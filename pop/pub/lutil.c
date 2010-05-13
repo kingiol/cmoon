@@ -1,6 +1,8 @@
 #include "mheads.h"
 #include "lheads.h"
 
+#include "oapp.h"
+
 /*
  * TODO how make local dlsym ok? so tired 
  */

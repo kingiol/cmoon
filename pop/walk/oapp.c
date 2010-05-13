@@ -18,15 +18,14 @@ int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 		return RET_RBTOP_INPUTE;
 	}
 
-	unsigned int aid = hash_string(aname);
-	mevent_add_u32(evt, NULL, "aid", aid);
+	hdf_set_int_value(evt->hdfsnd, "aid", (int)hash_string(aname));
 	ret = mevent_trigger(evt);
 	if (PROCESS_NOK(ret)) {
 		mtc_err("get %s stat failure %d", aname, ret);
 		return RET_RBTOP_EVTE;
 	}
 
-	if (data_cell_search(evt->rcvdata, false, DATA_TYPE_U32, "state")) {
+	if (hdf_get_obj(evt->hdfrcv, "state")) {
 		hdf_set_value(hdf, PRE_OUTPUT".exist", "1");
 	} else {
 		hdf_set_value(hdf, PRE_OUTPUT".exist", "0");

@@ -11,7 +11,7 @@ DEPEND  = .depend
 
 all: libwalk.a
 
-depend: $(SOURCES)
+$(DEPEND): $(SOURCES)
 	@$(CC) $(CFLAGS) -MM $^ $(INCS) > $@
 
 libwalk.a:$(OBJS) $(DEPEND)
