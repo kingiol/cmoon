@@ -31,9 +31,9 @@ function() {
 		var
 		aname = $("#aname").val(),
 		email = $("#email").val(),
-		usn = $("#usn").val();
+		asn = $("#asn").val();
 
-		$.getJSON("/app/new", {aname: aname, email: email, usn: usn},
+		$.getJSON("/app/new", {aname: aname, email: email, asn: asn},
 		function(data) {
 			if (data.success != 1 || !data.aname) {
 				alert(data.errmsg || "操作失败， 请稍后再试");

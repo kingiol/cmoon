@@ -22,7 +22,7 @@ int levt_init(HASH **evth)
 	bool filled = false;
 	while (node != NULL) {
 		ename = hdf_obj_value(node);
-		evt = mevent_init_plugin(ename, REQ_CMD_APPINFO, FLAGS_SYNC);
+		evt = mevent_init_plugin(ename);
 		if (evt) {
 			hash_insert(levth, (void*)strdup(ename), (void*)evt);
 			filled = true;
