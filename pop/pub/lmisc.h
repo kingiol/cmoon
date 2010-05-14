@@ -4,16 +4,18 @@
 
 __BEGIN_DECLS
 
-#define LEGAL_CK_ANAME(aname)									\
-	do {														\
-		if (!reg_search(aname, "^([a-zA-Z0-9_\.\-\+])+$")) {	\
-			return RET_RBTOP_INPUTE;							\
-		}														\
+#define LEGAL_CK_ANAME(aname)								\
+	do {													\
+		if (!reg_search("^([a-zA-Z0-9_\.\-])+$", aname)) {	\
+			mtc_err("%s illegal", aname);					\
+			return RET_RBTOP_INPUTE;						\
+		}													\
 	} while(0)
 
 #define LEGAL_CK_EMAIL(email)											\
 	do {																\
-		if (!reg_search(aname, "^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$")) { \
+		if (!reg_search("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$", email)) { \
+			mtc_err("%s illegal", email);								\
 			return RET_RBTOP_INPUTE;									\
 		}																\
 	} while(0)

@@ -8,11 +8,6 @@ lighttpd.conf
 +            "mod_rewrite",
 
 
-+url.rewrite-once              = ( "^/([^\.\?]+)$" => "/run/viki?ScriptName=$1",
-+                                  "^/([^\.]+)\?(.*)$"   => "/run/viki?ScriptName=$1&$2" )
-+                                  
-
-
 -$HTTP["remoteip"] =~ "127.0.0.1" {
 -       alias.url += (
 -               "/doc/" => "/usr/share/doc/",
@@ -54,8 +49,8 @@ config-avilable
 
 $HTTP["host"] == "www.bmoon.com" {
   server.document-root = "/var/www/www.bmoon.com/"
-  url.rewrite-once= ("^/([^\.\?]+)[^\/]$" => "/run/viki?ScriptName=/$1",
-                     "^/([^\.]+)\?(.*)[^\/]$"   => "/run/viki?ScriptName=/$1&$2")
+  url.rewrite-once= ("^/([^\.\?]+[^\/])$" => "/run/viki?ScriptName=/$1",
+                     "^/([^\.]+)\?(.*[^\/])$"   => "/run/viki?ScriptName=/$1&$2")
 
   $HTTP["url"] =~ "^/run/" {
         cgi.assign = ( "" => "" )

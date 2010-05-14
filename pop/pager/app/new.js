@@ -28,10 +28,13 @@ function() {
 			return;
 		}
 
+		$("#asn").attr("value", $.md5($.md5($("#asn").val())));
+
 		var
 		aname = $("#aname").val(),
 		email = $("#email").val(),
 		asn = $("#asn").val();
+
 
 		$.getJSON("/app/new", {aname: aname, email: email, asn: asn},
 		function(data) {
@@ -42,6 +45,8 @@ function() {
 			$("#copy_aname").text(data.aname);
 			$("#add").fadeOut();
 			$("#copy").fadeIn();
+			
+			bmoon.lcs.loginCheck();
 		});
 	});
 });

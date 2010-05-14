@@ -1,6 +1,9 @@
 CREATE TABLE appinfo (
 	   aid int PRIMARY KEY,
 	   aname varchar(256) NOT NULL DEFAULT '',
+	   asn varchar(256) NOT NULL DEFAULT '',
+	   masn varchar(256) NOT NULL DEFAULT '',
+	   email varchar(256) NOT NULL DEFAULT '',
 	   state int NOT NULL DEFAULT 0,
 	   intime timestamp DEFAULT now(),
 	   uptime timestamp DEFAULT now()

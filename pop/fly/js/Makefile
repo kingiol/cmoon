@@ -2,10 +2,12 @@ BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
 .PHONY: pub
-all: pub
+all: pub lbase.js
 
 pub:
 	@$(MAKE) -C pub
+
+lbase.js: local/bmoon.lcs.js
 
 %.js:
 	@echo -n > $@
@@ -14,4 +16,4 @@ pub:
 
 clean:
 	@$(MAKE) -C pub clean
-	@rm -f llayout.js
+	@rm -f lbase.js
