@@ -1,10 +1,11 @@
 CREATE TABLE lcsjoin (
 	   id SERIAL,
-	   aid int NOT NULL DEFAULT 0,
-	   aname varchar(256) NOT NULL DEFAULT '',
-	   uid int NOT NULL DEFAULT 0,
-	   uname varchar(256) NOT NULL DEFAULT '',
-	   unamea varchar(256) NOT NULL DEFAULT '',
+	   uid int NOT NULL DEFAULT 0,			   --userid
+	   uname varchar(256) NOT NULL DEFAULT '', --username
+	   aid int NOT NULL DEFAULT 0,			   --appid
+	   aname varchar(256) NOT NULL DEFAULT '', --appname
+	   oid int NOT NULL DEFAULT 0,			   --oserid
+	   oname varchar(256) NOT NULL DEFAULT '', --osername
 	   ip varchar(256) NOT NULL DEFAULT '',
 	   refer varchar(256) NOT NULL DEFAULT '',
 	   url varchar(256) NOT NULL DEFAULT '',

@@ -27,7 +27,8 @@ Db {
 
 Mevent {
 	0 = rawdb
-	1 = aic
+	1 = dyn
+	2 = aic
 }
 
 FileCache {

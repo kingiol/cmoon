@@ -4,12 +4,27 @@
 
 function liveCS(ape, debug) {
     this.initialize = function(opts) {
+		// app name
+        ape.lcsaname = opts.aname || document.domain;
+
+		// user name
 		ape.lcsuname = Cookie.read("lcs_uname");
 		if (ape.lcsuname == null) {
 			ape.lcsuname = bmoon.utl.randomWord(8);
-			Cookie.write("lcs_uname", ape.lcsuname, {'path': '/', 'duration': 365});
+			Cookie.write("lcs_uname", ape.lcsuname, {'path': '/', 'duration': 36500});
 		}
-        ape.lcsaname = opts.aname || document.domain;
+
+		// user visit this app's time
+		ape.lcsutime = Cookie.read("lcs_time");
+		if (!ape.lcsutime) {
+			ape.lcsutime = 1;
+			Cookie.write("lcs_utime", "1", {'path': '/', 'duration': 36500});
+		} else {
+			if (!ape.options.restore) {
+				Cookie.write("lcs_utime", parseInt(ape.lcsutime)+1, {'path': '/', 'duration': 36500});
+			}
+		}
+
         ape.lcsPipeName = "livecspipe_" + ape.lcsaname;
 		this.publicPipe = null;
 		this.currentPipe = null;
@@ -38,8 +53,7 @@ function liveCS(ape, debug) {
 							   lcs.setCurrentPipe(resp.data.sessions.currentPipe);
 						   }, opt);
 		} else {
-			//ape.request.send("LCS_JOIN", {'aname': ape.lcsaname}, opt);
-			ape.request.stack.add("LCS_JOIN", {'aname': ape.lcsaname}, opt);
+			ape.request.stack.add("LCS_JOIN", {'aname': ape.lcsaname, 'utime': ape.lcsutime}, opt);
 		}
 		ape.request.stack.send();
     };
@@ -54,11 +68,13 @@ function liveCS(ape, debug) {
 	};
 
     this.pipeCreate = function(pipe, options) {
+		var lcs = this;
         if (pipe.properties.name.toLowerCase() == ape.lcsPipeName) {
-			this.publicPipe = pipe;
-			if (!this.getCurrentPipe()) {
-				this.setCurrentPipe(pipe.getPubid());
-			}
+			//TODO
+			//this.publicPipe = pipe;
+			//if (!lcs.getCurrentPipe()) {
+			//	lcs.setCurrentPipe(pipe.getPubid());
+			//}
 		}
     };
 
