@@ -21,3 +21,8 @@ CREATE INDEX user_index ON userinfo (aid);
 
 CREATE TRIGGER tg_uptime_user BEFORE UPDATE ON userinfo FOR EACH ROW EXECUTE PROCEDURE update_time();
 
+
+05-17
+lcs_main
+alter table userinfo add ip varchar(64) not null default '';
+
