@@ -16,13 +16,12 @@
 <script type="text/javascript" src="http://js.bmoon.com/ape/app/livecs.js" ></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    var debug = true;
     var client = new APE.Client();
 	client.load({
 	  identifier: 'lcs',
 	  transport: 2,
 	  complete: function(ape) {
-	    new liveCS(ape, debug).initialize({aname: document.domain});
+	    new liveCS(ape).initialize({aname: document.domain});
 	  }
 	});
   });
