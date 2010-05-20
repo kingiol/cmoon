@@ -1,0 +1,34 @@
+Config {
+	trace_level = 7
+}
+
+Layout {
+	tabs {
+		0 {
+			name = Index
+			page = index
+		}
+		1 {
+			name = Products
+			page = products
+		}
+		2 {
+			name = certificates
+			page = certif
+		}
+		3 {
+			name = About
+			page = about
+		}
+		4 {
+			name = Fadeback
+			page = fadeback
+		}
+		5 {
+			name = Contact us
+			page = contact
+		}
+	}
+}
+
+Dbsn = sqlite:../data/prddb
