@@ -13,7 +13,7 @@ Layout {
 			page = products
 		}
 		2 {
-			name = certificates
+			name = Certificates
 			page = certif
 		}
 		3 {

@@ -1,0 +1,74 @@
+<ul class='clean'>
+  <li>
+	<div class="leftitem">产品图片:</div>
+	<img id="previewimg" src="/img/prd/default.jpg" width='150' />
+	<input id="prdimg" type="hidden" value="" />
+  </li>
+  
+  <li>
+	<div class="leftitem">产品名称:</div>
+	<input type='text' name='name' id='name' />
+  </li>
+  
+  <li>
+	<div class="leftitem ck4em">产品描述:</div>
+	<textarea class="right ckthird" id="atomexp" class="VAL_APPEND vrequire" vmax="1024" rows="5" cols="26"></textarea>
+  </li>
+  
+  <li>
+	<div class="leftitem"> &nbsp; </div>
+	<input type='submit' value='提交' id='submit' />
+  </li>
+</ul>
+
+
+<script type="text/javascript">
+(function() {
+    var uri = window.location;
+	var button = $("#previewimg");
+	var uploader = new AjaxUpload(button,
+	{
+		action: '/cgi/img',
+		name: 'imagename',
+		data: {op: 'add', tp: 'imageadd'},
+		responseType: "json",
+		autoSubmit: true,
+		onChange: replaceImage,
+		onComplete: function(file, resp) {
+			if (resp.success == "1") {
+				$("#previewimg").attr("src", resp.imageurl);
+				$("#prdimg").val(resp.imagename);
+			} else {
+				alert(resp.errmsg || "上传图片失败，请稍后再试！");
+			}
+		}
+	});
+
+	function replaceImage(file, ext) {
+		if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))) {
+			alert("请选择图片");
+			return false;
+		}
+		return true;
+	}
+
+	$("#addatom").click(function()
+	{
+		if (!$(".VAL_APPEND").inputval()) {
+			return;
+		}
+
+		$.post(uri,
+			   {
+				   img: $("#prdimg").val(),
+				   exp: $("#atomexp").val(),
+				   op: 'add'
+			   },
+			   function(data) {
+			   if (resp.success == "1") {
+					   overlay_append.close();
+				}
+			   }, "json");
+	});
+})();
+</script>

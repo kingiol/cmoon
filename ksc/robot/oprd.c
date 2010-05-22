@@ -8,14 +8,32 @@ int prd_get(HDF *hdf, mdb_conn *conn)
 	int tid = hdf_get_int_value(hdf, PRE_QUERY".tid", 0);
 
 	char cols[LEN_SM];
+
+	hdf_set_value(hdf, PRE_OUTPUT".admin", "1");
+	hdf_set_value(hdf, PRE_INCLUDE".res", "prd/list.res.html");
+
+	/*
+	 * get directories 
+	 */
+	sprintf(cols, " id, tid, name ");
+	mdb_exec(conn, NULL, "SELECT %s FROM prd WHERE type=0;", NULL, cols);
+	mdb_set_rows(hdf, conn, cols, PRE_OUTPUT".dirs");
+
+	
+	/*
+	 * get products
+	 */
 	sprintf(cols, " id, tid, name, url, des ");
-	mdb_exec(conn, NULL, "SELECT %s FROM prd WHERE pid=%d "
-			 " ORDER BY id DESC LIMIT 20;", NULL, cols);
-
-	mdb_set_rows(hdf, conn, cols, "items");
-
-	hdf_set_value(hdf, "hdf.loadpaths.local", PATH_FRT_TPL);
-	hdf_set_value(hdf, "Include.content", "prd/list.html");
+	if (tid == 0) {
+		mdb_exec(conn, NULL, "SELECT %s FROM prd WHERE type=1 AND "
+				 " tid=%d ORDER BY id DESC LIMIT 12;",
+				 NULL, cols, tid);
+	} else {
+		mdb_exec(conn, NULL, "SELECT %s FROM prd WHERE type=1 "
+				 " ORDER BY id DESC LIMIT 12;",
+				 NULL, cols);
+	}
+	mdb_set_rows(hdf, conn, cols, PRE_OUTPUT".items");
 
 	return RET_RBTOP_OK;
 }

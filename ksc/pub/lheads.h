@@ -4,5 +4,6 @@
 #include "lcfg.h"
 #include "ldb.h"
 #include "lcs.h"
+#include "lutil.h"
 
 #endif	/* __LHEADS_H__ */

@@ -8,6 +8,17 @@ __BEGIN_DECLS
 #define SITE_DOMAIN	"kosherall.com"
 #define TC_ROOT		"/var/log/moon/ksc/"
 
+#define IMG_ROOT	"../htdocs/img/"
+
+#define IMG_ORI	"ori"
+#define IMG_XXS	"24x24"
+#define IMG_XS	"48x48"
+#define IMG_S	"120x120"
+#define IMG_M	"250x250"
+#define IMG_L	"800X600"
+#define IMG_XL	"1024X768"
+#define IMG_XXL	"1440x900"
+
 #ifdef RELEASE
 /* #define PATH_SITE	"/usr/local/moon/www/" */
 #define PATH_SITE	"/home/bigml/web/moon/"

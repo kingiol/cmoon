@@ -1,8 +1,37 @@
-<?cs each: item = Output.items ?>
-<div class='prditem'>
-  <img src='<?cs var:item.url ?>' />
-  <div class='iname'>
-	<?cs var: item.name?>
+<div id="colone">
+  <div class="title">Products Category</div>
+  <div class="listcon">
+	<ul class='clean'>
+	  <?cs each:dir = Output.dirs?>
+	  <li><a href="/cgi/prd?t=<?cs var:dir.id ?>"><?cs var:dir.name ?></a></li>
+	  <?cs /each ?>
+	</ul>
   </div>
+
+  <img src="/pic/index.jpg" />
 </div>
-<?cs /each ?>
+
+<div id="coltwo">
+  
+  <img src='/pic/2.jpg' />
+
+  <div class='sep'></div>
+
+  <?cs if: Output.admin == 1 ?>
+  <p class='right'><a href='/prd/add.html' rel="#addoverlay">添加产品</a></p>
+  <div class="overlay" id="addoverlay">
+	<div class="wrap"></div>
+  </div>
+  <div class='sep'></div>
+  <?cs /if ?>
+  
+  <?cs each: item = Output.items ?>
+  <div class='prditem'>
+	<img src='<?cs var:item.url ?>' />
+	<div class='iname'>
+	  <?cs var: item.name?>
+	</div>
+  </div>
+  <?cs /each ?>
+
+</div>

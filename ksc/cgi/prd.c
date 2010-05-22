@@ -31,6 +31,16 @@ int main()
 	}
 	mdb_opfinish(ret, cgi->hdf, conn, TGT_SELF, URL_CLOSE, false);
 	
+	/*
+	 * set template dataset
+	 */
+	hdf_set_value(cgi->hdf, "hdf.loadpaths.local", PATH_FRT_TPL);
+	hdf_set_value(cgi->hdf, "Include.content", "prd/list.html");
+	hdf_copy(cgi->hdf, PRE_LAYOUT, hdf_get_obj(g_cfg, PRE_LAYOUT));
+	hdf_set_value(cgi->hdf, PRE_LAYOUT".title", "Products");
+	hdf_set_value(cgi->hdf, PRE_LAYOUT".crumbs.0.name", "products");
+	hdf_set_value(cgi->hdf, PRE_LAYOUT".crumbs.0.href", "/cgi/prd");
+	
 #ifdef DEBUG_HDF
 	hdf_write_file(cgi->hdf, TC_ROOT"hdf.prd");
 #endif
