@@ -7,24 +7,23 @@
   
   <li>
 	<div class="leftitem">产品名称:</div>
-	<input type='text' name='name' id='name' />
+	<input type='text' id='prdname' name='name' class='VAL_ADD vrequire' vmax='256' />
   </li>
   
   <li>
-	<div class="leftitem ck4em">产品描述:</div>
-	<textarea class="right ckthird" id="atomexp" class="VAL_APPEND vrequire" vmax="1024" rows="5" cols="26"></textarea>
+	<div class="leftitem">产品描述:</div>
+	<textarea id="prddes" class="VAL_ADD vrequire" vmax="1024" rows="5" cols="26"></textarea>
   </li>
   
   <li>
 	<div class="leftitem"> &nbsp; </div>
-	<input type='submit' value='提交' id='submit' />
+	<input type='submit' value='提交' id='addprd' />
   </li>
 </ul>
 
 
 <script type="text/javascript">
 (function() {
-    var uri = window.location;
 	var button = $("#previewimg");
 	var uploader = new AjaxUpload(button,
 	{
@@ -52,21 +51,22 @@
 		return true;
 	}
 
-	$("#addatom").click(function()
+	$("#addprd").click(function()
 	{
-		if (!$(".VAL_APPEND").inputval()) {
+		if (!$(".VAL_ADD").inputval()) {
 			return;
 		}
 
-		$.post(uri,
+		$.post("/cgi/prd",
 			   {
-				   img: $("#prdimg").val(),
-				   exp: $("#atomexp").val(),
-				   op: 'add'
+				   tid: $("#prdtid").val(),
+				   name: $("#prdname").val(),
+				   url: $("#prdimg").val(),
+				   des: $("#prddes").val()
 			   },
 			   function(data) {
-			   if (resp.success == "1") {
-					   overlay_append.close();
+			   if (data.success == "1") {
+			   		$("a[rel=#addoverlay]").overlay().close();
 				}
 			   }, "json");
 	});

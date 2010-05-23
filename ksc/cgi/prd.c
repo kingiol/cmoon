@@ -26,6 +26,9 @@ int main()
 	ret = CGI_REQ_METHOD(cgi);
 	if (ret == CGI_REQ_POST) {
 		ret = prd_add(cgi->hdf, conn);
+		mdb_opfinish_json(ret, cgi->hdf, conn);
+		mjson_output_hdf(cgi->hdf, 0);
+		goto done;
 	} else {
 		ret = prd_get(cgi->hdf, conn);
 	}
@@ -48,6 +51,7 @@ int main()
 	err = cgi_display(cgi, F_TPL_LAYOUT);
 	DIE_NOK_CGI(err);
 
+done:
 	mdb_destroy(conn);
 	cgi_destroy(&cgi);
 	return 0;
