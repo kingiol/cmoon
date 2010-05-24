@@ -165,7 +165,10 @@ input, textarea {
 
 .valid{border:2px solid green !important;}
 .invalid{border:2px solid #800 !important;}
+.center {text-align: center;}
 .right {text-align: right;}
+.hide {display: none;}
+.show {display: block;}
 .leftitem {
 	float: left;
 	width: 80px;
@@ -176,4 +179,10 @@ input, textarea {
 }
 .sep {
     height:3ex;
+}
+
+.prditem {
+	float: left;
+	width: 150px;
+	margin: 10px;
 }

@@ -1,0 +1,43 @@
+<ul class='clean'>
+  <li>
+	<div class="leftitem">用户名:</div>
+	<input type='text' id='uname' name='uname' class='VAL_LOGIN vrequire' vmax='256' />
+  </li>
+  
+  <li>
+	<div class="leftitem">用户密码:</div>
+	<input type='password' id='usn' name='usn' class='VAL_LOGIN vrequire' vmax='256' />
+  </li>
+  
+  <li>
+	<div class="leftitem"> &nbsp; </div>
+	<input type='submit' value='提交' id='login' />
+  </li>
+</ul>
+
+<script type="text/javascript">
+(function() {
+	$("#login").click(function()
+	{
+		if (!$(".VAL_LOGIN").inputval()) {
+			return;
+		}
+
+		$("#usn").attr("value", $.md5($.md5($("#usn").val())));
+		
+		$.post("/cgi/login",
+			   {
+				   uname: $("#uname").val(),
+				   usn: $("#usn").val()
+			   },
+			   function(data) {
+			   if (data.success == "1") {
+			   		$("a[rel=#loginoverlay]").overlay().close();
+					loginCheck();
+				} else {
+				    alert(data.errmsg || "登录失败");
+				}
+			   }, "json");
+	});
+})();
+</script>

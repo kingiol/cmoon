@@ -67,6 +67,7 @@
 			   function(data) {
 			   if (data.success == "1") {
 			   		$("a[rel=#addoverlay]").overlay().close();
+					window.location.reload();
 				}
 			   }, "json");
 	});

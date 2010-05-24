@@ -8,21 +8,73 @@
 <title>TODO - <?cs var:Layout.title ?></title>
 
 <link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/css/mflowtools.css" />
+
+<script type="text/javascript" src="/js/pub/mbase.js"></script>
+<script type="text/javascript" src="/js/pub/mmd5.js"></script>
+<script type="text/javascript" src="/js/pub/mflowtools.js"></script>
+<script type="text/javascript" src="/js/pub/minputval.js"></script>
+
 <?cs include:Include.res ?>
 
 <?cs var:Layout.css ?>
 
 <script type="text/javascript">
 <?cs var:Layout.js ?>
+var g_site_domain = "ksc.com";
+var loginCheck = function() {
+		var uname = $.cookie("uname");
+		if (uname != null) {
+			$("#unameLayout").text(uname);
+
+			$("#nav-guest").hide();
+			$("#nav-member").show();
+		} else {
+			$("#nav-member").hide();
+			$("#nav-guest").show();
+		}
+}
+
+$(document).ready(function(){
+	$("a[rel=#loginoverlay]").overlay({
+		api: true,
+		closeOnClick: false,
+		onBeforeLoad: function() {
+			var wrap = this.getContent().find("div.wrap");
+			if (wrap.is(":empty")) {
+				wrap.load(this.getTrigger().attr("href"));
+			}
+		}
+	});
+	loginCheck();
+	$("#userlogout").click(function(){
+        $.cookie("uname", null, {path: '/', domain: g_site_domain});
+        $.cookie("usn", null, {path: '/', domain: g_site_domain});
+		loginCheck();
+	});
+	//$(".prditem img").tooltip({position: 'center left'});
+	$(".prditem img").tooltip();
+
+});
 </script>
 </head>
 
 <body>
 <div id="top">
-  <ul class='inline right'>
+  <ul id='nav-guest' class='inline right'>
 	<li><a href="/en/index.html">English</a></li>
+	<li><a href="/login.html" rel="#loginoverlay">登录</a></li>
+  </ul>
+  <ul id='nav-member' class='inline right hide'>
+	<li><a href="/en/index.html">English</a></li>
+	<li>欢迎 <span id="unameLayout"></span></li>
+	<li><a href="javascript:void(0);" id="userlogout">退出</a></li>
   </ul>
 </div>
+
+  <div class="overlay" id="loginoverlay">
+	<div class="wrap"></div>
+  </div>
 
 <div id="mid">
   <div id="header">

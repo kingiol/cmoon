@@ -29,6 +29,11 @@ int main()
 		mdb_opfinish_json(ret, cgi->hdf, conn);
 		mjson_output_hdf(cgi->hdf, 0);
 		goto done;
+	} else if (ret == CGI_REQ_DEL) {
+		ret = prd_del(cgi->hdf, conn);
+		mdb_opfinish_json(ret, cgi->hdf, conn);
+		mjson_output_hdf(cgi->hdf, 0);
+		goto done;
 	} else {
 		ret = prd_get(cgi->hdf, conn);
 	}

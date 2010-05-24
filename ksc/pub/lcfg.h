@@ -5,7 +5,7 @@
 
 __BEGIN_DECLS
 
-#define SITE_DOMAIN	"kosherall.com"
+#define SITE_DOMAIN	"ksc.com"
 #define TC_ROOT		"/var/log/moon/ksc/"
 
 #define IMG_ROOT	"../htdocs/img/"
