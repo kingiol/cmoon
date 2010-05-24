@@ -43,7 +43,7 @@ int prd_add(HDF *hdf, mdb_conn *conn)
 {
 	PRE_DBOP(hdf, conn);
 
-	int tid;
+	int tid, ret;
 	char *name, *url, *des;
 
 	HDF_GET_INT(hdf, PRE_QUERY".tid", tid);
