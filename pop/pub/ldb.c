@@ -52,9 +52,12 @@ void ldb_opfinish(int ret, HDF *hdf, mdb_conn *conn,
 	get_errmsg(ret, msg);
 	mutil_redirect(msg, target, url, header);
 	
+	/* conn destroy by user */
+	/*
 	if (conn != NULL) {
 		mdb_destroy(conn);
 	}
+	*/
 	//exit(ret);
 }
 
@@ -78,9 +81,12 @@ void ldb_opfinish_json(int ret, HDF *hdf, mdb_conn *conn, time_t second)
 		hdf_set_value(hdf, PRE_ERRMSG, msg);
 	}
 	
+	/* conn destroy by user */
+	/*
 	if (conn != NULL) {
 		mdb_destroy(conn);
 	}
+	*/
 	//exit(ret);
 }
 
