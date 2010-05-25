@@ -15,7 +15,7 @@ function(){
 	function(){
 		if (confirm("确认删除该产品？")) {
 			var id = $(this).attr("idval");
-			$.getJSON("/cgi/prd", {id: id, op: "del"},
+			$.getJSON("/cgi-bin/prd", {id: id, op: "del"},
 					 function(data) {
 						 if (data.success == 1) {
 							 alert("成功删除");

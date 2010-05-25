@@ -27,7 +27,7 @@
 	var button = $("#previewimg");
 	var uploader = new AjaxUpload(button,
 	{
-		action: '/cgi/img',
+		action: '/cgi-bin/img',
 		name: 'imagename',
 		data: {op: 'add', tp: 'imageadd'},
 		responseType: "json",
@@ -57,7 +57,7 @@
 			return;
 		}
 
-		$.post("/cgi/prd",
+		$.post("/cgi-bin/prd",
 			   {
 				   tid: $("#prdtid").val(),
 				   name: $("#prdname").val(),
@@ -68,6 +68,8 @@
 			   if (data.success == "1") {
 			   		$("a[rel=#addoverlay]").overlay().close();
 					window.location.reload();
+				} else {
+					alert(data.errmsg || "添加产品失败， 请稍后再试");
 				}
 			   }, "json");
 	});

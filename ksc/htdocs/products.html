@@ -5,9 +5,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta content="TODO" name="keywords" />
 <meta content="TODO" name="description" />
-<title>TODO - Products</title>
+<title>TODO - </title>
 
 <link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/css/mflowtools.css" />
+
+<script type="text/javascript" src="/js/pub/mbase.js"></script>
+<script type="text/javascript" src="/js/pub/mmd5.js"></script>
+<script type="text/javascript" src="/js/pub/mflowtools.js"></script>
+<script type="text/javascript" src="/js/pub/minputval.js"></script>
 
 
 
@@ -15,34 +21,79 @@
 
 <script type="text/javascript">
 
+var g_site_domain = "kossenchem.com";
+var loginCheck = function() {
+		var uname = $.cookie("uname");
+		if (uname != null) {
+			$("#unameLayout").text(uname);
+
+			$("#nav-guest").hide();
+			$("#nav-member").show();
+		} else {
+			$("#nav-member").hide();
+			$("#nav-guest").show();
+		}
+}
+
+$(document).ready(function(){
+	$("a[rel=#loginoverlay]").overlay({
+		api: true,
+		closeOnClick: false,
+		onBeforeLoad: function() {
+			var wrap = this.getContent().find("div.wrap");
+			if (wrap.is(":empty")) {
+				wrap.load(this.getTrigger().attr("href"));
+			}
+		}
+	});
+	loginCheck();
+	$("#userlogout").click(function(){
+        $.cookie("uname", null, {path: '/', domain: g_site_domain});
+        $.cookie("usn", null, {path: '/', domain: g_site_domain});
+		loginCheck();
+	});
+	//$(".prditem img").tooltip({position: 'center left'});
+	$(".prditem img").tooltip();
+
+});
 </script>
 </head>
 
 <body>
 <div id="top">
-  <ul class='inline right'>
+  <ul id='nav-guest' class='inline right'>
 	<li><a href="/en/index.html">English</a></li>
+	<li><a href="/login.html" rel="#loginoverlay">登录</a></li>
+  </ul>
+  <ul id='nav-member' class='inline right hide'>
+	<li><a href="/en/index.html">English</a></li>
+	<li>欢迎 <span id="unameLayout"></span></li>
+	<li><a href="javascript:void(0);" id="userlogout">退出</a></li>
   </ul>
 </div>
+
+  <div class="overlay" id="loginoverlay">
+	<div class="wrap"></div>
+  </div>
 
 <div id="mid">
   <div id="header">
     <ul id="global-nav">
       
-      <li class=""><a href="index.html">Index</a></li>
+      <li class=""><a href="/index.html">Index</a></li>
       
-      <li class="selected"><a href="products.html">Products</a></li>
+      <li class=""><a href="/cgi-bin/prd">Products</a></li>
       
-      <li class=""><a href="news.html">News</a></li>
+      <li class=""><a href="/certif.html">Certificates</a></li>
       
-      <li class=""><a href="about.html">About</a></li>
+      <li class=""><a href="/fadeback.html">Fadeback</a></li>
+      
+      <li class=""><a href="/contact.html">Contact us</a></li>
       
     </ul>
       
     <div id="crumbs">
 	  Position:
-      
-      &raquo;<a href="products.html">Products</a>
       
     </div>
   </div> <!-- header -->
@@ -51,11 +102,9 @@
 	<div id="colone">
   <div class="title">News</div>
   <div class="listcon">
-    <marquee  behavior="scroll" direction="up" scrollamount="2">
-	  <ul>
-		<li><a href="/notice.html#genxin">TODO</a> </li>
-	  </ul>
-    </marquee>
+	<ul>
+	  <li><a href="/notice.html#genxin">TODO</a></li>
+	</ul>
   </div>
 
   <img src="/pic/index.jpg" />

@@ -25,7 +25,7 @@
 
 		$("#usn").attr("value", $.md5($.md5($("#usn").val())));
 		
-		$.post("/cgi/login",
+		$.post("/cgi-bin/login",
 			   {
 				   uname: $("#uname").val(),
 				   usn: $("#usn").val()
