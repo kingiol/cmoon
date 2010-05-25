@@ -45,10 +45,28 @@ int main()
 	hdf_set_value(cgi->hdf, "hdf.loadpaths.local", PATH_FRT_TPL);
 	hdf_set_value(cgi->hdf, "Include.content", "prd/list.html");
 	hdf_copy(cgi->hdf, PRE_LAYOUT, hdf_get_obj(g_cfg, PRE_LAYOUT));
+
 	hdf_set_value(cgi->hdf, PRE_LAYOUT".title", "Products");
-	hdf_set_value(cgi->hdf, PRE_LAYOUT".crumbs.0.name", "products");
-	hdf_set_value(cgi->hdf, PRE_LAYOUT".crumbs.0.href", "/cgi/prd");
+	hdf_set_value(cgi->hdf, PRE_LAYOUT".crumbs.0.name", "Products");
+	hdf_set_value(cgi->hdf, PRE_LAYOUT".crumbs.0.href", "/cgi-bin/prd");
+	int tid = hdf_get_int_value(cgi->hdf, PRE_QUERY".tid", 0);
+	if (tid != 0) {
+		char *name = hdf_get_value(cgi->hdf, PRE_OUTPUT".name", NULL);
+		hdf_set_value(cgi->hdf, PRE_LAYOUT".crumbs.1.name", name);
+		hdf_set_valuef(cgi->hdf, PRE_LAYOUT".crumbs.1.href=/cgi-bin/prd?tid=%d", tid);
+	}
 	
+	hdf_copy(cgi->hdf, NULL, g_cfg);
+
+	HDF *node = hdf_get_obj(cgi->hdf, PRE_LAYOUT".tabs.0");
+	while (node) {
+		if (!strcmp(hdf_get_value(node, "href", "unknown"), "/cgi-bin/prd")) {
+			hdf_set_value(node, "class", "selected");
+			break;
+		}
+		node = hdf_obj_next(node);
+	}
+
 #ifdef DEBUG_HDF
 	hdf_write_file(cgi->hdf, TC_ROOT"hdf.prd");
 #endif

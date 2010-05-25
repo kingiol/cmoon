@@ -6,27 +6,23 @@ Layout {
 	tabs {
 		0 {
 			name = Index
-			page = index
+			href = /index.html
 		}
 		1 {
 			name = Products
-			page = products
+			href = /cgi-bin/prd
 		}
 		2 {
 			name = Certificates
-			page = certif
+			href = /certif.html
 		}
 		3 {
-			name = About
-			page = about
+			name = Fadeback
+			href = /fadeback.html
 		}
 		4 {
-			name = Fadeback
-			page = fadeback
-		}
-		5 {
 			name = Contact us
-			page = contact
+			href = /contact.html
 		}
 	}
 }

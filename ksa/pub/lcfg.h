@@ -24,7 +24,7 @@ __BEGIN_DECLS
 #define PATH_ADM_CGI	PATH_SITE"admin/cgi-bin/"
 #define PATH_ADM_TPL	PATH_SITE"admin/tpl/"
 #define PATH_ADM_MTLS	PATH_SITE"admin/mtls/"
-#define F_TPL_LAYOUT	PATH_SITE"ksa/tpl/layout.html"
+#define F_TPL_LAYOUT	PATH_FRT_TPL"layout.html"
 
 #define NAV_NUM 7
 extern anchor_t g_nav[NAV_NUM];

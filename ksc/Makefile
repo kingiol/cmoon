@@ -1,7 +1,7 @@
 BASEDIR = ../
 include ../Make.env
 
-SUBDIR = pub robot cgi pager
+SUBDIR = pub robot cgi htdocs pager
 
 all: $(SUBDIR)
 	@$(MULTIMAKE) $(SUBDIR)

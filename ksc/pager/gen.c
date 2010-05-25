@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	HDF *hdf = NULL, *cnode, *pnode;
 	NEOERR *err;
 	struct dirent **eps = NULL;
-	char *page, fin[_POSIX_PATH_MAX], fout[_POSIX_PATH_MAX];
+	char *href, fin[_POSIX_PATH_MAX], fout[_POSIX_PATH_MAX];
 	STRING str;
 	int n;
 
@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 	for (int i = 0; i < n; i++) {
 		strncpy(fin, eps[i]->d_name, sizeof(fin));
 		free(eps[i]);
+		if (strstr(F_TPL_LAYOUT, fin)) continue;
 		mtc_dbg("parse file %s", fin);
 
 		cs = NULL; hdf = NULL;
@@ -46,17 +47,17 @@ int main(int argc, char *argv[])
 		cnode = hdf_get_obj(hdf, "Layout.tabs.0");
 		pnode = hdf_get_obj(hdf, "Layout");
 		while (cnode) {
-			page = hdf_get_value(cnode, "page", NULL);
-			hdf_set_valuef(cnode, "href=%s.html", page);
-			if (page && strstr(fin, page)) {
+			href = hdf_get_value(cnode, "href", NULL);
+			if (href && strstr(href, fin)) {
 				hdf_set_value(cnode, "class", "selected");
-				snprintf(fout, sizeof(fout), "%s%s.html", PATH_FRT_DOC, page);
 				hdf_set_value(pnode, "title", hdf_get_value(cnode, "name", NULL));
 				hdf_copy(pnode, "crumbs.0", cnode);
 			}
 			
 			cnode = hdf_obj_next(cnode);
 		}
+		
+		snprintf(fout, sizeof(fout), "%s%s", PATH_FRT_DOC, fin);
 
 		/*
 		 * set content hdf

@@ -15,6 +15,14 @@ int prd_get(HDF *hdf, mdb_conn *conn)
 
 	char cols[LEN_SM];
 	hdf_set_int_value(hdf, PRE_OUTPUT".tid", tid);
+
+	/*
+	 * get tid's name 
+	 */
+	char *name;
+	mdb_exec(conn, NULL, "SELECT name FROM prd WHERE id=%d;", NULL, tid);
+	mdb_get(conn, "s", &name);
+	hdf_set_value(hdf, PRE_OUTPUT".name", name);
 	
 	/*
 	 * get directories 

@@ -5,8 +5,7 @@
 
 __BEGIN_DECLS
 
-#define SITE_DOMAIN	"ksc.com"
-#define TC_ROOT		"/var/log/moon/ksc/"
+#define SITE_DOMAIN	"kossenchem.com"
 
 #define IMG_ROOT	"../htdocs/img/"
 
@@ -20,25 +19,18 @@ __BEGIN_DECLS
 #define IMG_XXL	"1440x900"
 
 #ifdef RELEASE
-/* #define PATH_SITE	"/usr/local/moon/www/" */
-#define PATH_SITE	"/home/bigml/web/moon/"
-#define SITE_CONFIG	"/home/kosheeral/www/config.hdf"
+#define PATH_SITE	"/home/kosheral/ksc/"
+#define TC_ROOT		PATH_SITE"log/"
 #else
-#define PATH_SITE	"/home/bigml/web/moon/"
-#define SITE_CONFIG	"/home/bigml/web/moon/ksc/config.hdf"
+#define PATH_SITE	"/home/bigml/web/moon/ksc/"
+#define TC_ROOT		"/var/log/moon/ksc/"
 #endif
-#define PATH_FRT_DOC	PATH_SITE"ksc/htdocs/"
-#define PATH_FRT_CGI	PATH_SITE"ksc/cgi-bin/"
-#define PATH_FRT_TPL	PATH_SITE"ksc/tpl/"
-#define PATH_FRT_MTLS	PATH_SITE"ksc/mtls/"
-#define PATH_ADM_DOC	PATH_SITE"admin/htdocs/"
-#define PATH_ADM_CGI	PATH_SITE"admin/cgi-bin/"
-#define PATH_ADM_TPL	PATH_SITE"admin/tpl/"
-#define PATH_ADM_MTLS	PATH_SITE"admin/mtls/"
-#define F_TPL_LAYOUT	PATH_SITE"ksc/tpl/layout.html"
-
-#define NAV_NUM 7
-extern anchor_t g_nav[NAV_NUM];
+#define SITE_CONFIG		PATH_SITE"config.hdf"
+#define PATH_FRT_DOC	PATH_SITE"htdocs/"
+#define PATH_FRT_CGI	PATH_SITE"cgi-bin/"
+#define PATH_FRT_TPL	PATH_SITE"tpl/"
+#define PATH_FRT_MTLS	PATH_SITE"mtls/"
+#define F_TPL_LAYOUT	PATH_FRT_TPL"layout.html"
 
 __END_DECLS
 #endif	/* __LCFG_H__ */
