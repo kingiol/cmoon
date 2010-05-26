@@ -27,6 +27,7 @@ ul.clean {
 }
 ul.clean li {
     padding: 5px;
+	clear: both;
 }
 ul.inline {
     list-style:none;
@@ -44,6 +45,9 @@ ul.inline li {
  */
 input, textarea {
     border: 1px solid #aaaaaa;
+}
+input.long {
+	width: 200px;
 }
 
 /* top level div */
@@ -169,10 +173,13 @@ input, textarea {
 .right {text-align: right;}
 .hide {display: none;}
 .show {display: block;}
-.leftitem {
+.leftitem, .leftitem_long {
 	float: left;
 	width: 80px;
 	margin: 0 18px 0 0;
+}
+.leftitem_long{
+	width: 120px;
 }
 .clearer {
     clear: both;
@@ -185,4 +192,16 @@ input, textarea {
 	float: left;
 	width: 150px;
 	margin: 10px;
+}
+
+.feedback_item {
+	margin: 10px;
+}
+.feedback_contact {
+    border-bottom: solid 1px #aaaaaa;
+}
+.feedback_content {
+	padding: 5px;
+}
+.feedback_del {
 }

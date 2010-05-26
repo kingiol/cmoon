@@ -30,4 +30,11 @@ CREATE TABLE user (
 uname TEXT NOT NULL DEFAULT '',
 usn TEXT NOT NULL DEFAULT '');"
 
+#mandy hey
 sqlite3 prddb "INSERT INTO user (uname, usn) VALUES ('mandy', '1284f7cd4392e1ebd58dda15e2ef7bb1');"
+
+sqlite3 prddb "
+CREATE TABLE feedback (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+contact TEXT NOT NULL DEFAULT '',
+content TEXT NOT NULL DEFAULT '');"

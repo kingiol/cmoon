@@ -18,7 +18,7 @@ Layout {
 		}
 		3 {
 			name = Fadeback
-			href = /fadeback.html
+			href = /cgi-bin/feedback
 		}
 		4 {
 			name = Contact us
