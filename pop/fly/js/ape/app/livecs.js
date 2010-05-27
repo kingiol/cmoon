@@ -84,7 +84,7 @@ function liveCS(ape) {
 		var jid = parseInt(raw.data.user.properties.jid);
 		// send LCS_VISIT only on session restore
 		if (jid && ape.options.restore) {
-			ape.request.send("LCS_VISIT", {'jid': jid, 'url': window.location.href, 'title': window.title});
+			ape.request.send("LCS_VISIT", {'jid': jid, 'url': location.href, 'title': document.title});
 		}
 	};
 
