@@ -1,7 +1,7 @@
 <div id="colone">
   <div class="title">Products Category</div>
   <div class="listcon">
-	<ul class='clean'>
+	<ul class="clean">
 	  <?cs each:dir = Output.dirs?>
 	  <li><a href="/cgi-bin/prd?tid=<?cs var:dir.id ?>"><?cs var:dir.name ?></a></li>
 	  <?cs /each ?>
@@ -13,33 +13,33 @@
 
 <div id="coltwo">
   
-  <img src='/pic/2.jpg' />
+  <img src="/pic/2.jpg" />
 
-  <div class='sep'></div>
+  <div class="sep"></div>
 
   <?cs if: Output.admin == 1 ?>
-  <p class='right'><a href='/prd/add.html' rel="#addoverlay">添加产品</a></p>
-  <input type='hidden' id='prdtid' value='<?cs var:Output.tid ?>' />
+  <p class="right"><a href="/prd/add.html" rel="#addoverlay">添加产品</a></p>
+  <input type="hidden" id="prdtid" value="<?cs var:Output.tid ?>" />
   <div class="overlay" id="addoverlay">
 	<div class="wrap"></div>
   </div>
-  <div class='sep'></div>
+  <div class="sep"></div>
   <?cs /if ?>
 
   <?cs set: count = 1 ?>
   <?cs each: item = Output.items ?>
-  <div class='prditem'>
-	<img src='/img/prd/<?cs if: item.url ?>ori/<?cs var:item.url ?><?cs else ?>default.jpg<?cs /if ?>' width='150' />
-	<span class='tooltip'><?cs var:item.des ?></span>
-	<div class='center'>
+  <div class="prditem">
+	<img src="/img/prd/<?cs if: item.url ?>ori/<?cs var:item.url ?><?cs else ?>default.jpg<?cs /if ?>" width="150" />
+	<span class="tooltip"><?cs var:item.des ?></span>
+	<div class="center">
 	  <?cs var: item.name?>
 	</div>
 	<?cs if: Output.admin == 1 ?>
-	<div class='center'><a href="javascript:void(0);" class='delprd' idval='<?cs var: item.id ?>'>删除</a></div>
+	<div class="center"><a href="javascript:void(0);" class="delprd" idval="<?cs var: item.id ?>">删除</a></div>
 	<?cs /if ?>
   </div>
   <?cs if: count % #4 == 0 ?>
-  <div class='clearer sep'></div>
+  <div class="clearer sep"></div>
   <?cs /if ?>
   <?cs set: count = count + #1 ?>
   <?cs /each ?>

@@ -14,15 +14,15 @@
 
 <div id="coltwo">
 
-  <img src='/pic/4.jpg' />
+  <img src="/pic/4.jpg" />
   
-  <div class='sep'></div>
+  <div class="sep"></div>
   <div class="title">Leave Us a Message</div>
   
-  <ul class='clean'>
+  <ul class="clean">
 	<li>
 	  <div class="leftitem_long">My Contact info:</div>
-	  <input type='text' id='contact' class='VAL_ADD vrequire long' vmax='256' />
+	  <input type="text" id="contact" class="VAL_ADD vrequire long" vmax="256" />
 	</li>
 	
 	<li>
@@ -32,16 +32,16 @@
 	
 	<li>
 	  <div class="leftitem_long"> &nbsp; </div>
-	  <input type='submit' id='addfeedback' value='Submit' />
+	  <input type="submit" id="addfeedback" value="Submit" />
 	</li>
   </ul>
 
   <?cs if: Output.admin == 1 ?>
-  <div class='sep'></div>
+  <div class="sep"></div>
   <?cs each: item = Output.items ?>
-  <div class='feedback_item'>
-	<div class='feedback_contact'><?cs var: item.contact ?><a href="javascript:void(0);" class='delfeedback' idval='<?cs var: item.id ?>'>删除</a></div>
-	<div class='feedback_content'><?cs var: item.content ?></div>
+  <div class="feedback_item">
+	<div class="feedback_contact"><?cs var: item.contact ?><a href="javascript:void(0);" class="delfeedback" idval="<?cs var: item.id ?>">删除</a></div>
+	<div class="feedback_content"><?cs var: item.content ?></div>
   </div>
   <?cs /each ?>
   <?cs /if ?>
