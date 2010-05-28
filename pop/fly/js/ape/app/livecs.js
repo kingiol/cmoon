@@ -1,5 +1,6 @@
 // new liveCS(ape).initialize({aname: document.domain});
 function liveCS(ape) {
+	var ui = bmoon.lcs.chat;
 	this.initialize = function(opts) {
 		/*
 		 * 我们本可设置 this.xxx = yyy, 这样， 只要是本实例成员函数发起的调用，都可以访问。
@@ -61,6 +62,7 @@ function liveCS(ape) {
 
 	this.pipeCreate = function(pipe, options) {
 		if (pipe.properties.name.toLowerCase() == ape.lcsPipeName) {
+			ui.init(ape);
 			ape.lcsPubPipe = pipe;
 			if (!ape.lcsCurrentPipe) {
 				ape.lcsCurrentPipe = pipe;
@@ -70,12 +72,14 @@ function liveCS(ape) {
 
 	this.createUser = function(user, pipe) {
 		if (pipe.properties.isadmin) {
+			ui.adminon(user);
 			ape.lcsCurrentPipe = pipe;
 		}
 	};
 
 	this.deleteUser = function(user, pipe) {
 		if (pipe.properties.isadmin) {
+			ui.adminoff(user);
 			ape.lcsCurrentPipe = ape.lcsPubPipe;
 		}
 	};
@@ -90,6 +94,7 @@ function liveCS(ape) {
 
 	this.rawLcsData = function(raw, pipe) {
 		if (pipe == ape.lcsCurrentPipe) {
+			ui.onmsg(raw);
 			var msg = unescape(raw.data.msg);
 			var uin = raw.data.from.properties.uin;
 			var tm = Date(eval(raw.time)).match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0];
