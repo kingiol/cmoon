@@ -1,6 +1,8 @@
 body {background: #fff; color: #111; }
 li {margin: 6px 0; }
 a {color: #DB3946; cursor: pointer; text-decoration: none; }
+dt {float: left; width: 100px; margin: 0 13px 0 0; text-align: right;}
+dd {margin: 10px 0;}
 /*a:hover {background-color: #DB3946; color: #FFF !important; text-decoration: none; }*/
 
 .hide {display: none;}
@@ -30,7 +32,6 @@ input.submitbtn, button.submitbtn {
 input.submitbtn:hover {background-color: #9a9a9a; cursor: pointer;}
 
 div.clearer {clear: both;}
-div.leftitem {float: left; width: 100px; margin: 0 13px 0 0; text-align: right;}
 div.sep {clear: both; height: 3ex;}
 div.sepl {clear: both; height: 2ex;}
 
