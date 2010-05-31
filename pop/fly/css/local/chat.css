@@ -1,4 +1,21 @@
-#bchat {position:fixed; z-index:999; right:50px; bottom:20px}
+#bchat {
+	background-color:#999999;
+	border: 1px solid #666666;
+	position:fixed;
+	right:50px;
+	bottom:20px;
+	padding: 10px;
+	opacity: 0.9;
+	z-index:999;
+}
+#bchat-head {width: 260px; height: 20px;}
+#bchat-body {width: 260px; display: none;}
+#bchat-msgs {
+	background-color: #eeeeee;
+	height: 200px;
+	width: 258px;
+	margin: 10px 10px 10px 0;
+}
 
 .wg-im-panel { float:left;}
 .wg-im-panel h2.title { width:170px; height:31px;/*cursor:move;*/ overflow:hidden; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) 0 0 no-repeat;}
