@@ -146,14 +146,6 @@ input.long {
 #coltwo p {
     line-height: 18px;
 }
-#coltwo pre {
-    width: 90%;
-    padding: 0.5em;
-    /*background-color: #6f91d6;*/
-    background-color: #d8e2ee;
-    border: solid 1px #aaaaaa;
-    color: #112222;
-}
 #coltwo pre.light {
     width: 90%;
     padding: 0.5em;

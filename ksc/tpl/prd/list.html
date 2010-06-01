@@ -29,8 +29,8 @@
   <?cs set: count = 1 ?>
   <?cs each: item = Output.items ?>
   <div class="prditem">
-	<img src="/img/prd/<?cs if: item.url ?>ori/<?cs var:item.url ?><?cs else ?>default.jpg<?cs /if ?>" width="150" />
-	<span class="tooltip"><?cs var:item.des ?></span>
+	<a href="/cgi-bin/detail?id=<?cs var: item.id ?>"><img src="/img/prd/<?cs if: item.url ?>ori/<?cs var:item.url ?><?cs else ?>default.jpg<?cs /if ?>" width="150" /></a>
+	<span class="tooltip"><pre><?cs var:item.des ?></pre></span>
 	<div class="center">
 	  <?cs var: item.name?>
 	</div>
