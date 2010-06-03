@@ -17,6 +17,8 @@
 	margin: 10px 10px 10px 0;
 }
 
+textarea#bchat-input {padding: 8px;}
+
 .wg-im-panel { float:left;}
 .wg-im-panel h2.title { width:170px; height:31px;/*cursor:move;*/ overflow:hidden; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) 0 0 no-repeat;}
 .wg-im-panel h2.title span.name { float:left; height:31px; width:100px; text-indent:-9999px;}
