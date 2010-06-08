@@ -3,3 +3,8 @@
 		   		   		 event have move fdb and dtrace to mnl's mdb and mtrace
 		   event - according to efficiency, data pack NEED change to pack hdf -_-!
 		   *DONE* event, rock - README NEED to be complete
+
+2010-06-08
+		*DONE* ksa - change m*.js to b/*.js and change them in layout.
+		*DONE* pop - change local js to object -_-!
+		*DONE* pop - html's div change from class_name to class-name
