@@ -1,12 +1,13 @@
-//; if (!bmoon.lcs) bmoon.lcs = {};
-; bmoon.lcs = bmoon.lcs || {version: "1.0"};
-bmoon.lcs.chat = {
+//; if (!bmoon) bmoon = {};
+; var bmoon = bmoon || {};
+bmoon.chat = {
+	version: "1.0",
 	inited: false,
 	adminon: false,
 	ape: {},
 
 	init: function(ape) {
-		var o = bmoon.lcs.chat,
+		var o = bmoon.chat,
 		html = [
 			'<div id="bchat">',
 				'<div id="bchat-head"><a href="javascript: void(0);" id="bchat-trigger">留言</a></div>',
@@ -32,20 +33,20 @@ bmoon.lcs.chat = {
 	},
 
 	openChat: function() {
-		var o = bmoon.lcs.chat;
+		var o = bmoon.chat;
 
 		$('#bchat-body').fadeIn();
         $('#bchat-input').focus();
 	},
 
 	closeChat: function() {
-		var o = bmoon.lcs.chat;
+		var o = bmoon.chat;
 
 		$('#bchat-body').fadeOut();
 	},
 
 	msgSend: function() {
-		var o = bmoon.lcs.chat,
+		var o = bmoon.chat,
 		m = $('#bchat-input').val(),
 		pipe = o.ape.lcsCurrentPipe;
 
@@ -61,13 +62,13 @@ bmoon.lcs.chat = {
 	},
 
 	adminOn: function() {
-		var o = bmoon.lcs.chat;
+		var o = bmoon.chat;
 
 		o.adminon = true;
 	},
 
 	adminOff: function() {
-		var o = bmoon.lcs.chat;
+		var o = bmoon.chat;
 
 		o.adminon = false;
 	}

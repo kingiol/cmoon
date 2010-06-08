@@ -1,6 +1,6 @@
 // new liveCS(ape).initialize({aname: document.domain});
 function liveCS(ape) {
-	var ui = bmoon.lcs.chat;
+	var ui = bmoon.chat;
 	this.initialize = function(opts) {
 		/*
 		 * 我们本可设置 this.xxx = yyy, 这样， 只要是本实例成员函数发起的调用，都可以访问。
@@ -99,3 +99,14 @@ function liveCS(ape) {
 		}
 	};
 }
+
+$(document).ready(function() {
+    var client = new APE.Client();
+	client.load({
+		identifier: 'lcs',
+		transport: 2,
+		complete: function(ape) {
+			new liveCS(ape).initialize({aname: document.domain});
+		}
+	});
+});

@@ -9,23 +9,13 @@
     <!--<title>TODO - <?cs var:Layout.title ?></title>-->
     <title> TODO jQuery Tools standalone demo</title>
 
-    <link rel="stylesheet" type="text/css" href="/css/mbase.css" />
-    <link rel="stylesheet" type="text/css" href="/css/mtools.css" />
+    <link rel="stylesheet" type="text/css" href="/css/b/base.css" />
     <?cs include:Include.css ?>
-    <style type="text/css">
-      <?cs include:Layout.css ?>
-    </style>
+	<?cs var: Layout.css ?>
 
-    <script type="text/javascript" src="/js/pub/mbase.js"></script>
-    <script type="text/javascript" src="/js/lbase.js"></script>
+    <script src="/js/b/base.js"></script>
     <?cs include:Include.js ?>
-    <script type="text/javascript">
-      $(document).ready(function()
-      {
-      <?cs include:Layout.js ?>
-      <?cs include:Layout.html ?>
-      });
-    </script>
+	<?cs var: Layout.js ?>
   </head>
 
   <body>

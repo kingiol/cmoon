@@ -1,13 +1,11 @@
 BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
-.PHONY: pub
-all: pub lbase.js
+all: b/base.js b/appnew.js
 
-pub:
-	@$(MAKE) -C pub
-
-lbase.js: local/bmoon.lcs.js
+b/base.js: pub/jquery-1.4.2.js pub/bmoon.js bmoon.lcs.js
+b/chat.js: ape/app/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
+b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
 
 %.js:
 	@echo -n > $@
@@ -15,5 +13,4 @@ lbase.js: local/bmoon.lcs.js
 
 
 clean:
-	@$(MAKE) -C pub clean
-	@rm -f lbase.js
+	@rm -f b/base.js b/appnew.js
