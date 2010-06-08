@@ -1,0 +1,246 @@
+/*
+KISSY CSS Reset
+理念：清除和重置是紧密不可分的
+特色：1.适应中文 2.基于最新主流浏览器
+维护：玉伯(lifesinger@gmail.com), 正淳(ragecarrier@gmail.com)
+*/
+
+/* 清除内外边距 */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+fieldset, lengend, button, input, textarea, /* form elements 表单元素 */
+th, td { /* table elements 表格元素 */
+    margin: 0;
+    padding: 0;
+}
+
+/* 设置默认字体 */
+body,
+button, input, select, textarea { /* for ie */
+    /*font: 12px/1 Tahoma, Helvetica, Arial, "宋体", sans-serif;*/
+    font: 12px Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; /* 用 ascii 字符表示，使得在任何编码下都无问题 */
+}
+
+h1 { font-size: 18px; /* 18px / 12px = 1.5 */ }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+h4, h5, h6 { font-size: 100%; }
+
+address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
+code, kbd, pre, samp, tt { font-family: "Courier New", Courier, monospace; } /* 统一等宽字体 */
+small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/* 重置列表元素 */
+ul, ol { list-style: none; }
+
+/* 重置文本格式元素 */
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+abbr[title], acronym[title] { /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+
+q:before, q:after { content: ''; }
+
+/* 重置表单元素 */
+legend { color: #000; } /* for ie6 */
+fieldset, img { border: none; } /* img 搭车：让链接里的 img 无边框 */
+/* 注：optgroup 无法扶正 */
+button, input, select, textarea {
+    font-size: 100%; /* 使得表单元素在 ie 下能继承字体大小 */
+}
+
+/* 重置表格元素 */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* 重置 hr */
+hr {
+    border: none;
+    height: 1px;
+}
+
+/* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
+html { overflow-y: scroll; }
+body {background: #fff; color: #111; }
+li {margin: 6px 0; }
+a {color: #DB3946; cursor: pointer; text-decoration: none; }
+dt {float: left; width: 100px; margin: 0 13px 0 0; text-align: right;}
+dd {margin: 10px 0;}
+/*a:hover {background-color: #DB3946; color: #FFF !important; text-decoration: none; }*/
+
+.hide {display: none;}
+.show {display: block;}
+.valid {border: 2px solid green !important;}
+.invalid {border: 2px solid #800 !important;}
+
+#pagenav {float: right; margin: 0 10px;}
+#pagenav span {margin: 0 5px;}
+#top {height: 36px; border-bottom: 1px dashed #101010; }
+#bot {height: 100px; border-top: 1px dashed #101010; }
+#bot p {padding-top: 10px; text-align: center; }
+#mid {width: 960px; margin: 0 auto; padding: 3ex 0; }
+
+input {border: 1px solid #676767;}
+input.long {width: 180px;}
+input.middle {width: 45px;}
+input.short {width: 25px;}
+input.submitbtn, button.submitbtn {
+	margin-top: 10px;
+	padding: 1px 28px;
+	text-align: center;
+	vertical-align: middle;
+	color: #fff;
+	background-color: #686868;
+}
+input.submitbtn:hover {background-color: #9a9a9a; cursor: pointer;}
+
+div.clearer {clear: both;}
+div.sep {clear: both; height: 3ex;}
+div.sepl {clear: both; height: 2ex;}
+
+:focus {outline-style:none;}
+/* member part */
+.member ul {
+    float: right;
+    margin: 8px 25px 0 0;
+}
+.member ul li{
+	display: inline;
+    float: left;
+    margin: 5px 0;
+	padding: 0 8px;
+    border-right: 1px solid #101010;
+}
+.member ul li.last{
+	border-right: 0 none;
+}
+
+/* global nav part */
+.navbanner{
+    width: 100%;
+	height: 27px;
+    border: 1px solid #101010;
+    border-width: 1px 0;
+}
+ul.indentmenu li, ul.crumbs li {
+	display: inline;
+}
+ul.indentmenu, ul.crumbs {
+    float: left;
+    margin: 0;
+    padding: 0;
+	
+}
+.indentmenu {
+    font: bold 13px Georgia;
+}
+ul.indentmenu li a {
+    float: left;
+    padding: 5px 11px;
+    border-right: 1px solid #101010;
+}
+ul.indentmenu li a:hover, ul.indentmenu li .selected {
+    padding-top: 6px; /*shift text down 1px for selected and active item*/
+    padding-bottom: 4px; /*shift text down 1px for selected and active item*/
+    background: black url(/images/updownl.jpg) center center repeat-x;
+}
+.crumbs {
+	margin-top: 10px;
+	line-height: 26px;
+}
+ul.crumbs li {
+	margin-right:5px;
+}
+ul.crumbs li.first {
+	margin-left:11px;
+}
+ul.uc-menu {
+	display: none;
+	float: right;
+	margin-right: 1em;
+}
+
+/* content */
+#content {
+	margin: 2ex 0 0 0;
+    border: 1px solid #101010;
+    border-width: 1px 0;
+}
+#colone {
+    float: left;
+    width: 180px;
+    margin: 0 15px;
+}
+#colone .title {
+	/*color: #EE1C25;*/
+	margin: 15px 0 0 0;
+    padding: 2px 0;
+	
+    /*background: black url(/images/upl2.jpg) center center repeat-x;*/
+    border: 1px solid #101010;
+    border-bottom: 0 none;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+}
+#colone .listcon {
+    margin-bottom: 2ex;
+    border: 1px solid #101010;
+}
+#colone .listcon ul {
+    line-height: 20px;
+}
+#colone .listcon ul li {
+    text-align: center;
+}
+
+#coltwo {
+    float: left;
+    width: 710px;			/* 960 = 180+15*4+x 15px~~15px -30px for ie6, ri */
+    margin: 0 15px 15px 15px;
+    padding: 0;
+}
+#coltwo .title {
+	/*color: #EE1C25;*/
+	margin: 15px 0;
+    border-bottom: 1px solid #101010;
+	
+    font-weight: bold;
+    font-size: 12px;
+}
+#coltwo p {
+    line-height: 18px;
+}
+#coltwo pre {
+    width: 90%;
+    padding: 0.5em;
+    border: solid 1px #aaaaee;
+    color: #112222;
+    background-color: #eeeeee;
+}
+
+/* ck means chunk */
+#coltwo .ckhalf {width: 345px;}
+#coltwo .ckthird {width: 230px;}
+#coltwo .ckquarter {width: 175px;}
+#coltwo .ckfifth {width: 135px;}
+#coltwo .cksixth, #coltwo .ck4em {width: 100px;}
+#coltwo .ck2em {width: 2em;}
+
+#coltwo .ckleft {
+    float: left;
+    margin: 0 10px 0 0;
+    text-align: left;
+}
+
+#coltwo .ckright {
+    float: right;
+    margin: 0 0 0 10px;
+    text-align: right;
+}

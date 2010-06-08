@@ -1,17 +1,14 @@
 BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
-all: mbase.css mtools.css mchat.css
+all: b/base.css b/chat.css
 
-mbase.css: local/reset.css local/base.css local/mid.css
-mtools.css: pub/ref/flowtools/css/mtabs.css pub/ref/flowtools/css/tooltip.css pub/ref/flowtools/css/expose.css \
-			pub/ref/flowtools/css/overlay.css pub/ref/flowtools/css/scrollable.css \
-			pub/ref/superfish/css/superfish.css pub/ref/superfish/css/superfish-vertical.css
-mchat.css: local/chat.css
+b/base.css: reset.css base.css mid.css
+b/chat.css: chat.css
 
 %.css:
 	$(CSSGLUE) $^ > $@
 
 
 clean:
-	@rm -f mbase.css mtools.css mchat.css
+	@rm -f b/base.css b/chat.css

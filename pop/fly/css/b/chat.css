@@ -1,0 +1,112 @@
+#bchat {
+	background-color:#999999;
+	border: 1px solid #666666;
+	position:fixed;
+	right:50px;
+	bottom:20px;
+	padding: 10px;
+	opacity: 0.9;
+	z-index:999;
+}
+#bchat-head {width: 260px; height: 20px;}
+#bchat-body {width: 260px; display: none;}
+#bchat-msgs {
+	background-color: #eeeeee;
+	height: 200px;
+	width: 258px;
+	margin: 10px 10px 10px 0;
+}
+
+textarea#bchat-input {padding: 8px;}
+
+.wg-im-panel { float:left;}
+.wg-im-panel h2.title { width:170px; height:31px;/*cursor:move;*/ overflow:hidden; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) 0 0 no-repeat;}
+.wg-im-panel h2.title span.name { float:left; height:31px; width:100px; text-indent:-9999px;}
+.wg-im-panel h2.title span.op { float:right; width:60px; padding-right:9px; padding-top:1px;}
+.wg-im-panel h2.title span.op a.close { float:right; overflow:hidden; text-indent:-9999px;  width:31px; height:20px; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -200px 0 no-repeat; }
+.wg-im-panel h2.title span.op a.open { float:right; overflow:hidden; text-indent:-9999px;  width:31px; height:20px; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -250px 0 no-repeat; }
+.wg-im-panel .inner { width:170px; height:1%; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) 0 100% no-repeat;}
+
+.wg-im .im-count { padding-bottom:15px; height:1%; }
+.wg-im .im-count ul { width:155px; height:60px; overflow:hidden; margin:0 auto; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -200px -150px no-repeat;}
+.wg-im .im-count li { height:30px; line-height:30px; padding-left:25px; color:#8F8F8F;}
+.wg-im .im-count li strong { font-style:normal; font-family:Verdana, Geneva, sans-serif; color:#D38550;}
+.wg-im .im-count li.ol { background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -190px -230px no-repeat;}
+.wg-im .im-count li.pv { background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -190px -260px no-repeat;}
+.wg-im .im-count span.new-msg { padding:0 10px; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) 0 -98px no-repeat; }
+
+.wg-im .im-obj .talk-nothing { height:300px; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -400px -520px no-repeat;}
+
+.wg-im .im-obj { height:360px;}
+.wg-im .im-obj .talk-to-group {}
+.wg-im .im-obj .talk-to-group li { height:30px; line-height:32px; overflow:hidden; cursor:pointer; text-indent:10px; color:#B8510C; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -199px -50px no-repeat;}
+.wg-im .im-obj .talk-to-group li.current { background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -199px -520px no-repeat;}
+.wg-im .im-obj .talk-to-one { height:300px; overflow:auto; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -600px -520px no-repeat;}
+.wg-im .im-obj .talk-to-one ul.list { height:270px; margin-right:1px; overflow-y:auto;}
+.wg-im .im-obj .talk-to-one li { height:30px; cursor:pointer; vertical-align:bottom; overflow:hidden; line-height:32px; padding-left:10px; }
+.wg-im .im-obj .talk-to-one li em { color:#B8510C; font-style:normal;}
+.wg-im .im-obj .talk-to-one li span.avt { float:left; padding-top:5px; width:25px;}
+.wg-im .im-obj .talk-to-one li span.name { float:left; margin-right:3px;}
+.wg-im .im-obj .talk-to-one li span.s-1 { float:left; height:30px; width:13px; overflow:hidden; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) 0 -92px no-repeat;}
+.wg-im .im-obj .talk-to-one li span.s-2 { float:left; height:30px; width:13px; overflow:hidden; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) 0 -142px no-repeat;}
+.wg-im .im-obj .talk-to-one li span.s-3 { float:left; height:30px; width:13px; overflow:hidden; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) 0 -192px no-repeat;}
+.wg-im .im-obj .talk-to-one li.current { background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -199px -520px no-repeat;}
+.wg-im .im-obj .talk-setting { padding-left:1px; height:30px; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -199px -100px no-repeat; line-height:30px; padding-right:13px; text-align:right;}
+.wg-im .im-obj .talk-setting a.setting { color:#B8510C; padding-left:15px; text-decoration:none; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -200px -301px no-repeat;}
+
+.wg-im-dialog { position:relative; float:left; width:390px; height:466px; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) 100% 0 no-repeat;}
+.wg-im-dialog-inner { padding:10px 12px 10px 10px;}
+
+.wg-im-dialog-btn { width:16px; height:36px; overflow:hidden; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) 0 -300px no-repeat; position:absolute; right:-5px; top:45%;}
+.wg-im-dialog-btn a { display:block; height:36px; text-indent:-9999px;}
+
+.wg-im .im-dialog-window { height:350px; margin-bottom:10px; border:1px solid #EDDBB8; background:#FFFFFF; overflow:auto;}
+.wg-im .im-dialog-list { padding:15px;}
+.wg-im .im-dialog-list .item { margin-bottom:5px; line-height:18px; color:#333333;}
+.wg-im .im-dialog-list .item-name { color:#6E7F02}
+.wg-im .im-dialog-list .item-name a { color:#B8510C; text-decoration:none;}
+.wg-im .im-dialog-list .item-name a:hover { text-decoration:underline;}
+.wg-im .im-dialog-list .item-content { padding-left:1em;}
+.wg-im .im-dialog-list .me .item-name { color:#B8510C;}
+
+
+.wg-im .im-dialog-op { height:80px;}
+.wg-im .im-dialog-op .im-b1 { width:300px; float:left;}
+.wg-im .im-dialog-op .im-b2 { width:59px; float:right;}
+.wg-im .im-dialog-op textarea { width:99%; height:76px; overflow:auto; border:1px solid #EDDBB8;}
+
+.wg-im .im-dialog-op .op-stop a { display:block; width:59px; text-indent:-9999px; height:25px; margin-bottom:3px; overflow:hidden; }
+.wg-im .im-dialog-op .op-stop a.off { background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -270px -440px no-repeat;}
+.wg-im .im-dialog-op .op-stop a.on { background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -200px -440px no-repeat;}
+.wg-im .im-dialog-op .op-face a.btn { display:block; width:59px; text-indent:-9999px; height:25px; margin-bottom:3px; overflow:hidden; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -200px -400px no-repeat;}
+.wg-im .im-dialog-op .op-send a.btn { display:block; width:59px; text-indent:-9999px; height:25px; overflow:hidden; background:url(http://css.hunantv.com/home/images/apps/im/im_panel.gif) -200px -350px no-repeat;}
+
+.wg-im .im-dialog-op .op-face { position:relative;}
+.wg-im .im-dialog-op .insert-face { position:absolute; top:-59px; left:59px; width:294px; height:80px;}
+.wg-im .im-dialog-op .insert-face ul { padding:10px; border:1px solid #EDDBB8; background:#FFFFFF; }
+.wg-im .im-dialog-op .insert-face li { display:inline; margin:2px;}
+.wg-im .im-obj .talk-to-group li span {
+    float: right;
+    width: 130px;
+}
+.wg-im .im-obj .talk-to-group .new {
+    overflow:hidden;
+    background:url("http://css.hunantv.com/home/images/apps/im/im_panel.gif") no-repeat scroll 0 -95px transparent;
+    height:15px;
+    width:13px;
+    float:left;
+}
+/*
+#fkq-tip {
+    height:20px;
+    left:0;
+    padding:2px;
+    position:absolute;
+    top:-20px;
+    color:red;
+}
+*/
+* html #fkq-box{	
+	margin-top: expression(0 - parseInt(this.offsetHeight) + (TBWindowMargin = document.documentElement && document.documentElement.scrollTop || document.body.scrollTop) + 'px');
+}
+
