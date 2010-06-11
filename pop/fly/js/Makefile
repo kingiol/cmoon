@@ -1,10 +1,11 @@
 BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
-all: b/base.js b/appnew.js
+FILES = b/base.js b/chat.js b/appnew.js
+all: $(FILES)
 
-b/base.js: pub/jquery-1.4.2.js pub/bmoon.js bmoon.lcs.js
-b/chat.js: ape/app/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
+b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/bmoon.js bmoon.lcs.js
+b/chat.js: pub/jquery.hotkeys.js ape/app/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
 b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
 
 %.js:
@@ -13,4 +14,4 @@ b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
 
 
 clean:
-	@rm -f b/base.js b/appnew.js
+	@rm -f $(FILES)

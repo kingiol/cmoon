@@ -17,8 +17,8 @@ app_new {
 	Layout = layout.html
 	Dataset {
 		Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/appnew.css" />
-			js = <script src="/js/b/appnew.js"></script>
+			css = /css/b/appnew.css
+			js = /js/b/appnew.js
 			title = 添加站点
 			crumbs {
 				0 {

@@ -25,7 +25,7 @@ function liveCS(ape) {
 		}
 		ape.lcsutime = parseInt(ape.lcsutime)+1;
 		if (!ape.options.restore) {
-				Cookie.write("lcs_utime", ape.lcsutime, {'path': '/', 'duration': 36500});
+			Cookie.write("lcs_utime", ape.lcsutime, {'path': '/', 'duration': 36500});
 		}
 
 		ape.lcsCurrentPipe = null;
@@ -50,12 +50,12 @@ function liveCS(ape) {
 		ape.start({'uin': ape.lcsuname}, opt);
 		if (ape.options.restore) {
 			ape.getSession('lcsCurrentPipe', function(resp) {
-							   ape.lcsCurrentPipe = ape.getPipe(resp.data.sessions.lcsCurrentPipe);
-						   }, opt);
+				ape.lcsCurrentPipe = ape.getPipe(resp.data.sessions.lcsCurrentPipe);
+			}, opt);
 		} else {
 			ape.request.stack.add("LCS_JOIN", {
-									  'aname': ape.lcsaname, 'utime': ape.lcsutime,
-									  'url': location.href, 'title': document.title}, opt);
+				'aname': ape.lcsaname, 'utime': ape.lcsutime,
+				'url': location.href, 'title': document.title}, opt);
 		}
 		ape.request.stack.send();
 	};
@@ -101,7 +101,7 @@ function liveCS(ape) {
 }
 
 $(document).ready(function() {
-    var client = new APE.Client();
+	var client = new APE.Client();
 	client.load({
 		identifier: 'lcs',
 		transport: 2,
