@@ -8,3 +8,7 @@
 		*DONE* ksa - change m*.js to b/*.js and change them in layout.
 		*DONE* pop - change local js to object -_-!
 		*DONE* pop - html's div change from class_name to class-name
+
+2010-06-11
+		lcs - livecs.js LCS_MSG shoult give user a hint.
+		lcs - lcs_join_a command

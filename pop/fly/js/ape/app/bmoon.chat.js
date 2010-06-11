@@ -57,7 +57,7 @@ bmoon.chat = {
 		if (o.amdinon && pipe) {
 			pipe.request.send("LCS_SEND", {msg: m});
 		} else {
-			o.ape.request.send("LCS_MSG", {aname: o.ape.lcsaname, msg: m});
+			o.ape.request.send("LCS_MSG", {uname: o.ape.lcsaname, msg: m});
 		}
 	},
 
