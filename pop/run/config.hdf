@@ -8,3 +8,12 @@ app {
 		dataer = app_exist
 	}
 }
+login {
+	reqtype = 1
+	dataer = app_login
+}
+oms {
+	reqtype = 0
+	dataer = oms
+	render = oms
+}

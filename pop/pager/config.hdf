@@ -10,6 +10,9 @@ index {
 				}
 			}
 		}
+		Include {
+			content = index.html
+		}
 	}
 	Output = index.html
 }
@@ -17,13 +20,17 @@ app_new {
 	Layout = layout.html
 	Dataset {
 		Layout {
-			css = /css/b/appnew.css
-			js = /js/b/appnew.js
+			css = <link rel="stylesheet" type="text/css" href="/css/b/appnew.css" />
+			js = <script src="/js/b/appnew.js"></script>
 			title = 添加站点
 			crumbs {
 				0 {
+					name = 首页
+					href = /index.html
+				}
+				1 {
 					name = 添加站点
-					href = app/new.html
+					href = /app/new.html
 				}
 			}
 		}

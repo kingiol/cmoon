@@ -102,8 +102,19 @@ int main(int argc, char **argv, char **envp)
 				if (CGI_REQ_METHOD(cgi) != CGI_REQ_GET) {
 					goto resp_ajax;
 				}
-				if (ret != RET_RBTOP_OK && ret == RET_RBTOP_NEXIST) {
-					cgi_redirect(cgi, "/404.html");
+				if (ret != RET_RBTOP_OK) {
+					if (ret == RET_RBTOP_NEXIST)
+						cgi_redirect(cgi, "/404.html");
+					else if (ret == RET_RBTOP_NOTLOGIN) {
+						char *ref;
+						cgi_url_escape(hdf_get_value(cgi->hdf, PRE_CGI_URI, "/index.html"), &ref);
+						cgi_redirect(cgi, "/index.html?loginref=%s", ref);
+						free(ref);
+					} else {
+						ldb_opfinish_json(ret, cgi->hdf, NULL, 0);
+						cgi_redirect(cgi, "/index.html?vikierr=%s",
+									 hdf_get_value(cgi->hdf, PRE_ERRMSG, "MD, 不知道啥错！"));
+					}
 				} else {
 					ret = ltpl_render(cgi, tplh, session, rcfg);
 					if (ret != RET_RBTOP_OK) {

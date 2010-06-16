@@ -1,28 +1,15 @@
 /* member part */
-.member ul {
-    float: right;
-    margin: 8px 25px 0 0;
-}
-.member ul li{
-	display: inline;
-    float: left;
-    margin: 5px 0;
-	padding: 0 8px;
-    border-right: 1px solid #101010;
-}
-.member ul li.last{
-	border-right: 0 none;
-}
+.member ul {float: right; margin: 8px 25px 0 0;}
+.member ul li{display: inline; float: left; margin: 5px 0;	padding: 0 8px; border-right: 1px solid #101010;}
+.member ul li.last{border-right: 0 none;}
 
 /* global nav part */
 .navbanner{
-    width: 100%;
 	height: 27px;
     border: 1px solid #101010;
     border-width: 1px 0;
-}
-ul.indentmenu li, ul.crumbs li {
-	display: inline;
+	background-color: #eee;
+	margin-bottom: 3ex;
 }
 ul.indentmenu, ul.crumbs {
     float: left;
@@ -30,6 +17,10 @@ ul.indentmenu, ul.crumbs {
     padding: 0;
 	
 }
+ul.indentmenu li, ul.crumbs li {
+	display: inline;
+}
+
 .indentmenu {
     font: bold 13px Georgia;
 }
@@ -39,10 +30,12 @@ ul.indentmenu li a {
     border-right: 1px solid #101010;
 }
 ul.indentmenu li a:hover, ul.indentmenu li .selected {
-    padding-top: 6px; /*shift text down 1px for selected and active item*/
-    padding-bottom: 4px; /*shift text down 1px for selected and active item*/
-    background: black url(/images/updownl.jpg) center center repeat-x;
+    /*padding-top: 6px; /*shift text down 1px for selected and active item*/
+    /*padding-bottom: 4px; /*shift text down 1px for selected and active item*/
+    /*background: black url(/images/updownl.jpg) center center repeat-x;*/
+	background-color: #bbb;
 }
+
 .crumbs {
 	margin-top: 10px;
 	line-height: 26px;
@@ -61,36 +54,23 @@ ul.uc-menu {
 
 /* content */
 #content {
-	margin: 2ex 0 0 0;
     border: 1px solid #101010;
     border-width: 1px 0;
+	padding: 3ex 0;
 }
 #colone {
     float: left;
     width: 180px;
     margin: 0 15px;
+    text-align: center;
+	border: 1px solid #101010;
+	border-top: 0 none;
+	border-bottom: 0 none;
 }
 #colone .title {
-	/*color: #EE1C25;*/
-	margin: 15px 0 0 0;
-    padding: 2px 0;
-	
-    /*background: black url(/images/upl2.jpg) center center repeat-x;*/
-    border: 1px solid #101010;
-    border-bottom: 0 none;
+    border-bottom: 1px solid #101010;
     font-weight: bold;
     font-size: 12px;
-    text-align: center;
-}
-#colone .listcon {
-    margin-bottom: 2ex;
-    border: 1px solid #101010;
-}
-#colone .listcon ul {
-    line-height: 20px;
-}
-#colone .listcon ul li {
-    text-align: center;
 }
 
 #coltwo {
@@ -101,7 +81,6 @@ ul.uc-menu {
 }
 #coltwo .title {
 	/*color: #EE1C25;*/
-	margin: 15px 0;
     border-bottom: 1px solid #101010;
 	
     font-weight: bold;

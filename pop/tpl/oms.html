@@ -1,0 +1,57 @@
+<div id="colone">
+  <dl class="appinfo">
+	<dt><?cs var: Output.aname ?></dt>
+	<dd class="time">注册日期：<?cs var: Output.intime ?></dd>
+	<dd class="state">
+	  <?cs if: Output.state == #10 ?>
+	  <div>用户来访短信通知： 关闭</div>
+	  <div>最高支持 5 人在线</div>
+	  <div>统计历史保存 3 月</div>
+	  <div><a target="_blank" href="/up">我要升级</a></div>
+	  <?cs elif: Output.state == #11 ?>
+	  <?cs elif: Output.state == #12 ?>
+	  <?cs elif: Output.state == #13 ?>
+	  <?cs /if ?>
+	</dd>
+  </dl>
+</div>
+
+<div id='coltwo'>
+  
+  <div class="title">聊天窗口</div>
+  <div class="sep"></div>
+  
+  <div id="chat-box" class="im-box">
+	<div class="im-op">
+	  <div class="op-find">
+		<input type="text" id="chat-find-text" class="middle" />
+		<input type="button" id="chat-find-submit" value="查找" />
+	  </div>
+
+	  <div class="im-user-list">
+		<ul>
+		  <li class="cur">所有人</li>
+		  <li>aaa</li>
+		  <li>bbb</li>
+		  <li>ccc</li>
+		  <li>ddd</li>
+		</ul>
+	  </div>
+
+	  <div class="page">
+	  </div>
+	</div>
+	
+	<div class="im-chat">
+	  <div class="im-state"> 给所有在线访客发送消息 </div>
+	  
+	  <div class="im-msgs"></div>
+
+	  <div class="im-input">
+		<textarea id="chat-msg-text" cols="55" rows="3"></textarea>
+		<input type="button" id="chat-msg-submit" value="发送" />
+	  </div>
+	</div>
+  </div>
+
+</div>

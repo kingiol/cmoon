@@ -4,26 +4,20 @@
 
 static void app_after_login(CGI *cgi, char *aname, char *masn)
 {
-	char tm[LEN_TM_GMT], *p;
+	char tm[LEN_TM_GMT];
 
 	hdf_set_copy(cgi->hdf, PRE_OUTPUT".aname", PRE_QUERY".aname");
 	
 	/*
 	 * set cookie 
 	 */
-#if 0
-	sprintf(tok, "%d", aid);
-	cgi_cookie_set(cgi, "aid", tok, NULL, SITE_DOMAIN, NULL, 1, 0);
-#endif
+	//cgi_url_escape(aname, &p);
+	cgi_cookie_set(cgi, "aname", aname, NULL, SITE_DOMAIN, NULL, 1, 0);
 
-	cgi_url_escape(aname, &p);
-	cgi_cookie_set(cgi, "aname", p, NULL, SITE_DOMAIN, NULL, 1, 0);
-	free(p);
-
-	cgi_url_escape(masn, &p);
+	//cgi_url_escape(masn, &p);
 	mmisc_getdatetime_gmt(tm, sizeof(tm), "%A, %d-%b-%Y %T GMT", 60*60*3);
-	cgi_cookie_set(cgi, "masn", p, NULL, SITE_DOMAIN, tm, 1, 0);
-	free(p);
+	cgi_cookie_set(cgi, "masn", masn, NULL, SITE_DOMAIN, tm, 1, 0);
+	//free(p);
 }
 
 int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
@@ -96,7 +90,7 @@ int app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_set_int_value(evt->hdfsnd, "state", LCS_ST_FREE);
 	
 	memset(masn, 0x0, sizeof(masn));
-	neo_rand_string(masn, sizeof(masn));
+	mcs_rand_string(masn, sizeof(masn));
 	hdf_set_value(evt->hdfsnd, "masn", masn);
 
 	/*
@@ -159,7 +153,7 @@ int app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 			 * follow-up
 			 */
 			memset(masn, 0x0, sizeof(masn));
-			neo_rand_string(masn, sizeof(masn));
+			mcs_rand_string(masn, sizeof(masn));
 			hdf_set_value(evt->hdfsnd, "aname", aname);
 			hdf_set_value(evt->hdfsnd, "masn", masn);
 			mevent_trigger(evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
@@ -182,8 +176,8 @@ int app_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 */
 	LPRE_DBOP(cgi->hdf, conn, evt);
 
-	HDF_GET_STR(cgi->hdf, PRE_QUERY".aname", aname);
-	HDF_GET_STR(cgi->hdf, PRE_QUERY".masn", masn);
+	HDF_GET_STR(cgi->hdf, PRE_COOKIE".aname", aname);
+	HDF_GET_STR(cgi->hdf, PRE_COOKIE".masn", masn);
 
 	/*
 	 * prepare data 
@@ -205,10 +199,12 @@ int app_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	char *masndb = hdf_get_value(evt->hdfrcv, "masn", NULL);
 	if (masndb) {
 		if (!strcmp(masndb, masn)) {
-			app_after_login(cgi, aname, masn);
+			//app_after_login(cgi, aname, masn);
+			hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
 			return RET_RBTOP_OK;
 		}
 	}
+	mtc_warn("%s<====>%s", masndb, masn);
 
 	return RET_RBTOP_NOTLOGIN;
 }

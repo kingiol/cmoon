@@ -3,15 +3,15 @@ Config {
 }
 
 Dataset {
-	Layout.html {
+	layout.html {
 		tabs {
 			0 {
 				name = 首页
-				page = index
+				href = /index.html
 			}
 			1 {
-				name = 域名管理
-				page = app
+				name = 站点管理
+				href = /oms
 			}
 		}
 	}

@@ -1,0 +1,52 @@
+dl.appinfo {margin: 10px 0;}
+dl.appinfo dt{font-weight: bold; text-decoration:underline;}
+dl.appinfo dd.time{color: gray; margin-bottom:10px;}
+
+.im-box {
+	height: 400px;
+    border: 1px solid #101010;
+	padding:15px;
+}
+.im-op {
+	width: 170px;
+	height: 400px;
+	float:left;
+}
+.im-chat {
+	width: 506px;
+	height: 400px;
+	float: right;
+    border: 1px solid #101010;
+	text-indent:1em;
+}
+
+
+.im-user-list ul {
+	margin-top: 3ex;
+}
+
+.im-user-list ul li {
+	margin: 10px 0;
+	line-height: 26px;
+	text-indent: 1em;
+}
+
+.im-user-list ul li.cur {
+	border: 1px solid #101010;
+	border-left: 0 none;
+	border-right: 1px solid #eee;
+	background-color: #eee;
+}
+
+.im-state {
+	background-color:#EEEEEE;
+	font-weight:bold;
+	line-height:26px;
+}
+.im-msgs {
+	height: 270px;
+	border: 1px dashed #101010;
+	border-right: 0 none;
+	border-left: 0 none;
+	margin: 15px 0;
+}

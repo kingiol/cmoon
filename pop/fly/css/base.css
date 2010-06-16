@@ -1,25 +1,10 @@
+/* ELEMENT */
 body {background: #fff; color: #111; }
-li {margin: 6px 0; }
 a {color: #DB3946; cursor: pointer; text-decoration: none; }
-dt {float: left; width: 100px; margin: 0 13px 0 0; text-align: right;}
-dd {margin: 10px 0;}
 /*a:hover {background-color: #DB3946; color: #FFF !important; text-decoration: none; }*/
-
-.hide {display: none;}
-.show {display: block;}
-.valid {border: 2px solid green !important;}
-.invalid {border: 2px solid #800 !important;}
-
-#pagenav {float: right; margin: 0 10px;}
-#pagenav span {margin: 0 5px;}
-#top {height: 36px; border-bottom: 1px dashed #101010; }
-#bot {height: 100px; border-top: 1px dashed #101010; }
-#bot p {padding-top: 10px; text-align: center; }
-#mid {width: 960px; margin: 0 auto; padding: 3ex 0; }
-
-input {border: 1px solid #676767;}
+input, textarea {border: 1px solid #676767;}
 input.long {width: 180px;}
-input.middle {width: 45px;}
+input.middle {width: 100px;}
 input.short {width: 25px;}
 input.submitbtn, button.submitbtn {
 	margin-top: 10px;
@@ -30,9 +15,21 @@ input.submitbtn, button.submitbtn {
 	background-color: #686868;
 }
 input.submitbtn:hover {background-color: #9a9a9a; cursor: pointer;}
-
-div.clearer {clear: both;}
-div.sep {clear: both; height: 3ex;}
-div.sepl {clear: both; height: 2ex;}
-
 :focus {outline-style:none;}
+dl.form dt {float: left; width: 100px; margin: 0 13px 0 0; text-align: right;}
+dl.form dd {margin: 10px 0;}
+
+/* SPECIAL CLASS */
+.hide {display: none;}
+.show {display: block;}
+.valid {border: 2px solid green !important;}
+.invalid {border: 2px solid #800 !important;}
+.clearer {clear: both;}
+.sep {clear: both; height: 3ex;}
+.sepl {clear: both; height: 2ex;}
+
+#top {height: 36px; border-bottom: 1px dashed #101010; }
+#bot {height: 100px; border-top: 1px dashed #101010; }
+#bot p {padding-top: 10px; text-align: center; }
+#mid {width: 960px; margin: 0 auto; padding: 3ex 0; }
+

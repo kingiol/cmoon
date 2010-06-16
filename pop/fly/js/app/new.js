@@ -6,15 +6,15 @@ bmoon.appnew = {
 		var o = bmoon.appnew;
 		if (o.inited) return o;
 
-		o.ht_exist = $('#hit-appnexist'),
-		o.ht_nexist = $('#hit-appexist');
+		o.ht_exist = $('#hit-appexist');
+		o.ht_nexist = $('#hit-appnexist'),
 
 		o.inited = true;
 		return o;
 	},
 	
 	onready: function() {
-		var o = hnmb.home.init();
+		var o = bmoon.appnew.init();
 
 		o.bindSubmit();
 	},

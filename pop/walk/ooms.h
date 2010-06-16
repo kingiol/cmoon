@@ -1,0 +1,10 @@
+#ifndef __OOMS_H__
+#define __OOMS_H__
+#include "mheads.h"
+
+__BEGIN_DECLS
+
+int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+
+__END_DECLS
+#endif /* __OOMS_H__ */

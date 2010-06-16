@@ -25,7 +25,7 @@ void ltpl_prepare_rend(HDF *hdf, char *tpl)
 	 */
 	snprintf(key, sizeof(key), PRE_CFG_DATASET".%s", tpl);
 	tmphdf = hdf_get_obj(g_cfg, key);
-	if (tmphdf != NULL) hdf_copy(hdf, NULL, tmphdf);
+	if (tmphdf != NULL) hdf_copy(hdf, PRE_CFG_LAYOUT, tmphdf);
 	
 	/*
 	 * set classes
@@ -63,10 +63,10 @@ void ltpl_prepare_rend(HDF *hdf, char *tpl)
 int ltpl_parse_dir(char *dir, HASH *outhash)
 {
 	struct dirent **eps = NULL;
-	HDF *node = NULL, *child = NULL;
+	HDF *node = NULL, *dhdf = NULL, *child = NULL;
 	CSPARSE *cs = NULL;
 	char *tp = NULL, *tpl = NULL, *dataer = NULL;
-	char fname[_POSIX_PATH_MAX];
+	char fname[_POSIX_PATH_MAX], tok[64];
 	NEOERR *err;
 	STRING str;
 	int n, ret;
@@ -92,7 +92,7 @@ int ltpl_parse_dir(char *dir, HASH *outhash)
 	n = scandir(dir, &eps, tpl_config, alphasort);
 	for (int i = 0; i < n; i++) {
 		mtc_dbg("parse file %s", eps[i]->d_name);
-		cs = NULL; node = NULL;
+		cs = NULL; node = NULL; dhdf = NULL;
 		memset(fname, 0x0, sizeof(fname));
 		snprintf(fname, sizeof(fname), "%s/%s", dir, eps[i]->d_name);
 		free(eps[i]);
@@ -122,6 +122,12 @@ int ltpl_parse_dir(char *dir, HASH *outhash)
 				 * strdup the key, baby, because we'll free the hdf later
 				 */
 				hash_insert(outhash, (void*)strdup(hdf_obj_name(child)), (void*)cs);
+				if (hdf_get_obj(child, PRE_CFG_DATASET)) {
+					hdf_init(&dhdf);
+					hdf_copy(dhdf, NULL, hdf_get_obj(child, PRE_CFG_DATASET));
+					snprintf(tok, sizeof(tok), "%s_hdf", hdf_obj_name(child));
+					hash_insert(outhash, (void*)strdup(tok), (void*)dhdf);
+				}
 			}
 			
 			if (hdf_get_value(child, PRE_CFG_OUTPUT, NULL) != NULL) {
@@ -220,10 +226,11 @@ void ltpl_destroy(HASH *tplh)
 int ltpl_render(CGI *cgi, HASH *tplh, session_t *ses, HDF *rcfg)
 {
 	CSPARSE *cs;
+	HDF *dhdf;
 	STRING str;
 	NEOERR *err;
 
-	char *file, *render = NULL;
+	char *file, *render = NULL, tok[64];
 	
 	file = hdf_get_value(cgi->hdf, PRE_REQ_URI_RW_HDF, NULL);
 	if (file) {
@@ -234,12 +241,16 @@ int ltpl_render(CGI *cgi, HASH *tplh, session_t *ses, HDF *rcfg)
 		return RET_RBTOP_NEXIST;
 	}
 
-	cs = (CSPARSE*)hash_lookup(tplh, file);
+	cs = (CSPARSE*)hash_lookup(tplh, render);
 	if (cs == NULL) {
 		mtc_err("file not found");
 		return RET_RBTOP_NEXIST;
 	}
 
+	snprintf(tok, sizeof(tok), "%s_hdf", render);
+	dhdf = (HDF*)hash_lookup(tplh, tok);
+
+	hdf_copy(cgi->hdf, NULL, dhdf);
 	ltpl_prepare_rend(cgi->hdf, "layout.html");
 	if (ses->tm_cache_browser > 0) {
 		hdf_set_valuef(cgi->hdf, "cgiout.other.cache=Cache-Control: max-age=%lu",

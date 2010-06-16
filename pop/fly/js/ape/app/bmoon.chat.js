@@ -2,7 +2,6 @@
 ; var bmoon = bmoon || {};
 bmoon.chat = {
 	version: "1.0",
-	inited: false,
 	adminon: false,
 	ape: {},
 
@@ -21,7 +20,7 @@ bmoon.chat = {
 
 		if (o.inited) return;
 		o.ape = ape;
-		o.inited = 1;
+		o.inited = true;
 
         $('head').append('<link rel="stylesheet" href="http://css.bmoon.com/mchat.css" />');
         $('body').append(html);
