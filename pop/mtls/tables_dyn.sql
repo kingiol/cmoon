@@ -5,7 +5,7 @@ CREATE TABLE lcsjoin (
 	   aid int NOT NULL DEFAULT 0,			   --appid
 	   aname varchar(256) NOT NULL DEFAULT '', --appname
 	   oid int NOT NULL DEFAULT 0,			   --oserid
-	   oname varchar(256) NOT NULL DEFAULT '', --osername
+	   oname varchar(256) NOT NULL DEFAULT '', --appname, which contact with username
 	   ip varchar(256) NOT NULL DEFAULT '',
 	   refer varchar(256) NOT NULL DEFAULT '',
 	   url varchar(256) NOT NULL DEFAULT '',

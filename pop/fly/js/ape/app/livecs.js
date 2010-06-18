@@ -4,7 +4,8 @@ function liveCS(ape) {
 	this.initialize = function(opts) {
 		/*
 		 * 我们本可设置 this.xxx = yyy, 这样， 只要是本实例成员函数发起的调用，都可以访问。
-		 * 但， LiveCS实例的函数有可能被其它 obj 发起调用(如addEvent())，这时 this.xxx 变得不可访问，
+		 * 但， LiveCS实例的函数有可能被其它 obj 发起调用(如addEvent())，
+		 * 这时 this.xxx 变得不可访问，
 		 * 故， 我们只能把 xxx 设置到 ape 里面， 无论谁发起的成员函数调用， 都可访问到 ape.xxx
 		 */
 
@@ -15,7 +16,8 @@ function liveCS(ape) {
 		ape.lcsuname = Cookie.read("lcs_uname");
 		if (ape.lcsuname == null) {
 			ape.lcsuname = bmoon.utl.randomWord(8);
-			Cookie.write("lcs_uname", ape.lcsuname, {'path': '/', 'duration': 36500});
+			Cookie.write("lcs_uname", ape.lcsuname,
+						 {'path': '/', 'duration': 36500});
 		}
 
 		// user visit this app's time
@@ -25,7 +27,8 @@ function liveCS(ape) {
 		}
 		ape.lcsutime = parseInt(ape.lcsutime)+1;
 		if (!ape.options.restore) {
-			Cookie.write("lcs_utime", ape.lcsutime, {'path': '/', 'duration': 36500});
+			Cookie.write("lcs_utime",
+						 ape.lcsutime, {'path': '/', 'duration': 36500});
 		}
 
 		ape.lcsCurrentPipe = null;
@@ -61,13 +64,13 @@ function liveCS(ape) {
 	};
 
 	this.pipeCreate = function(pipe, options) {
-		if (pipe.properties.name.toLowerCase() == "livecspipe_" + ape.lcsaname) {
+		if (pipe.properties.pname == ape.lcsaname) {
 			ui.init(ape);
 		}
 	};
 
 	this.createUser = function(user, pipe) {
-		if (user.properties.isadmin) {
+		if (pipe.properties.pname == ape.lcsaname && user.properties.isadmin) {
 			ape.lcsCurrentPipe = pipe;
 			ape.setSession({'lcsCurrentPipe': pipe.getPubid()});
 			ui.adminOn(user);
@@ -75,7 +78,7 @@ function liveCS(ape) {
 	};
 
 	this.deleteUser = function(user, pipe) {
-		if (user.properties.isadmin) {
+		if (pipe.properties.pname == ape.lcsaname && user.properties.isadmin) {
 			ape.lcsCurrentPipe = null;
 			ui.adminOff(user);
 		}
@@ -106,7 +109,7 @@ $(document).ready(function() {
 		identifier: 'lcs',
 		transport: 2,
 		complete: function(ape) {
-			new liveCS(ape).initialize({aname: document.domain});
+			new liveCS(ape).initialize({aname: 'test'});
 		}
 	});
 });

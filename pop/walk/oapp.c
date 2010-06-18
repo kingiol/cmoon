@@ -200,7 +200,7 @@ int app_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	if (masndb) {
 		if (!strcmp(masndb, masn)) {
 			//app_after_login(cgi, aname, masn);
-			hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
+			hdf_copy(cgi->hdf, PRE_OUTPUT".appinfo", evt->hdfrcv);
 			return RET_RBTOP_OK;
 		}
 	}
