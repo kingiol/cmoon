@@ -30,9 +30,9 @@
 
 	  <div class="im-user-list">
 		<ul>
-		  <li class="cur">所有人</li>
+		  <li id="im-user-0" class="cur">所有人</li>
 		  <?cs each: user = Output.userlist ?>
-		  <li><?cs name: user ?> (<?cs var: user.ip ?>) </li>
+		  <li id="im-user-<?cs name: user ?>"><?cs name: user ?> (<?cs var: user.ip ?>) </li>
 		  <?cs /each ?>
 		</ul>
 	  </div>

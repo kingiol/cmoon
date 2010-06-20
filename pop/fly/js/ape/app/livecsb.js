@@ -1,13 +1,12 @@
 function liveCS(ape) {
 	var ui = bmoon.chat;
-	this.initialize = function(opts) {
+	this.initialize = function() {
 		// app name
 		ape.lcsaname = Cookie.read('aname');
 		ape.lcsmasn = Cookie.read('masn');
-
-		if (!ape.lcsaname || !ape.lcsmasn) return;
-
 		ape.lcsCurrentPipe = null;
+		
+		if (!ape.lcsaname || !ape.lcsmasn) return;
 
 		ape.onRaw("ident", this.rawLcsIdent);
 		ape.onRaw("lcsdata", this.rawLcsData);
@@ -30,11 +29,7 @@ function liveCS(ape) {
 	this.start = function() {
 		var opt = {'sendStack': false, 'request': 'stack'};
 		ape.start({'uin': ape.lcsaname}, opt);
-		if (ape.options.restore) {
-			ape.getSession('lcsCurrentPipe', function(resp) {
-				ape.lcsCurrentPipe = ape.getPipe(resp.data.sessions.lcsCurrentPipe);
-			}, opt);
-		} else {
+		if (!ape.options.restore) {
 			ape.request.stack.add("LCS_JOINB", {
 				'aname': ape.lcsaname, 'masn': ape.lcsmasn}, opt);
 		}
@@ -42,11 +37,7 @@ function liveCS(ape) {
 	};
 
 	this.pipeCreate = function(pipe, options) {
-		if (pipe.properties.name.toLowerCase() == "livecspipe_" + ape.lcsaname) {
-			if (!ape.lcsCurrentPipe) {
-				ape.lcsCurrentPipe = pipe;
-				ape.setSession({'lcsCurrentPipe': pipe.getPubid()});
-			}
+		if (pipe.properties.aname == ape.lcsaname) {
 			ui.onready(ape);
 		}
 	};
@@ -77,7 +68,7 @@ $(document).ready(function() {
 		identifier: 'lcs',
 		transport: 2,
 		complete: function(ape) {
-			new liveCS(ape).initialize({aname: document.domain});
+			new liveCS(ape).initialize();
 		}
 	});
 });

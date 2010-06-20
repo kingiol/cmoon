@@ -71,16 +71,17 @@ function liveCS(ape) {
 
 	this.createUser = function(user, pipe) {
 		if (pipe.properties.pname == ape.lcsaname && user.properties.isadmin) {
-			ape.lcsCurrentPipe = pipe;
-			ape.setSession({'lcsCurrentPipe': pipe.getPubid()});
-			ui.adminOn(user);
+			ape.setSession({'lcsCurrentPipe': user.pubid});
+			//ape.lcsCurrentPipe = user.pipes;
+			ape.lcsCurrentPipe = ape.getPipe(user.pubid);
+			ui.adminOn({pname: ape.lcsaname, aname: pipe.properties.aname});
 		}
 	};
 
 	this.deleteUser = function(user, pipe) {
 		if (pipe.properties.pname == ape.lcsaname && user.properties.isadmin) {
 			ape.lcsCurrentPipe = null;
-			ui.adminOff(user);
+			ui.adminOff({pname: ape.lcsaname, aname: pipe.properties.aname});
 		}
 	};
 

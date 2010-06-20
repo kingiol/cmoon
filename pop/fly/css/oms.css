@@ -26,6 +26,7 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 }
 
 .im-user-list ul li {
+	cursor: pointer;
 	margin: 10px 0;
 	line-height: 26px;
 	text-indent: 1em;

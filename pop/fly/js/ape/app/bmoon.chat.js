@@ -2,11 +2,18 @@
 ; var bmoon = bmoon || {};
 bmoon.chat = {
 	version: "1.0",
-	adminon: false,
+	adminuser: {},
 	ape: {},
 
+    debug: function(msg) {
+        $('<div>'+ msg +'</div>').appendTo('body');
+    },
+	
 	init: function(ape) {
-		var o = bmoon.chat,
+		var o = bmoon.chat;
+		if (o.inited) return o;
+
+		var
 		html = [
 			'<div id="bchat">',
 				'<div id="bchat-head"><a href="javascript: void(0);" id="bchat-trigger">留言</a></div>',
@@ -18,7 +25,6 @@ bmoon.chat = {
 			'</div>'
 		].join('');
 
-		if (o.inited) return;
 		o.ape = ape;
 		o.inited = true;
 
@@ -29,23 +35,24 @@ bmoon.chat = {
 		$('#bchat-trigger').toggle(o.openChat, o.closeChat);
         $('#bchat-input').bind('keydown', 'ctrl+return', o.msgSend);
 		$('#bchat-snd').click(o.msgSend);
+		return o;
 	},
 
 	openChat: function() {
-		var o = bmoon.chat;
+		var o = bmoon.chat.init();
 
 		$('#bchat-body').fadeIn();
         $('#bchat-input').focus();
 	},
 
 	closeChat: function() {
-		var o = bmoon.chat;
+		var o = bmoon.chat.init();
 
 		$('#bchat-body').fadeOut();
 	},
 
 	msgSend: function() {
-		var o = bmoon.chat,
+		var o = bmoon.chat.init(),
 		m = $('#bchat-input').val(),
 		pipe = o.ape.lcsCurrentPipe;
 
@@ -53,22 +60,24 @@ bmoon.chat = {
 
 		if (!m.length) return;
 
-		if (o.amdinon && pipe) {
+		if (o.adminuser.aname && pipe) {
 			pipe.request.send("LCS_SEND", {msg: m});
 		} else {
 			o.ape.request.send("LCS_MSG", {uname: o.ape.lcsaname, msg: m});
 		}
 	},
 
-	adminOn: function() {
-		var o = bmoon.chat;
+	adminOn: function(data) {
+		var o = bmoon.chat.init();
 
-		o.adminon = true;
+ 		o.debug(data.pname + " 的管理员 " +data.aname + " 上线了");
+		o.adminuser = data;
 	},
 
 	adminOff: function() {
-		var o = bmoon.chat;
+		var o = bmoon.chat.init();
 
-		o.adminon = false;
+ 		o.debug("管理员走开了");
+		o.adminuser = {};
 	}
 };

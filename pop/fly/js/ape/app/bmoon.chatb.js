@@ -3,6 +3,7 @@
 bmoon.chat = {
 	version: "1.0",
 	ape: {},
+	currentUser: "im-user-0",
 
 	init: function(ape) {
 		var o = bmoon.chat;
@@ -29,6 +30,7 @@ bmoon.chat = {
 		
 		o.m.bind('keydown', 'ctrl+return', o.msgSend);
 		o.btm.click(o.msgSend);
+		$('.im-user-list li').click(o.openChat);
 	},
 
 	msgSend: function() {
@@ -46,5 +48,17 @@ bmoon.chat = {
 		} else {
 			o.ape.request.send("LCS_MSG", {uname: o.ape.lcsaname, msg: m});
 		}
+	},
+
+	openChat: function() {
+		var o = bmoon.chat.init();
+		
+		var
+		obj = $(this),
+		id = $(obj).attr("id");
+
+		$("#"+o.currentUser).removeClass("cur").click(o.openChat);
+		obj.addClass("cur").unbind('click');
+		o.currentUser = id;
 	}
 };
