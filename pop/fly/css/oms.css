@@ -39,6 +39,14 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 	background-color: #eee;
 }
 
+.im-user-list ul li.off {
+	background-color: #eee;
+}
+
+.im-user-list ul li.on {
+	background-color: green;
+}
+
 .im-state {
 	background-color:#EEEEEE;
 	font-weight:bold;

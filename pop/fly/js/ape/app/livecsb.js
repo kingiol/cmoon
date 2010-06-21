@@ -38,14 +38,23 @@ function liveCS(ape) {
 
 	this.pipeCreate = function(pipe, options) {
 		if (pipe.properties.aname == ape.lcsaname) {
-			ui.onready(ape);
+			ape.lcsCurrentPipe = pipe;
+			ui.onready(ape, pipe);
 		}
 	};
 
 	this.createUser = function(user, pipe) {
+		if (pipe.properties.aname == ape.lcsaname &&
+			user.properties.uin != ape.lcsaname) {
+			ui.userOn({uname: user.properties.uin, pubid: user.pubid});
+		}
 	};
 
 	this.deleteUser = function(user, pipe) {
+		if (pipe.properties.aname == ape.lcsaname &&
+			user.properties.uin != ape.lcsaname) {
+			ui.userOff({uname: user.properties.uin});
+		}
 	};
 
 	this.rawLcsIdent = function(raw, pipe) {

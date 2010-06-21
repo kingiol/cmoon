@@ -30,9 +30,9 @@
 
 	  <div class="im-user-list">
 		<ul>
-		  <li id="im-user-0" class="cur">所有人</li>
+		  <li id="im-user-0" uname="0" class="cur">所有人</li>
 		  <?cs each: user = Output.userlist ?>
-		  <li id="im-user-<?cs name: user ?>"><?cs name: user ?> (<?cs var: user.ip ?>) </li>
+		  <li id="im-user-<?cs name: user ?>" uname="<?cs name: user ?>" class="off" ><?cs name: user ?> (<?cs var: user.ip ?>) </li>
 		  <?cs /each ?>
 		</ul>
 	  </div>
@@ -44,7 +44,9 @@
 	<div class="im-chat">
 	  <div class="im-state"> 给所有在线访客发送消息 </div>
 	  
-	  <div class="im-msgs"></div>
+	  <div id="im-msgs" class="im-msgs">
+		<div id="im-msg-0"></div>
+	  </div>
 
 	  <div class="im-input">
 		<textarea id="chat-msg-text" cols="55" rows="3"></textarea>
