@@ -44,7 +44,11 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 }
 
 .im-user-list ul li.on {
-	background-color: green;
+	background-color: #bbb;
+}
+
+.im-user-list ul li.dirty {
+	background-color: #777;
 }
 
 .im-state {
@@ -58,4 +62,5 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 	border-right: 0 none;
 	border-left: 0 none;
 	margin: 15px 0;
+	overflow: auto;
 }

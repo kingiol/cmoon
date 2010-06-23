@@ -9,7 +9,9 @@ function liveCS(ape) {
 		if (!ape.lcsaname || !ape.lcsmasn) return;
 
 		ape.onRaw("ident", this.rawLcsIdent);
-		ape.onRaw("lcsdata", this.rawLcsData);
+		ape.onRaw("LCS_DEARUSERS", this.rawLcsDearusers);
+		ape.onRaw("RAW_RECENTLY", this.rawLcsRecently);
+		ape.onRaw("LCS_DATA", this.rawLcsData);
 
 		ape.onError("110", ape.clearSession);
 		ape.onError("111", ape.clearSession);
@@ -40,6 +42,10 @@ function liveCS(ape) {
 		if (pipe.properties.aname == ape.lcsaname) {
 			ape.lcsCurrentPipe = pipe;
 			ui.onready(ape, pipe);
+			ape.request.stack.add('LCS_DEARUSERS', null);
+			ape.request.stack.add('LCS_RECENTLY', {uin: "0", type: 0});
+			ape.request.stack.send();
+			//ape.request.send();
 		}
 	};
 
@@ -60,13 +66,36 @@ function liveCS(ape) {
 	this.rawLcsIdent = function(raw, pipe) {
 	};
 
+	this.rawLcsDearusers = function(raw, pipe) {
+		//var users = [];
+		//$.each(raw.data, function(key, val){
+		//	users.push(key);
+		//});
+		//ui.dearUsers(users);
+		ui.dearUsers(raw.data);
+	};
+
+	this.rawLcsRecently = function(raw, pipe) {
+		// some offline & notice message don't have data.to.properties.uin,
+		// use data.to_uin instead
+		if (raw.data.to_uin == ape.lcsaname ||
+			raw.data.to.properties.uin == ape.lcsaname) {
+			var type = raw.data.type;
+			var tm = Date(eval(raw.time*1000)).match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0];
+			var uname = raw.data.from.properties.uin;
+			ui.onRecently({uname: uname, type: type, tm: tm, data: raw.data});
+		}
+	};
+
 	this.rawLcsData = function(raw, pipe) {
-		if (pipe == ape.lcsCurrentPipe) {
-			ui.onmsg(raw);
-			var msg = unescape(raw.data.msg);
-			var uin = raw.data.from.properties.uin;
-			var tm = Date(eval(raw.time)).match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0];
-			//bmoon.lcs.userSaid(ape, uin, msg, tm);
+		// some notice message don't have data.to.properties.uin,
+		// use data.to_uin instead
+		if (raw.data.to_uin == ape.lcsaname ||
+			raw.data.to.properties.uin == ape.lcsaname) {
+			var type = raw.data.type;
+			var tm = Date(eval(raw.time*1000)).match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0];
+			var uname = raw.data.from.properties.uin;
+			ui.onData({uname: uname, type: type, tm: tm, data: raw.data});
 		}
 	};
 }

@@ -10,7 +10,8 @@ function liveCS(ape) {
 		 */
 
 		// app name
-		ape.lcsaname = opts.aname || document.domain;
+		ape.lcspname = opts.aname || document.domain;
+		ape.lcsaname = null;
 
 		// user name
 		ape.lcsuname = Cookie.read("lcs_uname");
@@ -57,31 +58,32 @@ function liveCS(ape) {
 			}, opt);
 		} else {
 			ape.request.stack.add("LCS_JOIN", {
-				'aname': ape.lcsaname, 'utime': ape.lcsutime,
+				'aname': ape.lcspname, 'utime': ape.lcsutime,
 				'url': location.href, 'title': document.title}, opt);
 		}
 		ape.request.stack.send();
 	};
 
 	this.pipeCreate = function(pipe, options) {
-		if (pipe.properties.pname == ape.lcsaname) {
+		if (pipe.properties.pname == ape.lcspname) {
+			ape.lcsaname = pipe.properties.aname;
 			ui.init(ape);
 		}
 	};
 
 	this.createUser = function(user, pipe) {
-		if (pipe.properties.pname == ape.lcsaname && user.properties.isadmin) {
+		if (pipe.properties.pname == ape.lcspname && user.properties.isadmin) {
 			ape.setSession({'lcsCurrentPipe': user.pubid});
 			//ape.lcsCurrentPipe = user.pipes;
 			ape.lcsCurrentPipe = ape.getPipe(user.pubid);
-			ui.adminOn({pname: ape.lcsaname, aname: pipe.properties.aname});
+			ui.adminOn({pname: ape.lcspname, aname: pipe.properties.aname});
 		}
 	};
 
 	this.deleteUser = function(user, pipe) {
-		if (pipe.properties.pname == ape.lcsaname && user.properties.isadmin) {
+		if (pipe.properties.pname == ape.lcspname && user.properties.isadmin) {
 			ape.lcsCurrentPipe = null;
-			ui.adminOff({pname: ape.lcsaname, aname: pipe.properties.aname});
+			ui.adminOff({pname: ape.lcspname, aname: pipe.properties.aname});
 		}
 	};
 
@@ -89,7 +91,7 @@ function liveCS(ape) {
 		var jid = parseInt(raw.data.user.properties.jid);
 		// send LCS_VISIT only on session restore
 		if (jid && ape.options.restore) {
-			ape.request.send("LCS_VISIT", {'jid': jid, 'url': location.href, 'title': document.title});
+			ape.request.send("LCS_VISIT", {'aname': ape.lcsaname, 'jid': jid, 'url': location.href, 'title': document.title});
 		}
 	};
 
