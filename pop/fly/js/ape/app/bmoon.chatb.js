@@ -3,7 +3,7 @@
 bmoon.chat = {
 	version: '1.0',
 	ape: {},
-	groupPipe: null,
+	groupPubid: null,
 	cUserID: '0',
 	usersOn: ["0"],
 	usersFetched: ["0"],
@@ -56,7 +56,7 @@ bmoon.chat = {
 		return r;
 	},
 
-	actionMsg: function(type, data) {
+	_strAction: function(type, data) {
 		var r = {
 			'join':
 			'通过' + decodeURIComponent(data.ref) +
@@ -78,10 +78,24 @@ bmoon.chat = {
 		return r[type];
 	},
 
-	onready: function(ape, pipe) {
+	// {from: from, type: type, tm: tm, data: data}
+	_strMsg: function(data) {
+		var o = bmoon.chat.init();
+
+		return [
+			'<div class="item-', data.type, '">',
+			    '<span class="item-name">',	decodeURIComponent(data.from),'</span>',
+			    '<span class="item-time">',	data.tm,'</span>',
+			    '<span class="item-content">', o._strAction(data.type, data.data),
+			    '</span>',
+			'</div>'
+		].join('');
+	},
+
+	onready: function(ape, pubid) {
 		var o = bmoon.chat.init(ape);
 
-		o.groupPipe = pipe;
+		o.groupPubid = pubid;
 		o.bindClick();
 	},
 
@@ -99,23 +113,22 @@ bmoon.chat = {
 		var
 		mv = o.m.val(),
 		pipe = o.ape.lcsCurrentPipe,
+		type = $.inArray(o.cUserID, o.usersOn) != -1 ? 'send': 'msg',
 		databox = $('.data', o._nodeMsg(o.cUserID, true)),
-		html = [
-			'<div class="item-send">',
-			    '<span class="item-time">',
-			        Date().match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0],
-			    '</span>',
-			    '<span class="item-content">', mv, '</span>',
-			'</div>'
-		].join('');
+		html = o._strMsg({
+			from: o.ape.lcsaname,
+			type: type,
+			tm: Date().match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0],
+			data: {msg: mv}
+		});
 
 		if (!mv.length) return;
 		o.m.val('');
 
 		$(html).appendTo(databox);
-		o.msglist.scrollTop = o.msglist.scrollHeight;
+		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
 
-		if (pipe && ($.inArray(o.cUserID, o.usersOn) != -1)) {
+		if (pipe && type == 'send') {
 			pipe.request.send('LCS_SEND', {msg: mv});
 		} else {
 			o.ape.request.send('LCS_MSG', {uname: o.ape.lcsaname, msg: mv});
@@ -138,6 +151,7 @@ bmoon.chat = {
 		
 		c.removeClass('dirty').addClass('cur').unbind('click');
 		o._nodeMsg(id, true).show();
+		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
 
 		if ($.inArray(id, o.usersFetched) == -1) {
 			o.ape.request.send('LCS_RECENTLY', {uin: id, type: 1});
@@ -146,8 +160,8 @@ bmoon.chat = {
 
 		if (pubid && pubid.length) {
 			o.ape.lcsCurrentPipe = o.ape.getPipe(pubid);
-		} else if (o.cUserID == "0") {
-			o.ape.lcsCurrentPipe = o.groupPipe;
+		} else if (o.cUserID == '0') {
+			o.ape.lcsCurrentPipe = o.ape.getPipe(o.groupPubid);
 		} else {
 			o.ape.lcsCurrentPipe = null;
 		}
@@ -163,7 +177,7 @@ bmoon.chat = {
 		});
 	},
 	
-	// {uname: "defTxg", pubid: "esfes323sdfssdf32r"}
+	// {uname: 'defTxg', pubid: 'esfes323sdfssdf32r'}
 	userOn: function(data) {
 		var o = bmoon.chat.init();
 
@@ -183,50 +197,41 @@ bmoon.chat = {
 		o.usersOn.splice($.inArray(data.uname, o.usersOn), 1);
 	},
 
-	// {uname: uname, type: type, tm: tm, data: data}
+	// {from: from, type: type, tm: tm, data: data}
 	onData: function(data) {
 		var o = bmoon.chat.init();
 
 		var
-		userbox = o._nodeUser(data.uname, true),
-		databox = $('.data', o._nodeMsg(data.uname, true)),
-		html = [
-			'<div class="item-', data.type, '">',
-			    '<span class="item-time">',	data.tm, '</span>',
-			    '<span class="item-content">',
-			        o.actionMsg(data.type, data.data),
-			    '</span>',
-			'</div>'
-		].join('');
+		uname = data.from,
+		userbox = o._nodeUser(uname, true),
+		databox = $('.data', o._nodeMsg(uname, true)),
+		html = o._strMsg(data);
 
-
-		if (o.cUserID != data.uname) {
+		if (o.cUserID != uname) {
 			userbox.addClass('dirty');
 			// avoid double messages appear
-			if ($.inArray(data.uname, o.usersFetched) == -1)
-				return;
-		} else {
-			o.msglist.scrollTop = o.msglist.scrollHeight;
+			if ($.inArray(uname, o.usersFetched) == -1) return;
 		}
+		
 		$(html).appendTo(databox);
+		if (o.cUserID == uname) {
+			o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
+		}
 	},
 
-	// {uname: uname, type: type, tm: tm, data: data}
+	// {from: from, to: to, type: type, tm: tm, data: data}
 	onRecently: function(data) {
 		var o = bmoon.chat.init();
 
 		var
-		userbox = o._nodeUser(data.uname, true),
-		recentbox = $('.recently', o._nodeMsg(data.uname, true)),
-		html = [
-			'<div class="item', data.type, '">',
-			    '<span class="item-time">',	data.tm,
-			    '</span>',
-			    '<span class="item-content">', o.actionMsg(data.type, data.data),
-			    '</span>',
-			'</div>'
-		].join('');
+		uname = data.from == o.ape.lcsaname ? data.to: data.from,
+		userbox = o._nodeUser(uname, true),
+		recentbox = $('.recently', o._nodeMsg(uname, true)),
+		html = o._strMsg(data);
 		
 		$(html).appendTo(recentbox);
+		if (o.cUserID == uname) {
+			o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
+		}
 	}
 };

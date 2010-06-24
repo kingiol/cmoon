@@ -39,9 +39,10 @@ function liveCS(ape) {
 	};
 
 	this.pipeCreate = function(pipe, options) {
-		if (pipe.properties.aname == ape.lcsaname) {
+		// avoid sended pipeCreate event in
+		if (pipe.properties.aname == ape.lcsaname && !options.from) {
 			ape.lcsCurrentPipe = pipe;
-			ui.onready(ape, pipe);
+			ui.onready(ape, pipe.getPubid());
 			ape.request.stack.add('LCS_DEARUSERS', null);
 			ape.request.stack.add('LCS_RECENTLY', {uin: "0", type: 0});
 			ape.request.stack.send();
@@ -78,12 +79,24 @@ function liveCS(ape) {
 	this.rawLcsRecently = function(raw, pipe) {
 		// some offline & notice message don't have data.to.properties.uin,
 		// use data.to_uin instead
-		if (raw.data.to_uin == ape.lcsaname ||
-			raw.data.to.properties.uin == ape.lcsaname) {
-			var type = raw.data.type;
-			var tm = Date(eval(raw.time*1000)).match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0];
-			var uname = raw.data.from.properties.uin;
-			ui.onRecently({uname: uname, type: type, tm: tm, data: raw.data});
+		if ((raw.data.from && raw.data.from.properties.uin == ape.lcsaname) ||
+			raw.data.to_uin == ape.lcsaname ||
+			(raw.data.to && raw.data.to.properties.uin == ape.lcsaname)) {
+			var
+			type = raw.data.type,
+			
+			//stm = new Date(raw.time*1000).toString(),
+			//tm = stm.match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0],
+			dt = new Date(raw.time*1000),
+			y = dt.getFullYear(), m = dt.getMonth()+1, d = dt.getDate(),
+			h = dt.getHours(), mt = dt.getMinutes(), s = dt.getSeconds(),
+			tm = y+"-"+m+"-"+d+" "+h+":"+mt+":"+s,
+			
+			from = raw.data.from.properties.uin,
+			to = raw.data.to_uin ||
+				(raw.data.to && raw.data.to.properties.uin) || "0";
+			
+			ui.onRecently({from: from, to: to, type: type, tm: tm, data: raw.data});
 		}
 	};
 
@@ -91,11 +104,14 @@ function liveCS(ape) {
 		// some notice message don't have data.to.properties.uin,
 		// use data.to_uin instead
 		if (raw.data.to_uin == ape.lcsaname ||
-			raw.data.to.properties.uin == ape.lcsaname) {
-			var type = raw.data.type;
-			var tm = Date(eval(raw.time*1000)).match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0];
-			var uname = raw.data.from.properties.uin;
-			ui.onData({uname: uname, type: type, tm: tm, data: raw.data});
+			(raw.data.to && raw.data.to.properties.uin == ape.lcsaname)) {
+			var
+			type = raw.data.type,
+			stm = new Date(raw.time*1000).toString(),
+			tm = stm.match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0],
+			from = raw.data.from.properties.uin;
+			
+			ui.onData({from: from, type: type, tm: tm, data: raw.data});
 		}
 	};
 }

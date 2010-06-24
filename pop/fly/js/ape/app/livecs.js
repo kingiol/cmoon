@@ -35,7 +35,8 @@ function liveCS(ape) {
 		ape.lcsCurrentPipe = null;
 
 		ape.onRaw("ident", this.rawLcsIdent);
-		ape.onRaw("lcsdata", this.rawLcsData);
+		ape.onRaw("RAW_RECENTLY", this.rawLcsRecently);
+		ape.onRaw("LCS_DATA", this.rawLcsData);
 
 		ape.onError("110", ape.clearSession);
 		ape.onError("111", ape.clearSession);
@@ -95,13 +96,33 @@ function liveCS(ape) {
 		}
 	};
 
+	this.rawLcsRecently = function(raw, pipe) {
+		if (raw.data.to_uin == ape.lcsuname ||
+			(raw.data.to && raw.data.to.properties.uin == ape.lcsuname)) {
+			var
+			type = raw.data.type,
+			
+			dt = new Date(raw.time*1000),
+			y = dt.getFullYear(), m = dt.getMonth()+1, d = dt.getDate(),
+			h = dt.getHours(), mt = dt.getMinutes(), s = dt.getSeconds(),
+			tm = y+"-"+m+"-"+d+" "+h+":"+mt+":"+s,
+			
+			from = raw.data.from.properties.uin,
+			to = raw.data.to_uin ||	(raw.data.to && raw.data.to.properties.uin);
+			
+			ui.onRecently({from: from, to: to, type: type, tm: tm, data: raw.data});
+		}
+	};
+
 	this.rawLcsData = function(raw, pipe) {
 		if (pipe == ape.lcsCurrentPipe) {
-			ui.onmsg(raw);
-			var msg = unescape(raw.data.msg);
-			var uin = raw.data.from.properties.uin;
-			var tm = Date(eval(raw.time)).match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0];
-			//bmoon.lcs.userSaid(ape, uin, msg, tm);
+			var
+			type = raw.data.type,
+			stm = new Date(raw.time*1000).toString(),
+			tm = stm.match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0],
+			from = raw.data.from.properties.uin;
+			
+			ui.onData({from: from, type: type, tm: tm, data: raw.data});
 		}
 	};
 }
