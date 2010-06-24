@@ -82,9 +82,11 @@ bmoon.chat = {
 	_strMsg: function(data) {
 		var o = bmoon.chat.init();
 
+		var uname = data.from == o.ape.lcsaname ? '我': data.from;
+		
 		return [
 			'<div class="item-', data.type, '">',
-			    '<span class="item-name">',	decodeURIComponent(data.from),'</span>',
+			    '<span class="item-name">',	decodeURIComponent(uname),'</span>',
 			    '<span class="item-time">',	data.tm,'</span>',
 			    '<span class="item-content">', o._strAction(data.type, data.data),
 			    '</span>',
@@ -150,7 +152,7 @@ bmoon.chat = {
 		o.cUserID = id;
 		
 		c.removeClass('dirty').addClass('cur').unbind('click');
-		o._nodeMsg(id, true).show();
+		o._nodeMsg(id, true).fadeIn();
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
 
 		if ($.inArray(id, o.usersFetched) == -1) {

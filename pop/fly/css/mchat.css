@@ -1,0 +1,32 @@
+#bchat {
+	background-color:#999999;
+	border: 1px solid #666666;
+	position:fixed;
+	right:50px;
+	bottom:20px;
+	padding: 10px;
+	opacity: 0.9;
+	z-index:999;
+}
+#bchat-head {width: 260px; height: 20px;}
+#bchat-body {width: 260px; display: none;}
+#bchat-msgs {
+	background-color: #eeeeee;
+	height: 200px;
+	width: 258px;
+	margin: 10px 10px 10px 0;
+	overflow: auto;
+}
+
+.item-join, .item-visit, .item-send, .item-msg {
+	margin: 12px 0;
+}
+.bchat-msgs .item-name, .bchat-msgs .item-time{
+	margin-left: 10px;
+	color: #999;
+}
+.bchat-msgs .item-content {
+	display: block;
+	margin: 5px;
+	text-indent: 2em;
+}

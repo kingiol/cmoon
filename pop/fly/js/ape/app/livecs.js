@@ -97,7 +97,8 @@ function liveCS(ape) {
 	};
 
 	this.rawLcsRecently = function(raw, pipe) {
-		if (raw.data.to_uin == ape.lcsuname ||
+		if ((raw.data.from && raw.data.from.properties.uin == ape.lcsuname) ||
+			raw.data.to_uin == ape.lcsuname ||
 			(raw.data.to && raw.data.to.properties.uin == ape.lcsuname)) {
 			var
 			type = raw.data.type,
@@ -109,8 +110,11 @@ function liveCS(ape) {
 			
 			from = raw.data.from.properties.uin,
 			to = raw.data.to_uin ||	(raw.data.to && raw.data.to.properties.uin);
-			
-			ui.onRecently({from: from, to: to, type: type, tm: tm, data: raw.data});
+
+			// filter join and visit messages
+			if (type == 'send' || type == 'msg') {
+				ui.onRecently({from: from, to: to, type: type, tm: tm, data: raw.data});
+			}
 		}
 	};
 

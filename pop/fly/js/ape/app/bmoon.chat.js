@@ -7,17 +7,6 @@ bmoon.chat = {
 
 	_strAction: function(type, data) {
 		var r = {
-			'join':
-			'通过' + decodeURIComponent(data.ref) +
-				'来访本站页面<a target="_blank" href="'+
-				decodeURIComponent(data.url)+'">'+
-				decodeURIComponent(data.title)+'</a>',
-			
-			'visit':
-			'浏览了页面<a target="_blank" href="'+
-				decodeURIComponent(data.url)+'">'+
-				decodeURIComponent(data.title)+'</a>',
-
 			'send':
 			decodeURIComponent(data.msg),
 
@@ -31,9 +20,11 @@ bmoon.chat = {
 	_strMsg: function(data) {
 		var o = bmoon.chat.init();
 
+		var uname = data.from == o.ape.lcsuname ? '我': data.from;
+		
 		return [
 			'<div class="item-', data.type, '">',
-			    '<span class="item-name">',	decodeURIComponent(data.from),'</span>',
+			    '<span class="item-name">',	decodeURIComponent(uname),'</span>',
 			    '<span class="item-time">',	data.tm,'</span>',
 			    '<span class="item-content">', o._strAction(data.type, data.data),
 			    '</span>',
@@ -56,8 +47,8 @@ bmoon.chat = {
 			        '<a href="javascript: void(0);" id="bchat-trigger">留言</a>',
 			    '</div>',
 				'<div id="bchat-body">',
-					'<div id="bchat-msgs">',
-			            '<div class=".recently"></div><div class="data"></div>',
+					'<div id="bchat-msgs" class="bchat-msgs">',
+			            '<div class="recently"></div><div class="data"></div>',
 			        '</div>',
 					'<textarea cols="27" rows="3" id="bchat-input"></textarea>',
 			        '<div>',
@@ -151,7 +142,7 @@ bmoon.chat = {
 		html = o._strMsg(data);
 
 		$(html).appendTo(o.databox);
-		if ($('#bchat-body').style('display') != 'none') {
+		if ($('#bchat-body').css('display') != 'none') {
 			o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
 		} else {
 			userbox.addClass('dirty');
