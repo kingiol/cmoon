@@ -16,8 +16,8 @@ function liveCS(ape) {
 
 		// user name
 		ape.lcsuname = Cookie.read("lcs_uname");
-		if (ape.lcsuname == null) {
-			ape.lcsuname = bmoon.utl.randomWord(8);
+		if (!ape.lcsuname) {
+			ape.lcsuname = bmoon.utl.randomName();
 			Cookie.write("lcs_uname", ape.lcsuname,
 						 {'path': '/', 'duration': 36500});
 		}
