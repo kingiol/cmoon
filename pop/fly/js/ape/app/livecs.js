@@ -12,6 +12,7 @@ function liveCS(ape) {
 		// app name
 		ape.lcspname = opts.aname || document.domain;
 		ape.lcsaname = null;
+		ape.lcsjid = 0;
 
 		// user name
 		ape.lcsuname = Cookie.read("lcs_uname");
@@ -69,6 +70,13 @@ function liveCS(ape) {
 		if (pipe.properties.pname == ape.lcspname) {
 			ape.lcsaname = pipe.properties.aname;
 			ui.init(ape);
+			// send LCS_VISIT only on session restore
+			if (ape.options.restore) {
+				ape.request.send("LCS_VISIT", {
+					'aname': ape.lcsaname, 'jid': ape.lcsjid,
+					'url': location.href, 'title': document.title
+				});
+			}
 		}
 	};
 
@@ -89,11 +97,7 @@ function liveCS(ape) {
 	};
 
 	this.rawLcsIdent = function(raw, pipe) {
-		var jid = parseInt(raw.data.user.properties.jid);
-		// send LCS_VISIT only on session restore
-		if (jid && ape.options.restore) {
-			ape.request.send("LCS_VISIT", {'aname': ape.lcsaname, 'jid': jid, 'url': location.href, 'title': document.title});
-		}
+		ape.lcsjid = parseInt(raw.data.user.properties.jid);
 	};
 
 	this.rawLcsRecently = function(raw, pipe) {
@@ -119,7 +123,8 @@ function liveCS(ape) {
 	};
 
 	this.rawLcsData = function(raw, pipe) {
-		if (pipe == ape.lcsCurrentPipe) {
+		if ((raw.data.from && raw.data.from.properties.uin == ape.lcsaname) ||
+			pipe == ape.lcsCurrentPipe) {
 			var
 			type = raw.data.type,
 			stm = new Date(raw.time*1000).toString(),

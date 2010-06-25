@@ -10,8 +10,14 @@
 		*DONE* pop - html's div change from class_name to class-name
 
 2010-06-11
-		lcs - livecs.js LCS_MSG shoult give user a hint.
-		lcs - lcs_join_a command
+		*DONE* lcs - livecs.js LCS_MSG shoult give user a hint.
+		*DONE* lcs - lcs_join_a command
 
 2010-06-17
 		lcs - lcs_utime 需要区分不同的 aname 站点， 不然后面的站点都不能被记住
+
+
+2010-06-25
+		dearuser 没调试
+		message 没 escape
+		bug: 客户端无法得到 管理员 群发的 历史消息

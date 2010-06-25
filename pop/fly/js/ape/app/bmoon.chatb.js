@@ -16,7 +16,7 @@ bmoon.chat = {
 
 		o.m = $('#chat-msg-text');
 		o.btm = $('#chat-msg-submit');
-		o.userlist = $('#im-user-list > ul');
+		o.userlist = $('#im-users > ul');
 		o.msglist = $('#im-msgs');
 		
 		o.ape = ape;
@@ -57,17 +57,21 @@ bmoon.chat = {
 	},
 
 	_strAction: function(type, data) {
+		if (data.ref) data.sref = '通过 ' + decodeURIComponent(data.ref);
+		else data.sref = '';
+		
 		var r = {
 			'join':
-			'通过' + decodeURIComponent(data.ref) +
-				'来访本站页面<a target="_blank" href="'+
+			data.sref + ' 来到本站, 访问了页面<a target="_blank" href="'+
 				decodeURIComponent(data.url)+'">'+
 				decodeURIComponent(data.title)+'</a>',
 			
 			'visit':
-			'浏览了页面<a target="_blank" href="'+
+			'打开了页面 <a target="_blank" href="'+
 				decodeURIComponent(data.url)+'">'+
 				decodeURIComponent(data.title)+'</a>',
+
+			'left': '离开了本站',
 
 			'send':
 			decodeURIComponent(data.msg),
@@ -106,7 +110,7 @@ bmoon.chat = {
 
 		o.m.bind('keydown', 'ctrl+return', o.msgSend);
 		o.btm.click(o.msgSend);
-		$('.im-user-list li').click(o.openChat);
+		$('.im-users li').click(o.openChat);
 	},
 
 	msgSend: function() {
@@ -172,11 +176,13 @@ bmoon.chat = {
 	// {defTxg: 1, eoogG: 1}
 	dearUsers: function(data) {
 		var o = bmoon.chat.init();
-		
-		$.each(data, function(key, val){
-			var c = o._nodeUser(key, true);
-			if (key != o.cUserID) c.addClass('dirty');
-		});
+
+		if (bmoon.utl.type(data) == Object) {
+			$.each(data, function(key, val){
+				var c = o._nodeUser(key, true);
+				if (key != o.cUserID) c.addClass('dirty');
+			});
+		}
 	},
 	
 	// {uname: 'defTxg', pubid: 'esfes323sdfssdf32r'}
@@ -189,14 +195,32 @@ bmoon.chat = {
 		o.usersOn.push(data.uname);
 	},
 
+	// {uname: user.properties.uin}
 	userOff: function(data) {
 		var o = bmoon.chat.init();
 
-		var c = o._nodeUser(data.uname, false);
-		if (c.length) {
-			c.removeClass('on').addClass('off').attr('pubid', '');
+		var
+		userbox = o._nodeUser(data.uname, false),
+		databox = $('.data', o._nodeMsg(data.uname, false)),
+		html = o._strMsg({
+			from: data.uname,
+			type: 'left',
+			tm: Date().match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0],
+			data: {}
+		});
+		
+		if (userbox.length) {
+			userbox.removeClass('on').addClass('off').attr('pubid', '');
 		}
 		o.usersOn.splice($.inArray(data.uname, o.usersOn), 1);
+
+		// for history raw, use event_onleft
+		/*
+		$(html).appendTo(databox);
+		if (o.cUserID == data.uname) {
+			o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
+		}
+		*/
 	},
 
 	// {from: from, type: type, tm: tm, data: data}

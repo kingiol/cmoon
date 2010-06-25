@@ -21,33 +21,33 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 }
 
 
-.im-user-list ul {
+.im-users ul {
 	margin-top: 3ex;
 }
 
-.im-user-list ul li {
+.im-users ul li {
 	cursor: pointer;
 	margin: 10px 0;
 	line-height: 26px;
 	text-indent: 1em;
 }
 
-.im-user-list ul li.cur {
+.im-users ul li.cur {
 	border: 1px solid #101010;
 	border-left: 0 none;
 	border-right: 1px solid #eee;
 	background-color: #eee;
 }
 
-.im-user-list ul li.off {
+.im-users ul li.off {
 	background-color: #eee;
 }
 
-.im-user-list ul li.on {
+.im-users ul li.on {
 	background-color: #bbb;
 }
 
-.im-user-list ul li.dirty {
+.im-users ul li.dirty {
 	background-color: #777;
 }
 
