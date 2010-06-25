@@ -60,7 +60,9 @@ bmoon.chat = {
 		if (data.ref) data.sref = '通过 ' + decodeURIComponent(data.ref);
 		else data.sref = '';
 		
-		var r = {
+		var
+		msg = decodeURIComponent(data.msg).replace(/<\/?[^>]*>/g, ''),
+		r = {
 			'join':
 			data.sref + ' 来到本站, 访问了页面<a target="_blank" href="'+
 				decodeURIComponent(data.url)+'">'+
@@ -72,12 +74,8 @@ bmoon.chat = {
 				decodeURIComponent(data.title)+'</a>',
 
 			'left': '离开了本站',
-
-			'send':
-			decodeURIComponent(data.msg),
-
-			'msg':
-			'留言说： ' + decodeURIComponent(data.msg),
+			'send': msg,
+			'msg': '留言说： ' + msg
 		};
 		return r[type];
 	},

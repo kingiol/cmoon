@@ -6,13 +6,13 @@ bmoon.chat = {
 	ape: {},
 
 	_strAction: function(type, data) {
-		var r = {
-			'send':
-			decodeURIComponent(data.msg),
-
-			'msg':
-			'留言说： ' + decodeURIComponent(data.msg),
+		var
+		msg = decodeURIComponent(data.msg).replace(/<\/?[^>]*>/g, ''),
+		r = {
+			'send':	msg,
+			'msg': '留言说： ' + msg,
 		};
+		
 		return r[type];
 	},
 
