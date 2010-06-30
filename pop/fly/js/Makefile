@@ -2,7 +2,10 @@ BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
 FILES = b/base.js b/chat.js b/oms.js b/appnew.js
-all: $(FILES)
+all: preload $(FILES)
+
+preload:
+	@$(MAKE) -C ape/
 
 b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/jquery.md5.js \
 		   pub/jquery.mninpval.js \
