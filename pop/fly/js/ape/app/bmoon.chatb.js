@@ -60,7 +60,9 @@ bmoon.chat = {
 		if (data.ref) data.sref = '通过 ' + decodeURIComponent(data.ref);
 		else data.sref = '';
 		
-		var r = {
+		var
+		msg = decodeURIComponent(data.msg).replace(/<\/?[^>]*>/g, ''),
+		r = {
 			'join':
 			data.sref + ' 来到本站, 访问了页面<a target="_blank" href="'+
 				decodeURIComponent(data.url)+'">'+
@@ -72,12 +74,8 @@ bmoon.chat = {
 				decodeURIComponent(data.title)+'</a>',
 
 			'left': '离开了本站',
-
-			'send':
-			decodeURIComponent(data.msg),
-
-			'msg':
-			'留言说： ' + decodeURIComponent(data.msg),
+			'send': msg,
+			'msg': '留言说： ' + msg
 		};
 		return r[type];
 	},
@@ -177,10 +175,17 @@ bmoon.chat = {
 	dearUsers: function(data) {
 		var o = bmoon.chat.init();
 
-		if (bmoon.utl.type(data) == Object) {
-			$.each(data, function(key, val){
-				var c = o._nodeUser(key, true);
-				if (key != o.cUserID) c.addClass('dirty');
+		if (bmoon.utl.type(data) == 'Array') {
+			$.each(data, function(i, val){
+				if (bmoon.utl.type(val) == 'Object') {
+					$.each(val, function(k, v) {
+						var c = o._nodeUser(k, true);
+						if (k != o.cUserID) c.addClass('dirty');
+					});
+				} else if (bmoon.utl.type(val) == 'String') {
+					var c = o._nodeUser(val, true);
+					if (val != o.cUserID) c.addClass('dirty');
+				}
 			});
 		}
 	},

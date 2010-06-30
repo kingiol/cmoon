@@ -18,6 +18,6 @@
 
 
 2010-06-25
-		dearuser 没调试
-		message 没 escape
+		*DONE* dearuser 没调试
+		*DONE* message 没 escape
 		bug: 客户端无法得到 管理员 群发的 历史消息
