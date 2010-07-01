@@ -11,10 +11,8 @@
 <link rel="icon" href="/favicon.ico" type="image/ico" />
 <link rel="stylesheet" type="text/css" href="/css/index.css" />
 
-<!--
-<script type="text/javascript" src="http://js.bmoon.com/b/base.js" ></script>
-<script type="text/javascript" src="http://js.bmoon.com/b/chat.js" ></script>
--->
+<script type="text/javascript" src="http://js.kaiwuonline.com/b/base.js" ></script>
+<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js" ></script>
 
 <?cs include:Include.css ?>
 <?cs var:Layout.css ?>
@@ -22,6 +20,16 @@
 <?cs include:Include.js ?>
 <script type="text/javascript">
 <?cs include:Layout.js ?>
+$(document).ready(function() {
+	var client = new APE.Client();
+	client.load({
+		identifier: 'lcs',
+		transport: 2,
+		complete: function(ape) {
+			new liveCS(ape).initialize({aname: 'ksa'});
+		}
+	});
+});
 </script>
 </head>
 
