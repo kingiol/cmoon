@@ -37,7 +37,7 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	hdf_destroy(&evt->hdfsnd);
+	hdf_destroy(&evt->hdfrcv);
 	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_USERLIST, FLAGS_SYNC))) {
 		mtc_err("get %s userlist failure %d", aname, evt->errcode);
 		return RET_RBTOP_EVTE;
