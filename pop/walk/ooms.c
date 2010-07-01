@@ -42,7 +42,9 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 		mtc_err("get %s userlist failure %d", aname, evt->errcode);
 		return RET_RBTOP_EVTE;
 	}
-	hdf_copy(cgi->hdf, PRE_OUTPUT".userlist", evt->hdfrcv);
+	if (evt->hdfrcv) {
+		hdf_copy(cgi->hdf, PRE_OUTPUT".userlist", evt->hdfrcv);
+	}
 	
 	
 	return RET_RBTOP_OK;
