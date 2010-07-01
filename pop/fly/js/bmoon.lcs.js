@@ -30,7 +30,7 @@ bmoon.lcs = {
 		}
 		o.vikierr = bmoon.utl.getQueryString("vikierr");
 		if (o.vikierr) {
-			$('#content').clear().append('<div class="error">'+o.vikierr+'</div>')
+			$('#content').empty().append('<div class="error">'+o.vikierr+'</div>')
 		}
 	},
 	
