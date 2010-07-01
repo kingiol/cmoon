@@ -1,4 +1,4 @@
-; var g_site_domain = "bmoon.com";
+; var g_site_domain = "kaiwuonline.com";
 var bmoon = bmoon || {};
 bmoon.lcs = {
 	version: "1.0",

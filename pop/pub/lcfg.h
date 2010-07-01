@@ -5,7 +5,7 @@
 
 __BEGIN_DECLS
 
-#define SITE_DOMAIN	"bmoon.com"
+#define SITE_DOMAIN	"kaiwuonline.com"
 #define TC_ROOT		"/var/log/moon/pop/"
 
 #ifdef RELEASE
