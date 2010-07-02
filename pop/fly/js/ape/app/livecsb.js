@@ -119,7 +119,7 @@ function liveCS(ape) {
 $(document).ready(function() {
 	var client = new APE.Client();
 	client.load({
-		identifier: 'lcs',
+		identifier: 'kol_backend',
 		transport: 2,
 		complete: function(ape) {
 			new liveCS(ape).initialize();

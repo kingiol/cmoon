@@ -57,7 +57,7 @@ bmoon.appnew = {
 					alert(data.errmsg || "操作失败， 请稍后再试");
 					return;
 				}
-				$("#copy-aname").text(data.aname);
+				$(".copy-aname").text(data.aname);
 				$("#add").fadeOut();
 				$("#copy").fadeIn();
 				
