@@ -10,7 +10,7 @@ bmoon.chat = {
 		msg = decodeURIComponent(data.msg).replace(/<\/?[^>]*>/g, ''),
 		r = {
 			'send':	msg,
-			'msg': '留言说： ' + msg,
+			'msg': '留言说： ' + msg
 		};
 		
 		return r[type];
@@ -66,10 +66,8 @@ bmoon.chat = {
 		// application don't write bchat, append it by lcs.
 		if (!chatbody.length) {
 			$('head').append('<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />');
+			$('head').append('<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->');
 			$('body').append(html);
-		}
-		if ($.browser.msie && $.browser.version=="6.0") {
-			$('#bchat').css('position','absolute');
 		}
 
 		o.msglist = $('#bchat-msgs');
