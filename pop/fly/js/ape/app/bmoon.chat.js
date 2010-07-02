@@ -10,7 +10,7 @@ bmoon.chat = {
 		msg = decodeURIComponent(data.msg).replace(/<\/?[^>]*>/g, ''),
 		r = {
 			'send':	msg,
-			'msg': '留言说： ' + msg,
+			'msg': '留言说： ' + msg
 		};
 		
 		return r[type];
