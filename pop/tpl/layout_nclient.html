@@ -15,42 +15,9 @@
 	<script type="text/javascript" src="/js/b/base.js"></script>
 	<?cs var: Layout.js ?>
 	<?cs include:Include.js ?>
-
-<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />
-<script type="text/javascript" src="http://js.kaiwuonline.com/b/base.js" ></script>
-<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js" ></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	var client = new APE.Client();
-	client.load({
-		identifier: 'lcs',
-		transport: 2,
-		complete: function(ape) {
-			new liveCS(ape).initialize({aname: 'kol'});
-		}
-	});
-});
-</script>
-	
   </head>
 
   <body>
-	
-	<div id="bchat">
-	  <div id="bchat-head">
-		<a href="javascript: void(0);" id="bchat-trigger">有疑问？ 点我^^</a>
-	  </div>
-	  <div id="bchat-body">
-		<div id="bchat-msgs" class="bchat-msgs">
-		  <div class="recently"></div><div class="data"></div>
-		</div>
-		<textarea cols="25" rows="2" id="bchat-input"></textarea>
-		<div>
-		  <a id="bchat-snd" title="Control+Enter" href="javascript:">发送(Control+Enter)</a>
-		</div>
-	  </div>
-	</div>
-	
 	<div id="top">
 	  <div class="member">
 		<ul class="hide" id="nav-member">

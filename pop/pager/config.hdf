@@ -2,7 +2,7 @@ index {
 	Layout = layout.html
 	Dataset {
 		Layout {
-			title = Easy Our Life
+			title = 首页 - Easy Our Life
 			crumbs {
 				0 {
 					name = 首页

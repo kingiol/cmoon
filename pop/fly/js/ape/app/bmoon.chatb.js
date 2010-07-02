@@ -32,7 +32,7 @@ bmoon.chat = {
 		html = '<li id="im-user-'+uname+'" uname="'+uname+'">'+uname+'</li>';
 		
 		if (!r.length && create) {
-			r = $(html).appendTo(o.userlist);
+			r = $(html).appendTo(o.userlist).click(o.openChat);
 		}
 		return r;
 	},

@@ -44,27 +44,31 @@ bmoon.chat = {
 		html = [
 			'<div id="bchat">',
 			    '<div id="bchat-head">',
-			        '<a href="javascript: void(0);" id="bchat-trigger">留言</a>',
+			        '<a href="javascript: void(0);" id="bchat-trigger">在线咨询</a>',
 			    '</div>',
 				'<div id="bchat-body">',
 					'<div id="bchat-msgs" class="bchat-msgs">',
 			            '<div class="recently"></div><div class="data"></div>',
 			        '</div>',
-					'<textarea cols="27" rows="3" id="bchat-input"></textarea>',
+					'<textarea cols="25" rows="2" id="bchat-input"></textarea>',
 			        '<div>',
 			            '<a id="bchat-snd" title="Control+Enter" ',
-			            ' href="javascript:">发送</a>',
+			            ' href="javascript:">发送(Control+Enter)</a>',
 			        '</div>',
 				'</div>',
 			'</div>'
-		].join('');
+		].join(''),
+		chatbody = $('#bchat-body');
 
 		o.ape = ape;
 		o.inited = true;
 
-        $('head').append('<link rel="stylesheet" href="http://css.bmoon.com/mchat.css" />');
-        $('body').append(html);
-        if ($.browser.msie && $.browser.version=="6.0") {
+		// application don't write bchat, append it by lcs.
+		if (!chatbody.length) {
+			$('head').append('<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />');
+			$('body').append(html);
+		}
+		if ($.browser.msie && $.browser.version=="6.0") {
 			$('#bchat').css('position','absolute');
 		}
 

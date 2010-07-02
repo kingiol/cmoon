@@ -2,7 +2,7 @@
   <div class="title">常见问题</div>
   <div class="listcon">
 	<ul>
-	  <li><a href="/app/login.html">管理已注册站点</a></li>
+	  <li><a href="/oms">管理已注册站点</a></li>
 	</ul>
   </div>
 </div>
@@ -13,7 +13,8 @@
 	<dl class="form">
 	  <dt>站点标识：</dt>
 	  <dd>
-		<input type='text' name='aname' id='aname' class="long VAL_NEWAPP vrequire" />
+		<input type='text' name='aname' id='aname' class="long VAL_NEWAPP vname" />
+		<span>（字母 数字 . 或 -）</span>
 		<span id='hit-appexist' class='hide'>站点已被注册</span>
 		<span id='hit-appnexist' class='hide'>标识可以使用</span>
 	  </dd>
@@ -36,10 +37,24 @@
   </div>
 
   <div id='copy' class='hide'>
-	<h4>添加站点成功， 请在您网站页面上加入以下代码， 即可<a href='/chat'>开始使用</a></h4>
-	<div>
-	  xxxxx<span id='copy-aname'></span>xxxxx
-	</div>
+	<h4>添加站点成功， 请在您网站页面<head></head>中加入以下代码， 即可<a href='/oms'>开始管理站点</a></h4>
+	<div class="sep"></div>
+	<pre>
+&lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/base.js" &gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js" &gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+$(document).ready(function() {
+	var client = new APE.Client();
+	client.load({
+		identifier: 'lcs',
+		transport: 2,
+		complete: function(ape) {
+			new liveCS(ape).initialize({aname: '<span id='copy-aname'></span>'});
+		}
+	});
+});
+&lt;/script&gt;
+	</pre>
 	
   </div>
 

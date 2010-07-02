@@ -1,5 +1,5 @@
 oms {
-	Layout = layout.html
+	Layout = layout_nclient.html
 	Dataset {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/oms.css" />
