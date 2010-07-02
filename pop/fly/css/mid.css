@@ -75,7 +75,7 @@ ul.uc-menu {
 
 #coltwo {
     float: left;
-    width: 710px;			/* 960 = 180+15*4+x 15px~~15px -30px for ie6, ri */
+    width: 700px;			/* 960 = 180+15*4+x 15px~~15px -30px for ie6, ri */
     margin: 0 15px 15px 15px;
     padding: 0;
 }
