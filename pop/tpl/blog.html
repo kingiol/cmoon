@@ -1,0 +1,26 @@
+<div id="colone">
+  <div class="title">开物博客</div>
+  <div class="listcon">
+	<ul>
+	  <?cs each: blog = Output.blogs ?>
+	  <li><?cs var: blog.title ?></li>
+	  <?cs /each ?>
+	</ul>
+  </div>
+</div>
+
+<div id='coltwo'>
+
+  <?cs each: blog = Output.blogs ?>
+  <div class="blog-item">
+	<div class="title"><?cs var: blog.title ?></div>
+	<div class="content">
+	  <?cs var: blog.content ?>
+	</div>
+	<div class="info">
+	  [ posted at: <?cs var: blog.intime ?> | <a href="/blog?f=<?cs var: blog.fname ?>"><?cs var: blog.count_comment ?> comments</a> ]
+	</div>
+  </div>
+  <?cs /each ?>
+  
+</div>

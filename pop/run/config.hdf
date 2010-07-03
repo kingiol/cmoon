@@ -17,3 +17,8 @@ oms {
 	dataer = oms
 	render = oms
 }
+blog {
+	reqtype = 0
+	dataer = blog
+	render = blog
+}

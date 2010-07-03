@@ -10,6 +10,7 @@ static void lutil_donotcall()
 {
 	app_exist_data_get(NULL, NULL, NULL, NULL);
 	oms_data_get(NULL, NULL, NULL, NULL);
+	blog_data_get(NULL, NULL, NULL, NULL);
 }
 
 int CGI_REQ_TYPE(CGI *cgi, HDF *rcfg)

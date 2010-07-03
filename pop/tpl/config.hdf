@@ -17,3 +17,22 @@ oms {
 		}
 	}
 }
+blog {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/blog.css" />
+			js = <script type="text/javascript" src="/js/b/blog.js"></script>
+			title = 产品动态
+			crumbs {
+				0 {
+					name = 站点管理
+					href = /blog
+				}
+			}
+        }
+		Include {
+			content = blog.html
+		}
+	}
+}

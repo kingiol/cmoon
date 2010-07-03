@@ -243,7 +243,7 @@ int ltpl_render(CGI *cgi, HASH *tplh, session_t *ses, HDF *rcfg)
 
 	cs = (CSPARSE*)hash_lookup(tplh, render);
 	if (cs == NULL) {
-		mtc_err("file not found");
+		mtc_err("render %s not found", render);
 		return RET_RBTOP_NEXIST;
 	}
 

@@ -1,0 +1,12 @@
+.blog-item {
+	margin: 10px 0;
+}
+
+.blog-item .content {
+	margin: 20px 0;
+	text-indent: 2em;
+}
+
+.blog-item .info {
+	text-align: right;
+}
