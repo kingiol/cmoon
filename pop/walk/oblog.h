@@ -4,6 +4,8 @@
 
 __BEGIN_DECLS
 
+#define BLOG_INDEX	PATH_DOC"index_blog"
+
 int blog_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
 __END_DECLS

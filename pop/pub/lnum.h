@@ -38,6 +38,7 @@ enum uiplug_type {
 #define RET_RBTOP_EXISTE	2041
 
 #define RET_RBTOP_IMGPROE	2050
+#define RET_RBTOP_OPENFILE	2051
 
 __END_DECLS
 #endif	/* __LNUM_H__ */
