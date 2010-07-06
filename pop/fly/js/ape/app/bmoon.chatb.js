@@ -18,6 +18,7 @@ bmoon.chat = {
 		o.btm = $('#chat-msg-submit');
 		o.userlist = $('#im-users > ul');
 		o.msglist = $('#im-msgs');
+		o.stat = $('#im-stat');
 		
 		o.ape = ape;
 
@@ -156,6 +157,11 @@ bmoon.chat = {
 		c.removeClass('dirty').addClass('cur').unbind('click');
 		o._nodeMsg(id, true).fadeIn();
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
+		if (id == '0') {
+			o.stat.html("给所有在线访客发送消息");
+		} else {
+			o.stat.html("与 " + id + " 对话");
+		}
 
 		if ($.inArray(id, o.usersFetched) == -1) {
 			o.ape.request.send('LCS_RECENTLY', {uin: id, type: 1});

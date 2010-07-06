@@ -6,13 +6,19 @@
 	right:20px;
 	bottom: 0;
 	padding: 10px;
-	opacity: 0.9;
+	opacity: 1.0;
 	z-index:999;
 }
 #bchat-head {width: 260px; height: 20px; text-align: center;}
+#bchat-trigger.dirty {color: green;}
 #bchat-body {
 	display: none;
 	width: 260px;
+}
+#bchat-hint {
+	color: #999;
+	background-color: #eeeeee;
+	overflow: hidden;
 }
 #bchat-msgs {
 	background-color: #eeeeee;

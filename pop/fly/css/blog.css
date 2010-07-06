@@ -1,12 +1,16 @@
 .blog-item {
-	margin: 10px 0;
-}
-
-.blog-item .content {
-	margin: 20px 0;
-	/*text-indent: 2em;*/
+	margin: 30px 0;
 }
 
 .blog-item .info {
-	text-align: right;
+	color: gray;
+}
+
+.blog-item .content {
+	margin: 20px 0 10px 0;
+	/*text-indent: 2em;*/
+}
+
+.blog-item .end {
+	color: gray;
 }

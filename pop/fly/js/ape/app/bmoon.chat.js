@@ -47,6 +47,7 @@ bmoon.chat = {
 			        '<a href="javascript: void(0);" id="bchat-trigger">在线咨询</a>',
 			    '</div>',
 				'<div id="bchat-body">',
+			        '<div id="bchat-hint">客服当前离线，留言功能开启。</div>',
 					'<div id="bchat-msgs" class="bchat-msgs">',
 			            '<div class="recently"></div><div class="data"></div>',
 			        '</div>',
@@ -70,7 +71,9 @@ bmoon.chat = {
 			$('body').append(html);
 		}
 
+		o.trigger = $('#bchat-trigger');
 		o.msglist = $('#bchat-msgs');
+		o.hint = $('#bchat-hint');
 		o.recentbox = $('.recently', o.msglist);
 		o.databox = $('.data', o.msglist);
 		o.ape.request.send('LCS_RECENTLY', {uin: '0', type: 1});
@@ -88,6 +91,7 @@ bmoon.chat = {
         $('#bchat-input').focus();
 		
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
+		o.trigger.removeClass('dirty');
 	},
 
 	closeChat: function() {
@@ -115,23 +119,25 @@ bmoon.chat = {
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
 
 		if (o.adminuser.aname && pipe) {
-			pipe.request.send("LCS_SEND", {msg: mv});
+			pipe.request.send('LCS_SEND', {msg: mv});
 		} else {
-			o.ape.request.send("LCS_MSG", {uname: o.ape.lcsaname, msg: mv});
+			o.ape.request.send('LCS_MSG', {uname: o.ape.lcsaname, msg: mv});
 		}
 	},
 
 	adminOn: function(data) {
 		var o = bmoon.chat.init();
 
- 		o.debug(data.pname + " 的管理员 " +data.aname + " 上线了");
+ 		o.debug(data.pname + ' 的管理员 ' +data.aname + ' 上线了');
+		o.hint.html(data.aname + ' 当前在线。');
 		o.adminuser = data;
 	},
 
 	adminOff: function() {
 		var o = bmoon.chat.init();
 
- 		o.debug("管理员走开了");
+ 		o.debug('管理员走开了');
+		o.hint.html('客服当前离线，留言功能开启。');
 		o.adminuser = {};
 	},
 	
@@ -147,7 +153,7 @@ bmoon.chat = {
 		if ($('#bchat-body').css('display') != 'none') {
 			o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
 		} else {
-			userbox.addClass('dirty');
+			o.trigger.addClass('dirty');
 		}
 	},
 
