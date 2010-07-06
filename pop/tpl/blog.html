@@ -11,16 +11,29 @@
 
 <div id='coltwo'>
 
-  <?cs each: blog = Output.blogs ?>
-  <div class="blog-item">
-	<div class="title"><?cs var: blog.title ?></div>
-	<div class="content">
-	  <?cs var: blog.abs ?>
-	</div>
-	<div class="info">
-	  [ posted at: <?cs var: blog.intime ?> | <a href="/blog?f=<?cs var: blog.fname ?>"><?cs var: blog.count_comment ?> comments</a> ]
-	</div>
-  </div>
-  <?cs /each ?>
+  <?cs if: ?Output.blogs.0.title ?>
+      <?cs each: blog = Output.blogs ?>
+      <div class="blog-item">
+      	<div class="title"><?cs var: blog.title ?></div>
+      	<div class="info"><?cs var: blog.intime ?></div>
+      	<div class="content">
+      	  <?cs var: blog.abs ?>
+      	</div>
+      	<div class="end">
+      	  <?cs if blog.done == 0 ?>
+      	  <a href="/blog?f=<?cs var: blog.fname ?>">阅读全文</a>
+      	  <?cs /if ?>
+      	</div>
+      </div>
+      <?cs /each ?>
+  <?cs else ?>
+      <div class="blog-item">
+      	<div class="title"><?cs var: Output.blog.title ?></div>
+      	<div class="info"><?cs var: Output.blog.intime ?></div>
+      	<div class="content">
+      	  <?cs var: Output.blog.content ?>
+      	</div>
+      </div>
+  <?cs /if ?>
   
 </div>

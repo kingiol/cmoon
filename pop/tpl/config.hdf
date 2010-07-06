@@ -26,7 +26,7 @@ blog {
 			title = 产品动态
 			crumbs {
 				0 {
-					name = 站点管理
+					name = 开物博客
 					href = /blog
 				}
 			}
