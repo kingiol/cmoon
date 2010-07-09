@@ -1,5 +1,11 @@
 /* ELEMENT */
-body {background: #fff; color: #111; }
+body {
+	background: #fff;
+	/*background-image: url(/img/bg/bg.gif);*/
+	color: #111;
+	width: 960px;
+	margin: 0 auto;
+}
 a {color: #DB3946; cursor: pointer; text-decoration: none; }
 p {
 	text-indent: 2em;
@@ -32,8 +38,13 @@ dl.form dd {margin: 10px 0;}
 .sep {clear: both; height: 3ex;}
 .sepl {clear: both; height: 2ex;}
 
-#top {height: 36px; border-bottom: 1px dashed #101010; }
+#top {
+	height: 42px;
+	border-bottom: 1px dashed #101010;
+	background-image: url(/img/logo.png);
+	background-repeat:no-repeat;
+}
 #bot {height: 100px; border-top: 1px dashed #101010; }
 #bot p {padding-top: 10px; text-align: center; }
-#mid {width: 960px; margin: 0 auto; padding: 3ex 0; }
+#mid {padding: 3ex 0; }
 
