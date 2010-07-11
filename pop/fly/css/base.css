@@ -35,6 +35,10 @@ dl.form dd {margin: 10px 0;}
 .clearer {clear: both;}
 .sep {clear: both; height: 3ex;}
 .sepl {clear: both; height: 2ex;}
+.decimal {
+	font: 12px Georgia;
+	font-weight: bold;
+}
 
 #top, #mid, #ot {
 	width: 960px;

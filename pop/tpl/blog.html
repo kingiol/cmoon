@@ -1,5 +1,5 @@
 <div id="colone">
-  <div class="title">开物博客</div>
+  <div class="cktitle">开物博客</div>
   <div class="listcon">
 	<ul>
 	  <?cs each: blog = Output.blogs ?>
@@ -14,7 +14,7 @@
   <?cs if: ?Output.blogs.0.title ?>
       <?cs each: blog = Output.blogs ?>
       <div class="blog-item">
-      	<div class="title"><?cs var: blog.title ?></div>
+      	<div class="cktitle"><?cs var: blog.title ?></div>
       	<div class="info"><?cs var: blog.intime ?></div>
       	<div class="content">
       	  <?cs var: blog.abs ?>
@@ -28,7 +28,7 @@
       <?cs /each ?>
   <?cs else ?>
       <div class="blog-item">
-      	<div class="title"><?cs var: Output.blog.title ?></div>
+      	<div class="cktitle"><?cs var: Output.blog.title ?></div>
       	<div class="info"><?cs var: Output.blog.intime ?></div>
       	<div class="content">
       	  <?cs var: Output.blog.content ?>

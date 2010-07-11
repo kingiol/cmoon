@@ -39,7 +39,7 @@ bmoon.lcs = {
 		
 		$('#login-submit').click(o.login);
 		$('#userlogout').click(o.logout);
-		o.loginoverlay = $('a[rel="#loginoverlay"]').overlay({api: true});
+		o.loginoverlay = $('a[rel="#loginoverlay"]').overlay({mask: '#666', api: true});
 	},
 
 	login: function() {

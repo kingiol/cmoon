@@ -9,7 +9,8 @@ preload:
 
 b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/jquery.md5.js \
 		   pub/jquery.mninpval.js \
-	       pub/flowtools/js/tools.overlay-1.1.2.js \
+		   pub/jquerytools/src/toolbox/toolbox.expose.js \
+	       pub/jquerytools/src/overlay/overlay.js \
 	       pub/bmoon.js bmoon.lcs.js
 
 b/chat.js: pub/jquery.hotkeys.js ape/app/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
