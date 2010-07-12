@@ -43,9 +43,7 @@ bmoon.chat = {
 		var
 		html = [
 			'<div id="bchat">',
-				'<div id="bchat-min" title="打开聊天面板">',
-					'<img src="/img/im/up.png" />',
-				'</div>',
+				'<div id="bchat-min" title="打开聊天面板">&nbsp;</div>',
 				'<div id="bchat-max">',
 					'<div id="bchat-body">',
 			    	    '<div id="bchat-hint">客服当前离线，留言功能开启。</div>',
@@ -53,12 +51,12 @@ bmoon.chat = {
 			    	        '<div class="recently"></div><div class="data"></div>',
 			    	    '</div>',
 						'<textarea rows="2" id="bchat-input"></textarea>',
-						'<div id="bchat-hint2">Ctrl+Enter 发送消息。</div>',
+						'<div id="bchat-hint2">Ctrl + Enter 发送消息。</div>',
 					'</div>',
 			    	'<div id="bchat-head">',
-						'<div id="bchat-trigger" title="在线聊天"><img src="/img/im/chat.png" /> Live Chat</div>',
-						'<div id="bchat-power">Powered By: KaiwuOnline</div>',
-						'<div id="bchat-downer" title="关闭聊天"><img src="/img/im/down.png"></div>',
+						'<div id="bchat-trigger" title="在线聊天">&nbsp;</div>',
+						'<div id="bchat-power">&nbsp;</div>',
+						'<div id="bchat-downer" title="关闭聊天">&nbsp;</div>',
 			    	'</div>',
 				'</div>',
 			'</div>'
@@ -86,7 +84,16 @@ bmoon.chat = {
 
 		$('#bchat-trigger').toggle(o.openChat, o.closeChat);
 		$('#bchat-input').bind('keydown', 'ctrl+return', o.msgSend);
+		// chat.css is appended by js, will overwrite my fadeIn, so, delay.
+		setTimeout(o.initUI, 1000);
 		
+		//$('#bchat div[title]').tooltip({position: ['top', 'left']});
+		return o;
+	},
+
+	initUI: function() {
+		var o = bmoon.chat.init();
+
 		if ($.cookie('lcs_ui_max') == "0") {
 			o.min.fadeIn();
 		} else {
@@ -98,15 +105,12 @@ bmoon.chat = {
 			$.cookie('lcs_ui_max', "0");
 		});
 		$('#bchat-min').click(function() {
-			$('#bchat-min').hide();
-			$('#bchat-max').fadeIn();
+			o.min.hide();
+			o.max.fadeIn();
 			$.cookie('lcs_ui_max', "1");
 		});
-		//$('#bchat-snd').click(o.msgSend);
-		//$('#bchat div[title]').tooltip({position: ['top', 'left']});
-		return o;
 	},
-
+	
 	openChat: function() {
 		var o = bmoon.chat.init();
 

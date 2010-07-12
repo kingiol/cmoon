@@ -10,6 +10,8 @@
 #bchat-min {
 	width: 20px;
 	height: 20px;
+	background:transparent url(http://www.kaiwuonline.com/img/im/client.png) no-repeat scroll 0 0;
+	overflow: hidden;
 	display: none;
 	cursor: pointer;
 }
@@ -23,12 +25,33 @@
 	width: 280px; height: 25px;
 	border: 1px solid #666666;
 }
-#bchat-trigger, #bchat-power, #bchat-downer {float: left; margin: 5px 0 0 12px;}
-#bchat-power {color: #999;}
-#bchat-trigger {font-weight: bold; cursor: pointer;}
-#bchat-trigger img {vertical-align: top;}
+#bchat-trigger, #bchat-power, #bchat-downer {
+	float: left;
+	/*margin: 5px 0 0 12px;*/
+	margin-left: 5px;
+}
+#bchat-power {
+	height: 20px;
+	width: 155px;
+	overflow: hidden;
+	background:transparent url(http://www.kaiwuonline.com/img/im/client.png) no-repeat scroll 0 -58px;
+}
+#bchat-trigger {
+	cursor: pointer;
+	height: 20px;
+	width: 85px;
+	overflow: hidden;
+	background:transparent url(http://www.kaiwuonline.com/img/im/client.png) no-repeat scroll 0 -38px;
+}
+/*#bchat-trigger img {vertical-align: top;}*/
 #bchat-trigger.dirty {color: green;}
-#bchat-downer {cursor: pointer;}
+#bchat-downer {
+	cursor: pointer;
+	height: 20px;
+	width: 20px;
+	overflow: hidden;
+	background:transparent url(http://www.kaiwuonline.com/img/im/client.png) no-repeat scroll 0 -17px;
+}
 
 #bchat-body {
 	background-color:#EEEEEE;
@@ -58,7 +81,7 @@ textarea#bchat-input {
 }
 
 .item-join, .item-visit, .item-send, .item-msg {
-	margin: 12px 0;
+	margin: 5px 0;
 }
 .bchat-msgs .item-name, .bchat-msgs .item-time{
 	margin-left: 10px;
@@ -66,7 +89,6 @@ textarea#bchat-input {
 }
 .bchat-msgs .item-content {
 	display: block;
-	margin: 5px;
 	text-indent: 2em;
 }
 
