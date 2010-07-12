@@ -1,36 +1,60 @@
 #bchat {
-	/*background-color:#999999;*/
-	background-color:#EEEEEE;
-	border: 1px solid #666666;
 	position:fixed;
-	right:20px;
+	right:10px;
 	bottom: 0;
-	padding: 10px;
+	/*padding: 10px;*/
 	opacity: 1.0;
-	z-index:999;
-}
-#bchat-head {width: 260px; height: 20px; text-align: center;}
-#bchat-trigger.dirty {color: green;}
-#bchat-body {
-	display: none;
-	width: 260px;
-}
-#bchat-hint {
-	color: #999;
-	background-color: #eeeeee;
-	overflow: hidden;
-}
-#bchat-msgs {
-	background-color: #eeeeee;
-	border: 1px solid #666666;
-	height: 200px;
-	width: 259px;
-	margin: 10px 10px 10px 0;
-	overflow: auto;
+	z-index:99999;
 }
 
+#bchat-min {
+	width: 20px;
+	height: 20px;
+	display: none;
+	cursor: pointer;
+}
+
+#bchat-max {
+	display: none;
+}
+
+#bchat-head {
+	background-color:#EEEEEE;
+	width: 280px; height: 25px;
+	border: 1px solid #666666;
+}
+#bchat-trigger, #bchat-power, #bchat-downer {float: left; margin: 5px 0 0 12px;}
+#bchat-power {color: #999;}
+#bchat-trigger {font-weight: bold; cursor: pointer;}
+#bchat-trigger img {vertical-align: top;}
+#bchat-trigger.dirty {color: green;}
+#bchat-downer {cursor: pointer;}
+
+#bchat-body {
+	background-color:#EEEEEE;
+	display: none;
+	width: 280px;
+	border: 1px solid #666666;
+	border-bottom: 1px solid #EEEEEE;
+}
+#bchat-hint, #bchat-hint2 {
+	color: #999;
+	overflow: hidden;
+	margin: 10px;
+}
+#bchat-msgs {
+	border: 1px solid #666666;
+	height: 200px;
+	margin: 10px;
+	overflow: auto;
+}
 textarea#bchat-input {
 	padding: 5px;
+	margin: 0 10px 2px 10px;
+	width: 89%;
+}
+#bchat-hint2 {
+	margin-top: 0;
 }
 
 .item-join, .item-visit, .item-send, .item-msg {
@@ -44,4 +68,17 @@ textarea#bchat-input {
 	display: block;
 	margin: 5px;
 	text-indent: 2em;
+}
+
+
+.tooltip {
+	display:none;
+	/*background:url(/pub/flowtools/image/tooltip/white_arrow.png);*/
+	background-color: #999;
+	border: 1px solid #666;
+	width:60px;
+	height:30px;
+	padding:25px;
+	margin: 30px;
+	font-size:11px;
 }

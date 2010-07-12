@@ -43,23 +43,27 @@ bmoon.chat = {
 		var
 		html = [
 			'<div id="bchat">',
-			    '<div id="bchat-head">',
-			        '<a href="javascript: void(0);" id="bchat-trigger">在线咨询</a>',
-			    '</div>',
-				'<div id="bchat-body">',
-			        '<div id="bchat-hint">客服当前离线，留言功能开启。</div>',
-					'<div id="bchat-msgs" class="bchat-msgs">',
-			            '<div class="recently"></div><div class="data"></div>',
-			        '</div>',
-					'<textarea cols="25" rows="2" id="bchat-input"></textarea>',
-			        '<div>',
-			            '<a id="bchat-snd" title="Control+Enter" ',
-			            ' href="javascript:">发送(Control+Enter)</a>',
-			        '</div>',
+				'<div id="bchat-min" title="打开聊天面板">',
+					'<img src="/img/im/up.png" />',
+				'</div>',
+				'<div id="bchat-max">',
+					'<div id="bchat-body">',
+			    	    '<div id="bchat-hint">客服当前离线，留言功能开启。</div>',
+						'<div id="bchat-msgs" class="bchat-msgs">',
+			    	        '<div class="recently"></div><div class="data"></div>',
+			    	    '</div>',
+						'<textarea rows="2" id="bchat-input"></textarea>',
+						'<div id="bchat-hint2">Ctrl+Enter 发送消息。</div>',
+					'</div>',
+			    	'<div id="bchat-head">',
+						'<div id="bchat-trigger" title="在线聊天"><img src="/img/im/chat.png" /> Live Chat</div>',
+						'<div id="bchat-power">Powered By: KaiwuOnline</div>',
+						'<div id="bchat-downer" title="关闭聊天"><img src="/img/im/down.png"></div>',
+			    	'</div>',
 				'</div>',
 			'</div>'
 		].join(''),
-		chatbody = $('#bchat-body');
+		chatbody = $('#bchat');
 
 		o.ape = ape;
 		o.inited = true;
@@ -71,6 +75,8 @@ bmoon.chat = {
 			$('body').append(html);
 		}
 
+		o.min = $('#bchat-min');
+		o.max = $('#bchat-max');
 		o.trigger = $('#bchat-trigger');
 		o.msglist = $('#bchat-msgs');
 		o.hint = $('#bchat-hint');
@@ -79,8 +85,25 @@ bmoon.chat = {
 		o.ape.request.send('LCS_RECENTLY', {uin: '0', type: 1});
 
 		$('#bchat-trigger').toggle(o.openChat, o.closeChat);
-        $('#bchat-input').bind('keydown', 'ctrl+return', o.msgSend);
-		$('#bchat-snd').click(o.msgSend);
+		$('#bchat-input').bind('keydown', 'ctrl+return', o.msgSend);
+		
+		if ($.cookie('lcs_ui_max') == "0") {
+			o.min.fadeIn();
+		} else {
+			o.max.fadeIn();
+		}
+		$('#bchat-downer').click(function() {
+			o.max.hide();
+			o.min.fadeIn();
+			$.cookie('lcs_ui_max', "0");
+		});
+		$('#bchat-min').click(function() {
+			$('#bchat-min').hide();
+			$('#bchat-max').fadeIn();
+			$.cookie('lcs_ui_max', "1");
+		});
+		//$('#bchat-snd').click(o.msgSend);
+		//$('#bchat div[title]').tooltip({position: ['top', 'left']});
 		return o;
 	},
 

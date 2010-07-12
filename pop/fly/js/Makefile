@@ -13,7 +13,7 @@ b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/jquery.md5.js \
 	       pub/jquerytools/src/overlay/overlay.js \
 	       pub/bmoon.js bmoon.lcs.js
 
-b/chat.js: pub/jquery.hotkeys.js ape/app/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
+b/chat.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/app/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
 b/oms.js: pub/jquery.hotkeys.js ape/app/bmoon.chatb.js ape/Build/apeClient.js ape/app/livecsb.js
 b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
 
