@@ -85,7 +85,7 @@ bmoon.chat = {
 		$('#bchat-trigger').toggle(o.openChat, o.closeChat);
 		$('#bchat-input').bind('keydown', 'ctrl+return', o.msgSend);
 		// chat.css is appended by js, will overwrite my fadeIn, so, delay.
-		setTimeout(o.initUI, 1000);
+		setTimeout(o.initUI, 2000);
 		
 		//$('#bchat div[title]').tooltip({position: ['top', 'left']});
 		return o;
