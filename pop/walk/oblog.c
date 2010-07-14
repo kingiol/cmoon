@@ -2,14 +2,14 @@
 #include "lheads.h"
 #include "oblog.h"
 
-static int blog_file_get(char *f, CGI *cgi, int sn)
+static int blog_file_get(char *f, HDF *hdf, int sn)
 {
 	struct stat s;
 	char *c, *content, *p, *q;
 	char fname[LINE_MAX], prekey[64], intime[64];
 	NEOERR *err;
 	
-	if (!f || !cgi) return RET_RBTOP_INPUTE;
+	if (!f || !hdf) return RET_RBTOP_INPUTE;
 	
 	snprintf(fname, sizeof(fname), "%s%s", PATH_BLOG, f);
 	if (stat(fname, &s) == -1) {
@@ -37,32 +37,32 @@ static int blog_file_get(char *f, CGI *cgi, int sn)
 		sprintf(prekey, "blogs.%d", sn);
 	}
 	
-	hdf_set_valuef(cgi->hdf, PRE_OUTPUT".%s.fname=%s", prekey, f);
-	hdf_set_valuef(cgi->hdf, PRE_OUTPUT".%s.title=%s", prekey, content);
-	hdf_set_valuef(cgi->hdf, PRE_OUTPUT".%s.content=%s", prekey, p ? p: content);
-	hdf_set_valuef(cgi->hdf, PRE_OUTPUT".%s.intime=%s", prekey, intime);
+	hdf_set_valuef(hdf, PRE_OUTPUT".%s.fname=%s", prekey, f);
+	hdf_set_valuef(hdf, PRE_OUTPUT".%s.title=%s", prekey, content);
+	hdf_set_valuef(hdf, PRE_OUTPUT".%s.content=%s", prekey, p ? p: content);
+	hdf_set_valuef(hdf, PRE_OUTPUT".%s.intime=%s", prekey, intime);
 		
 	if (p) {
 		q = strstr(p, "<br /><br />");
 		if (q) *q = '\0';
 	}
-	hdf_set_valuef(cgi->hdf, PRE_OUTPUT".%s.abs=%s", prekey, p ? p: content);
+	hdf_set_valuef(hdf, PRE_OUTPUT".%s.abs=%s", prekey, p ? p: content);
 	/* q not null, blog hasn't finish */
 	if (q) {
-		hdf_set_valuef(cgi->hdf, PRE_OUTPUT".%s.done=0", prekey);
+		hdf_set_valuef(hdf, PRE_OUTPUT".%s.done=0", prekey);
 	} else {
-		hdf_set_valuef(cgi->hdf, PRE_OUTPUT".%s.done=1", prekey);
+		hdf_set_valuef(hdf, PRE_OUTPUT".%s.done=1", prekey);
 	}
-		
+	
 	free(c);
 	free(content);
 	return RET_RBTOP_OK;
 }
 
-static int blog_index_get(CGI *cgi)
+int blog_index_get(HDF *hdf)
 {
 	FILE *fp;
-	char line[LINE_MAX];
+	char line[LINE_MAX], src[64], dst[64];
 
 	if ((fp = fopen(BLOG_INDEX, "r")) == NULL) {
 		mtc_err("open index file %s failure", BLOG_INDEX);
@@ -76,7 +76,30 @@ static int blog_index_get(CGI *cgi)
 		x = strlen(line) -1;
 		while (x > 0 && (line[x] == '\n')) line[x--] = '\0';
 
-		if (blog_file_get(line, cgi, i) == RET_RBTOP_OK) i++;
+		if (blog_file_get(line, hdf, i) == RET_RBTOP_OK) {
+			if (i > 0) {
+				/*
+				 * set my prev 
+				 */
+				sprintf(src, PRE_OUTPUT".blogs.%d.title", i-1);
+				sprintf(dst, PRE_OUTPUT".blogs.%d.titleprev", i);
+				hdf_set_copy(hdf, dst, src);
+				sprintf(src, PRE_OUTPUT".blogs.%d.fname", i-1);
+				sprintf(dst, PRE_OUTPUT".blogs.%d.fnameprev", i);
+				hdf_set_copy(hdf, dst, src);
+
+				/*
+				 * set formal's next
+				 */
+				sprintf(src, PRE_OUTPUT".blogs.%d.title", i);
+				sprintf(dst, PRE_OUTPUT".blogs.%d.titlenext", i-1);
+				hdf_set_copy(hdf, dst, src);
+				sprintf(src, PRE_OUTPUT".blogs.%d.fname", i);
+				sprintf(dst, PRE_OUTPUT".blogs.%d.fnamenext", i-1);
+				hdf_set_copy(hdf, dst, src);
+			}
+			i++;
+		}
 	}
 	
 	fclose(fp);
@@ -89,12 +112,12 @@ int blog_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
 	char *f = hdf_get_value(cgi->hdf, PRE_QUERY".f", NULL);
 	if (f != NULL) {
-		return blog_file_get(f, cgi, -1);
+		return blog_file_get(f, cgi->hdf, -1);
 	} else {
-		return blog_index_get(cgi);
+		return blog_index_get(cgi->hdf);
 	}
 
-#if 0	
+#if 0
 	hdf_set_value(cgi->hdf, PRE_OUTPUT".blogs.0.title", "日志1");
 	hdf_set_value(cgi->hdf, PRE_OUTPUT".blogs.0.content", "xxdfpsdfsd<br />哈阿");
 	hdf_set_value(cgi->hdf, PRE_OUTPUT".blogs.0.intime", "2010-07-03 12:22");

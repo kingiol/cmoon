@@ -27,7 +27,7 @@ blog {
 			crumbs {
 				0 {
 					name = 开物博客
-					href = /blog
+					href = /blog/index.html
 				}
 			}
         }

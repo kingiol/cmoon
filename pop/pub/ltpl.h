@@ -4,6 +4,7 @@
 
 __BEGIN_DECLS
 
+void ltpl_prepare_rend(HDF *hdf, char *tpl);
 int  ltpl_parse_dir(char *dir, HASH *outhash);
 int  ltpl_init(HASH **tplh);
 void ltpl_destroy(HASH *tplh);
