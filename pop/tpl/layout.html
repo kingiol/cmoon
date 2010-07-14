@@ -2,14 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="keywords" content="开物在线 在线客户 站长工具 开源软件" />
-    <meta name="description" content="bmoon" />
-    <title>开物在线 - <?cs var:Layout.title ?></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="开物在线 在线客户 站长工具 开源软件" />
+	<meta name="description" content="bmoon" />
+	<title>开物在线 - <?cs var:Layout.title ?></title>
 
-    <link rel="stylesheet" type="text/css" href="/css/b/base.css" />
-    <?cs var: Layout.css ?>
-    <?cs include:Include.css ?>
+	<link rel="stylesheet" type="text/css" href="/css/b/base.css" />
+	<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />
+	<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->
+	<?cs var: Layout.css ?>
+	<?cs include:Include.css ?>
 
 	<script type="text/javascript" src="/js/b/base.js"></script>
 	<?cs var: Layout.js ?>
@@ -66,37 +68,37 @@ $(document).ready(function() {
 	  </div>
 	</div>
 
-    <div id="mid">
-      <div class="navbanner">
-        <ul class="indentmenu">
-          <?cs each:tab = Layout.tabs ?>
-          <li><a href="<?cs var:tab.href ?>" class="<?cs var:tab.class ?>"><?cs var:tab.name ?></a></li>
-          <?cs /each ?>
-        </ul>
-      </div>
+	<div id="mid">
+	  <div class="navbanner">
+		<ul class="indentmenu">
+		  <?cs each:tab = Layout.tabs ?>
+		  <li><a href="<?cs var:tab.href ?>" class="<?cs var:tab.class ?>"><?cs var:tab.name ?></a></li>
+		  <?cs /each ?>
+		</ul>
+	  </div>
 	  
-      <div class="navbanner">
-        <ul class="crumbs">
-          <li class="first">您当前的位置:</li>
-          <?cs each:crumb = Layout.crumbs ?>
-          <li>&raquo; <a href="<?cs var:crumb.href ?>"><?cs var:crumb.name ?></a></li>
-          <?cs /each ?>
-        </ul>
-        <ul id="userActions" class="sf-menu uc-menu">
-          <li class="current"><a href="/run/member">管理</a></li>
-        </ul>
-      </div>
-      
-      <div id="content">
-        <?cs include:Include.content ?>
-        <?cs var:Content.content ?>
-        <div class="clearer"></div>
-      </div> <!-- content -->
-    </div> <!-- mid -->
+	  <div class="navbanner">
+		<ul class="crumbs">
+		  <li class="first">您当前的位置:</li>
+		  <?cs each:crumb = Layout.crumbs ?>
+		  <li>&raquo; <a href="<?cs var:crumb.href ?>"><?cs var:crumb.name ?></a></li>
+		  <?cs /each ?>
+		</ul>
+		<ul id="userActions" class="sf-menu uc-menu">
+		  <li class="current"><a href="/run/member">管理</a></li>
+		</ul>
+	  </div>
+	  
+	  <div id="content">
+		<?cs include:Include.content ?>
+		<?cs var:Content.content ?>
+		<div class="clearer"></div>
+	  </div> <!-- content -->
+	</div> <!-- mid -->
 
-    <div id="bot">
-      <p>版权所有 &copy; 2010 bmoon</p>
-    </div>
+	<div id="bot">
+	  <p>版权所有 &copy; 2010 bmoon</p>
+	</div>
 
   </body>
 </html>

@@ -68,8 +68,9 @@ bmoon.chat = {
 
 		// application don't write bchat, append it by lcs.
 		if (!chatbody.length) {
-			$('head').append('<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />');
-			$('head').append('<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->');
+			// load css dynamic will overwrite iniUI, especially in bad network enviorment.
+			//$('head').append('<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />');
+			//$('head').append('<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->');
 			$('body').append(html);
 		}
 
@@ -85,7 +86,8 @@ bmoon.chat = {
 		$('#bchat-trigger').toggle(o.openChat, o.closeChat);
 		$('#bchat-input').bind('keydown', 'ctrl+return', o.msgSend);
 		// chat.css is appended by js, will overwrite my fadeIn, so, delay.
-		setTimeout(o.initUI, 1000);
+		//setTimeout(o.initUI, 2000);
+		o.initUI();
 		
 		//$('#bchat div[title]').tooltip({position: ['top', 'left']});
 		return o;

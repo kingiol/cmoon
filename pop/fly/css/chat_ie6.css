@@ -1,3 +1,5 @@
-html{overflow:hidden;}
-body{height:100%;overflow:auto;}
-#bchat{position:absolute;left:10px;bottom:0;}
+html {overflow:hidden;}
+body {height:100%;overflow:auto;}
+#bchat {position:absolute;right:10px;bottom:0;}
+#bchat-max {position:absolute;right:10px;bottom:0;}
+#bchat-min {position:absolute;right:10px;bottom:0;}
