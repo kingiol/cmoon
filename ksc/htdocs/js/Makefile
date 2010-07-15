@@ -1,13 +1,17 @@
 BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
-.PHONY: pub
-all: pub
+FILES = b/base.js b/prd.js
+all: $(FILES)
 
-pub:
-	@$(MAKE) -C pub
+b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/jquery.md5.js \
+		   pub/jquery.mninpval.js \
+		   pub/jquerytools/src/toolbox/toolbox.expose.js \
+		   pub/jquerytools/src/tooltip/tooltip.js \
+	       pub/jquerytools/src/overlay/overlay.js \
+	       pub/bmoon.js bmoon.ksc.js
 
-lbase.js: local/bmoon.lcs.js
+b/prd.js: pub/ajaxupload.3.5.js prd_admin.js
 
 %.js:
 	@echo -n > $@
@@ -15,5 +19,4 @@ lbase.js: local/bmoon.lcs.js
 
 
 clean:
-	@$(MAKE) -C pub clean
-	@rm -f lbase.js
+	@rm -f $(FILES)
