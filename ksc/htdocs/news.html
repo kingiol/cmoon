@@ -10,6 +10,25 @@
 <link rel="stylesheet" type="text/css" href="/css/b/base.css" />
 <script type="text/javascript" src="/js/b/base.js"></script>
 
+<!-- kaiwuonline begin -->
+	<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />
+	<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->
+<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js" ></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var client = new APE.Client();
+	client.load({
+		identifier: 'ksc',
+		transport: 2,
+		complete: function(ape) {
+			new liveCS(ape).initialize({aname: 'ksc'});
+		}
+	});
+});
+</script>
+<!-- kaiwuonline end -->
+
+
 
 
 

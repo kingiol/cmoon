@@ -30,7 +30,8 @@ bmoon.ksc = {
 			api: true,
 			closeOnClick: false,
 			onBeforeLoad: function() {
-				var wrap = this.getContent().find("div.wrap");
+				//var wrap = this.getContent().find("div.wrap");
+				var wrap = this.getOverlay().find(".wrap");
 				if (wrap.is(":empty")) {
 					wrap.load(this.getTrigger().attr("href"));
 				}

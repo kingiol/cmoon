@@ -71,7 +71,7 @@ div.panes {
 */
 .tooltip {
 	display:none;
-	background:url(/js/pub/ref/flowtools/image/tooltip/white_arrow.png);
+	background:url(/js/pub/flowtools/image/tooltip/white_arrow.png);
 	width:179px;
 	height:90px;
 	padding:20px 15px 5px 15px;
@@ -98,7 +98,7 @@ div.panes {
 
 /* close button positioned on upper right corner */
 .overlay .close {
-	background-image:url(/js/pub/ref/flowtools/image/overlay/close.png);
+	background-image:url(/js/pub/flowtools/image/overlay/close.png);
 	position:absolute;
 	right:-15px;
 	top:-15px;
