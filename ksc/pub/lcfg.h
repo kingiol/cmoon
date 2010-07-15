@@ -19,12 +19,11 @@ __BEGIN_DECLS
 #define IMG_XXL	"1440x900"
 
 #ifdef RELEASE
-#define PATH_SITE	"/home/kosheral/ksc/"
-#define TC_ROOT		PATH_SITE"log/"
+#define PATH_SITE	"/usr/local/moon/ksc/"
 #else
 #define PATH_SITE	"/home/bigml/web/moon/ksc/"
-#define TC_ROOT		"/var/log/moon/ksc/"
 #endif
+#define TC_ROOT		"/var/log/moon/ksc/"
 #define SITE_CONFIG		PATH_SITE"config.hdf"
 #define PATH_FRT_DOC	PATH_SITE"htdocs/"
 #define PATH_FRT_CGI	PATH_SITE"cgi-bin/"
