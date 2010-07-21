@@ -90,8 +90,18 @@ $(document).ready(function() {
 	  </div>
 	  
 	  <div id="content">
-		<?cs include:Include.content ?>
-		<?cs var:Content.content ?>
+		<?cs if: ?Output.errmsg && Output.errcode == 2000 ?>
+		  <script>
+			$(document).ready(function() {
+			  bmoon.lcs.init().loginoverlay.load();
+			});
+		  </script>
+		<?cs elif: ?Output.errmsg && ?Output.errcode?>
+		  <h3><?cs var: Output.errcode ?> : <?cs var: Output.errmsg ?></h3>
+		<?cs else ?>
+		  <?cs include:Include.content ?>
+		  <?cs var:Content.content ?>
+		<?cs /if ?>
 		<div class="clearer"></div>
 	  </div> <!-- content -->
 	</div> <!-- mid -->

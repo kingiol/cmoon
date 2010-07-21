@@ -14,6 +14,7 @@ bmoon.lcs = {
 		o.nav_member = $('#nav-member');
 		o.login_aname = $('#login-aname');
 		o.login_asn = $('#login-asn');
+		o.loginoverlay = $('a[rel="#loginoverlay"]').overlay({mask: '#666', api: true});
 		
 		return o;
 	},
@@ -39,7 +40,6 @@ bmoon.lcs = {
 		
 		$('#login-submit').click(o.login);
 		$('#userlogout').click(o.logout);
-		o.loginoverlay = $('a[rel="#loginoverlay"]').overlay({mask: '#666', api: true});
 	},
 
 	login: function() {
@@ -51,18 +51,13 @@ bmoon.lcs = {
 		aname = o.login_aname.val(),
 		asn = $.md5($.md5(o.login_asn.val()));
 
-		$.getJSON("/login", {aname: aname, asn: asn}, function(data) {
+		$.getJSON("/json/app/login", {aname: aname, asn: asn}, function(data) {
 			if (data.success != 1 || !data.aname) {
 				alert(data.errmsg || "操作失败， 请稍后再试");
 				return;
 			}
 			o.loginoverlay.close();
-			if (o.loginref) {
-				setTimeout(function() {location.href = o.loginref;}, 1000);
-				//location.href = o.loginref;
-			} else {
-				o.loginCheck();
-			}
+			setTimeout(function() {location.href = o.loginref || location.href;}, 1000);
 		});
 	},
 	
@@ -76,7 +71,7 @@ bmoon.lcs = {
 		
         $.ajax({
             type: 'GET',
-            url: '/logout',
+            url: '/json/app/logout',
             cache: false
         });
 	},

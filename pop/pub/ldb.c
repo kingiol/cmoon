@@ -4,17 +4,11 @@
 static void get_errmsg(int ret, char *res)
 {
 	switch (ret) {
-	case RET_RBTOP_LOGINUSR:
-		strcpy(res, "用户不存在");
+	case RET_RBTOP_NOTLOGIN:
+		strcpy(res, "请登录后操作");
 		break;
 	case RET_RBTOP_LOGINPSW:
-		strcpy(res, "密码不正确");
-		break;
-	case RET_RBTOP_RELEASED:
-		strcpy(res, "号码使用中");
-		break;
-	case RET_RBTOP_NOTLOGIN:
-		strcpy(res, "敏感操作, 请先登录");
+		strcpy(res, "密码错误");
 		break;
 	case RET_RBTOP_LIMITE:
 		strcpy(res, "用户无权限");
@@ -28,8 +22,11 @@ static void get_errmsg(int ret, char *res)
 	case RET_RBTOP_IMGPROE:
 		strcpy(res, "处理图片失败");
 		break;
+	case RET_RBTOP_OPENFILE:
+		strcpy(res, "创建文件失败");
+		break;
 	default:
-		strcpy(res, "数据库操作错误");
+		strcpy(res, "数据操作错误");
 		break;
 	}
 }
@@ -80,6 +77,7 @@ void ldb_opfinish_json(int ret, HDF *hdf, mdb_conn *conn, time_t second)
 		get_errmsg(ret, msg);
 		hdf_set_value(hdf, PRE_ERRMSG, msg);
 	}
+	hdf_set_int_value(hdf, PRE_ERRCODE, ret);
 	
 	/* conn destroy by user */
 	/*

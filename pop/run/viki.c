@@ -10,13 +10,12 @@ HDF *g_cfg = NULL;
 int main(int argc, char **argv, char **envp)
 {
 	CGI *cgi;
-	HDF *rcfg;
 	NEOERR *err;
 	int ret;
 
 	HASH *dbh, *tplh, *evth;
 	session_t *session = NULL;
-	char *requri, *jsoncb;
+	char *jsoncb;
 
 	int (*data_handler)(CGI *cgi, HASH *dbh, HASH *evth, session_t *session);
 	void *lib;
@@ -25,7 +24,6 @@ int main(int argc, char **argv, char **envp)
 	mutil_wrap_fcgi(argc, argv, envp);
 
 	mconfig_parse_file(SITE_CONFIG, &g_cfg);
-	mconfig_parse_file(CGI_CONFIG, &rcfg);
 	mtc_init(TC_ROOT"viki");
 
 	ret = ltpl_init(&tplh);
@@ -71,19 +69,18 @@ int main(int argc, char **argv, char **envp)
 		hdf_set_value(cgi->hdf, PRE_COOKIE".musn", "8Y]u0|v=*MS]U3J");
 #endif
 		
-		ret = session_init(cgi->hdf, dbh, &session);
+		ret = session_init(cgi, dbh, &session);
 		if (ret != RET_RBTOP_OK) {
 			mtc_err("init session failure");
 			goto response;
 		}
 
-		requri = hdf_get_value(cgi->hdf, PRE_REQ_URI_RW, "NULL");
-		if (mutil_client_attack(cgi->hdf, requri, LMT_CLI_ATTACK,
-								PERIOD_CLI_ATTACK)) {
+		if (mutil_client_attack(cgi->hdf, "viki",
+								LMT_CLI_ATTACK, PERIOD_CLI_ATTACK)) {
 			goto response;
 		}
 		
-		data_handler = lutil_get_data_handler(lib, cgi, rcfg);
+		data_handler = lutil_get_data_handler(lib, cgi, session);
 		if (data_handler == NULL) {
 			mtc_err("get handler failure");
 			ret = RET_RBTOP_NEXIST;
@@ -97,37 +94,22 @@ int main(int argc, char **argv, char **envp)
 #ifdef DEBUG_HDF
 			hdf_write_file(cgi->hdf, TC_ROOT"hdf.viki");
 #endif
-			switch (CGI_REQ_TYPE(cgi, rcfg)) {
+			ldb_opfinish_json(ret, cgi->hdf, NULL, 0);
+			switch (session->reqtype) {
 			case CGI_REQ_HTML:
 				if (CGI_REQ_METHOD(cgi) != CGI_REQ_GET) {
 					goto resp_ajax;
 				}
+				ret = ltpl_render(cgi, tplh, session);
 				if (ret != RET_RBTOP_OK) {
 					if (ret == RET_RBTOP_NEXIST)
 						cgi_redirect(cgi, "/404.html");
-					else if (ret == RET_RBTOP_NOTLOGIN) {
-						char *ref;
-						cgi_url_escape(hdf_get_value(cgi->hdf, PRE_CGI_URI, "/index.html"), &ref);
-						cgi_redirect(cgi, "/index.html?loginref=%s", ref);
-						free(ref);
-					} else {
-						ldb_opfinish_json(ret, cgi->hdf, NULL, 0);
-						cgi_redirect(cgi, "/index.html?vikierr=%s",
-									 hdf_get_value(cgi->hdf, PRE_ERRMSG, "MD, 不知道啥错！"));
-					}
-				} else {
-					ret = ltpl_render(cgi, tplh, session, rcfg);
-					if (ret != RET_RBTOP_OK) {
-						if (ret == RET_RBTOP_NEXIST)
-							cgi_redirect(cgi, "/404.html");
-						else
-							cgi_redirect(cgi, "/503.html");
-					}
+					else
+						cgi_redirect(cgi, "/503.html");
 				}
 				break;
 			case CGI_REQ_AJAX:
 			resp_ajax:
-				ldb_opfinish_json(ret, cgi->hdf, NULL, 0);
 				jsoncb = hdf_get_value(cgi->hdf, PRE_REQ_AJAX_FN, NULL);
 				if (jsoncb != NULL) {
 					mjson_execute_hdf(cgi->hdf, jsoncb, session->tm_cache_browser);

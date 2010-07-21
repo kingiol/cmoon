@@ -12,9 +12,8 @@ enum cgi_req_type {
 	CGI_REQ_AJAX,
 	CGI_REQ_UNSUPPORT
 };
-int CGI_REQ_TYPE(CGI *cgi, HDF *rcfg);
 
-void* lutil_get_data_handler(void *lib, CGI *cgi, HDF *rcfg);
+void* lutil_get_data_handler(void *lib, CGI *cgi, session_t *ses);
 int lutil_fetch_count(HDF *hdf, mdb_conn *conn, char *table, char *cond);
 int lutil_fetch_countf(HDF *hdf, mdb_conn *conn, char *table, char *cfmt, ...);
 

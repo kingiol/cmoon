@@ -34,7 +34,6 @@ __BEGIN_DECLS
 #define PRE_CGI_URI		PRE_CGI".RequestURI"
 #define PRE_REQ_URI		PRE_CGI".ScriptName" 		/* lutil_file_access() */
 #define PRE_REQ_URI_RW	PRE_QUERY".ScriptName"		/* lutil_file_access_rewrited() */
-#define PRE_REQ_URI_RW_HDF	PRE_QUERY".ScriptNameHDF"
 #define PRE_REQ_AJAX_FN	PRE_QUERY".JsonCallback"
 
 #define PRE_RSV_FILE		PRE_RESERVE".RequestFile"	/* lutil_get_data_handler() */

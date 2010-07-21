@@ -27,7 +27,7 @@ bmoon.appnew = {
 			if (aname.length > 0) {
 				o.ht_exist.fadeOut();
 				o.ht_nexist.fadeOut();
-				$.getJSON("/app/exist", {aname: aname}, function(data) {
+				$.getJSON("/json/app/exist", {aname: aname}, function(data) {
 					if (data.success == 1) {
 						if (data.exist == 1) {
 							o.ht_nexist.fadeOut();
@@ -52,7 +52,7 @@ bmoon.appnew = {
 			asn = $("#asn").val();
 
 
-			$.getJSON("/app/new", {aname: aname, email: email, asn: asn}, function(data) {
+			$.getJSON("/json/app/new", {aname: aname, email: email, asn: asn}, function(data) {
 				if (data.success != 1 || !data.aname) {
 					alert(data.errmsg || "操作失败， 请稍后再试");
 					return;

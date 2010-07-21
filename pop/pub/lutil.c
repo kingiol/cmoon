@@ -13,55 +13,12 @@ static void lutil_donotcall()
 	blog_data_get(NULL, NULL, NULL, NULL);
 }
 
-int CGI_REQ_TYPE(CGI *cgi, HDF *rcfg)
+void* lutil_get_data_handler(void *lib, CGI *cgi, session_t *ses)
 {
-	int ret;
-	
-	if (cgi == NULL) return CGI_REQ_UNSUPPORT;
-	
-	ret = hdf_get_int_value(cgi->hdf, PRE_RSV_REQ_TYPE, CGI_REQ_UNSUPPORT);
-	if (ret == CGI_REQ_UNSUPPORT) {
-		char file[_POSIX_PATH_MAX];
-		snprintf(file, sizeof(file), "%s.reqtype",
-				 hdf_get_value(cgi->hdf, PRE_REQ_URI_RW_HDF, "UNKNOWN"));
-		ret = hdf_get_int_value(rcfg, file, 0);
-	}
-	return ret;
-}
-
-void* lutil_get_data_handler(void *lib, CGI *cgi, HDF *rcfg)
-{
-	char *file, *dataer = NULL, *tp;
-	char hname[_POSIX_PATH_MAX];
+	char *hname, *tp;
 	void *res;
 
-	file = hdf_get_value(cgi->hdf, PRE_REQ_URI_RW_HDF, NULL);
-	if (file) {
-		dataer = hdf_get_valuef(rcfg, "%s.dataer", file);
-	}
-	if (!dataer) {
-		mtc_err("%s dataer not found", file);
-		return NULL;
-	}
-	
-	switch (CGI_REQ_METHOD(cgi)) {
-		case CGI_REQ_GET:
-			snprintf(hname, sizeof(hname), "%s_data_get", dataer);
-			break;
-		case CGI_REQ_POST:
-			snprintf(hname, sizeof(hname), "%s_data_mod", dataer);
-			break;
-		case CGI_REQ_PUT:
-			snprintf(hname, sizeof(hname), "%s_data_add", dataer);
-			break;
-		case CGI_REQ_DEL:
-			snprintf(hname, sizeof(hname), "%s_data_del", dataer);
-			break;
-		default:
-			mtc_err("op not support");
-			return NULL;
-	}
-
+	hname = ses->dataer;
 	res = dlsym(lib, hname);
 	if ((tp = dlerror()) != NULL) {
 		mtc_err("%s", tp);

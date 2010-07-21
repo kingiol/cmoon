@@ -7,9 +7,10 @@
 			free(str);							\
 	} while (0)
 
-int session_init(HDF *hdf, HASH *dbh, session_t **ses)
+int session_init(CGI *cgi, HASH *dbh, session_t **ses)
 {
 	session_t *lses;
+	char tok[_POSIX_PATH_MAX];
 	
 	*ses = NULL;
 
@@ -18,24 +19,53 @@ int session_init(HDF *hdf, HASH *dbh, session_t **ses)
 		mtc_err("calloc memory for session_t failure");
 		return RET_RBTOP_MEMALLOCE;
 	}
+	
+	lses->reqtype = CGI_REQ_HTML;
+	hdf_get_copy(cgi->hdf, PRE_COOKIE".uname", &lses->uname, NULL);
 
-	*ses = lses;
-
-	hdf_get_copy(hdf, PRE_COOKIE".uname", &lses->uname, NULL);
-	hdf_set_copy(hdf, PRE_REQ_URI_RW_HDF, PRE_REQ_URI_RW);
-	mmisc_str_repchr(hdf_get_value(hdf, PRE_REQ_URI_RW_HDF, "NULL"), '/', '.');
+	char *uri = hdf_get_value(cgi->hdf, PRE_REQ_URI_RW, NULL);
+	if (!uri) {
+		mtc_err(".ScriptName disappear!");
+		return RET_RBTOP_INPUTE;
+	}
+	/* TODO uniq req uri */
+	//uri = mmisc_str_uniq(uri, '/');
+	mmisc_str_repchr(uri, '/', '_');
+	uri = mmisc_str_strip(uri, '_');
+	if (!strncmp(uri, "json_", 5)) {
+		uri = uri+5;
+		lses->reqtype = CGI_REQ_AJAX;
+	}
+	switch (CGI_REQ_METHOD(cgi)) {
+		case CGI_REQ_POST:
+			snprintf(tok, sizeof(tok), "%s_data_mod", uri);
+			break;
+		case CGI_REQ_PUT:
+			snprintf(tok, sizeof(tok), "%s_data_add", uri);
+			break;
+		case CGI_REQ_DEL:
+			snprintf(tok, sizeof(tok), "%s_data_del", uri);
+			break;
+		default:
+		case CGI_REQ_GET:
+			snprintf(tok, sizeof(tok), "%s_data_get", uri);
+			break;
+	}
+	lses->dataer = strdup(tok);
+	lses->render = strdup(uri);
 	
     /* process cache */
 	HDF *node = hdf_get_obj(g_cfg, PRE_CFG_FILECACHE".0");
 	while (node != NULL) {
-		if (reg_search(hdf_get_value(node, "uri", "NULL"),
-					   hdf_get_value(hdf, PRE_REQ_URI_RW, "404"))) {
+		if (reg_search(hdf_get_value(node, "uri", "NULL"), uri)) {
 			lses->tm_cache_browser = hdf_get_int_value(node, "tm_cache", 0);
 			break;
 		}
 		node = hdf_obj_next(node);
 	}
 
+	*ses = lses;
+	
 	return RET_RBTOP_OK;
 }
 
@@ -48,6 +78,8 @@ void session_destroy(session_t **ses)
 	if (lses == NULL) return;
 
     SAFE_FREE(lses->uname);
+	SAFE_FREE(lses->dataer);
+	SAFE_FREE(lses->render);
 
 	free(lses);
 	lses = NULL;

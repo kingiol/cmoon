@@ -223,24 +223,16 @@ void ltpl_destroy(HASH *tplh)
 	hash_destroy(&tplh);
 }
 
-int ltpl_render(CGI *cgi, HASH *tplh, session_t *ses, HDF *rcfg)
+int ltpl_render(CGI *cgi, HASH *tplh, session_t *ses)
 {
 	CSPARSE *cs;
 	HDF *dhdf;
 	STRING str;
 	NEOERR *err;
 
-	char *file, *render = NULL, tok[64];
-	
-	file = hdf_get_value(cgi->hdf, PRE_REQ_URI_RW_HDF, NULL);
-	if (file) {
-		render = hdf_get_valuef(rcfg, "%s.render", file);
-	}
-	if (!render) {
-		mtc_err("%s not found", file);
-		return RET_RBTOP_NEXIST;
-	}
+	char *render = NULL, tok[64];
 
+	render = ses->render;
 	cs = (CSPARSE*)hash_lookup(tplh, render);
 	if (cs == NULL) {
 		mtc_err("render %s not found", render);
