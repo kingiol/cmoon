@@ -1,0 +1,14 @@
+lcs_join
+--------
+	用户上线时调用，用来加入访问列表。
+	I: 加入管理员频道：
+		1, lcs_user_join_get() 获取用户上次加入的管理员，以下两种情况，沿用jid完成join：
+		   a. 其在线
+		   b. 其不在且所有管理员都不在线时，建立其留言管道。
+		   
+		2, lcs_app_get_adminchan() 加入该站其他在线的管理员，
+	   	   此时调用lcs_user_join_set() 将本次的 join 计入 lcsjoin 表， 方便下次取。
+		   
+	II: 关联用户与站点
+		1, 用户没有设置 QUIET 标志， 或者设置了但 utime >= 2 时，lcs_user_remember_me()
+	   	   将 uname 和 aname 关联起来， 记入 userinfo 表， 方便管理员列表展示。

@@ -5,7 +5,8 @@ CREATE TABLE appinfo (
 	   masn varchar(256) NOT NULL DEFAULT '',
 	   email varchar(256) NOT NULL DEFAULT '',
 	   state int NOT NULL DEFAULT 0,
-	   pid int NOT NULL DEFAULT 0,	--0: superuser, x: X site's custormer
+	   tune int NOT NULL DEFAULT 0,
+	   pid int NOT NULL DEFAULT 0,	--0: superuser, x: X site's adminer
 	   intime timestamp DEFAULT now(),
 	   uptime timestamp DEFAULT now()
 );
