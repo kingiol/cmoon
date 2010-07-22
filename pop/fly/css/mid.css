@@ -4,13 +4,17 @@
 .member ul li.last{border-right: 0 none;}
 
 /* global nav part */
-.navbanner{
+.navbanner, .navbanner-sub{
 	height: 27px;
     border: 1px solid #101010;
     border-width: 1px 0;
 	background-color: #eee;
 	margin-bottom: 3ex;
 }
+.navbanner-sub {
+	height: 22px;
+}
+
 ul.indentmenu, ul.crumbs {
     float: left;
     margin: 0;
@@ -40,7 +44,7 @@ ul.indentmenu li a:hover, ul.indentmenu li .selected {
 
 .crumbs {
 	margin-top: 10px;
-	line-height: 26px;
+	line-height: 20px;
 }
 ul.crumbs li {
 	margin-right:5px;
@@ -48,17 +52,19 @@ ul.crumbs li {
 ul.crumbs li.first {
 	margin-left:11px;
 }
-ul.uc-menu {
-	display: none;
+ul.uc-menu li {
 	float: right;
-	margin-right: 1em;
+    border-left: 1px solid #101010;
+	padding: 0 1em;
+	line-height: 23px;
 }
 
 /* content */
 #content {
-    border: 1px solid #101010;
-    border-width: 1px 0;
-	padding: 3ex 0;
+    /*border: 1px solid #101010;*/
+    /*border-width: 1px 0;*/
+	/*padding: 3ex 0;*/
+	margin-bottom: 4ex;
 }
 #colone {
     float: left;

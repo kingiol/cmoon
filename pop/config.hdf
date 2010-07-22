@@ -10,7 +10,7 @@ Dataset {
 				href = /index.html
 			}
 			1 {
-				name = 站点管理
+				name = 我的站点
 				href = /oms
 			}
 			2 {

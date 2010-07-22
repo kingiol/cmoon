@@ -5,7 +5,8 @@
 __BEGIN_DECLS
 
 int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
-int oms_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+int oms_edit_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+int oms_edit_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
 __END_DECLS
 #endif /* __OOMS_H__ */

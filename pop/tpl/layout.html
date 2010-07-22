@@ -76,18 +76,22 @@ $(document).ready(function() {
 		  <?cs /each ?>
 		</ul>
 	  </div>
-	  
-	  <div class="navbanner">
+
+	  <?cs if: ?Layout.crumbs.0.name || ?Layout.actions.0.name ?>
+	  <div class="navbanner-sub">
 		<ul class="crumbs">
-		  <li class="first">您当前的位置:</li>
+		  <li class="first">当前的位置:</li>
 		  <?cs each:crumb = Layout.crumbs ?>
 		  <li>&raquo; <a href="<?cs var:crumb.href ?>"><?cs var:crumb.name ?></a></li>
 		  <?cs /each ?>
 		</ul>
-		<ul id="userActions" class="sf-menu uc-menu">
-		  <li class="current"><a href="/run/member">管理</a></li>
+		<ul id="userActions" class="uc-menu">
+		  <?cs each:action = Layout.actions ?>
+		  <li><a href="<?cs var:action.href ?>"><?cs var:action.name ?></a></li>
+		  <?cs /each ?>
 		</ul>
 	  </div>
+	  <?cs /if ?>
 	  
 	  <div id="content">
 		<?cs if: ?Output.errmsg && Output.errcode == 2000 ?>

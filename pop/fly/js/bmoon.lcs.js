@@ -25,6 +25,8 @@ bmoon.lcs = {
 		o.bindClick();
 		o.loginCheck();
 
+		//$('ul.sf-menu').superfish();
+		
 		o.loginref = bmoon.utl.getQueryString("loginref");
 		if (o.loginref) {
 			o.loginoverlay.load();

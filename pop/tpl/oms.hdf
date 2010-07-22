@@ -1,0 +1,97 @@
+oms {
+	Layout = layout_nclient.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms.css" />
+			js = <script type="text/javascript" src="/js/b/oms.js"></script>
+			title = Oh, My Site
+			tabpart = 1
+			crumbs {
+				0 {
+					name = 我的站点
+					href = /oms
+				}
+			}
+			actions {
+				0 {
+					name = 站点设置
+					href = /oms/edit
+				}
+				1 {
+					name = 站点统计
+					href = /oms/stat
+				}
+			}
+        }
+		Include {
+			content = oms/oms.html
+		}
+	}
+}
+
+oms_edit {
+	Layout = layout.html
+	# Dataset := oms.Dataset
+	# : link := copy
+	# overwrite linke will overwrite original node
+	# copy can't be deep
+	# so, done partly
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms_edit.css" />
+			js = <script type="text/javascript" src="/js/b/oms_edit.js"></script>
+			title = 站点设置
+			tabpart := oms.Dataset.Layout.tabpart
+			crumbs {
+				0 {
+					name = 我的站点
+					href = /oms
+				}
+				1 {
+					name = 站点设置
+					href = /oms/edit
+				}
+			}
+			actions {
+				0 {
+					name = 站点统计
+					href = /oms/stat
+				}
+			}
+        }
+		Include {
+			content = oms/edit.html
+		}
+	}
+}
+
+oms_stat {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms_stat.css" />
+			js = <script type="text/javascript" src="/js/b/oms_stat.js"></script>
+			title = 站点设置
+			tabpart := oms.Dataset.Layout.tabpart
+			crumbs {
+				0 {
+					name = 我的站点
+					href = /oms
+				}
+				1 {
+					name = 站点统计
+					href = /oms/stat
+				}
+			}
+			actions {
+				0 {
+					name = 站点设置
+					href = /oms/edit
+				}
+			}
+        }
+		Include {
+			content = oms/stat.html
+		}
+	}
+}

@@ -20,6 +20,13 @@ static void rend_node(HASH *tplh, HDF *node)
 	
 	hdf_copy(node, NULL, dhdf);
 	ltpl_prepare_rend(node, "layout.html");
+	hdf_set_copy(node, PRE_LAYOUT".title", PRE_OUTPUT".blog.title");
+
+	fname = hdf_get_value(node, PRE_OUTPUT".blog.fname", NULL);
+	if (fname == NULL) {
+		fname = "index";
+		hdf_set_value(node, PRE_LAYOUT".title", "开物博客");
+	}
 	
 	cs->hdf = node;
 
@@ -27,9 +34,6 @@ static void rend_node(HASH *tplh, HDF *node)
 	
 	err = cs_render(cs, &str, mcs_strcb);
 	RETURN_NOK(err);
-
-	fname = hdf_get_value(node, PRE_OUTPUT".blog.fname", NULL);
-	if (fname == NULL) fname = "index";
 	
 	snprintf(tok, sizeof(tok), "%s%s.html", PATH_BLOG_H, fname);
 	mutil_makesure_dir(tok);

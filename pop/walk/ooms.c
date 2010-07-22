@@ -51,7 +51,12 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	return RET_RBTOP_OK;
 }
 
-int oms_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+int oms_edit_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	return RET_RBTOP_OK;
+}
+
+int oms_edit_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
