@@ -6,9 +6,6 @@ bmoon.appnew = {
 		var o = bmoon.appnew;
 		if (o.inited) return o;
 
-		o.ht_exist = $('#hit-appexist');
-		o.ht_nexist = $('#hit-appnexist'),
-
 		o.inited = true;
 		return o;
 	},
@@ -23,18 +20,18 @@ bmoon.appnew = {
 		var o = bmoon.appnew.init();
 		
 		$("#aname").blur(function() {
-			var aname = $("#aname").val();
+			var
+			aname = $("#aname").val(),
+			p = $(this).parent();
+			
 			if (aname.length > 0) {
-				o.ht_exist.fadeOut();
-				o.ht_nexist.fadeOut();
+				p.removeClass("success").removeClass("error").addClass("loading");
 				$.getJSON("/json/app/exist", {aname: aname}, function(data) {
 					if (data.success == 1) {
 						if (data.exist == 1) {
-							o.ht_nexist.fadeOut();
-							o.ht_exist.fadeIn('slow');
+							p.addClass("error");
 						} else {
-							o.ht_exist.fadeOut();
-							o.ht_nexist.fadeIn('slow');
+							p.addClass("success");
 						}
 					}
 				});

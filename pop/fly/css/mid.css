@@ -54,9 +54,11 @@ ul.crumbs li.first {
 }
 ul.uc-menu li {
 	float: right;
-    border-left: 1px solid #101010;
-	padding: 0 1em;
 	line-height: 23px;
+}
+ul.uc-menu li a {
+	padding: 0 1em;
+    border-left: 1px solid #101010;
 }
 
 /* content */

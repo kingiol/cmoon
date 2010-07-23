@@ -1,0 +1,34 @@
+<div class="vtabs">
+  <ul class="css-tabs">
+	<li><a href="javascript:void(0);">基本设置</a></li>
+	<!--<li><a href="javascript:void(0);">暂无</a></li>-->
+  </ul>
+
+  <div class="css-panes">
+	<div>
+	  <dl class="edit">
+		<dt>
+		  <input id="ck-quiet" class="uptune" type="checkbox" tune="1"
+				 <?cs if: Output.appinfo.quiet == 1 ?>checked="checked"<?cs /if ?>
+		  / > &nbsp; 只登录一次不记入列表<span class="indicator"></span></dt>
+		<dd>
+		  只有用户第二次打开才记入聊天列表。
+		</dd>
+		
+		<dt>
+		  <input id="ck-sms" class="uptune" type="checkbox" tune="2"
+				 <?cs if: Output.appinfo.sms ?>checked="checked"<?cs /if ?>
+		  / > &nbsp; 开通短信通知<span class="indicator"></span></dt>
+		<dd>
+		  用户来访和消息发送时短信通知到您设置的手机， 建议访问量较小的网站开通此功能。
+		</dd>
+	  </dl>
+	</div>
+
+	<!--
+	<div>
+	  暂无内容
+	</div>
+	-->
+  </div>
+</div>

@@ -38,8 +38,8 @@ oms_edit {
 	# so, done partly
 	Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/oms_edit.css" />
-			js = <script type="text/javascript" src="/js/b/oms_edit.js"></script>
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/edit.css" />
+			js = <script type="text/javascript" src="/js/b/oms/edit.js"></script>
 			title = 站点设置
 			tabpart := oms.Dataset.Layout.tabpart
 			crumbs {
@@ -69,8 +69,8 @@ oms_stat {
 	Layout = layout.html
 	Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/oms_stat.css" />
-			js = <script type="text/javascript" src="/js/b/oms_stat.js"></script>
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/stat.css" />
+			js = <script type="text/javascript" src="/js/b/oms/stat.js"></script>
 			title = 站点设置
 			tabpart := oms.Dataset.Layout.tabpart
 			crumbs {

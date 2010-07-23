@@ -3,7 +3,7 @@
 
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="keywords" content="开物在线 在线客户 站长工具 开源软件" />
+	<meta name="keywords" content="开物在线 在线客户 站长工具" />
 	<meta name="description" content="bmoon" />
 	<title>开物在线 - <?cs var:Layout.title ?></title>
 
@@ -80,7 +80,7 @@ $(document).ready(function() {
 	  <?cs if: ?Layout.crumbs.0.name || ?Layout.actions.0.name ?>
 	  <div class="navbanner-sub">
 		<ul class="crumbs">
-		  <li class="first">当前的位置:</li>
+		  <li class="first">当前位置:</li>
 		  <?cs each:crumb = Layout.crumbs ?>
 		  <li>&raquo; <a href="<?cs var:crumb.href ?>"><?cs var:crumb.name ?></a></li>
 		  <?cs /each ?>

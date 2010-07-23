@@ -53,7 +53,16 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
 int oms_edit_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	return RET_RBTOP_OK;
+	int ret = oms_data_get(cgi, dbh, evth, ses);
+
+	int tune = hdf_get_int_value(cgi->hdf, PRE_OUTPUT".appinfo.tune", 0);
+
+	if (tune & LCS_TUNE_QUIET)
+		hdf_set_value(cgi->hdf, PRE_OUTPUT".appinfo.quiet", "1");
+	if (tune & LCS_TUNE_SMS)
+		hdf_set_value(cgi->hdf, PRE_OUTPUT".appinfo.sms", "1");
+
+	return ret;
 }
 
 int oms_edit_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)

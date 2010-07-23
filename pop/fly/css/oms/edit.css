@@ -1,0 +1,25 @@
+dl.edit {
+	margin-top: 1ex;
+}
+
+dl.edit dt {
+	line-height:22px;
+	font-weight: bold;
+}
+
+dl.edit dd {
+	color: #333;
+	margin: 1ex 0 3ex 2em;
+}
+
+dl.edit dt.loading .indicator {
+	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;
+}
+
+dl.edit dt.success .indicator {
+	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat
+}
+
+dl.edit dt.error .indicator {
+	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;
+}
