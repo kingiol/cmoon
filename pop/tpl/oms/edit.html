@@ -10,17 +10,20 @@
 		<dt>
 		  <input id="ck-quiet" class="uptune" type="checkbox" tune="1"
 				 <?cs if: Output.appinfo.quiet == 1 ?>checked="checked"<?cs /if ?>
-		  / > &nbsp; 只登录一次不记入列表<span class="indicator"></span></dt>
+		  / > 不记住首次访问用户<span class="indicator"></span></dt>
 		<dd>
-		  只有用户第二次打开才记入聊天列表。
+		  开启此选项，只有在用户第二次访问我的站点时，才将其计入管理后台的聊天用户列表。 <br />
+		  此选项可以有效过滤掉大部分打酱油用户。  <br />
+		  网站访问量较大时，建议开启此选项。
 		</dd>
 		
 		<dt>
 		  <input id="ck-sms" class="uptune" type="checkbox" tune="2"
 				 <?cs if: Output.appinfo.sms ?>checked="checked"<?cs /if ?>
-		  / > &nbsp; 开通短信通知<span class="indicator"></span></dt>
+		  / > 短信通知<span class="indicator"></span></dt>
 		<dd>
-		  用户来访和消息发送时短信通知到您设置的手机， 建议访问量较小的网站开通此功能。
+		  用户来访和消息发送时短信通知到您设置的手机。  <br />
+		  网站访问量较小时，建议开启此选项。
 		</dd>
 	  </dl>
 	</div>

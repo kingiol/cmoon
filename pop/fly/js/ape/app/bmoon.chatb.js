@@ -19,6 +19,10 @@ bmoon.chat = {
 		o.userlist = $('#im-users > ul');
 		o.msglist = $('#im-msgs');
 		o.stat = $('#im-stat');
+		o.rmdlogin = $('#remind-login')[0];
+		o.rmdlogout = $('#remind-logout')[0];
+		o.rmdsend = $('#remind-send')[0];
+		o.rmdreceive = $('#remind-receive')[0];
 		
 		o.ape = ape;
 
@@ -138,6 +142,8 @@ bmoon.chat = {
 		} else {
 			o.ape.request.send('LCS_MSG', {uname: o.ape.lcsaname, msg: mv});
 		}
+
+		o.rmdsend.play();
 	},
 
 	openChat: function() {
@@ -244,6 +250,14 @@ bmoon.chat = {
 		databox = $('.data', o._nodeMsg(uname, true)),
 		html = o._strMsg(data);
 
+		if (data.type == 'send') {
+			o.rmdreceive.play();
+		} else if (data.type == 'join') {
+			o.rmdlogin.play();
+		} else if (data.type == 'left') {
+			o.rmdlogout.play();
+		}
+		
 		if (o.cUserID != uname) {
 			userbox.addClass('dirty');
 			// avoid double messages appear
