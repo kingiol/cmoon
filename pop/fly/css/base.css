@@ -23,6 +23,7 @@ input.submitbtn, button.submitbtn {
 	background-color: #686868;
 }
 input.submitbtn:hover {background-color: #9a9a9a; cursor: pointer;}
+input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;}
 :focus {outline-style:none;}
 dl.form dt {float: left; width: 100px; margin: 0 13px 0 0; text-align: right;}
 dl.form dd {margin: 10px 0;	line-height:22px;}

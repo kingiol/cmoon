@@ -1,3 +1,5 @@
+input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;}
+
 #bchat {
 	position:fixed;
 	right:20px;
