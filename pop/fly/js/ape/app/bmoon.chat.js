@@ -41,6 +41,7 @@ bmoon.chat = {
 		if (o.inited) return o;
 
 		var
+		rmdhtml = $.browser.msid? '<bgsound id="bchat-remind"></bgsound>': '<audio id="bchat-remind"></audio>',
 		html = [
 			'<div id="bchat">',
 				'<div id="bchat-min" title="打开聊天面板">&nbsp;</div>',
@@ -51,7 +52,9 @@ bmoon.chat = {
 			    	        '<div class="recently"></div><div class="data"></div>',
 			    	    '</div>',
 						'<textarea rows="2" id="bchat-input"></textarea>',
-						'<div id="bchat-hint2">Ctrl + Enter 发送消息。</div>',
+						'<div id="bchat-hint2">Ctrl + Enter 发送消息。 ',
+							'<span><input type="checkbox" id="bchat-remind-sw" checked="checked" /> 提示音</span>',
+						'</div>',
 					'</div>',
 			    	'<div id="bchat-head">',
 						'<div id="bchat-trigger" title="在线聊天">&nbsp;</div>',
@@ -59,6 +62,7 @@ bmoon.chat = {
 						'<div id="bchat-downer" title="关闭聊天">&nbsp;</div>',
 			    	'</div>',
 				'</div>',
+				rmdhtml,
 			'</div>'
 		].join(''),
 		chatbody = $('#bchat');
@@ -82,6 +86,8 @@ bmoon.chat = {
 		o.recentbox = $('.recently', o.msglist);
 		o.databox = $('.data', o.msglist);
 		o.ape.request.send('LCS_RECENTLY', {uin: '0', type: 1});
+		o.reminder = $('#bchat-remind')[0];
+		o.rmdsw = $('#bchat-remind-sw');
 
 		$('#bchat-trigger').toggle(o.openChat, o.closeChat);
 		$('#bchat-input').bind('keydown', 'ctrl+return', o.msgSend);
@@ -152,6 +158,8 @@ bmoon.chat = {
 		} else {
 			o.ape.request.send('LCS_MSG', {uname: o.ape.lcsaname, msg: mv});
 		}
+		
+		o.soundRemind('send');
 	},
 
 	adminOn: function(data) {
@@ -160,6 +168,8 @@ bmoon.chat = {
  		o.debug(data.pname + ' 的管理员 ' +data.aname + ' 上线了');
 		o.hint.html(data.aname + ' 当前在线。');
 		o.adminuser = data;
+		
+		o.soundRemind('login');
 	},
 
 	adminOff: function() {
@@ -184,6 +194,8 @@ bmoon.chat = {
 		} else {
 			o.trigger.addClass('dirty');
 		}
+
+		o.soundRemind('receive');
 	},
 
 	// {from: from, to: to, type: type, tm: tm, data: data}
@@ -195,5 +207,15 @@ bmoon.chat = {
 		
 		$(html).appendTo(o.recentbox);
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
+	},
+
+	soundRemind: function(type) {
+		var o = bmoon.chat.init();
+
+		if (o.rmdsw.attr('checked') == true) {
+			o.reminder.src = 'http://www.kaiwuonline.com/obj/audio/'+type+'.wav';
+			o.reminder.load();
+			o.reminder.play();
+		}
 	}
 };

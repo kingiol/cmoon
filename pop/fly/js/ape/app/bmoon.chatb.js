@@ -19,10 +19,8 @@ bmoon.chat = {
 		o.userlist = $('#im-users > ul');
 		o.msglist = $('#im-msgs');
 		o.stat = $('#im-stat');
-		o.rmdlogin = $('#remind-login')[0];
-		o.rmdlogout = $('#remind-logout')[0];
-		o.rmdsend = $('#remind-send')[0];
-		o.rmdreceive = $('#remind-receive')[0];
+		o.reminder = $('#remind-sound')[0];
+		o.rmdsw = $('#remind-sound-sw');
 		
 		o.ape = ape;
 
@@ -143,7 +141,7 @@ bmoon.chat = {
 			o.ape.request.send('LCS_MSG', {uname: o.ape.lcsaname, msg: mv});
 		}
 
-		o.rmdsend.play();
+		o.soundRemind('send');
 	},
 
 	openChat: function() {
@@ -251,11 +249,11 @@ bmoon.chat = {
 		html = o._strMsg(data);
 
 		if (data.type == 'send') {
-			o.rmdreceive.play();
+			o.soundRemind('receive');
 		} else if (data.type == 'join') {
-			o.rmdlogin.play();
+			o.soundRemind('login');
 		} else if (data.type == 'left') {
-			o.rmdlogout.play();
+			o.soundRemind('logout');
 		}
 		
 		if (o.cUserID != uname) {
@@ -283,6 +281,16 @@ bmoon.chat = {
 		$(html).appendTo(recentbox);
 		if (o.cUserID == uname) {
 			o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
+		}
+	},
+
+	soundRemind: function(type) {
+		var o = bmoon.chat.init();
+
+		if (o.rmdsw.attr('checked') == true) {
+			o.reminder.src = '/obj/audio/'+type+'.wav';
+			o.reminder.load();
+			o.reminder.play();
 		}
 	}
 };

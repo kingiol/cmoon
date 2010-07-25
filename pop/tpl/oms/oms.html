@@ -49,15 +49,13 @@
 	  <div id="im-msgs" class="im-msgs"></div>
 
 	  <div class="im-input">
-		<textarea id="chat-msg-text" cols="55" rows="3"></textarea>
+		<textarea id="chat-msg-text" cols="45" rows="3"></textarea>
 		<input type="button" id="chat-msg-submit" value="发送" />
+		<input type="checkbox" id="remind-sound-sw" checked="checked" /> 提示音
 	  </div>
 	</div>  <!-- im-chat -->
   </div>  <!-- im-box -->
 
-  <audio id="remind-login" src="/obj/audio/login.wav"></audio>
-  <audio id="remind-logout" src="/obj/audio/logout.wav"></audio>
-  <audio id="remind-send" src="/obj/audio/send.wav"></audio>
-  <audio id="remind-receive" src="/obj/audio/receive.wav"></audio>
+  <audio id="remind-sound"></audio>
 
 </div>
