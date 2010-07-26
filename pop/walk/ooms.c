@@ -3,6 +3,7 @@
 #include "ooms.h"
 
 #include "oapp.h"
+#include "oplace.h"
 
 int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
@@ -45,6 +46,18 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	}
 	if (evt->hdfrcv) {
 		hdf_copy(cgi->hdf, PRE_OUTPUT".userlist", evt->hdfrcv);
+	}
+	HDF *node = hdf_get_child(cgi->hdf, PRE_OUTPUT".userlist");
+	char *c, *a;
+	while (node) {
+		char *ip = hdf_get_value(node, "ip", NULL);
+		if (ip) {
+			if (ip2addr_data_get(ip, &c, &a) == RET_RBTOP_OK) {
+				hdf_set_value(node, "city", c);
+				hdf_set_value(node, "area", a);
+			}
+		}
+		node = hdf_obj_next(node);
 	}
 	
 	

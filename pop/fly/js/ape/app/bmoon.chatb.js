@@ -35,7 +35,9 @@ bmoon.chat = {
 
 		var
 		r = $('#im-user-' + uname),
-		html = '<li id="im-user-'+uname+'" uname="'+uname+'">'+uname+'</li>';
+		html = '<li id="im-user-'+uname+'" uname="'+uname+'">'+
+			uname + '<span class="place"></span>' +
+			'</li>';
 		
 		if (!r.length && create) {
 			r = $(html).appendTo(o.userlist).click(o.openChat);
@@ -70,7 +72,7 @@ bmoon.chat = {
 		msg = decodeURIComponent(data.msg).replace(/<\/?[^>]*>/g, ''),
 		r = {
 			'join':
-			data.sref + ' 来到本站, 访问了页面<a target="_blank" href="'+
+			data.sref + ' 来到本站, 访问了页面 <a target="_blank" href="'+
 				decodeURIComponent(data.url)+'">'+
 				decodeURIComponent(data.title)+'</a>',
 			
@@ -255,6 +257,12 @@ bmoon.chat = {
 			o.soundRemind('receive');
 		} else if (data.type == 'join') {
 			o.soundRemind('login');
+			// TODO, duplicated request?
+			$.getJSON('/json/place', {ip: data.data.ip}, function(rdata) {
+				if(rdata.success == '1') {
+					$('.place', userbox).text(rdata.c);
+				}
+			});
 		} else if (data.type == 'left') {
 			o.soundRemind('logout');
 		}

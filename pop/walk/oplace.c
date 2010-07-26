@@ -2,8 +2,68 @@
 #include "lheads.h"
 #include "oplace.h"
 
+static iconv_t cv = NULL;
+static struct cache *ipc = NULL;
 static unsigned char *ips = NULL;
 static unsigned int ipbgn, ipend;
+
+static char* gb2utf8(char *s)
+{
+	if (!s) return NULL;
+
+	if (!cv || (int)cv == -1) cv = iconv_open("UTF-8", "GB2312");
+	if ((int)cv == -1) {
+		mtc_err("init conv error %s", strerror(errno));
+		return NULL;
+	}
+
+	unsigned int len = strlen(s), ulen;
+	ulen = len*2;
+	char *utf8 = calloc(1, ulen);
+	char *us = utf8;
+	
+	if (iconv (cv, &s, &len, &utf8, &ulen) == -1) {
+		mtc_err("conv error");
+		free(us);
+		return NULL;
+	}
+	
+	//iconv_close(cv);
+	return us;
+}
+
+static int ip_cache_get(char *ip, char **c, char **a)
+{
+	char *val = NULL;
+	size_t vsize = 0;
+	
+	if (ipc == NULL) ipc = cache_create(1024, 0);
+	
+	int hit = cache_get(ipc, (unsigned char*)ip, strlen(ip), (unsigned char**)&val, &vsize);
+	if (hit != 0) {
+		*c = val;
+		char *x = strchr(val, ';');
+		if (x) {
+			*x = '\0';
+			*a = x+1;
+		} else {
+			*a = val + strlen(val) +1;
+		}
+		return 0;
+	}
+	
+	return -1;
+}
+
+static void ip_cache_set(char *ip, char *a, char *c)
+{
+	if (ipc == NULL) ipc = cache_create(1024, 0);
+
+	char tok[1024] = {0};
+	snprintf(tok, sizeof(tok), "%s;%s", a, c);
+
+	cache_set(ipc, (unsigned char*)ip, strlen(ip), (unsigned char*)tok, strlen(tok)+2);
+}
 
 static unsigned int b2int(unsigned char *p, int count)
 {
@@ -79,6 +139,8 @@ static void ip_place(int offset, char **c, char **a)
 		*c = (char*)(ips + offset + 4);
 		*a = (char*)(readarea(offset + 4 + strlen(*c) + 1));
 	}
+	*c = gb2utf8(*c);
+	*a = gb2utf8(*a);
 }
 
 static int ip_offset(unsigned int ip)
@@ -120,7 +182,7 @@ static int ip_offset(unsigned int ip)
 		return -1;
 }
 
-static int ip2addr_data_get(char *ip, char **c, char **a)
+int ip2addr_data_get(char *ip, char **c, char **a)
 {
 	*c = *a = NULL;
 	
@@ -129,6 +191,11 @@ static int ip2addr_data_get(char *ip, char **c, char **a)
 	char *p, *s;
 	unsigned int dip = 0;
 
+	if (ip_cache_get(ip, c, a) == 0) {
+		mtc_dbg("get %s from cache: %s %s", ip, *c, *a);
+		return RET_RBTOP_OK;
+	}
+	
 	s = strdup(ip);
 	p = strtok(s, ".");
 	while (p) {
@@ -143,6 +210,11 @@ static int ip2addr_data_get(char *ip, char **c, char **a)
 		int offset = ip_offset(dip);
 		if (offset != -1) {
 			ip_place(offset, c, a);
+			ip_cache_set(ip, *c, *a);
+			free(*c);
+			free(*a);
+			ip_cache_get(ip, c, a);
+			mtc_dbg("get %s from file: %s %s", ip, *c, *a);
 			return RET_RBTOP_OK;
 		}
 	}
