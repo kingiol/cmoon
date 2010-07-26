@@ -14,6 +14,9 @@ bmoon.chat = {
 		if (o.inited) return o;
 		o.inited = true;
 
+		var rmdhtml = $.browser.msie? '<bgsound id="remind-sound"></bgsound>': '<audio id="remind-sound"></audio>';
+		
+		$(rmdhtml).appendTo('body');
 		o.m = $('#chat-msg-text');
 		o.btm = $('#chat-msg-submit');
 		o.userlist = $('#im-users > ul');
@@ -289,8 +292,10 @@ bmoon.chat = {
 
 		if (o.rmdsw.attr('checked') == true) {
 			o.reminder.src = '/obj/audio/'+type+'.wav';
-			o.reminder.load();
-			o.reminder.play();
+			if (!$.browser.msie) {
+				o.reminder.load();
+				o.reminder.play();
+			}
 		}
 	}
 };

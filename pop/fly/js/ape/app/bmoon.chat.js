@@ -41,7 +41,7 @@ bmoon.chat = {
 		if (o.inited) return o;
 
 		var
-		rmdhtml = $.browser.msid? '<bgsound id="bchat-remind"></bgsound>': '<audio id="bchat-remind"></audio>',
+		rmdhtml = $.browser.msie? '<bgsound id="bchat-remind"></bgsound>': '<audio id="bchat-remind"></audio>',
 		html = [
 			'<div id="bchat">',
 				'<div id="bchat-min" title="打开聊天面板">&nbsp;</div>',
@@ -214,8 +214,10 @@ bmoon.chat = {
 
 		if (o.rmdsw.attr('checked') == true) {
 			o.reminder.src = 'http://www.kaiwuonline.com/obj/audio/'+type+'.wav';
-			o.reminder.load();
-			o.reminder.play();
+			if (!$.browser.msie) {
+				o.reminder.load();
+				o.reminder.play();
+			}
 		}
 	}
 };
