@@ -3,20 +3,22 @@ dl.appinfo dt{font-weight: bold; text-decoration:underline;}
 dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 
 .im-box {
-	height: 400px;
-    border: 1px solid #101010;
-	padding:15px;
+	height: 450px;
+	overflow: hidden;
+    /*border: 1px solid #101010;*/
+	/*padding:15px;*/
 }
 .im-op {
 	width: 170px;
-	height: 400px;
+	height: 440px;
 	float:left;
 }
 .im-chat {
-	width: 496px;
-	height: 400px;
-	float: right;
-    border: 1px solid #101010;
+	width: 516px;
+	height: 430px;
+	float: left;
+    border: 0.5em solid #aaa;
+	background-color:#eee;
 	text-indent:1em;
 }
 
@@ -27,9 +29,12 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 
 .im-users ul li {
 	cursor: pointer;
-	margin: 10px 0;
+	margin-top: -1px;
 	line-height: 26px;
 	text-indent: 1em;
+	border-color: #aaa;
+	border-style:solid none solid solid;
+	border-width:1px 0 1px 1px;
 }
 
 .im-users ul li .place {
@@ -37,41 +42,36 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 	margin-right: 1em;
 }
 
-.im-users ul li.cur {
-	border: 1px solid #101010;
-	border-left: 0 none;
-	border-right: 1px solid #eee;
-	background-color: #eee;
-}
-
 .im-users ul li.off {
-	background-color: #eee;
+	background-color: #fff;
 }
 
 .im-users ul li.on {
-	background-color: #bbb;
+	background-color: #ddd;
 }
 
 .im-users ul li.dirty {
 	background-color: #777;
 }
 
+.im-users ul li.cur {
+	background-color: #aaa;
+}
+
 .im-stat {
-	background-color:#EEEEEE;
 	font-weight:bold;
 	line-height:26px;
 }
 .im-msgs {
-	height: 270px;
-	border: 1px dashed #101010;
-	border-right: 0 none;
-	border-left: 0 none;
-	margin: 15px 0;
+	height: 330px;
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	margin-bottom: 10px;
 	overflow: auto;
 }
 
 .item-join, .item-visit, .item-send, .item-msg {
-	margin: 12px 0;
+	margin: 8px 0;
 }
 .im-msgs .item-name, .im-msgs .item-time{
 	margin-left: 10px;
@@ -79,10 +79,25 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 }
 .im-msgs .item-content {
 	display: block;
-	margin: 5px;
-	text-indent: 2em;
+	margin: 2px;
+	text-indent: 3em;
 }
 
 .im-msgs .item-content a {
 	color: #999;
+}
+
+.im-input textarea {
+	height: 40px;
+	width: 340px;
+	padding: 5px;
+	margin-bottom: -3px;
+}
+
+.im-input input {
+	margin: 0 2px;
+}
+
+.im-input input[type=button] {
+	width: 70px;
 }
