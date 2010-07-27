@@ -9,8 +9,6 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 	/*padding:15px;*/
 }
 .im-op {
-	width: 170px;
-	height: 440px;
 	float:left;
 }
 .im-chat {
@@ -23,8 +21,23 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 }
 
 
-.im-users ul {
+.im-users {
+	width: 170px;
+	height: 410px;
+	overflow:hidden;
+	position:relative;
+}
+
+.im-users .items {
+	clear:both;
+	position:absolute;
+	width:20000em;
+}
+
+.im-users .items ul {
 	margin-top: 3ex;
+	float:left;
+	width:170px;
 }
 
 .im-users ul li {

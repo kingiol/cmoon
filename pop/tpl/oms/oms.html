@@ -23,29 +23,45 @@
   
   <div id="chat-box" class="im-box">
 	<div class="im-op">
-	  <!--
-	  <div class="op-find">
-		<input type="text" id="chat-find-text" class="middle" />
-		<input type="button" id="chat-find-submit" value="查找" />
-	  </div>
-	  -->
+	  
+	  <div id="im-users" class="im-users scrollable">
 
-	  <div id="im-users" class="im-users">
+		<div class="items">
 		<ul>
 		  <li id="im-user-0" uname="0" class="cur">所有人</li>
-		  <?cs each: user = Output.userlist ?>
+		  
+		<?cs set: count = #1 ?>
+		<?cs each: user = Output.userlist ?>
+		
+		<?cs if: count % 14 == #0 ?>
+		<ul>
+		<?cs /if ?>
+		  
 		  <li id="im-user-<?cs name: user ?>" uname="<?cs name: user ?>" class="off" >
-		    <?cs name: user ?>
-			<span class="place"><?cs var: user.city ?></span>
+		  <?cs name: user ?>
+		  <span class="place"><?cs var: user.city ?></span>
 		  </li>
-		  <?cs /each ?>
+		  
+		<?cs if: count % 14 == #13 ?>
 		</ul>
-	  </div>
+		<?cs /if ?>
+		
+		<?cs set: count = count + #1 ?>
+		<?cs /each ?>
 
-	  <div class="page">
-	  </div>
-	</div>
-	
+		<?cs if: count % 14 != #0 ?>
+		</ul>
+		<?cs /if ?>
+		</div> <!-- items -->
+		
+	  </div> <!-- im-users -->
+	  
+	  <a class="prev browse left"></a>
+	  <div class="navi"></div>
+	  <a class="next browse right"></a>
+	  
+	</div>	<!-- im-op -->
+	  
 	<div class="im-chat">
 	  <div id="im-stat" class="im-stat"> 给所有在线访客发送消息 </div>
 	  

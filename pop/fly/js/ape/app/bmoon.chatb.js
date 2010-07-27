@@ -19,7 +19,9 @@ bmoon.chat = {
 		$(rmdhtml).appendTo('body');
 		o.m = $('#chat-msg-text');
 		o.btm = $('#chat-msg-submit');
-		o.userlist = $('#im-users > ul');
+		o.usersTop = $('#im-users .items');
+		o.userlist = $('#im-users ul:last');
+		o.usersPerTab = 14;
 		o.msglist = $('#im-msgs');
 		o.stat = $('#im-stat');
 		o.reminder = $('#remind-sound')[0];
@@ -40,6 +42,15 @@ bmoon.chat = {
 			'</li>';
 		
 		if (!r.length && create) {
+			if (o.userlist.children().length >= o.usersPerTab) {
+				if (bmoon.oms.scroll) {
+					//bmoon.oms.scroll.addItem($('<ul></ul>')).end();
+					bmoon.oms.scroll.addItem($('<ul></ul>'));
+					o.userlist = $('#im-users ul:last');
+				} else {
+					o.userlist = $('<ul></ul>').appendTo(o.usersTop);
+				}
+			}
 			r = $(html).appendTo(o.userlist).click(o.openChat);
 		}
 		return r;
@@ -213,6 +224,7 @@ bmoon.chat = {
 		c.removeClass('off').addClass('on');
 		c.attr('pubid', data.pubid);
 		o.usersOn.push(data.uname);
+		o.postUserAction(data.uname);
 	},
 
 	// {uname: user.properties.uin}
@@ -267,6 +279,8 @@ bmoon.chat = {
 			o.soundRemind('logout');
 		}
 		
+		o.postUserAction(uname);
+		
 		if (o.cUserID != uname) {
 			userbox.addClass('dirty');
 			// avoid double messages appear
@@ -304,6 +318,21 @@ bmoon.chat = {
 				o.reminder.load();
 				o.reminder.play();
 			}
+		}
+	},
+
+	postUserAction: function(uname) {
+		var o = bmoon.chat.init();
+
+		var
+		userbox = o._nodeUser(uname, false),
+		userboxoff = $('#im-users ul li.off:first');
+
+		if (userbox.length && userboxoff.length) {
+			var	up = userbox.parent();
+			
+			userbox.insertBefore(userboxoff);
+			userboxoff.appendTo(up);
 		}
 	}
 };
