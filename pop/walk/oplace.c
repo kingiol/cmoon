@@ -39,7 +39,8 @@ static int ip_cache_get(char *ip, char **c, char **a)
 	
 	if (ipc == NULL) ipc = cache_create(1024, 0);
 	
-	int hit = cache_get(ipc, (unsigned char*)ip, strlen(ip), (unsigned char**)&val, &vsize);
+	int hit = cache_get(ipc, (unsigned char*)ip, strlen(ip),
+						(unsigned char**)&val, &vsize);
 	if (hit != 0) {
 		*c = val;
 		char *x = strchr(val, ';');
@@ -62,7 +63,8 @@ static void ip_cache_set(char *ip, char *a, char *c)
 	char tok[1024] = {0};
 	snprintf(tok, sizeof(tok), "%s;%s", a, c);
 
-	cache_set(ipc, (unsigned char*)ip, strlen(ip), (unsigned char*)tok, strlen(tok)+2);
+	cache_set(ipc, (unsigned char*)ip, strlen(ip),
+			  (unsigned char*)tok, strlen(tok)+2);
 }
 
 static unsigned int b2int(unsigned char *p, int count)
@@ -222,7 +224,7 @@ int ip2addr_data_get(char *ip, char **c, char **a)
 	return RET_RBTOP_ERROR;
 }
 
-int place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+int place_data_get_local(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	if (!cgi || !cgi->hdf) return RET_RBTOP_INPUTE;
 
@@ -239,4 +241,40 @@ int place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	}
 	
 	return ret;
+}
+
+int place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "place");
+	char *ip;
+	
+	/*
+	 * input check
+	 */
+	LPRE_DBOP(cgi->hdf, conn, evt);
+
+	HDF_GET_STR(cgi->hdf, PRE_QUERY".ip", ip);
+
+	/*
+	 * prepare data 
+	 */
+	hdf_set_value(evt->hdfsnd, "ip", ip);
+	
+	/*
+	 * trigger
+	 */
+	if (PROCESS_NOK(mevent_trigger(evt, ip, REQ_CMD_PLACEGET, FLAGS_SYNC))) {
+		mtc_err("get %s stat failure %d", ip, evt->errcode);
+		return RET_RBTOP_EVTE;
+	}
+
+	/*
+	 * set output
+	 */
+	if (evt->hdfrcv) {
+		hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
+	}
+
+	return RET_RBTOP_OK;
 }

@@ -24,8 +24,11 @@ int levt_init(HASH **evth)
 		ename = hdf_obj_value(node);
 		evt = mevent_init_plugin(ename);
 		if (evt) {
+			mtc_dbg("event %s init ok", ename);
 			hash_insert(levth, (void*)strdup(ename), (void*)evt);
 			filled = true;
+		} else {
+			mtc_err("event %s init failure", ename);
 		}
 		
 		node = hdf_obj_next(node);

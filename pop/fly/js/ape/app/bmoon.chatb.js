@@ -272,7 +272,7 @@ bmoon.chat = {
 			// TODO, duplicated request?
 			$.getJSON('/json/place', {ip: data.data.ip}, function(rdata) {
 				if(rdata.success == '1') {
-					$('.place', userbox).text(rdata.c);
+					$('.place', userbox).text(rdata[0].c);
 				}
 			});
 		} else if (data.type == 'left') {

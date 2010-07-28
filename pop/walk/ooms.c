@@ -3,7 +3,64 @@
 #include "ooms.h"
 
 #include "oapp.h"
-#include "oplace.h"
+
+static void ips2places(HDF *hdf, HASH *evth)
+{
+	if (!hdf || !evth) return;
+
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "place");
+	if (!evt) {
+		mtc_err("can't find place event");
+		return;
+	}
+
+	char *p, *q;
+	HDF *node, *rnode;
+	STRING ip;
+
+	string_init(&ip);
+	node = hdf_obj_child(hdf);
+	while (node) {
+		p = hdf_get_value(node, "ip", NULL);
+		if (p) string_appendf(&ip, "%s,", p);
+		
+		node = hdf_obj_next(node);
+	}
+
+	hdf_set_value(evt->hdfsnd, "ip", ip.buf);
+	if (PROCESS_NOK(mevent_trigger(evt, ip.buf, REQ_CMD_PLACEGET, FLAGS_SYNC))) {
+		mtc_err("get %s stat failure %d", ip.buf, evt->errcode);
+		string_clear(&ip);
+		return;
+	}
+
+	if (evt->hdfrcv) {
+		node = hdf_obj_child(hdf);
+		rnode = hdf_obj_child(evt->hdfrcv);
+		while (node && rnode) {
+			p = hdf_get_value(node, "ip", NULL);
+			if (p) {
+				q = hdf_get_value(rnode, "ip", NULL);
+				while (!q && rnode) {
+					q = hdf_get_value(rnode, "ip", NULL);
+					rnode = hdf_obj_next(rnode);
+				}
+
+				if (!q) break;
+				
+				if (!strcmp(p, q)) {
+					hdf_set_value(node, "city", hdf_get_value(rnode, "c", NULL));
+					hdf_set_value(node, "area", hdf_get_value(rnode, "a", NULL));
+					rnode = hdf_obj_next(rnode);
+				}
+			}
+			
+			node = hdf_obj_next(node);
+		}
+	}
+	
+	string_clear(&ip);
+}
 
 int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
@@ -47,18 +104,8 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	if (evt->hdfrcv) {
 		hdf_copy(cgi->hdf, PRE_OUTPUT".userlist", evt->hdfrcv);
 	}
-	HDF *node = hdf_get_child(cgi->hdf, PRE_OUTPUT".userlist");
-	char *c, *a;
-	while (node) {
-		char *ip = hdf_get_value(node, "ip", NULL);
-		if (ip) {
-			if (ip2addr_data_get(ip, &c, &a) == RET_RBTOP_OK) {
-				hdf_set_value(node, "city", c);
-				hdf_set_value(node, "area", a);
-			}
-		}
-		node = hdf_obj_next(node);
-	}
+
+	ips2places(hdf_get_obj(cgi->hdf, PRE_OUTPUT".userlist"), evth);
 	
 	
 	return RET_RBTOP_OK;

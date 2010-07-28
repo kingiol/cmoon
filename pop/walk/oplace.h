@@ -9,6 +9,8 @@ __BEGIN_DECLS
 #define IP_RECORD_LENGTH 7
 
 int ip2addr_data_get(char *ip, char **c, char **a);
+int place_data_get_local(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+
 int place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
 __END_DECLS

@@ -13,6 +13,8 @@
 #include "mevent.h"
 
 #include "mevent_aic.h"
+#include "mevent_dyn.h"
 #include "mevent_rawdb.h"
+#include "mevent_place.h"
 
 #endif	/* __LHEADS_H__ */
