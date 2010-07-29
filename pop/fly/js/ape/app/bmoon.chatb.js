@@ -224,7 +224,6 @@ bmoon.chat = {
 		c.removeClass('off').addClass('on');
 		c.attr('pubid', data.pubid);
 		o.usersOn.push(data.uname);
-		o.postUserAction(data.uname);
 	},
 
 	// {uname: user.properties.uin}
@@ -269,6 +268,7 @@ bmoon.chat = {
 			o.soundRemind('receive');
 		} else if (data.type == 'join') {
 			o.soundRemind('login');
+			o.postUserAction(uname);
 			// TODO, duplicated request?
 			$.getJSON('/json/place', {ip: data.data.ip}, function(rdata) {
 				if(rdata.success == '1') {
@@ -279,7 +279,6 @@ bmoon.chat = {
 			o.soundRemind('logout');
 		}
 		
-		o.postUserAction(uname);
 		
 		if (o.cUserID != uname) {
 			userbox.addClass('dirty');
