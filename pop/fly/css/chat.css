@@ -13,7 +13,7 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 	display: none;
 	width: 20px;
 	height: 20px;
-	background:transparent url(http://www.kaiwuonline.com/img/im/client.png) no-repeat scroll 0 0;
+	background:transparent url(http://www.kaiwuonline.com/img/im/client.gif) no-repeat scroll 0 0;
 	overflow: hidden;
 	cursor: pointer;
 }
@@ -36,23 +36,25 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 	height: 20px;
 	width: 155px;
 	overflow: hidden;
-	background:transparent url(http://www.kaiwuonline.com/img/im/client.png) no-repeat scroll 0 -58px;
+	background:transparent url(http://www.kaiwuonline.com/img/im/client.gif) no-repeat scroll 0 -81px;
 }
 #bchat-trigger {
 	cursor: pointer;
 	height: 20px;
 	width: 85px;
 	overflow: hidden;
-	background:transparent url(http://www.kaiwuonline.com/img/im/client.png) no-repeat scroll 0 -38px;
+	background:transparent url(http://www.kaiwuonline.com/img/im/client.gif) no-repeat scroll 0 -38px;
 }
 /*#bchat-trigger img {vertical-align: top;}*/
-#bchat-trigger.dirty {color: green;}
+#bchat-trigger.dirty {
+	background:transparent url(http://www.kaiwuonline.com/img/im/client.gif) no-repeat scroll 0 -63px;
+}
 #bchat-downer {
 	cursor: pointer;
 	height: 20px;
 	width: 20px;
 	overflow: hidden;
-	background:transparent url(http://www.kaiwuonline.com/img/im/client.png) no-repeat scroll 0 -17px;
+	background:transparent url(http://www.kaiwuonline.com/img/im/client.gif) no-repeat scroll 0 -17px;
 }
 
 #bchat-body {
@@ -62,14 +64,25 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 	border: 1px solid #666666;
 	/*border-bottom: 1px solid #EEEEEE;*/
 }
-#bchat-hint, #bchat-hint2 {
+#bchat-hint {
 	color: #999;
 	overflow: hidden;
-	margin: 10px;
+	margin: 5px 10px;
+	float: left;
+	width: 80%;
+}
+#bchat-close {
+	cursor: pointer;
+	float: right;
+	height: 20px;
+	width: 20px;
+	margin: 2px 11px 0 0;
+	background:transparent url(http://www.kaiwuonline.com/img/im/client.gif) no-repeat scroll 0 -99px;
 }
 #bchat-msgs {
 	border: 1px solid #666666;
 	height: 200px;
+	width: 92%;
 	margin: 10px;
 	overflow: auto;
 }
@@ -79,7 +92,9 @@ textarea#bchat-input {
 	width: 88%;
 }
 #bchat-hint2 {
-	margin-top: 0;
+	color: #999;
+	overflow: hidden;
+	margin: 0 10px 10px 10px;
 }
 
 .item-join, .item-visit, .item-send, .item-msg {

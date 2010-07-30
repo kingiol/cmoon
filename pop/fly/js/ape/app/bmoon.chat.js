@@ -48,6 +48,7 @@ bmoon.chat = {
 				'<div id="bchat-max">',
 					'<div id="bchat-body">',
 			    	    '<div id="bchat-hint">客服当前离线，留言功能开启。</div>',
+						'<div id="bchat-close">&nbsp;</div>',
 						'<div id="bchat-msgs" class="bchat-msgs">',
 			    	        '<div class="recently"></div><div class="data"></div>',
 			    	    '</div>',
@@ -81,6 +82,7 @@ bmoon.chat = {
 		o.min = $('#bchat-min');
 		o.max = $('#bchat-max');
 		o.trigger = $('#bchat-trigger');
+		o.closer = $('#bchat-close');
 		o.msglist = $('#bchat-msgs');
 		o.hint = $('#bchat-hint');
 		o.recentbox = $('.recently', o.msglist);
@@ -89,7 +91,6 @@ bmoon.chat = {
 		o.reminder = $('#bchat-remind')[0];
 		o.rmdsw = $('#bchat-remind-sw');
 
-		$('#bchat-trigger').toggle(o.openChat, o.closeChat);
 		$('#bchat-input').bind('keydown', 'ctrl+return', o.msgSend);
 		// chat.css is appended by js, will overwrite my fadeIn, so, delay.
 		//setTimeout(o.initUI, 2000);
@@ -117,6 +118,8 @@ bmoon.chat = {
 			o.max.fadeIn();
 			$.cookie('lcs_ui_max', "1");
 		});
+		o.closer.click(o.closeChat);
+		o.trigger.click(o.openChat);
 	},
 	
 	openChat: function() {
@@ -127,12 +130,14 @@ bmoon.chat = {
 		
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
 		o.trigger.removeClass('dirty');
+		o.trigger.unbind('click').click(o.closeChat);
 	},
 
 	closeChat: function() {
 		var o = bmoon.chat.init();
 
 		$('#bchat-body').fadeOut();
+		o.trigger.unbind('click').click(o.openChat);
 	},
 
 	msgSend: function() {
