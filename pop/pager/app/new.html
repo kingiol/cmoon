@@ -36,22 +36,12 @@
   </div>
 
   <div id="copy" class="hide">
-	<h4>添加站点成功， 请在您网站页面<head></head>中加入以下代码， 即可<a href="/oms">开始管理站点</a></h4>
+	<h4>添加站点成功， 请在您网站页面<head></head>中加入以下代码(建议置于底部,&lt;/body&gt;之前)， 即可<a href="/oms">开始管理站点</a></h4>
 	<div class="sep"></div>
 	<pre>
-&lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/base.js" &gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js" &gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" &gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
-$(document).ready(function() {
-	var client = new APE.Client();
-	client.load({
-		identifier: '<span class='copy-aname'></span>',
-		transport: 2,
-		complete: function(ape) {
-			new liveCS(ape).initialize({aname: '<span class='copy-aname'></span>'});
-		}
-	});
-});
+  bmoon.kol.onready({aname: '<span class='copy-aname'></span>'});
 &lt;/script&gt;
 	</pre>
 	

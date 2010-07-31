@@ -8,8 +8,6 @@
 	<title>开物在线 - <?cs var:Layout.title ?></title>
 
 	<link rel="stylesheet" type="text/css" href="/css/b/base.css" />
-	<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />
-	<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->
 	<?cs var: Layout.css ?>
 	<?cs include:Include.css ?>
 
@@ -17,20 +15,10 @@
 	<?cs var: Layout.js ?>
 	<?cs include:Include.js ?>
 
-<!--<script type="text/javascript" src="http://js.kaiwuonline.com/b/base.js" ></script>-->
-<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js" ></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	var client = new APE.Client();
-	client.load({
-		identifier: 'kol',
-		transport: 2,
-		complete: function(ape) {
-			new liveCS(ape).initialize({aname: 'kol'});
-		}
-	});
-});
-</script>
+	<script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" ></script>
+	<script type="text/javascript">
+	  bmoon.kol.onready({aname: 'kol'});
+	</script>
 	
   </head>
 
@@ -112,6 +100,7 @@ $(document).ready(function() {
 
 	<div id="bot">
 	  <p>版权所有 &copy; 2010 bmoon</p>
+	  <p>京ICP备10205734号</p>
 	</div>
 
   </body>

@@ -66,7 +66,7 @@ dl.form dd.error .indicator {
 	height: 100px;
 	/*border-top: 1px dashed #aaa;*/
 	border-top: 1px solid #aaa;
+	padding: 10px;
 }
-#bot p {text-align: center; }
-#mid {padding: 1ex 0; }
-
+#bot p {text-align: center; text-indent: 0; margin: 2px;}
+/*#mid {padding: 1ex 0; }*/
