@@ -56,6 +56,6 @@ bmoon.kol = {
 					new liveCS(ape).initialize({aname: o.aname});
 				}
 			});
-		}, "typeof bmoon.chat == 'object'");
+		}, "typeof liveCS == 'function'");
 	}
 };
