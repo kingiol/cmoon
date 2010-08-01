@@ -1,3 +1,13 @@
+; function _execAfter(func, until) {
+	if (eval(until)) {
+		func();
+	} else {
+		setTimeout(function() {
+			_execAfter(func, until);
+		}, 100);
+	}
+}
+
 ; var bmoon = bmoon || {};
 bmoon.kol = {
 	version: "1.0",
@@ -9,16 +19,6 @@ bmoon.kol = {
 		document.getElementsByTagName("head")[0].appendChild(e);
 	},
 
-	_execAfter: function(func, until) {
-		if (eval(until)) {
-			func();
-		} else {
-			setTimeout(function() {
-				bmoon.kol._execAfter(func, until);
-			}, 100);
-		}
-	},
-	
 	// {aname: 'xxx'}
 	init: function(opt) {
 		var o = bmoon.kol;
@@ -35,7 +35,7 @@ bmoon.kol = {
 		}
 		
 		// wait for chatx.js loaded
-		o._execAfter(function() {
+		_execAfter(function() {
 			$('head').append('<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />');
 			$('head').append('<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->');
 			$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js"></script>');
@@ -47,7 +47,7 @@ bmoon.kol = {
 	onready: function(opt) {
 		var o = bmoon.kol.init(opt);
 
-		o._execAfter(function() {
+		_execAfter(function() {
 			var client = new APE.Client();
 			client.load({
 				identifier: o.aname,
