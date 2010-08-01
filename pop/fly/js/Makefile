@@ -35,3 +35,4 @@ b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
 
 clean:
 	@rm -f $(FILES)
+	@$(MAKE) clean -C ape/
