@@ -30,7 +30,7 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 }
 #bchat-trigger, #bchat-power, #bchat-downer {
 	float: left;
-	margin-left: 5px;
+	margin-left: 3px;
 }
 #bchat-power {
 	height: 20px;
@@ -67,23 +67,23 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 #bchat-hint {
 	color: #999;
 	overflow: hidden;
-	margin: 5px 10px;
+	padding: 5px 10px;
 	float: left;
-	width: 80%;
+	width: 70%;
 }
 #bchat-close {
 	cursor: pointer;
 	float: right;
 	height: 20px;
 	width: 20px;
-	margin: 2px 11px 0 0;
-	background:transparent url(http://www.kaiwuonline.com/img/im/client.gif) no-repeat scroll 0 -99px;
+	padding: 2px 14px 0 0;
+	background:transparent url(http://www.kaiwuonline.com/img/im/client.gif) no-repeat scroll 0 -97px;
 }
 #bchat-msgs {
 	border: 1px solid #666666;
 	height: 200px;
 	width: 92%;
-	margin: 10px;
+	margin: 0 10px 10px 10px;
 	overflow: auto;
 }
 textarea#bchat-input {
