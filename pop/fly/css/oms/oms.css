@@ -37,6 +37,7 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 .im-users .items ul {
 	margin-top: 3ex;
 	width: 170px;
+	flat: left;
 }
 
 .im-users ul li {
@@ -60,7 +61,7 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 	margin-right: 1em;
 	height: 24px;
 	line-height: 24px;
-	width: 88px;
+	width: 80px;
 	overflow: hidden;
 	text-align: right;
 }
