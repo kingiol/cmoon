@@ -53,6 +53,9 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 .im-users ul li .place {
 	float: right;
 	margin-right: 1em;
+	height: 24px;
+	width: 88px;
+	overflow: hidden;
 }
 
 .im-users ul li.off {
