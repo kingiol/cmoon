@@ -36,18 +36,22 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 
 .im-users .items ul {
 	margin-top: 3ex;
-	float:left;
-	width:170px;
 }
 
 .im-users ul li {
-	cursor: pointer;
-	margin-top: -1px;
-	line-height: 26px;
-	text-indent: 1em;
+	/*cursor: pointer;*/
+	/*margin-top: -1px;*/
+	height: 26px;
+	width: 170px;
+	overflow: hidden;
 	border-color: #aaa;
 	border-style:solid none solid solid;
 	border-width:1px 0 1px 1px;
+}
+
+.im-users ul li .uname {
+	float:left;
+	margin-right: 1em;
 }
 
 .im-users ul li .place {

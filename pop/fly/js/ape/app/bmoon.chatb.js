@@ -38,7 +38,7 @@ bmoon.chat = {
 		var
 		r = $('#im-user-' + uname),
 		html = '<li id="im-user-'+uname+'" uname="'+uname+'">'+
-			uname + '<span class="place"></span>' +
+			'<span class="uname">'+uname+'</span><span class="place"></span>' +
 			'</li>';
 		
 		if (!r.length && create) {
