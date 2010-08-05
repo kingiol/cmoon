@@ -125,7 +125,7 @@ bmoon.chat = {
 	bindClick: function() {
 		var o = bmoon.chat.init();
 
-		o.m.bind('keydown', 'ctrl+return', o.msgSend);
+		o.m.bind('keydown', 'return', o.msgSend);
 		o.btm.click(o.msgSend);
 		$('.im-users li').click(o.openChat);
 	},

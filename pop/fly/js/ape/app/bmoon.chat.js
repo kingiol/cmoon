@@ -53,7 +53,7 @@ bmoon.chat = {
 			    	        '<div class="recently"></div><div class="data"></div>',
 			    	    '</div>',
 						'<textarea rows="2" id="bchat-input"></textarea>',
-						'<div id="bchat-hint2">Ctrl + Enter 发送消息。 ',
+						'<div id="bchat-hint2">Enter 发送消息。 ',
 							'<span><input type="checkbox" id="bchat-remind-sw" checked="checked" /> 提示音</span>',
 						'</div>',
 					'</div>',
@@ -91,7 +91,7 @@ bmoon.chat = {
 		o.reminder = $('#bchat-remind')[0];
 		o.rmdsw = $('#bchat-remind-sw');
 
-		$('#bchat-input').bind('keydown', 'ctrl+return', o.msgSend);
+		$('#bchat-input').bind('keydown', 'return', o.msgSend);
 		// chat.css is appended by js, will overwrite my fadeIn, so, delay.
 		//setTimeout(o.initUI, 2000);
 		o.initUI();
