@@ -4,8 +4,8 @@ lighttpd
 lighttpd.conf
 -------------
 
--#           "mod_rewrite",
-+            "mod_rewrite",
++ mod_rewrite
++ mod_expire
 
 
 config-avilable
@@ -25,6 +25,15 @@ $HTTP["host"] == "www.kaiwuonline.com" {
 #        cgi.assign = ( "" => "" )
 #  }
 
+  $HTTP["url"] =~ "^/img/" {
+     expire.url = ( "" => "access 30 days" )
+  }
+  $HTTP["url"] =~ "^/obj/" {
+     expire.url = ( "" => "access 30 days" )
+  }
+  $HTTP["url"] =~ "^.*\.html$" {
+     expire.url = ( "" => "access 1 days" )
+  }
 }
 
 $HTTP["host"] == "kaiwuonline.com" {
@@ -40,10 +49,12 @@ $HTTP["host"] == "kaiwuonline.com" {
 
 $HTTP["host"] == "js.kaiwuonline.com" {
   server.document-root = "/var/www/js.kaiwuonline.com/"
+  expire.url = ("" => "access 1 days")
 }
 
 $HTTP["host"] == "css.kaiwuonline.com" {
   server.document-root = "/var/www/css.kaiwuonline.com/"
+  expire.url = ("" => "access 1 days")
 }
 
 **************10-cgi.conf:**************

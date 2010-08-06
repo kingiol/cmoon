@@ -37,13 +37,14 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 .im-users .items ul {
 	margin-top: 3ex;
 	width: 170px;
-	flat: left;
+	float: left;
 }
 
 .im-users ul li {
 	cursor: pointer;
-	margin-top: -1px;
-	height: 26px;
+	/*margin-top: -1px;*/
+	margin: 0;
+	height: 24px;
 	overflow: hidden;
 	border-color: #aaa;
 	border-style:solid none solid solid;
@@ -113,9 +114,9 @@ dl.appinfo dd.time{color: gray; margin-bottom:10px;}
 
 .im-input textarea {
 	height: 40px;
-	width: 340px;
+	width: 330px;
 	padding: 5px;
-	margin-bottom: -3px;
+	margin: 0 0 -3px 1em;
 }
 
 .im-input input {
