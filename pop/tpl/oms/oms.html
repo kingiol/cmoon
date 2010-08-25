@@ -3,11 +3,13 @@
 	<dt><?cs var: Output.appinfo.aname ?></dt>
 	<dd class="time">注册日期：<?cs var: Output.appinfo.intime ?></dd>
 	<dd class="state">
-	  <?cs if: Output.appinfo.state == #10 && Output.appinfo.pid == #0 ?>
-	  <div>用户来访短信通知： 关闭</div>
-	  <div>最高支持 10 人在线</div>
-	  <div>统计历史保存 3 月</div>
-	  <div><a target="_blank" href="/up">我要升级</a></div>
+	  <ul>
+		<?cs if: Output.appinfo.state == #10 && Output.appinfo.pid == #0 ?>
+		<li>用户来访短信通知： 关闭</li>
+		<li>保存最近 20 条聊天记录</li>
+		<li>最高支持 20 人在线</li>
+		<li><a target="_blank" href="/up">我要升级</a>(开发中。。。)</li>
+	  </ul>
 	  <?cs elif: Output.appinfo.state == #11 ?>
 	  <?cs elif: Output.appinfo.state == #12 ?>
 	  <?cs elif: Output.appinfo.state == #13 ?>
