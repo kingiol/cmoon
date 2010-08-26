@@ -1,7 +1,7 @@
 <div class="vtabs">
   <ul class="css-tabs">
 	<li><a href="javascript:void(0);">基本设置</a></li>
-	<!--<li><a href="javascript:void(0);">暂无</a></li>-->
+	<li><a href="javascript:void(0);">站点代码</a></li>
   </ul>
 
   <div class="css-panes">
@@ -29,10 +29,15 @@
 	  </dl>
 	</div>
 
-	<!--
 	<div>
-	  暂无内容
+	  <h4>在您网站页面中加入以下代码(建议置于底部,&lt;/body&gt;之前)</h4>
+	  <span class="sep"></span>
+	  <pre>
+&lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" &gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  bmoon.kol.onready({aname: '<?cs var: Output.appinfo.aname ?>'});
+&lt;/script&gt;
+	  </pre>
 	</div>
-	-->
   </div>
 </div>

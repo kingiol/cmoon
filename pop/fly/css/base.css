@@ -45,7 +45,7 @@ dl.form dd.error .indicator {
 .valid {border: 2px solid green !important;}
 .invalid {border: 2px solid #800 !important;}
 .clearer {clear: both;}
-.sep {clear: both; height: 3ex;}
+.sep {display: block; clear: both; height: 3ex;}
 .sepl {clear: both; height: 2ex;}
 .decimal {
 	font: 12px Georgia;
