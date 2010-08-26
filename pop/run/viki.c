@@ -91,10 +91,11 @@ int main(int argc, char **argv, char **envp)
 		
 	response:
 		if (cgi != NULL && cgi->hdf != NULL) {
+			ldb_opfinish_json(ret, cgi->hdf, NULL, 0);
+			
 #ifdef DEBUG_HDF
 			hdf_write_file(cgi->hdf, TC_ROOT"hdf.viki");
 #endif
-			ldb_opfinish_json(ret, cgi->hdf, NULL, 0);
 			switch (session->reqtype) {
 			case CGI_REQ_HTML:
 				if (CGI_REQ_METHOD(cgi) != CGI_REQ_GET) {
