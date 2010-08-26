@@ -47,9 +47,10 @@ int main(int argc, char **argv, char **envp)
 	}
 	
 #ifndef DROP_FCGI
+	cgiwrap_init_emu(NULL, &read_cb, &printf_cb, &write_cb, NULL, NULL, NULL);
 	while (FCGI_Accept() >= 0) {
 #endif
-		mutil_wrap_fcgi(argc, argv, envp);
+		cgiwrap_init_std(argc, argv, environ);
 		err = cgi_init(&cgi, NULL);
 		JUMP_NOK_CGI(err, response);
 		err = cgi_parse(cgi);
