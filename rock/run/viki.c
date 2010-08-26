@@ -22,8 +22,6 @@ int main(int argc, char **argv, char **envp)
 	void *lib;
 
 	//sleep(20);
-	mutil_wrap_fcgi(argc, argv, envp);
-
 	mconfig_parse_file(SITE_CONFIG, &g_cfg);
 	mtc_init(TC_ROOT"viki");
 
@@ -51,6 +49,7 @@ int main(int argc, char **argv, char **envp)
 #ifndef DROP_FCGI
 	while (FCGI_Accept() >= 0) {
 #endif
+		mutil_wrap_fcgi(argc, argv, envp);
 		err = cgi_init(&cgi, NULL);
 		JUMP_NOK_CGI(err, response);
 		err = cgi_parse(cgi);
