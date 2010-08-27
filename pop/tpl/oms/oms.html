@@ -1,10 +1,12 @@
 <div id="colone">
   <dl class="appinfo">
 	<dt><?cs var: Output.appinfo.aname ?></dt>
-	<dd class="time">注册日期：<?cs var: Output.appinfo.intime ?></dd>
+	<dd class="remark">注册日期：<?cs var: Output.appinfo.intime ?></dd>
+	<dd class="remark">上次登录：<?cs var: Output.appinfo.uptime ?></dd>
 	<dd class="state">
 	  <ul>
 		<?cs if: Output.appinfo.state == #10 && Output.appinfo.pid == #0 ?>
+		<li><a target="_blank" href="/oms/users"><?cs var: Output.appinfo.numuser ?> 位用户</a></li>
 		<li>用户来访短信通知： 关闭</li>
 		<li>保存最近 20 条聊天记录</li>
 		<li>最高支持 20 人在线</li>
@@ -39,8 +41,8 @@
 		<ul>
 		<?cs /if ?>
 		  
-		  <li id="im-user-<?cs name: user ?>" uname="<?cs name: user ?>" class="off" >
-		  <span class="uname"><?cs name: user ?></span>
+		  <li id="im-user-<?cs var: user.uname ?>" uname="<?cs var: user.uname ?>" class="off" >
+		  <span class="uname"><?cs var: user.uname ?></span>
 		  <span class="place"><?cs var: user.city ?></span>
 		  </li>
 		  

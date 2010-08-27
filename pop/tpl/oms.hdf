@@ -21,6 +21,10 @@ oms {
 					name = 站点统计
 					href = /oms/stat
 				}
+				2 {
+					name = 用户管理
+					href = /oms/users
+				}
 			}
         }
 		Include {
@@ -57,6 +61,10 @@ oms_edit {
 					name = 站点统计
 					href = /oms/stat
 				}
+				1 {
+					name = 用户管理
+					href = /oms/users
+				}
 			}
         }
 		Include {
@@ -88,10 +96,49 @@ oms_stat {
 					name = 站点设置
 					href = /oms/edit
 				}
+				1 {
+					name = 用户管理
+					href = /oms/users
+				}
 			}
         }
 		Include {
 			content = oms/stat.html
+		}
+	}
+}
+
+oms_users {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/users.css" />
+			js = <script type="text/javascript" src="/js/b/oms/users.js"></script>
+			title = 站点设置
+			tabpart := oms.Dataset.Layout.tabpart
+			crumbs {
+				0 {
+					name = 我的站点
+					href = /oms
+				}
+				1 {
+					name = 用户管理
+					href = /oms/users
+				}
+			}
+			actions {
+				0 {
+					name = 站点设置
+					href = /oms/edit
+				}
+				1 {
+					name = 站点统计
+					href = /oms/stat
+				}
+			}
+        }
+		Include {
+			content = oms/users.html
 		}
 	}
 }

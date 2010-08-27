@@ -17,7 +17,6 @@ __BEGIN_DECLS
 #define PATH_DOC	PATH_SITE"fly/"
 #define PATH_JS		PATH_SITE"fly/js/"
 #define PATH_CGI	PATH_SITE"run/"
-#define CGI_CONFIG	PATH_CGI"config.hdf"
 #define PATH_TPL	PATH_SITE"tpl/"
 #define PATH_PAGER	PATH_SITE"pager/"
 #define PATH_MTLS	PATH_SITE"mtls/"

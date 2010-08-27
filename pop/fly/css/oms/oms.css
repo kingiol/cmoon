@@ -1,6 +1,7 @@
 dl.appinfo {margin: 10px 0;}
 dl.appinfo dt{font-weight: bold; font-size: 150%;}
-dl.appinfo dd.time{color: gray; margin-bottom:10px;}
+dl.appinfo dd.remark{color: gray; line-height: 20px;}
+dl.appinfo .state {margin:10px 0;}
 dl.appinfo .state ul li {line-height: 24px;}
 
 .im-box {
