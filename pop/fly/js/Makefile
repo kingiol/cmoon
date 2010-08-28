@@ -1,7 +1,7 @@
 BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
-FILES = b/base.js b/chat.js b/kol.js b/chatb.js b/chatc.js b/oms.js b/oms/edit.js b/oms/stat.js b/appnew.js
+FILES = b/base.js b/chat.js b/kol.js b/chatb.js b/chatc.js b/oms.js b/oms/edit.js b/oms/stat.js b/oms/users.js b/appnew.js
 all: preload $(FILES)
 
 preload:
@@ -25,6 +25,7 @@ b/oms.js: pub/jquery.hotkeys.js ape/app/bmoon.chatb.js ape/Build/apeClient.js ap
 		  oms/oms.js
 b/oms/edit.js: pub/jquerytools/src/tabs/tabs.js oms/edit.js
 b/oms/stat.js: oms/stat.js
+b/oms/users.js: app/new.js oms/users.js
 
 b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
 
