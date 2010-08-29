@@ -26,7 +26,6 @@ int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname;
-	int ret;
 	
 	/*
 	 * input check
@@ -44,9 +43,8 @@ int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	ret = mevent_trigger(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
-	if (PROCESS_NOK(ret)) {
-		mtc_err("get %s stat failure %d", aname, ret);
+	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC))) {
+		mtc_err("get %s stat failure %d", aname, evt->errcode);
 		return RET_RBTOP_EVTE;
 	}
 
@@ -67,7 +65,6 @@ int app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *asn, *email, masn[LEN_CK];
-	int ret;
 	
 	/*
 	 * input check
@@ -85,7 +82,7 @@ int app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 * prepare data 
 	 */
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
-	mcs_hdf_escape_val(evt->hdfsnd);
+	// mcs_hdf_escape_val(evt->hdfsnd);
 	
 	hdf_set_int_value(evt->hdfsnd, "state", LCS_ST_FREE);
 	
@@ -96,11 +93,10 @@ int app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	ret = mevent_trigger(evt, aname, REQ_CMD_APPNEW, FLAGS_SYNC);
-	if (PROCESS_NOK(ret)) {
-		mtc_err("set %s info failure", aname, ret);
-		if (ret == REP_ERR_ALREADYREGIST)
-			hdf_set_value(cgi->hdf, PRE_ERRMSG, "站点标志已被他人注册过了");
+	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPNEW, FLAGS_SYNC))) {
+		mtc_err("set %s info failure", aname, evt->errcode);
+		if (evt->errcode == REP_ERR_ALREADYREGIST)
+			return RET_RBTOP_EXISTE;
 		return RET_RBTOP_EVTE;
 	}
 
@@ -117,7 +113,6 @@ int app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *asn, masn[LEN_CK];
-	int ret;
 	
 	/*
 	 * input check
@@ -137,9 +132,8 @@ int app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	ret = mevent_trigger(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
-	if (PROCESS_NOK(ret)) {
-		mtc_err("get %s stat failure %d", aname, ret);
+	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC))) {
+		mtc_err("get %s stat failure %d", aname, evt->errcode);
 		return RET_RBTOP_EVTE;
 	}
 	
@@ -176,8 +170,8 @@ int app_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 */
 	LPRE_DBOP(cgi->hdf, conn, evt);
 
-	HDF_GET_STR(cgi->hdf, PRE_COOKIE".aname", aname);
-	HDF_GET_STR(cgi->hdf, PRE_COOKIE".masn", masn);
+	HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".aname", aname);
+	HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".masn", masn);
 
 	/*
 	 * prepare data 

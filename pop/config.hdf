@@ -46,3 +46,7 @@ FileCache {
 		tm_cache = 60
 	}
 }
+
+Limit {
+	max_users_per_freesite = 10
+}

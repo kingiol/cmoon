@@ -1,7 +1,33 @@
-<a href="javascript: void(0);" rel="#addoverlay">添加新用户</a>
+<div id="content-sub">
+  <div class="info">
+	<span class="new"><a href="javascript: void(0);" rel="#addoverlay">创建新用户</a></span>
+	<p class="u">您最多可以为 <?cs var: Output.appinfo.aname ?> 创建 10 个后台帐户。 &nbsp; 如果您希望有更多用户，请购买专业版。</p>
+  </div>
 
+  <table class="userlist" id="usertable">
+	<tr>
+	  <th>用户名</th>
+	  <th>邮箱</th>
+	  <th>注册时间</th>
+	  <th>上次登录时间</th>
+	  <th>在线状态</th>
+	  <th>操作</th>
+	</tr>
 
-<div class="overlay" id="addoverlay">
+	<?cs each: user = Output.users ?>
+	<tr id="user-<?cs var: user.aname ?>">
+	  <td><?cs var: user.aname ?></td>
+	  <td><?cs var: user.email ?></td>
+	  <td><?cs var: user.intime ?></td>
+	  <td><?cs var: user.uptime ?></td>
+	  <td></td>
+	  <td><a href="javascript: void(0);" class="deluser" aname="<?cs var: user.aname ?>" >删除</td>
+	</tr>
+	<?cs /each ?>
+  </table>
+</div>
+
+<div class="overlay-w" id="addoverlay">
 	<dl class="form">
 	  <dt>用户名：</dt>
 	  <dd>

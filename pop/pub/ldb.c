@@ -13,6 +13,12 @@ static void get_errmsg(int ret, char *res)
 	case RET_RBTOP_LIMITE:
 		strcpy(res, "用户无权限");
 		break;
+	case RET_RBTOP_NEEDVIP:
+		strcpy(res, "专业版功能");
+		break;
+	case RET_RBTOP_NEEDVVIP:
+		strcpy(res, "完全版功能");
+		break;
 	case RET_RBTOP_NEXIST:
 		strcpy(res, "资源不存在");
 		break;
