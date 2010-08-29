@@ -28,6 +28,17 @@ void ltpl_prepare_rend(HDF *hdf, char *tpl)
 	if (tmphdf != NULL) hdf_copy(hdf, PRE_CFG_LAYOUT, tmphdf);
 	
 	/*
+	 * special actions
+	 */
+	tmphdf = hdf_get_child(hdf, PRE_SPECIAL_ACTION);
+	while (tmphdf) {
+		snprintf(key, sizeof(key), PRE_LAYOUT".%s", hdf_obj_value(tmphdf));
+		hdf_copy(hdf, PRE_LAYOUT".actions", hdf_get_obj(hdf, key));
+		
+		tmphdf = hdf_obj_next(tmphdf);
+	}
+	
+	/*
 	 * set classes
 	 */
 	char *tab = hdf_get_value(hdf, "Layout.tabpart", NULL);

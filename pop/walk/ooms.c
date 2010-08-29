@@ -86,6 +86,9 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 		return RET_RBTOP_NOTLOGIN;
 	}
 	hdf_copy(cgi->hdf, PRE_OUTPUT".appinfo", evt->hdfrcv);
+	if (hdf_get_int_value(evt->hdfrcv, "pid", 1) == 0) {
+		hdf_set_value(cgi->hdf, PRE_SPECIAL_ACTION".0", "actions_1");
+	}
 	
 	/*
 	 * prepare data 
@@ -96,7 +99,6 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	//hdf_destroy(&evt->hdfrcv);
 	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPUSERS, FLAGS_SYNC))) {
 		mtc_err("get %s userlist failure %d", aname, evt->errcode);
 		return RET_RBTOP_EVTE;

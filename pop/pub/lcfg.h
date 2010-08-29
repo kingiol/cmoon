@@ -52,6 +52,7 @@ __BEGIN_DECLS
 #define PRE_CFG_DATAER		"data_geter"
 #define PRE_CFG_FILECACHE	"FileCache"
 #define PRE_CFG_UIPLUG		"Uiplug"
+#define PRE_SPECIAL_ACTION	"SpecialAction"
 
 #define EVT_PLUGIN_SYS		"db_sys"
 #define EVT_PLUGIN_USER		"db_user"

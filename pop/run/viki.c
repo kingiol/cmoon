@@ -94,9 +94,6 @@ int main(int argc, char **argv, char **envp)
 		if (cgi != NULL && cgi->hdf != NULL) {
 			ldb_opfinish_json(ret, cgi->hdf, NULL, 0);
 			
-#ifdef DEBUG_HDF
-			hdf_write_file(cgi->hdf, TC_ROOT"hdf.viki");
-#endif
 			switch (session->reqtype) {
 			case CGI_REQ_HTML:
 				if (CGI_REQ_METHOD(cgi) != CGI_REQ_GET) {
@@ -123,6 +120,11 @@ int main(int argc, char **argv, char **envp)
 				cgi_redirect(cgi, "/503.html");
 				break;
 			}
+			
+#ifdef DEBUG_HDF
+			hdf_write_file(cgi->hdf, TC_ROOT"hdf.viki");
+#endif
+			
 			cgi_destroy(&cgi);
 			session_destroy(&session);
 		}
