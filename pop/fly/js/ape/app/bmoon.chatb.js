@@ -145,7 +145,7 @@ bmoon.chat = {
 			data: {msg: mv}
 		});
 
-		if (!mv.length) return;
+		if (!mv.length) return false;
 		o.m.val('');
 
 		$(html).appendTo(databox);
@@ -158,6 +158,7 @@ bmoon.chat = {
 		}
 
 		o.soundRemind('send');
+		return false;
 	},
 
 	openChat: function() {

@@ -152,7 +152,7 @@ bmoon.chat = {
 			data: {msg: mv}
 		});
 
-		if (!mv.length) return;
+		if (!mv.length) return false;
 		$('#bchat-input').val('');
 
 		$(html).appendTo(o.databox);
@@ -165,6 +165,7 @@ bmoon.chat = {
 		}
 		
 		o.soundRemind('send');
+		return false;
 	},
 
 	adminOn: function(data) {
