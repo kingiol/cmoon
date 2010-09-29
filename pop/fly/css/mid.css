@@ -79,8 +79,8 @@ ul.uc-menu li a {
 }
 #coltwo {
     float: left;
-    width: 700px;			/* 960 = 180+15*4+x 15px~~15px -30px for ie6, ri */
-    margin: 0 15px 15px 15px;
+    width: 720px;			/* 960 = 180+15*4+x 15px~~15px -30px for ie6, ri */
+    margin: 0 10px 15px 10px;
     padding: 0;
 }
 #coltwo p {

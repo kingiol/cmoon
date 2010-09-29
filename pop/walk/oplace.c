@@ -64,7 +64,7 @@ static void ip_cache_set(char *ip, char *a, char *c)
 	snprintf(tok, sizeof(tok), "%s;%s", a, c);
 
 	cache_set(ipc, (unsigned char*)ip, strlen(ip),
-			  (unsigned char*)tok, strlen(tok)+2);
+			  (unsigned char*)tok, strlen(tok)+2, 0);
 }
 
 static unsigned int b2int(unsigned char *p, int count)

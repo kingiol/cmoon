@@ -4,6 +4,7 @@
 
 __BEGIN_DECLS
 
+#if 0
 #define LEGAL_CK_ANAME(aname)								\
 	do {													\
 		if (!reg_search("^([a-zA-Z0-9_\.\-])+$", aname)) {	\
@@ -19,6 +20,12 @@ __BEGIN_DECLS
 			return RET_RBTOP_INPUTE;									\
 		}																\
 	} while(0)
+#else
+
+#define LEGAL_CK_ANAME(aname)
+#define LEGAL_CK_EMAIL(email)
+
+#endif
 
 __END_DECLS
 #endif	/* __LMISC_H__ */

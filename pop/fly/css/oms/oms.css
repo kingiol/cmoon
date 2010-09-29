@@ -24,7 +24,7 @@ dl.appinfo .state ul li {line-height: 24px;}
 
 
 .im-users {
-	width: 170px;
+	width: 190px;
 	height: 410px;
 	overflow:hidden;
 	position:relative;
@@ -38,7 +38,7 @@ dl.appinfo .state ul li {line-height: 24px;}
 
 .im-users .items ul {
 	margin-top: 3ex;
-	width: 170px;
+	width: 190px;
 	float: left;
 }
 
@@ -60,13 +60,21 @@ dl.appinfo .state ul li {line-height: 24px;}
 }
 
 .im-users ul li .place {
-	float: right;
+	float: left;
 	margin-right: 1em;
 	height: 24px;
 	line-height: 24px;
 	width: 80px;
 	overflow: hidden;
 	text-align: right;
+}
+
+.im-users ul li.cur .remove {
+	background:transparent url(/img/ajax/close_pill.png) no-repeat scroll 0 0;
+	height:18px;
+	width:18px;
+	float: left;
+	margin: 2px 0 0 2px;
 }
 
 .im-users ul li.off {

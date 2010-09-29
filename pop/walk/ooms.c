@@ -111,6 +111,37 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	return RET_RBTOP_OK;
 }
 
+int oms_camer_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname, *uname;
+	int ret;
+
+	LPRE_DBOP(cgi->hdf, conn, evt);
+	
+	ret = app_check_login_data_get(cgi, dbh, evth, ses);
+	if (ret != RET_RBTOP_OK) {
+		mtc_warn("doesn't login, %d", ret);
+		return RET_RBTOP_NOTLOGIN;
+	}
+	
+	HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".aname", aname);
+	HDF_GET_STR(cgi->hdf, PRE_QUERY".uname", uname);
+	LEGAL_CK_ANAME(aname);
+	LEGAL_CK_ANAME(uname);
+
+	hdf_set_value(evt->hdfsnd, "aname", aname);
+	hdf_set_value(evt->hdfsnd, "uname", uname);
+
+	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPUSEROUT, FLAGS_NONE))) {
+		mtc_err("process %s failure %d", aname, evt->errcode);
+		return RET_RBTOP_EVTE;
+	}
+
+	return RET_RBTOP_OK;
+}
+
 int oms_edit_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	int ret = oms_data_get(cgi, dbh, evth, ses);
