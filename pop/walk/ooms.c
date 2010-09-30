@@ -236,7 +236,10 @@ int oms_users_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 		mtc_err("process %s failure %d", aname, evt->errcode);
 		return RET_RBTOP_EVTE;
 	}
-	hdf_copy(cgi->hdf, PRE_OUTPUT".users", evt->hdfrcv);
+	HDF *node = hdf_get_obj(evt->hdfrcv, "users");
+	if (node) {
+		hdf_copy(cgi->hdf, PRE_OUTPUT".users", node);
+	}
 	
 	return RET_RBTOP_OK;
 }
