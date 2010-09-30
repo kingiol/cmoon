@@ -33,7 +33,7 @@ bmoon.chat = {
 	},
 
     debug: function(msg) {
-        $('<div>'+ msg +'</div>').appendTo('body');
+        //$('<div>'+ msg +'</div>').appendTo('body');
     },
 	
 	init: function(ape) {
