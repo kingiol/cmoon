@@ -103,10 +103,11 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 		mtc_err("get %s userlist failure %d", aname, evt->errcode);
 		return RET_RBTOP_EVTE;
 	}
-	hdf_copy(cgi->hdf, PRE_OUTPUT".userlist", evt->hdfrcv);
-
-	ips2places(hdf_get_obj(cgi->hdf, PRE_OUTPUT".userlist"), evth);
-	
+	HDF *node = hdf_get_obj(evt->hdfrcv, "userlist");
+	if (node) {
+		hdf_copy(cgi->hdf, PRE_OUTPUT".userlist", node);
+		ips2places(hdf_get_obj(cgi->hdf, PRE_OUTPUT".userlist"), evth);
+	}
 	
 	return RET_RBTOP_OK;
 }
