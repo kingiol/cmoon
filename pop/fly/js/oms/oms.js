@@ -33,10 +33,6 @@ bmoon.oms = {
 		p = c.parent(),
 		uname = p.attr('uname');
 
-		if (!confirm('确认删除 ' + uname + ' ?')) {
-			return;
-		}
-
 		$.post('/oms/camer', {op: 'del', uname: uname}, function(data) {
 			if (data.success == '1') {
 				p.remove();

@@ -55,18 +55,18 @@ dl.appinfo .state ul li {line-height: 24px;}
 
 .im-users ul li .uname {
 	float:left;
+	width:64px;
 	margin-left: 1em;
 	line-height: 24px;
 }
 
 .im-users ul li .place {
 	float: left;
-	margin-right: 1em;
+	margin-left: 1em;
 	height: 24px;
 	line-height: 24px;
 	width: 80px;
 	overflow: hidden;
-	text-align: right;
 }
 
 .im-users ul li.cur .remove {
@@ -74,7 +74,11 @@ dl.appinfo .state ul li {line-height: 24px;}
 	height:18px;
 	width:18px;
 	float: left;
-	margin: 2px 0 0 2px;
+	margin: 3px 0 0 2px;
+}
+
+.im-users ul li.cur .remove:hover {
+	background-position: 0 -50px;
 }
 
 .im-users ul li.off {
