@@ -63,11 +63,14 @@ int main(int argc, char **argv, char **envp)
 		JUMP_NOK_CGI(err, response);
 
 #ifdef NCGI_MODE
-		hdf_set_value(cgi->hdf, PRE_REQ_URI_RW, "/json/place");
+		hdf_set_value(cgi->hdf, PRE_REQ_URI_RW, "/json/msg");
 		hdf_set_value(cgi->hdf, PRE_COOKIE".uin", "1001");
 		hdf_set_value(cgi->hdf, PRE_COOKIE".uname", "bigml");
 		hdf_set_value(cgi->hdf, PRE_COOKIE".musn", "8Y]u0|v=*MS]U3J");
 		hdf_set_value(cgi->hdf, PRE_QUERY".ip", "222.247.56.14");
+		hdf_set_value(cgi->hdf, PRE_QUERY".to", "cj_BXTSJ");
+		hdf_set_value(cgi->hdf, PRE_QUERY".from", "kol");
+		hdf_set_value(cgi->hdf, PRE_QUERY".JsonCallback", "Ape.transport.read");
 #endif
 		
 		ret = session_init(cgi, dbh, &session);
@@ -111,6 +114,7 @@ int main(int argc, char **argv, char **envp)
 			resp_ajax:
 				jsoncb = hdf_get_value(cgi->hdf, PRE_REQ_AJAX_FN, NULL);
 				if (jsoncb != NULL) {
+					hdf_remove_tree(cgi->hdf, PRE_SUCCESS);
 					mjson_execute_hdf(cgi->hdf, jsoncb, session->tm_cache_browser);
 				} else {
 					mjson_output_hdf(cgi->hdf, session->tm_cache_browser);

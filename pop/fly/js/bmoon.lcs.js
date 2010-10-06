@@ -42,6 +42,7 @@ bmoon.lcs = {
 		
 		$('#login-submit').click(o.login);
 		$('#userlogout').click(o.logout);
+		o.login_asn.bind('keydown', 'return', o.login);
 	},
 
 	login: function() {

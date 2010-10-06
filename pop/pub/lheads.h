@@ -16,5 +16,6 @@
 #include "mevent_dyn.h"
 #include "mevent_rawdb.h"
 #include "mevent_place.h"
+#include "mevent_msg.h"
 
 #endif	/* __LHEADS_H__ */

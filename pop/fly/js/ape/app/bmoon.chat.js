@@ -87,7 +87,7 @@ bmoon.chat = {
 		o.hint = $('#bchat-hint');
 		o.recentbox = $('.recently', o.msglist);
 		o.databox = $('.data', o.msglist);
-		o.ape.request.send('LCS_RECENTLY', {uin: '0', type: 1});
+		//o.ape.request.send('LCS_RECENTLY', {uin: '0'});
 		o.reminder = $('#bchat-remind')[0];
 		o.rmdsw = $('#bchat-remind-sw');
 

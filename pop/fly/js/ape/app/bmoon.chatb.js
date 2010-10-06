@@ -8,6 +8,10 @@ bmoon.chat = {
 	usersOn: ["0"],
 	usersFetched: ["0"],
 
+    debug: function(msg) {
+        $('<div>'+ msg +'</div>').appendTo('body');
+    },
+	
 	init: function(ape) {
 		var o = bmoon.chat;
 
@@ -185,7 +189,25 @@ bmoon.chat = {
 		}
 
 		if ($.inArray(id, o.usersFetched) == -1) {
-			o.ape.request.send('LCS_RECENTLY', {uin: id, type: 1});
+			// so tired. 调了一天， 几个需要解释的地方：
+			// 1, 使用 getJSON，加上 JsonCallback=? 参数是为了能让cgi输出正确的json回调形式，实现夸域
+			// 2, 由于数据接口里存的是整个 RAW (自己组装多级 json raw 非常麻烦)，
+			//    所以数据接口返回的数据是一个字符串数组，而不是 ape 形式的对象数组
+			//      数据接口：   ["{\"time\":\"1286291022\",\"raw\":\"RAW_RECENTL
+			//      ape返回：   [{"time":"1286353563","raw":"LCS_DATA
+			//    所以不能直接调用 Ape.transport.read(data) 或者 o.ape.transport.read(data)
+			// 3, $.each 内部不能直接调用 Ape.transport.read('[' +v+ ']')
+			//    是因为read() ---> parseResponse() 会干扰 ape.check() 造成请求混乱
+			$.getJSON('http://www.kaiwuonline.com/json/msg?JsonCallback=?',
+					  {name: id, name2: o.ape.lcsaname},
+					  function(data) {
+						  $.each(data, function(i, v) {
+							  var raw = JSON.parse(v);
+							  if (raw) {
+								  o.ape.callRaw(raw);
+							  }
+						  });
+					  });
 			o.usersFetched.push(id);
 		}
 

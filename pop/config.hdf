@@ -34,6 +34,7 @@ Mevent {
 	1 = dyn
 	2 = aic
 	3 = place
+	4 = msg
 }
 
 FileCache {
