@@ -23,4 +23,6 @@ int msg_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 		hdf_copy(cgi->hdf, PRE_OUTPUT, node);
 		hdf_set_attr(cgi->hdf, PRE_OUTPUT, "type", "array");
 	}
+
+	return RET_RBTOP_OK;
 }

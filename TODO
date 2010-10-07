@@ -21,3 +21,13 @@
 		*DONE* dearuser 没调试
 		*DONE* message 没 escape
 		bug: 客户端无法得到 管理员 群发的 历史消息
+
+2010-10-07
+		代码简化:
+			MDB_EXEC
+			XEVENT_TRIGGER_XXX
+			DECLARE_CACHE CACHE_HDF
+			mmisc_pagediv_set/GET
+		完成分页功能
+		常见问题
+		博客升级

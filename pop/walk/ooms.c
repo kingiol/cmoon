@@ -289,7 +289,8 @@ int oms_users_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 	hdf_set_value(evt->hdfsnd, "pname", pname);
 	hdf_set_value(evt->hdfsnd, "aname", aname);
-	hdf_set_value(evt->hdfsnd, "state", hdf_get_value(evt->hdfrcv, "state", LCS_ST_FREE));
+	hdf_set_int_value(evt->hdfsnd, "state",
+					  hdf_get_int_value(evt->hdfrcv, "state", LCS_ST_FREE));
 	hdf_set_value(evt->hdfsnd, "masn", aname);
 	
 	/*
