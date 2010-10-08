@@ -264,10 +264,7 @@ int place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	if (PROCESS_NOK(mevent_trigger(evt, ip, REQ_CMD_PLACEGET, FLAGS_SYNC))) {
-		mtc_err("get %s stat failure %d", ip, evt->errcode);
-		return RET_RBTOP_EVTE;
-	}
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, ip, REQ_CMD_PLACEGET, FLAGS_SYNC);
 
 	/*
 	 * set output

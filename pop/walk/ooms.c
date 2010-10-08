@@ -28,11 +28,8 @@ static void ips2places(HDF *hdf, HASH *evth)
 	}
 
 	hdf_set_value(evt->hdfsnd, "ip", ip.buf);
-	if (PROCESS_NOK(mevent_trigger(evt, ip.buf, REQ_CMD_PLACEGET, FLAGS_SYNC))) {
-		mtc_err("get %s stat failure %d", ip.buf, evt->errcode);
-		string_clear(&ip);
-		return;
-	}
+	/* TODO memroy leak string not clear on NOK */
+	MEVENT_TRIGGER_VOID(evt, ip.buf, REQ_CMD_PLACEGET, FLAGS_SYNC);
 
 	if (evt->hdfrcv) {
 		node = hdf_obj_child(hdf);
@@ -99,10 +96,7 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPUSERS, FLAGS_SYNC))) {
-		mtc_err("get %s userlist failure %d", aname, evt->errcode);
-		return RET_RBTOP_EVTE;
-	}
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPUSERS, FLAGS_SYNC);
 	HDF *node = hdf_get_obj(evt->hdfrcv, "userlist");
 	if (node) {
 		hdf_copy(cgi->hdf, PRE_OUTPUT".userlist", node);
@@ -135,10 +129,7 @@ int oms_camer_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_set_value(evt->hdfsnd, "aname", aname);
 	hdf_set_value(evt->hdfsnd, "uname", uname);
 
-	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPUSEROUT, FLAGS_NONE))) {
-		mtc_err("process %s failure %d", aname, evt->errcode);
-		return RET_RBTOP_EVTE;
-	}
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPUSEROUT, FLAGS_NONE);
 
 	return RET_RBTOP_OK;
 }
@@ -191,10 +182,7 @@ int oms_edit_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPUP, FLAGS_SYNC))) {
-		mtc_err("process %s failure %d", aname, evt->errcode);
-		return RET_RBTOP_EVTE;
-	}
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
 	
 	return RET_RBTOP_OK;
 }
@@ -232,10 +220,7 @@ int oms_users_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APP_O_USERS, FLAGS_SYNC))) {
-		mtc_err("process %s failure %d", aname, evt->errcode);
-		return RET_RBTOP_EVTE;
-	}
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APP_O_USERS, FLAGS_SYNC);
 	HDF *node = hdf_get_obj(evt->hdfrcv, "users");
 	if (node) {
 		hdf_copy(cgi->hdf, PRE_OUTPUT".users", node);
@@ -338,10 +323,7 @@ int oms_users_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	}
 	
 	hdf_set_value(evt->hdfsnd, "pname", pname);
-	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APP_O_USERS, FLAGS_SYNC))) {
-		mtc_err("get %s userlist failure %d", aname, evt->errcode);
-		return RET_RBTOP_EVTE;
-	}
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APP_O_USERS, FLAGS_SYNC);
 	if (!hdf_get_obj(evt->hdfrcv, aname)) {
 		mtc_warn("%s not %s's", aname, pname);
 		return RET_RBTOP_LIMITE;

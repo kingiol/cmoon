@@ -43,10 +43,7 @@ int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC))) {
-		mtc_err("get %s stat failure %d", aname, evt->errcode);
-		return RET_RBTOP_EVTE;
-	}
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
 
 	/*
 	 * set output
@@ -93,12 +90,7 @@ int app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPNEW, FLAGS_SYNC))) {
-		mtc_err("set %s info failure", aname, evt->errcode);
-		if (evt->errcode == REP_ERR_ALREADYREGIST)
-			return RET_RBTOP_EXISTE;
-		return RET_RBTOP_EVTE;
-	}
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPNEW, FLAGS_SYNC);
 
 	/*
 	 * follow-up
@@ -132,10 +124,7 @@ int app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC))) {
-		mtc_err("get %s stat failure %d", aname, evt->errcode);
-		return RET_RBTOP_EVTE;
-	}
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
 	
 	/*
 	 * verify
@@ -182,10 +171,7 @@ int app_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC))) {
-		mtc_err("get %s stat failure %d", aname, evt->errcode);
-		return RET_RBTOP_EVTE;
-	}
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
 
 	/*
 	 * verify
