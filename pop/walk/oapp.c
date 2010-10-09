@@ -148,6 +148,32 @@ int app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	return RET_RBTOP_LOGINPSW;
 }
 
+int app_logout_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname;
+	int ret;
+	
+	/*
+	 * want sth seriously
+	 */
+	ret = app_check_login_data_get(cgi, dbh, evth, ses);
+	if (ret != RET_RBTOP_OK) {
+		mtc_warn("doesn't login, %d", ret);
+		return RET_RBTOP_NOTLOGIN;
+	}
+
+	HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".aname", aname);
+	
+	hdf_set_value(evt->hdfsnd, "aname", aname);
+	hdf_set_value(evt->hdfsnd, "masn", "0");
+
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
+
+	return RET_RBTOP_OK;
+}
+
 int app_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");

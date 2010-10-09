@@ -14,7 +14,15 @@ bmoon.lcs = {
 		o.nav_member = $('#nav-member');
 		o.login_aname = $('#login-aname');
 		o.login_asn = $('#login-asn');
-		o.loginoverlay = $('a[rel="#loginoverlay"]').overlay({mask: '#666', api: true});
+		o.loginoverlay = $('a[rel="#loginoverlay"]').overlay({
+			mask: '#666', api: true,
+			onLoad: function() {
+				if (o.login_aname.val().length <= 0)
+					o.login_aname.focus();
+				else
+					o.login_asn.focus();
+			}
+		});
 		
 		return o;
 	},
@@ -67,16 +75,13 @@ bmoon.lcs = {
 	logout: function() {
 		var o = bmoon.lcs.init();
 		
+        $.getJSON('/json/app/logout');
+		
         $.cookie('aname', null, {path: '/', domain: g_site_domain});
         $.cookie('asn', null, {path: '/', domain: g_site_domain});
         $.cookie('masn', null, {path: '/', domain: g_site_domain});
+		o.login_aname.val("");
 		o.loginCheck();
-		
-        $.ajax({
-            type: 'GET',
-            url: '/json/app/logout',
-            cache: false
-        });
 	},
 	
 	loginCheck: function() {
@@ -87,6 +92,7 @@ bmoon.lcs = {
 			o.aname.text(aname);
 			o.nav_guest.hide();
 			o.nav_member.show();
+			o.login_aname.val(aname);
 		} else {
 			o.nav_member.hide();
 			o.nav_guest.show();
