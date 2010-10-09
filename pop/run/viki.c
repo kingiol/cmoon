@@ -114,7 +114,7 @@ int main(int argc, char **argv, char **envp)
 			resp_ajax:
 				jsoncb = hdf_get_value(cgi->hdf, PRE_REQ_AJAX_FN, NULL);
 				if (jsoncb != NULL) {
-					hdf_remove_tree(cgi->hdf, PRE_SUCCESS);
+					//hdf_remove_tree(cgi->hdf, PRE_SUCCESS);
 					mjson_execute_hdf(cgi->hdf, jsoncb, session->tm_cache_browser);
 				} else {
 					mjson_output_hdf(cgi->hdf, session->tm_cache_browser);

@@ -18,11 +18,8 @@ int msg_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, NULL, REQ_CMD_SAYWITHOTHER, FLAGS_SYNC);
 
-	HDF *node = hdf_get_obj(evt->hdfrcv, "raws");
-	if (node) {
-		hdf_copy(cgi->hdf, PRE_OUTPUT, node);
-		hdf_set_attr(cgi->hdf, PRE_OUTPUT, "type", "array");
-	}
+	hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
+	hdf_set_attr(cgi->hdf, PRE_OUTPUT".raws", "type", "array");
 
 	return RET_RBTOP_OK;
 }

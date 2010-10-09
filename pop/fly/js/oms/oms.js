@@ -23,6 +23,7 @@ bmoon.oms = {
 		var o = bmoon.oms.init();
 
 		$('#im-users li .remove').click(o.removeCamer);
+		$('#im-msgs').mnscrollpage({trigpos: 'top', ppage: 1, callback: o.getMessage});
 	},
 
 	removeCamer: function() {
@@ -40,6 +41,14 @@ bmoon.oms = {
 				alert(data.errmsg || '删除操作失败，请稍后再试');
 			}
 		}, 'json');
+	},
+
+	getMessage: function(pg) {
+		var o = bmoon.oms.init();
+
+		var p = bmoon.chat;
+		
+		p.getMessage(p.cUserID, p.aname, pg);
 	}
 };
 

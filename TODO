@@ -23,7 +23,7 @@
 		bug: 客户端无法得到 管理员 群发的 历史消息
 
 2010-10-07
-		代码简化:
+		*DONE* 代码简化:
 			MDB_EXEC
 			XEVENT_TRIGGER_XXX
 			DECLARE_CACHE CACHE_HDF

@@ -4,12 +4,16 @@ bmoon.chat = {
 	version: '1.0',
 	ape: {},
 	groupPubid: null,
+	aname: '0',
 	cUserID: '0',
 	usersOn: ["0"],
 	usersFetched: ["0"],
+	usersTotalMsg: {},
+	usersLoadPage: {},
 
     debug: function(msg) {
         $('<div>'+ msg +'</div>').appendTo('body');
+		console.log(msg);
     },
 	
 	init: function(ape) {
@@ -32,6 +36,7 @@ bmoon.chat = {
 		o.rmdsw = $('#remind-sound-sw');
 		
 		o.ape = ape;
+		o.aname = ape.lcsaname;
 
 		return o;
 	},
@@ -107,7 +112,7 @@ bmoon.chat = {
 	_strMsg: function(data) {
 		var o = bmoon.chat.init();
 
-		var uname = data.from == o.ape.lcsaname ? '我': data.from;
+		var uname = data.from == o.aname ? '我': data.from;
 		
 		return [
 			'<div class="item-', data.type, '">',
@@ -143,7 +148,7 @@ bmoon.chat = {
 		type = $.inArray(o.cUserID, o.usersOn) != -1 ? 'send': 'msg',
 		databox = $('.data', o._nodeMsg(o.cUserID, true)),
 		html = o._strMsg({
-			from: o.ape.lcsaname,
+			from: o.aname,
 			type: type,
 			tm: Date().match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0],
 			data: {msg: mv}
@@ -158,7 +163,7 @@ bmoon.chat = {
 		if (pipe && type == 'send') {
 			pipe.request.send('LCS_SEND', {msg: mv});
 		} else {
-			o.ape.request.send('LCS_MSG', {uname: o.ape.lcsaname, msg: mv});
+			o.ape.request.send('LCS_MSG', {uname: o.aname, msg: mv});
 		}
 
 		o.soundRemind('send');
@@ -189,25 +194,7 @@ bmoon.chat = {
 		}
 
 		if ($.inArray(id, o.usersFetched) == -1) {
-			// so tired. 调了一天， 几个需要解释的地方：
-			// 1, 使用 getJSON，加上 JsonCallback=? 参数是为了能让cgi输出正确的json回调形式，实现夸域
-			// 2, 由于数据接口里存的是整个 RAW (自己组装多级 json raw 非常麻烦)，
-			//    所以数据接口返回的数据是一个字符串数组，而不是 ape 形式的对象数组
-			//      数据接口：   ["{\"time\":\"1286291022\",\"raw\":\"RAW_RECENTL
-			//      ape返回：   [{"time":"1286353563","raw":"LCS_DATA
-			//    所以不能直接调用 Ape.transport.read(data) 或者 o.ape.transport.read(data)
-			// 3, $.each 内部不能直接调用 Ape.transport.read('[' +v+ ']')
-			//    是因为read() ---> parseResponse() 会干扰 ape.check() 造成请求混乱
-			$.getJSON('http://www.kaiwuonline.com/json/msg?JsonCallback=?',
-					  {name: id, name2: o.ape.lcsaname},
-					  function(data) {
-						  $.each(data, function(i, v) {
-							  var raw = JSON.parse(v);
-							  if (raw) {
-								  o.ape.callRaw(raw);
-							  }
-						  });
-					  });
+			o.getMessage(id, o.aname, 1);
 			o.usersFetched.push(id);
 		}
 
@@ -217,6 +204,42 @@ bmoon.chat = {
 			o.ape.lcsCurrentPipe = o.ape.getPipe(o.groupPubid);
 		} else {
 			o.ape.lcsCurrentPipe = null;
+		}
+	},
+
+	// so tired. 调了一天， 几个需要解释的地方：
+	// 1, 使用 getJSON，加上 JsonCallback=? 参数是为了能让cgi输出正确的json回调形式，实现夸域
+	// 2, 由于数据接口里存的是整个 RAW (自己组装多级 json raw 非常麻烦)，
+	//    所以数据接口返回的数据是一个字符串数组，而不是 ape 形式的对象数组
+	//      数据接口：   ["{\"time\":\"1286291022\",\"raw\":\"RAW_RECENTL
+	//      ape返回：   [{"time":"1286353563","raw":"LCS_DATA
+	//    所以不能直接调用 Ape.transport.read(data) 或者 o.ape.transport.read(data)
+	// 3, $.each 内部不能直接调用 Ape.transport.read('[' +v+ ']')
+	//    是因为read() ---> parseResponse() 会干扰 ape.check() 造成请求混乱
+	getMessage: function(name, aname, pg) {
+		var o = bmoon.chat.init();
+
+		// we use usersLoadPage[name] instead of pg. because we have soooo many pg
+		pg = bmoon.utl.type(o.usersLoadPage[name]) == 'Number' ? o.usersLoadPage[name]: 0;
+		
+		o.debug("get " + name + "'s msg page" + parseInt(pg + 1));
+		
+		if (bmoon.utl.type(o.usersTotalMsg[name]) != 'Number' || (o.usersTotalMsg[name] / 15) > pg) {
+			$.getJSON('http://www.kaiwuonline.com/json/msg?JsonCallback=?',
+					  {name: name, name2: aname, npp: 15, npg: pg+1},
+					  function(data) {
+						  if (data.success == 1 && bmoon.utl.type(data.raws) == 'Array') {
+							  $.each(data.raws, function(i, v) {
+								  var raw = JSON.parse(v);
+								  if (raw) {
+									  o.ape.callRaw(raw);
+								  }
+							  });
+							  if (data.ntt) o.usersTotalMsg[name] = parseInt(data.ntt);
+							  if (bmoon.utl.type(o.usersLoadPage[name]) == 'Number') o.usersLoadPage[name] += 1;
+							  else o.usersLoadPage[name] = 1;
+						  }
+					  });
 		}
 	},
 
@@ -320,15 +343,12 @@ bmoon.chat = {
 		var o = bmoon.chat.init();
 
 		var
-		uname = data.from == o.ape.lcsaname ? data.to: data.from,
+		uname = data.from == o.aname ? data.to: data.from,
 		userbox = o._nodeUser(uname, true),
 		recentbox = $('.recently', o._nodeMsg(uname, true)),
 		html = o._strMsg(data);
 		
-		$(html).appendTo(recentbox);
-		if (o.cUserID == uname) {
-			o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
-		}
+		$(html).prependTo(recentbox);
 	},
 
 	soundRemind: function(type) {
