@@ -75,6 +75,7 @@ dl.appinfo .state ul li {line-height: 24px;}
 	width:18px;
 	float: left;
 	margin: 3px 0 0 2px;
+	text-ident: -9999px;
 }
 
 .im-users ul li.cur .remove:hover {

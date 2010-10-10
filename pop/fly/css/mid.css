@@ -67,11 +67,12 @@ ul.uc-menu li a {
     /*border-width: 1px 0;*/
 	/*padding: 3ex 0;*/
 	margin-bottom: 4ex;
+	line-height: 18px;
 }
 #colone {
     float: left;
     width: 180px;
-    margin: 0 15px;
+    margin: 0 10px;
     text-align: center;
 	border: 1px solid #101010;
 	border-top: 0 none;
