@@ -8,7 +8,11 @@
 		<?cs if: Output.appinfo.state == #10 && Output.appinfo.pid == #0 ?>
 		<li><a target="_blank" href="/oms/users"><?cs var: Output.appinfo.numuser ?> 位管理员</a></li>
 		<li>用户来访短信通知： 关闭</li>
-		<li>保存最近 20 条聊天记录</li>
+		<?cs if: Output.appinfo.intime > 2011-01-01 ?>
+		<li>保存最近 2 个月聊天记录</li>
+		<?cs else ?>
+		<li>永久保存聊天记录</li>
+		<?cs /if ?>
 		<li>最高支持 20 人在线</li>
 		<li>可创建管理员 10 人</li>
 		<li><a target="_blank" href="/up">我要升级</a>(开发中。。。)</li>
