@@ -124,6 +124,12 @@ bmoon.chat = {
 		].join('');
 	},
 
+	_strMsgDivide: function(pg) {
+		var o = bmoon.chat.init();
+
+		return '<div class="item-divide">第 '+pg+' 页历史消息</div>';
+	},
+
 	onready: function(ape, pubid) {
 		var o = bmoon.chat.init(ape);
 
@@ -222,6 +228,10 @@ bmoon.chat = {
 		// we use usersLoadPage[name] instead of pg. because we have soooo many pg
 		pg = bmoon.utl.type(o.usersLoadPage[name]) == 'Number' ? o.usersLoadPage[name]: 0;
 		
+		var
+		recentbox = $('.recently', o._nodeMsg(name, true)),
+		html = o._strMsgDivide(pg+1);
+		
 		o.debug("get " + name + "'s msg page" + parseInt(pg + 1));
 		
 		if (bmoon.utl.type(o.usersTotalMsg[name]) != 'Number' || (o.usersTotalMsg[name] / 15) > pg) {
@@ -235,6 +245,8 @@ bmoon.chat = {
 									  o.ape.callRaw(raw);
 								  }
 							  });
+							  $(html).prependTo(recentbox);
+							  
 							  if (data.ntt) o.usersTotalMsg[name] = parseInt(data.ntt);
 							  if (bmoon.utl.type(o.usersLoadPage[name]) == 'Number') o.usersLoadPage[name] += 1;
 							  else o.usersLoadPage[name] = 1;

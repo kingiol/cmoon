@@ -110,12 +110,16 @@ dl.appinfo .state ul li {line-height: 24px;}
 	overflow: auto;
 }
 
-.item-join, .item-visit, .item-send, .item-msg {
+.item-join, .item-visit, .item-send, .item-msg, .item-divide {
 	margin: 8px 0;
 }
 .im-msgs .item-name, .im-msgs .item-time{
 	margin-left: 10px;
 	color: #999;
+}
+.im-msgs .item-divide {
+	height: 24px;
+	background-color: #fff;
 }
 .im-msgs .item-content {
 	display: block;
