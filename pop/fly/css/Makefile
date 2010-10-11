@@ -1,7 +1,7 @@
 BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
-FILES = b/base.css b/chat.css b/chat_ie6.css b/oms.css b/oms/edit.css b/oms/stat.css b/oms/users.css b/blog.css
+FILES = b/base.css b/chat.css b/chat_ie6.css b/oms.css b/oms/edit.css b/oms/stat.css b/oms/users.css b/oms/faq.css b/blog.css
 all: preload $(FILES)
 
 preload:
@@ -15,6 +15,7 @@ b/oms.css: oms/oms.css oms/scroll.css
 b/oms/edit.css: oms/tabs.css oms/edit.css
 b/oms/stat.css: oms/stat.css
 b/oms/users.css: oms/users.css oms/overlay.css
+b/oms/faq.css: oms/faq.css
 b/blog.css: blog.css
 
 %.css:

@@ -35,3 +35,27 @@ app_new {
 	}
 	Output = app/new.html
 }
+oms_faq {
+	Layout = layout.html
+	Dataset {
+		Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/faq.css" />
+#			js = <script src="/js/b/appnew.js"></script>
+			title = 站点管理常见问题
+			crumbs {
+				0 {
+					name = 我的站点
+					href = /oms
+				}
+				1 {
+					name = 常见问题
+					href = /oms/faq.html
+				}
+			}
+		}
+		Include {
+			content = oms/faq.html
+		}
+	}
+	Output = oms/faq.html
+}
