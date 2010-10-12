@@ -8,7 +8,7 @@
 		<?cs if: Output.appinfo.state == #10 && Output.appinfo.pid == #0 ?>
 		<li><a target="_blank" href="/oms/users"><?cs var: Output.appinfo.numuser ?> 位管理员</a></li>
 		<li>用户来访短信通知： 关闭</li>
-		<?cs if: Output.appinfo.intime > 2011-01-01 ?>
+		<?cs if: string.find(Output.appinfo.intime, "2010") == -1 ?>
 		<li>保存最近 2 个月聊天记录</li>
 		<?cs else ?>
 		<li>永久保存聊天记录</li>
