@@ -245,14 +245,13 @@ int place_data_get_local(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
 int place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "place");
 	char *ip;
 	
 	/*
 	 * input check
 	 */
-	LPRE_DBOP(cgi->hdf, conn, evt);
+	LPRE_EVTOP(cgi->hdf, evt);
 
 	HDF_GET_STR(cgi->hdf, PRE_QUERY".ip", ip);
 

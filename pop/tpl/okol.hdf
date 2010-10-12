@@ -1,0 +1,36 @@
+okol {
+	Layout = layout_nclient.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/okol.css" />
+			js = <script type="text/javascript" src="/js/b/okol.js"></script>
+			title = Oh, My Site
+			tabpart = 1
+			crumbs {
+				0 {
+					name = 我的KOL
+					href = /okol
+				}
+			}
+			actions {
+				0 {
+					name = 站点设置
+					href = /okol/edit
+				}
+				1 {
+					name = 站点统计
+					href = /okol/stat
+				}
+			}
+			actions_1 {
+				1_0 {
+					name = 用户管理
+					href = /okol/users
+				}
+			}
+        }
+		Include {
+			content = okol/okol.html
+		}
+	}
+}

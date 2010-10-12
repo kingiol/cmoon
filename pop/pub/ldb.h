@@ -4,7 +4,7 @@
 
 __BEGIN_DECLS
 
-#define LPRE_DBOP(hdf, conn, evt)						\
+#define LPRE_ALLOP(hdf, conn, evt)						\
 	if (hdf == NULL) {									\
 		mtc_err("hdf is null");							\
 		return RET_RBTOP_HDFNINIT;						\
@@ -18,7 +18,7 @@ __BEGIN_DECLS
 		return RET_RBTOP_EVTNINIT;						\
 	}
 
-#define LPRE_DBOP_NRET(hdf, conn, evt)					\
+#define LPRE_ALLOP_NRET(hdf, conn, evt)					\
 	if (hdf == NULL) {									\
 		mtc_err("hdf is null");							\
 		return;											\
@@ -30,6 +30,26 @@ __BEGIN_DECLS
 	if (evt == NULL) {									\
 		mtc_err("evt is null");							\
 		return;											\
+	}
+
+#define LPRE_DBOP(hdf, conn)							\
+	if (hdf == NULL) {									\
+		mtc_err("hdf is null");							\
+		return RET_RBTOP_HDFNINIT;						\
+	}													\
+	if (mdb_get_errcode(conn) != MDB_ERR_NONE) {		\
+		mtc_err("conn err %s", mdb_get_errmsg(conn));	\
+		return RET_RBTOP_DBNINIT;						\
+	}
+
+#define LPRE_EVTOP(hdf, evt)							\
+	if (hdf == NULL) {									\
+		mtc_err("hdf is null");							\
+		return RET_RBTOP_HDFNINIT;						\
+	}													\
+	if (evt == NULL) {									\
+		mtc_err("evt is null");							\
+		return RET_RBTOP_EVTNINIT;						\
 	}
 
 #define TABLE_RLS_USER	(hdf_get_value(g_cfg, "Db.Table.release_user", "rls_user_4"))

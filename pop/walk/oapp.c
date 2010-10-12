@@ -22,15 +22,13 @@ static void app_after_login(CGI *cgi, char *aname, char *masn)
 
 int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	
-	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname;
 	
 	/*
 	 * input check
 	 */
-	LPRE_DBOP(cgi->hdf, conn, evt);
+	LPRE_EVTOP(cgi->hdf, evt);
 
 	HDF_GET_STR(cgi->hdf, PRE_QUERY".aname", aname);
 
@@ -59,14 +57,13 @@ int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
 int app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *asn, *email, masn[LEN_CK];
 	
 	/*
 	 * input check
 	 */
-	LPRE_DBOP(cgi->hdf, conn, evt);
+	LPRE_EVTOP(cgi->hdf, evt);
 	
 	HDF_GET_STR(cgi->hdf, PRE_QUERY".aname", aname);
 	HDF_GET_STR(cgi->hdf, PRE_QUERY".asn", asn);
@@ -102,14 +99,13 @@ int app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
 int app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *asn, masn[LEN_CK];
 	
 	/*
 	 * input check
 	 */
-	LPRE_DBOP(cgi->hdf, conn, evt);
+	LPRE_EVTOP(cgi->hdf, evt);
 	
 	HDF_GET_STR(cgi->hdf, PRE_QUERY".aname", aname);
 	HDF_GET_STR(cgi->hdf, PRE_QUERY".asn", asn);
@@ -150,19 +146,10 @@ int app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
 int app_logout_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname;
-	int ret;
 	
-	/*
-	 * want sth seriously
-	 */
-	ret = app_check_login_data_get(cgi, dbh, evth, ses);
-	if (ret != RET_RBTOP_OK) {
-		mtc_warn("doesn't login, %d", ret);
-		return RET_RBTOP_NOTLOGIN;
-	}
+	APP_CHECK_LOGIN();
 
 	HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".aname", aname);
 	
@@ -176,17 +163,17 @@ int app_logout_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
 int app_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *masn;
 	
 	/*
 	 * input check
 	 */
-	LPRE_DBOP(cgi->hdf, conn, evt);
+	LPRE_EVTOP(cgi->hdf, evt);
 
 	HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".aname", aname);
 	HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".masn", masn);
+	LEGAL_CK_ANAME(aname);
 
 	/*
 	 * prepare data 

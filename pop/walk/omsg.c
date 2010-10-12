@@ -4,11 +4,10 @@
 
 int msg_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "main");
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "msg");
 	//char *from, *to;
 
-	LPRE_DBOP(cgi->hdf, conn, evt);
+	LPRE_EVTOP(cgi->hdf, evt);
 	
 	//HDF_GET_STR(cgi->hdf, PRE_QUERY".from", from);
 	//HDF_GET_STR(cgi->hdf, PRE_QUERY".to", to);

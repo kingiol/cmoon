@@ -13,6 +13,7 @@ static void lutil_donotcall()
 	blog_data_get(NULL, NULL, NULL, NULL);
 	place_data_get(NULL, NULL, NULL, NULL);
 	msg_data_get(NULL, NULL, NULL, NULL);
+	okol_data_get(NULL, NULL, NULL, NULL);
 }
 
 void* lutil_get_data_handler(void *lib, CGI *cgi, session_t *ses)
