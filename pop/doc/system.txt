@@ -108,6 +108,7 @@ postgresql
     postgres -D /usr/local/pgsql/data
     pg_ctl -D /usr/local/pgsql/data -l logfile start
 
+apt-get install postgresql-contrib
 1, 建立 postgresql 账号
 	用 postgres 用户登录psql,	执行
 	CREATE USER lcser CREATEDB password 'loveu';
@@ -163,6 +164,8 @@ postgresql
    \i /usr/local/moon/pop/mtls/tables_dyn.sql
    \c lcs_mtool
    \i /usr/local/moon/pop/mtls/tables_mtls.sql
+   \i /usr/local/moon/pop/mtls/view_mtls.sql
+   \i /usr/share/postgresql/8.4/contrib/dblink.sql
 
 备注:
 	上述配置, mnuser 只能以bigml通过 local 方式登录, 如需其他方式请修改 pg_hba.conf 文件,
