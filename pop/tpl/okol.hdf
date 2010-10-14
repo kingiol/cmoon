@@ -3,7 +3,10 @@ okol {
 	Dataset {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/okol.css" />
-			js = <script type="text/javascript" src="/js/b/okol.js"></script>
+			js << EOM
+				<!--[if IE]><script type="text/javascript" src="/js/b/okol_ie.js"></script><![endif]-->
+				<script type="text/javascript" src="/js/b/okol.js"></script>
+EOM
 			title = Oh, My Site
 			tabpart = 1
 			crumbs {

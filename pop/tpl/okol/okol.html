@@ -1,0 +1,41 @@
+<dl class="query">
+  <dt>统计内容</dt>
+  <dd>
+	<select id="stat-type">
+	  <option value="0">注册站点数</option>
+	  <option value="1">新用户数</option>
+	  <option value="2">首次访问数</option>
+	  <option value="3">打开页面数</option>
+	  <option value="4">事件消息数</option>
+	  
+	  <option value="100">总注册站点数</option>
+	  <option value="101">总用户数</option>
+	  <option value="102">总首次访问数</option>
+	  <option value="103">总打开页面数</option>
+	  <option value="104">总事件消息数</option>
+	</select>
+  </dd>
+
+  <dt>开始时间</dt>
+  <dd>
+	<input type="text" id="times" class="datep" />
+  </dd>
+  <dt>结束时间</dt>
+  <dd>
+	<input type="text" id="timee" class="datep" />
+  </dd>
+
+  <dt><input type="button" id="do" class="middle" value="查询" /></dt>
+</dl>
+
+<script>
+  var o = bmoon.okol;
+  
+  o.stdata = [];
+  <?cs each: st = Output.sts ?>
+  o.stdata.push([<?cs var: st.intime ?>, <?cs var: st.count ?>]);
+  <?cs /each ?>
+</script>
+
+<div id="stat-result">
+</div>

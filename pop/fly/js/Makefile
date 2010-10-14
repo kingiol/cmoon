@@ -1,7 +1,8 @@
 BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
-FILES = b/base.js b/chat.js b/kol.js b/chatb.js b/chatc.js b/oms.js b/oms/edit.js b/oms/stat.js b/oms/users.js b/appnew.js
+FILES = b/base.js b/chat.js b/kol.js b/chatb.js b/chatc.js b/oms.js b/oms/edit.js b/oms/stat.js b/oms/users.js b/appnew.js \
+	    b/okol_ie.js b/okol.js
 all: preload $(FILES)
 
 preload:
@@ -31,6 +32,11 @@ b/oms/stat.js: oms/stat.js
 b/oms/users.js: app/new.js oms/users.js
 
 b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
+
+b/okol_ie.js: pub/datepicker/jquery.bgiframe.min.js pub/flot/excanvas.min.js
+b/okol.js: pub/datepicker/date.js pub/datepicker/jquery.datePicker.js \
+	       pub/flot/jquery.flot.js \
+	       okol/okol.js
 
 %.js:
 	@echo -n > $@
