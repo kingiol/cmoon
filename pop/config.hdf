@@ -31,10 +31,11 @@ Db {
 	QueryCond {
 		stat {
 			s {
-				0 = intime
+				tms = intime >
+				tme = intime <
 			}
 			i {
-				0 = type
+				type = type =
 			}
 		}
 	}
