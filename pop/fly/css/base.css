@@ -18,7 +18,7 @@ input.long {width: 180px;}
 input.middle {width: 100px;}
 input.short {width: 25px;}
 input.submitbtn, button.submitbtn {
-	margin-top: 10px;
+	/*margin-top: 10px;*/
 	padding: 1px 28px;
 	text-align: center;
 	vertical-align: middle;
