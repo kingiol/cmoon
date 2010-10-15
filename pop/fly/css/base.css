@@ -11,7 +11,6 @@ a {color: #DB3946; cursor: pointer; text-decoration: none; }
 	margin: 2ex 0;
 }
 */
-p.u {color:#767676;}
 /*a:hover {background-color: #DB3946; color: #FFF !important; text-decoration: none; }*/
 input, textarea {border: 1px solid #676767;}
 input.long {width: 180px;}
@@ -54,6 +53,7 @@ dl.form dd.error .indicator {
 	font: 12px Georgia;
 	font-weight: bold;
 }
+.slight {color:#767676;}
 .em {font-weight: bold; font-size: 120%;}
 .hint {color: #bb0000}
 .error {color: #ff0000}

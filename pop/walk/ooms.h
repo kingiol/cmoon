@@ -14,5 +14,7 @@ int oms_users_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 int oms_users_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 int oms_users_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
+int oms_secy_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+
 __END_DECLS
 #endif /* __OOMS_H__ */

@@ -1,7 +1,22 @@
 <div id="content-sub">
   <div class="info">
-	<span class="new"><a href="javascript: void(0);" rel="#addoverlay">创建新用户</a></span>
-	<p class="u">您最多可以为 <?cs var: Output.appinfo.aname ?> 创建 10 个后台帐户。 &nbsp; 如果您希望有更多用户，请购买专业版。</p>
+	<dl class="form">
+	  <dt>默认接待员：<dt>
+	  <dd>
+		<select id="select-secy">
+		  <?cs each: user = Output.users ?>
+		  <option value="<?cs var: user.aname ?>" <?cs if: user.secy == #1 ?>selected="selected"<?cs /if ?>><?cs var: user.aname ?></option>
+		  <?cs /each ?>
+		</select>
+		<span class="slight">(所有管理员离线时，新来的用户访问信息和留言会被默认接待员下次登录时收到)</span>
+		<span class="indicator"></span>
+	  </dd>
+	  
+	  <dt><span class="new"><a href="javascript: void(0);" rel="#addoverlay">创建新用户</a></span></dt>
+	  <dd>
+		<p class="slight">您最多可以为 <?cs var: Output.appinfo.aname ?> 创建 10 个后台帐户。 &nbsp; 如果您希望有更多用户，请购买专业版。</p>
+	  </dd>
+	</dl>
   </div>
 
   <table class="userlist" id="usertable">

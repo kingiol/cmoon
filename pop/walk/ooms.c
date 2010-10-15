@@ -81,11 +81,8 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 * trigger
 	 */
 	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPUSERS, FLAGS_SYNC);
-	HDF *node = hdf_get_obj(evt->hdfrcv, "userlist");
-	if (node) {
-		hdf_copy(cgi->hdf, PRE_OUTPUT".userlist", node);
-		ips2places(hdf_get_obj(cgi->hdf, PRE_OUTPUT".userlist"), evth);
-	}
+	hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
+	ips2places(hdf_get_obj(cgi->hdf, PRE_OUTPUT".userlist"), evth);
 	
 	return RET_RBTOP_OK;
 }
@@ -141,7 +138,6 @@ int oms_edit_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 */
 	hdf_set_value(evt->hdfsnd, "aname", aname);
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
-	mcs_hdf_escape_val(evt->hdfsnd);
 	
 	/*
 	 * trigger
@@ -169,10 +165,7 @@ int oms_users_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 * trigger
 	 */
 	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APP_O_USERS, FLAGS_SYNC);
-	HDF *node = hdf_get_obj(evt->hdfrcv, "users");
-	if (node) {
-		hdf_copy(cgi->hdf, PRE_OUTPUT".users", node);
-	}
+	hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
 	
 	return RET_RBTOP_OK;
 }
@@ -264,5 +257,22 @@ int oms_users_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 		return RET_RBTOP_EVTE;
 	}
 	
+	return RET_RBTOP_OK;
+}
+
+int oms_secy_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname, *uname;
+
+	HDF_GET_STR(cgi->hdf, PRE_QUERY".aname", uname);
+	
+	APP_CHECK_LOGIN_ADMIN(uname);
+
+	hdf_set_value(evt->hdfsnd, "pname", aname);
+	hdf_set_value(evt->hdfsnd, "aname", uname);
+
+	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APP_SETSECY, FLAGS_NONE);
+
 	return RET_RBTOP_OK;
 }

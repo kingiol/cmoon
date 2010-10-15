@@ -18,17 +18,17 @@ EOM
 			actions {
 				0 {
 					name = 站点设置
-					href = /okol/edit
+					href = /oms/edit
 				}
 				1 {
 					name = 站点统计
-					href = /okol/stat
+					href = /oms/stat
 				}
 			}
 			actions_1 {
 				1_0 {
 					name = 用户管理
-					href = /okol/users
+					href = /oms/users
 				}
 			}
         }

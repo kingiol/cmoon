@@ -7,6 +7,7 @@ bmoon.omsusers = {
 		if (o.inited) return o;
 
 		o.users = $('#usertable');
+		o.secy = $('#select-secy');
 		o.addoverlay = $('a[rel="#addoverlay"]').overlay({mask: '#999', api: true});
 
 		o.inited = true;
@@ -46,8 +47,28 @@ bmoon.omsusers = {
 	bindClick: function() {
 		var o = bmoon.omsusers.init();
 
+		o.secy.change(o.setSecy);
 		$('#submit').unbind('click').click(o.userAdd);
 		$('a.deluser').live('click', o.userDel);
+	},
+
+	setSecy: function() {
+		var o = bmoon.omsusers.init();
+
+		var id = o.secy.val(),
+		p = $(this).parent();
+		
+		p.removeClass('success').removeClass('error').addClass('loading');
+
+		$.post('/oms/secy', {aname: id}, function(data) {
+			p.removeClass('loading');
+			
+			if (data.success == '1') {
+				p.addClass('success');
+			} else {
+				p.addClass('error');
+			}
+		}, 'json');
 	},
 	
 	userAdd: function() {
