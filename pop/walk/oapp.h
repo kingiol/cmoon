@@ -20,12 +20,12 @@ __BEGIN_DECLS
 			mtc_warn("doesen't login");									\
 			return RET_RBTOP_NOTLOGIN;									\
 		}																\
+		HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".aname", aname);			\
+		LEGAL_CK_ANAME(aname);											\
 		if (hdf_get_int_value(evt->hdfrcv, "pid", -1) != 0) {			\
 			mtc_warn("%s not super admin", aname);						\
 			return RET_RBTOP_LIMITE;									\
 		}																\
-		HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".aname", aname);			\
-		LEGAL_CK_ANAME(aname);											\
 		/* we can also get uname's info instead of get aname's ousers */ \
 		hdf_set_value(evt->hdfsnd, "pname", aname);						\
 		MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APP_O_USERS, FLAGS_SYNC); \

@@ -1,11 +1,11 @@
 <div id="content-sub">
   <div class="info">
 	<dl class="form">
-	  <dt>默认接待员：<dt>
+	  <dt>默认接待员：</dt>
 	  <dd>
 		<select id="select-secy">
 		  <?cs each: user = Output.users ?>
-		  <option value="<?cs var: user.aname ?>" <?cs if: user.secy == #1 ?>selected="selected"<?cs /if ?>><?cs var: user.aname ?></option>
+		  <option value="<?cs var: user.aname ?>" <?cs if: bitop.and(user.tune, 4) == #4 ?>selected="selected"<?cs /if ?>><?cs var: user.aname ?></option>
 		  <?cs /each ?>
 		</select>
 		<span class="slight">(所有管理员离线时，新来的用户访问信息和留言会被默认接待员下次登录时收到)</span>

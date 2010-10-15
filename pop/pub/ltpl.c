@@ -99,6 +99,7 @@ int ltpl_parse_dir(char *dir, HASH *outhash)
 
 			err = cgi_register_strfuncs(cs);
 			JUMP_NOK(err, wnext);
+			mcs_register_bitop_functions(cs);
 			tpl = hdf_get_value(child, PRE_CFG_LAYOUT, "null.html");
 			snprintf(fname, sizeof(fname), "%s/%s", PATH_TPL, tpl);
 			err = cs_parse_file(cs, fname);
