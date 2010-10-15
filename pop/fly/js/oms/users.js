@@ -67,6 +67,7 @@ bmoon.omsusers = {
 				p.addClass('success');
 			} else {
 				p.addClass('error');
+				$('<span>'+ data.errmsg +'</span>').appendTo(p);
 			}
 		}, 'json');
 	},

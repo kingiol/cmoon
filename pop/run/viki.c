@@ -79,8 +79,9 @@ int main(int argc, char **argv, char **envp)
 			goto response;
 		}
 
-		if (mutil_client_attack(cgi->hdf, "viki",
+		if (mutil_client_attack(cgi->hdf, "viki", "lcs_uname",
 								LMT_CLI_ATTACK, PERIOD_CLI_ATTACK)) {
+			ret = RET_RBTOP_ATTACKE;
 			goto response;
 		}
 		
