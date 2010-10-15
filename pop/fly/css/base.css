@@ -54,6 +54,7 @@ dl.form dd.error .indicator {
 	font: 12px Georgia;
 	font-weight: bold;
 }
+.em {font-weight: bold; font-size: 120%;}
 .hint {color: #bb0000}
 .error {color: #ff0000}
 
