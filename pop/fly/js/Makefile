@@ -24,7 +24,7 @@ b/chatc.js: pub/jquery.cookie.js pub/bmoon.js
 
 #b/oms.js: pub/jquery.mnscrollpage.js pub/jquery.seekAttention.js
 b/oms.js: pub/jquery.mnscrollpage.js \
-		  ape/app/bmoon.chatb.js ape/Build/apeClient.js ape/app/livecsb.js \
+		  ape/app/bmoon.chatb.js ape/Build/JSON.js ape/Build/apeClient.js ape/app/livecsb.js \
 		  pub/jquerytools/src/scrollable/scrollable.js pub/jquerytools/src/scrollable/scrollable.navigator.js \
 		  oms/oms.js
 b/oms/edit.js: pub/jquerytools/src/tabs/tabs.js oms/edit.js

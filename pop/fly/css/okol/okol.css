@@ -1,7 +1,7 @@
 a.dp-choose-date {
 	background:transparent url(/img/bg/calendar.png) no-repeat scroll 0 0;
 	display:block;
-	float:right;
+	float:left;
 	height:16px;
 	margin:3px 3px 0;
 	overflow:hidden;
@@ -12,8 +12,9 @@ a.dp-choose-date {
 
 dl.query {height: 20px; margin-bottom: 2em;}
 dl.query select {border: 1px solid #676767;}
-dl.query dt {float: left; margin: 0 10px 0 30px; line-height: 20px; text-align: right;}
+dl.query dt {float: left; margin: 0 5px 0 20px; line-height: 20px; text-align: right;}
 dl.query dd {float: left; line-height: 20px;}
+dl.query dd input {float: left;}
 
 #stat-result {
 	width: 700px;

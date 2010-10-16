@@ -1,13 +1,15 @@
 BASEDIR = ../../../../
 include $(BASEDIR)Make.env
 
-FILES = Build/apeCore.js Build/apeClient.js
+FILES = Build/JSON.js Build/apeCore.js Build/apeClient.js
 
-DIR_JSF = /home/bigml/web/APE_JSF/
+DIR_JSF = /usr/local/APE_JSF/
 DIR_CORE = $(DIR_JSF)Source/
 DIR_CLIENT = $(DIR_JSF)Clients/
 
 all: $(FILES)
+
+Build/JSON.js: $(DIR_CORE)Core/JSON.js
 
 Build/apeCore.js: $(DIR_CORE)mootools-core.js \
 		$(DIR_CORE)Core/APE.js $(DIR_CORE)Core/Events.js $(DIR_CORE)Core/Core.js $(DIR_CORE)Core/JSON.js $(DIR_CORE)Core/Session.js $(DIR_CORE)Core/Utility.js \
