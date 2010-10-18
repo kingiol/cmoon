@@ -237,7 +237,7 @@ int oms_users_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	
 	hdf_set_value(evt->hdfsnd, "pname", pname);
 	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APP_O_USERS, FLAGS_SYNC);
-	if (!hdf_get_obj(evt->hdfrcv, aname)) {
+	if (!hdf_get_valuef(evt->hdfrcv, "users.%s.aname", aname)) {
 		mtc_warn("%s not %s's", aname, pname);
 		return RET_RBTOP_LIMITE;
 	}

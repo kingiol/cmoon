@@ -48,6 +48,7 @@ int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 */
 	if (hdf_get_obj(evt->hdfrcv, "state")) {
 		hdf_set_value(cgi->hdf, PRE_OUTPUT".exist", "1");
+		hdf_set_value(cgi->hdf, PRE_OUTPUT".msg", "站点名已被占用");
 	} else {
 		hdf_set_value(cgi->hdf, PRE_OUTPUT".exist", "0");
 	}

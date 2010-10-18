@@ -33,6 +33,7 @@ bmoon.omsedit = {
 		tune = c.attr('tune'),
 		val = c.attr('checked') ? 1: 0;
 
+		$(".error", p).remove();
 		p.removeClass('success').removeClass('error').addClass('loading');
 
 		$.post('/oms/edit', {tune: tune, tuneop: val}, function(data) {
@@ -42,7 +43,7 @@ bmoon.omsedit = {
 				p.addClass('success');
 			} else {
 				p.addClass('error');
-				$('<span>'+ data.errmsg +'</span>').appendTo(p);
+				$('<span class="error">'+ data.errmsg +'</span>').appendTo(p);
 			}
 		}, 'json');
 	}

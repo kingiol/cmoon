@@ -1,20 +1,11 @@
-<div id="colone">
-  <div class="cktitle">常见问题</div>
-  <div class="listcon">
-	<ul>
-	  <li><a href="/oms">管理已注册站点</a></li>
-	</ul>
-  </div>
-</div>
-
-<div id="coltwo">
+<div id="content-sub">
   <div id="add">
-	<div class="cktitle">添加站点信息</div>
+	<div class="cktitle">注册新站点</div>
 	<dl class="form">
 	  <dt>站点标识：</dt>
 	  <dd>
-		<input type="text" name="aname" id="aname" class="long VAL_NEWAPP vname" />
-		<span>（字母 数字 . 或 -）</span>
+		<input type="text" name="aname" id="aname" class="long VAL_NEWAPP vrequire" vmax="256" vmin="3" />
+		<span>（3 ~ 128个字符）</span>
 		<span class="indicator"></span>
 	  </dd>
 	  
@@ -23,7 +14,7 @@
 		<input type="text" name="email" id="email" class="long VAL_NEWAPP vrequire vemail" />
 	  </dd>
 	  
-	  <dt>管理密码：</dt>
+	  <dt>登录密码：</dt>
 	  <dd>
 		<input type="password" name="asn" id="asn" class="VAL_NEWAPP vrequire" />
 	  </dd>

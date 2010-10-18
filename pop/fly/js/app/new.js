@@ -31,17 +31,19 @@ bmoon.appnew = {
 		p = $(this).parent();
 		
 		if (aname.length > 0) {
+			$(".error", p).remove();
 			p.removeClass('success').removeClass('error').addClass('loading');
 			$.getJSON('/json/app/exist', {aname: aname}, function(data) {
 				if (data.success == 1) {
 					if (data.exist == 1) {
+						$('<span class="error">'+ data.msg +'</span>').appendTo(p);
 						p.addClass('error');
 					} else {
 						p.addClass('success');
 					}
 				} else {
 					p.addClass('error');
-					$('<span>'+ data.errmsg +'</span>').appendTo(p);
+					$('<span class="error">'+ data.errmsg +'</span>').appendTo(p);
 				}
 			});
 		}

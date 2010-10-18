@@ -58,6 +58,7 @@ bmoon.omsusers = {
 		var id = o.secy.val(),
 		p = $(this).parent();
 		
+		$(".error", p).remove();
 		p.removeClass('success').removeClass('error').addClass('loading');
 
 		$.post('/oms/secy', {aname: id}, function(data) {
@@ -67,7 +68,7 @@ bmoon.omsusers = {
 				p.addClass('success');
 			} else {
 				p.addClass('error');
-				$('<span>'+ data.errmsg +'</span>').appendTo(p);
+				$('<span class="error">'+ data.errmsg +'</span>').appendTo(p);
 			}
 		}, 'json');
 	},
