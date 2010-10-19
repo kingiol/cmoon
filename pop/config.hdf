@@ -10,12 +10,12 @@ Dataset {
 				href = /index.html
 			}
 			1 {
-				name = 我的站点
-				href = /oms
+				name = 使用手册
+				href = /manual.html
 			}
 			2 {
-				name = 开物博客
-				href = /blog/index.html
+				name = 我的站点
+				href = /oms
 			}
 		}
 	}

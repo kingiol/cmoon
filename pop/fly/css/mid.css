@@ -97,25 +97,25 @@ pre {
 }
 
 /* ck means chunk */
-#colone .cktitle, #coltwo .cktitle {
+.cktitle, .cktitle {
     border-bottom: 1px solid #101010;
     font-weight: bold;
     font-size: 12px;
 }
-#coltwo .ckhalf {width: 345px;}
-#coltwo .ckthird {width: 230px;}
-#coltwo .ckquarter {width: 175px;}
-#coltwo .ckfifth {width: 135px;}
-#coltwo .cksixth, #coltwo .ck4em {width: 100px;}
-#coltwo .ck2em {width: 2em;}
+.ckhalf {width: 345px;}
+.ckthird {width: 230px;}
+.ckquarter {width: 175px;}
+.ckfifth {width: 135px;}
+.cksixth, #coltwo .ck4em {width: 100px;}
+.ck2em {width: 2em;}
 
-#coltwo .ckleft {
+.ckleft {
     float: left;
     margin: 0 10px 0 0;
     text-align: left;
 }
 
-#coltwo .ckright {
+.ckright {
     float: right;
     margin: 0 0 0 10px;
     text-align: right;

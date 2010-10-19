@@ -8,7 +8,7 @@ okol {
 				<script type="text/javascript" src="/js/b/okol.js"></script>
 EOM
 			title = Oh, My Site
-			tabpart = 1
+			tabpart = 2
 			crumbs {
 				0 {
 					name = 我的KOL

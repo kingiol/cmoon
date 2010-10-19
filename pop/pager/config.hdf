@@ -2,6 +2,8 @@ index {
 	Layout = layout.html
 	Dataset {
 		Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/index.css" />
+			js = <script src="/js/b/index.js"></script>
 			title = 首页 - Easy Our Life
 			tabpart = 0
 		}
@@ -11,6 +13,28 @@ index {
 	}
 	Output = index.html
 }
+
+manual {
+	Layout = layout.html
+	Dataset {
+		Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/manual.css" />
+			title = 使用手册
+			tabpart = 1
+			crumbs {
+				0 {
+					name = 使用手册
+					href = /manual.html
+				}
+			}
+		}
+		Include {
+			content = manual.html
+		}
+	}
+	Output = manual.html
+}
+
 app_new {
 	Layout = layout.html
 	Dataset {
@@ -24,7 +48,7 @@ app_new {
 					href = /index.html
 				}
 				1 {
-					name = 添加站点
+					name = 注册新站点
 					href = /app/new.html
 				}
 			}
@@ -35,6 +59,7 @@ app_new {
 	}
 	Output = app/new.html
 }
+
 oms_faq {
 	Layout = layout.html
 	Dataset {

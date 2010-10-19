@@ -1,8 +1,11 @@
 BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
-FILES = b/base.js b/chat.js b/kol.js b/chatb.js b/chatc.js b/oms.js b/oms/edit.js b/oms/stat.js b/oms/users.js b/appnew.js \
+FILES = b/base.js b/chat.js b/kol.js b/chatb.js b/chatc.js \
+		b/index.js b/appnew.js \
+		b/oms.js b/oms/edit.js b/oms/stat.js b/oms/users.js \
 	    b/okol_ie.js b/okol.js
+
 all: preload $(FILES)
 
 preload:
@@ -15,14 +18,17 @@ b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/jquery.md5.js \
 	       pub/jquerytools/src/overlay/overlay.js \
 	       pub/bmoon.js bmoon.lcs.js \
 		   pub/jquery.hotkeys.js
-#		   pub/superfish-1.4.8/js/superfish.js \
 
+# Client
 b/kol.js: bmoon.kol.js
 b/chat.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/app/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
 b/chatb.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/bmoon.js
 b/chatc.js: pub/jquery.cookie.js pub/bmoon.js
 
-#b/oms.js: pub/jquery.mnscrollpage.js pub/jquery.seekAttention.js
+# Server
+b/index.js: pub/jquerytools/src/scrollable/scrollable.js index.js
+b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
+
 b/oms.js: pub/jquery.mnscrollpage.js \
 		  ape/app/bmoon.chatb.js ape/Build/JSON.js ape/Build/apeClient.js ape/app/livecsb.js \
 		  pub/jquerytools/src/scrollable/scrollable.js pub/jquerytools/src/scrollable/scrollable.navigator.js \
@@ -30,8 +36,6 @@ b/oms.js: pub/jquery.mnscrollpage.js \
 b/oms/edit.js: pub/jquerytools/src/tabs/tabs.js oms/edit.js
 b/oms/stat.js: oms/stat.js
 b/oms/users.js: app/new.js oms/users.js
-
-b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
 
 b/okol_ie.js: pub/datepicker/jquery.bgiframe.min.js pub/flot/excanvas.min.js
 b/okol.js: pub/datepicker/date.js pub/datepicker/jquery.datePicker.js \

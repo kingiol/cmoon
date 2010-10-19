@@ -1,0 +1,1528 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg3368"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="manual.svg"
+   inkscape:export-filename="/home/bigml/web/moon/pop/fly/pic/manual.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs3370">
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Mend"
+       style="overflow:visible;">
+      <path
+         id="path5074"
+         style="font-size:12.0;fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.6) rotate(180) translate(0,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Lend"
+       style="overflow:visible;">
+      <path
+         id="path5068"
+         style="font-size:12.0;fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) rotate(180) translate(1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mstart"
+       style="overflow:visible">
+      <path
+         id="path5053"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.4) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path5047"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective3376" />
+    <inkscape:perspective
+       id="perspective3386"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="751"
+       height="475"
+       patternTransform="translate(15.5,395.86218)"
+       id="pattern3351">
+      <image
+         xlink:href="file:///home/bigml/web/moon/pop/fly/pic/new4.jpg"
+         width="751"
+         height="475"
+         id="image3347"
+         x="0"
+         y="0" />
+    </pattern>
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="912"
+       height="187"
+       patternTransform="translate(35,692.86218)"
+       id="pattern3261">
+      <image
+         xlink:href="file:///home/bigml/web/moon/pop/fly/pic/new2.jpg"
+         width="912"
+         height="187"
+         id="image3257"
+         x="0"
+         y="0" />
+    </pattern>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3273">
+      <rect
+         y="702.58124"
+         x="48.21909"
+         height="168.56183"
+         width="610.56183"
+         id="rect3275"
+         style="fill:#ffffff;fill-opacity:1;stroke:#0197fd;stroke-width:7.43817425;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    </clipPath>
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="950"
+       height="202"
+       patternTransform="translate(48,633.36218)"
+       id="pattern3004">
+      <image
+         xlink:href="file:///home/bigml/web/moon/pop/fly/pic/new.jpg"
+         width="950"
+         height="202"
+         id="image3000"
+         x="0"
+         y="0" />
+    </pattern>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3464">
+      <rect
+         y="642.97858"
+         x="36.616383"
+         height="166.76721"
+         width="468.76721"
+         id="rect3466"
+         style="fill:#ffffff;fill-opacity:1;stroke:#0197fd;stroke-width:6.2327919;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective6006"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective6069"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective6109"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective6317"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath6330">
+      <rect
+         y="973.06097"
+         x="-37.123096"
+         height="193.5186"
+         width="717.23749"
+         id="rect6332"
+         style="fill:#ffffff;fill-opacity:1;stroke:#0197fd;stroke-width:0.75381827;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective6342"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective8143"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-7"
+       style="overflow:visible">
+      <path
+         id="path5074-0"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8270"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-2"
+       style="overflow:visible">
+      <path
+         id="path5074-1"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8328"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-5"
+       style="overflow:visible">
+      <path
+         id="path5074-6"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8328-5"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-4"
+       style="overflow:visible">
+      <path
+         id="path5074-7"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8328-8"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-3"
+       style="overflow:visible">
+      <path
+         id="path5074-64"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8467"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-70"
+       style="overflow:visible">
+      <path
+         id="path5074-76"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8512"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-30"
+       style="overflow:visible">
+      <path
+         id="path5074-14"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8552"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1"
+       style="overflow:visible">
+      <path
+         id="path5074-4"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath8587">
+      <rect
+         y="395.49484"
+         x="25.132584"
+         height="465.73486"
+         width="727.7348"
+         id="rect8589"
+         style="fill:#ffffff;fill-opacity:1;stroke:#0197fd;stroke-width:9.26516438;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective8614"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-9"
+       style="overflow:visible">
+      <path
+         id="path5074-72"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8654"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-0"
+       style="overflow:visible">
+      <path
+         id="path5074-43"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8694"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-08"
+       style="overflow:visible">
+      <path
+         id="path5074-3"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8762"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-8"
+       style="overflow:visible">
+      <path
+         id="path5074-62"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8802"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-36"
+       style="overflow:visible">
+      <path
+         id="path5074-45"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective8836"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective8936"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective9010"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective9084"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath9092">
+      <rect
+         style="opacity:0.68586384;fill:#eeeeee;fill-opacity:1;stroke:#0197fd;stroke-width:2.0055325;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect9094"
+         width="288.99445"
+         height="35.994465"
+         x="295.50275"
+         y="2064.865" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective9164"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective9238"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath9246">
+      <rect
+         style="opacity:0.68586384;fill:#eeeeee;fill-opacity:1;stroke:#0197fd;stroke-width:3;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect9248"
+         width="345"
+         height="82"
+         x="306"
+         y="2037.3622" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective9318"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective9392"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective9466"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath9474">
+      <rect
+         style="opacity:0.68586384;fill:#eeeeee;fill-opacity:1;stroke:#0197fd;stroke-width:3;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect9476"
+         width="271"
+         height="99"
+         x="301"
+         y="2593.3623" />
+    </clipPath>
+    <inkscape:perspective
+       id="perspective9486"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-93"
+       style="overflow:visible">
+      <path
+         id="path5074-5"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective9531"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-37"
+       style="overflow:visible">
+      <path
+         id="path5074-768"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective9531-1"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-58"
+       style="overflow:visible">
+      <path
+         id="path5074-04"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective9593"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-52"
+       style="overflow:visible">
+      <path
+         id="path5074-8"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective9627"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3088"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#ffffff"
+     borderopacity="0.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="0"
+     inkscape:zoom="0.5"
+     inkscape:cx="449.04464"
+     inkscape:cy="-1681.1339"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1440"
+     inkscape:window-height="874"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3373">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:url(#pattern3004);stroke:none"
+       width="950"
+       height="202"
+       x="48"
+       y="633.36218"
+       id="rect3007"
+       clip-path="url(#clipPath3464)"
+       transform="translate(317.61641,-255.52625)" />
+    <rect
+       style="fill:url(#pattern3261);stroke:none"
+       width="912"
+       height="187"
+       x="35"
+       y="692.86218"
+       id="rect3264"
+       clip-path="url(#clipPath3273)"
+       transform="translate(164.21908,-12.52625)" />
+    <rect
+       style="fill:url(#pattern3351);stroke:none"
+       width="751"
+       height="475"
+       x="15.5"
+       y="395.86218"
+       id="rect3354"
+       clip-path="url(#clipPath8587)"
+       transform="translate(70.132614,932.4738)" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:120%;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:'文鼎ＰＬ简中楷';-inkscape-font-specification:'文鼎ＰＬ简中楷'"
+       x="-57.773438"
+       y="-124.63782"
+       id="text3468"
+       sodipodi:linespacing="120%"><tspan
+         sodipodi:role="line"
+         id="tspan3470"
+         x="-57.773438"
+         y="-124.63782"
+         dy="0 0 0 0 0 0.71428573 0 0 0 0 0 0 0 0 0 0 -0.71428573">欢迎使用 开物在线 之 在线客服 工具。</tspan><tspan
+         sodipodi:role="line"
+         x="-57.773438"
+         y="-100.63782"
+         id="tspan3490" /><tspan
+         sodipodi:role="line"
+         x="-57.773438"
+         y="-76.637817"
+         id="tspan3488"
+         style="letter-spacing:0;-inkscape-font-specification:'文鼎ＰＬ简中楷';font-family:'文鼎ＰＬ简中楷';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:18px;text-anchor:start;text-align:start;writing-mode:lr;line-height:120%">该文档将有助于你初步了解在线客服的使用方法和一些常见问题。</tspan><tspan
+         sodipodi:role="line"
+         x="-57.773438"
+         y="-52.637814"
+         id="tspan4990"><tspan
+           dy="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 7 -10"
+           id="tspan3078"
+           style="-inkscape-font-specification:'文鼎ＰＬ简中楷';font-family:'文鼎ＰＬ简中楷';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:18px;text-anchor:start;text-align:start;writing-mode:lr;line-height:120%">更多使用中遇到的问题及错误，可以向 qq 群 55593669 反馈。</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+       x="633"
+       y="74.362183"
+       id="text3484"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3486" /></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4992"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Courier 10 Pitch;font-style:normal;font-weight:normal;font-size:14px;-inkscape-font-specification:Courier 10 Pitch;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;line-height:100%"><flowRegion
+         id="flowRegion4994"><rect
+           id="rect4996"
+           width="241"
+           height="24"
+           x="281"
+           y="-35.637817" /></flowRegion><flowPara
+         id="flowPara4998" /></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:120.00000477%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:'文鼎ＰＬ简中楷';-inkscape-font-specification:'文鼎ＰＬ简中楷'"
+       x="-57"
+       y="150.36218"
+       id="text5002"
+       sodipodi:linespacing="120%"><tspan
+         sodipodi:role="line"
+         id="tspan5004"
+         x="-57"
+         y="150.36218">首先，在线客服(LCS) 是一个统计网站访问用户，并能与来访用户即时沟通的工具。</tspan><tspan
+         sodipodi:role="line"
+         x="-57"
+         y="169.56218"
+         id="tspan5006">所以，要使用他，你首先需要拥有一个有用户访问的站点(APP)。</tspan><tspan
+         sodipodi:role="line"
+         x="-57"
+         y="188.76218"
+         id="tspan5008" /><tspan
+         sodipodi:role="line"
+         x="-57"
+         y="207.96219"
+         id="tspan5010">LCS 的工作原理是在 APP 站点的 html 页面加入一段 js 代码，页面展示给来访者时，</tspan><tspan
+         sodipodi:role="line"
+         x="-57"
+         y="227.16219"
+         id="tspan5022">来访者便能与登录在 kol 的 管理员 或 接待员 即时聊天或者留言。</tspan><tspan
+         sodipodi:role="line"
+         x="-57"
+         y="246.36218"
+         id="tspan5030">同时，管理员还能在 kol 查看自己的 APP 的一些访问统计。 例如访问量变化，访问地里位置统计等。</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:110.00000238%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+       x="-56.640625"
+       y="-7.6378174"
+       id="text5012"
+       sodipodi:linespacing="110%"><tspan
+         sodipodi:role="line"
+         id="tspan5014"
+         x="-56.640625"
+         y="-7.6378174">术语约定：</tspan><tspan
+         sodipodi:role="line"
+         x="-56.640625"
+         y="7.7621827"
+         id="tspan5024">    KOL   - KaiwuOline，开物在线</tspan><tspan
+         sodipodi:role="line"
+         x="-56.640625"
+         y="25.251183"
+         id="tspan5016">    LCS   - 在线客服，即本文档介绍工具的名字（Live Custemer Service）</tspan><tspan
+         sodipodi:role="line"
+         x="-56.640625"
+         y="42.740185"
+         id="tspan5018">    APP   - 使用 LCS 的网站（你的站点）</tspan><tspan
+         sodipodi:role="line"
+         x="-56.640625"
+         y="60.229183"
+         id="tspan5026">    管理员 - 通过 KOL 注册新站点 注册的 APP 管理人员，例如：google.cn.hk</tspan><tspan
+         sodipodi:role="line"
+         x="-56.640625"
+         y="77.718185"
+         id="tspan5028">    接待员 - 由管理员在 KOL 管理后台创建，负责 APP 咨询沟通的接待人员，例如：g.hk客服007号</tspan><tspan
+         sodipodi:role="line"
+         x="-56.640625"
+         y="95.207184"
+         id="tspan5020">    来访者 - 打开 APP 页面的用户</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:120.00000477%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:'文鼎ＰＬ简中楷';-inkscape-font-specification:'文鼎ＰＬ简中楷'"
+       x="-57.361328"
+       y="299.36218"
+       id="text5032"
+       sodipodi:linespacing="120%"><tspan
+         sodipodi:role="line"
+         id="tspan5034"
+         x="-57.361328"
+         y="299.36218">好， 让我们开始吧：</tspan></text>
+    <g
+       id="g3187"
+       transform="translate(58.009766,0)">
+      <text
+         sodipodi:linespacing="100%"
+         id="text5036"
+         y="353.36218"
+         x="359.48242"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="353.36218"
+           x="359.48242"
+           id="tspan5038"
+           sodipodi:role="line">管理员通过 KOL ==&gt; 注册 功能，在 kol 上注册自己的新站点</tspan></text>
+      <path
+         transform="matrix(0.72687504,0,0,0.79442313,121.58592,-149.30061)"
+         d="m 316,629.86218 c 0,10.76956 -9.84974,19.5 -22,19.5 -12.15026,0 -22,-8.73044 -22,-19.5 0,-10.76955 9.84974,-19.5 22,-19.5 12.15026,0 22,8.73045 22,19.5 z"
+         sodipodi:ry="19.5"
+         sodipodi:rx="22"
+         sodipodi:cy="629.86218"
+         sodipodi:cx="294"
+         id="path10278-1-9"
+         style="fill:#eeeeee;fill-opacity:1;stroke:#d40000;stroke-width:6.32818985;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:none"
+         sodipodi:type="arc" />
+      <g
+         id="g4088-3-1"
+         transform="translate(269.28718,274.65154)">
+        <text
+           xml:space="preserve"
+           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS"
+           x="61.317383"
+           y="84.757812"
+           id="text10753-4-3"
+           sodipodi:linespacing="100%"><tspan
+             sodipodi:role="line"
+             id="tspan10755-2-7"
+             x="61.317383"
+             y="84.757812">1</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g3224"
+       transform="translate(114.84375,0)">
+      <text
+         sodipodi:linespacing="100%"
+         id="text5036-5"
+         y="655.36218"
+         x="359.48242"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="655.36218"
+           x="359.48242"
+           id="tspan5038-9"
+           sodipodi:role="line">管理员将注册后生成的代码加入到自己 APP 网站页面中</tspan></text>
+      <g
+         id="g6055-1"
+         transform="translate(148.28718,299.14286)">
+        <path
+           sodipodi:type="arc"
+           style="fill:#eeeeee;fill-opacity:1;stroke:#d40000;stroke-width:6.32818985;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:none"
+           id="path10278-1-9-2"
+           sodipodi:cx="294"
+           sodipodi:cy="629.86218"
+           sodipodi:rx="22"
+           sodipodi:ry="19.5"
+           d="m 316,629.86218 c 0,10.76956 -9.84974,19.5 -22,19.5 -12.15026,0 -22,-8.73044 -22,-19.5 0,-10.76955 9.84974,-19.5 22,-19.5 12.15026,0 22,8.73045 22,19.5 z"
+           transform="matrix(0.72687504,0,0,0.79442313,-26.70126,-155.0149)" />
+        <g
+           transform="translate(121,268.93725)"
+           id="g4088-3-1-1">
+          <text
+             sodipodi:linespacing="100%"
+             id="text10753-4-3-1"
+             y="84.757812"
+             x="61.317383"
+             style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS"
+             xml:space="preserve"><tspan
+               y="84.757812"
+               x="61.317383"
+               id="tspan10755-2-7-6"
+               sodipodi:role="line">2</tspan></text>
+        </g>
+      </g>
+    </g>
+    <g
+       id="g3215">
+      <text
+         sodipodi:linespacing="100%"
+         id="text5036-5-1"
+         y="932.36218"
+         x="359.48242"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="932.36218"
+           x="359.48242"
+           id="tspan5038-9-7"
+           sodipodi:role="line">管理员通过 我的站点 ==&gt; 用户管理 登录到 APP 管理后台，添加接待员</tspan></text>
+      <g
+         id="g6055-1-4"
+         transform="translate(148.28718,584.71429)">
+        <path
+           sodipodi:type="arc"
+           style="fill:#eeeeee;fill-opacity:1;stroke:#d40000;stroke-width:6.32818985;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:none"
+           id="path10278-1-9-2-0"
+           sodipodi:cx="294"
+           sodipodi:cy="629.86218"
+           sodipodi:rx="22"
+           sodipodi:ry="19.5"
+           d="m 316,629.86218 c 0,10.76956 -9.84974,19.5 -22,19.5 -12.15026,0 -22,-8.73044 -22,-19.5 0,-10.76955 9.84974,-19.5 22,-19.5 12.15026,0 22,8.73045 22,19.5 z"
+           transform="matrix(0.72687504,0,0,0.79442313,-26.70126,-155.0149)" />
+        <g
+           transform="translate(121,268.93725)"
+           id="g4088-3-1-1-2">
+          <text
+             sodipodi:linespacing="100%"
+             id="text10753-4-3-1-9"
+             y="84.757812"
+             x="61.317383"
+             style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS"
+             xml:space="preserve"><tspan
+               y="84.757812"
+               x="61.317383"
+               id="tspan10755-2-7-6-6"
+               sodipodi:role="line">3</tspan></text>
+        </g>
+      </g>
+    </g>
+    <image
+       y="948.8783"
+       x="-29.016565"
+       id="image6319"
+       height="240.96773"
+       width="960.03345"
+       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/new7.jpg"
+       clip-path="url(#clipPath6330)"
+       transform="translate(142.88561,0)" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d=""
+       id="path8188" />
+    <g
+       id="g3205"
+       transform="translate(10.294922,0)">
+      <text
+         sodipodi:linespacing="100%"
+         id="text5036-5-1-2"
+         y="1231.3622"
+         x="359.48242"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="1231.3622"
+           x="359.48242"
+           id="tspan5038-9-7-3"
+           sodipodi:role="line">管理员 或 接待员 通过 我的站点 登录到 KOL，开始进行在线客服功能</tspan></text>
+      <g
+         transform="translate(127.34814,4.2857143)"
+         id="g3109">
+        <path
+           sodipodi:type="arc"
+           style="fill:#eeeeee;fill-opacity:1;stroke:#d40000;stroke-width:6.32818985;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:none"
+           id="path10278-1-9-2-0-2"
+           sodipodi:cx="294"
+           sodipodi:cy="629.86218"
+           sodipodi:rx="22"
+           sodipodi:ry="19.5"
+           d="m 316,629.86218 c 0,10.76956 -9.84974,19.5 -22,19.5 -12.15026,0 -22,-8.73044 -22,-19.5 0,-10.76955 9.84974,-19.5 22,-19.5 12.15026,0 22,8.73045 22,19.5 z"
+           transform="matrix(0.72687504,0,0,0.79442313,-5.76222,722.9851)" />
+        <g
+           transform="translate(141.93904,1146.9373)"
+           id="g4088-3-1-1-2-5">
+          <text
+             sodipodi:linespacing="100%"
+             id="text10753-4-3-1-9-9"
+             y="84.757812"
+             x="61.317383"
+             style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS"
+             xml:space="preserve"><tspan
+               y="84.757812"
+               x="61.317383"
+               id="tspan10755-2-7-6-6-5"
+               sodipodi:role="line">4</tspan></text>
+        </g>
+        <path
+           style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           d="m 203.85814,1235.1415 c -6.76992,-2.6916 -10.43576,-9.9989 -7.98471,-15.9162 2.12029,-5.1189 6.43362,-7.9631 12.07612,-7.9631 13.87606,0 17.67867,18.2737 4.86915,23.3991 -4.54378,1.818 -5.47057,1.8677 -8.96056,0.4802 z m 9,-4.8793 c 0,-1.1 0.45,-2 1,-2 0.55,0 1,-0.675 1,-1.5 0,-0.825 -0.45,-1.5 -1,-1.5 -0.55,0 -1,-2.025 -1,-4.5 0,-6.1169 -2.00548,-5.8979 -6.45172,0.7044 -3.65607,5.4289 -3.44501,6.7478 1.08509,6.7803 1.28433,0.01 2.34151,0.8112 2.65638,2.0153 0.28765,1.1 1.01514,2 1.61663,2 0.60149,0 1.09362,-0.9 1.09362,-2 z"
+           id="path8194" />
+      </g>
+    </g>
+    <g
+       id="g8250"
+       transform="translate(112.14286,18.857143)">
+      <path
+         sodipodi:nodetypes="cc"
+         id="path7561-2"
+         d="m 71.367599,1291.7066 0,39.5166"
+         style="fill:#ff9bff;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text8163"
+         y="1283.3622"
+         x="39"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="1283.3622"
+           x="39"
+           id="tspan8165"
+           sodipodi:role="line">来访者列表</tspan></text>
+      <path
+         id="path8182"
+         d="m 64.857649,1320.0222 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+         style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         id="path8184"
+         d="m 64.857649,1320.0222 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+         style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         id="path8186"
+         d="m 64.857649,1320.0222 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+         style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         id="path8190"
+         d="m 64.857649,1320.0222 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+         style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         id="path8192"
+         d="m 64.857649,1320.0222 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+         style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         id="path8199"
+         d="m 64.857649,1320.0222 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+         style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#d40000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         id="path8201"
+         d="m 64.857649,1320.0222 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+         style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#d40000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    </g>
+    <g
+       id="g3128"
+       transform="translate(27.563691,-2)">
+      <g
+         transform="translate(20,3)"
+         id="g8499">
+        <path
+           style="fill:#ff9bff;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+           d="m 7.9186037,1399.3583 33.4886333,0.3761"
+           id="path7561-2-7"
+           sodipodi:nodetypes="cc" />
+        <text
+           xml:space="preserve"
+           style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+           x="-51.041016"
+           y="1402.9292"
+           id="text8163-9"
+           sodipodi:linespacing="100%"><tspan
+             sodipodi:role="line"
+             id="tspan8165-5"
+             x="-51.041016"
+             y="1402.9292">当前在线</tspan></text>
+      </g>
+    </g>
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 70.032296,1402.5892 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+       id="path8182-6" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 70.032296,1402.5892 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+       id="path8184-8" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 70.032296,1402.5892 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+       id="path8186-2" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 70.032296,1402.5892 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+       id="path8190-7" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 70.032296,1402.5892 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+       id="path8192-4" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#d40000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 70.032296,1402.5892 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+       id="path8199-3" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#d40000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 70.032296,1402.5892 c -3.472602,-9.493 -6.514945,-17.8191 -6.760764,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625988,2.7685 7.636218,2.2384 7.636218,-4.0075 0,-5.2 0.136364,-5.5 2.5,-5.5 2.363636,0 2.5,0.3 2.5,5.5 0,6.2374 1.013141,6.7748 7.591138,4.0263 3.467021,-1.4486 3.51517,-1.4358 2.835978,0.75 -1.147757,3.6939 -12.424998,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.173166,-7.435 -6.645767,-16.928 z"
+       id="path8201-1" />
+    <g
+       id="g8601"
+       transform="translate(-6,-14)">
+      <path
+         sodipodi:nodetypes="cc"
+         id="path7561-2-7-4"
+         d="m 117.42266,1841.9121 0,-39.5166"
+         style="fill:#ff9bff;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text8163-9-8"
+         y="1859.9292"
+         x="83.958984"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="1859.9292"
+           x="83.958984"
+           id="tspan8165-5-7"
+           sodipodi:role="line">来访者翻页</tspan></text>
+    </g>
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 101.81663,1903.5892 c -3.472599,-9.493 -6.514942,-17.8191 -6.760761,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625984,2.7685 7.636214,2.2384 7.636214,-4.0075 0,-5.2 0.13637,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8182-6-9" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 101.81663,1903.5892 c -3.472599,-9.493 -6.514942,-17.8191 -6.760761,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625984,2.7685 7.636214,2.2384 7.636214,-4.0075 0,-5.2 0.13637,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8184-8-15" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 101.81663,1903.5892 c -3.472599,-9.493 -6.514942,-17.8191 -6.760761,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625984,2.7685 7.636214,2.2384 7.636214,-4.0075 0,-5.2 0.13637,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8186-2-5" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 101.81663,1903.5892 c -3.472599,-9.493 -6.514942,-17.8191 -6.760761,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625984,2.7685 7.636214,2.2384 7.636214,-4.0075 0,-5.2 0.13637,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8190-7-2" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 101.81663,1903.5892 c -3.472599,-9.493 -6.514942,-17.8191 -6.760761,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625984,2.7685 7.636214,2.2384 7.636214,-4.0075 0,-5.2 0.13637,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8192-4-1" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#d40000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 101.81663,1903.5892 c -3.472599,-9.493 -6.514942,-17.8191 -6.760761,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625984,2.7685 7.636214,2.2384 7.636214,-4.0075 0,-5.2 0.13637,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8199-3-1" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#d40000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 101.81663,1903.5892 c -3.472599,-9.493 -6.514942,-17.8191 -6.760761,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.125037,0.25 6.625984,2.7685 7.636214,2.2384 7.636214,-4.0075 0,-5.2 0.13637,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8201-1-3" />
+    <g
+       id="g3139"
+       transform="translate(28.444336,-2)">
+      <path
+         sodipodi:nodetypes="cc"
+         id="path7561-2-7-3"
+         d="m 27.037959,1429.8022 33.488633,0.3761"
+         style="fill:#ff9bff;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text8163-9-63"
+         y="1433.3732"
+         x="-43.921661"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="1433.3732"
+           x="-43.921661"
+           id="tspan8165-5-3"
+           sodipodi:role="line">有未读消息</tspan></text>
+    </g>
+    <g
+       id="g3144"
+       transform="translate(26,-2)">
+      <path
+         sodipodi:nodetypes="cc"
+         id="path7561-2-7-3-8"
+         d="m 29.482295,1686.8364 33.488633,0.3761"
+         style="fill:#ff9bff;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text8163-9-63-6"
+         y="1690.4073"
+         x="-33.477325"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="1690.4073"
+           x="-33.477325"
+           id="tspan8165-5-3-8"
+           sodipodi:role="line">正在对话</tspan></text>
+    </g>
+    <g
+       id="g3149"
+       transform="translate(26,3.0908203)">
+      <path
+         sodipodi:nodetypes="cc"
+         id="path7561-2-7-4-8"
+         d="m 249.64141,1823.7803 0,-124.5166"
+         style="fill:#ff9bff;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text8163-9-8-8"
+         y="1842.7974"
+         x="212.17773"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="1842.7974"
+           x="212.17773"
+           id="tspan8165-5-7-8"
+           sodipodi:role="line">删除该来访者</tspan></text>
+    </g>
+    <g
+       id="g3134"
+       transform="translate(27.444336,-2)">
+      <path
+         sodipodi:nodetypes="cc"
+         id="path7561-2-7-42"
+         d="m 28.037959,1456.8022 33.488633,0.3761"
+         style="fill:#ff9bff;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text8163-9-6"
+         y="1460.3732"
+         x="-30.921661"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="1460.3732"
+           x="-30.921661"
+           id="tspan8165-5-0"
+           sodipodi:role="line">当前离线</tspan></text>
+    </g>
+    <g
+       id="g3123"
+       transform="translate(24.285714,1.4285714)">
+      <path
+         sodipodi:nodetypes="cc"
+         id="path7561-2-3"
+         d="m 774.32658,1305.2736 0,60.5166"
+         style="fill:#ff9bff;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text8163-5"
+         y="1297.9292"
+         x="689.95898"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="1297.9292"
+           x="689.95898"
+           id="tspan8165-7"
+           sodipodi:role="line">历史消息滚到顶端翻页</tspan></text>
+    </g>
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 767.81663,1367.5892 c -3.4726,-9.493 -6.51495,-17.8191 -6.76076,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.12503,0.25 6.62599,2.7685 7.63622,2.2384 7.63622,-4.0075 0,-5.2 0.13636,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8182-7" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 767.81663,1367.5892 c -3.4726,-9.493 -6.51495,-17.8191 -6.76076,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.12503,0.25 6.62599,2.7685 7.63622,2.2384 7.63622,-4.0075 0,-5.2 0.13636,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8184-1" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 767.81663,1367.5892 c -3.4726,-9.493 -6.51495,-17.8191 -6.76076,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.12503,0.25 6.62599,2.7685 7.63622,2.2384 7.63622,-4.0075 0,-5.2 0.13636,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8186-7" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 767.81663,1367.5892 c -3.4726,-9.493 -6.51495,-17.8191 -6.76076,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.12503,0.25 6.62599,2.7685 7.63622,2.2384 7.63622,-4.0075 0,-5.2 0.13636,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8190-4" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 767.81663,1367.5892 c -3.4726,-9.493 -6.51495,-17.8191 -6.76076,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.12503,0.25 6.62599,2.7685 7.63622,2.2384 7.63622,-4.0075 0,-5.2 0.13636,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8192-8" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#d40000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 767.81663,1367.5892 c -3.4726,-9.493 -6.51495,-17.8191 -6.76076,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.12503,0.25 6.62599,2.7685 7.63622,2.2384 7.63622,-4.0075 0,-5.2 0.13636,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8199-5" />
+    <path
+       style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#d40000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 767.81663,1367.5892 c -3.4726,-9.493 -6.51495,-17.8191 -6.76076,-18.5025 -0.32925,-0.9153 0.49366,-0.8494 3.12503,0.25 6.62599,2.7685 7.63622,2.2384 7.63622,-4.0075 0,-5.2 0.13636,-5.5 2.5,-5.5 2.36364,0 2.5,0.3 2.5,5.5 0,6.2374 1.01314,6.7748 7.59114,4.0263 3.46702,-1.4486 3.51517,-1.4358 2.83598,0.75 -1.14776,3.6939 -12.425,34.0549 -12.78184,34.4117 -0.18257,0.1826 -3.17317,-7.435 -6.64577,-16.928 z"
+       id="path8201-7" />
+    <g
+       id="g3159"
+       transform="translate(26,15.145508)">
+      <path
+         sodipodi:nodetypes="cc"
+         id="path7561-2-7-4-86"
+         d="m 723.64141,1812.7803 0,-59.5166"
+         style="fill:#ff9bff;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text8163-9-8-2"
+         y="1830.7974"
+         x="684.17773"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="1830.7974"
+           x="684.17773"
+           id="tspan8165-5-7-6"
+           sodipodi:role="line">提示音控制开关</tspan></text>
+    </g>
+    <path
+       style="fill:#ff9bff;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 432.87927,1823.5641 0,-60.9452"
+       id="path7561-2-7-4-86-1"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+       x="389.12988"
+       y="1845.7241"
+       id="text8163-9-8-2-5"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan8165-5-7-6-8"
+         x="389.12988"
+         y="1845.7241">消息输入框，回车输入</tspan></text>
+    <g
+       id="g3195"
+       transform="translate(3.4863281,0)">
+      <text
+         sodipodi:linespacing="100%"
+         id="text5036-5-1-2-8"
+         y="1975.3622"
+         x="359.55078"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+         xml:space="preserve"><tspan
+           y="1975.3622"
+           x="359.55078"
+           id="tspan5038-9-7-3-3"
+           sodipodi:role="line">来访者打开添加了 lcs 代码的网页时，页面右下角上会出现如下聊天窗口</tspan></text>
+      <g
+         transform="translate(63.20068,4.2857143)"
+         id="g3116">
+        <path
+           sodipodi:type="arc"
+           style="fill:#eeeeee;fill-opacity:1;stroke:#d40000;stroke-width:6.32818985;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:none"
+           id="path10278-1-9-2-0-2-5"
+           sodipodi:cx="294"
+           sodipodi:cy="629.86218"
+           sodipodi:rx="22"
+           sodipodi:ry="19.5"
+           d="m 316,629.86218 c 0,10.76956 -9.84974,19.5 -22,19.5 -12.15026,0 -22,-8.73044 -22,-19.5 0,-10.76955 9.84974,-19.5 22,-19.5 12.15026,0 22,8.73045 22,19.5 z"
+           transform="matrix(0.72687504,0,0,0.79442313,58.38524,1466.9851)" />
+        <g
+           transform="translate(206.0865,1890.9373)"
+           id="g4088-3-1-1-2-5-9">
+          <text
+             sodipodi:linespacing="100%"
+             id="text10753-4-3-1-9-9-2"
+             y="84.757812"
+             x="61.317383"
+             style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS"
+             xml:space="preserve"><tspan
+               y="84.757812"
+               x="61.317383"
+               id="tspan10755-2-7-6-6-5-4"
+               sodipodi:role="line">5</tspan></text>
+        </g>
+        <path
+           style="opacity:0;fill:#d40000;fill-opacity:1;stroke:#000000;stroke-width:6.28399992;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           d="m 268.0056,1979.1415 c -6.76992,-2.6916 -10.43576,-9.9989 -7.98471,-15.9162 2.12029,-5.1189 6.43362,-7.9631 12.07612,-7.9631 13.87606,0 17.67867,18.2737 4.86915,23.3991 -4.54378,1.818 -5.47057,1.8677 -8.96056,0.4802 z m 9,-4.8793 c 0,-1.1 0.45,-2 1,-2 0.55,0 1,-0.675 1,-1.5 0,-0.825 -0.45,-1.5 -1,-1.5 -0.55,0 -1,-2.025 -1,-4.5 0,-6.1169 -2.00548,-5.8979 -6.45172,0.7044 -3.65607,5.4289 -3.44501,6.7478 1.08509,6.7803 1.28433,0.01 2.34151,0.8112 2.65638,2.0153 0.28765,1.1 1.01514,2 1.61663,2 0.60149,0 1.09362,-0.9 1.09362,-2 z"
+           id="path8194-4" />
+      </g>
+    </g>
+    <image
+       y="2008.8622"
+       x="294"
+       id="image9240"
+       height="103"
+       width="350"
+       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/cli2.jpg"
+       clip-path="url(#clipPath9246)"
+       transform="translate(-208.35714,39)" />
+    <image
+       y="2005.8623"
+       x="481"
+       id="image9320"
+       height="401"
+       width="342"
+       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/cli3.jpg" />
+    <image
+       y="2551.8623"
+       x="295.5"
+       id="image9468"
+       height="129"
+       width="265"
+       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/cli4.jpg"
+       clip-path="url(#clipPath9474)"
+       transform="translate(-124.85714,-355.42857)" />
+    <path
+       style="fill:#ff9bff;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 304.98565,2049.8346 0.3761,39.9773"
+       id="path7561-2-7-9"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+       x="242.30446"
+       y="2044.373"
+       id="text8163-9-4"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan8165-5-6"
+         x="242.30446"
+         y="2044.373">聊天客户端初始状态</tspan></text>
+    <path
+       style="fill:#ff9bff;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 305.50022,2387.7414 -0.3761,-39.9773"
+       id="path7561-2-7-9-1"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+       x="242.42751"
+       y="2407.8298"
+       id="text8163-9-4-3"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan8165-5-6-76"
+         x="242.42751"
+         y="2407.8298">聊天客户端最小化后</tspan></text>
+    <path
+       style="fill:#ff9bff;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 653.25729,2451.6572 -0.3761,-39.9773"
+       id="path7561-2-7-9-1-1"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+       x="597.12305"
+       y="2471.7456"
+       id="text8163-9-4-3-0"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan8165-5-6-76-8"
+         x="597.12305"
+         y="2471.7456">点开聊天客户端后</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:120.00000477%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:'文鼎ＰＬ简中楷';-inkscape-font-specification:'文鼎ＰＬ简中楷'"
+       x="-57.044922"
+       y="2565.0859"
+       id="text5032-7"
+       sodipodi:linespacing="120%"><tspan
+         sodipodi:role="line"
+         id="tspan5034-4"
+         x="-57.044922"
+         y="2565.0859">LCS 就这些东西：D  接下来看看常见问题：</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:110%;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+       x="-57.1875"
+       y="2608.3623"
+       id="text9644"
+       sodipodi:linespacing="110%"><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2608.3623"
+         id="tspan9650">问：为什么我刷新网页，再登陆就不行了啊 老是出现登陆框 ？</tspan><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2624.2615"
+         id="tspan9660"
+         style="letter-spacing:0;-inkscape-font-specification:Courier 10 Pitch;font-family:Courier 10 Pitch;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:14px;text-anchor:start;text-align:start;writing-mode:lr;line-height:110%"
+         dy="0 0 0">答：关掉浏览器再打开页面刷新看看</tspan><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2638.2615"
+         id="tspan9662" /><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2652.2615"
+         id="tspan9664">问：注册时提示给我添加到网页中的代码忘记了，在哪能找到呢？</tspan><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2666.2615"
+         id="tspan9666">答：在我的站点 ==&gt; 站点设置 ==&gt; 站点代码中能找到</tspan><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2682.1604"
+         id="tspan9652" /><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2698.0596"
+         id="tspan9658" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:120.00000477%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"
+       x="0.23223169"
+       y="2839.2881"
+       id="text5032-7-6"
+       sodipodi:linespacing="120%"><tspan
+         sodipodi:role="line"
+         x="0.23223169"
+         y="2839.2881"
+         id="tspan3105">That's all.  We hope you enjoy using KOL as much as we enjoyed writing it.</tspan></text>
+  </g>
+</svg>

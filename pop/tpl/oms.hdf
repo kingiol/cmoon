@@ -5,7 +5,7 @@ oms {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/oms.css" />
 			js = <script type="text/javascript" src="/js/b/oms.js"></script>
 			title = Oh, My Site
-			tabpart = 1
+			tabpart = 2
 			crumbs {
 				0 {
 					name = 我的站点
