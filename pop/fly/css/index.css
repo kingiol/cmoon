@@ -1,3 +1,11 @@
+.intro-img {
+	background:transparent url(/img/bg/h300.png) repeat-x scroll 0 0;
+	border:1px solid #ccc;
+	height:200px;
+	overflow:hidden;
+	margin-bottom: 3ex;
+}
+
 .intro {
 	width: 300px;
 	float: left;

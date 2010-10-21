@@ -21,17 +21,22 @@ $HTTP["host"] == "www.kaiwuonline.com" {
   url.rewrite-once= ("^/([^\.\?]+[^\/])$" => "/run/viki?ScriptName=$1",
                      "^/([^\.]+)\?(.*[^\/])$"   => "/run/viki?ScriptName=$1&$2")
 
-#  $HTTP["url"] =~ "^/run/" {
-#        cgi.assign = ( "" => "" )
-#  }
-
-  $HTTP["url"] =~ "^/img/" {
+  $HTTP["url"] =~ "^/img/.*" {
      expire.url = ( "" => "access 30 days" )
   }
-  $HTTP["url"] =~ "^/obj/" {
+  $HTTP["url"] =~ "^/obj/.*" {
+     expire.url = ( "" => "access 30 days" )
+  }
+  $HTTP["url"] =~ "^/pic/.*" {
      expire.url = ( "" => "access 30 days" )
   }
   $HTTP["url"] =~ "^.*\.html$" {
+     expire.url = ( "" => "access 1 days" )
+  }
+  $HTTP["url"] =~ "^.*\.js$" {
+     expire.url = ( "" => "access 1 days" )
+  }
+  $HTTP["url"] =~ "^.*\.css$" {
      expire.url = ( "" => "access 1 days" )
   }
 }
