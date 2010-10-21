@@ -94,7 +94,7 @@
        patternTransform="translate(15.5,395.86218)"
        id="pattern3351">
       <image
-         xlink:href="file:///home/bigml/web/moon/pop/fly/pic/new4.jpg"
+         xlink:href="file:///home/bigml/web/moon/pop/fly/pic/manual/new4.jpg"
          width="751"
          height="475"
          id="image3347"
@@ -108,7 +108,7 @@
        patternTransform="translate(35,692.86218)"
        id="pattern3261">
       <image
-         xlink:href="file:///home/bigml/web/moon/pop/fly/pic/new2.jpg"
+         xlink:href="file:///home/bigml/web/moon/pop/fly/pic/manual/new2.jpg"
          width="912"
          height="187"
          id="image3257"
@@ -133,7 +133,7 @@
        patternTransform="translate(48,633.36218)"
        id="pattern3004">
       <image
-         xlink:href="file:///home/bigml/web/moon/pop/fly/pic/new.jpg"
+         xlink:href="file:///home/bigml/web/moon/pop/fly/pic/manual/new.jpg"
          width="950"
          height="202"
          id="image3000"
@@ -666,9 +666,9 @@
      borderopacity="0.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="0"
-     inkscape:zoom="0.5"
+     inkscape:zoom="1"
      inkscape:cx="449.04464"
-     inkscape:cy="-1681.1339"
+     inkscape:cy="-1641.1339"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -685,7 +685,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -977,7 +977,7 @@
        id="image6319"
        height="240.96773"
        width="960.03345"
-       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/new7.jpg"
+       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/manual/new7.jpg"
        clip-path="url(#clipPath6330)"
        transform="translate(142.88561,0)" />
     <path
@@ -1398,7 +1398,7 @@
        id="image9240"
        height="103"
        width="350"
-       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/cli2.jpg"
+       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/manual/cli2.jpg"
        clip-path="url(#clipPath9246)"
        transform="translate(-208.35714,39)" />
     <image
@@ -1407,14 +1407,14 @@
        id="image9320"
        height="401"
        width="342"
-       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/cli3.jpg" />
+       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/manual/cli3.jpg" />
     <image
        y="2551.8623"
        x="295.5"
        id="image9468"
        height="129"
        width="265"
-       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/cli4.jpg"
+       xlink:href="file:///home/bigml/web/moon/pop/fly/pic/manual/cli4.jpg"
        clip-path="url(#clipPath9474)"
        transform="translate(-124.85714,-355.42857)" />
     <path
@@ -1478,7 +1478,7 @@
          y="2565.0859">LCS 就这些东西：D  接下来看看常见问题：</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:110%;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:110.00000238%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
        x="-57.1875"
        y="2608.3623"
        id="text9644"
@@ -1489,40 +1489,64 @@
          id="tspan9650">问：为什么我刷新网页，再登陆就不行了啊 老是出现登陆框 ？</tspan><tspan
          sodipodi:role="line"
          x="-57.1875"
-         y="2624.2615"
+         y="2625.8513"
          id="tspan9660"
-         style="letter-spacing:0;-inkscape-font-specification:Courier 10 Pitch;font-family:Courier 10 Pitch;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:14px;text-anchor:start;text-align:start;writing-mode:lr;line-height:110%"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:110.00000238%;letter-spacing:0;writing-mode:lr-tb;text-anchor:start;font-family:Courier 10 Pitch;-inkscape-font-specification:Courier 10 Pitch"
          dy="0 0 0">答：关掉浏览器再打开页面刷新看看</tspan><tspan
          sodipodi:role="line"
          x="-57.1875"
-         y="2638.2615"
+         y="2641.2512"
          id="tspan9662" /><tspan
          sodipodi:role="line"
          x="-57.1875"
-         y="2652.2615"
+         y="2656.6514"
          id="tspan9664">问：注册时提示给我添加到网页中的代码忘记了，在哪能找到呢？</tspan><tspan
          sodipodi:role="line"
          x="-57.1875"
-         y="2666.2615"
+         y="2672.0513"
          id="tspan9666">答：在我的站点 ==&gt; 站点设置 ==&gt; 站点代码中能找到</tspan><tspan
          sodipodi:role="line"
          x="-57.1875"
-         y="2682.1604"
+         y="2689.5403"
          id="tspan9652" /><tspan
          sodipodi:role="line"
          x="-57.1875"
-         y="2698.0596"
-         id="tspan9658" /></text>
+         y="2707.0293"
+         id="tspan9658">问：刚聊的消息， 刷新页面后怎么就没了？</tspan><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2724.5183"
+         id="tspan3085">答：为了缓解服务器压力， 目前我们对历史消息做了 1 分钟时间的缓存， 刚刚聊天的消息， 1 分钟后将在历史消息中体现</tspan><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2742.0073"
+         id="tspan3087">（每次刷新页面后取的是历史消息）</tspan><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2757.4072"
+         id="tspan3089" /><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2772.8074"
+         id="tspan3091">问：如何知道有人上线， 发来了消息？</tspan><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2790.2964"
+         id="tspan3093">答：IE, FireFox 浏览器目前对这类事件有声音提示。 另外， 新来的用户我们会放到在线列表的第一屏。 </tspan><tspan
+         sodipodi:role="line"
+         x="-57.1875"
+         y="2807.7854"
+         id="tspan3095">对于访问量较少的用户， 今后会有短信提醒的功能可以使用。</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:120.00000477%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"
        x="0.23223169"
-       y="2839.2881"
+       y="2901.2881"
        id="text5032-7-6"
        sodipodi:linespacing="120%"><tspan
          sodipodi:role="line"
          x="0.23223169"
-         y="2839.2881"
+         y="2901.2881"
          id="tspan3105">That's all.  We hope you enjoy using KOL as much as we enjoyed writing it.</tspan></text>
   </g>
 </svg>
