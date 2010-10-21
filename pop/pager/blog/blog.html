@@ -1,0 +1,34 @@
+<div id='content-sub'>
+
+  <div class="blog-item">
+	<?cs escape: "html" ?>
+	<div class="cktitle"><?cs var: Output.blog.title ?></div>
+	<div class="info"><?cs var: Output.blog.intime ?></div>
+	
+	<div class="content">
+	  <pre class="box"><?cs var: Output.blog.content ?></pre>
+	</div>
+	<?cs /escape ?>
+  </div>
+  
+  <div class="nav">
+	<?cs if: ?Output.blog.titleprev ?>
+	<span class="left">
+	  <a href="/blog/<?cs var: Output.blog.fnameprev ?>.html">&lt; <?cs var: Output.blog.titleprev ?></a>
+	</span>
+	<?cs /if ?>
+	
+	<span class="center">
+	  <a href="/blog/index.html">
+		开物博客
+	  </a>
+	</span>
+	
+	<?cs if: ?Output.blog.titlenext ?>
+	<span class="right">
+	  <a href="/blog/<?cs var: Output.blog.fnamenext ?>.html"><?cs var: Output.blog.titlenext ?> &gt;</a>
+	</span>
+	<?cs /if ?>
+  </div>
+  
+</div>

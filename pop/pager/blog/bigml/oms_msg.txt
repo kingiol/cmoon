@@ -1,6 +1,0 @@
-完成消息持久化
-
-几日奋战，历史消息持久化功能完成， 历史消息将不受聊天服务器重启影响。
-之前因为历史消息没有写入磁盘，导致每次重启聊天服务器， 重启前的到访和聊天消息都会丢失。 花费很大精力做的 ape 历史消息扩展自此成为历史：D
-
-套用 enlightenment 开发者的一句话: We hope you enjoy using KOL as much as we enjoyed writing it.

@@ -1,127 +1,214 @@
 #include "mheads.h"
 #include "lheads.h"
+#include "oapp.h"
 #include "oblog.h"
 
-static int blog_file_get(char *f, HDF *hdf, int sn)
+#define BLOG_COL " id, id%32 ||'/'|| id as fname, title, content, state, author, " \
+	" to_char(intime, 'YYYY-MM-DD') as intime "
+
+int blog_index_static_get(HDF *hdf, HASH *dbh)
 {
-	struct stat s;
-	char *c, *content, *p, *q;
-	char fname[LINE_MAX], prekey[64], intime[64];
-	NEOERR *err;
-	
-	if (!f || !hdf) return RET_RBTOP_INPUTE;
-	
-	snprintf(fname, sizeof(fname), "%s%s", PATH_BLOG, f);
-	if (stat(fname, &s) == -1) {
-		mtc_warn("stat file %s failure %s", fname, strerror(errno));
-		return RET_RBTOP_OPENFILE;
-	}
-	
-	struct tm *stm = gmtime(&(s.st_mtime));
-	strftime(intime, sizeof(intime), "%F %T", stm);
-		
-	err = ne_load_file(fname, &c);
-	RETURN_V_NOK(err, RET_RBTOP_OPENFILE);
-	mcs_text_escape(c, &content);
+	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "aux");
 
-	p = q = NULL;
-	p = strstr(content, "<br /><br />");
-	if (p) {
-		*p = '\0';
-		p += strlen("<br /><br />");
-	}
+	LPRE_DBOP(hdf, conn);
 
-	if (sn < 0) {
-		strcpy(prekey, "blog");
-	} else {
-		sprintf(prekey, "blogs.%d", sn);
-	}
+	/* set pgtt for caller use */
+	MMISC_PAGEDIV_SET(hdf, PRE_OUTPUT, 0, conn, "blog", " state=%d ",
+					  NULL, BLOG_ST_NORMAL);
+	int ntt = hdf_get_int_value(hdf, PRE_OUTPUT".ntt", 0);
+	int pgtt = (ntt+BLOG_NUM_PERPAGE-1) / BLOG_NUM_PERPAGE;
+	hdf_set_int_value(hdf, PRE_OUTPUT".pgtt", pgtt);
 	
-	hdf_set_valuef(hdf, PRE_OUTPUT".%s.fname=%s", prekey, f);
-	hdf_set_valuef(hdf, PRE_OUTPUT".%s.title=%s", prekey, content);
-	hdf_set_valuef(hdf, PRE_OUTPUT".%s.content=%s", prekey, p ? p: content);
-	hdf_set_valuef(hdf, PRE_OUTPUT".%s.intime=%s", prekey, intime);
-		
-	if (p) {
-		q = strstr(p, "<br /><br />");
-		if (q) *q = '\0';
-	}
-	hdf_set_valuef(hdf, PRE_OUTPUT".%s.abs=%s", prekey, p ? p: content);
-	/* q not null, blog hasn't finish */
-	if (q) {
-		hdf_set_valuef(hdf, PRE_OUTPUT".%s.done=0", prekey);
-	} else {
-		hdf_set_valuef(hdf, PRE_OUTPUT".%s.done=1", prekey);
-	}
-	
-	free(c);
-	free(content);
+	int offset = 0;
+	int pageid = hdf_get_int_value(hdf, PRE_QUERY".pageid", 0);
+	if (pageid == 0)
+		offset = (pgtt - 1) * BLOG_NUM_PERPAGE;
+	else
+		offset = (pageid-1) * BLOG_NUM_PERPAGE;
+	MDB_QUERY_RAW(conn, "blog", BLOG_COL, " state=%d ORDER BY ID "
+				  " LIMIT %d OFFSET %d", NULL,
+				  BLOG_ST_NORMAL, BLOG_NUM_PERPAGE, offset);
+	mdb_set_rows(hdf, conn, BLOG_COL, PRE_OUTPUT".blogs", 0);
+
 	return RET_RBTOP_OK;
 }
 
-int blog_index_get(HDF *hdf)
+int blog_static_get(HDF *hdf, HASH *dbh)
 {
-	FILE *fp;
-	char line[LINE_MAX], src[64], dst[64];
+	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "aux");
 
-	if ((fp = fopen(BLOG_INDEX, "r")) == NULL) {
-		mtc_err("open index file %s failure", BLOG_INDEX);
-		return RET_RBTOP_OPENFILE;
+	LPRE_DBOP(hdf, conn);
+
+	int bid = hdf_get_int_value(hdf, PRE_QUERY".bid", 0);
+
+	MDB_QUERY_RAW(conn, "blog", BLOG_COL, " id=%d AND state=%d ",
+				  NULL, bid, BLOG_ST_NORMAL);
+	if (mdb_set_row(hdf, conn, BLOG_COL, PRE_OUTPUT".blog") != MDB_ERR_NONE) {
+		mtc_err("db failure %s", mdb_get_errmsg(conn));
+		return RET_RBTOP_DBE;
 	}
 
-	int i = 0, x;
-	while (fgets(line, LINE_MAX, fp) != NULL) {
-		
-		/* rubish, shit, fuck... */
-		x = strlen(line) -1;
-		while (x > 0 && (line[x] == '\n')) line[x--] = '\0';
+	/*
+	 * previous
+	 * TODO id%32 ===> id%%d, BLOG_SUBDIR_NUM
+	 */
+	MDB_QUERY_RAW(conn, "blog", " id%32 ||'/'|| id as id, title ",
+				  " id < %d AND state=%d ORDER BY ID DESC LIMIT 1 ",
+				  NULL, bid, BLOG_ST_NORMAL);
+	mdb_set_row(hdf, conn, " fnameprev, titleprev ", PRE_OUTPUT".blog");
 
-		if (blog_file_get(line, hdf, i) == RET_RBTOP_OK) {
-			if (i > 0) {
-				/*
-				 * set my prev 
-				 */
-				sprintf(src, PRE_OUTPUT".blogs.%d.title", i-1);
-				sprintf(dst, PRE_OUTPUT".blogs.%d.titleprev", i);
-				hdf_set_copy(hdf, dst, src);
-				sprintf(src, PRE_OUTPUT".blogs.%d.fname", i-1);
-				sprintf(dst, PRE_OUTPUT".blogs.%d.fnameprev", i);
-				hdf_set_copy(hdf, dst, src);
+	/*
+	 * next 
+	 */
+	MDB_QUERY_RAW(conn, "blog", " id%32 ||'/'|| id as id, title ",
+				  " id > %d AND state=%d ORDER BY ID LIMIT 1 ",
+				  NULL, bid, BLOG_ST_NORMAL);
+	mdb_set_row(hdf, conn, " fnamenext, titlenext ", PRE_OUTPUT".blog");
 
-				/*
-				 * set formal's next
-				 */
-				sprintf(src, PRE_OUTPUT".blogs.%d.title", i);
-				sprintf(dst, PRE_OUTPUT".blogs.%d.titlenext", i-1);
-				hdf_set_copy(hdf, dst, src);
-				sprintf(src, PRE_OUTPUT".blogs.%d.fname", i);
-				sprintf(dst, PRE_OUTPUT".blogs.%d.fnamenext", i-1);
-				hdf_set_copy(hdf, dst, src);
-			}
-			i++;
-		}
-	}
-	
-	fclose(fp);
 	return RET_RBTOP_OK;
 }
 
 int blog_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	if (!cgi || !cgi->hdf) return RET_RBTOP_HDFNINIT;
+	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "aux");
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname, *author;
 
-	char *f = hdf_get_value(cgi->hdf, PRE_QUERY".f", NULL);
-	if (f != NULL) {
-		return blog_file_get(f, cgi->hdf, -1);
-	} else {
-		return blog_index_get(cgi->hdf);
+	LPRE_DBOP(cgi->hdf, conn);
+
+	APP_CHECK_LOGIN();
+
+	if (hdf_get_int_value(evt->hdfrcv, "state", 0) < LCS_ST_ADMIN) {
+		mtc_warn("%s wan't be admin", aname);
+		return RET_RBTOP_LIMITE;
 	}
 
-#if 0
-	hdf_set_value(cgi->hdf, PRE_OUTPUT".blogs.0.title", "日志1");
-	hdf_set_value(cgi->hdf, PRE_OUTPUT".blogs.0.content", "xxdfpsdfsd<br />哈阿");
-	hdf_set_value(cgi->hdf, PRE_OUTPUT".blogs.0.intime", "2010-07-03 12:22");
-	hdf_set_value(cgi->hdf, PRE_OUTPUT".blogs.0.fname", "rizhi1.txt");
-	hdf_set_value(cgi->hdf, PRE_OUTPUT".blogs.0.count_comment", "20");
-#endif
+	int bid = hdf_get_int_value(cgi->hdf, PRE_QUERY".bid", 0);
+	if (bid == 0) {
+		/* just rend tpl */
+		return RET_RBTOP_OK;
+	}
+
+	MDB_QUERY_RAW(conn, "blog", BLOG_COL, " id=%d ",
+				  NULL, bid, BLOG_ST_NORMAL);
+	mdb_set_row(cgi->hdf, conn, BLOG_COL, PRE_OUTPUT".blog");
+
+	author = hdf_get_value(cgi->hdf, PRE_OUTPUT".blog.author", NULL);
+	if (!author) {
+		return RET_RBTOP_NEXIST;
+	}
+	
+	if (strcmp(aname, author)) {
+		mtc_warn("%s not %s", aname, author);
+		return RET_RBTOP_LIMITE;
+	}
+
+	return RET_RBTOP_OK;
+}
+
+int blog_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "aux");
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname, command[1024];
+	char *title, *content;
+	int id = 0;
+
+	LPRE_DBOP(cgi->hdf, conn);
+	
+	APP_CHECK_LOGIN();
+	
+	if (hdf_get_int_value(evt->hdfrcv, "state", 0) < LCS_ST_ADMIN) {
+		mtc_warn("%s wan't be admin", aname);
+		return RET_RBTOP_LIMITE;
+	}
+
+	HDF_GET_STR(cgi->hdf, PRE_QUERY".title", title);
+	HDF_GET_STR(cgi->hdf, PRE_QUERY".content", content);
+
+	MDB_EXEC_RBT(conn, NULL, "INSERT INTO blog (title, content, author) "
+				 " VALUES ($1, $2, $3) RETURNING id", "sss", title, content, aname);
+	mdb_get(conn, "i", &id);
+
+	snprintf(command, sizeof(command), PATH_PAGER"blg -i -b %d", id);
+	mtc_dbg("%s", command);
+	system(command);
+
+	return RET_RBTOP_OK;
+}
+
+int blog_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "aux");
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname;
+	int bid;
+
+	LPRE_DBOP(cgi->hdf, conn);
+
+	HDF_GET_INT(cgi->hdf, PRE_QUERY".bid", bid);
+
+	APP_CHECK_LOGIN();
+	
+	if (hdf_get_int_value(evt->hdfrcv, "state", 0) < LCS_ST_ADMIN) {
+		mtc_warn("%s wan't be admin", aname);
+		return RET_RBTOP_LIMITE;
+	}
+
+	STRING str;
+	string_init(&str);
+	mcs_build_upcol_s(hdf_get_obj(cgi->hdf, PRE_QUERY),
+					  hdf_get_child(g_cfg, "Db.UpdateCol.blog.s"), &str);
+	if (str.len <= 0) {
+		mtc_err("update none");
+		return RET_RBTOP_INPUTE;
+	}
+	string_append(&str, " uptime=uptime ");
+	MDB_EXEC_RBT(conn, NULL, "UPDATE blog SET %s WHERE id=%d AND author=$1",
+				 "s", str.buf, bid, aname);
+	string_clear(&str);
+
+	char command[1024];
+	snprintf(command, sizeof(command), PATH_PAGER"blg -b %d", bid);
+	mtc_dbg("%s", command);
+	system(command);
+
+	return RET_RBTOP_OK;
+}
+
+int blog_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mdb_conn *conn = (mdb_conn*)hash_lookup(dbh, "aux");
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname;
+	int bid, state;
+
+	LPRE_DBOP(cgi->hdf, conn);
+
+	HDF_GET_INT(cgi->hdf, PRE_QUERY".bid", bid);
+	HDF_GET_INT(cgi->hdf, PRE_QUERY".state", state);
+
+	APP_CHECK_LOGIN();
+	
+	if (hdf_get_int_value(evt->hdfrcv, "state", 0) < LCS_ST_ADMIN) {
+		mtc_warn("%s wan't be admin", aname);
+		return RET_RBTOP_LIMITE;
+	}
+
+	MDB_EXEC_RBT(conn, NULL, "UPDATE blog SET state=%d WHERE id=%d AND author=$1",
+				 "s", state, bid, aname);
+
+	char command[1024];
+	snprintf(command, sizeof(command), PATH_PAGER"blg -b %d", bid);
+	mtc_dbg("%s", command);
+	system(command);
+
+	if (state == BLOG_ST_DEL) {
+		snprintf(command, sizeof(command), "rm -f %s/%d/%d.html",
+				 PATH_BLOG, bid%BLOG_SUBDIR_NUM, bid);
+		mtc_dbg("%s", command);
+		system(command);
+	}
+
+	return RET_RBTOP_OK;
 }

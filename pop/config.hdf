@@ -17,6 +17,30 @@ Dataset {
 				name = 我的站点
 				href = /oms
 			}
+			3 {
+				name = 开物博客
+				href = /blog/index.html
+			}
+		}
+	}
+	layout_nclient.html {
+		tabs {
+			0 {
+				name = 首页
+				href = /index.html
+			}
+			1 {
+				name = 使用手册
+				href = /manual.html
+			}
+			2 {
+				name = 我的站点
+				href = /oms
+			}
+			3 {
+				name = 开物博客
+				href = /blog/index.html
+			}
 		}
 	}
 }
@@ -27,6 +51,7 @@ Db {
 		dyn = pgsql:dbname=lcs_dyn host=localhost user=lcser password=loveu
 		msg = pgsql:dbname=lcs_msg host=localhost user=lcser password=loveu
 		mtool = pgsql:dbname=lcs_mtool host=localhost user=lcser password=loveu
+		aux = pgsql:dbname=lcs_aux host=localhost user=lcser password=loveu
 	}
 	QueryCond {
 		stat {
@@ -36,6 +61,14 @@ Db {
 			}
 			i {
 				type = type =
+			}
+		}
+	}
+	UpdateCol {
+		blog {
+			s {
+				title = title
+				content = content
 			}
 		}
 	}

@@ -1,0 +1,17 @@
+.content pre.box {
+    width: 95%;
+    padding: 0.5em;
+    border-bottom: solid 1px #ccc;
+    /*color: #112222;*/
+    /*background-color: #eeeeee;*/
+}
+
+.nav {
+	border-top: 1px solid #aaa;
+	text-align: right;
+	line-height: 24px;
+}
+
+.nav .center {
+	margin:0 50px;
+}

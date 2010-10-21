@@ -50,6 +50,8 @@ bmoon.appnew = {
 	},
 
 	appAdd: function() {
+		var o = bmoon.appnew.init();
+
 		if (!$('.VAL_NEWAPP').inputval()) return;
 
 		$('#asn').attr('value', $.md5($.md5($('#asn').val())));

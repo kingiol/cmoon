@@ -3,6 +3,7 @@ include $(BASEDIR)Make.env
 
 FILES = b/base.js b/chat.js b/kol.js b/chatb.js b/chatc.js \
 		b/index.js b/appnew.js \
+		b/blog.js b/blogindex.js b/blogop.js \
 		b/oms.js b/oms/edit.js b/oms/stat.js b/oms/users.js \
 	    b/okol_ie.js b/okol.js
 
@@ -28,6 +29,9 @@ b/chatc.js: pub/jquery.cookie.js pub/bmoon.js
 # Server
 b/index.js: pub/jquerytools/src/scrollable/scrollable.js index.js
 b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
+b/blog.js: blog/blog.js
+b/blogindex.js: blog/index.js
+b/blogop.js: blog/op.js
 
 b/oms.js: pub/jquery.mnscrollpage.js \
 		  ape/app/bmoon.chatb.js ape/Build/JSON.js ape/Build/apeClient.js ape/app/livecsb.js \

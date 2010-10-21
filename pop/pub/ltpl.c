@@ -47,16 +47,105 @@ void ltpl_prepare_rend(HDF *hdf, char *tpl)
 	}
 }
 
+int ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outhash)
+{
+	char *tp = NULL, *tpl = NULL, *dataer = NULL;
+	HDF *node = NULL, *dhdf = NULL, *child = NULL;
+	CSPARSE *cs = NULL;
+	STRING str;
+	NEOERR *err;
+	char fname[_POSIX_PATH_MAX], tok[64];
+	int (*data_handler)(HDF *hdf, HASH *dbh);
+	int ret;
+	
+	memset(fname, 0x0, sizeof(fname));
+	snprintf(fname, sizeof(fname), "%s/%s", dir, name);
+	hdf_init(&node);
+	err = hdf_read_file(node, fname);
+	RETURN_V_NOK(err, RET_RBTOP_ERROR);
+
+	child = hdf_obj_child(node);
+	while (child != NULL) {
+		mtc_dbg("parse node %s", hdf_obj_name(child));
+		string_init(&str);
+		err = cs_init(&cs, hdf_get_obj(child, PRE_CFG_DATASET));
+		JUMP_NOK(err, wnext);
+			
+		hdf_set_value(cs->hdf, "hdf.loadpaths.local", dir);
+
+		err = cgi_register_strfuncs(cs);
+		JUMP_NOK(err, wnext);
+		mcs_register_bitop_functions(cs);
+		tpl = hdf_get_value(child, PRE_CFG_LAYOUT, "null.html");
+		snprintf(fname, sizeof(fname), "%s/%s", PATH_TPL, tpl);
+		err = cs_parse_file(cs, fname);
+		JUMP_NOK(err, wnext);
+
+		if (outhash != NULL) {
+			/*
+			 * strdup the key, baby, because we'll free the hdf later
+			 */
+			hash_insert(outhash, (void*)strdup(hdf_obj_name(child)), (void*)cs);
+			if (hdf_get_obj(child, PRE_CFG_DATASET)) {
+				hdf_init(&dhdf);
+				hdf_copy(dhdf, NULL, hdf_get_obj(child, PRE_CFG_DATASET));
+				snprintf(tok, sizeof(tok), "%s_hdf", hdf_obj_name(child));
+				hash_insert(outhash, (void*)strdup(tok), (void*)dhdf);
+			}
+		}
+			
+		if (hdf_get_value(child, PRE_CFG_OUTPUT, NULL) != NULL) {
+			ltpl_prepare_rend(hdf_get_obj(child, PRE_CFG_DATASET), tpl);
+				
+			/*
+			 * get_data
+			 */
+			dataer = hdf_get_value(child, PRE_CFG_DATAER, NULL);
+			if (dataer != NULL && lib) {
+				data_handler = dlsym(lib, dataer);
+				if( (tp = dlerror()) != NULL) {
+					mtc_err("%s", tp);
+					//continue;
+				} else {
+					ret = (*data_handler)(hdf_get_obj(child, PRE_CFG_DATASET), dbh);
+					if (ret != RET_RBTOP_OK) {
+						mtc_err("%s return %d", dataer, ret);
+					}
+				}
+			}
+				
+			err = cs_render(cs, &str, mcs_strcb);
+			JUMP_NOK(err, wnext);
+				
+			snprintf(fname, sizeof(fname), PATH_DOC"%s",
+					 hdf_get_value(child, PRE_CFG_OUTPUT, "null.html"));
+			mutil_makesure_dir(fname);
+			if(!mcs_str2file(str, fname)) {
+				mtc_err("write result to %s failure", fname);
+			}
+#ifdef DEBUG_HDF
+			snprintf(fname, sizeof(fname), "%s/hdf.%s",
+					 TC_ROOT, hdf_obj_name(child));
+			hdf_write_file(child, fname);
+#endif
+		}
+
+	wnext:
+		if (cs != NULL && outhash == NULL)
+			cs_destroy(&cs);
+		string_clear(&str);
+		child = hdf_obj_next(child);
+	}
+		
+	if (node != NULL) hdf_destroy(&node);
+
+	return RET_RBTOP_OK;
+}
+
 int ltpl_parse_dir(char *dir, HASH *outhash)
 {
 	struct dirent **eps = NULL;
-	HDF *node = NULL, *dhdf = NULL, *child = NULL;
-	CSPARSE *cs = NULL;
-	char *tp = NULL, *tpl = NULL, *dataer = NULL;
-	char fname[_POSIX_PATH_MAX], tok[64];
-	NEOERR *err;
-	STRING str;
-	int n, ret;
+	int n;
 
 	if (dir == NULL) {
 		mtc_err("can't read null directory");
@@ -64,14 +153,12 @@ int ltpl_parse_dir(char *dir, HASH *outhash)
 	}
 
 	HASH *dbh;
-	int (*data_handler)(HDF *hdf, HASH *dbh);
 	void *lib = dlopen(NULL, RTLD_NOW|RTLD_GLOBAL);
 	if (lib == NULL) {
 		mtc_err("possible? %s", dlerror());
 		return RET_RBTOP_ERROR;
 	}
-	ret = ldb_init(&dbh);
-	if (ret != RET_RBTOP_OK) {
+	if (ldb_init(&dbh) != RET_RBTOP_OK) {
 		mtc_err("init db error");
 		return RET_RBTOP_INITE;
 	}
@@ -79,90 +166,8 @@ int ltpl_parse_dir(char *dir, HASH *outhash)
 	n = scandir(dir, &eps, tpl_config, alphasort);
 	for (int i = 0; i < n; i++) {
 		mtc_dbg("parse file %s", eps[i]->d_name);
-		cs = NULL; node = NULL; dhdf = NULL;
-		memset(fname, 0x0, sizeof(fname));
-		snprintf(fname, sizeof(fname), "%s/%s", dir, eps[i]->d_name);
+		ltpl_parse_file(dbh, lib, dir, eps[i]->d_name, outhash);
 		free(eps[i]);
-
-		hdf_init(&node);
-		err = hdf_read_file(node, fname);
-		JUMP_NOK(err, next);
-
-		child = hdf_obj_child(node);
-		while (child != NULL) {
-			mtc_dbg("parse node %s", hdf_obj_name(child));
-			string_init(&str);
-			err = cs_init(&cs, hdf_get_obj(child, PRE_CFG_DATASET));
-			JUMP_NOK(err, wnext);
-			
-			hdf_set_value(cs->hdf, "hdf.loadpaths.local", dir);
-
-			err = cgi_register_strfuncs(cs);
-			JUMP_NOK(err, wnext);
-			mcs_register_bitop_functions(cs);
-			tpl = hdf_get_value(child, PRE_CFG_LAYOUT, "null.html");
-			snprintf(fname, sizeof(fname), "%s/%s", PATH_TPL, tpl);
-			err = cs_parse_file(cs, fname);
-			JUMP_NOK(err, wnext);
-
-			if (outhash != NULL) {
-				/*
-				 * strdup the key, baby, because we'll free the hdf later
-				 */
-				hash_insert(outhash, (void*)strdup(hdf_obj_name(child)), (void*)cs);
-				if (hdf_get_obj(child, PRE_CFG_DATASET)) {
-					hdf_init(&dhdf);
-					hdf_copy(dhdf, NULL, hdf_get_obj(child, PRE_CFG_DATASET));
-					snprintf(tok, sizeof(tok), "%s_hdf", hdf_obj_name(child));
-					hash_insert(outhash, (void*)strdup(tok), (void*)dhdf);
-				}
-			}
-			
-			if (hdf_get_value(child, PRE_CFG_OUTPUT, NULL) != NULL) {
-				ltpl_prepare_rend(hdf_get_obj(child, PRE_CFG_DATASET), tpl);
-				
-				/*
-				 * get_data
-				 */
-				dataer = hdf_get_value(child, PRE_CFG_DATAER, NULL);
-				if (dataer != NULL) {
-					data_handler = dlsym(lib, dataer);
-					if( (tp = dlerror()) != NULL) {
-						mtc_err("%s", tp);
-						//continue;
-					} else {
-						ret = (*data_handler)(hdf_get_obj(child, PRE_CFG_DATASET), dbh);
-						if (ret != RET_RBTOP_OK) {
-							mtc_err("%s return %d", dataer, ret);
-						}
-					}
-				}
-				
-				err = cs_render(cs, &str, mcs_strcb);
-				JUMP_NOK(err, wnext);
-				
-				snprintf(fname, sizeof(fname), PATH_DOC"%s",
-						 hdf_get_value(child, PRE_CFG_OUTPUT, "null.html"));
-				mutil_makesure_dir(fname);
-				if(!mcs_str2file(str, fname)) {
-					mtc_err("write result to %s failure", fname);
-				}
-#ifdef DEBUG_HDF
-				snprintf(fname, sizeof(fname), "%s/hdf.%s",
-						 TC_ROOT, hdf_obj_name(child));
-				hdf_write_file(child, fname);
-#endif
-			}
-
-		wnext:
-			if (cs != NULL && outhash == NULL)
-				cs_destroy(&cs);
-			string_clear(&str);
-			child = hdf_obj_next(child);
-		}
-		
-	next:
-		if (node != NULL) hdf_destroy(&node);
 	}
 
 	ldb_destroy(dbh);

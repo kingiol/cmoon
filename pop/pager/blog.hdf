@@ -1,0 +1,27 @@
+blog {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/blog.css" />
+			js = <script type="text/javascript" src="/js/b/blog.js"></script>
+			tabpart = 3
+        }
+		Include {
+			content = blog/blog.html
+		}
+	}
+}
+
+blog_index {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/blogindex.css" />
+			js = <script type="text/javascript" src="/js/b/blogindex.js"></script>
+			tabpart = 3
+        }
+		Include {
+			content = blog/index.html
+		}
+	}
+}

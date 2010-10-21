@@ -1,13 +1,24 @@
 blog {
-	Layout = layout.html
+	Layout = layout_nclient.html
 	Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/blog.css" />
-			js = <script type="text/javascript" src="/js/b/blog.js"></script>
-			tabpart = 2
+			css = <link rel="stylesheet" type="text/css" href="/css/b/blogop.css" />
+			js = <script type="text/javascript" src="/js/b/blogop.js"></script>
+			title = 写博客
+			tabpart = 3
+			crumbs {
+				0 {
+					name = 开物博客
+					href = /blog/index.html
+				}
+				1 {
+					name = 写博客
+					href = /blog
+				}
+			}
         }
 		Include {
-			content = blog.html
+			content = blog/op.html
 		}
 	}
 }

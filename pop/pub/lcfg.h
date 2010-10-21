@@ -20,8 +20,7 @@ __BEGIN_DECLS
 #define PATH_TPL	PATH_SITE"tpl/"
 #define PATH_PAGER	PATH_SITE"pager/"
 #define PATH_MTLS	PATH_SITE"mtls/"
-#define PATH_BLOG_H	PATH_DOC"blog/"
-#define PATH_BLOG	PATH_PAGER"blog/"
+#define PATH_BLOG	PATH_DOC"blog/"
 #define F_TPL_LAYOUT PATH_SITE"tpl/layout.html"
 
 #define CGI_RUN_DIR		"run"

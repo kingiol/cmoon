@@ -88,13 +88,6 @@ ul.uc-menu li a {
 #coltwo p {
     line-height: 18px;
 }
-pre {
-    width: 90%;
-    padding: 0.5em;
-    border: solid 1px #aaaaee;
-    color: #112222;
-    background-color: #eeeeee;
-}
 
 /* ck means chunk */
 .cktitle, .cktitle {

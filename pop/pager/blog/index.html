@@ -1,0 +1,37 @@
+<div id='content-sub'>
+  <?cs escape: "html" ?>
+  <?cs each: blog = Output.blogs ?>
+  <div class="blog-item">
+	<div class="cktitle"><?cs var: blog.title ?></div>
+	<div class="info">
+	  <?cs var: blog.author ?> 发表于 <?cs var: blog.intime ?>
+	</div>
+	
+	<div class="content">
+	  <pre class="box"><?cs var: string.slice(blog.content, 0, 1024) ?></pre>
+	</div>
+	
+	<div class="end">
+	  <?cs if: string.length(blog.content) > #1024 ?>
+	  <a href="/blog/<?cs var:blog.fname ?>.html">阅读详细</a>
+	  <?cs /if ?>
+	</div>
+  </div>
+  <?cs /each ?>
+  <?cs /escape ?>
+
+  <div class="nav">
+	<?cs if: ?Output.pgprev ?>
+	<span class="left">
+	  <a href="/blog/<?cs var: Output.pgprev ?>.html">&lt; 较老的日志 </a>
+	</span>
+	<?cs /if ?>
+	
+	<?cs if: ?Output.pgnext ?>
+	<span class="right">
+	  <a href="/blog/<?cs var: Output.pgnext ?>.html"> 较新的日志 &gt;</a>
+	</span>
+	<?cs /if ?>
+  </div>
+
+</div>

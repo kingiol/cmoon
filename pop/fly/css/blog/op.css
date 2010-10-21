@@ -1,0 +1,14 @@
+dl.blognew dt {float: left; width: 200px; margin: 0 13px 0 0; text-align: right;}
+dl.blognew dd {margin: 10px 0;	line-height:22px;}
+
+input.title {
+	width: 400px;
+	margin-right: 1em;
+}
+
+textarea.content {
+	height: 300px;
+	width: 600px;
+	padding: 5px;
+	margin-right: 1em;
+}
