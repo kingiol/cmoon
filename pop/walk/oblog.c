@@ -130,7 +130,7 @@ int blog_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 				 " VALUES ($1, $2, $3) RETURNING id", "sss", title, content, aname);
 	mdb_get(conn, "i", &id);
 
-	snprintf(command, sizeof(command), PATH_PAGER"blg -i -b %d", id);
+	snprintf(command, sizeof(command), PATH_PAGER"blg -i 0 -b %d", id);
 	mtc_dbg("%s", command);
 	system(command);
 

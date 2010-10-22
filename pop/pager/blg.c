@@ -33,8 +33,13 @@ static int rend_blog_index(HASH *dbh, HASH *tplh, int pageid)
 	if (pageid == 0) {
 		if (pgtt > 1) {
 			hdf_set_int_value(hdf, PRE_OUTPUT".pgprev", pgtt-1);
-			if (ntt % BLOG_NUM_PERPAGE == 1)
+			if (ntt % BLOG_NUM_PERPAGE == 1) {
 				rend_blog_index(dbh, tplh, pgtt-1);
+				if (pgtt > 2) {
+					/* origin 1.html's nex is index.html, change them into 2.html */
+					rend_blog_index(dbh, tplh, pgtt-2);
+				}
+			}
 		}
 	} else {
 		if (pageid > 1 && pgtt > 1)
@@ -122,11 +127,12 @@ static void rend_blog(HASH *dbh, HASH *tplh, int bid)
 
 void useage(char *prg)
 {
-	printf("usage: %s -i -b id\n"
-		   "\t -i process index.\n"
+	printf("usage: %s -i id -r -b id\n"
+		   "\t -i process index id.\n"
+		   "\t -r process index recurse.\n"
 		   "\t -b process blog id.\n"
 		   "example:\n"
-		   "\t %s -b 22\n",
+		   "\t %s -b 22 -i 0\n",
 		   prg, prg);
 	exit(1);
 }
@@ -135,19 +141,19 @@ int main(int argc, char *argv[])
 {
 	HASH *tplh = NULL, *dbh = NULL;
 	NEOERR *err;
-	int c, bid = 0;
-	bool doindex = false, dorecurse = false;
+	int c, bid = 0, indexid = -1;
+	bool dorecurse = false;
 
 	mconfig_parse_file(SITE_CONFIG, &g_cfg);
 	mtc_init(TC_ROOT"blg");
 
-	while ( (c=getopt(argc, argv, "b:ir")) != -1 ) {
+	while ( (c=getopt(argc, argv, "b:i:r")) != -1 ) {
 		switch(c) {
 		case 'b':
 			bid = atoi(optarg);
 			break;
 		case 'i':
-			doindex = true;
+			indexid = atoi(optarg);
 			break;
 		case 'r':
 			dorecurse = true;
@@ -169,8 +175,9 @@ int main(int argc, char *argv[])
 		return RET_RBTOP_INITE;
 	}
 
-	if (doindex) {
-		int pgtt = rend_blog_index(dbh, tplh, 0);
+	if (indexid >= 0) {
+		int pgtt = rend_blog_index(dbh, tplh, indexid);
+		if (indexid > 0 && pgtt > indexid) pgtt = indexid;
 		if (dorecurse) {
 			while (pgtt-- > 0) {
 				rend_blog_index(dbh, tplh, pgtt);
