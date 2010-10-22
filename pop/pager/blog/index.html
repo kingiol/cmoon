@@ -2,17 +2,20 @@
   <?cs escape: "html" ?>
   <?cs each: blog = Output.blogs ?>
   <div class="blog-item">
-	<div class="cktitle"><?cs var: blog.title ?></div>
+	<div class="cktitle"><a href="/blog/<?cs var:blog.fname ?>.html"><?cs var: blog.title ?></a></div>
 	<div class="info">
 	  <?cs var: blog.author ?> 发表于 <?cs var: blog.intime ?>
+	  <span class="left">
+	    <span id="comment-<?cs var: blog.id ?>"></span>
+	  条评论</span>
 	</div>
 	
 	<div class="content">
-	  <pre class="box"><?cs var: string.slice(blog.content, 0, 1024) ?></pre>
+	  <pre class="box"><?cs var: string.slice(blog.content, 0, 200) ?></pre>
 	</div>
 	
 	<div class="end">
-	  <?cs if: string.length(blog.content) > #1024 ?>
+	  <?cs if: string.length(blog.content) > #200 ?>
 	  <a href="/blog/<?cs var:blog.fname ?>.html">阅读详细</a>
 	  <?cs /if ?>
 	</div>
@@ -35,3 +38,12 @@
   </div>
 
 </div>
+
+<script>
+  var o = bmoon.blogindex;
+
+  o.ids = [];
+  <?cs each: blog = Output.blogs ?>
+  o.ids.push(<?cs var: blog.id ?>);
+  <?cs /each ?>
+</script>

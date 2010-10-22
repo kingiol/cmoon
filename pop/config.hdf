@@ -85,6 +85,7 @@ Mevent {
 	2 = aic
 	3 = place
 	4 = msg
+	5 = aux
 }
 
 FileCache {

@@ -3,7 +3,12 @@
   <div class="blog-item">
 	<?cs escape: "html" ?>
 	<div class="cktitle"><?cs var: Output.blog.title ?></div>
-	<div class="info"><?cs var: Output.blog.intime ?></div>
+	<div class="info">
+	  <?cs var: Output.blog.author ?> 发表于 <?cs var: Output.blog.intime ?>
+	  <span class="left">
+	    <span id="comment-num-<?cs var: Output.blog.id ?>"></span>
+	  条评论</span>
+	</div>
 	
 	<div class="content">
 	  <pre class="box"><?cs var: Output.blog.content ?></pre>
@@ -30,5 +35,27 @@
 	</span>
 	<?cs /if ?>
   </div>
+
+  <div id="comments">
+  </div>
+
+  <dl id="comment-add" class="form commentnew">
+	<dt>留言 (3 ~ 256 个字):</dt>
+	<dd>
+	  <textarea id="b-comment" class="content VAL_NEWCOMMENT vrequire" vmax="256" vmin="3"></textarea>
+	</dd>
+
+	<dt>&nbsp;</dt>
+	<dd>
+	  <input type="button" id="submit-comment-add" class="submitbtn" value="提交" />
+	  <span class="indicator"></span>
+	</dd>
+  </dl>
   
 </div>
+
+<script>
+  var o = bmoon.blog;
+
+  o.bid = <?cs var: Output.blog.id ?>;
+</script>

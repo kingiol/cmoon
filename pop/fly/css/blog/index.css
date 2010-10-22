@@ -6,6 +6,10 @@
 	color: gray;
 }
 
+.blog-item .info .left{
+	float: right;
+}
+
 .blog-item .content {
 	margin: 20px 0 10px 0;
 	/*text-indent: 2em;*/

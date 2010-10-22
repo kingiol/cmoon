@@ -1,3 +1,24 @@
+.blog-item {
+	margin: 30px 0;
+}
+
+.blog-item .info {
+	color: gray;
+}
+
+.blog-item .info .left{
+	float: right;
+}
+
+.blog-item .content {
+	margin: 20px 0 10px 0;
+	/*text-indent: 2em;*/
+}
+
+.blog-item .end {
+	color: gray;
+}
+
 .content pre.box {
     width: 95%;
     padding: 0.5em;
@@ -14,4 +35,14 @@
 
 .nav .center {
 	margin:0 50px;
+}
+
+
+dl.commentnew dt {float: left; width: 150px; margin: 0 13px 0 0; text-align: right;}
+dl.commentnew dd {margin: 10px 0; line-height:22px;}
+
+textarea.content {
+	height: 100px;
+	width: 450px;
+	padding: 5px;
 }
