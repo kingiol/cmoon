@@ -41,6 +41,8 @@ bmoon.blogop = {
 			
 			if (data.success == 1) {
 				p.addClass('success');
+				$('#title').val("");
+				$('#b-content').val("");
 			} else {
 				p.addClass('error');
 				$('<span class="error">'+ data.errmsg +'</span>').appendTo(p);
