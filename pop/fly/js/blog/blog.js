@@ -8,6 +8,7 @@ bmoon.blog = {
 
 		o.pid = 0;
 		o.commentnum = 0;
+		o.commentget = 0;
 		o.author = Cookie.read("lcs_uname");
 		if (!o.author) o.author = '网友';
 		o.comments = $('#comments');
@@ -20,21 +21,22 @@ bmoon.blog = {
 	_nodeComment: function(cmt) {
 		var o = bmoon.blog.init();
 
-		var r = $('#comment-'+cmd.id),
+		var r = $('#comment-'+cmt.id),
 		html = [
 			'<div class="comment-item" id="comment-', cmt.id, '">',
-				'<pre class="box">',
-					'<div class="content">', cmt.content, '</div>',
-				'</pre>',
 				'<div class="info">',
 					'<span class="author">',
 						'来自 ', cmt.addr, ' 的 ', cmt.author,
-					'</span>',
-					'<span class="date">', cmt.intime, '</span>',
+					'</span> ',
+					'<span class="date">', cmt.intime, '</span> 说',
 				'</div>',
+				'<pre class="box">',
+					'<div class="content">', cmt.content, '</div>',
+				'</pre>',
 			'</div>'
 		].join('');
 
+		if (cmt.id == 0) r = [];
 		if (!r.length) {
 			r = $(html);
 		}
@@ -52,12 +54,13 @@ bmoon.blog = {
 		var o = bmoon.blog.init();
 
 		$('#submit-comment-add').click(o.addComment);
+		$('#get-comment').click(o.getComment);
 	},
 
 	getComment: function() {
 		var o = bmoon.blog.init();
 
-		$.getJSON('/json/comment', {ids: '0:'+o.bid}, function(data) {
+		$.getJSON('/json/comment', {ids: '0:'+o.bid, nst: o.commentget}, function(data) {
 			if (data.success == 1 && bmoon.utl.type(data[0]) == 'Object') {
 				o.commentnum = data[0][o.bid].ntt;
 				$('#comment-num-'+o.bid).text(o.commentnum);
@@ -67,7 +70,13 @@ bmoon.blog = {
 							o._nodeComment(v).appendTo(o.comments);
 						else
 							o._nodeComment(v).appendTo($('#comment-'+v.pid));
+						o.commentget++;
 					});
+					if (o.commentget < o.commentnum) {
+						$('#comments-get').show();
+					} else {
+						$('#comments-get').hide();
+					}
 				}
 			}
 		});
@@ -97,7 +106,14 @@ bmoon.blog = {
 					   p.addClass('success');
 					   o.commentnum++;
 					   $('#comment-num-'+o.bid).text(o.commentnum);
-					   $('#b-content').val("");
+					   $('#b-comment').val('');
+					   o._nodeComment({
+						   id: 0,
+						   addr: '火星',
+						   author: '你',
+						   intime: '刚刚',
+						   content: content
+					   }).prependTo(o.comments).fadeIn();
 				   } else {
 					   p.addClass('error');
 					   $('<span class="error">'+ data.errmsg +'</span>').appendTo(p);

@@ -36,22 +36,26 @@
 	<?cs /if ?>
   </div>
 
+  <ul id="comment-add" class="commentnew">
+	<li>
+	  <span class="slight">发布留言 (3 ~ 256 个字)</span>
+	</li>
+	<li>
+	  <textarea id="b-comment" class="content VAL_NEWCOMMENT vrequire" vmax="256" vmin="3"></textarea>
+	</li>
+	<li>
+	  <input type="button" id="submit-comment-add" class="submitbtn" value="提交" />
+	  <span class="indicator"></span>
+	</li>
+  </ul>
+
   <div id="comments">
   </div>
 
-  <dl id="comment-add" class="form commentnew">
-	<dt>留言 (3 ~ 256 个字):</dt>
-	<dd>
-	  <textarea id="b-comment" class="content VAL_NEWCOMMENT vrequire" vmax="256" vmin="3"></textarea>
-	</dd>
+  <div id="comments-get" class="hide">
+	<a href="javascript:void(0);" id="get-comment">查看更多评论</a>
+  </div>
 
-	<dt>&nbsp;</dt>
-	<dd>
-	  <input type="button" id="submit-comment-add" class="submitbtn" value="提交" />
-	  <span class="indicator"></span>
-	</dd>
-  </dl>
-  
 </div>
 
 <script>

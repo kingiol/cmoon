@@ -27,7 +27,7 @@ int comment_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	char *ip = hdf_get_value(cgi->hdf, "CGI.RemoteAddress", "unknownHost");
 	hdf_set_value(evt_place->hdfsnd, "ip", ip);
 	MEVENT_TRIGGER_NRET(evt_place, ip, REQ_CMD_PLACEGET, FLAGS_SYNC);
-	char *addr = hdf_get_value(evt_place->hdfrcv, "0.a", "火星");
+	char *addr = hdf_get_value(evt_place->hdfrcv, "0.c", "火星");
 	
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 	hdf_set_value(evt->hdfsnd, "ip", ip);

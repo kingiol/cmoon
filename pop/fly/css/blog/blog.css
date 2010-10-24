@@ -37,12 +37,39 @@
 	margin:0 50px;
 }
 
+ul.commentnew li {
+	margin: 3px 0;
+}
 
-dl.commentnew dt {float: left; width: 150px; margin: 0 13px 0 0; text-align: right;}
-dl.commentnew dd {margin: 10px 0; line-height:22px;}
-
+ul.commentnew li.loading .indicator {
+	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;
+}
+ul.commentnew li.success .indicator {
+	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat
+}
+ul.commentnew li.error .indicator {
+	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;
+}
 textarea.content {
 	height: 100px;
 	width: 450px;
 	padding: 5px;
+}
+
+#comments {
+	clear: both;
+	margin: 10px;
+	margin-top: 5ex;
+}
+
+#comments .comment-item {
+	margin-top: 2ex;
+}
+
+.comment-item .author {
+	color:#767676;
+}
+
+.comment-item pre.box {
+	margin: 0 10px;
 }
