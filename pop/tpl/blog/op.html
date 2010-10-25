@@ -1,11 +1,11 @@
 <div id='content-sub'>
   <dl class="form blognew">
-	<dt>博客标题 (3 ~ 128 个字)</dt>
+	<dt>博客标题 (1 ~ 128 个字)</dt>
 	<dd>
-	  <input type="text" id="title" class="title VAL_NEWBLOG vrequire" vmax="256" vmin="3" value="<?cs var: Output.blog.title ?>" />
+	  <input type="text" id="title" class="title VAL_NEWBLOG vrequire" vmax="256" value="<?cs var: Output.blog.title ?>" />
 	</dd>
 
-	<dt>博客内容 （可以使用 html 标签）</dt>
+	<dt>博客内容 （不可使用 html 标签）</dt>
 	<dd>
 	  <textarea id="b-content" class="content VAL_NEWBLOG vrequire"><?cs var: Output.blog.content ?></textarea>
 	</dd>
