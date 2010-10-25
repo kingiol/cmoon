@@ -22,7 +22,6 @@
 .content pre.box {
     width: 95%;
     padding: 0.5em;
-    border-bottom: solid 1px #ccc;
     /*color: #112222;*/
     /*background-color: #eeeeee;*/
 }
@@ -35,6 +34,10 @@
 
 .nav .center {
 	margin:0 50px;
+}
+
+ul.commentnew h4 {
+	margin-bottom: 0;
 }
 
 ul.commentnew li {
@@ -51,15 +54,24 @@ ul.commentnew li.error .indicator {
 	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;
 }
 textarea.content {
-	height: 100px;
-	width: 450px;
+	height: 150px;
+	width: 520px;
 	padding: 5px;
+}
+textarea.reply {
+	height: 62px;
+	width: 270px;
+	padding: 2px;
+	margin-right: 1em;
 }
 
 #comments {
 	clear: both;
-	margin: 10px;
-	margin-top: 5ex;
+	margin: 5ex 1ex;
+}
+
+#comments h3 {
+	margin:1em 0 0.5em;
 }
 
 #comments .comment-item {

@@ -6,7 +6,6 @@ bmoon.blog = {
 		var o = bmoon.blog;
 		if (o.inited) return o;
 
-		o.pid = 0;
 		o.commentnum = 0;
 		o.commentget = 0;
 		o.author = Cookie.read("lcs_uname");
@@ -28,17 +27,39 @@ bmoon.blog = {
 					'<span class="author">',
 						'来自 ', cmt.addr, ' 的 ', cmt.author,
 					'</span> ',
-					'<span class="date">', cmt.intime, '</span> 说',
+					'<span class="date">', cmt.intime, '</span> 说 ',
 				'</div>',
-				'<pre class="box">',
-					'<div class="content">', cmt.content, '</div>',
-				'</pre>',
+				'<div class="content">',
+					'<pre class="box">', cmt.content, '</pre>',
+				'</div>',
 			'</div>'
 		].join('');
 
 		if (cmt.id == 0) r = [];
 		if (!r.length) {
 			r = $(html);
+			/*
+			 * nest comment don't add, because it's hard to rend newer child cmt before
+			 * parent rended.
+			if (cmt.id != 0) {
+				var box = $('.content', r),
+				wr = $('<div class="reply hide"></div>'),
+				replya = $('<textarea class="reply"></textarea>'),
+				replyb = $('<a href="javascript:void(0);">回复</a>');
+
+				replya.appendTo(wr);
+				replyb.appendTo(wr);
+				wr.appendTo(box);
+
+				replyb.click(function() {
+					var v = replya.val();
+					if (!v.length) return;
+					o.addComment({pid: cmt.pid, v: v, p: box});
+				});
+				box.mouseenter(function() { wr.fadeIn('slow');});
+				box.mouseleave(function() { wr.fadeOut();});
+			}
+			*/
 		}
 		return r;
 	},
@@ -95,7 +116,7 @@ bmoon.blog = {
 
 		$.post('/comment',
 			   {
-				   op: 'add', type: 0, oid: o.bid, pid: o.pid,
+				   op: 'add', type: 0, oid: o.bid, pid: 0,
 				   author: o.author,
 				   content: content
 			   },
@@ -113,7 +134,7 @@ bmoon.blog = {
 						   author: '你',
 						   intime: '刚刚',
 						   content: content
-					   }).prependTo(o.comments).fadeIn();
+					   }).prependTo(o.comments).fadeIn('slow');
 				   } else {
 					   p.addClass('error');
 					   $('<span class="error">'+ data.errmsg +'</span>').appendTo(p);

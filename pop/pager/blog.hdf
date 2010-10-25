@@ -18,6 +18,7 @@ blog_index {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/blogindex.css" />
 			js = <script type="text/javascript" src="/js/b/blogindex.js"></script>
+			title = 开物博客
 			tabpart = 3
         }
 		Include {
