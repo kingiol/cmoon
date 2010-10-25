@@ -4,20 +4,20 @@
 
 static void app_after_login(CGI *cgi, char *aname, char *masn)
 {
-	char tm[LEN_TM_GMT];
+	char tm[LEN_TM_GMT], *p;
 
 	hdf_set_copy(cgi->hdf, PRE_OUTPUT".aname", PRE_QUERY".aname");
 	
 	/*
 	 * set cookie 
 	 */
-	//cgi_url_escape(aname, &p);
-	cgi_cookie_set(cgi, "aname", aname, NULL, SITE_DOMAIN, NULL, 1, 0);
+	cgi_url_escape(aname, &p);
+	cgi_cookie_set(cgi, "aname", p, NULL, SITE_DOMAIN, NULL, 1, 0);
+	free(p);
 
 	//cgi_url_escape(masn, &p);
 	mmisc_getdatetime_gmt(tm, sizeof(tm), "%A, %d-%b-%Y %T GMT", 60*60*3);
 	cgi_cookie_set(cgi, "masn", masn, NULL, SITE_DOMAIN, tm, 1, 0);
-	//free(p);
 }
 
 int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
