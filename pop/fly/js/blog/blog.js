@@ -30,7 +30,7 @@ bmoon.blog = {
 					'<span class="date">', cmt.intime, '</span> 说 ',
 				'</div>',
 				'<div class="content">',
-					'<pre class="box">', cmt.content, '</pre>',
+					'<p class="pre">', cmt.content, '</p>',
 				'</div>',
 			'</div>'
 		].join('');

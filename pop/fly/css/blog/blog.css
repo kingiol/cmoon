@@ -19,9 +19,10 @@
 	color: gray;
 }
 
-.content pre.box {
+.content p.pre {
     width: 95%;
     padding: 0.5em;
+	white-space: pre-wrap;
     /*color: #112222;*/
     /*background-color: #eeeeee;*/
 }
@@ -82,6 +83,7 @@ textarea.reply {
 	color:#767676;
 }
 
-.comment-item pre.box {
+.comment-item p.pre {
 	margin: 0 10px;
+	white-space: pre-wrap;
 }

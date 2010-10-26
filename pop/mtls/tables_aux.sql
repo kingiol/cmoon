@@ -28,5 +28,5 @@ CREATE TABLE comment (
 	   PRIMARY KEY (id)	
 );
 
-CREATE INDEX comment_index ON comment (type, state, cid, pid);
+CREATE INDEX comment_index ON comment (type, state, oid, pid);
 CREATE TRIGGER tg_uptime_comment BEFORE UPDATE ON comment FOR EACH ROW EXECUTE PROCEDURE update_time();
