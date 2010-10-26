@@ -11,7 +11,7 @@ static void app_after_login(CGI *cgi, char *aname, char *masn)
 	/*
 	 * set cookie 
 	 */
-	cgi_url_escape(aname, &p);
+	neos_url_escape(aname, &p, NULL);
 	cgi_cookie_set(cgi, "aname", p, NULL, SITE_DOMAIN, NULL, 1, 0);
 	free(p);
 
