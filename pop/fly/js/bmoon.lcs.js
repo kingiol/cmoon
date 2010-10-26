@@ -78,6 +78,7 @@ bmoon.lcs = {
         $.getJSON('/json/app/logout');
 		
         $.cookie('aname', null, {path: '/', domain: g_site_domain});
+        $.cookie('aname_esc', null, {path: '/', domain: g_site_domain});
         $.cookie('asn', null, {path: '/', domain: g_site_domain});
         $.cookie('masn', null, {path: '/', domain: g_site_domain});
 		o.login_aname.val("");
@@ -87,7 +88,7 @@ bmoon.lcs = {
 	loginCheck: function() {
 		var o = bmoon.lcs.init();
 		
-		var aname = $.cookie('aname');
+		var aname = $.cookie('aname_esc');
 		if (aname != null) {
 			o.aname.text(aname);
 			o.nav_guest.hide();
