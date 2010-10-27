@@ -11,10 +11,10 @@ bmoon.chat = {
 	usersTotalMsg: {},
 	usersLoadPage: {},
 
-    debug: function(msg) {
-        $('<div>'+ msg +'</div>').appendTo('body');
+	debug: function(msg) {
+		$('<div>'+ msg +'</div>').appendTo('body');
 		console.log(msg);
-    },
+	},
 	
 	init: function(ape) {
 		var o = bmoon.chat;
@@ -169,7 +169,7 @@ bmoon.chat = {
 		if (pipe && type == 'send') {
 			pipe.request.send('LCS_SEND', {msg: mv});
 		} else {
-			o.ape.request.send('LCS_MSG', {uname: o.aname, msg: mv});
+			o.ape.request.send('LCS_MSG', {uname: o.cUserID, msg: mv});
 		}
 
 		o.soundRemind('send');
@@ -279,9 +279,14 @@ bmoon.chat = {
 		var o = bmoon.chat.init();
 
 		var c = o._nodeUser(data.uname, true);
+		
 		c.removeClass('off').addClass('on');
 		c.attr('pubid', data.pubid);
 		o.usersOn.push(data.uname);
+
+		if (o.cUserID == data.uname) {
+			o.ape.lcsCurrentPipe = o.ape.getPipe(data.pubid);
+		}
 	},
 
 	// {uname: user.properties.uin}

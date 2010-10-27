@@ -84,7 +84,7 @@ function liveCS(ape) {
 							  $.each(data.raws, function(i, v) {
 								  var raw = JSON.parse(v);
 								  if (raw) {
-									  o.ape.callRaw(raw);
+									  ape.callRaw(raw);
 								  }
 							  });
 						  }

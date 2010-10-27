@@ -211,7 +211,7 @@ bmoon.chat = {
 		var
 		html = o._strMsg(data);
 		
-		$(html).appendTo(o.recentbox);
+		$(html).prependTo(o.recentbox);
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
 	},
 
