@@ -77,13 +77,18 @@ function liveCS(ape) {
 					'url': location.href, 'title': document.title
 				});
 			}
-			$.getJSON('http://www.kaiwuonline.com/json/msg', {from: ape.lcsaname, to: ape.lcsuname}, function(data) {
-				if (data.success == 1 && bmoon.utl.type(data.raws) == 'Array') {
-					$.each(data.raws, function(i, v) {
-						eval('Ape.transport.read (' + v.msgraw + ')');
-					});
-				}
-			});
+			$.getJSON('http://www.kaiwuonline.com/json/msg?JsonCallback=?',
+					  {name: ape.lcsaname, name2: ape.lcsuname},
+					  function(data) {
+						  if (data.success == 1 && bmoon.utl.type(data.raws) == 'Array') {
+							  $.each(data.raws, function(i, v) {
+								  var raw = JSON.parse(v);
+								  if (raw) {
+									  o.ape.callRaw(raw);
+								  }
+							  });
+						  }
+					  });
 		}
 	};
 

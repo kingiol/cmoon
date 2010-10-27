@@ -22,7 +22,7 @@ b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/jquery.md5.js \
 
 # Client
 b/kol.js: bmoon.kol.js
-b/chat.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/app/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
+b/chat.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/Build/JSON.js ape/app/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
 b/chatb.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/bmoon.js
 b/chatc.js: pub/jquery.cookie.js pub/bmoon.js
 
@@ -33,8 +33,8 @@ b/blog.js: blog/blog.js
 b/blogindex.js: blog/index.js
 b/blogop.js: blog/op.js
 
-b/oms.js: pub/jquery.mnscrollpage.js \
-		  ape/app/bmoon.chatb.js ape/Build/JSON.js ape/Build/apeClient.js ape/app/livecsb.js \
+b/oms.js: pub/jquery.mnscrollpage.js ape/Build/JSON.js \
+		  ape/app/bmoon.chatb.js ape/Build/apeClient.js ape/app/livecsb.js \
 		  pub/jquerytools/src/scrollable/scrollable.js pub/jquerytools/src/scrollable/scrollable.navigator.js \
 		  oms/oms.js
 b/oms/edit.js: pub/jquerytools/src/tabs/tabs.js oms/edit.js
