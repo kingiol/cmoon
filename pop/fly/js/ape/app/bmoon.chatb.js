@@ -161,6 +161,12 @@ bmoon.chat = {
 		});
 
 		if (!mv.length) return false;
+		if (mv.length > 256) {
+			var ot = o.stat.html();
+			o.stat.html('聊天信息不要超过 256 个字。');
+			setTimeout(function(){o.stat.html(ot);}, 2000);
+			return false;
+		}
 		o.m.val('');
 
 		$(html).appendTo(databox);

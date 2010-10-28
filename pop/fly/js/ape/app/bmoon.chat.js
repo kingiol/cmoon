@@ -153,6 +153,12 @@ bmoon.chat = {
 		});
 
 		if (!mv.length) return false;
+		if (mv.length > 256) {
+			var ot = o.hint.html();
+			o.hint.html('聊天信息不要超过 256 个字。');
+			setTimeout(function(){o.hint.html(ot);}, 2000);
+			return false;
+		}
 		$('#bchat-input').val('');
 
 		$(html).appendTo(o.databox);

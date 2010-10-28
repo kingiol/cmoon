@@ -127,7 +127,9 @@ int blog_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	HDF_GET_STR(cgi->hdf, PRE_QUERY".content", content);
 
 	MDB_EXEC_RBT(conn, NULL, "INSERT INTO blog (title, content, author) "
-				 " VALUES ($1, $2, $3) RETURNING id", "sss", title, content, aname);
+				 " VALUES ($1::varchar(256), $2, "
+				 " $3::varchar(256)) RETURNING id",
+				 "sss", title, content, aname);
 	mdb_get(conn, "i", &id);
 
 	snprintf(command, sizeof(command), PATH_PAGER"blg -i 0 -b %d", id);
