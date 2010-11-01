@@ -28,15 +28,9 @@ int okol_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 * build query conditon
 	 */
 	string_init(&str);
-	mcs_build_querycond_s(hdf_get_obj(cgi->hdf, PRE_QUERY),
-						  hdf_get_child(g_cfg, "Db.QueryCond.stat.s"),
-						  &str);
-	mcs_build_querycond_i(hdf_get_obj(cgi->hdf, PRE_QUERY),
-						  hdf_get_child(g_cfg, "Db.QueryCond.stat.i"),
-						  &str);
-	if (str.len <= 0) string_append(&str, " intime > current_date - 7 AND type=0 ");
-	else string_append(&str, " 1=1 ");
-
+	mcs_build_querycond(hdf_get_obj(cgi->hdf, PRE_QUERY),
+						hdf_get_obj(g_cfg, "Db.QueryCond.stat"),
+						&str, " intime > current_date - 7 AND type=0 ");
 	/*
 	 * execute
 	 */

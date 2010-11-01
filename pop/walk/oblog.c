@@ -159,13 +159,12 @@ int blog_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
 	STRING str;
 	string_init(&str);
-	mcs_build_upcol_s(hdf_get_obj(cgi->hdf, PRE_QUERY),
-					  hdf_get_child(g_cfg, "Db.UpdateCol.blog.s"), &str);
-	if (str.len <= 0) {
+	if (mcs_build_upcol(hdf_get_obj(cgi->hdf, PRE_QUERY),
+						hdf_get_obj(g_cfg, "Db.UpdateCol.blog"), &str)
+		!= RET_RBTOP_OK) {
 		mtc_err("update none");
 		return RET_RBTOP_INPUTE;
 	}
-	string_append(&str, " uptime=uptime ");
 	MDB_EXEC_RBT(conn, NULL, "UPDATE blog SET %s WHERE id=%d AND author=$1",
 				 "s", str.buf, bid, aname);
 	string_clear(&str);

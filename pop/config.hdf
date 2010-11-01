@@ -55,21 +55,15 @@ Db {
 	}
 	QueryCond {
 		stat {
-			s {
-				tms = intime >
-				tme = intime <
-			}
-			i {
-				type = type =
-			}
+			tms [type=str] = intime >
+			tme [type=str] = intime <
+			type [type=int] = type =
 		}
 	}
 	UpdateCol {
 		blog {
-			s {
-				title = title
-				content = content
-			}
+			title [type=str, clen=256] = title
+			content [type=str] = content
 		}
 	}
 }
