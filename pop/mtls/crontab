@@ -1,3 +1,7 @@
 # m h  dom mon dow   command
 55 23 * * * /usr/local/moon/pop/mtls/stat.sh > /tmp/stat.log
 0 0 1,15 * * /usr/local/moon/pop/mtls/backupdb.sh > /tmp/backupdb.log
+
+* * * * * /usr/local/moon/pop/mtls/email.sh 1 > /tmp/email.log
+0 * * * * /usr/local/moon/pop/mtls/email.sh 2 > /tmp/email.log
+58 23 * * * /usr/local/moon/pop/mtls/email.sh 3 > /tmp/email.log

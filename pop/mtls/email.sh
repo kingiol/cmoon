@@ -20,7 +20,7 @@ FS="|"
 
 
 # 根据参数 select 对应的数据到 临时文件
-psql -U lcser lcs_aux -t -F${FS} -c "SELECT max(opts), max(subject), str_concat(sendto || ','), str_concat(cc || ','), str_concat(bcc || ','), checksum, str_concat(id || ',') FROM email WHERE state=0 AND gotime="${GOTIME}" GROUP BY checksum" > ${TMPFILE}
+psql -U lcser lcs_aux -t -F${FS} -c "SELECT max(opts), max(subject), str_concat(sendto || ','), str_concat(cc || ','), str_concat(bcc || ','), checksum, str_concat(id || ',') FROM email WHERE state=0 AND gotime="${GOTIME}" GROUP BY checksum LIMIT 100" > ${TMPFILE}
 
 # readline 临时文件， 分行处理
 # awk -F: 'script' / -f scriptfile FILE  对FILE逐行进行script操作
