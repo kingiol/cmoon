@@ -2,7 +2,7 @@ function liveCS(ape) {
 	var ui = bmoon.chat;
 	this.initialize = function() {
 		// app name
-		ape.lcsaname = Cookie.read('aname');
+		ape.lcsaname = Cookie.read('aname_esc');
 		ape.lcsmasn = Cookie.read('masn');
 		ape.lcsCurrentPipe = null;
 		
