@@ -31,14 +31,14 @@ bmoon.kol = {
 		if (typeof jQuery != 'function') {
 			o._loadJs('http://js.kaiwuonline.com/b/chatb.js');
 		} else if (typeof jQuery.cookie != 'function') {
-			$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chatc.js"></script>');
+			$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chatc.js" charset="utf-8"></script>');
 		}
 		
 		// wait for chatx.js loaded
 		_execAfter(function() {
 			$('head').append('<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />');
 			$('head').append('<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->');
-			$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js"></script>');
+			$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js charset="utf-8""></script>');
 		}, "typeof jQuery == 'function' && typeof jQuery.cookie == 'function'");
 		
 		return o;
