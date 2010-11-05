@@ -28,7 +28,7 @@ bmoon.kol = {
 
 		o.aname = opt.aname;
 
-		if (typeof jQuery != 'function') {
+		if (typeof jQuery != 'function' || jQuery.fn.jquery < '1.4.2') {
 			o._loadJs('http://js.kaiwuonline.com/b/chatb.js');
 		} else if (typeof jQuery.cookie != 'function') {
 			$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chatc.js" charset="utf-8"></script>');
