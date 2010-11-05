@@ -1,7 +1,7 @@
 BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
-FILES = b/base.js b/chat.js b/kol.js b/chatb.js b/chatc.js \
+FILES = b/base.js b/chat.js b/chat_gb.js b/kol.js b/chatb.js b/chatc.js \
 		b/index.js b/appnew.js \
 		b/blog.js b/blogindex.js b/blogop.js \
 		b/oms.js b/oms/edit.js b/oms/stat.js b/oms/users.js \
