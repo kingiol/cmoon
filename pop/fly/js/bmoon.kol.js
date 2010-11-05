@@ -38,7 +38,12 @@ bmoon.kol = {
 		_execAfter(function() {
 			$('head').append('<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />');
 			$('head').append('<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->');
-			$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js" charset="utf-8"></script>');
+			var pgcode = $('meta[http-equiv]').attr('content');
+			if (!pgcode.length || pgcode.match('UTF') || pgcode.match('utf')) {
+				$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js" charset="utf-8"></script>');
+			} else {
+				$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat_gb.js" charset="gb2312"></script>');
+			}
 		}, "typeof jQuery == 'function' && typeof jQuery.cookie == 'function'");
 		
 		return o;

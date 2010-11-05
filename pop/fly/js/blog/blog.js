@@ -38,28 +38,6 @@ bmoon.blog = {
 		if (cmt.id == 0) r = [];
 		if (!r.length) {
 			r = $(html);
-			/*
-			 * nest comment don't add, because it's hard to rend newer child cmt before
-			 * parent rended.
-			if (cmt.id != 0) {
-				var box = $('.content', r),
-				wr = $('<div class="reply hide"></div>'),
-				replya = $('<textarea class="reply"></textarea>'),
-				replyb = $('<a href="javascript:void(0);">回复</a>');
-
-				replya.appendTo(wr);
-				replyb.appendTo(wr);
-				wr.appendTo(box);
-
-				replyb.click(function() {
-					var v = replya.val();
-					if (!v.length) return;
-					o.addComment({pid: cmt.pid, v: v, p: box});
-				});
-				box.mouseenter(function() { wr.fadeIn('slow');});
-				box.mouseleave(function() { wr.fadeOut();});
-			}
-			*/
 		}
 		return r;
 	},

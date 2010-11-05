@@ -23,6 +23,8 @@ b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/jquery.md5.js \
 # Client
 b/kol.js: bmoon.kol.js
 b/chat.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/Build/JSON.js ape/app/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
+# gb2312
+b/chat_gb.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/Build/JSON.js ape/app/gb/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
 b/chatb.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/bmoon.js
 b/chatc.js: pub/jquery.cookie.js pub/bmoon.js
 
