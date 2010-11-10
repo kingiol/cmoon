@@ -182,3 +182,6 @@ apt-get install postgresql-contrib
 	上述配置, mnuser 只能以bigml通过 local 方式登录, 如需其他方式请修改 pg_hba.conf 文件,
 	pg_ident.conf 文件只是在 认证方式为 ident 的时候配合修改(ident也可以存在于TCP/IP方式)
 	关于 pg_hba.conf 的说明可以参考 http://www.chinaunix.net/jh/18/8176.html
+
+
+useradd -d /opt -g code -N forge
