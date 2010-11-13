@@ -32,6 +32,24 @@ bmoon.chat = {
 		].join('');
 	},
 
+	_blinkToggle: function() {
+		var o = bmoon.chat.init();
+
+		if (!o.toggle.blinkID) {
+			o.toggle.blinkID = setInterval(function() {
+				o.toggle.toggleClass('dirty');
+			}, 500);
+		}
+	},
+
+	_stopBlinkToggle: function() {
+		var o = bmoon.chat.init();
+
+		clearInterval(o.toggle.blinkID);
+		o.toggle.removeClass('dirty');
+		o.toggle.blinkID = 0;
+	},
+
     debug: function(msg) {
         //$('<div>'+ msg +'</div>').appendTo('body');
     },
@@ -39,110 +57,111 @@ bmoon.chat = {
 	init: function(ape) {
 		var o = bmoon.chat;
 		if (o.inited) return o;
+		o.inited = true;
 
-		var
-		rmdhtml = $.browser.msie? '<bgsound id="bchat-remind"></bgsound>': '<audio id="bchat-remind"></audio>',
+		var	rmdhtml = $.browser.msie? '<bgsound id="kol-lcs-remind"></bgsound>': '<audio id="kol-lcs-remind"></audio>',
 		html = [
-			'<div id="bchat">',
-				'<div id="bchat-min" title="打开">&nbsp;</div>',
-				'<div id="bchat-max">',
-					'<div id="bchat-body">',
-			    	    '<div id="bchat-hint">客服当前离线，留言功能开启。</div>',
-						'<div id="bchat-close" title="最小化">&nbsp;</div>',
-						'<div id="bchat-msgs" class="bchat-msgs">',
+			'<div id="kol-lcs">',
+				'<div id="kol-lcs-min" title="打开">&nbsp;</div>',
+				'<div id="kol-lcs-max">',
+					'<div id="kol-lcs-body">',
+			    	    '<div class="top">客服当前离线，留言功能开启。</div>',
+						'<div class="close" title="最小化">&nbsp;</div>',
+						'<div class="msgs">',
 			    	        '<div class="recently"></div><div class="data"></div>',
 			    	    '</div>',
-						'<textarea rows="2" id="bchat-input"></textarea>',
-						'<div id="bchat-hint2">Enter 发送消息。 ',
-							'<span><input type="checkbox" id="bchat-remind-sw" checked="checked" /> 提示音</span>',
+						'<textarea rows="2" id="kol-lcs-input"></textarea>',
+						'<div class="bot">Enter 发送消息。 ',
+							'<span><input type="checkbox" id="kol-lcs-remind-sw" checked="checked" /> 提示音</span>',
 						'</div>',
 					'</div>',
-			    	'<div id="bchat-head">',
-						'<div id="bchat-trigger" title="在线聊天">&nbsp;</div>',
-						'<div id="bchat-power">&nbsp;</div>',
-						'<div id="bchat-downer" title="关闭">&nbsp;</div>',
+			    	'<div id="kol-lcs-head">',
+						'<div class="toggle" title="在线聊天">&nbsp;</div>',
+						'<div class="miner" title="关闭">&nbsp;</div>',
 			    	'</div>',
 				'</div>',
 				rmdhtml,
 			'</div>'
 		].join(''),
-		chatbody = $('#bchat');
+		chatbody = $('#kol-lcs');
 
-		o.ape = ape;
-		o.inited = true;
-
-		// application don't write bchat, append it by lcs.
+		// application don't write kol-lcs, append it.
 		if (!chatbody.length) {
-			// load css dynamic will overwrite iniUI, especially in bad network enviorment.
-			//$('head').append('<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />');
-			//$('head').append('<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->');
 			$('body').append(html);
 		}
 
-		o.min = $('#bchat-min');
-		o.max = $('#bchat-max');
-		o.trigger = $('#bchat-trigger');
-		o.closer = $('#bchat-close');
-		o.msglist = $('#bchat-msgs');
-		o.hint = $('#bchat-hint');
+		o.ape = ape;
+		o.min = $('#kol-lcs-min');
+		o.max = $('#kol-lcs-max');
+		o.head = $('#kol-lcs-head');
+		o.body = $('#kol-lcs-body');
+		
+		o.toggle = $('.toggle', o.head);
+		o.closer = $('.close', o.body);
+		o.miner = $('.miner', o.head);
+		
+		o.msglist = $('.msgs', o.body);
 		o.recentbox = $('.recently', o.msglist);
 		o.databox = $('.data', o.msglist);
-		//o.ape.request.send('LCS_RECENTLY', {uin: '0'});
-		o.reminder = $('#bchat-remind')[0];
-		o.rmdsw = $('#bchat-remind-sw');
+		o.hint = $('.top', o.body);
+		
+		o.reminder = $('#kol-lcs-remind')[0];
+		o.rmdsw = $('#kol-lcs-remind-sw');
+		o.msginput = $('#kol-lcs-input');
 
-		$('#bchat-input').bind('keydown', 'return', o.msgSend);
-		// chat.css is appended by js, will overwrite my fadeIn, so, delay.
-		//setTimeout(o.initUI, 2000);
 		o.initUI();
 		
-		//$('#bchat div[title]').tooltip({position: ['top', 'left']});
 		return o;
 	},
 
 	initUI: function() {
 		var o = bmoon.chat.init();
 
-		if ($.cookie('lcs_ui_max') == "0") {
+		var uimax = $.cookie('lcs_ui_max');
+
+		if ( (!o.ape.restoreUI && o.ape.defaultUI == 'min') || (o.ape.restoreUI && ((uimax == null && o.ape.defaultUI == 'min') || uimax == '0' )) )
 			o.min.fadeIn();
-		} else {
+		else
 			o.max.fadeIn();
-		}
-		$('#bchat-downer').click(function() {
+
+		o.miner.click(function() {
 			o.max.hide();
 			o.min.fadeIn();
 			$.cookie('lcs_ui_max', "0");
 		});
-		$('#bchat-min').click(function() {
+		o.min.click(function() {
 			o.min.hide();
 			o.max.fadeIn();
 			$.cookie('lcs_ui_max', "1");
 		});
+		
 		o.closer.click(o.closeChat);
-		o.trigger.click(o.openChat);
+		o.toggle.click(o.openChat);
+		o.msginput.bind('keydown', 'return', o.msgSend);
 	},
 	
 	openChat: function() {
 		var o = bmoon.chat.init();
 
-		$('#bchat-body').fadeIn();
-        $('#bchat-input').focus();
+		o.body.fadeIn();
+        o.msginput.focus();
 		
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
-		o.trigger.removeClass('dirty');
-		o.trigger.unbind('click').click(o.closeChat);
+		o._stopBlinkToggle();
+		o.toggle.unbind('click').click(o.closeChat);
 	},
 
 	closeChat: function() {
 		var o = bmoon.chat.init();
 
-		$('#bchat-body').fadeOut();
-		o.trigger.unbind('click').click(o.openChat);
+		o.body.fadeOut();
+		o.toggle.unbind('click').click(o.openChat);
 	},
 
 	msgSend: function() {
-		var o = bmoon.chat.init(),
-		mv = $('#bchat-input').val(),
+		var o = bmoon.chat.init();
+		
+		var mv = o.msginput.val(),
 		pipe = o.ape.lcsCurrentPipe,
 		type = o.adminuser ? 'send': 'msg',
 		html = o._strMsg({
@@ -159,7 +178,7 @@ bmoon.chat = {
 			setTimeout(function(){o.hint.html(ot);}, 2000);
 			return false;
 		}
-		$('#bchat-input').val('');
+		o.msginput.val('');
 
 		$(html).appendTo(o.databox);
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
@@ -201,10 +220,10 @@ bmoon.chat = {
 		html = o._strMsg(data);
 
 		$(html).appendTo(o.databox);
-		if ($('#bchat-body').css('display') != 'none') {
+		if (o.body.css('display') != 'none') {
 			o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
 		} else {
-			o.trigger.addClass('dirty');
+			o._blinkToggle();
 		}
 
 		o.soundRemind('receive');

@@ -20,13 +20,13 @@ bmoon.kol = {
 	},
 
 	// {aname: 'xxx'}
-	init: function(opt) {
+	init: function(opts) {
 		var o = bmoon.kol;
 
 		if (o.inited) return o;
 		o.inited = true;
 
-		o.aname = opt.aname;
+		o.aname = opts.aname;
 
 		if (typeof jQuery != 'function' || jQuery.fn.jquery < '1.4.2') {
 			o._loadJs('http://js.kaiwuonline.com/b/chatb.js');
@@ -36,8 +36,13 @@ bmoon.kol = {
 		
 		// wait for chatx.js loaded
 		_execAfter(function() {
-			$('head').append('<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />');
-			$('head').append('<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->');
+			opts = $.extend({
+				aname: 'unknown',
+				css: 'http://css.kaiwuonline.com/b/client/lcs'
+			}, opts || {});
+			
+			$('head').append('<link rel="stylesheet" href="' + opts.css + '.css" />');
+			$('head').append('<!--[if IE 6]><link rel="stylesheet" href="' + opts.css + '_ie6.css" /><![endif]-->');
 			var unode = $('meta[content*="utf"]');
 			if (!unode.length) unode = $('meta[content*="UTF"]');
 			if (unode.length) {
@@ -50,8 +55,8 @@ bmoon.kol = {
 		return o;
 	},
 
-	onready: function(opt) {
-		var o = bmoon.kol.init(opt);
+	onready: function(opts) {
+		var o = bmoon.kol.init(opts);
 
 		_execAfter(function() {
 			var client = new APE.Client();
@@ -59,7 +64,11 @@ bmoon.kol = {
 				identifier: o.aname,
 				transport: 2,
 				complete: function(ape) {
-					new liveCS(ape).initialize({aname: o.aname});
+					new liveCS(ape).initialize({
+						aname: o.aname,
+						defaultUI: opts.defaultUI,
+						restoreUI: opts.restoreUI
+					});
 				}
 			});
 		}, "typeof liveCS == 'function'");

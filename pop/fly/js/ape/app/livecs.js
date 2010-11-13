@@ -13,6 +13,8 @@ function liveCS(ape) {
 		ape.lcspname = opts.aname || document.domain;
 		ape.lcsaname = null;
 		ape.lcsjid = 0;
+		ape.defaultUI = opts.defaultUI || 'max';
+		ape.restoreUI = opts.restoreUI || true;
 
 		// user name
 		ape.lcsuname = Cookie.read("lcs_uname");
