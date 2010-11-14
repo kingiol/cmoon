@@ -1366,10 +1366,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="228.07836"
+     inkscape:cx="171.57836"
      inkscape:cy="806.2462"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:window-width="1016"
      inkscape:window-height="701"
@@ -1393,7 +1393,7 @@
      id="layer2"
      inkscape:label="background">
     <rect
-       style="opacity:1;fill:#ffffff;fill-opacity:1"
+       style="opacity:1;fill:#eeeeee;fill-opacity:1"
        id="rect2846"
        width="253"
        height="83"
