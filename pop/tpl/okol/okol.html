@@ -32,11 +32,11 @@
   </dl>
 
   <script>
-	var o = bmoon.okol;
+	var mgd = mgd || {};
 	
-	o.stdata = [];
+	mgd.stdata = [];
 	<?cs each: st = Output.sts ?>
-	o.stdata.push([<?cs var: st.intime ?>, <?cs var: st.count ?>]);
+	mgd.stdata.push([<?cs var: st.intime ?>, <?cs var: st.count ?>]);
 	<?cs /each ?>
   </script>
 

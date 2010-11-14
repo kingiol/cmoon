@@ -27,9 +27,9 @@
 
 <?cs if: ?Output.blog.title ?>
 <script>
-	var o = bmoon.blogop;
+	var mgd = mgd || {};
 
-	o.bid = <?cs var: Output.blog.id ?>
-	o.op = 'mod';
+	mgd.bid = <?cs var: Output.blog.id ?>
+	mgd.op = 'mod';
 </script>
 <?cs /if ?>

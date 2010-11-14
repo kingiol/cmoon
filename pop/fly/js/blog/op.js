@@ -36,7 +36,7 @@ bmoon.blogop = {
 		$(".error", p).remove();
 		p.removeClass('success').removeClass('error').addClass('loading');
 		
-		$.post('/blog', {op:o.op? o.op: 'add', bid: o.bid, title: title, content: content}, function(data) {
+		$.post('/blog', {op:mgd.op? mgd.op: 'add', bid: mgd.bid, title: title, content: content}, function(data) {
 			p.removeClass('loading');
 			
 			if (data.success == 1) {
@@ -63,7 +63,7 @@ bmoon.blogop = {
 			$(".error", p).remove();
 			p.removeClass('success').removeClass('error').addClass('loading');
 			
-			$.getJSON('/json/blog', {op: 'del', bid: o.bid, state: state}, function(data) {
+			$.getJSON('/json/blog', {op: 'del', bid: mgd.bid, state: state}, function(data) {
 				p.removeClass('loading');
 				if (data.success == 1) {
 					p.addClass('success');

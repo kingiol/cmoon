@@ -27,8 +27,8 @@ bmoon.blogindex = {
 
 		var ids = [];
 
-		for (var i = 0; i < o.ids.length; i++) {
-			ids.push('0:' + o.ids[i])
+		for (var i = 0; i < mgd.ids.length; i++) {
+			ids.push('0:' + mgd.ids[i])
 		}
 		ids = ids.join(',');
 		

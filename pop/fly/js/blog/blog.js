@@ -59,12 +59,12 @@ bmoon.blog = {
 	getComment: function() {
 		var o = bmoon.blog.init();
 
-		$.getJSON('/json/comment', {ids: '0:'+o.bid, nst: o.commentget}, function(data) {
+		$.getJSON('/json/comment', {ids: '0:'+mgd.bid, nst: o.commentget}, function(data) {
 			if (data.success == 1 && bmoon.utl.type(data[0]) == 'Object') {
-				o.commentnum = data[0][o.bid].ntt;
-				$('#comment-num-'+o.bid).text(o.commentnum);
-				if (bmoon.utl.type(data[0][o.bid].cmts) == 'Object') {
-					$.each(data[0][o.bid].cmts, function(k, v){
+				o.commentnum = data[0][mgd.bid].ntt;
+				$('#comment-num-'+mgd.bid).text(o.commentnum);
+				if (bmoon.utl.type(data[0][mgd.bid].cmts) == 'Object') {
+					$.each(data[0][mgd.bid].cmts, function(k, v){
 						if (v.pid == 0)
 							o._nodeComment(v).appendTo(o.comments);
 						else
@@ -94,7 +94,7 @@ bmoon.blog = {
 
 		$.post('/comment',
 			   {
-				   op: 'add', type: 0, oid: o.bid, pid: 0,
+				   op: 'add', type: 0, oid: mgd.bid, pid: 0,
 				   author: o.author,
 				   content: content
 			   },
@@ -104,7 +104,7 @@ bmoon.blog = {
 				   if (data.success == 1) {
 					   p.addClass('success');
 					   o.commentnum++;
-					   $('#comment-num-'+o.bid).text(o.commentnum);
+					   $('#comment-num-'+mgd.bid).text(o.commentnum);
 					   $('#b-comment').val('');
 					   o._nodeComment({
 						   id: 0,

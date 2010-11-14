@@ -40,10 +40,10 @@
 </div>
 
 <script>
-  var o = bmoon.blogindex;
+  var mgd = mgd || {};
 
-  o.ids = [];
+  mgd.ids = [];
   <?cs each: blog = Output.blogs ?>
-  o.ids.push(<?cs var: blog.id ?>);
+  mgd.ids.push(<?cs var: blog.id ?>);
   <?cs /each ?>
 </script>

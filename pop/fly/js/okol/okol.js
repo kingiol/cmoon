@@ -5,11 +5,12 @@ bmoon.okol = {
 	init: function() {
 		var o = bmoon.okol;
 		if (o.inited) return o;
+		o.inited = true;
 
 		o.stres = $("#stat-result");
 		o.previousPoint = null;
+		o.stdata = mgd.stdata;
 
-		o.inited = true;
 		return o;
 	},
 	
