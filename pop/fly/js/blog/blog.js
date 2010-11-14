@@ -8,7 +8,7 @@ bmoon.blog = {
 
 		o.commentnum = 0;
 		o.commentget = 0;
-		o.author = Cookie.read("lcs_uname");
+		o.author = $.cookie('lcs_uname');
 		if (!o.author) o.author = '网友';
 		o.comments = $('#comments');
 		
