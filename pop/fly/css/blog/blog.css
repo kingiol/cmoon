@@ -22,7 +22,12 @@
 .content p.pre {
     width: 95%;
     padding: 0.5em;
-	white-space: pre-wrap;
+    white-space: pre-wrap;       /* css 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla*/
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    *white-space: pre;
+    word-wrap: break-word;       /* IE 5.5?? */
     /*color: #112222;*/
     /*background-color: #eeeeee;*/
 }
@@ -85,5 +90,10 @@ textarea.reply {
 
 .comment-item p.pre {
 	margin: 0 10px;
-	white-space: pre-wrap;
+    white-space: pre-wrap;       /* css 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla*/
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    *white-space: pre;
+    word-wrap: break-word;       /* IE 5.5?? */
 }

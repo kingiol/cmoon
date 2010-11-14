@@ -16,7 +16,12 @@
 }
 
 .content p.pre {
-	white-space: pre-wrap;
+    white-space: pre-wrap;       /* css3 */
+    white-space: -moz-pre-wrap;  /* Mozilla*/
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    *white-space: pre;
+    word-wrap: break-word;       /* IE 5.5?? */
 }
 
 .blog-item .end {

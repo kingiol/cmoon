@@ -1366,7 +1366,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="171.57836"
+     inkscape:cx="439.63347"
      inkscape:cy="806.2462"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
@@ -1395,7 +1395,7 @@
     <rect
        style="opacity:1;fill:#eeeeee;fill-opacity:1"
        id="rect2846"
-       width="253"
+       width="243"
        height="83"
        x="125"
        y="143.36218"
@@ -1408,83 +1408,79 @@
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-size:16.63342285px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#888888;fill-opacity:1;stroke:none;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold"
+       x="225.39282"
+       y="194.64771"
+       id="text3422"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3424"
+         x="225.39282"
+         y="194.64771"
+         dx="0 0 0 -3.9205348 0 0 0 0 0 0 0 0 0 0">by KaiwuOnline</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.78526497px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"
+       x="155.68594"
+       y="194.01251"
+       id="text3430"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3432"
+         x="155.68594"
+         y="194.01251"
+         dx="0 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906">Live Chat</tspan></text>
     <g
-       id="g4327"
-       transform="translate(0,2)">
-      <text
-         sodipodi:linespacing="100%"
-         id="text3422"
-         y="192.64771"
-         x="235.39282"
-         style="font-size:16.63342285px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#888888;fill-opacity:1;stroke:none;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold"
-         xml:space="preserve"><tspan
-           dx="0 0 0 -3.9205348 0 0 0 0 0 0 0 0 0 0"
-           y="192.64771"
-           x="235.39282"
-           id="tspan3424"
-           sodipodi:role="line">by KaiwuOnline</tspan></text>
-      <text
-         sodipodi:linespacing="100%"
-         id="text3430"
-         y="192.01251"
-         x="161.68594"
-         style="font-size:14.78526497px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"
-         xml:space="preserve"><tspan
-           dx="0 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906"
-           y="192.01251"
-           x="161.68594"
-           id="tspan3432"
-           sodipodi:role="line">Live Chat</tspan></text>
-      <g
-         transform="matrix(0.9240791,0,0,0.9240791,124.80499,171.28904)"
-         inkscape:label="Calque 1"
-         id="layer1-4">
-        <rect
-           style="fill:#427bc3;fill-opacity:1;stroke:none"
-           id="rect3465"
-           width="6"
-           height="0"
-           x="16"
-           y="11"
-           ry="0" />
-        <path
-           sodipodi:type="inkscape:offset"
-           inkscape:radius="1.59375"
-           inkscape:original="M 9.625 6 C 5.9556492 6 3 8.6028246 3 12.625 C 3 16.647175 7.2 18.6 10 19 L 17 20 C 18 21 14 25 14 25 L 22.28125 19.75 C 25 18 27 16.38063 27 13.375 C 27 10 24 6 20 6 L 9.625 6 z "
-           style="fill:#3465a4;fill-opacity:1;stroke:none"
-           id="path2408"
-           d="M 9.625,4.40625 C 5.2019733,4.40625 1.40625,7.8220587 1.40625,12.625 C 1.40625,15.190825 2.8203624,17.188596 4.5,18.4375 C 6.1796376,19.686404 8.1322372,20.326927 9.78125,20.5625 L 15,21.3125 C 14.859564,21.521865 14.796214,21.686117 14.625,21.90625 C 13.830285,22.928027 12.875,23.875 12.875,23.875 C 12.326851,24.451844 12.288126,25.344599 12.784265,25.966741 C 13.280404,26.588884 14.159392,26.749791 14.84375,26.34375 L 23.125,21.09375 C 23.135416,21.093852 23.145834,21.093852 23.15625,21.09375 C 24.554196,20.193923 25.846027,19.286834 26.875,18.0625 C 27.903973,16.838166 28.59375,15.231318 28.59375,13.375 C 28.59375,11.215278 27.679862,9.0725619 26.1875,7.375 C 24.695138,5.6774381 22.53125,4.40625 20,4.40625 L 9.625,4.40625 z"
-           transform="translate(0,-0.486608)" />
-        <path
-           style="fill:url(#linearGradient4347);fill-opacity:1;stroke:none"
-           d="M 9.625,5.513392 C 5.9556492,5.513392 3,8.1162166 3,12.138392 C 3,16.160567 7.2,18.113392 10,18.513392 L 17,19.513392 C 18,20.513392 14,24.513392 14,24.513392 L 22.28125,19.263392 C 25,17.513392 27,15.894022 27,12.888392 C 27,9.513392 24,5.513392 20,5.513392 L 9.625,5.513392 L 9.625,5.513392 z"
-           id="rect2396"
-           sodipodi:nodetypes="czzcccccc" />
-        <rect
-           style="fill:#729fcf;fill-opacity:1;stroke:none"
-           id="rect3461"
-           width="14"
-           height="1"
-           x="8"
-           y="9.0758924"
-           ry="0.40625" />
-        <rect
-           style="fill:#729fcf;fill-opacity:1;stroke:none"
-           id="rect3463"
-           width="14"
-           height="1"
-           x="8"
-           y="11.575892"
-           ry="0.40625" />
-        <rect
-           style="fill:#729fcf;fill-opacity:1;stroke:none"
-           id="rect3467"
-           width="10"
-           height="1"
-           x="8"
-           y="14.075892"
-           ry="0.40625" />
-      </g>
+       id="layer1-4"
+       inkscape:label="Calque 1"
+       transform="matrix(0.9240791,0,0,0.9240791,124.80499,173.28904)">
+      <rect
+         ry="0"
+         y="11"
+         x="16"
+         height="0"
+         width="6"
+         id="rect3465"
+         style="fill:#427bc3;fill-opacity:1;stroke:none" />
+      <path
+         transform="translate(0,-0.486608)"
+         d="M 9.625,4.40625 C 5.2019733,4.40625 1.40625,7.8220587 1.40625,12.625 C 1.40625,15.190825 2.8203624,17.188596 4.5,18.4375 C 6.1796376,19.686404 8.1322372,20.326927 9.78125,20.5625 L 15,21.3125 C 14.859564,21.521865 14.796214,21.686117 14.625,21.90625 C 13.830285,22.928027 12.875,23.875 12.875,23.875 C 12.326851,24.451844 12.288126,25.344599 12.784265,25.966741 C 13.280404,26.588884 14.159392,26.749791 14.84375,26.34375 L 23.125,21.09375 C 23.135416,21.093852 23.145834,21.093852 23.15625,21.09375 C 24.554196,20.193923 25.846027,19.286834 26.875,18.0625 C 27.903973,16.838166 28.59375,15.231318 28.59375,13.375 C 28.59375,11.215278 27.679862,9.0725619 26.1875,7.375 C 24.695138,5.6774381 22.53125,4.40625 20,4.40625 L 9.625,4.40625 z"
+         id="path2408"
+         style="fill:#3465a4;fill-opacity:1;stroke:none"
+         inkscape:original="M 9.625 6 C 5.9556492 6 3 8.6028246 3 12.625 C 3 16.647175 7.2 18.6 10 19 L 17 20 C 18 21 14 25 14 25 L 22.28125 19.75 C 25 18 27 16.38063 27 13.375 C 27 10 24 6 20 6 L 9.625 6 z "
+         inkscape:radius="1.59375"
+         sodipodi:type="inkscape:offset" />
+      <path
+         sodipodi:nodetypes="czzcccccc"
+         id="rect2396"
+         d="M 9.625,5.513392 C 5.9556492,5.513392 3,8.1162166 3,12.138392 C 3,16.160567 7.2,18.113392 10,18.513392 L 17,19.513392 C 18,20.513392 14,24.513392 14,24.513392 L 22.28125,19.263392 C 25,17.513392 27,15.894022 27,12.888392 C 27,9.513392 24,5.513392 20,5.513392 L 9.625,5.513392 L 9.625,5.513392 z"
+         style="fill:url(#linearGradient4347);fill-opacity:1;stroke:none" />
+      <rect
+         ry="0.40625"
+         y="9.0758924"
+         x="8"
+         height="1"
+         width="14"
+         id="rect3461"
+         style="fill:#729fcf;fill-opacity:1;stroke:none" />
+      <rect
+         ry="0.40625"
+         y="11.575892"
+         x="8"
+         height="1"
+         width="14"
+         id="rect3463"
+         style="fill:#729fcf;fill-opacity:1;stroke:none" />
+      <rect
+         ry="0.40625"
+         y="14.075892"
+         x="8"
+         height="1"
+         width="10"
+         id="rect3467"
+         style="fill:#729fcf;fill-opacity:1;stroke:none" />
     </g>
     <rect
        style="fill:#427bc3;fill-opacity:1;stroke:none"
@@ -1520,73 +1516,69 @@
          style="fill:url(#linearGradient10497);fill-opacity:1;fill-rule:nonzero;stroke:#3465a4;stroke-width:1.10852623;stroke-linecap:round;stroke-linejoin:round;marker:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible" />
     </g>
     <g
-       id="g4315"
-       transform="translate(-1.652802e-7,4)">
-      <g
-         transform="matrix(0.9240791,0,0,0.9240791,9.2472551,37.253652)"
-         id="g4738">
-        <path
-           sodipodi:type="inkscape:offset"
-           inkscape:radius="1.59375"
-           inkscape:original="M 9.625 6 C 5.9556492 6 3 8.6028246 3 12.625 C 3 16.647175 7.2 18.6 10 19 L 17 20 C 18 21 14 25 14 25 L 22.28125 19.75 C 25 18 27 16.38063 27 13.375 C 27 10 24 6 20 6 L 9.625 6 z "
-           style="fill:#980101;fill-opacity:1;stroke:none"
-           id="path2408-0-8"
-           d="M 9.625,4.40625 C 5.2019733,4.40625 1.40625,7.8220587 1.40625,12.625 C 1.40625,15.190825 2.8203624,17.188596 4.5,18.4375 C 6.1796376,19.686404 8.1322372,20.326927 9.78125,20.5625 L 15,21.3125 C 14.859564,21.521865 14.796214,21.686117 14.625,21.90625 C 13.830285,22.928027 12.875,23.875 12.875,23.875 C 12.326851,24.451844 12.288126,25.344599 12.784265,25.966741 C 13.280404,26.588884 14.159392,26.749791 14.84375,26.34375 L 23.125,21.09375 C 23.135416,21.093852 23.145834,21.093852 23.15625,21.09375 C 24.554196,20.193923 25.846027,19.286834 26.875,18.0625 C 27.903973,16.838166 28.59375,15.231318 28.59375,13.375 C 28.59375,11.215278 27.679862,9.0725619 26.1875,7.375 C 24.695138,5.6774381 22.53125,4.40625 20,4.40625 L 9.625,4.40625 z"
-           transform="translate(125.05178,107.08661)" />
-        <path
-           style="fill:url(#linearGradient4345);fill-opacity:1;stroke:none"
-           d="M 134.63214,113.0302 C 130.96279,113.0302 128.00714,115.63303 128.00714,119.6552 C 128.00714,123.67738 132.20714,125.6302 135.00714,126.0302 L 142.00714,127.0302 C 143.00714,128.0302 139.00714,132.0302 139.00714,132.0302 L 147.28839,126.7802 C 150.00714,125.0302 152.00714,123.41083 152.00714,120.4052 C 152.00714,117.0302 149.00714,113.0302 145.00714,113.0302 L 134.63214,113.0302 z"
-           id="rect2396-8-2"
-           sodipodi:nodetypes="czzcccccc" />
-        <rect
-           style="fill:#d40000;fill-opacity:1;stroke:none"
-           id="rect3461-2-8"
-           width="14"
-           height="1"
-           x="133.00714"
-           y="116.5927"
-           ry="0.40625" />
-        <rect
-           style="fill:#d40000;fill-opacity:1;stroke:none"
-           id="rect3463-7-7"
-           width="14"
-           height="1"
-           x="133.00714"
-           y="119.0927"
-           ry="0.40625" />
-        <rect
-           style="fill:#d40000;fill-opacity:1;stroke:none"
-           id="rect3467-0-8"
-           width="10"
-           height="1"
-           x="133.00714"
-           y="121.5927"
-           ry="0.40625" />
-      </g>
-      <text
-         sodipodi:linespacing="100%"
-         id="text3422-1"
-         y="156.52866"
-         x="235.1649"
-         style="font-size:16.63342285px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#888888;fill-opacity:1;stroke:none;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold"
-         xml:space="preserve"><tspan
-           dx="0 0 0 -3.9205348 0 0 0 0 0 0 0 0 0 0"
-           y="156.52866"
-           x="235.1649"
-           id="tspan3424-3"
-           sodipodi:role="line">by KaiwuOnline</tspan></text>
-      <text
-         sodipodi:linespacing="100%"
-         id="text3430-1"
-         y="155.89346"
-         x="161.45802"
-         style="font-size:14.78526497px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#fd3301;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"
-         xml:space="preserve"><tspan
-           dx="0 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906"
-           y="155.89346"
-           x="161.45802"
-           id="tspan3432-5"
-           sodipodi:role="line">Live Chat</tspan></text>
+       id="g4738"
+       transform="matrix(0.9240791,0,0,0.9240791,9.2472549,41.253652)">
+      <path
+         transform="translate(125.05178,107.08661)"
+         d="M 9.625,4.40625 C 5.2019733,4.40625 1.40625,7.8220587 1.40625,12.625 C 1.40625,15.190825 2.8203624,17.188596 4.5,18.4375 C 6.1796376,19.686404 8.1322372,20.326927 9.78125,20.5625 L 15,21.3125 C 14.859564,21.521865 14.796214,21.686117 14.625,21.90625 C 13.830285,22.928027 12.875,23.875 12.875,23.875 C 12.326851,24.451844 12.288126,25.344599 12.784265,25.966741 C 13.280404,26.588884 14.159392,26.749791 14.84375,26.34375 L 23.125,21.09375 C 23.135416,21.093852 23.145834,21.093852 23.15625,21.09375 C 24.554196,20.193923 25.846027,19.286834 26.875,18.0625 C 27.903973,16.838166 28.59375,15.231318 28.59375,13.375 C 28.59375,11.215278 27.679862,9.0725619 26.1875,7.375 C 24.695138,5.6774381 22.53125,4.40625 20,4.40625 L 9.625,4.40625 z"
+         id="path2408-0-8"
+         style="fill:#980101;fill-opacity:1;stroke:none"
+         inkscape:original="M 9.625 6 C 5.9556492 6 3 8.6028246 3 12.625 C 3 16.647175 7.2 18.6 10 19 L 17 20 C 18 21 14 25 14 25 L 22.28125 19.75 C 25 18 27 16.38063 27 13.375 C 27 10 24 6 20 6 L 9.625 6 z "
+         inkscape:radius="1.59375"
+         sodipodi:type="inkscape:offset" />
+      <path
+         sodipodi:nodetypes="czzcccccc"
+         id="rect2396-8-2"
+         d="M 134.63214,113.0302 C 130.96279,113.0302 128.00714,115.63303 128.00714,119.6552 C 128.00714,123.67738 132.20714,125.6302 135.00714,126.0302 L 142.00714,127.0302 C 143.00714,128.0302 139.00714,132.0302 139.00714,132.0302 L 147.28839,126.7802 C 150.00714,125.0302 152.00714,123.41083 152.00714,120.4052 C 152.00714,117.0302 149.00714,113.0302 145.00714,113.0302 L 134.63214,113.0302 z"
+         style="fill:url(#linearGradient4345);fill-opacity:1;stroke:none" />
+      <rect
+         ry="0.40625"
+         y="116.5927"
+         x="133.00714"
+         height="1"
+         width="14"
+         id="rect3461-2-8"
+         style="fill:#d40000;fill-opacity:1;stroke:none" />
+      <rect
+         ry="0.40625"
+         y="119.0927"
+         x="133.00714"
+         height="1"
+         width="14"
+         id="rect3463-7-7"
+         style="fill:#d40000;fill-opacity:1;stroke:none" />
+      <rect
+         ry="0.40625"
+         y="121.5927"
+         x="133.00714"
+         height="1"
+         width="10"
+         id="rect3467-0-8"
+         style="fill:#d40000;fill-opacity:1;stroke:none" />
     </g>
+    <text
+       xml:space="preserve"
+       style="font-size:16.63342285px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#888888;fill-opacity:1;stroke:none;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold"
+       x="225.1649"
+       y="160.52866"
+       id="text3422-1"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3424-3"
+         x="225.1649"
+         y="160.52866"
+         dx="0 0 0 -3.9205348 0 0 0 0 0 0 0 0 0 0">by KaiwuOnline</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.78526497px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#fd3301;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"
+       x="155.45802"
+       y="159.89346"
+       id="text3430-1"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3432-5"
+         x="155.45802"
+         y="159.89346"
+         dx="0 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906">Live Chat</tspan></text>
   </g>
 </svg>
