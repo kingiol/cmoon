@@ -1,0 +1,78 @@
+制作属于自己的聊天客户端
+
+
+准备好自己的聊天客户端
+=================
+聊天客户端整体结构如下
+
+	<div id="kol-lcs">
+		<div id="kol-lcs-min" title="打开">&nbsp;</div>
+		<div id="kol-lcs-max">
+			<div id="kol-lcs-body">
+			    <div class="top">客服当前离线，留言功能开启。</div>
+				<div class="close" title="最小化">&nbsp;</div>
+				<div class="msgs">
+			        <div class="recently"></div><div class="data"></div>
+			    </div>
+				<textarea rows="2" id="kol-lcs-input"></textarea>
+				<div class="bot">Enter 发送消息。 ',
+					<span><input type="checkbox" id="kol-lcs-remind-sw" checked="checked" /> 提示音</span>
+				</div>
+			</div>
+	    	<div id="kol-lcs-head">
+				<div class="toggle" title="在线聊天">&nbsp;</div>
+				<div class="miner" title="关闭">&nbsp;</div>
+	    	</div>
+		</div>
+	</div>
+
+几个主要的div(# 表示id, .表示 class)：
+	#kol-lcs                             	主div											
+	#kol-lcs-min						 	整个 lcs 客户端最小化时，点击可以触发 #kol-lcs-max
+	#kol-lcs-max						 	整个 lcs 客户端常态时							
+		#kol-lcs-body					 	聊天窗口										
+			.top						 	聊天窗口信息提示区								
+			.close						 	关闭聊天窗口									
+			.msgs						 	消息数据区										
+				.recently				 	历史消息区										
+				.data					 	聊天消息区										
+			#kol-lcs-input				 	消息输入框										
+			.bot						 	聊天窗口底部信息提示区							
+				#kol-lcs-remind-sw		 	消息声音提示开关								
+		#kol-lcs-head					 	聊天触发区										
+			.toggle						 	触发聊天窗口开启、关闭							
+			.miner						 	最小化整个 lcs 客户端，点击可以触发 #kol-lcs-min
+
+
+只要遵循以上 html DOM 结构， 聊天客户端就能正常工作。  大部分情况下， 我们主要是为这些 html 元素编写适合自己页面的 css 代码。
+常用的做法是为这些元素做个背景图， 然后使用 css 背景定位技术， 让这些元素有不同的展现。
+可以参考 kol 的第一个聊天客户端插件代码：
+	背景图： http://www.kaiwuonline.com/img/im/lcs.png
+	css代码： http://css.kaiwuonline.com/b/client/lcs.css
+            为了兼容 ie6, 你可能需要一个同名 + _ie6.css 的css 文件， 如： http://css.kaiwuonline.com/b/client/lcs_ie6.css
+
+
+
+使用自己的聊天客户端
+===============
+准备好自己的聊天客户端后（一个背景图、一个css文件）， 我们需要把这些代码和图片放到一个可访问的服务器上。
+（也可以提交给 qq 群 55593669 作为 kol 的官方客户端：D）， 然后在需要使用这个客户端的页面上如下初始化 lcs:
+
+	<script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" ></script>
+	<script type="text/javascript">
+	  bmoon.kol.onready({
+	      aname: '',
+		  css: '',
+		  defaultUI: '',
+		  restoreUI: '',
+	  });
+	</script>
+
+各个参数解释如下：
+	aname: 必填， 你注册的站点名
+	css: 选填， 使用的 css url。  默认为 http://css.kaiwuonline.com/b/client/lcs.css
+	defaultUI: 选填， min 或者 max。 为展现客户端时默认展现的 div， 是#kol-lcs-min， 还是 #kol-lcs-max。 默认展现max
+	restoreUI: 选填， true 或者 false。 是否记住用户的选择。 比如为 true 时， 用户点击了最小化 lcs 客户端， 刷新页面后还是最小化， 否则使用 defaultUI。 默认为true
+
+
+That's all, happy coding :D	
