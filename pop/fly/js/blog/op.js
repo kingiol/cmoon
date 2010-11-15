@@ -7,8 +7,6 @@ bmoon.blogop = {
 		if (o.inited) return o;
 		o.inited = true;
 
-		window.mgd = window.mgd || {};
-		
 		return o;
 	},
 	
