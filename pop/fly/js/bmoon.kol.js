@@ -41,7 +41,7 @@ bmoon.kol = {
 				css: 'http://css.kaiwuonline.com/b/client/lcs.css'
 			}, opts || {});
 			
-			$('head').append('<link rel="stylesheet" href="' + opts.css + '.css" />');
+			$('head').append('<link rel="stylesheet" href="' + opts.css + '" />');
 			$('head').append('<!--[if IE 6]><link rel="stylesheet" href="' + opts.css.substr(0, opts.css.length-4) + '_ie6.css" /><![endif]-->');
 			var unode = $('meta[content*="utf"]');
 			if (!unode.length) unode = $('meta[content*="UTF"]');
