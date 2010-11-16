@@ -5,26 +5,7 @@
 =================
 聊天客户端整体结构如下
 
-	<div id="kol-lcs">
-		<div id="kol-lcs-min" title="打开">&nbsp;</div>
-		<div id="kol-lcs-max">
-			<div id="kol-lcs-body">
-			    <div class="top">客服当前离线，留言功能开启。</div>
-				<div class="close" title="最小化">&nbsp;</div>
-				<div class="msgs">
-			        <div class="recently"></div><div class="data"></div>
-			    </div>
-				<textarea rows="2" id="kol-lcs-input"></textarea>
-				<div class="bot">Enter 发送消息。 ',
-					<span><input type="checkbox" id="kol-lcs-remind-sw" checked="checked" /> 提示音</span>
-				</div>
-			</div>
-	    	<div id="kol-lcs-head">
-				<div class="toggle" title="在线聊天">&nbsp;</div>
-				<div class="miner" title="关闭">&nbsp;</div>
-	    	</div>
-		</div>
-	</div>
+<img src="/pic/blog/clientDOM.jpg" />
 
 几个主要的div(# 表示id, .表示 class)：
 	#kol-lcs                             	主div											
@@ -47,8 +28,8 @@
 只要遵循以上 html DOM 结构， 聊天客户端就能正常工作。  大部分情况下， 我们主要是为这些 html 元素编写适合自己页面的 css 代码。
 常用的做法是为这些元素做个背景图， 然后使用 css 背景定位技术， 让这些元素有不同的展现。
 可以参考 kol 的第一个聊天客户端插件代码：
-	背景图： http://www.kaiwuonline.com/img/im/lcs.png
-	css代码： http://css.kaiwuonline.com/b/client/lcs.css
+	背景图： <a href="http://www.kaiwuonline.com/img/im/lcs.png">http://www.kaiwuonline.com/img/im/lcs.png</a>
+	css代码： <a href="http://css.kaiwuonline.com/b/client/lcs.css">http://css.kaiwuonline.com/b/client/lcs.css</a>
             为了兼容 ie6, 你可能需要一个同名 + _ie6.css 的css 文件， 如： http://css.kaiwuonline.com/b/client/lcs_ie6.css
 
 
