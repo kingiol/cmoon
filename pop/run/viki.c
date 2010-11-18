@@ -63,13 +63,13 @@ int main(int argc, char **argv, char **envp)
 		JUMP_NOK_CGI(err, response);
 
 #ifdef NCGI_MODE
-		hdf_set_value(cgi->hdf, PRE_REQ_URI_RW, "/okol");
+		hdf_set_value(cgi->hdf, PRE_REQ_URI_RW, "/blog/mkdparser");
 		hdf_set_value(cgi->hdf, PRE_COOKIE".uin", "1001");
 		hdf_set_value(cgi->hdf, PRE_COOKIE".uname", "bigml");
 		hdf_set_value(cgi->hdf, PRE_COOKIE".musn", "8Y]u0|v=*MS]U3J");
 		hdf_set_value(cgi->hdf, PRE_QUERY".ip", "222.247.56.14");
 		hdf_set_value(cgi->hdf, PRE_QUERY".to", "cj_BXTSJ");
-		hdf_set_value(cgi->hdf, PRE_QUERY".from", "kol");
+		hdf_set_value(cgi->hdf, PRE_QUERY".s", "koldddd");
 		hdf_set_value(cgi->hdf, PRE_QUERY".JsonCallback", "Ape.transport.read");
 #endif
 		
@@ -100,9 +100,7 @@ int main(int argc, char **argv, char **envp)
 			
 			switch (session->reqtype) {
 			case CGI_REQ_HTML:
-				if (CGI_REQ_METHOD(cgi) != CGI_REQ_GET) {
-					goto resp_ajax;
-				}
+				/* post also could get html, so, don't judge CGI_REQ_METHOD() */
 				ret = ltpl_render(cgi, tplh, session);
 				if (ret != RET_RBTOP_OK) {
 					if (ret == RET_RBTOP_NEXIST)
@@ -112,7 +110,6 @@ int main(int argc, char **argv, char **envp)
 				}
 				break;
 			case CGI_REQ_AJAX:
-			resp_ajax:
 				jsoncb = hdf_get_value(cgi->hdf, PRE_REQ_AJAX_FN, NULL);
 				if (jsoncb != NULL) {
 					//hdf_remove_tree(cgi->hdf, PRE_SUCCESS);

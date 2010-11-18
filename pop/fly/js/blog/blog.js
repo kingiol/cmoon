@@ -92,7 +92,7 @@ bmoon.blog = {
 		$(".error", p).remove();
 		p.removeClass('success').removeClass('error').addClass('loading');
 
-		$.post('/comment',
+		$.post('/json/comment',
 			   {
 				   op: 'add', type: 0, oid: mgd.bid, pid: 0,
 				   author: o.author,

@@ -38,7 +38,7 @@ bmoon.blogop = {
 		$(".error", p).remove();
 		p.removeClass('success').removeClass('error').addClass('loading');
 		
-		$.post('/blog', {op:mgd.op? mgd.op: 'add', bid: mgd.bid, title: title, content: content}, function(data) {
+		$.post('/json/blog', {op:mgd.op? mgd.op: 'add', bid: mgd.bid, title: title, content: content}, function(data) {
 			p.removeClass('loading');
 			
 			if (data.success == 1) {
