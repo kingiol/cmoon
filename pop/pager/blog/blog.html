@@ -4,14 +4,14 @@
   <div class="blog-item">
 	<?cs escape: "html" ?>
 	<div class="cktitle"><?cs var: Output.blog.title ?></div>
+	<?cs /escape ?>
 	<div class="info">
 	  <?cs var: Output.blog.author ?> 发布于 <?cs var: Output.blog.intime ?>
 	</div>
 	
 	<div class="content">
-	  <p class="pre"><?cs var: Output.blog.content ?></p>
+	  <p class="pre"><?cs var: mkd.escape(html_escape(Output.blog.content)) ?></p>
 	</div>
-	<?cs /escape ?>
   </div>
   
   <!-- 博客导航 -->

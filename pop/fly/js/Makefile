@@ -33,7 +33,7 @@ b/index.js: pub/jquerytools/src/scrollable/scrollable.js index.js
 b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
 b/blog.js: blog/blog.js
 b/blogindex.js: blog/index.js
-b/blogop.js: blog/op.js
+b/blogop.js: pub/markitup/markitup/jquery.markitup.js blog/mku_set.js blog/op.js
 
 b/oms.js: pub/jquery.mnscrollpage.js ape/Build/JSON.js \
 		  ape/app/bmoon.chatb.js ape/Build/apeClient.js ape/app/livecsb.js \

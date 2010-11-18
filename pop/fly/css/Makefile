@@ -22,7 +22,7 @@ b/index.css: index.css
 b/manual.css: manual.css
 b/blog.css: blog/blog.css
 b/blogindex.css: blog/index.css
-b/blogop.css: blog/op.css
+b/blogop.css: blog/mku_skin.css blog/mku_set.css blog/op.css
 
 b/oms.css: oms/oms.css oms/scroll.css
 b/oms/edit.css: oms/tabs.css oms/edit.css

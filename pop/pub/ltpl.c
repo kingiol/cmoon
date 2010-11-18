@@ -76,6 +76,7 @@ int ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outhash)
 		err = cgi_register_strfuncs(cs);
 		JUMP_NOK(err, wnext);
 		mcs_register_bitop_functions(cs);
+		mcs_register_mkd_functions(cs);
 		tpl = hdf_get_value(child, PRE_CFG_LAYOUT, "null.html");
 		snprintf(fname, sizeof(fname), "%s/%s", PATH_TPL, tpl);
 		err = cs_parse_file(cs, fname);
@@ -235,7 +236,7 @@ int ltpl_render(CGI *cgi, HASH *tplh, session_t *ses)
 	snprintf(tok, sizeof(tok), "%s_hdf", render);
 	dhdf = (HDF*)hash_lookup(tplh, tok);
 
-	hdf_copy(cgi->hdf, NULL, dhdf);
+	if (dhdf) hdf_copy(cgi->hdf, NULL, dhdf);
 	ltpl_prepare_rend(cgi->hdf, "layout.html");
 	if (ses->tm_cache_browser > 0) {
 		hdf_set_valuef(cgi->hdf, "cgiout.other.cache=Cache-Control: max-age=%lu",

@@ -7,6 +7,8 @@ bmoon.blogop = {
 		if (o.inited) return o;
 		o.inited = true;
 
+		$('#b-content').markItUp(myMarkdownSettings);
+
 		return o;
 	},
 	

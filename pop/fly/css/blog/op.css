@@ -1,5 +1,16 @@
-dl.blognew dt {float: left; width: 200px; margin: 0 13px 0 0; text-align: right;}
-dl.blognew dd {margin: 10px 0;	line-height:22px;}
+dl.blognew dt {clear: left; float:left; width: 180px; margin: 5px 13px 5px 0; text-align: right;}
+dl.blognew dd {float:left; margin: 5px 0;}
+dl.blognew dd.loading .indicator {
+	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;
+}
+
+dl.blognew dd.success .indicator {
+	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat
+}
+
+dl.blognew dd.error .indicator {
+	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;
+}
 
 input.title {
 	width: 400px;
@@ -7,8 +18,5 @@ input.title {
 }
 
 textarea.content {
-	height: 300px;
-	width: 600px;
 	padding: 5px;
-	margin-right: 1em;
 }

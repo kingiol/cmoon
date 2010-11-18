@@ -1,0 +1,3 @@
+blog_mkdparser {
+	Layout = blog/preview.html
+}
