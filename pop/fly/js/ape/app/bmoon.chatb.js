@@ -271,10 +271,12 @@ bmoon.chat = {
 					$.each(val, function(k, v) {
 						var c = o._nodeUser(k, true);
 						if (k != o.cUserID) c.addClass('dirty');
+						o.postUserDirty(k);
 					});
 				} else if (bmoon.utl.type(val) == 'String') {
 					var c = o._nodeUser(val, true);
 					if (val != o.cUserID) c.addClass('dirty');
+					o.postUserDirty(val);
 				}
 			});
 		}
@@ -337,7 +339,6 @@ bmoon.chat = {
 			o.soundRemind('receive');
 		} else if (data.type == 'join') {
 			o.soundRemind('login');
-			o.postUserAction(uname);
 			// TODO, duplicated request?
 			$.getJSON('/json/place', {ip: data.data.ip}, function(rdata) {
 				if(rdata.success == '1') {
@@ -351,6 +352,7 @@ bmoon.chat = {
 		
 		if (o.cUserID != uname) {
 			userbox.addClass('dirty');
+			o.postUserDirty(uname);
 			// avoid double messages appear
 			if ($.inArray(uname, o.usersFetched) == -1) return;
 		}
@@ -386,18 +388,20 @@ bmoon.chat = {
 		}
 	},
 
-	postUserAction: function(uname) {
+	postUserDirty: function(uname) {
 		var o = bmoon.chat.init();
 
-		var
-		userbox = o._nodeUser(uname, false),
-		userboxoff = $('#im-users ul li.off:first');
+		var userbox = o._nodeUser(uname, false),
+		userboxoff = $('#im-users ul li.off:not(.dirty):first');
 
 		if (userbox.length && userboxoff.length) {
 			var	up = userbox.parent();
 			
-			userbox.insertBefore(userboxoff);
-			userboxoff.appendTo(up);
+			if (up.index() >= userboxoff.parent().index() ||
+				userbox.index() > userboxoff.index()) {
+				userbox.insertBefore(userboxoff);
+				userboxoff.appendTo(up);
+			}
 		}
 	}
 };
