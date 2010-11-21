@@ -30,6 +30,7 @@
 		</ul>
 	  </div>
 	  <div class="overlay" id="loginoverlay">
+		<h3 id="login-hint" class="center"></h3>
 		<dl class="form">
 		  <dt>站点标识：</dt>
 		  <dd>
@@ -46,6 +47,7 @@
 			<input type="submit" id="login-submit" class="submitbtn" value="提交" />
 		  </dd>
 		</dl>
+		<h4 class="right"><a href="/app/new.html" target="_blank">还没注册？</a></h4>
 	  </div>
 	</div>
 
@@ -78,6 +80,7 @@
 		<?cs if: ?Output.errmsg && Output.errcode == 2000 ?>
 		  <script>
 			$(document).ready(function() {
+			  $('#login-hint').html('<?cs var: Output.errmsg ?>')
 			  bmoon.lcs.loginoverlay.load();
 			});
 		  </script>
