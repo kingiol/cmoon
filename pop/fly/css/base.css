@@ -5,13 +5,11 @@ body {
 	color: #111;
 }
 a {color: #DB3946; cursor: pointer; text-decoration: none; }
-h2, h3, h4 {margin: 1em 0;}
-/*
-  p {
-	text-indent: 2em;
-	margin: 2ex 0;
+h2, h3, h4 {margin: 3ex 0 0 0;}
+p {
+/*	text-indent: 2em; */
+	margin: 2ex 0 1ex 0;
 }
-*/
 /*a:hover {background-color: #DB3946; color: #FFF !important; text-decoration: none; }*/
 input, textarea {border: 1px solid #676767;}
 input.long {width: 180px;}
