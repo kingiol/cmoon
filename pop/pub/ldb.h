@@ -9,9 +9,12 @@ __BEGIN_DECLS
 		mtc_err("hdf is null");							\
 		return RET_RBTOP_HDFNINIT;						\
 	}													\
-	if (mdb_get_errcode(conn) != MDB_ERR_NONE) {		\
-		mtc_err("conn err %s", mdb_get_errmsg(conn));	\
+	if (MDB_CONN_BAD(conn)) {							\
+		mtc_err("conn bad %d", mdb_get_errcode(conn));	\
 		return RET_RBTOP_DBNINIT;						\
+	} else if (mdb_get_errcode(conn) != MDB_ERR_NONE) {	\
+		mtc_err("conn err %s", mdb_get_errmsg(conn));	\
+		mdb_clear_error(conn);							\
 	}													\
 	if (evt == NULL) {									\
 		mtc_err("evt is null");							\
@@ -23,9 +26,12 @@ __BEGIN_DECLS
 		mtc_err("hdf is null");							\
 		return;											\
 	}													\
-	if (mdb_get_errcode(conn) != MDB_ERR_NONE) {		\
-		mtc_err("conn err %s", mdb_get_errmsg(conn));	\
+	if (MDB_CONN_BAD(conn)) {							\
+		mtc_err("conn bad %d", mdb_get_errcode(conn));	\
 		return;											\
+	} else if (mdb_get_errcode(conn) != MDB_ERR_NONE) {	\
+		mtc_err("conn err %s", mdb_get_errmsg(conn));	\
+		mdb_clear_error(conn);							\
 	}													\
 	if (evt == NULL) {									\
 		mtc_err("evt is null");							\
@@ -37,19 +43,22 @@ __BEGIN_DECLS
 		mtc_err("hdf is null");							\
 		return RET_RBTOP_HDFNINIT;						\
 	}													\
-	if (mdb_get_errcode(conn) != MDB_ERR_NONE) {		\
-		mtc_err("conn err %s", mdb_get_errmsg(conn));	\
+	if (MDB_CONN_BAD(conn)) {							\
+		mtc_err("conn bad %d", mdb_get_errcode(conn));	\
 		return RET_RBTOP_DBNINIT;						\
+	} else if (mdb_get_errcode(conn) != MDB_ERR_NONE) {	\
+		mtc_err("conn err %s", mdb_get_errmsg(conn));	\
+		mdb_clear_error(conn);							\
 	}
 
-#define LPRE_EVTOP(hdf, evt)							\
-	if (hdf == NULL) {									\
-		mtc_err("hdf is null");							\
-		return RET_RBTOP_HDFNINIT;						\
-	}													\
-	if (evt == NULL) {									\
-		mtc_err("evt is null");							\
-		return RET_RBTOP_EVTNINIT;						\
+#define LPRE_EVTOP(hdf, evt)					\
+	if (hdf == NULL) {							\
+		mtc_err("hdf is null");					\
+		return RET_RBTOP_HDFNINIT;				\
+	}											\
+	if (evt == NULL) {							\
+		mtc_err("evt is null");					\
+		return RET_RBTOP_EVTNINIT;				\
 	}
 
 #define TABLE_RLS_USER	(hdf_get_value(g_cfg, "Db.Table.release_user", "rls_user_4"))

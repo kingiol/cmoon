@@ -97,8 +97,7 @@ bmoon.okol = {
                 showTooltip(item.pageX, item.pageY,
                             $('#stat-type option:selected').text() + ': ' + tm + ' = ' + y);
             }
-        }
-        else {
+        } else {
             $("#tooltip").remove();
             o.previousPoint = null;            
         }

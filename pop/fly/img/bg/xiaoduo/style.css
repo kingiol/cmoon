@@ -1,0 +1,703 @@
+/*
+Theme Name: Yofox_v12
+Theme URI: http://www.yofox.net/
+Description: Theme by <a href="http://www.yofox.net/">Yofox</a> on 2008-10-06 17:23:03.
+Version: 2.6
+Author: Yofox
+Author URI: http://www.yofox.net/
+*/
+@import url(wp-recentcomments.css);
+/* *************************** 
+   Style 
+   ***************************/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	text-align: center;
+	font: 12px/180% "Lucida Grande", "Lucida Sans Unicode", Verdana, sans-serif;
+	color: #4D453F;
+	background: url(images/body_bg.gif) repeat-x 0 98px;
+}
+
+h1, h2, h3, ul, li, em, dl, dt, cite {
+	font-size: 12px;
+	list-style: none;
+	font-style: normal;
+	font-weight: normal;
+}
+
+dd{
+	font-size:14px;
+	line-height:25px;
+}
+img, a img {
+	border: 0;
+}
+
+a {
+	color: #b73742;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+.clearfix {
+	margin: 0;
+	padding: 0;
+	line-height: 0;
+	overflow: hidden;
+	clear: both;
+}
+
+br {
+	line-height: 10px;
+}
+
+#wrapper {
+	text-align: left;
+	margin: 0 auto;
+	width: 950px;
+}
+
+/* *************************** 
+   Header 
+   ***************************/
+#header {
+	position: relative;
+}
+
+#logo {
+	padding-bottom: 1px;
+}
+
+#top_tool {
+	position: absolute;
+	right: 5px;
+	top: 35px;
+	text-align: right;
+}
+
+#top_tool  dl {
+	background: url(images/search_box_bg.gif) repeat-x 0 -29px;
+	overflow: hidden;
+	height: 100%;
+	width:280px;
+}
+
+#top_tool  dt {
+	float: left;
+	width: 210px;
+	height: 29px;
+	background: url(images/search_box_bg.gif) no-repeat 0 -58px;
+}
+
+#top_tool  dd {
+	float: left;
+}
+
+.search_box {
+	width: 204px;
+	border: 0px;
+	padding: 6px 3px;
+	font-size: 12px;
+	background: none;
+	color: #999999;
+}
+
+.button {
+	width: 69px;
+	height: 29px;
+	border: 0;
+	background: url(images/search_box_bg.gif) no-repeat 0 0;
+	cursor: pointer;
+}
+
+#menu ul {
+	overflow: hidden;
+	zoom: 1;
+}
+
+#menu li {
+	float: left;
+	font-size: 14px;
+	font-weight:bold;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 22px;
+	background: url(images/menu_nav.gif) repeat-y 0 0;
+}
+
+#menu li.no_bg {
+	background: none;
+}
+
+#menu li a {
+	color: #FFF;
+}
+
+ #menu li a:hover {
+	text-decoration: underline;
+}
+
+/* *************************** 
+   Container
+   ***************************/
+#container {
+	overflow: hidden;
+	height: 100%;
+	padding-top: 15px;
+}
+
+#content {
+	width: 680px;
+	float: left;
+}
+
+.post_list {
+	padding: 0px;
+}
+
+.post_topic {
+	margin-bottom: 10px;
+	overflow: hidden;
+	height: 100%;
+}
+
+.digg_box {
+	width: 48px;
+	height: 42px;
+	background: url(images/digg_bg.gif) no-repeat 0 2px;
+	float: left;
+	text-align: center;
+	color: #404040;
+	font-family:tahoma;
+	font-weight:bold;
+}
+
+.digg_box  span {
+	display: block;
+	color: #404040;
+	line-height: 18px;
+	font-size: 14px;
+}
+
+.title_info {
+	padding: 3px 0px;
+	margin-left: 55px;
+	line-height: 160%;
+}
+
+.post_title h1 {
+	color: #353534;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.post_title h1 a{
+	color: #404040;
+}
+
+.post_title h1 a:hover {
+	color: #CC3000;
+	text-decoration: underline;
+}
+
+.post_title h2 {
+	font-size: 12px;
+	color: #404040;
+}
+
+.post_title h2 span {
+	padding-right: 5px;
+}
+
+/* *************************** ICON
+   
+
+.post_title h2 span.cat, .post_title h2 span.author, .post_title h2 span.hits, .post_bot h3  em, .post_bot h3 span {
+	background: url(images/topic_ico.gif) no-repeat;
+}
+
+   ***************************/
+.post_title h2 span.cat {
+	background-position: 0 -100px;
+}
+
+.post_title h2 span.author {
+	background-position: 0 -50px;
+}
+
+.post_title h2 span.hits {
+	background-position: 0 -198px;
+}
+
+.post_info {
+	padding: 10px 0px;
+	text-align: justify;
+	text-justify: inter-ideograph;
+}
+
+.post_info ol li {
+	list-style-type: decimal;
+	list-style-position: inside;
+}
+
+.post_info ul li {
+	list-style-type: square;
+	list-style-position: inside;
+}
+
+.post_bot  h3{
+	border-bottom:solid 1px #ccc;
+	text-align:right
+}
+
+.post_bot h3  em {
+	background-position: 0 1px;
+}
+.post_bot h3  em a{
+	padding-right:5px;
+}
+
+.post_bot h3 span {
+	background-position: 0 -144px;
+	padding-left: 10px;
+}
+
+.other_topic  ul {
+	overflow: hidden;
+	height: 100%;
+	padding-bottom:10px;
+}
+
+.other_topic li {
+	line-height:26px;
+	height:26px; 
+	width:325px;
+}
+
+.other_topic li.prev {
+	float:left;
+}
+
+.other_topic li.next {
+    float:right;
+	text-align:right;
+}
+
+.page_info {
+	padding: 2px 0px;
+}
+
+.page_info h1,.archive_box h1{
+	background: url(images/line_bg.gif) repeat-x 0 100%;
+	height: 26px;
+	line-height: 25px;
+	padding: 0px 5px;
+	color: #353534;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.page_info .text_info {
+	padding: 5px;
+}
+/* *************************** 
+阅读全文
+.link_more {
+	background: url(images/li_arrow.gif) no-repeat 1px 6px;
+	padding-left: 8px;
+}
+***************************/
+
+/* *************************** 
+Archive Pages 
+***************************/
+.archive_list {
+	padding-top: 10px;
+}
+
+.archive_list  li{
+	background: url(images/archive_list_box_bg.gif) repeat-y -680px 0 #fff4f0;
+	margin-bottom: 12px;
+}
+
+.archive_list  li  h2{
+	font-size: 14px;
+	font-weight:bold;
+	background: url(images/archive_list_box_bg.gif) no-repeat 0 0;
+	height: 36px;
+	line-height: 31px;
+	padding: 0px 15px 0px 23px;
+}
+
+.archive_list li  h2 em{
+	float: right;
+	color: #f16d78;
+	font-size: 16px;
+}
+
+.archive_list  li  p{
+	line-height: 150%;
+	background: url(images/archive_list_box_bg.gif) no-repeat  -1360px 100%;
+	padding: 5px 15px;
+}
+
+.archive_list li p span{
+	padding-right: 10px;
+}
+
+.archive_list  li  h2  a{
+	color: #404040;
+}
+
+.archive_list  li  h2  a:hover{
+	text-decoration: underline;
+}
+
+/* *************************** 
+Comment Pages 
+***************************/
+.comment_box{
+	padding: 0px;
+}
+
+.comment_title h1{
+	background: url(images/line_bg.gif) repeat-x 0 100%;
+	height: 26px;
+	line-height: 25px;
+	padding: 0px 5px;
+	color: #353534;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.comment_title h1 span{
+	float: right;
+	font-size: 12px;
+	font-weight: 100;
+	font-family: "宋体";
+}
+
+.comment_list dl{
+	background: url(images/comment_box_bg.gif) repeat-y -680px 0 #fff4f0;
+	overflow: hidden;
+	height: 100%;
+	margin-top: 10px;
+}
+
+.comment_list dl dt{
+	background: url(images/comment_box_bg.gif) no-repeat 0 0;
+	padding: 10px 10px 0 10px;
+}
+
+.comment_list dl dt .user_image{
+	float: left;
+	width: 48px;
+	height: 42px;
+	background: url(images/comment_box_bg.gif) no-repeat -4080px 0px;
+}
+
+.comment_list dl dt .user_image img{
+	margin: 5px;
+}
+
+.comment_list dl dt .msg_text{
+	margin-left: 15px;
+}
+
+.comment_list dl dt .msg_text small{
+	padding: 3px 0px;
+	color: #FF6200;
+	font-size: 12px;
+}
+
+.comment_list dl dt .msg_text  blockquote{
+	padding: 1px 3px;
+	background: url(images/line_bg.gif) repeat-x 0 100%;
+	margin-bottom: 10px;
+}
+
+.comment_list dl dt .msg_text h2 {
+	line-height: 130%;
+	padding: 5px 0px;
+}
+
+.comment_list dl dt span {
+	float: right;
+	color: #f16d78;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.comment_list dl dt span sup {
+	font-size: 12px;
+	padding-left: 2px;
+}
+
+.comment_list dl dt cite{
+	color: #606060;
+	font-weight: bold;
+}
+
+.comment_list dl dt cite a:hover{
+	color: #FF6200;
+}
+
+.comment_list dl dt em{
+	color: #7E7F7F;
+	font-size: 10px;
+}
+
+.comment_list dl dd{
+	background: url(images/comment_box_bg.gif) no-repeat -1360px 100%;
+	height: 10px;
+	font-size: 0;
+}
+
+.comment_list dl.admincomment{
+	background: url(images/comment_box_bg.gif) repeat-y -2720px 0 #FFEED1;
+}
+
+.comment_list dl.admincomment dt{
+	background: url(images/comment_box_bg.gif) no-repeat -2040px 0;
+}
+
+.comment_list dl.admincomment dt .user_image{
+	background: url(images/comment_box_bg.gif) no-repeat 100% 0;
+}
+
+.comment_list dl.admincomment dt cite{
+	color: #BE6116;
+	font-weight: bold;
+}
+
+.comment_list dl.admincomment dt cite a{
+	color: #BE6116;
+}
+
+.comment_list dl.admincomment dt cite a:hover{
+	color: #FF6200;
+}
+
+.comment_list dl.admincomment dd{
+	background: url(images/comment_box_bg.gif) no-repeat -3400px 100%;
+}
+
+.comment_list dl.admincomment dt .msg_text p{
+	color: #B04D01;
+}
+
+/* *************************** 
+ Post Comment  
+***************************/
+.post_comment{
+	padding: 12px 0px 0px 0px;
+}
+
+.post_comment_info{
+	background: #fff4f0;
+}
+
+.post_comment_title{
+	background: url(images/post_comment_bg.gif) no-repeat 0 0;
+	padding: 5px 10px;
+}
+
+.post_comment_title h3{
+	color: #353534;
+	font-weight: bold;
+	font-size: 14px;
+	padding: 5px;
+	border-bottom: 2px solid #f16d78;
+}
+
+.post_comment_body{
+	background: url(images/post_comment_bg.gif) no-repeat -680px 100%;
+	padding: 5px 30px 0px 30px;
+}
+
+.post_comment_welcome p{
+	font-size: 10px;
+}
+
+.post_comment_welcome strong{
+	font-size: 12px;
+}
+
+.post_comment_body dl{
+	padding: 10px 0px;
+}
+
+.post_comment_body dt{
+	font-size: 14px;
+}
+
+.post_comment_body dt span{
+	font-size: 12px;
+	color: #FF6200;
+	padding-top: 5px;
+	padding-left: 10px;
+}
+
+.post_comment_body dd{
+	padding: 2px 0px 15px 0px;
+}
+
+.post_comment_body dd input{
+	padding: 7px 5px;
+	width: 420px;
+	border: 1px solid #DACBB4;
+	background: #FFFBF2;
+}
+
+.post_comment_body .textarea_box{
+	padding-top: 8px;
+}
+
+.post_comment_body .textarea_box  textarea{
+	border: 1px solid #f2ded7;
+	background: #fff;
+	overflow: auto;
+	width: 98%;
+	padding: 5px;
+}
+
+.post_comment_body .submit_box{
+	padding: 20px 0px;
+}
+
+.post_comment_body .submit_box input{
+	background: url(images/post_comment_bg.gif) no-repeat  -1360px 0;
+	width: 242px;
+	height: 34px;
+	border: none;
+	cursor: pointer;
+}
+
+/* *************************** 
+   WP-pagenavi 
+   ***************************/
+.navigation {
+	padding-left: 0px;
+}
+
+.wp-pagenavi {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.wp-pagenavi a{
+	padding: 1px 4px;
+	margin: 2px;
+	text-decoration: none;
+	border: 1px solid #f16d78;
+	background: #FFF;
+}
+
+.wp-pagenavi a:hover {
+	border: 1px solid #f16d78;
+	color: #FFF;
+	background: #f16d78;
+}
+
+.wp-pagenavi span.pages {
+	padding: 1px 4px;
+	margin: 2px;
+	border: 1px solid #f16d78;
+	background: #FFF;
+}
+
+.wp-pagenavi span.current {
+	padding: 1px 4px;
+	margin: 2px;
+	font-weight: bold;
+	border: 1px solid #f16d78;
+	color: #FFF;
+	background: #f16d78;
+}
+
+/* *************************** 
+   Sidebar
+   ***************************/
+#sidebar {
+	width: 260px;
+	float: right;
+}
+
+.sect {
+	background: repeat-y -260px 0;
+}
+
+.sect  h2 {
+	background: no-repeat 0 0;
+}
+
+.sect ul {
+	background: no-repeat -520px 100%;
+	padding: 0px 10px 8px 10px;
+}
+
+.recent_article ul, .comment_article ul {
+	padding-bottom: 13px;
+}
+
+.recent_article li {
+	line-height: 29px;
+	height: 29px;
+	overflow: hidden;
+	background: url(images/li_arrow2.gif) no-repeat 0 0;
+	padding-left: 10px;
+}
+
+.sect_index h2, .sect h2 {
+	height: 36px;
+	line-height: 29px;
+	padding-left: 22px;
+	color: #404040;
+	font-weight: bold;
+}
+
+.sect_index, .sect_index h2, .sect_index ul, .sect , .sect  h2, .sect ul,.feed h2 {
+	background-image: url(images/box_bg.gif);
+}
+
+/* *************************** 
+  404
+   ***************************/
+#box_404 {
+	background: url(images/404.jpg);
+	width: 600px;
+	height: 480px;
+	margin: 5px auto;
+}
+
+/* *************************** 
+   Footer
+   ***************************/
+#footer p {
+	padding: 5px 15px 25px 5px;
+	font-size: 12px;
+	margin-top: 50px;
+	line-height:20px;
+	border-top:solid 2px #f16d78;
+	color:#999999;
+}
+#footer a{
+	color:#f7c8cb;
+}
+
+#footer p span {
+	float: right;
+	font-family: "宋体";
+	font-size: 12px;
+}
+
+#footer p a {
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, sans-serif;
+}
+
