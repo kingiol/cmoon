@@ -10,46 +10,37 @@ HDF *g_cfg = NULL;
 int main(int argc, char **argv, char **envp)
 {
 	CGI *cgi;
-	NEOERR *err;
-	int ret;
+	NEOERR *err = STATUS_OK;
 
 	HASH *dbh, *tplh, *evth;
 	session_t *session = NULL;
 	char *jsoncb;
 
-	int (*data_handler)(CGI *cgi, HASH *dbh, HASH *evth, session_t *session);
+	NEOERR* (*data_handler)(CGI *cgi, HASH *dbh, HASH *evth, session_t *session);
 	void *lib;
 
 	//sleep(20);
-	mconfig_parse_file(SITE_CONFIG, &g_cfg);
 	mtc_init(TC_ROOT"viki");
 
-	ret = ltpl_init(&tplh);
-	if (ret != RET_RBTOP_OK) {
-		mtc_err("init templates error");
-		mutil_redirect("初始化模板失败", TGT_SELF, URL_CLOSE, true);
-		return ret;
-	}
+	err = lerr_init();
+	DIE_NOK_CGI(err);
+	
+	err = mconfig_parse_file(SITE_CONFIG, &g_cfg);
+	DIE_NOK_CGI(err);
 
-	ret = ldb_init(&dbh);
-	if (ret != RET_RBTOP_OK) {
-		mtc_err("init db error");
-		mutil_redirect("初始化数据库失败", TGT_SELF, URL_CLOSE, true);
-		return ret;
-	}
+	err = ltpl_init(&tplh);
+	DIE_NOK_CGI(err);
 
-	ret = levt_init(&evth);
-	if (ret != RET_RBTOP_OK) {
-		mtc_err("init mevent error");
-		mutil_redirect("初始化事件后台失败", TGT_SELF, URL_CLOSE, true);
-		return ret;
-	}
+	err = ldb_init(&dbh);
+	DIE_NOK_CGI(err);
+
+	err = levt_init(&evth);
+	DIE_NOK_CGI(err);
 
 	lib = dlopen(NULL, RTLD_NOW|RTLD_GLOBAL);
-	if (lib == NULL) {
-		mtc_err("possible? %s", dlerror());
-		mutil_redirect("初始化库函数失败", TGT_SELF, URL_CLOSE, true);
-		return 1;
+	if (!lib) {
+		err = nerr_raise(NERR_SYSTEM, "dlopen %s", dlerror());
+		DIE_NOK_CGI(err);
 	}
 	
 #ifndef DROP_FCGI
@@ -73,46 +64,41 @@ int main(int argc, char **argv, char **envp)
 		hdf_set_value(cgi->hdf, PRE_QUERY".JsonCallback", "Ape.transport.read");
 #endif
 		
-		ret = session_init(cgi, dbh, &session);
-		if (ret != RET_RBTOP_OK) {
-			mtc_err("init session failure");
-			goto response;
-		}
+		err = session_init(cgi, dbh, &session);
+		JUMP_NOK_CGI(err, response);
 
 		if (mutil_client_attack(cgi->hdf, "viki", "lcs_uname",
 								LMT_CLI_ATTACK, PERIOD_CLI_ATTACK)) {
-			ret = RET_RBTOP_ATTACKE;
-			goto response;
+			err = nerr_raise(LERR_ATTACK, "need a rest, babey!");
+			JUMP_NOK_CGI(err, response);
 		}
 		
-		data_handler = lutil_get_data_handler(lib, cgi, session);
-		if (data_handler == NULL) {
-			mtc_err("get handler failure");
-			ret = RET_RBTOP_NEXIST;
-			goto response;
+		if ((data_handler = lutil_get_data_handler(lib, cgi, session)) == NULL) {
+			err = nerr_raise(LERR_NEXIST, "dataer %s not found", session->dataer);
+			JUMP_NOK_CGI(err, response);
 		}
 
-		ret = (*data_handler)(cgi, dbh, evth, session);
+		err = (*data_handler)(cgi, dbh, evth, session);
 		
 	response:
 		if (cgi != NULL && cgi->hdf != NULL) {
-			ldb_opfinish_json(ret, cgi->hdf, NULL, 0);
+			lerr_opfinish_json(err, cgi->hdf);
 			
 			switch (session->reqtype) {
 			case CGI_REQ_HTML:
 				/* post also could get html, so, don't judge CGI_REQ_METHOD() */
-				ret = ltpl_render(cgi, tplh, session);
-				if (ret != RET_RBTOP_OK) {
-					if (ret == RET_RBTOP_NEXIST)
+				err = ltpl_render(cgi, tplh, session);
+				if (err != STATUS_OK) {
+					if (nerr_match(err, LERR_NEXIST))
 						cgi_redirect(cgi, "/404.html");
 					else
 						cgi_redirect(cgi, "/503.html");
+					TRACE_NOK(err);
 				}
 				break;
 			case CGI_REQ_AJAX:
 				jsoncb = hdf_get_value(cgi->hdf, PRE_REQ_AJAX_FN, NULL);
 				if (jsoncb != NULL) {
-					//hdf_remove_tree(cgi->hdf, PRE_SUCCESS);
 					mjson_execute_hdf(cgi->hdf, jsoncb, session->tm_cache_browser);
 				} else {
 					mjson_output_hdf(cgi->hdf, session->tm_cache_browser);

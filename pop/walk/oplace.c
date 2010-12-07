@@ -184,18 +184,18 @@ static int ip_offset(unsigned int ip)
 		return -1;
 }
 
-int ip2addr_data_get(char *ip, char **c, char **a)
+NEOERR* ip2addr_data_get(char *ip, char **c, char **a)
 {
 	*c = *a = NULL;
 	
-	if (!ip) return RET_RBTOP_INPUTE;
+	if (!ip) return nerr_raise(NERR_ASSERT, "ip null");
 
 	char *p, *s;
 	unsigned int dip = 0;
 
 	if (ip_cache_get(ip, c, a) == 0) {
 		mtc_dbg("get %s from cache: %s %s", ip, *c, *a);
-		return RET_RBTOP_OK;
+		return STATUS_OK;
 	}
 	
 	s = strdup(ip);
@@ -217,33 +217,32 @@ int ip2addr_data_get(char *ip, char **c, char **a)
 			free(*a);
 			ip_cache_get(ip, c, a);
 			mtc_dbg("get %s from file: %s %s", ip, *c, *a);
-			return RET_RBTOP_OK;
+			return STATUS_OK;
 		}
 	}
 
-	return RET_RBTOP_ERROR;
+	return nerr_raise(NERR_SYSTEM, PATH_MTLS"QQWry.Dat nexist or format error");
 }
 
-int place_data_get_local(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* place_data_get_local(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	if (!cgi || !cgi->hdf) return RET_RBTOP_INPUTE;
+	if (!cgi || !cgi->hdf) return nerr_raise(NERR_ASSERT, "paramter null");
 
 	char *ip, *c, *a;
-	int ret;
+	NEOERR *err;
 
 	HDF_GET_STR(cgi->hdf, PRE_QUERY".ip", ip);
 
 	c = a = NULL;
-	ret = ip2addr_data_get(ip, &c, &a);
-	if (ret == RET_RBTOP_OK) {
-		hdf_set_value(cgi->hdf, PRE_OUTPUT".a", a);
-		hdf_set_value(cgi->hdf, PRE_OUTPUT".c", c);
-	}
+	err = ip2addr_data_get(ip, &c, &a);
+	if (err != STATUS_OK) return nerr_pass(err);
+	hdf_set_value(cgi->hdf, PRE_OUTPUT".a", a);
+	hdf_set_value(cgi->hdf, PRE_OUTPUT".c", c);
 	
-	return ret;
+	return STATUS_OK;
 }
 
-int place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "place");
 	char *ip;
@@ -263,7 +262,7 @@ int place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, ip, REQ_CMD_PLACEGET, FLAGS_SYNC);
+	MEVENT_TRIGGER(evt, ip, REQ_CMD_PLACEGET, FLAGS_SYNC);
 
 	/*
 	 * set output
@@ -272,5 +271,5 @@ int place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 		hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
 	}
 
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }

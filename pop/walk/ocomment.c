@@ -4,20 +4,20 @@
 
 #include "oapp.h"
 
-int comment_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* comment_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aux");
 
 	LPRE_EVTOP(cgi->hdf, evt);
 	
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, NULL, REQ_CMD_CMT_GET, FLAGS_SYNC);
+	MEVENT_TRIGGER(evt, NULL, REQ_CMD_CMT_GET, FLAGS_SYNC);
 	hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
 	
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int comment_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* comment_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aux");
 	mevent_t *evt_place = (mevent_t*)hash_lookup(evth, "place");
@@ -32,32 +32,31 @@ int comment_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 	hdf_set_value(evt->hdfsnd, "ip", ip);
 	hdf_set_value(evt->hdfsnd, "addr", addr);
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, NULL, REQ_CMD_CMT_ADD, FLAGS_SYNC);
+	MEVENT_TRIGGER(evt, NULL, REQ_CMD_CMT_ADD, FLAGS_SYNC);
 	
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int comment_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* comment_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int comment_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* comment_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname;
+	NEOERR *err;
 
 	LPRE_EVTOP(cgi->hdf, evt);
 	
 	APP_CHECK_LOGIN();
 	
-	if (hdf_get_int_value(evt->hdfrcv, "state", 0) < LCS_ST_ADMIN) {
-		mtc_warn("%s wan't be admin", aname);
-		return RET_RBTOP_LIMITE;
-	}
+	if (hdf_get_int_value(evt->hdfrcv, "state", 0) < LCS_ST_ADMIN)
+		return nerr_raise(LERR_LIMIT, "%s wan't be admin", aname);
 
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, NULL, REQ_CMD_CMT_DEL, FLAGS_NONE);
+	MEVENT_TRIGGER(evt, NULL, REQ_CMD_CMT_DEL, FLAGS_NONE);
 	
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }

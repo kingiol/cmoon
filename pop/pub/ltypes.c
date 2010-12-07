@@ -1,13 +1,7 @@
 #include "mheads.h"
 #include "lheads.h"
 
-#define SAFE_FREE(str)							\
-	do {										\
-		if (str != NULL)						\
-			free(str);							\
-	} while (0)
-
-int session_init(CGI *cgi, HASH *dbh, session_t **ses)
+NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses)
 {
 	session_t *lses;
 	char tok[_POSIX_PATH_MAX];
@@ -15,19 +9,13 @@ int session_init(CGI *cgi, HASH *dbh, session_t **ses)
 	*ses = NULL;
 
 	lses = calloc(1, sizeof(session_t));
-	if (lses == NULL) {
-		mtc_err("calloc memory for session_t failure");
-		return RET_RBTOP_MEMALLOCE;
-	}
+	if (!lses) return nerr_raise(NERR_NOMEM, "calloc memory for session_t failure");
 	
 	lses->reqtype = CGI_REQ_HTML;
 	hdf_get_copy(cgi->hdf, PRE_COOKIE".uname", &lses->uname, NULL);
 
 	char *uri = hdf_get_value(cgi->hdf, PRE_REQ_URI_RW, NULL);
-	if (!uri) {
-		mtc_err(".ScriptName disappear!");
-		return RET_RBTOP_INPUTE;
-	}
+	if (!uri) return nerr_raise(LERR_USERINPUT, ".ScriptName disappear!");
 	/* TODO uniq req uri */
 	//uri = mmisc_str_uniq(uri, '/');
 	mmisc_str_repchr(uri, '/', '_');
@@ -66,7 +54,7 @@ int session_init(CGI *cgi, HASH *dbh, session_t **ses)
 
 	*ses = lses;
 	
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
 void session_destroy(session_t **ses)

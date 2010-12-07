@@ -4,10 +4,10 @@
 
 __BEGIN_DECLS
 
-int comment_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
-int comment_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
-int comment_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
-int comment_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* comment_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* comment_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* comment_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* comment_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
 __END_DECLS
 #endif /* __OCOMMENT_H__ */

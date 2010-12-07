@@ -21,7 +21,7 @@ static void app_after_login(CGI *cgi, char *aname, char *masn)
 	cgi_cookie_set(cgi, "masn", masn, NULL, SITE_DOMAIN, tm, 1, 0);
 }
 
-int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname;
@@ -42,7 +42,7 @@ int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
 
 	/*
 	 * set output
@@ -54,10 +54,10 @@ int app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 		hdf_set_value(cgi->hdf, PRE_OUTPUT".exist", "0");
 	}
 	
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *asn, *email, masn[LEN_CK];
@@ -78,7 +78,6 @@ int app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 * prepare data 
 	 */
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
-	// mcs_hdf_escape_val(evt->hdfsnd);
 	
 	hdf_set_int_value(evt->hdfsnd, "state", LCS_ST_FREE);
 	
@@ -89,17 +88,17 @@ int app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPNEW, FLAGS_SYNC);
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPNEW, FLAGS_SYNC);
 
 	/*
 	 * follow-up
 	 */
 	app_after_login(cgi, aname, masn);
 	
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *asn, masn[LEN_CK];
@@ -122,7 +121,7 @@ int app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
 	
 	/*
 	 * verify
@@ -139,17 +138,19 @@ int app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 			hdf_set_value(evt->hdfsnd, "masn", masn);
 			mevent_trigger(evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
 			app_after_login(cgi, aname, masn);
-			return RET_RBTOP_OK;
-		}
+			return STATUS_OK;
+		} else 
+			return nerr_raise(LERR_LOGINPSW, "password wrong");
 	}
-	
-	return RET_RBTOP_LOGINPSW;
+
+	return nerr_raise(LERR_NEXIST, "app %s not exist", aname);
 }
 
-int app_logout_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* app_logout_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname;
+	NEOERR *err;
 	
 	APP_CHECK_LOGIN();
 
@@ -158,12 +159,12 @@ int app_logout_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_set_value(evt->hdfsnd, "aname", aname);
 	hdf_set_value(evt->hdfsnd, "masn", "0");
 
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
 
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int app_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* app_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *masn;
@@ -186,7 +187,7 @@ int app_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
 
 	/*
 	 * verify
@@ -194,11 +195,10 @@ int app_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	char *masndb = hdf_get_value(evt->hdfrcv, "masn", NULL);
 	if (masndb) {
 		if (!strcmp(masndb, masn)) {
-			//app_after_login(cgi, aname, masn);
-			return RET_RBTOP_OK;
+			return STATUS_OK;
 		}
 	}
 	mtc_warn("%s<====>%s", masndb, masn);
 
-	return RET_RBTOP_NOTLOGIN;
+	return nerr_raise(LERR_NOTLOGIN, "%s not login", aname);
 }

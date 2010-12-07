@@ -4,7 +4,7 @@
 
 __BEGIN_DECLS
 
-int msg_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* msg_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
 __END_DECLS
 #endif /* __OMSG_H__ */

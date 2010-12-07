@@ -59,10 +59,11 @@ static void ips2places(HDF *hdf, HASH *evth)
 	string_clear(&ip);
 }
 
-int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname;
+	NEOERR *err;
 	
 	APP_CHECK_LOGIN();
 	
@@ -80,17 +81,18 @@ int oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPUSERS, FLAGS_SYNC);
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPUSERS, FLAGS_SYNC);
 	hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
 	ips2places(hdf_get_obj(cgi->hdf, PRE_OUTPUT".userlist"), evth);
 	
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int oms_camer_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* oms_camer_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *uname;
+	NEOERR *err;
 
 	APP_CHECK_LOGIN();
 	
@@ -100,21 +102,21 @@ int oms_camer_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_set_value(evt->hdfsnd, "aname", aname);
 	hdf_set_value(evt->hdfsnd, "uname", uname);
 
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPUSEROUT, FLAGS_NONE);
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPUSEROUT, FLAGS_NONE);
 
 	evt = (mevent_t*)hash_lookup(evth, "msg");
 	if (evt) {
 		hdf_set_value(evt->hdfsnd, "name", uname);
 		hdf_set_value(evt->hdfsnd, "name2", aname);
-		MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, uname, REQ_CMD_DEL_BOTH, FLAGS_NONE);
+		MEVENT_TRIGGER(evt, uname, REQ_CMD_DEL_BOTH, FLAGS_NONE);
 	}
 
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int oms_edit_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* oms_edit_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-	int ret = oms_data_get(cgi, dbh, evth, ses);
+	NEOERR *err = oms_data_get(cgi, dbh, evth, ses);
 
 	int tune = hdf_get_int_value(cgi->hdf, PRE_OUTPUT".appinfo.tune", 0);
 
@@ -123,13 +125,14 @@ int oms_edit_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	if (tune & LCS_TUNE_SMS)
 		hdf_set_value(cgi->hdf, PRE_OUTPUT".appinfo.sms", "1");
 
-	return ret;
+	return nerr_pass(err);
 }
 
-int oms_edit_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* oms_edit_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname;
+	NEOERR *err;
 	
 	APP_CHECK_LOGIN();
 	
@@ -142,15 +145,16 @@ int oms_edit_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
 	
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int oms_users_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* oms_users_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname;
+	NEOERR *err;
 	
 	APP_CHECK_LOGIN();
 	
@@ -164,16 +168,17 @@ int oms_users_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APP_O_USERS, FLAGS_SYNC);
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APP_O_USERS, FLAGS_SYNC);
 	hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
 	
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int oms_users_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* oms_users_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *pname, *email;
+	NEOERR *err;
 	
 	APP_CHECK_LOGIN();
 	
@@ -184,16 +189,12 @@ int oms_users_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	LEGAL_CK_ANAME(aname);
 	LEGAL_CK_EMAIL(email);
 
-	if (hdf_get_int_value(evt->hdfrcv, "pid", 1) != 0) {
-		mtc_warn("%s want add %s", pname, aname);
-		return RET_RBTOP_LIMITE;
-	}
+	if (hdf_get_int_value(evt->hdfrcv, "pid", 1) != 0)
+		return nerr_raise(LERR_LIMIT, "%s want add %s", pname, aname);
 
 	int limit = hdf_get_int_value(g_cfg, "Limit.max_users_per_freesite", 5);
-	if (hdf_get_int_value(evt->hdfrcv, "numuser", 0) >= limit) {
-		mtc_warn("%s want to add more users %s", pname, aname);
-		return RET_RBTOP_NEEDVIP;
-	}
+	if (hdf_get_int_value(evt->hdfrcv, "numuser", 0) >= limit)
+		return nerr_raise(LERR_NEEDVIP, "%s want to add more users %s", pname, aname);
 	
 	/*
 	 * prepare data 
@@ -209,19 +210,23 @@ int oms_users_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 * trigger
 	 */
 	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPNEW, FLAGS_SYNC))) {
-		mtc_err("process %s failure %d", aname, evt->errcode);
+		//mtc_err("process %s failure %d", aname, evt->errcode);
 		if (evt->errcode == REP_ERR_ALREADYREGIST)
-			return RET_RBTOP_EXISTE;
-		return RET_RBTOP_EVTE;
+			return nerr_raise(LERR_EXIST, "%s already exist", aname);
+		char *zpa = NULL;
+		hdf_write_string(evt->hdfrcv, &zpa);
+		return nerr_raise(LERR_MEVENT, "pro %s %d failure %d %s",
+						  evt->ename, REQ_CMD_APPNEW, evt->errcode, zpa);
 	}
 	
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int oms_users_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* oms_users_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *pname;
+	NEOERR *err;
 	
 	APP_CHECK_LOGIN();
 
@@ -230,17 +235,13 @@ int oms_users_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	LEGAL_CK_ANAME(pname);
 	LEGAL_CK_ANAME(aname);
 
-	if (!strcmp(pname, aname)) {
-		mtc_warn("%s want kill him self", pname);
-		return RET_RBTOP_LIMITE;
-	}
+	if (!strcmp(pname, aname))
+		return nerr_raise(LERR_LIMIT, "%s want kill him self", pname);
 	
 	hdf_set_value(evt->hdfsnd, "pname", pname);
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APP_O_USERS, FLAGS_SYNC);
-	if (!hdf_get_valuef(evt->hdfrcv, "users.%s.aname", aname)) {
-		mtc_warn("%s not %s's", aname, pname);
-		return RET_RBTOP_LIMITE;
-	}
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APP_O_USERS, FLAGS_SYNC);
+	if (!hdf_get_valuef(evt->hdfrcv, "users.%s.aname", aname))
+		return nerr_raise(LERR_LIMIT, "%s not %s 's admin", pname, aname);
 
 	/*
 	 * prepare data 
@@ -251,19 +252,22 @@ int oms_users_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 * trigger
 	 */
 	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPDEL, FLAGS_SYNC))) {
-		mtc_err("process %s failure %d", aname, evt->errcode);
 		if (evt->errcode == REP_ERR_NREGIST)
-			return RET_RBTOP_NEXIST;
-		return RET_RBTOP_EVTE;
+			return nerr_raise(LERR_NEXIST, "%s don't regist", aname);
+		char *zpa = NULL;
+		hdf_write_string(evt->hdfrcv, &zpa);
+		return nerr_raise(LERR_MEVENT, "pro %s %d failure %d %s",
+						  evt->ename, REQ_CMD_APPDEL, evt->errcode, zpa);
 	}
 	
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int oms_secy_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* oms_secy_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *uname;
+	NEOERR *err;
 
 	HDF_GET_STR(cgi->hdf, PRE_QUERY".aname", uname);
 	
@@ -272,7 +276,7 @@ int oms_secy_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_set_value(evt->hdfsnd, "pname", aname);
 	hdf_set_value(evt->hdfsnd, "aname", uname);
 
-	MEVENT_TRIGGER(RET_RBTOP_EVTE, evt, aname, REQ_CMD_APP_SETSECY, FLAGS_NONE);
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APP_SETSECY, FLAGS_NONE);
 
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }

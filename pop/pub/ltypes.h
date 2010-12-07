@@ -13,7 +13,7 @@ typedef struct _session {
 	char *render;
 } session_t;
 
-int session_init(CGI *cgi, HASH *dbh, session_t **ses);
+NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses);
 void session_destroy(session_t **ses);
 
 __END_DECLS

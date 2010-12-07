@@ -8,10 +8,10 @@ __BEGIN_DECLS
 #define	REDIRECT_MODE_2 0x02
 #define IP_RECORD_LENGTH 7
 
-int ip2addr_data_get(char *ip, char **c, char **a);
-int place_data_get_local(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* ip2addr_data_get(char *ip, char **c, char **a);
+NEOERR* place_data_get_local(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
-int place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* place_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
 __END_DECLS
 #endif /* __OPLACE_H__ */

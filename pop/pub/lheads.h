@@ -2,7 +2,9 @@
 #define __LHEADS_H__
 
 #include "lnum.h"
+#include "lerr.h"
 #include "lcfg.h"
+#include "lcs.h"
 #include "ltypes.h"
 #include "lutil.h"
 #include "lmisc.h"

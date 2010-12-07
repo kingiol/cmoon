@@ -47,22 +47,23 @@ void ltpl_prepare_rend(HDF *hdf, char *tpl)
 	}
 }
 
-int ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outhash)
+NEOERR* ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outhash)
 {
 	char *tp = NULL, *tpl = NULL, *dataer = NULL;
 	HDF *node = NULL, *dhdf = NULL, *child = NULL;
 	CSPARSE *cs = NULL;
 	STRING str;
-	NEOERR *err;
 	char fname[_POSIX_PATH_MAX], tok[64];
-	int (*data_handler)(HDF *hdf, HASH *dbh);
-	int ret;
+	NEOERR* (*data_handler)(HDF *hdf, HASH *dbh);
+	NEOERR *err;
 	
 	memset(fname, 0x0, sizeof(fname));
 	snprintf(fname, sizeof(fname), "%s/%s", dir, name);
-	hdf_init(&node);
+	err = hdf_init(&node);
+	if (err != STATUS_OK) return nerr_pass(err);
+
 	err = hdf_read_file(node, fname);
-	RETURN_V_NOK(err, RET_RBTOP_ERROR);
+	if (err != STATUS_OK) return nerr_pass(err);
 
 	child = hdf_obj_child(node);
 	while (child != NULL) {
@@ -75,8 +76,11 @@ int ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outhash)
 
 		err = cgi_register_strfuncs(cs);
 		JUMP_NOK(err, wnext);
-		mcs_register_bitop_functions(cs);
-		mcs_register_mkd_functions(cs);
+		err = mcs_register_bitop_functions(cs);
+		JUMP_NOK(err, wnext);
+		err = mcs_register_mkd_functions(cs);
+		JUMP_NOK(err, wnext);
+
 		tpl = hdf_get_value(child, PRE_CFG_LAYOUT, "null.html");
 		snprintf(fname, sizeof(fname), "%s/%s", PATH_TPL, tpl);
 		err = cs_parse_file(cs, fname);
@@ -86,12 +90,16 @@ int ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outhash)
 			/*
 			 * strdup the key, baby, because we'll free the hdf later
 			 */
-			hash_insert(outhash, (void*)strdup(hdf_obj_name(child)), (void*)cs);
+			err = hash_insert(outhash, (void*)strdup(hdf_obj_name(child)), (void*)cs);
+			JUMP_NOK(err, wnext);
 			if (hdf_get_obj(child, PRE_CFG_DATASET)) {
-				hdf_init(&dhdf);
-				hdf_copy(dhdf, NULL, hdf_get_obj(child, PRE_CFG_DATASET));
+				err = hdf_init(&dhdf);
+				JUMP_NOK(err, wnext);
+				err = hdf_copy(dhdf, NULL, hdf_get_obj(child, PRE_CFG_DATASET));
+				JUMP_NOK(err, wnext);
 				snprintf(tok, sizeof(tok), "%s_hdf", hdf_obj_name(child));
-				hash_insert(outhash, (void*)strdup(tok), (void*)dhdf);
+				err = hash_insert(outhash, (void*)strdup(tok), (void*)dhdf);
+				JUMP_NOK(err, wnext);
 			}
 		}
 			
@@ -108,10 +116,8 @@ int ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outhash)
 					mtc_err("%s", tp);
 					//continue;
 				} else {
-					ret = (*data_handler)(hdf_get_obj(child, PRE_CFG_DATASET), dbh);
-					if (ret != RET_RBTOP_OK) {
-						mtc_err("%s return %d", dataer, ret);
-					}
+					err = (*data_handler)(hdf_get_obj(child, PRE_CFG_DATASET), dbh);
+					TRACE_NOK(err);
 				}
 			}
 				
@@ -140,67 +146,56 @@ int ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outhash)
 		
 	if (node != NULL) hdf_destroy(&node);
 
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
-int ltpl_parse_dir(char *dir, HASH *outhash)
+NEOERR* ltpl_parse_dir(char *dir, HASH *outhash)
 {
 	struct dirent **eps = NULL;
 	int n;
+	NEOERR *err;
 
-	if (dir == NULL) {
-		mtc_err("can't read null directory");
-		return RET_RBTOP_INPUTE;
-	}
+	if (!dir) return nerr_raise(NERR_ASSERT, "can't read null directory");
 
 	HASH *dbh;
 	void *lib = dlopen(NULL, RTLD_NOW|RTLD_GLOBAL);
-	if (lib == NULL) {
-		mtc_err("possible? %s", dlerror());
-		return RET_RBTOP_ERROR;
-	}
-	if (ldb_init(&dbh) != RET_RBTOP_OK) {
-		mtc_err("init db error");
-		return RET_RBTOP_INITE;
-	}
+	if (!lib) return nerr_raise(NERR_SYSTEM, "dlopen %s", dlerror());
+	
+	err = ldb_init(&dbh);
+	if (err != STATUS_OK) return nerr_pass(err);
 	
 	n = scandir(dir, &eps, tpl_config, alphasort);
 	for (int i = 0; i < n; i++) {
 		mtc_dbg("parse file %s", eps[i]->d_name);
-		ltpl_parse_file(dbh, lib, dir, eps[i]->d_name, outhash);
+		err = ltpl_parse_file(dbh, lib, dir, eps[i]->d_name, outhash);
+		TRACE_NOK(err);
 		free(eps[i]);
 	}
 
 	ldb_destroy(dbh);
 	dlclose(lib);
 	
-	if (n > 0) {
-		free(eps);
-		return RET_RBTOP_OK;
-	} else {
-		mtc_warn("not .hdf file found in %s", dir);
-		return RET_RBTOP_NEXIST;
-	}
+	if (n > 0) free(eps);
+	else mtc_warn("not .hdf file found in %s", dir);
+
+	return STATUS_OK;
 }
 
-int ltpl_init(HASH **tplh)
+NEOERR* ltpl_init(HASH **tplh)
 {
 	HASH *ltplh = NULL;
 	NEOERR *err;
-	int ret;
 
+	*tplh = NULL;
+	
 	err = hash_init(&ltplh, hash_str_hash, hash_str_comp);
-	RETURN_V_NOK(err, RET_RBTOP_INITE);
+	if (err != STATUS_OK) return nerr_pass(err);
 
-	ret = ltpl_parse_dir(PATH_TPL, ltplh);
-	if (ret != RET_RBTOP_OK) {
-		mtc_err("parse %s failure %d", PATH_TPL, ret);
-		*tplh = NULL;
-		return ret;
-	}
+	err = ltpl_parse_dir(PATH_TPL, ltplh);
+	if (err != STATUS_OK) return nerr_pass_ctx(err, "pase dir %s", PATH_TPL);
 	
 	*tplh = ltplh;
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
 void ltpl_destroy(HASH *tplh)
@@ -217,7 +212,7 @@ void ltpl_destroy(HASH *tplh)
 	hash_destroy(&tplh);
 }
 
-int ltpl_render(CGI *cgi, HASH *tplh, session_t *ses)
+NEOERR* ltpl_render(CGI *cgi, HASH *tplh, session_t *ses)
 {
 	CSPARSE *cs;
 	HDF *dhdf;
@@ -228,16 +223,14 @@ int ltpl_render(CGI *cgi, HASH *tplh, session_t *ses)
 
 	render = ses->render;
 	cs = (CSPARSE*)hash_lookup(tplh, render);
-	if (cs == NULL) {
-		mtc_err("render %s not found", render);
-		return RET_RBTOP_NEXIST;
-	}
+	if (!cs) return nerr_raise(LERR_NEXIST, "render %s not found", render);
 
 	snprintf(tok, sizeof(tok), "%s_hdf", render);
 	dhdf = (HDF*)hash_lookup(tplh, tok);
-
 	if (dhdf) hdf_copy(cgi->hdf, NULL, dhdf);
+	
 	ltpl_prepare_rend(cgi->hdf, "layout.html");
+	
 	if (ses->tm_cache_browser > 0) {
 		hdf_set_valuef(cgi->hdf, "cgiout.other.cache=Cache-Control: max-age=%lu",
 					   ses->tm_cache_browser);
@@ -246,13 +239,13 @@ int ltpl_render(CGI *cgi, HASH *tplh, session_t *ses)
 
 	string_init(&str);
 	err = cs_render(cs, &str, mcs_strcb);
-	RETURN_V_NOK(err, RET_RBTOP_ERROR);
+	if (err != STATUS_OK) return nerr_pass(err);
 
 	err = cgi_output(cgi, &str);
-	RETURN_V_NOK(err, RET_RBTOP_ERROR);
+	if (err != STATUS_OK) return nerr_pass(err);
 
 	cs->hdf = NULL;
 	string_clear(&str);
 
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }

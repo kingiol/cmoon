@@ -7,15 +7,15 @@ __BEGIN_DECLS
 #define UIN_ILLEGAL(u)	(u < MIN_USER_NUM)
 #define GID_ILLEGAL(g)	(g < 0)
 
-enum cgi_req_type {
+typedef enum {
 	CGI_REQ_HTML = 0,
 	CGI_REQ_AJAX,
 	CGI_REQ_UNSUPPORT
-};
+} cgi_req_type;
 
 void* lutil_get_data_handler(void *lib, CGI *cgi, session_t *ses);
-int lutil_fetch_count(HDF *hdf, mdb_conn *conn, char *table, char *cond);
-int lutil_fetch_countf(HDF *hdf, mdb_conn *conn, char *table, char *cfmt, ...);
+NEOERR* lutil_fetch_count(HDF *hdf, mdb_conn *conn, char *table, char *cond);
+NEOERR* lutil_fetch_countf(HDF *hdf, mdb_conn *conn, char *table, char *cfmt, ...);
 
 __END_DECLS
 #endif	/* __LUTIL_H__ */

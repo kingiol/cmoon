@@ -4,7 +4,7 @@
 
 __BEGIN_DECLS
 
-int okol_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* okol_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
 __END_DECLS
 #endif /* __OOKOL_H__ */

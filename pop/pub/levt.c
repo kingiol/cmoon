@@ -1,7 +1,7 @@
 #include "mheads.h"
 #include "lheads.h"
 
-int levt_init(HASH **evth)
+NEOERR* levt_init(HASH **evth)
 {
 	mevent_t *evt;
 	char *ename;
@@ -10,23 +10,18 @@ int levt_init(HASH **evth)
 	NEOERR *err;
 
 	node = hdf_get_obj(g_cfg, "Mevent");
-	if (node == NULL) {
-		mtc_err("Mevent config not found");
-		return RET_RBTOP_INITE;
-	}
+	if (!node) return nerr_raise(NERR_ASSERT, "Mevent config not found");
 	
 	err = hash_init(&levth, hash_str_hash, hash_str_comp);
-	RETURN_V_NOK(err, RET_RBTOP_INITE);
+	if (err != STATUS_OK) return nerr_pass(err);
 
 	node = hdf_obj_child(node);
-	bool filled = false;
 	while (node != NULL) {
 		ename = hdf_obj_value(node);
 		evt = mevent_init_plugin(ename);
 		if (evt) {
 			mtc_dbg("event %s init ok", ename);
 			hash_insert(levth, (void*)strdup(ename), (void*)evt);
-			filled = true;
 		} else {
 			mtc_err("event %s init failure", ename);
 		}
@@ -34,12 +29,8 @@ int levt_init(HASH **evth)
 		node = hdf_obj_next(node);
 	}
 
-	if (!filled) {
-		mtc_err("no valid event backend");
-		return RET_RBTOP_INITE;
-	}
 	*evth = levth;
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
 void levt_destroy(HASH *evth)

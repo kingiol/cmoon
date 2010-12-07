@@ -4,40 +4,48 @@
 
 HDF *g_cfg = NULL;
 
-static int rend_blog_index(HASH *dbh, HASH *tplh, int pageid)
+static NEOERR* rend_blog_index(HASH *dbh, HASH *tplh, int pageid, int *pgttr)
 {
 	CSPARSE *cs = NULL;
 	HDF *hdf, *dhdf;
 	STRING str;
-	NEOERR *err;
+	NEOERR *err = STATUS_OK;
 	char fname[_POSIX_PATH_MAX];
 	
-	if (!dbh || !tplh) return 0;
+	if (!dbh || !tplh) return nerr_raise(NERR_ASSERT, "paramter null");
 	
 	cs = (CSPARSE*)hash_lookup(tplh, "blog_index");
 	dhdf = (HDF*)hash_lookup(tplh, "blog_index_hdf");
-	if (!cs || !dhdf) return 0;
+	if (!cs || !dhdf) return nerr_raise(LERR_NEXIST, "blog_index not found");
 
-	hdf_init(&hdf);
+	err = hdf_init(&hdf);
+	if (err != STATUS_OK) return nerr_pass(err);
+
 	hdf_copy(hdf, NULL, dhdf);
+
 	ltpl_prepare_rend(hdf, "layout.html");
 
 	hdf_set_int_value(hdf, PRE_QUERY".pageid", pageid);
-	if (blog_index_static_get(hdf, dbh) != RET_RBTOP_OK) {
-		hdf_destroy(&hdf);
-		return 0;
-	}
+
+	err = blog_index_static_get(hdf, dbh);
+	if (err != STATUS_OK) goto done;
 
 	int ntt = hdf_get_int_value(hdf, PRE_OUTPUT".ntt", 0);
 	int pgtt = hdf_get_int_value(hdf, PRE_OUTPUT".pgtt", 1);
+	if (pgttr) *pgttr = pgtt;
 	if (pageid == 0) {
 		if (pgtt > 1) {
-			hdf_set_int_value(hdf, PRE_OUTPUT".pgprev", pgtt-1);
+			err = hdf_set_int_value(hdf, PRE_OUTPUT".pgprev", pgtt-1);
+			TRACE_NOK(err);
+
 			if (ntt % BLOG_NUM_PERPAGE == 1) {
-				rend_blog_index(dbh, tplh, pgtt-1);
+				err = rend_blog_index(dbh, tplh, pgtt-1, NULL);
+				TRACE_NOK(err);
+
 				if (pgtt > 2) {
 					/* origin 1.html's nex is index.html, change them into 2.html */
-					rend_blog_index(dbh, tplh, pgtt-2);
+					err = rend_blog_index(dbh, tplh, pgtt-2, NULL);
+					TRACE_NOK(err);
 				}
 			}
 		}
@@ -54,7 +62,7 @@ static int rend_blog_index(HASH *dbh, HASH *tplh, int pageid)
 
 	string_init(&str);
 	err = cs_render(cs, &str, mcs_strcb);
-	RETURN_V_NOK(err, 0);
+	if (err != STATUS_OK) goto done;
 
 	if (pageid == 0)
 		snprintf(fname, sizeof(fname), "%sindex.html", PATH_BLOG);
@@ -62,22 +70,22 @@ static int rend_blog_index(HASH *dbh, HASH *tplh, int pageid)
 		snprintf(fname, sizeof(fname), "%s%d.html", PATH_BLOG, pageid);
 	mutil_makesure_dir(fname);
 	if (!mcs_str2file(str, fname)) {
-		mtc_err("write file %s failure", fname);
+		err = nerr_raise(NERR_IO, "Unable to open %s for writing", fname);
+		goto done;
 	}
 
 #ifdef DEBUG_HDF
 	hdf_write_file(hdf, TC_ROOT"hdf.blg.index");
 #endif
 
+done:
 	hdf_destroy(&hdf);
-
 	cs->hdf = NULL;
 	string_clear(&str);
-
-	return pgtt;
+	return nerr_pass(err);
 }
 
-static void rend_blog(HASH *dbh, HASH *tplh, int bid)
+static NEOERR* rend_blog(HASH *dbh, HASH *tplh, int bid)
 {
 	CSPARSE *cs = NULL;
 	HDF *hdf, *dhdf;
@@ -85,21 +93,23 @@ static void rend_blog(HASH *dbh, HASH *tplh, int bid)
 	NEOERR *err;
 	char fname[_POSIX_PATH_MAX];
 	
-	if (!dbh || !tplh || bid < 0) return;
+	if (!dbh || !tplh || bid < 0) return nerr_raise(NERR_ASSERT, "paramter null");
 	
 	cs = (CSPARSE*)hash_lookup(tplh, "blog");
 	dhdf = (HDF*)hash_lookup(tplh, "blog_hdf");
-	if (!cs || !dhdf) return;
+	if (!cs || !dhdf) return nerr_raise(LERR_NEXIST, "blog_index not found");
 
-	hdf_init(&hdf);
+	err = hdf_init(&hdf);
+	if (err != STATUS_OK) return nerr_pass(err);
+
 	hdf_copy(hdf, NULL, dhdf);
+
 	ltpl_prepare_rend(hdf, "layout.html");
 	
 	hdf_set_int_value(hdf, PRE_QUERY".bid", bid);
-	if (blog_static_get(hdf, dbh) != RET_RBTOP_OK) {
-		hdf_destroy(&hdf);
-		return;
-	}
+
+	err = blog_static_get(hdf, dbh);
+	if (err != STATUS_OK) goto done;
 	
 	hdf_set_copy(hdf, PRE_LAYOUT".title", PRE_OUTPUT".blog.title");
 	
@@ -107,22 +117,25 @@ static void rend_blog(HASH *dbh, HASH *tplh, int bid)
 
 	string_init(&str);
 	err = cs_render(cs, &str, mcs_strcb);
-	RETURN_NOK(err);
+	if (err != STATUS_OK) goto done;
 	
 	snprintf(fname, sizeof(fname), "%s%d/%d.html",
 			 PATH_BLOG, bid%BLOG_SUBDIR_NUM, bid);
 	mutil_makesure_dir(fname);
 	if (!mcs_str2file(str, fname)) {
-		mtc_err("write file %s failure", fname);
+		err = nerr_raise(NERR_IO, "Unable to open %s for writing", fname);
+		goto done;
 	}
 
 #ifdef DEBUG_HDF
 	hdf_write_file(hdf, TC_ROOT"hdf.blg");
 #endif
-	hdf_destroy(&hdf);
 
+done:
+	hdf_destroy(&hdf);
 	cs->hdf = NULL;
 	string_clear(&str);
+	return nerr_pass(err);
 }
 
 void useage(char *prg)
@@ -141,11 +154,13 @@ int main(int argc, char *argv[])
 {
 	HASH *tplh = NULL, *dbh = NULL;
 	NEOERR *err;
-	int c, bid = 0, indexid = -1;
+	int c, bid = 0, indexid = -1, pgtt;
 	bool dorecurse = false;
 
-	mconfig_parse_file(SITE_CONFIG, &g_cfg);
 	mtc_init(TC_ROOT"blg");
+
+	err = mconfig_parse_file(SITE_CONFIG, &g_cfg);
+	DIE_NOK_MTL(err);
 
 	while ( (c=getopt(argc, argv, "b:i:r")) != -1 ) {
 		switch(c) {
@@ -163,24 +178,24 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if (ldb_init(&dbh) != RET_RBTOP_OK) {
-		mtc_err("init db error");
-		return RET_RBTOP_DBE;
-	}
+	err = ldb_init(&dbh);
+	DIE_NOK_MTL(err);
 	
 	err = hash_init(&tplh, hash_str_hash, hash_str_comp);
-	RETURN_V_NOK(err, RET_RBTOP_INITE);
-	if (ltpl_parse_file(dbh, NULL, PATH_PAGER, "blog.hdf", tplh) != RET_RBTOP_OK) {
-		mtc_err("parse blog.hdf failure");
-		return RET_RBTOP_INITE;
-	}
+	DIE_NOK_MTL(err);
+
+	err = ltpl_parse_file(dbh, NULL, PATH_PAGER, "blog.hdf", tplh);
+	DIE_NOK_MTL(err);
 
 	if (indexid >= 0) {
-		int pgtt = rend_blog_index(dbh, tplh, indexid);
+		err = rend_blog_index(dbh, tplh, indexid, &pgtt);
+		TRACE_NOK(err);
+
 		if (indexid > 0 && pgtt > indexid) pgtt = indexid;
 		if (dorecurse) {
 			while (pgtt-- > 0) {
-				rend_blog_index(dbh, tplh, pgtt);
+				err = rend_blog_index(dbh, tplh, pgtt, NULL);
+				TRACE_NOK(err);
 			}
 		}
 	}

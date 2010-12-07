@@ -1,135 +1,30 @@
 #include "mheads.h"
 #include "lheads.h"
 
-static void get_errmsg(int ret, char *res)
-{
-	switch (ret) {
-	case RET_RBTOP_NOTLOGIN:
-		strcpy(res, "请登录后操作");
-		break;
-	case RET_RBTOP_LOGINPSW:
-		strcpy(res, "密码错误");
-		break;
-	case RET_RBTOP_LIMITE:
-		strcpy(res, "用户无权限");
-		break;
-	case RET_RBTOP_NEEDVIP:
-		strcpy(res, "专业版功能");
-		break;
-	case RET_RBTOP_NEEDVVIP:
-		strcpy(res, "完全版功能");
-		break;
-	case RET_RBTOP_NEXIST:
-		strcpy(res, "资源不存在");
-		break;
-	case RET_RBTOP_EXISTE:
-		strcpy(res, "资源已存在");
-		break;
-	case RET_RBTOP_IMGPROE:
-		strcpy(res, "处理图片失败");
-		break;
-	case RET_RBTOP_OPENFILE:
-		strcpy(res, "创建文件失败");
-		break;
-	default:
-		strcpy(res, "数据操作错误");
-		break;
-	}
-}
-
-
-void ldb_opfinish(int ret, HDF *hdf, mdb_conn *conn,
-				  char *target, char *url, bool header)
-{
-	char msg[LEN_SM];
-	
-	if (ret == RET_RBTOP_OK) {
-		return;
-	}
-	
-	if (ret < RET_RBTOP_MAX_M) {
-		mdb_opfinish(ret, hdf, conn, target, url, header);
-		return;
-	}
-
-	get_errmsg(ret, msg);
-	mutil_redirect(msg, target, url, header);
-	
-	/* conn destroy by user */
-	/*
-	if (conn != NULL) {
-		mdb_destroy(conn);
-	}
-	*/
-	//exit(ret);
-}
-
-void ldb_opfinish_json(int ret, HDF *hdf, mdb_conn *conn, time_t second)
-{
-	char msg[LEN_SM];
-	
-	if (ret == RET_RBTOP_OK) {
-		hdf_set_value(hdf, PRE_SUCCESS, "1");
-		return;
-	}
-	
-	if (ret < RET_RBTOP_MAX_M) {
-		mdb_opfinish_json(ret, hdf, conn);
-		return;
-	}
-
-	hdf_remove_tree(hdf, PRE_SUCCESS);
-	if (!hdf_get_obj(hdf, PRE_ERRMSG)) {
-		get_errmsg(ret, msg);
-		hdf_set_value(hdf, PRE_ERRMSG, msg);
-	}
-	hdf_set_int_value(hdf, PRE_ERRCODE, ret);
-	
-	/* conn destroy by user */
-	/*
-	if (conn != NULL) {
-		mdb_destroy(conn);
-	}
-	*/
-	//exit(ret);
-}
-
-
-int ldb_init(HASH **dbh)
+NEOERR* ldb_init(HASH **dbh)
 {
 	HDF *node;
 	HASH *ldbh;
 	NEOERR *err;
-	int ret;
 
 	node = hdf_get_obj(g_cfg, "Db.Dsn");
-	if (node == NULL) {
-		mtc_err("Db config not found");
-		return RET_RBTOP_INITE;
-	}
+	if (!node) return nerr_raise(NERR_ASSERT, "Db.Dsn config not found");
 	
 	err = hash_init(&ldbh, hash_str_hash, hash_str_comp);
-	RETURN_V_NOK(err, RET_RBTOP_INITE);
+	if (err != STATUS_OK) return nerr_pass(err);
 
 	node = hdf_obj_child(node);
 	mdb_conn *conn;
-	bool filled = false;
 	while (node != NULL) {
-		ret = mdb_init(&conn, hdf_obj_value(node));
-		if (ret == RET_RBTOP_OK) {
-			hash_insert(ldbh, (void*)strdup(hdf_obj_name(node)), (void*)conn);
-			filled = true;
-		}
+		err = mdb_init(&conn, hdf_obj_value(node));
+		if (err != STATUS_OK) return nerr_pass(err);
+		hash_insert(ldbh, (void*)strdup(hdf_obj_name(node)), (void*)conn);
 		
 		node = hdf_obj_next(node);
 	}
-
-	if (!filled) {
-		mtc_err("no valid db connection");
-		return RET_RBTOP_INITE;
-	}
+	
 	*dbh = ldbh;
-	return RET_RBTOP_OK;
+	return STATUS_OK;
 }
 
 void ldb_destroy(HASH *dbh)
