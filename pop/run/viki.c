@@ -49,9 +49,9 @@ int main(int argc, char **argv, char **envp)
 #endif
 		cgiwrap_init_std(argc, argv, environ);
 		err = cgi_init(&cgi, NULL);
-		JUMP_NOK_CGI(err, response);
+		if (err != STATUS_OK) goto response;
 		err = cgi_parse(cgi);
-		JUMP_NOK_CGI(err, response);
+		if (err != STATUS_OK) goto response;
 
 #ifdef NCGI_MODE
 		hdf_set_value(cgi->hdf, PRE_REQ_URI_RW, "/blog/mkdparser");
@@ -65,17 +65,17 @@ int main(int argc, char **argv, char **envp)
 #endif
 		
 		err = session_init(cgi, dbh, &session);
-		JUMP_NOK_CGI(err, response);
+		if (err != STATUS_OK) goto response;
 
 		if (mutil_client_attack(cgi->hdf, "viki", "lcs_uname",
 								LMT_CLI_ATTACK, PERIOD_CLI_ATTACK)) {
 			err = nerr_raise(LERR_ATTACK, "need a rest, babey!");
-			JUMP_NOK_CGI(err, response);
+			if (err != STATUS_OK) goto response;
 		}
 		
 		if ((data_handler = lutil_get_data_handler(lib, cgi, session)) == NULL) {
 			err = nerr_raise(LERR_NEXIST, "dataer %s not found", session->dataer);
-			JUMP_NOK_CGI(err, response);
+			if (err != STATUS_OK) goto response;
 		}
 
 		err = (*data_handler)(cgi, dbh, evth, session);

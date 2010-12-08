@@ -84,7 +84,7 @@
 	  <?cs /if ?>
 	  
 	  <div id="content">
-		<?cs if: ?Output.errmsg && Output.errcode == 2000 ?>
+		<?cs if: ?Output.errmsg && Output.errcode == 15 ?>
 		  <script>
 			$(document).ready(function() {
 			  $('#login-hint').html('<?cs var: Output.errmsg ?>')
@@ -93,6 +93,7 @@
 		  </script>
 		<?cs elif: ?Output.errmsg && ?Output.errcode?>
 		  <h3><?cs var: Output.errcode ?> : <?cs var: Output.errmsg ?></h3>
+		  <pre><?cs var: Output.errtrace ?></pre>
 		<?cs else ?>
 		  <?cs include:Include.content ?>
 		  <?cs var:Content.content ?>

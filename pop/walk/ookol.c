@@ -35,7 +35,7 @@ NEOERR* okol_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * execute
 	 */
-	MDB_QUERY_RAW(err, conn, "stat", STAT_COL, "%s ORDER BY intime", NULL, str.buf);
+	MDB_QUERY_RAW(conn, "stat", STAT_COL, "%s ORDER BY intime", NULL, str.buf);
 	string_clear(&str);
 	err = mdb_set_rows(cgi->hdf, conn, STAT_COL, PRE_OUTPUT".sts", 0);
 	if (err != STATUS_OK) return nerr_pass(err);

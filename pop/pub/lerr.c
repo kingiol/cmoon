@@ -1,6 +1,7 @@
 #include "mheads.h"
 #include "lheads.h"
 
+/* LERR_XXX start from 14 */
 int LERR_MEVENT = 0;
 int LERR_NOTLOGIN = 0;
 int LERR_LOGINPSW = 0;
@@ -19,6 +20,8 @@ NEOERR* lerr_init()
 	NEOERR *err;
 
 	if (lerrInited == 0) {
+		err = nerr_init();
+		if (err != STATUS_OK) return nerr_pass(err);
 		err = nerr_register(&LERR_MEVENT, "后台处理失败");
 		if (err != STATUS_OK) return nerr_pass(err);
 		err = nerr_register(&LERR_NOTLOGIN, "请登录后操作");
@@ -57,18 +60,14 @@ void lerr_opfinish_json(NEOERR *err, HDF *hdf)
 	
 	hdf_remove_tree(hdf, PRE_SUCCESS);
 	
+	char buf[1024];
+	NEOERR *neede = mcs_err_valid(err);
+	if (!neede) neede = err;
 	/* set PRE_ERRXXX with the most recently err */
-	hdf_set_int_value(hdf, PRE_ERRCODE, err->error);
 	if (!hdf_get_obj(hdf, PRE_ERRMSG)) {
-		char buf[1024];
-		NEOERR *neede = err;
-		while (neede && neede != INTERNAL_ERR) {
-			if (neede->error != NERR_PASS) break;
-			neede = neede->next;
-		}
-		if (!neede) neede = err;
 		hdf_set_value(hdf, PRE_ERRMSG, _lookup_errname(neede, buf, sizeof(buf)));
 	}
+	hdf_set_int_value(hdf, PRE_ERRCODE, neede->error);
 
 	STRING str; string_init(&str);
 	nerr_error_traceback(err, &str);

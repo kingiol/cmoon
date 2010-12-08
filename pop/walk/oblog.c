@@ -26,7 +26,7 @@ NEOERR* blog_index_static_get(HDF *hdf, HASH *dbh)
 		offset = (pgtt - 1) * BLOG_NUM_PERPAGE;
 	else
 		offset = (pageid-1) * BLOG_NUM_PERPAGE;
-	MDB_QUERY_RAW(err, conn, "blog", BLOG_COL, " state=%d ORDER BY ID "
+	MDB_QUERY_RAW(conn, "blog", BLOG_COL, " state=%d ORDER BY ID "
 				  " LIMIT %d OFFSET %d", NULL,
 				  BLOG_ST_NORMAL, BLOG_NUM_PERPAGE, offset);
 
@@ -42,7 +42,7 @@ NEOERR* blog_static_get(HDF *hdf, HASH *dbh)
 
 	int bid = hdf_get_int_value(hdf, PRE_QUERY".bid", 0);
 
-	MDB_QUERY_RAW(err, conn, "blog", BLOG_COL, " id=%d AND state=%d ",
+	MDB_QUERY_RAW(conn, "blog", BLOG_COL, " id=%d AND state=%d ",
 				  NULL, bid, BLOG_ST_NORMAL);
 	err = mdb_set_row(hdf, conn, BLOG_COL, PRE_OUTPUT".blog");
 	if (err != STATUS_OK) return nerr_pass(err);
@@ -51,7 +51,7 @@ NEOERR* blog_static_get(HDF *hdf, HASH *dbh)
 	 * previous
 	 * TODO id%32 ===> id%%d, BLOG_SUBDIR_NUM
 	 */
-	MDB_QUERY_RAW(err, conn, "blog", " id%32 ||'/'|| id as id, title ",
+	MDB_QUERY_RAW(conn, "blog", " id%32 ||'/'|| id as id, title ",
 				  " id < %d AND state=%d ORDER BY ID DESC LIMIT 1 ",
 				  NULL, bid, BLOG_ST_NORMAL);
 	err = mdb_set_row(hdf, conn, " fnameprev, titleprev ", PRE_OUTPUT".blog");
@@ -60,7 +60,7 @@ NEOERR* blog_static_get(HDF *hdf, HASH *dbh)
 	/*
 	 * next 
 	 */
-	MDB_QUERY_RAW(err, conn, "blog", " id%32 ||'/'|| id as id, title ",
+	MDB_QUERY_RAW(conn, "blog", " id%32 ||'/'|| id as id, title ",
 				  " id > %d AND state=%d ORDER BY ID LIMIT 1 ",
 				  NULL, bid, BLOG_ST_NORMAL);
 	err = mdb_set_row(hdf, conn, " fnamenext, titlenext ", PRE_OUTPUT".blog");
@@ -86,7 +86,7 @@ NEOERR* blog_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/* just rend tpl */
 	if (bid == 0) return STATUS_OK;
 
-	MDB_QUERY_RAW(err, conn, "blog", BLOG_COL, " id=%d ",
+	MDB_QUERY_RAW(conn, "blog", BLOG_COL, " id=%d ",
 				  NULL, bid, BLOG_ST_NORMAL);
 	err = mdb_set_row(cgi->hdf, conn, BLOG_COL, PRE_OUTPUT".blog");
 	if (err != STATUS_OK) return nerr_pass(err);
@@ -119,10 +119,10 @@ NEOERR* blog_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	HDF_GET_STR(cgi->hdf, PRE_QUERY".title", title);
 	HDF_GET_STR(cgi->hdf, PRE_QUERY".content", content);
 
-	MDB_EXEC_RBT(err, conn, NULL, "INSERT INTO blog (title, content, author) "
-				 " VALUES ($1::varchar(256), $2, "
-				 " $3::varchar(256)) RETURNING id",
-				 "sss", title, content, aname);
+	MDB_EXEC(conn, NULL, "INSERT INTO blog (title, content, author) "
+			 " VALUES ($1::varchar(256), $2, "
+			 " $3::varchar(256)) RETURNING id",
+			 "sss", title, content, aname);
 	err = mdb_get(conn, "i", &id);
 	if (err != STATUS_OK) return nerr_pass(err);
 
@@ -156,8 +156,8 @@ NEOERR* blog_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 						  hdf_get_obj(g_cfg, "Db.UpdateCol.blog"), &str);
 	if (err != STATUS_OK) return nerr_pass(err);
 
-	MDB_EXEC_RBT(err, conn, NULL, "UPDATE blog SET %s WHERE id=%d AND author=$1",
-				 "s", str.buf, bid, aname);
+	MDB_EXEC(conn, NULL, "UPDATE blog SET %s WHERE id=%d AND author=$1",
+			 "s", str.buf, bid, aname);
 	string_clear(&str);
 
 	char command[1024];
@@ -186,8 +186,8 @@ NEOERR* blog_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	if (hdf_get_int_value(evt->hdfrcv, "state", 0) < LCS_ST_ADMIN)
 		return nerr_raise(LERR_LIMIT, "%s wan't be admin", aname);
 
-	MDB_EXEC_RBT(err, conn, NULL, "UPDATE blog SET state=%d WHERE id=%d AND "
-				 " author=$1", "s", state, bid, aname);
+	MDB_EXEC(conn, NULL, "UPDATE blog SET state=%d WHERE id=%d AND "
+			 " author=$1", "s", state, bid, aname);
 
 	char command[1024];
 	snprintf(command, sizeof(command), PATH_PAGER"blg -b %d", bid);
