@@ -90,14 +90,13 @@ static void rawdb_process_driver(struct event_entry *entry, struct queue_entry *
 	
 	mdb_conn *dbaccess = e->dbaccess;
 	mdb_conn *dbstat = e->dbstat;
-	struct cache *cd = e->cd;
 	struct rawdb_stats *st = &(e->st);
 
 	st->msg_total++;
 	
 	mtc_dbg("process cmd %u", q->operation);
 	switch (q->operation) {
-        CASE_SYS_CMD(q->operation, q, cd, err);
+        CASE_SYS_CMD(q->operation, q, e->cd, err);
 	case REQ_CMD_ACCESS:
 		err = rawdb_cmd_updatedb(q, dbaccess);
 		break;

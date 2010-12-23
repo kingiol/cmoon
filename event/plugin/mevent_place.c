@@ -230,7 +230,7 @@ static void place_process_driver(struct event_entry *entry, struct queue_entry *
 	
 	mtc_dbg("process cmd %u", q->operation);
 	switch (q->operation) {
-        CASE_SYS_CMD(q->operation, q, cd, err);
+        CASE_SYS_CMD(q->operation, q, e->cd, err);
 	case REQ_CMD_PLACEGET:
 		err = place_cmd_get(q, cd, db);
 		break;
