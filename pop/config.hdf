@@ -54,7 +54,7 @@ Db {
 		aux = pgsql:dbname=lcs_aux host=localhost user=lcser password=loveu
 	}
 	QueryCond {
-		stat {
+		kol {
 			tms [type=str] = intime >
 			tme [type=str] = intime <
 			type [type=int] = type =
@@ -80,6 +80,7 @@ Mevent {
 	3 = place
 	4 = msg
 	5 = aux
+	6 = mtls
 }
 
 FileCache {

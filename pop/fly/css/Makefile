@@ -26,7 +26,7 @@ b/blogop.css: blog/mku_skin.css blog/mku_set.css blog/op.css
 
 b/oms.css: oms/oms.css oms/scroll.css
 b/oms/edit.css: oms/tabs.css oms/edit.css
-b/oms/stat.css: oms/stat.css
+b/oms/stat.css: okol/datePicker.css oms/stat.css
 b/oms/users.css: oms/users.css oms/overlay.css
 b/oms/faq.css: oms/faq.css
 b/okol.css: okol/datePicker.css okol/okol.css

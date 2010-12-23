@@ -5,7 +5,9 @@ body {
 	color: #111;
 }
 a {color: #DB3946; cursor: pointer; text-decoration: none; }
-h1, h2, h3, h4 {margin: 3ex 0;}
+h1 {margin: 3ex 0;}
+h2 {margin: 2ex 0;}
+h3 {margin: 1ex 0;}
 p {
 /*	text-indent: 2em; */
 	margin: 2ex 0 1ex 0;

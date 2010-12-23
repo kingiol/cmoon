@@ -4,7 +4,7 @@ include $(BASEDIR)Make.env
 FILES = b/base.js b/chat.js b/chat_gb.js b/kol.js b/chatb.js b/chatc.js \
 		b/index.js b/appnew.js \
 		b/blog.js b/blogindex.js b/blogop.js \
-		b/oms.js b/oms/edit.js b/oms/stat.js b/oms/users.js \
+		b/oms.js b/oms/edit.js b/oms/stat_ie.js b/oms/stat.js b/oms/users.js \
 	    b/okol_ie.js b/okol.js
 
 all: preload $(FILES)
@@ -40,7 +40,10 @@ b/oms.js: pub/jquery.mnscrollpage.js ape/Build/JSON.js \
 		  pub/jquerytools/src/scrollable/scrollable.js pub/jquerytools/src/scrollable/scrollable.navigator.js \
 		  oms/oms.js
 b/oms/edit.js: pub/jquerytools/src/tabs/tabs.js oms/edit.js
-b/oms/stat.js: oms/stat.js
+b/oms/stat_ie.js: pub/datepicker/jquery.bgiframe.min.js pub/flot/excanvas.min.js
+b/oms/stat.js: pub/datepicker/date.js pub/datepicker/jquery.datePicker.js \
+		       pub/flot/jquery.flot.js \
+			   oms/stat.js
 b/oms/users.js: app/new.js oms/users.js
 
 b/okol_ie.js: pub/datepicker/jquery.bgiframe.min.js pub/flot/excanvas.min.js

@@ -12,7 +12,18 @@ __BEGIN_DECLS
 		LEGAL_CK_ANAME(aname);									\
 	} while (0)
 
-#define APP_CHECK_LOGIN_ADMIN(uname)									\
+#define APP_CHECK_ADMIN()											\
+	do {															\
+		err = app_check_login_data_get(cgi, dbh, evth, ses);		\
+		if (err != STATUS_OK) return nerr_pass(err);				\
+		HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".aname", aname);		\
+		LEGAL_CK_ANAME(aname);										\
+		if (hdf_get_int_value(evt->hdfrcv, "pid", -1) != 0) {		\
+			return nerr_raise(LERR_LIMIT, "%s not admin", aname);	\
+		}															\
+	} while (0)
+
+#define APP_CHECK_ADMIN_OTHER(uname)									\
 	do {																\
 		err = app_check_login_data_get(cgi, dbh, evth, ses);			\
 		if (err != STATUS_OK) return nerr_pass(err);					\

@@ -1,0 +1,64 @@
+<div id="content-sub">
+  <form method="post" action="/oms/stat">
+	<dl class="query">
+	<dt>开始时间</dt>
+	<dd>
+	  <input type="text" name="times" class="datep" value="<?cs var: Query.times ?>" />
+	</dd>
+	<dt>结束时间</dt>
+	<dd>
+	  <input type="text" name="timee" class="datep" value="<?cs var: Query.timee ?>" />
+	</dd>
+
+	<dt><input type="submit" class="submitbtn" value="查询" /></dt>
+	</dl>
+  </form>
+
+
+  <?cs if: ?Output.visit.0.pv ?>
+
+  <h2>访问量、用户量统计</h2>
+  <div id="st-visit"></div>
+
+  <h2>排行统计</h2>
+  <div id="st-bar"></div>
+
+  <script>
+	var mgd = mgd || {};
+
+	mgd.stdata = {pv: [], uv: [], refer: [], url: [], area: [],	aux: []};
+
+	<?cs each: v = Output.visit ?>
+	mgd.stdata.pv.push([<?cs var: v.intime ?>, <?cs var: v.pv ?>]);
+	mgd.stdata.uv.push([<?cs var: v.intime ?>, <?cs var: v.uv ?>]);
+	<?cs /each ?>
+
+
+	<?cs set: count = #0 ?>
+
+	<?cs each: v = Output.refer ?>
+	mgd.stdata.aux.push('<?cs var: v.refer ?>');
+	mgd.stdata.refer.push(['<?cs var: count ?>', <?cs var: v.count ?>]);
+	<?cs set: count = #count + #1 ?>
+	<?cs /each ?>
+
+	<?cs each: v = Output.url ?>
+	mgd.stdata.aux.push(decodeURIComponent('<?cs var: v.title ?>'));
+	mgd.stdata.url.push([<?cs var: count ?>, <?cs var: v.count ?>]);
+	<?cs set: count = #count + #1 ?>
+	<?cs /each ?>
+
+	<?cs each: v = Output.area ?>
+	mgd.stdata.aux.push('<?cs var: v.area ?>');
+	mgd.stdata.area.push(['<?cs var: count ?>', <?cs var: v.count ?>]);
+	<?cs set: count = #count + #1 ?>
+	
+	<?cs /each ?>
+  </script>
+  
+  <?cs else ?>
+  <div class="fresh">
+	暂时还没统计数据， 明天再来看看吧(统计数据会延时一天) :D
+  </div>
+  <?cs /if ?>
+</div>

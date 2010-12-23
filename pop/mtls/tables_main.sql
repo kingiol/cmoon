@@ -21,7 +21,8 @@ CREATE TABLE userinfo (
 	   uname varchar(256) NOT NULL DEFAULT '',
 	   aid int,
 	   aname varchar(256) NOT NULL DEFAULT '',
-	   ip varchar(256) NOT NULL DEFAULT '',
+	   ip varchar(32) NOT NULL DEFAULT '',
+	   addr varchar(64) NOT NULL DEFAULT '',
 	   intime timestamp DEFAULT now(),
 	   uptime timestamp DEFAULT now(),
 	   PRIMARY KEY (uid, aid)

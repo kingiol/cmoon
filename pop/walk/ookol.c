@@ -4,7 +4,7 @@
 
 #include "oapp.h"
 
-#define STAT_COL " type, count, " \
+#define KOL_COL " type, count, "						\
 	" ceil(date_part('epoch', intime)*1000) as intime "
 //	"to_char(intime, 'YYYY-MM-DD') as intime "
 
@@ -28,16 +28,16 @@ NEOERR* okol_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 */
 	string_init(&str);
 	err = mcs_build_querycond(hdf_get_obj(cgi->hdf, PRE_QUERY),
-							  hdf_get_obj(g_cfg, "Db.QueryCond.stat"),
+							  hdf_get_obj(g_cfg, "Db.QueryCond.kol"),
 							  &str, " intime > current_date - 7 AND type=0 ");
 	if (err != STATUS_OK) return nerr_pass(err);
 
 	/*
 	 * execute
 	 */
-	MDB_QUERY_RAW(conn, "stat", STAT_COL, "%s ORDER BY intime", NULL, str.buf);
+	MDB_QUERY_RAW(conn, "kol", KOL_COL, "%s ORDER BY intime", NULL, str.buf);
 	string_clear(&str);
-	err = mdb_set_rows(cgi->hdf, conn, STAT_COL, PRE_OUTPUT".sts", 0);
+	err = mdb_set_rows(cgi->hdf, conn, KOL_COL, PRE_OUTPUT".sts", 0);
 	if (err != STATUS_OK) return nerr_pass(err);
 
 	hdf_set_attr(cgi->hdf, PRE_OUTPUT".sts", "type", "array");

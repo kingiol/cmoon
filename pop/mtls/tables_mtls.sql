@@ -1,4 +1,4 @@
-CREATE TABLE stat (
+CREATE TABLE kol (
 	   id SERIAL,
 	   type int NOT NULL DEFAULT 0,
 	   count int NOT NULL DEFAULT 0,
@@ -6,6 +6,51 @@ CREATE TABLE stat (
 	   PRIMARY KEY (id)
 );
 
-CREATE INDEX app_stat ON stat (type, count);
+CREATE INDEX kol_index ON kol (type, count);
 
---CREATE TRIGGER tg_uptime_stat BEFORE UPDATE ON stat FOR EACH ROW EXECUTE PROCEDURE update_time();
+
+CREATE TABLE visit (
+	   id SERIAL,
+	   aid int NOT NULL DEFAULT 0,
+	   pv int NOT NULL DEFAULT 0,
+	   uv int NOT NULL DEFAULT 0,
+	   dt date DEFAULT current_date,
+	   PRIMARY KEY (id)
+);
+
+CREATE TABLE topref (
+	   id SERIAL,
+	   aid int NOT NULL DEFAULT 0,
+	   refer varchar(256) NOT NULL DEFAULT 0,
+	   count int NOT NULL DEFAULT 0,
+	   dt date DEFAULT current_date,
+	   PRIMARY KEY (id)
+);
+
+CREATE TABLE topurl (
+	   id SERIAL,
+	   aid int NOT NULL DEFAULT 0,
+	   url varchar(256) NOT NULL DEFAULT 0,
+	   title varchar(256) NOT NULL DEFAULT 0,
+	   count int NOT NULL DEFAULT 0,
+	   dt date DEFAULT current_date,
+	   PRIMARY KEY (id)
+);
+
+CREATE TABLE toparea (
+	   id SERIAL,
+	   aid int NOT NULL DEFAULT 0,
+	   area varchar(64) NOT NULL DEFAULT '',
+	   count int NOT NULL DEFAULT 0,
+	   dt date DEFAULT current_date,
+	   PRIMARY KEY (id)
+);
+
+--CREATE TABLE toppv (
+--	   id SERIAL,
+--	   aid int NOT NULL DEFAULT 0,
+--	   pv int NOT NULL DEFAULT 0,
+--	   count int NOT NULL DEFAULT 0,
+--	   dt date DEFAULT current_date,
+--	   PRIMARY KEY (id)
+--);

@@ -14,16 +14,16 @@ oms {
 			}
 			actions {
 				0 {
-					name = 站点设置
-					href = /oms/edit
-				}
-				1 {
 					name = 站点统计
 					href = /oms/stat
 				}
 			}
 			actions_1 {
 				1_0 {
+					name = 站点设置
+					href = /oms/edit
+				}
+				1_1 {
 					name = 用户管理
 					href = /oms/users
 				}
@@ -82,7 +82,10 @@ oms_stat {
 	Dataset {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/stat.css" />
-			js = <script type="text/javascript" src="/js/b/oms/stat.js"></script>
+			js << EOM
+				<!--[if IE]><script type="text/javascript" src="/js/b/oms/stat_ie.js"></script><![endif]-->
+				<script type="text/javascript" src="/js/b/oms/stat.js"></script>
+EOM
 			title = 站点设置
 			tabpart := oms.Dataset.Layout.tabpart
 			crumbs {
@@ -95,14 +98,12 @@ oms_stat {
 					href = /oms/stat
 				}
 			}
-			actions {
-				0 {
+			actions_1 {
+				1_0 {
 					name = 站点设置
 					href = /oms/edit
 				}
-			}
-			actions_1 {
-				1_0 {
+				1_1 {
 					name = 用户管理
 					href = /oms/users
 				}
@@ -134,12 +135,14 @@ oms_users {
 			}
 			actions {
 				0 {
-					name = 站点设置
-					href = /oms/edit
-				}
-				1 {
 					name = 站点统计
 					href = /oms/stat
+				}
+			}
+			actions_1 {
+				1_0 {
+					name = 站点设置
+					href = /oms/edit
 				}
 			}
         }
