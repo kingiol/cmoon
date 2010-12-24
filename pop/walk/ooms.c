@@ -9,8 +9,9 @@ static void ips2places(HDF *hdf, HASH *evth)
 	if (!hdf || !evth) return;
 
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "place");
-	if (!evt) {
-		mtc_err("can't find place event");
+	mevent_t *evta = (mevent_t*)hash_lookup(evth, "aic");
+	if (!evt || !evta) {
+		mtc_err("can't find event");
 		return;
 	}
 
@@ -23,7 +24,7 @@ static void ips2places(HDF *hdf, HASH *evth)
 	while (node) {
 		p = hdf_get_value(node, "ip", NULL);
 		q = hdf_get_value(node, "addr", NULL);
-		if (p && !q) string_appendf(&ip, "%s,", p);
+		if (p && (!q || !*q)) string_appendf(&ip, "%s,", p);
 		
 		node = hdf_obj_next(node);
 	}
@@ -31,27 +32,33 @@ static void ips2places(HDF *hdf, HASH *evth)
 	if (ip.len <= 0) return;
 	
 	hdf_set_value(evt->hdfsnd, "ip", ip.buf);
-	/* TODO memroy leak string not clear on NOK */
 	MEVENT_TRIGGER_VOID(evt, ip.buf, REQ_CMD_PLACEGET, FLAGS_SYNC);
 
 	if (evt->hdfrcv) {
 		node = hdf_obj_child(hdf);
-		rnode = hdf_obj_child(evt->hdfrcv);
-		while (node && rnode) {
+		while (node) {
+			rnode = hdf_obj_child(evt->hdfrcv);
 			p = hdf_get_value(node, "ip", NULL);
-			if (p) {
-				q = hdf_get_value(rnode, "ip", NULL);
-				while (!q && rnode) {
+			q = hdf_get_value(node, "addr", NULL);
+			if (p && (!q || !*q)) {
+				while (rnode) {
 					q = hdf_get_value(rnode, "ip", NULL);
+					if (q && !strcmp(p, q)) break;
+					else q = NULL;
+					
 					rnode = hdf_obj_next(rnode);
 				}
 
-				if (!q) break;
-				
-				if (!strcmp(p, q)) {
+				if (q) {
 					hdf_set_value(node, "city", hdf_get_value(rnode, "c", NULL));
 					hdf_set_value(node, "area", hdf_get_value(rnode, "a", NULL));
-					rnode = hdf_obj_next(rnode);
+
+					hdf_set_value(evta->hdfsnd, "uid", hdf_get_value(node, "uid", 0));
+					hdf_set_value(evta->hdfsnd, "aid", hdf_get_value(node, "aid", 0));
+					hdf_set_value(evta->hdfsnd, "addr", hdf_get_value(rnode, "c", "Mars"));
+					MEVENT_TRIGGER_NRET(evta, NULL, REQ_CMD_APPUSERUP, FLAGS_NONE);
+				} else {
+					mtc_warn("can't find addr for %s", p);
 				}
 			}
 			
@@ -77,7 +84,9 @@ NEOERR* oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 * prepare data 
 	 */
 	hdf_set_value(evt->hdfsnd, "aname", aname);
-
+	char *state = hdf_get_value(evt->hdfrcv, "state", "10");
+	char *limit = hdf_get_valuef(g_cfg, "Limit.maxUsers.%s", state);
+	if (limit) hdf_set_value(evt->hdfsnd, "limit", limit);
 	
 	/*
 	 * trigger
@@ -202,9 +211,10 @@ NEOERR* oms_users_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	LEGAL_CK_ANAME(aname);
 	LEGAL_CK_EMAIL(email);
 
-	int limit = hdf_get_int_value(g_cfg, "Limit.max_users_per_freesite", 5);
-	if (hdf_get_int_value(evt->hdfrcv, "numuser", 0) >= limit)
-		return nerr_raise(LERR_NEEDVIP, "%s want to add more users %s", pname, aname);
+	char *state = hdf_get_value(evt->hdfrcv, "state", "10");
+	char *limit = hdf_get_valuef(g_cfg, "Limit.maxAdmins.%s", state);
+	if (limit && hdf_get_int_value(evt->hdfrcv, "numuser", 0) >= atoi(limit))
+		return nerr_raise(LERR_NEEDUP, "%s want to add more users %s", pname, aname);
 	
 	/*
 	 * prepare data 

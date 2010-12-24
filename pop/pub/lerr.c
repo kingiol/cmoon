@@ -7,6 +7,7 @@ int LERR_NOTLOGIN = 0;
 int LERR_LOGINPSW = 0;
 int LERR_USERINPUT = 0;
 int LERR_LIMIT = 0;
+int LERR_NEEDUP = 0;
 int LERR_NEEDVIP = 0;
 int LERR_NEEDVVIP = 0;
 int LERR_NEXIST = 0;
@@ -31,6 +32,8 @@ NEOERR* lerr_init()
 		err = nerr_register(&LERR_USERINPUT, "输入参数错误");
 		if (err != STATUS_OK) return nerr_pass(err);
 		err = nerr_register(&LERR_LIMIT, "用户无权限");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_NEEDUP, "请联系开物客服升级版本");
 		if (err != STATUS_OK) return nerr_pass(err);
 		err = nerr_register(&LERR_NEEDVIP, "专业版功能");
 		if (err != STATUS_OK) return nerr_pass(err);

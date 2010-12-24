@@ -95,5 +95,16 @@ FileCache {
 }
 
 Limit {
-	max_users_per_freesite = 10
+	maxAdmins {
+		10 = 10
+		11 = 10
+		12 = 50
+		13 = 500
+	}
+	maxUsers {
+		10 = 60
+		11 = 60
+		12 = 100
+		13 = 500
+	}
 }

@@ -16,7 +16,7 @@ psql -U lcser lcs_mtool -c "INSERT INTO kol (type, count) SELECT 104, * FROM cou
 psql -U lcser lcs_mtool -c "INSERT INTO kol (type, count) SELECT 105, * FROM count_app_valid_total;"
 
 
-#/home/bigml/web/moon/pop/mtls/fill_trackarea
+/home/bigml/web/moon/pop/mtls/prestat
 
 psql -U lcser lcs_mtool -c "INSERT INTO visit (aid, pv, uv) SELECT * FROM visit_today;"
 psql -U lcser lcs_mtool -c "INSERT INTO topref (aid, refer, count) SELECT * FROM topref_today;"
