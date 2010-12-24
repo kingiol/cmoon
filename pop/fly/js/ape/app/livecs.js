@@ -12,7 +12,6 @@ function liveCS(ape) {
 		// app name
 		ape.lcspname = opts.aname || document.domain;
 		ape.lcsaname = null;
-		ape.lcsjid = 0;
 		ape.defaultUI = opts.defaultUI || 'max';
 		ape.restoreUI = opts.restoreUI || true;
 
@@ -37,7 +36,6 @@ function liveCS(ape) {
 
 		ape.lcsCurrentPipe = null;
 
-		ape.onRaw("ident", this.rawLcsIdent);
 		ape.onRaw("RAW_RECENTLY", this.rawLcsRecently);
 		ape.onRaw("LCS_DATA", this.rawLcsData);
 
@@ -75,7 +73,7 @@ function liveCS(ape) {
 			// send LCS_VISIT only on session restore
 			if (ape.options.restore) {
 				ape.request.send("LCS_VISIT", {
-					'aname': ape.lcsaname, 'jid': ape.lcsjid,
+					'aname': ape.lcsaname, 'pname': ape.lcspname,
 					'url': location.href, 'title': document.title
 				});
 			}
@@ -108,10 +106,6 @@ function liveCS(ape) {
 			ape.lcsCurrentPipe = null;
 			ui.adminOff({pname: ape.lcspname, aname: pipe.properties.aname});
 		}
-	};
-
-	this.rawLcsIdent = function(raw, pipe) {
-		ape.lcsjid = parseInt(raw.data.user.properties.jid);
 	};
 
 	this.rawLcsRecently = function(raw, pipe) {
