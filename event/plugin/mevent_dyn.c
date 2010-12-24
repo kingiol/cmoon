@@ -71,6 +71,7 @@ static NEOERR* dyn_cmd_getadmin(struct queue_entry *q, struct cache *cd, mdb_con
 					  " ORDER BY id DESC LIMIT 1;",
 					  NULL, uid, aid, TYPE_JOIN);
 		err = mdb_set_row(q->hdfsnd, db, TRACK_COL, NULL);
+		nerr_handle(&err, NERR_NOT_FOUND);
 		if (err != STATUS_OK) return nerr_pass(err);
 
 		CACHE_HDF(q->hdfsnd, ONE_MINUTE, PREFIX_ADMIN"%d_%d", uid, aid);
