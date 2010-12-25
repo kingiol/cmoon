@@ -50,7 +50,7 @@ static void ips2places(HDF *hdf, HASH *evth)
 				}
 
 				if (q) {
-					hdf_set_value(node, "city", hdf_get_value(rnode, "c", NULL));
+					hdf_set_value(node, "addr", hdf_get_value(rnode, "c", NULL));
 					hdf_set_value(node, "area", hdf_get_value(rnode, "a", NULL));
 
 					hdf_set_value(evta->hdfsnd, "uid", hdf_get_value(node, "uid", 0));
