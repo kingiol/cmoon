@@ -1,6 +1,15 @@
 <div id="content-sub">
   <form method="post" action="/oms/stat">
 	<dl class="query">
+	<dt>统计内容</dt>
+	<dd>
+	  <select name="stat-type" value="<?cs var: Query.stat-type ?>">
+	    <option value="visit">访问量统计</option>
+	    <option value="refer">来源连接排行</option>
+	    <option value="url">页面访问次数排行</option>
+	    <option value="area">访问量地理位置排行</option>
+	  </select>
+	</dd>
 	<dt>开始时间</dt>
 	<dd>
 	  <input type="text" name="times" class="datep" value="<?cs var: Query.times ?>" />
@@ -9,7 +18,6 @@
 	<dd>
 	  <input type="text" name="timee" class="datep" value="<?cs var: Query.timee ?>" />
 	</dd>
-
 	<dt><input type="submit" class="submitbtn" value="查询" /></dt>
 	</dl>
   </form>
@@ -17,10 +25,7 @@
 
   <?cs if: ?Output.visit.0.pv ?>
 
-  <h2>访问量、用户量统计</h2>
   <div id="st-visit"></div>
-
-  <h2>排行统计</h2>
   <div id="st-bar"></div>
 
   <script>
