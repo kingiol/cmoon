@@ -20,8 +20,7 @@ bmoon.omsstat = {
 		if (o.inited) return o;
 
 		o.sttype = $('select[name=stat-type]');
-		o.stvisit = $('#st-visit');
-		o.stbar = $('#st-bar');
+		o.stres = $('#st-res');
 		o.stdata = mgd.stdata;
 
 		o.inited = true;
@@ -43,8 +42,7 @@ bmoon.omsstat = {
 		var o = bmoon.omsstat.init();
 
 		$('.datep').datePicker({startDate: '2010-10-10'});
-		o.stvisit.bind('plothover', o.visitOver);
-		o.stbar.bind('plothover', o.barOver);
+		o.stres.bind('plothover', o.plotOver);
 		o.sttype.change(o.rendStat);
 	},
 
@@ -54,7 +52,7 @@ bmoon.omsstat = {
 		var type = o.sttype.val();
 		
 		if (type == 'visit') {
-			$.plot(o.stvisit,
+			$.plot(o.stres,
 				   [
 					   {label: '日访问量', data: o.stdata.pv},
 					   {label: '日用户量', data: o.stdata.uv}
@@ -68,7 +66,7 @@ bmoon.omsstat = {
 					   grid: {hoverable: true}
 				   });
 		} else {
-			$.plot(o.stbar, o.stdata[type],
+			$.plot(o.stres, [o.stdata[type]],
 				   {
 					   series: {
 						   bars: {show: true, barWidth: 0.6}
@@ -78,31 +76,7 @@ bmoon.omsstat = {
 		}
 	},
 
-	visitOver: function(event, pos, item) {
-		var o = bmoon.omsstat.init();
-
-        if (item) {
-            if (o.previousPoint != item.datapoint) {
-                o.previousPoint = item.datapoint;
-                
-                $("#tooltip").remove();
-				
-                var	x = item.datapoint[0],
-                y = item.datapoint[1],
-				dt = new Date(x),
-				Y = dt.getFullYear(), m = dt.getMonth()+1, d = dt.getDate(),
-				tm = Y+"-"+m+"-"+d;
-                
-                o._showTooltip(item.pageX, item.pageY,
-                               tm + ' ' + item.series.label + ' : ' + y);
-            }
-        } else {
-            $("#tooltip").remove();
-            o.previousPoint = null;            
-        }
-	},
-
-	barOver: function(event, pos, item) {
+	plotOver: function(event, pos, item) {
 		var o = bmoon.omsstat.init();
 
         if (item) {
@@ -113,9 +87,18 @@ bmoon.omsstat = {
 				
                 var	x = item.datapoint[0],
                 y = item.datapoint[1];
-                
-                o._showTooltip(item.pageX, item.pageY,
-                               o.stdata.aux[x] + ' ' + ' : ' + y);
+
+				if (o.sttype.val() == 'visit') {
+					var dt = new Date(x),
+					Y = dt.getFullYear(), m = dt.getMonth()+1, d = dt.getDate(),
+					tm = Y+"-"+m+"-"+d;
+					
+					o._showTooltip(item.pageX, item.pageY,
+								   tm + ' ' + item.series.label + ' : ' + y);
+				} else {
+					o._showTooltip(item.pageX, item.pageY,
+                                   o.stdata.aux[x] + ' ' + ' : ' + y);
+				}
             }
         } else {
             $("#tooltip").remove();
