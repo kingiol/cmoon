@@ -206,7 +206,8 @@ bmoon.chat = {
 		}
 
 		if ($.inArray(id, o.usersFetched) == -1) {
-			o.getMessage(id, o.aname, 1);
+			// wait some time for message insert done
+			setTimeout(function() {o.getMessage(id, o.aname, 1);}, 500);
 			o.usersFetched.push(id);
 		}
 
