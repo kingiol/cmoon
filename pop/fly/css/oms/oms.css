@@ -13,7 +13,11 @@ dl.appinfo .state ul li {line-height: 24px;}
 #chat-box.loading {
 	opacity: 0.5;
 }
+#chat-box + div.indicator {
+	display: none;
+}
 #chat-box.loading + div.indicator {
+	display: block;
 	background:url(/img/ajax/loader-bar.gif) 0 0 no-repeat;
     position: relative;
     left: 280px;
