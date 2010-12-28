@@ -8,6 +8,7 @@ bmoon.chat = {
 	cUserID: '0',
 	usersOn: ["0"],
 	usersFetched: ["0"],
+	usersNew: ["0"],
 	usersTotalMsg: {},
 	usersLoadPage: {},
 
@@ -286,7 +287,8 @@ bmoon.chat = {
 	userOn: function(data) {
 		var o = bmoon.chat.init();
 
-		var c = o._nodeUser(data.uname, true);
+		var tc = o._nodeUser(data.uname, false),
+		c = o._nodeUser(data.uname, true);
 		
 		c.removeClass('off').addClass('on');
 		c.attr('pubid', data.pubid);
@@ -295,6 +297,8 @@ bmoon.chat = {
 		if (o.cUserID == data.uname) {
 			o.ape.lcsCurrentPipe = o.ape.getPipe(data.pubid);
 		}
+
+		if (!tc.length) o.usersNew.push(data.uname);
 	},
 
 	// {uname: user.properties.uin}
@@ -354,7 +358,8 @@ bmoon.chat = {
 			userbox.addClass('dirty');
 			o.postUserDirty(uname);
 			// avoid double messages appear
-			if ($.inArray(uname, o.usersFetched) == -1) return;
+			if ($.inArray(uname, o.usersNew) != -1)
+				o.usersFetched.push(uname);
 		}
 		
 		$(html).appendTo(databox);
