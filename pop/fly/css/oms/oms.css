@@ -10,6 +10,18 @@ dl.appinfo .state ul li {line-height: 24px;}
     /*border: 1px solid #101010;*/
 	/*padding:15px;*/
 }
+#chat-box.loading {
+	opacity: 0.5;
+}
+#chat-box.loading + div.indicator {
+	background:url(/img/ajax/loader-bar.gif) 0 0 no-repeat;
+    position: relative;
+    left: 280px;
+    top: -300px;
+	width: 130px;
+	height: 20px;
+	z-index: 2;
+}
 .im-op {
 	float:left;
 }

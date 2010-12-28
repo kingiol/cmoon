@@ -26,6 +26,7 @@ bmoon.chat = {
 		var rmdhtml = $.browser.msie? '<bgsound id="remind-sound"></bgsound>': '<audio id="remind-sound"></audio>';
 		
 		$(rmdhtml).appendTo('body');
+		o.imbox = $('#chat-box');
 		o.m = $('#chat-msg-text');
 		o.btm = $('#chat-msg-submit');
 		o.usersTop = $('#im-users .items');
@@ -136,6 +137,7 @@ bmoon.chat = {
 
 		o.groupPubid = pubid;
 		o.bindClick();
+		o.imbox.removeClass('loading');
 	},
 
 	bindClick: function() {
