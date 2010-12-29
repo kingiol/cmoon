@@ -8,9 +8,17 @@ __BEGIN_DECLS
 #define MEVENT_TRIGGER(evt, key, cmd, flags)							\
 	do {																\
 		if (PROCESS_NOK(mevent_trigger(evt, key, cmd, flags))) {		\
-			char *zpa = NULL;											\
-			hdf_write_string(evt->hdfrcv, &zpa);						\
-			return nerr_raise(LERR_MEVENT, "pro %s %d failure %d %s", evt->ename, cmd, evt->errcode, zpa); \
+			switch (evt->errcode) {										\
+			case REP_ERR_ALREADYREGIST:									\
+				return nerr_raise(LERR_EXIST, "%s already exist", aname); \
+			case REP_ERR_NREGIST:										\
+				return nerr_raise(LERR_NEXIST, "%s don't regist", key);	\
+			default:													\
+				char *zpa = NULL;										\
+				hdf_write_string(evt->hdfrcv, &zpa);					\
+				return nerr_raise(LERR_MEVENT, "pro %s %d failure %d %s", \
+								  evt->ename, cmd, evt->errcode, zpa);	\
+			}															\
 		}																\
 	} while(0)
 #define MEVENT_TRIGGER_VOID(evt, key, cmd, flags)						\

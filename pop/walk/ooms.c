@@ -229,15 +229,7 @@ NEOERR* oms_users_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPNEW, FLAGS_SYNC))) {
-		//mtc_err("process %s failure %d", aname, evt->errcode);
-		if (evt->errcode == REP_ERR_ALREADYREGIST)
-			return nerr_raise(LERR_EXIST, "%s already exist", aname);
-		char *zpa = NULL;
-		hdf_write_string(evt->hdfrcv, &zpa);
-		return nerr_raise(LERR_MEVENT, "pro %s %d failure %d %s",
-						  evt->ename, REQ_CMD_APPNEW, evt->errcode, zpa);
-	}
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPNEW, FLAGS_SYNC);
 	
 	return STATUS_OK;
 }
@@ -262,14 +254,7 @@ NEOERR* oms_users_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	if (PROCESS_NOK(mevent_trigger(evt, uname, REQ_CMD_APPDEL, FLAGS_SYNC))) {
-		if (evt->errcode == REP_ERR_NREGIST)
-			return nerr_raise(LERR_NEXIST, "%s don't regist", uname);
-		char *zpa = NULL;
-		hdf_write_string(evt->hdfrcv, &zpa);
-		return nerr_raise(LERR_MEVENT, "pro %s %d failure %d %s",
-						  evt->ename, REQ_CMD_APPDEL, evt->errcode, zpa);
-	}
+	MEVENT_TRIGGER(evt, uname, REQ_CMD_APPDEL, FLAGS_SYNC);
 	
 	return STATUS_OK;
 }
