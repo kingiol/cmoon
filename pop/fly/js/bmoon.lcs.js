@@ -23,6 +23,8 @@ bmoon.lcs = {
 					o.login_asn.focus();
 			}
 		});
+		o.browserhint = $('#browser-hint');
+		o.browserlater = $('#browser-later');
 		
 		return o;
 	},
@@ -43,6 +45,9 @@ bmoon.lcs = {
 		if (o.vikierr) {
 			$('#content').empty().append('<div class="error">'+o.vikierr+'</div>')
 		}
+		if ($.browser.msie && $.browser.version <= "6" && !$.cookie('lcs_bs_ignore')) {
+			o.browserhint.fadeIn();
+		}
 	},
 	
 	bindClick: function() {
@@ -51,6 +56,12 @@ bmoon.lcs = {
 		$('#login-submit').click(o.login);
 		$('#userlogout').click(o.logout);
 		o.login_asn.bind('keydown', 'return', o.login);
+		o.browserlater.click(function() {
+			var o = bmoon.lcs.init();
+
+			o.browserhint.fadeOut();
+			$.cookie('lcs_bs_ignore', '1', {expires: 1});
+		});
 	},
 
 	login: function() {

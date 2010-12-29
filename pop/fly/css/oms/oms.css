@@ -7,7 +7,7 @@ dl.appinfo .state ul li {line-height: 24px;}
 .im-box {
 	height: 450px;
 	overflow: hidden;
-    /*border: 1px solid #101010;*/
+	/*border: 1px solid #101010;*/
 	/*padding:15px;*/
 }
 #chat-box.loading {
@@ -19,11 +19,10 @@ dl.appinfo .state ul li {line-height: 24px;}
 #chat-box.loading + div.indicator {
 	display: block;
 	background:url(/img/ajax/loader-bar.gif) 0 0 no-repeat;
-    position: relative;
-    left: 280px;
-    top: -300px;
+	position: absolute;
+	left: 48%;
+	top: 78%;
 	width: 130px;
-	height: 100px;
 	z-index: 2;
 	padding: 18px 5px;
 	color: #999;
@@ -35,7 +34,7 @@ dl.appinfo .state ul li {line-height: 24px;}
 	width: 516px;
 	height: 430px;
 	float: left;
-    border: 0.5em solid #aaa;
+	border: 0.5em solid #aaa;
 	background-color:#eee;
 	text-indent:1em;
 }

@@ -81,4 +81,13 @@ dl.form dd.error .indicator {
 	padding: 10px;
 }
 #bot p {text-align: center; text-indent: 0; margin: 2px;}
+#browser-hint {
+	width: 100%;
+	text-align: center;
+	background-color: #676767;
+	color: #aaa;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	font-weight: bold;
+}
 /*#mid {padding: 1ex 0; }*/
