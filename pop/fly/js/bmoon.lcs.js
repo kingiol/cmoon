@@ -26,6 +26,8 @@ bmoon.lcs = {
 		o.browserhint = $('#browser-hint');
 		o.browserlater = $('#browser-later');
 		
+		o.ielow = bmoon.utl.ie() && bmoon.utl.ie() < 7;
+
 		return o;
 	},
 
@@ -45,9 +47,8 @@ bmoon.lcs = {
 		if (o.vikierr) {
 			$('#content').empty().append('<div class="error">'+o.vikierr+'</div>')
 		}
-		if ($.browser.msie && $.browser.version <= "6" && !$.cookie('lcs_bs_ignore')) {
-			o.browserhint.fadeIn();
-		}
+		
+		o.ielow && !$.cookie('lcs_bs_ignore') && o.browserhint.fadeIn('slow');
 	},
 	
 	bindClick: function() {

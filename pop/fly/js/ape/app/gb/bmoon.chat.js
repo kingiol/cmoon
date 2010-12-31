@@ -50,6 +50,15 @@ bmoon.chat = {
 		o.toggle.blinkID = 0;
 	},
 
+	_rendBox: function() {
+		var o = bmoon.chat.init();
+
+		o.ielow && o.rendo.animate({
+			top: $(window).scrollTop() + ($(window).height() - o.rendo.height()),
+			right: '20px'
+		}, 10);
+	},
+
     debug: function(msg) {
         //$('<div>'+ msg +'</div>').appendTo('body');
     },
@@ -82,17 +91,19 @@ bmoon.chat = {
 				'</div>',
 				rmdhtml,
 			'</div>'
-		].join(''),
-		chatbody = $('#kol-lcs');
+		].join('');
+		
+		o.chatbody = $('#kol-lcs');
 
 		// application don't write kol-lcs, append it.
-		if (!chatbody.length) {
+		if (!o.chatbody.length) {
 			$('body').append(html);
 		}
 
 		o.ape = ape;
 		o.min = $('#kol-lcs-min');
 		o.max = $('#kol-lcs-max');
+		o.rendo = o.max;
 		o.head = $('#kol-lcs-head');
 		o.body = $('#kol-lcs-body');
 		
@@ -109,6 +120,8 @@ bmoon.chat = {
 		o.rmdsw = $('#kol-lcs-remind-sw');
 		o.msginput = $('#kol-lcs-input');
 
+		o.ielow = bmoon.utl.ie() && bmoon.utl.ie() < 7;
+
 		o.initUI();
 		
 		return o;
@@ -117,13 +130,28 @@ bmoon.chat = {
 	initUI: function() {
 		var o = bmoon.chat.init();
 
-		var uimax = $.cookie('lcs_ui_max');
+		var uimax = $.cookie('lcs_ui_max'),
+		attr = {
+			position: 'absolute',
+			top: $(window).height() + $(window).scrollTop(),
+			right: '20px'
+		};
 
 		if ( (!o.ape.restoreUI && o.ape.defaultUI == 'min') || (o.ape.restoreUI && ((uimax == null && o.ape.defaultUI == 'min') || uimax == '0' )) )
-			o.min.fadeIn();
-		else
-			o.max.fadeIn();
+			o.rendo = o.min;
 
+		// ielow double margin on float node. set display inline to fix it
+		o.ielow && o.toggle.css('display', 'inline');
+		attr.top -= o.rendo.height();
+		// ielow position: fixed bug. set absolute and scrool to fix it
+		if (o.ielow) {
+			o.rendo.css(attr);
+			$(window).scroll(o._rendBox);
+			$(window).resize(o._rendBox);
+		}
+		
+		o.rendo.fadeIn();
+		
 		o.miner.click(function() {
 			o.max.hide();
 			o.min.fadeIn();
