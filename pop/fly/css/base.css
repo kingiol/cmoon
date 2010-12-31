@@ -59,8 +59,8 @@ dl.form dd.error .indicator {
 .eem {font-weight: bold; font-size: 120%;}
 .text-center {text-align: center;}
 .text-right {text-align: right;}
-.hint {color: #bb0000}
-.error {color: #ff0000}
+.text-hint {color: #bb0000}
+.text-error {color: #ff0000}
 
 #top, #mid, #bot {
 	width: 960px;

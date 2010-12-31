@@ -50,13 +50,26 @@ bmoon.chat = {
 		o.toggle.blinkID = 0;
 	},
 
-	_rendBox: function() {
+	_rendBox: function(opts) {
 		var o = bmoon.chat.init();
 
-		o.ielow && o.rendo.animate({
-			top: $(window).scrollTop() + ($(window).height() - o.rendo.height()),
-			right: '20px'
-		}, 10);
+		if (o.ielow) {
+			opts = $.extend({
+				ani: true
+			}, opts || {});
+			o.rendo.css('position', 'absolute');
+			if (opts.ani) {
+				o.rendo.animate({
+					top: $(window).scrollTop() + ($(window).height() - o.rendo.height()),
+					right: '20px'
+				}, 10);
+			} else {
+				o.rendo.css({
+					top: $(window).scrollTop() + ($(window).height() - o.rendo.height()),
+					right: '20px'
+				});
+			}
+		}
 	},
 
     debug: function(msg) {
@@ -130,22 +143,20 @@ bmoon.chat = {
 	initUI: function() {
 		var o = bmoon.chat.init();
 
-		var uimax = $.cookie('lcs_ui_max'),
-		attr = {
-			position: 'absolute',
-			top: $(window).height() + $(window).scrollTop(),
-			right: '20px'
-		};
+		var uimax = $.cookie('lcs_ui_max');
 
 		if ( (!o.ape.restoreUI && o.ape.defaultUI == 'min') || (o.ape.restoreUI && ((uimax == null && o.ape.defaultUI == 'min') || uimax == '0' )) )
 			o.rendo = o.min;
 
-		// ielow double margin on float node. set display inline to fix it
-		o.ielow && o.toggle.css('display', 'inline');
-		attr.top -= o.rendo.height();
-		// ielow position: fixed bug. set absolute and scrool to fix it
 		if (o.ielow) {
-			o.rendo.css(attr);
+			// ielow double margin on float node. set display inline to fix it
+			o.toggle.css('display', 'inline');
+			o.closer.css('display', 'inline');
+			o.miner.css('display', 'inline');
+			o.hint.css('display', 'inline');
+
+			// ielow position: fixed bug. set absolute and scrool to fix it
+			o._rendBox({ani: false});
 			$(window).scroll(o._rendBox);
 			$(window).resize(o._rendBox);
 		}
@@ -155,11 +166,15 @@ bmoon.chat = {
 		o.miner.click(function() {
 			o.max.hide();
 			o.min.fadeIn();
+			o.rendo = o.min;
+			o._rendBox({ani: false});
 			$.cookie('lcs_ui_max', "0");
 		});
 		o.min.click(function() {
 			o.min.hide();
 			o.max.fadeIn();
+			o.rendo = o.max;
+			o._rendBox({ani: false});
 			$.cookie('lcs_ui_max', "1");
 		});
 		
@@ -172,6 +187,7 @@ bmoon.chat = {
 		var o = bmoon.chat.init();
 
 		o.body.fadeIn();
+		o._rendBox({ani: false});
         o.msginput.focus();
 		
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
@@ -182,7 +198,8 @@ bmoon.chat = {
 	closeChat: function() {
 		var o = bmoon.chat.init();
 
-		o.body.fadeOut();
+		o.body.hide();
+		o._rendBox({ani: false});
 		o.toggle.unbind('click').click(o.openChat);
 	},
 
@@ -261,8 +278,7 @@ bmoon.chat = {
 	onRecently: function(data) {
 		var o = bmoon.chat.init();
 
-		var
-		html = o._strMsg(data);
+		var html = o._strMsg(data);
 		
 		$(html).prependTo(o.recentbox);
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;

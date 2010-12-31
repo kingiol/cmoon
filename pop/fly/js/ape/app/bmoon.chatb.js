@@ -140,6 +140,15 @@ bmoon.chat = {
 		o.imbox.removeClass('loading');
 	},
 
+	judgeReady: function() {
+		var o = bmoon.chat.init({});
+
+		if (o.imbox.hasClass('loading')) {
+			o.imbox.removeClass('loading').addClass('error');
+			$('.indicator', o.imbox).text('数据加载失败，请联系客服或稍后再试');
+		}
+	},
+
 	bindClick: function() {
 		var o = bmoon.chat.init();
 

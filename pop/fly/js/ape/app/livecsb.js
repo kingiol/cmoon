@@ -26,6 +26,8 @@ function liveCS(ape) {
 		ape.addEvent("multiPipeCreate", this.pipeCreate);
 
 		ape.addEvent("load", this.start);
+
+		setTimeout(ui.judgeReady, 10000);
 	};
 
 	this.start = function() {
