@@ -1,5 +1,4 @@
-html {overflow:hidden;}
-body {height:100%;overflow:auto;}
+html, body {height: 100%;overflow: auto;}
 
 #kol-lcs {position:absolute;right:20px;bottom:0;}
 #kol-lcs-max {position:absolute;right:20px;bottom:0;}
