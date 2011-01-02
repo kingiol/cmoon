@@ -2,7 +2,8 @@ BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
 FILES = b/base.css \
-		b/client/lcs_ie6.css b/client/lcs.css \
+		b/client/lcs.css \
+		b/client/mic.css \
 		b/index.css b/manual.css \
 		b/blog.css b/blogindex.css b/blogop.css \
 		b/oms.css b/oms/edit.css b/oms/stat.css b/oms/users.css b/oms/faq.css \
@@ -15,8 +16,8 @@ preload:
 
 b/base.css: reset.css base.css mid.css overlay.css
 
-b/client/lcs_ie6.css: client/lcs_ie6.css
 b/client/lcs.css: client/lcs.css
+b/client/mic.css: client/mic.css
 
 b/index.css: index.css
 b/manual.css: manual.css

@@ -38,6 +38,7 @@ bmoon.kol = {
 		_execAfter(function() {
 			opts = $.extend({
 				aname: 'unknown',
+				js: 'http://js.kaiwuonline.com/b/client/lcs.js',
 				css: 'http://css.kaiwuonline.com/b/client/lcs.css'
 			}, opts || {});
 			
@@ -46,9 +47,9 @@ bmoon.kol = {
 			var unode = $('meta[content*="utf"]');
 			if (!unode.length) unode = $('meta[content*="UTF"]');
 			if (unode.length) {
-				$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js" charset="utf-8"></script>');
+				$('head').append('<script type="text/javascript" src="'+opts.js+'" charset="utf-8"></script>');
 			} else {
-				$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat_gb.js" charset="gb2312"></script>');
+				$('head').append('<script type="text/javascript" src="'+opts.js.substr(0, opts.js.length-3)+'_gb.js" charset="gb2312"></script>');
 			}
 		}, "typeof jQuery == 'function' && typeof jQuery.cookie == 'function'");
 		

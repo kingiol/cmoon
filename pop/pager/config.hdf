@@ -15,7 +15,7 @@ index {
 }
 
 manual {
-	Layout = layout.html
+	Layout = layout_mic.html
 	Dataset {
 		Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/manual.css" />

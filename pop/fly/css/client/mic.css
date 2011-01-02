@@ -2,98 +2,66 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 
 #kol-lcs {
 	position:fixed;
-	right:20px;
-	bottom: 0;
+	right: 0;
+	top: 35%;
 	opacity: 1.0;
 	font-family:verdana,arial,sans-serif;
 	font-size:12px;
 	z-index:99999;
 }
 
-#kol-lcs-min {
-	display: none;
-	width: 30px;
-	height: 30px;
-	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll -41px -60px;
-	overflow: hidden;
-	cursor: pointer;
-}
-
-#kol-lcs-max {
-	display: none;
-}
-
 #kol-lcs-head {
-	height: 30px;
-	width: 300px;
-	background-color:#EEEEEE;
-	border: 1px solid #666666;
-}
-
-#kol-lcs-head .toggle, #kol-lcs-head .miner {
-	height: 28px;
-	float: left;
-	overflow: hidden;
+	width: 42px;
+	height: 151px;
 	cursor: pointer;
+	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) repeat-x scroll 0 0;
 }
-#kol-lcs-head .toggle {
-	width: 242px;
-	margin-left: 10px;
-	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll 0 -29px;
-}
-#kol-lcs-head .toggle.dirty {
-	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll 0 5px;
-}
-#kol-lcs-head .miner {
-	width: 25px;
-	margin-left: 15px;
-	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll 0 -58px;
+#kol-lcs-head.dirty {
+	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll -42px 0;
 }
 
 #kol-lcs-body {
 	display: none;
-	background-color:#EEEEEE;
-	width: 300px;
-	border: 1px solid #666666;
-	/*border-bottom: 1px solid #EEEEEE;*/
+	width: 288px;
+	border: 1px solid #ff4500;
+	padding: 5px 10px;
+	background: #fff url(http://www.kaiwuonline.com/img/im/mic_bg.png) repeat-x scroll 0 0;
 }
 #kol-lcs-body .top {
-	color: #999;
+	height: 24px;
+	line-height: 23px;
+	margin: 0 auto;
+	border-bottom: 1px solid #ff4545;
 	overflow: hidden;
-	padding: 5px 10px;
-	float: left;
-	width: 80%;
 }
 #kol-lcs-body .close {
 	cursor: pointer;
-	float: right;
+	float: left;
 	height: 20px;
-	width: 30px;
+	width: 25px;
 	padding: 2px 3px 0 0;
-	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll -83px -60px;
+	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll 0 -170px;
 }
 #kol-lcs-body .msgs {
-	border: 1px solid #666666;
-	height: 200px;
-	width: 93%;
-	margin: 0 10px 10px 10px;
+	height: 234px;
+	margin: 5px 0;
 	overflow: auto;
 }
 textarea#kol-lcs-input {
 	padding: 5px;
-	margin: 0 10px 2px 10px;
-	width: 90%;
+	width: 96%;
+	height: 18px;
 }
 #kol-lcs-body .bot {
 	color: #999;
 	overflow: hidden;
-	margin: 0 10px 10px 10px;
+	margin-bottom: 5px;
 }
 
 #kol-lcs-body .msgs .item-join, #kol-lcs-body .msgs .item-visit, #kol-lcs-body .msgs .item-send, #kol-lcs-body .msgs .item-msg {
-	margin: 5px 0;
+	margin: 5px 0 0 0;
 }
-#kol-lcs-body .msgs .item-name, .kol-lcs-msgs .item-time{
+#kol-lcs-body .msgs .item-name, #kol-lcs-body .msgs .item-time {
 	margin-left: 10px;
 	color: #999;
 }

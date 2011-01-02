@@ -1,7 +1,9 @@
 BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
-FILES = b/base.js b/chat.js b/chat_gb.js b/kol.js b/chatb.js b/chatc.js \
+FILES = b/base.js b/kol.js b/chatb.js b/chatc.js \
+		b/client/lcs.js b/client/lcs_gb.js \
+		b/client/mic.js b/client/mic_gb.js \
 		b/index.js b/appnew.js \
 		b/blog.js b/blogindex.js b/blogop.js \
 		b/oms.js b/oms/edit.js b/oms/stat_ie.js b/oms/stat.js b/oms/users.js \
@@ -12,6 +14,7 @@ all: preload $(FILES)
 preload:
 	@$(MAKE) -C ape/
 	@mkdir -p b/oms/
+	@mkdir -p b/client/
 
 b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/jquery.md5.js \
 		   pub/jquery.mninpval.js \
@@ -20,13 +23,16 @@ b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/jquery.md5.js \
 	       pub/bmoon.js bmoon.lcs.js \
 		   pub/jquery.hotkeys.js
 
-# Client
 b/kol.js: bmoon.kol.js
-b/chat.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/Build/JSON.js ape/app/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
-# gb2312
-b/chat_gb.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/Build/JSON.js ape/app/gb/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
 b/chatb.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/bmoon.js
 b/chatc.js: pub/jquery.cookie.js pub/bmoon.js
+
+# Client [gb gb3212]
+b/client/lcs.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/Build/JSON.js ape/app/lcs/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
+b/client/lcs_gb.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/Build/JSON.js ape/app/lcs/gb/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
+
+b/client/mic.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/Build/JSON.js ape/app/mic/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
+b/client/mic_gb.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/Build/JSON.js ape/app/mic/gb/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
 
 # Server
 b/index.js: pub/jquerytools/src/scrollable/scrollable.js index.js
