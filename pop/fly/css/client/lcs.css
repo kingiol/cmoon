@@ -46,8 +46,9 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 /* max */
 #kol-lcs-max {
 	width: 300px;
-	background-color:#EEEEEE;
+	padding: 5px 10px;
 	border: 1px solid #666666;
+	background-color:#EEEEEE;
 }
 #kol-lcs-max .mider {
 	float: right;
@@ -60,32 +61,38 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 #kol-lcs-max .miner {
 	float: right;
 	width: 25px;
-	margin-left: 15px;
+	height: 28px;
+	padding: 2px 3px 0 0;
+	margin-left: 3px;
+	overflow: hidden;
 	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll 0 -58px;
+	cursor: pointer;
 }
 #kol-lcs-max .hint {
+	height: 24px;
+	line-height: 23px;
+	margin: 0 auto;
 	color: #999;
-	overflow: hidden;
-	padding: 5px 10px;
 	float: left;
-	width: 75%;
+	width: 70%;
+	overflow: hidden;
 }
 #kol-lcs-max .msgs {
-	border: 1px solid #666666;
 	height: 200px;
-	width: 91%;
-	margin: 0 10px 10px 10px;
+	width: 100%;
+	margin: 5px 0;
+	border: 1px solid #666666;
 	overflow: auto;
 }
 textarea#kol-lcs-input {
 	padding: 5px;
-	margin: 0 10px 2px 10px;
-	width: 87%;
+	width: 96%;
+	height: 18px;
 }
 #kol-lcs-max .bot {
 	color: #999;
+	margin-bottom: 5px;
 	overflow: hidden;
-	margin: 0 10px 10px 10px;
 }
 
 #kol-lcs-max .msgs .item-join, #kol-lcs-max .msgs .item-visit, #kol-lcs-max .msgs .item-send, #kol-lcs-max .msgs .item-msg {

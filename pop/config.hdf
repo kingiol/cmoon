@@ -23,26 +23,6 @@ Dataset {
 			}
 		}
 	}
-	layout_mic.html {
-		tabs {
-			0 {
-				name = 首页
-				href = /index.html
-			}
-			1 {
-				name = 使用手册
-				href = /manual.html
-			}
-			2 {
-				name = 我的站点
-				href = /oms
-			}
-			3 {
-				name = 开物博客
-				href = /blog/index.html
-			}
-		}
-	}
 	layout_nclient.html {
 		tabs {
 			0 {

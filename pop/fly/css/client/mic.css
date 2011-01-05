@@ -55,8 +55,8 @@ textarea#kol-lcs-input {
 }
 #kol-lcs-max .bot {
 	color: #999;
-	overflow: hidden;
 	margin-bottom: 5px;
+	overflow: hidden;
 }
 
 #kol-lcs-max .msgs .item-join, #kol-lcs-max .msgs .item-visit, #kol-lcs-max .msgs .item-send, #kol-lcs-max .msgs .item-msg {

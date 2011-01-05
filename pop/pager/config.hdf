@@ -15,10 +15,14 @@ index {
 }
 
 manual {
-	Layout = layout_mic.html
+	Layout = layout_nclient.html
 	Dataset {
 		Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/manual.css" />
+			js << EOM
+			<script src="/js/b/kol.js"></script>
+			<script src="/js/b/manual.js"></script>
+EOM			
 			title = 使用手册
 			tabpart = 1
 			crumbs {
