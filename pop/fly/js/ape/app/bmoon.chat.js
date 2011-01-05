@@ -174,8 +174,8 @@ bmoon.chat = {
 			// ielow double margin on float node. set display inline to fix it
 			o.hint.css('display', 'inline');
 			o.mider.css('display', 'inline');
-			o.minable && o.maxer.css('display', 'inline');
-			o.minable && o.miner.css('display', 'inline');
+			o.ape.opts.minable && o.maxer.css('display', 'inline');
+			o.ape.opts.minable && o.miner.css('display', 'inline');
 
 			// ielow position: fixed bug. set absolute and scrool to fix it
 			o._rendBox({ani: false});

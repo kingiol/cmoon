@@ -126,8 +126,8 @@ bmoon.chat = {
 		if (op.minable) {
 			o.min = $('<div/>').attr('id', 'kol-lcs-min').appendTo(o.chatbody);
 			o.maxer = $('<div/>').addClass('maxer').appendTo(o.mid);
-			$('<div/>').addClass('miner').appendTo(o.max);
-			$('<div/>').addClass('miner').insertAfter(o.mider);
+			$('<div/>').addClass('miner').attr('title', '¹Ø±Õ').appendTo(o.mid);
+			$('<div/>').addClass('miner').attr('title', '¹Ø±Õ').insertBefore(o.mider);
 			o.miner = $('.miner', o.chatbody);
 		} else o.maxer = o.mid;
 
@@ -157,7 +157,7 @@ bmoon.chat = {
 			o.rendo = o.max;
 			break;
 		case 'min':
-			o.rendo = o.min;
+			o.rendo = o.min ? o.min: o.mid;
 			break;
 		case 'mid':
 		default:
@@ -174,8 +174,8 @@ bmoon.chat = {
 			// ielow double margin on float node. set display inline to fix it
 			o.hint.css('display', 'inline');
 			o.mider.css('display', 'inline');
-			o.minable && o.maxer.css('display', 'inline');
-			o.minable && o.miner.css('display', 'inline');
+			o.ape.opts.minable && o.maxer.css('display', 'inline');
+			o.ape.opts.minable && o.miner.css('display', 'inline');
 
 			// ielow position: fixed bug. set absolute and scrool to fix it
 			o._rendBox({ani: false});
