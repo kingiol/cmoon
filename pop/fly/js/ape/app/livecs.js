@@ -14,6 +14,7 @@ function liveCS(ape) {
 		ape.lcsaname = null;
 		ape.defaultUI = opts.defaultUI || 'max';
 		ape.restoreUI = opts.restoreUI || true;
+		ape.pos = opts.pos || {};
 
 		// user name
 		ape.lcsuname = Cookie.read("lcs_uname");

@@ -50,25 +50,30 @@ bmoon.chat = {
 		o.head.blinkID = 0;
 	},
 
-	_rendBox: function(opts) {
+	_getCssV: function(cssv, total) {
+		if (bmoon.utl.type(cssv) == 'String' && cssv.match(/.*\%$/)) return total * parseInt(cssv) / 100;
+		else return parseInt(cssv);
+	},
+	
+	_rendBox: function(op) {
 		var o = bmoon.chat.init();
 
 		if (o.ielow) {
-			opts = $.extend({
+			var sh = $(window).scrollTop(),
+			sl = $(window).scrollLeft(),
+			wh = $(window).height(),
+			ww = $(window).width(),
+			rh = o.chatbody.height(),
+			rw = o.chatbody.width(),
+			top = o.pos.top === undefined ? (sh + wh - o._getCssV(o.pos.bottom, wh) - rh) : (sh + o._getCssV(o.pos.top, wh)),
+			left = o.pos.left === undefined ? (sl + ww - o._getCssV(o.pos.right, ww) - rw) : (sl + o._getCssV(o.pos.left, ww));
+
+			op = $.extend({
 				ani: true
-			}, opts || {});
-			o.rendo.css('position', 'absolute');
-			if (opts.ani) {
-				o.rendo.animate({
-					top: $(window).scrollTop() + ($(window).height() - o.rendo.height()),
-					right: o.pos.right
-				}, 10);
-			} else {
-				o.rendo.css({
-					top: $(window).scrollTop() + ($(window).height() - o.rendo.height()),
-					right: o.pos.right
-				});
-			}
+			}, op || {});
+			o.chatbody.css('position', 'absolute');
+			if (op.ani) o.chatbody.animate({top: top, left: left}, 10);
+			else o.chatbody.css({top: top, left: left});
 		}
 	},
 
@@ -107,13 +112,13 @@ bmoon.chat = {
 		// application don't write kol-lcs, append it.
 		if (!o.chatbody.length) {
 			$('body').append(html);
+			o.chatbody = $('#kol-lcs');
 		}
 
 		o.ape = ape;
 		o.head = $('#kol-lcs-head');
 		o.body = $('#kol-lcs-body');
 		o.closer = $('.close', o.body);
-		o.rendo = o.head;
 		
 		o.msglist = $('.msgs', o.body);
 		o.recentbox = $('.recently', o.msglist);
@@ -126,10 +131,8 @@ bmoon.chat = {
 
 		o.ielow = bmoon.utl.ie() && bmoon.utl.ie() < 7;
 
-		o.pos = {
-			right: o.chatbody.css('right') ? o.chatbody.css('right'): 0,
-			bottom: o.chatbody.css('bottom') ? o.chatbody.css('bottom'): 0
-		};
+		o.pos = ape.pos;
+		
 		o.initUI();
 		
 		return o;
@@ -147,9 +150,9 @@ bmoon.chat = {
 			o._rendBox({ani: false});
 			$(window).scroll(o._rendBox);
 			$(window).resize(o._rendBox);
-		}
+		} else o.chatbody.css(o.pos);
 		
-		o.rendo.fadeIn();
+		o.head.fadeIn();
 		
 		o.head.mouseover(o.openChat);
 		o.closer.click(o.closeChat);
@@ -161,7 +164,6 @@ bmoon.chat = {
 
 		o.head.hide();
 		o.body.fadeIn();
-		o.rendo = o.body;
 		o._rendBox({ani: false});
         o.msginput.focus();
 		
@@ -174,7 +176,6 @@ bmoon.chat = {
 
 		o.body.hide();
 		o.head.show();
-		o.rendo = o.head;
 		o._rendBox({ani: false});
 	},
 

@@ -2,8 +2,9 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 
 #kol-lcs {
 	position:fixed;
-	right: 0;
-	top: 35%;
+	/* set position on js */
+/*	right: 0; */
+/*	top: 35%; */
 	opacity: 1.0;
 	font-family:verdana,arial,sans-serif;
 	font-size:12px;
