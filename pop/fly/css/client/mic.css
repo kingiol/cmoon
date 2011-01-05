@@ -2,48 +2,48 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 
 #kol-lcs {
 	position:fixed;
-	/* set position on js */
+	/* set exact position on js */
 /*	right: 0; */
 /*	top: 35%; */
-	opacity: 1.0;
 	font-family:verdana,arial,sans-serif;
 	font-size:12px;
 	z-index:99999;
 }
 
-#kol-lcs-head {
+/* mid */
+#kol-lcs-mid {
 	width: 42px;
 	height: 151px;
-	cursor: pointer;
 	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) repeat-x scroll 0 0;
+	cursor: pointer;
 }
-#kol-lcs-head.dirty {
+#kol-lcs-mid.dirty {
 	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll -42px 0;
 }
 
-#kol-lcs-body {
-	display: none;
+/* max */
+#kol-lcs-max {
 	width: 288px;
 	border: 1px solid #ff4500;
 	padding: 5px 10px;
 	background: #fff url(http://www.kaiwuonline.com/img/im/mic_bg.png) repeat-x scroll 0 0;
 }
-#kol-lcs-body .top {
+#kol-lcs-max .mider {
+	float: right;
+	height: 20px;
+	width: 25px;
+	padding: 2px 3px 0 0;
+	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll 0 -170px;
+	cursor: pointer;
+}
+#kol-lcs-max .hint {
 	height: 24px;
 	line-height: 23px;
 	margin: 0 auto;
 	border-bottom: 1px solid #ff4545;
 	overflow: hidden;
 }
-#kol-lcs-body .close {
-	cursor: pointer;
-	float: left;
-	height: 20px;
-	width: 25px;
-	padding: 2px 3px 0 0;
-	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll 0 -170px;
-}
-#kol-lcs-body .msgs {
+#kol-lcs-max .msgs {
 	height: 234px;
 	margin: 5px 0;
 	overflow: auto;
@@ -53,20 +53,20 @@ textarea#kol-lcs-input {
 	width: 96%;
 	height: 18px;
 }
-#kol-lcs-body .bot {
+#kol-lcs-max .bot {
 	color: #999;
 	overflow: hidden;
 	margin-bottom: 5px;
 }
 
-#kol-lcs-body .msgs .item-join, #kol-lcs-body .msgs .item-visit, #kol-lcs-body .msgs .item-send, #kol-lcs-body .msgs .item-msg {
+#kol-lcs-max .msgs .item-join, #kol-lcs-max .msgs .item-visit, #kol-lcs-max .msgs .item-send, #kol-lcs-max .msgs .item-msg {
 	margin: 5px 0 0 0;
 }
-#kol-lcs-body .msgs .item-name, #kol-lcs-body .msgs .item-time {
+#kol-lcs-max .msgs .item-name, #kol-lcs-max .msgs .item-time {
 	margin-left: 10px;
 	color: #999;
 }
-#kol-lcs-body .msgs .item-content {
+#kol-lcs-max .msgs .item-content {
 	display: block;
 	text-indent: 2em;
 }

@@ -20,7 +20,7 @@ bmoon.chat = {
 	_strMsg: function(data) {
 		var o = bmoon.chat.init();
 
-		var uname = data.from == o.ape.lcsuname ? '我': data.from;
+		var uname = data.from == o.ape.opts.uname ? '我': data.from;
 		
 		return [
 			'<div class="item-', data.type, '">',
@@ -35,9 +35,9 @@ bmoon.chat = {
 	_blink: function() {
 		var o = bmoon.chat.init();
 
-		if (!o.head.blinkID) {
-			o.head.blinkID = setInterval(function() {
-				o.head.toggleClass('dirty');
+		if (!o.mid.blinkID) {
+			o.mid.blinkID = setInterval(function() {
+				o.mid.toggleClass('dirty');
 			}, 500);
 		}
 	},
@@ -45,9 +45,9 @@ bmoon.chat = {
 	_stopBlink: function() {
 		var o = bmoon.chat.init();
 
-		clearInterval(o.head.blinkID);
-		o.head.removeClass('dirty');
-		o.head.blinkID = 0;
+		clearInterval(o.mid.blinkID);
+		o.mid.removeClass('dirty');
+		o.mid.blinkID = 0;
 	},
 
 	_getCssV: function(cssv, total) {
@@ -65,8 +65,9 @@ bmoon.chat = {
 			ww = $(window).width(),
 			rh = o.chatbody.height(),
 			rw = o.chatbody.width(),
-			top = o.pos.top === undefined ? (sh + wh - o._getCssV(o.pos.bottom, wh) - rh) : (sh + o._getCssV(o.pos.top, wh)),
-			left = o.pos.left === undefined ? (sl + ww - o._getCssV(o.pos.right, ww) - rw) : (sl + o._getCssV(o.pos.left, ww));
+			pos = o.ape.opts.pos,
+			top = pos.top === undefined ? (sh + wh - o._getCssV(pos.bottom, wh) - rh) : (sh + o._getCssV(pos.top, wh)),
+			left = pos.left === undefined ? (sl + ww - o._getCssV(pos.right, ww) - rw) : (sl + o._getCssV(pos.left, ww));
 
 			op = $.extend({
 				ani: true
@@ -82,19 +83,18 @@ bmoon.chat = {
     },
 	
 	init: function(ape) {
-		var o = bmoon.chat;
+		var o = bmoon.chat,
+		op = ape ? ape.opts : {};
+		
 		if (o.inited) return o;
 		o.inited = true;
 
 		var	rmdhtml = $.browser.msie? '<bgsound id="kol-lcs-remind"></bgsound>': '<audio id="kol-lcs-remind"></audio>',
 		html = [
 			'<div id="kol-lcs">',
-			    '<div id="kol-lcs-head">&nbsp;</div>',
-				'<div id="kol-lcs-body">',
-			        '<div class="top">',
-						'<div class="close" title="最小化">&nbsp;</div>',
-						'<span class="hint">客服当前离线，留言功能开启。</span>',
-					'</div>',
+				'<div id="kol-lcs-max">',
+					'<div class="mider" title="缩小"></div>',
+					'<div class="hint">客服当前离线，留言功能开启。</div>',
 					'<div class="msgs">',
 			            '<div class="recently"></div><div class="data"></div>',
 			        '</div>',
@@ -103,6 +103,7 @@ bmoon.chat = {
 					'</div>',
 					'<textarea id="kol-lcs-input"></textarea>',
 				'</div>',
+			    '<div id="kol-lcs-mid"></div>',
 				rmdhtml,
 			'</div>'
 		].join('');
@@ -116,14 +117,24 @@ bmoon.chat = {
 		}
 
 		o.ape = ape;
-		o.head = $('#kol-lcs-head');
-		o.body = $('#kol-lcs-body');
-		o.closer = $('.close', o.body);
+		o.max = $('#kol-lcs-max');
+		o.mid = $('#kol-lcs-mid');
+		o.rendo = o.mid;
 		
-		o.msglist = $('.msgs', o.body);
+		// maxer mider miner
+		o.mider = $('.mider', o.max);
+		if (op.minable) {
+			o.min = $('<div/>').attr('id', 'kol-lcs-min').appendTo(o.chatbody);
+			o.maxer = $('<div/>').addClass('maxer').appendTo(o.mid);
+			$('<div/>').addClass('miner').appendTo(o.max);
+			$('<div/>').addClass('miner').insertAfter(o.mider);
+			o.miner = $('.miner', o.chatbody);
+		} else o.maxer = o.mid;
+
+		o.msglist = $('.msgs', o.max);
 		o.recentbox = $('.recently', o.msglist);
 		o.databox = $('.data', o.msglist);
-		o.hint = $('.hint', o.body);
+		o.hint = $('.hint', o.max);
 		
 		o.reminder = $('#kol-lcs-remind')[0];
 		o.rmdsw = $('#kol-lcs-remind-sw');
@@ -131,8 +142,6 @@ bmoon.chat = {
 
 		o.ielow = bmoon.utl.ie() && bmoon.utl.ie() < 7;
 
-		o.pos = ape.pos;
-		
 		o.initUI();
 		
 		return o;
@@ -141,42 +150,86 @@ bmoon.chat = {
 	initUI: function() {
 		var o = bmoon.chat.init();
 
+		var ui = o.ape.opts.restoreUI ? $.cookie('lcs_ui') : o.ape.opts.defaultUI;
+
+		switch (ui) {
+		case 'max':
+			o.rendo = o.max;
+			break;
+		case 'min':
+			o.rendo = o.min;
+			break;
+		case 'mid':
+		default:
+			o.rendo = o.mid;
+			break;
+		}
+
+		o.max.hide();
+		o.mid.hide();
+		o.min && o.min.hide();
+		o.rendo.fadeIn();
+
 		if (o.ielow) {
 			// ielow double margin on float node. set display inline to fix it
 			o.hint.css('display', 'inline');
-			o.closer.css('display', 'inline');
+			o.mider.css('display', 'inline');
+			o.minable && o.maxer.css('display', 'inline');
+			o.minable && o.miner.css('display', 'inline');
 
 			// ielow position: fixed bug. set absolute and scrool to fix it
 			o._rendBox({ani: false});
 			$(window).scroll(o._rendBox);
 			$(window).resize(o._rendBox);
-		} else o.chatbody.css(o.pos);
-		
-		o.head.fadeIn();
-		
-		o.head.mouseover(o.openChat);
-		o.closer.click(o.closeChat);
+		} else o.chatbody.css(o.ape.opts.pos);
+
+		if ($.inArray(o.ape.opts.maxevent, ['click', 'mouseenter']) == -1)
+			o.ape.opts.maxevent = 'click';
+		o.maxer.bind(o.ape.opts.maxevent, o.openChat);
+		o.mider.click(o.closeChat);
 		o.msginput.bind('keydown', 'return', o.msgSend);
+
+		o.miner && o.miner.click(function() {
+			o.max.hide();
+			o.mid.hide();
+			o.min.fadeIn();
+			o._rendBox({ani: false});
+			$.cookie('lcs_ui', 'min');
+		});
+		o.min && o.min.click(function() {
+			o.min.hide();
+			o.rendo.fadeIn();
+			o._rendBox({ani: false});
+			$.cookie('lcs_ui', 'max');
+		})
 	},
 	
 	openChat: function() {
 		var o = bmoon.chat.init();
 
-		o.head.hide();
-		o.body.fadeIn();
+		o.mid.hide();
+		o.max.fadeIn();
+		o.rendo = o.max;
 		o._rendBox({ani: false});
         o.msginput.focus();
 		
 		o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
 		o._stopBlink();
+		$.cookie('lcs_ui', 'max');
 	},
 
 	closeChat: function() {
 		var o = bmoon.chat.init();
 
-		o.body.hide();
-		o.head.show();
+		o.max.hide();
+		if (o.ape.opts.maxevent == 'mouseenter') {
+			o.maxer.unbind('mouseenter');
+			o.maxer.mouseout(function() {o.maxer.mouseenter(o.openChat);});
+		}
+		o.mid.show();
+		o.rendo = o.mid;
 		o._rendBox({ani: false});
+		$.cookie('lcs_ui', 'mid');
 	},
 
 	msgSend: function() {
@@ -186,7 +239,7 @@ bmoon.chat = {
 		pipe = o.ape.lcsCurrentPipe,
 		type = o.adminuser ? 'send': 'msg',
 		html = o._strMsg({
-			from: o.ape.lcsuname,
+			from: o.ape.opts.uname,
 			type: type,
 			tm: Date().match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0],
 			data: {msg: mv}
@@ -207,7 +260,7 @@ bmoon.chat = {
 		if (o.adminuser.aname && pipe) {
 			pipe.request.send('LCS_SEND', {msg: mv});
 		} else {
-			o.ape.request.send('LCS_MSG', {uname: o.ape.lcsaname, msg: mv});
+			o.ape.request.send('LCS_MSG', {uname: o.ape.opts.aname, msg: mv});
 		}
 		
 		o.soundRemind('send');
@@ -241,7 +294,7 @@ bmoon.chat = {
 		html = o._strMsg(data);
 
 		$(html).appendTo(o.databox);
-		if (o.body.css('display') != 'none') {
+		if (o.max.css('display') != 'none') {
 			o.msglist[0].scrollTop = o.msglist[0].scrollHeight;
 		} else {
 			o._blink();

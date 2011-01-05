@@ -2,16 +2,13 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 
 #kol-lcs {
 	position:fixed;
-	right:20px;
-	bottom: 0;
-	opacity: 1.0;
 	font-family:verdana,arial,sans-serif;
 	font-size:12px;
 	z-index:99999;
 }
 
+/* min */
 #kol-lcs-min {
-	display: none;
 	width: 30px;
 	height: 30px;
 	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll -41px -60px;
@@ -19,59 +16,61 @@ input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;
 	cursor: pointer;
 }
 
-#kol-lcs-max {
-	display: none;
-}
-
-#kol-lcs-head, #kol-lcs-body {
+/* mid */
+#kol-lcs-mid {
 	width: 300px;
+	height: 30px;
 	background-color:#EEEEEE;
 	border: 1px solid #666666;
 }
-
-#kol-lcs-head {
-	height: 30px;
-}
-
-#kol-lcs-head .toggle, #kol-lcs-head .miner {
-	height: 28px;
+#kol-lcs-mid .maxer, #kol-lcs-mid .miner {
 	float: left;
+	height: 28px;
 	overflow: hidden;
 	cursor: pointer;
 }
-#kol-lcs-head .toggle {
+#kol-lcs-mid .maxer {
 	width: 242px;
 	margin-left: 10px;
 	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll 0 -29px;
 }
-#kol-lcs-head .toggle.dirty {
+#kol-lcs-mid .maxer.dirty {
 	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll 0 5px;
 }
-#kol-lcs-head .miner {
+#kol-lcs-mid .miner {
 	width: 25px;
 	margin-left: 15px;
 	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll 0 -58px;
 }
 
-#kol-lcs-body {
-	display: none;
+/* max */
+#kol-lcs-max {
+	width: 300px;
+	background-color:#EEEEEE;
+	border: 1px solid #666666;
 }
-#kol-lcs-body .top {
+#kol-lcs-max .mider {
+	float: right;
+	height: 20px;
+	width: 30px;
+	padding: 2px 3px 0 0;
+	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll -83px -60px;
+	cursor: pointer;
+}
+#kol-lcs-max .miner {
+	float: right;
+	width: 25px;
+	margin-left: 15px;
+	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll 0 -58px;
+}
+#kol-lcs-max .hint {
 	color: #999;
 	overflow: hidden;
 	padding: 5px 10px;
 	float: left;
 	width: 75%;
 }
-#kol-lcs-body .close {
-	cursor: pointer;
-	float: right;
-	height: 20px;
-	width: 30px;
-	padding: 2px 3px 0 0;
-	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll -83px -60px;
-}
-#kol-lcs-body .msgs {
+#kol-lcs-max .msgs {
 	border: 1px solid #666666;
 	height: 200px;
 	width: 91%;
@@ -83,20 +82,20 @@ textarea#kol-lcs-input {
 	margin: 0 10px 2px 10px;
 	width: 87%;
 }
-#kol-lcs-body .bot {
+#kol-lcs-max .bot {
 	color: #999;
 	overflow: hidden;
 	margin: 0 10px 10px 10px;
 }
 
-#kol-lcs-body .msgs .item-join, #kol-lcs-body .msgs .item-visit, #kol-lcs-body .msgs .item-send, #kol-lcs-body .msgs .item-msg {
+#kol-lcs-max .msgs .item-join, #kol-lcs-max .msgs .item-visit, #kol-lcs-max .msgs .item-send, #kol-lcs-max .msgs .item-msg {
 	margin: 5px 0 0 0;
 }
-#kol-lcs-body .msgs .item-name, #kol-lcs-body .msgs .item-time {
+#kol-lcs-max .msgs .item-name, #kol-lcs-max .msgs .item-time {
 	margin-left: 10px;
 	color: #999;
 }
-#kol-lcs-body .msgs .item-content {
+#kol-lcs-max .msgs .item-content {
 	display: block;
 	text-indent: 2em;
 }

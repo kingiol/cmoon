@@ -10,29 +10,28 @@ function liveCS(ape) {
 		 */
 
 		// app name
-		ape.lcspname = opts.aname || document.domain;
-		ape.lcsaname = null;
-		ape.defaultUI = opts.defaultUI || 'max';
-		ape.restoreUI = opts.restoreUI || true;
-		ape.pos = opts.pos || {};
+		opts.pname = opts.aname || document.domain;
+		opts.aname = null;
+		opts.defaultUI = opts.defaultUI || 'mid';
+		ape.opts = opts;
 
 		// user name
-		ape.lcsuname = Cookie.read("lcs_uname");
-		if (!ape.lcsuname) {
-			ape.lcsuname = bmoon.utl.randomName();
-			Cookie.write("lcs_uname", ape.lcsuname,
+		ape.opts.uname = Cookie.read("lcs_uname");
+		if (!ape.opts.uname) {
+			ape.opts.uname = bmoon.utl.randomName();
+			Cookie.write("lcs_uname", ape.opts.uname,
 						 {'path': '/', 'duration': 36500});
 		}
 
 		// user visit this app's time
-		ape.lcsutime = Cookie.read("lcs_utime");
-		if (!ape.lcsutime) {
-			ape.lcsutime = 0;
+		ape.opts.utime = Cookie.read("lcs_utime");
+		if (!ape.opts.utime) {
+			ape.opts.utime = 0;
 		}
-		ape.lcsutime = parseInt(ape.lcsutime)+1;
+		ape.opts.utime = parseInt(ape.opts.utime)+1;
 		if (!ape.options.restore) {
 			Cookie.write("lcs_utime",
-						 ape.lcsutime, {'path': '/', 'duration': 36500});
+						 ape.opts.utime, {'path': '/', 'duration': 36500});
 		}
 
 		ape.lcsCurrentPipe = null;
@@ -54,32 +53,32 @@ function liveCS(ape) {
 
 	this.start = function() {
 		var opt = {'sendStack': false, 'request': 'stack'};
-		ape.start({'uin': ape.lcsuname}, opt);
+		ape.start({'uin': ape.opts.uname}, opt);
 		if (ape.options.restore) {
 			ape.getSession('lcsCurrentPipe', function(resp) {
 				ape.lcsCurrentPipe = ape.getPipe(resp.data.sessions.lcsCurrentPipe);
 			}, opt);
 		} else {
 			ape.request.stack.add("LCS_JOIN", {
-				'aname': ape.lcspname, 'utime': ape.lcsutime,
+				'aname': ape.opts.pname, 'utime': ape.opts.utime,
 				'url': location.href, 'title': document.title}, opt);
 		}
 		ape.request.stack.send();
 	};
 
 	this.pipeCreate = function(pipe, options) {
-		if (pipe.properties.pname == ape.lcspname) {
-			ape.lcsaname = pipe.properties.aname;
+		if (pipe.properties.pname == ape.opts.pname) {
+			ape.opts.aname = pipe.properties.aname;
 			ui.init(ape);
 			// send LCS_VISIT only on session restore
 			if (ape.options.restore) {
 				ape.request.send("LCS_VISIT", {
-					'aname': ape.lcsaname, 'pname': ape.lcspname,
+					'aname': ape.opts.aname, 'pname': ape.opts.pname,
 					'url': location.href, 'title': document.title
 				});
 			}
 			$.getJSON('http://www.kaiwuonline.com/json/msg?JsonCallback=?',
-					  {name: ape.lcsaname, name2: ape.lcsuname},
+					  {name: ape.opts.aname, name2: ape.opts.uname},
 					  function(data) {
 						  if (data.success == 1 && bmoon.utl.type(data.raws) == 'Array') {
 							  $.each(data.raws, function(i, v) {
@@ -94,25 +93,25 @@ function liveCS(ape) {
 	};
 
 	this.createUser = function(user, pipe) {
-		if (pipe.properties.pname == ape.lcspname && user.properties.isadmin) {
+		if (pipe.properties.pname == ape.opts.pname && user.properties.isadmin) {
 			ape.setSession({'lcsCurrentPipe': user.pubid});
 			//ape.lcsCurrentPipe = user.pipes;
 			ape.lcsCurrentPipe = ape.getPipe(user.pubid);
-			ui.adminOn({pname: ape.lcspname, aname: pipe.properties.aname});
+			ui.adminOn({pname: ape.opts.pname, aname: pipe.properties.aname});
 		}
 	};
 
 	this.deleteUser = function(user, pipe) {
-		if (pipe.properties.pname == ape.lcspname && user.properties.isadmin) {
+		if (pipe.properties.pname == ape.opts.pname && user.properties.isadmin) {
 			ape.lcsCurrentPipe = null;
-			ui.adminOff({pname: ape.lcspname, aname: pipe.properties.aname});
+			ui.adminOff({pname: ape.opts.pname, aname: pipe.properties.aname});
 		}
 	};
 
 	this.rawLcsRecently = function(raw, pipe) {
-		if ((raw.data.from && raw.data.from.properties.uin == ape.lcsuname) ||
-			raw.data.to_uin == ape.lcsuname ||
-			(raw.data.to && raw.data.to.properties.uin == ape.lcsuname)) {
+		if ((raw.data.from && raw.data.from.properties.uin == ape.opts.uname) ||
+			raw.data.to_uin == ape.opts.uname ||
+			(raw.data.to && raw.data.to.properties.uin == ape.opts.uname)) {
 			var
 			type = raw.data.type,
 			
@@ -132,7 +131,7 @@ function liveCS(ape) {
 	};
 
 	this.rawLcsData = function(raw, pipe) {
-		if ((raw.data.from && raw.data.from.properties.uin == ape.lcsaname) ||
+		if ((raw.data.from && raw.data.from.properties.uin == ape.opts.aname) ||
 			pipe == ape.lcsCurrentPipe) {
 			var
 			type = raw.data.type,

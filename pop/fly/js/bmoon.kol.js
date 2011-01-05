@@ -62,8 +62,11 @@ bmoon.kol = {
 			// opts part two
 			opts = $.extend({
 				aname: 'unknown',
-				defaultUI: 'max',
+				defaultUI: 'mid',
 				restoreUI: true,
+				restoreMsg: true,
+				minable: false,
+				maxevent: 'click',
 				pos: {
 					bottom: 0,
 					right: 0
