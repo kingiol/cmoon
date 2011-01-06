@@ -66,6 +66,7 @@ bmoon.kol = {
 				restoreUI: true,
 				restoreMsg: true,
 				minable: false,
+				hidemidOnMax: true,
 				maxevent: 'click',
 				pos: {
 					bottom: 0,

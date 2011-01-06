@@ -168,6 +168,7 @@ bmoon.chat = {
 		o.max.hide();
 		o.mid.hide();
 		o.min && o.min.hide();
+		if (o.rendo == o.max && !o.ape.opts.hidemidOnMax) o.mid.show();
 		o.rendo.fadeIn();
 
 		if (o.ielow) {
@@ -198,6 +199,7 @@ bmoon.chat = {
 		});
 		o.min && o.min.click(function() {
 			o.min.hide();
+			!o.ape.opts.hidemidOnMax && o.mid.show();
 			o.rendo.fadeIn();
 			o._rendBox({ani: false});
 			$.cookie('lcs_ui', 'max');
@@ -207,7 +209,7 @@ bmoon.chat = {
 	openChat: function() {
 		var o = bmoon.chat.init();
 
-		o.mid.hide();
+		o.ape.opts.hidemidOnMax && o.mid.hide();
 		o.max.fadeIn();
 		o.rendo = o.max;
 		o._rendBox({ani: false});

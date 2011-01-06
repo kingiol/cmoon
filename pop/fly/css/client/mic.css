@@ -1,27 +1,27 @@
-input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;}
-
 #kol-lcs {
 	position:fixed;
-	/* set exact position on js */
-/*	right: 0; */
-/*	top: 35%; */
 	font-family:verdana,arial,sans-serif;
 	font-size:12px;
 	z-index:99999;
 }
 
-/* mid */
+/*
+ * mid
+ */
 #kol-lcs-mid {
 	width: 42px;
 	height: 151px;
 	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) repeat-x scroll 0 0;
 	cursor: pointer;
 }
+/* dirty: unread new message */
 #kol-lcs-mid.dirty {
 	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll -42px 0;
 }
 
-/* max */
+/*
+ * max
+ */
 #kol-lcs-max {
 	width: 288px;
 	border: 1px solid #ff4500;
@@ -70,3 +70,6 @@ textarea#kol-lcs-input {
 	display: block;
 	text-indent: 2em;
 }
+
+/* sound remind checkbox */
+#kol-lcs-remind-sw {vertical-align:middle; margin-top:-2px; margin-bottom:1px;}
