@@ -11,9 +11,9 @@ __BEGIN_DECLS
 			char *zpa = NULL;											\
 			switch (evt->errcode) {										\
 			case REP_ERR_ALREADYREGIST:									\
-				return nerr_raise(LERR_EXIST, "%s already exist", key); \
+				return nerr_raise(LERR_EXIST, "%s already exist", key ? key : "null"); \
 			case REP_ERR_NREGIST:										\
-				return nerr_raise(LERR_NEXIST, "%s don't regist", key);	\
+				return nerr_raise(LERR_NEXIST, "%s don't regist", key ? key : "null"); \
 			default:													\
 				hdf_write_string(evt->hdfrcv, &zpa);					\
 				return nerr_raise(LERR_MEVENT, "pro %s %d failure %d %s", \

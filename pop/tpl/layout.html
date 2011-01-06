@@ -9,11 +9,11 @@
 
 	<link rel="stylesheet" type="text/css" href="/css/b/base.css" />
 	<?cs var: Layout.css ?>
-	<?cs include:Include.css ?>
+	<?cs linclude:Include.css ?>
 
 	<script type="text/javascript" src="/js/b/base.js"></script>
 	<?cs var: Layout.js ?>
-	<?cs include:Include.js ?>
+	<?cs linclude:Include.js ?>
 
 	<script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" ></script>
 	<script type="text/javascript">
@@ -110,7 +110,7 @@
 		  <h3><?cs var: Output.errcode ?> : <?cs var: Output.errmsg ?></h3>
 		  <pre><?cs var: Output.errtrace ?></pre>
 		<?cs else ?>
-		  <?cs include:Include.content ?>
+		  <?cs linclude!Include.content ?>
 		  <?cs var:Content.content ?>
 		<?cs /if ?>
 		<div class="clearer"></div>

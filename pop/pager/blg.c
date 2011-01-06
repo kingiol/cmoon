@@ -68,11 +68,12 @@ static NEOERR* rend_blog_index(HASH *dbh, HASH *tplh, int pageid, int *pgttr)
 		snprintf(fname, sizeof(fname), "%sindex.html", PATH_BLOG);
 	else
 		snprintf(fname, sizeof(fname), "%s%d.html", PATH_BLOG, pageid);
-	mutil_makesure_dir(fname);
-	if (!mcs_str2file(str, fname)) {
-		err = nerr_raise(NERR_IO, "Unable to open %s for writing", fname);
-		goto done;
-	}
+	
+	err = mutil_makesure_dir(fname);
+	if (err != STATUS_OK) goto done;
+	
+	err = mcs_str2file(str, fname);
+	if (err != STATUS_OK) goto done;
 
 #ifdef DEBUG_HDF
 	hdf_write_file(hdf, TC_ROOT"hdf.blg.index");
@@ -121,11 +122,12 @@ static NEOERR* rend_blog(HASH *dbh, HASH *tplh, int bid)
 	
 	snprintf(fname, sizeof(fname), "%s%d/%d.html",
 			 PATH_BLOG, bid%BLOG_SUBDIR_NUM, bid);
-	mutil_makesure_dir(fname);
-	if (!mcs_str2file(str, fname)) {
-		err = nerr_raise(NERR_IO, "Unable to open %s for writing", fname);
-		goto done;
-	}
+
+	err = mutil_makesure_dir(fname);
+	if (err != STATUS_OK) goto done;
+
+	err = mcs_str2file(str, fname);
+	if (err != STATUS_OK) goto done;
 
 #ifdef DEBUG_HDF
 	hdf_write_file(hdf, TC_ROOT"hdf.blg");

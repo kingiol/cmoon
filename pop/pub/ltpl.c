@@ -126,10 +126,11 @@ NEOERR* ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outha
 				
 			snprintf(fname, sizeof(fname), PATH_DOC"%s",
 					 hdf_get_value(child, PRE_CFG_OUTPUT, "null.html"));
-			mutil_makesure_dir(fname);
-			if(!mcs_str2file(str, fname)) {
-				mtc_err("write result to %s failure", fname);
-			}
+			err = mutil_makesure_dir(fname);
+			JUMP_NOK(err, wnext);
+
+			err = mcs_str2file(str, fname);
+			JUMP_NOK(err, wnext);
 #ifdef DEBUG_HDF
 			snprintf(fname, sizeof(fname), "%s/hdf.%s",
 					 TC_ROOT, hdf_obj_name(child));
