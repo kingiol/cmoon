@@ -35,9 +35,9 @@ bmoon.chat = {
 	_blink: function() {
 		var o = bmoon.chat.init();
 
-		if (!o.mid.blinkID) {
-			o.mid.blinkID = setInterval(function() {
-				o.mid.toggleClass('dirty');
+		if (!o.maxer.blinkID) {
+			o.maxer.blinkID = setInterval(function() {
+				o.maxer.toggleClass('dirty');
 			}, 500);
 		}
 	},
@@ -45,9 +45,9 @@ bmoon.chat = {
 	_stopBlink: function() {
 		var o = bmoon.chat.init();
 
-		clearInterval(o.mid.blinkID);
-		o.mid.removeClass('dirty');
-		o.mid.blinkID = 0;
+		clearInterval(o.maxer.blinkID);
+		o.maxer.removeClass('dirty');
+		o.maxer.blinkID = 0;
 	},
 
 	_getCssV: function(cssv, total) {
