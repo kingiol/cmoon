@@ -3,7 +3,10 @@ manual {
 	Dataset {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/manual.css" />
-			js = <script type="text/javascript" src="/js/b/manual.js"></script>
+			js << EOM
+			<script src="/js/b/kol.js"></script>
+			<script src="/js/b/manual.js"></script>
+EOM			
 			tabpart = 3
         }
 	}

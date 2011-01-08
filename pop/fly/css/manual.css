@@ -1,1 +1,47 @@
-#content-sub {text-align: center;}
+#content .intro {
+	font-size: 110%;
+}
+
+#content pre {
+	width:90%;
+	padding:0.5em;
+	margin: 1ex auto;
+	background-color:#EEEEEE;
+	border:1px solid #AAAAAA;
+	color:#112222;
+	font-size:90%;
+}
+
+#content img {
+	margin: 0 auto;
+}
+
+#content ul {
+	margin-left: 2em;
+	list-style-type: disc;
+}
+
+#content table {
+	border: 1px solid #CCCCCC;
+	border-collapse:collapse;
+	width:100%;
+}
+#content table th {
+	/*background:transparent url(/img/table/tablebar_bg.png) repeat-x scroll center bottom;*/
+	background-color: #eee;
+	border-left:1px solid #CCCCCC;
+	border-bottom:1px solid #CCCCCC;
+	padding:4px 4px;
+	text-align:center;
+	width:auto;
+}
+
+#content table td {
+	border-left:1px solid #CCCCCC;
+	border-bottom:1px solid #CCCCCC;
+	padding:4px 4px;
+}
+
+#content table tr:hover {
+	background-color: #FFFFCC;
+}
