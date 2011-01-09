@@ -127,7 +127,8 @@ bmoon.chat = {
 			o.min = $('<div/>').attr('id', 'kol-lcs-min').appendTo(o.chatbody);
 			o.maxer = $('<div/>').addClass('maxer').appendTo(o.mid);
 			$('<div/>').addClass('miner').attr('title', '关闭').appendTo(o.mid);
-			$('<div/>').addClass('miner').attr('title', '关闭').insertBefore(o.mider);
+			if (o.ape.opts.hidemidOnMax)
+				$('<div/>').addClass('miner').attr('title', '关闭').insertBefore(o.mider);
 			o.miner = $('.miner', o.chatbody);
 		} else o.maxer = o.mid;
 
@@ -186,7 +187,14 @@ bmoon.chat = {
 
 		if ($.inArray(o.ape.opts.maxevent, ['click', 'mouseenter']) == -1)
 			o.ape.opts.maxevent = 'click';
-		o.maxer.bind(o.ape.opts.maxevent, o.openChat);
+		if (o.rendo == o.max && !o.ape.opts.hidemidOnMax)
+			o.maxer.bind(o.ape.opts.maxevent, o.closeChat);
+		else
+			o.maxer.bind(o.ape.opts.maxevent, o.openChat);
+		if (o.ape.opts.maxevent == 'mouseenter') {
+			o.maxer.mouseover(function() {o.maxer.addClass('mouseover');});
+			o.maxer.mouseout(function() {o.maxer.removeClass('mouseover')});
+		}
 		o.mider.click(o.closeChat);
 		o.msginput.bind('keydown', 'return', o.msgSend);
 
@@ -200,16 +208,22 @@ bmoon.chat = {
 		o.min && o.min.click(function() {
 			o.min.hide();
 			!o.ape.opts.hidemidOnMax && o.mid.show();
-			o.rendo.fadeIn();
+			o.rendo != o.min && o.rendo.fadeIn();
 			o._rendBox({ani: false});
-			$.cookie('lcs_ui', 'max');
+			if (o.max.css('display') == 'none') $.cookie('lcs_ui', 'mid');
+			else $.cookie('lcs_ui', 'max');
 		})
 	},
 	
 	openChat: function() {
 		var o = bmoon.chat.init();
 
-		o.ape.opts.hidemidOnMax && o.mid.hide();
+		if (o.ape.opts.hidemidOnMax) o.mid.hide();
+		else if (o.ape.opts.maxevent == 'click') {
+			// toggle open & close on click
+			o.maxer.unbind(o.ape.opts.maxevent).bind(o.ape.opts.maxevent, o.closeChat);
+		}
+		
 		o.max.fadeIn();
 		o.rendo = o.max;
 		o._rendBox({ani: false});
@@ -225,8 +239,16 @@ bmoon.chat = {
 
 		o.max.hide();
 		if (o.ape.opts.maxevent == 'mouseenter') {
+			// prevent max after mided on mouse in mid
 			o.maxer.unbind('mouseenter');
-			o.maxer.mouseout(function() {o.maxer.mouseenter(o.openChat);});
+			setTimeout(function() {
+				if (o.maxer.hasClass('mouseover'))
+					o.maxer.mouseout(function() {o.maxer.mouseenter(o.openChat);});
+				else o.maxer.mouseenter(o.openChat);
+			}, 50);
+		} else if (!o.ape.opts.hidemidOnMax) {
+			// toggle open & close on click
+			o.maxer.unbind(o.ape.opts.maxevent).bind(o.ape.opts.maxevent, o.openChat);
 		}
 		o.mid.show();
 		o.rendo = o.mid;
