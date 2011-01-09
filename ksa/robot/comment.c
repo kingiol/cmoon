@@ -3,6 +3,7 @@
 
 int comment_get(HDF *hdf, mdb_conn *conn)
 {
+#if 0
 	PRE_DBOP(hdf, conn);
 
 	char cols[LEN_SM];
@@ -22,12 +23,14 @@ int comment_get(HDF *hdf, mdb_conn *conn)
 		}
 		res = hdf_obj_next(res);
 	}
+#endif
 
-	return RET_RBTOP_OK;
+	return 0;
 }
 
 int comment_add(HDF *hdf, mdb_conn *conn)
 {
+	#if 0
 	PRE_DBOP(hdf, conn);
 
 	int id = 0;
@@ -68,6 +71,7 @@ int comment_add(HDF *hdf, mdb_conn *conn)
 	hdf_set_value(hdf, PRE_OUTPUT".comment.0.intime", tm);
 	hdf_set_copy(hdf, PRE_OUTPUT".comment.0.uname", PRE_QUERY".cname");
 	hdf_set_copy(hdf, PRE_OUTPUT".comment.0.content", PRE_QUERY".ccontent");
+#endif
 	
-	return RET_RBTOP_OK;
+	return 0;
 }
