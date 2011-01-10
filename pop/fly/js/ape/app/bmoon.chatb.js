@@ -4,7 +4,6 @@ bmoon.chat = {
 	version: '1.0',
 	ape: {},
 	groupPubid: null,
-	aname: '0',
 	cUserID: '0',
 	usersOn: ["0"],
 	usersFetched: ["0"],
@@ -38,7 +37,6 @@ bmoon.chat = {
 		o.rmdsw = $('#remind-sound-sw');
 		
 		o.ape = ape;
-		o.aname = ape.lcsaname;
 
 		return o;
 	},
@@ -114,7 +112,7 @@ bmoon.chat = {
 	_strMsg: function(data) {
 		var o = bmoon.chat.init();
 
-		var uname = data.from == o.aname ? '我': data.from;
+		var uname = data.from == o.ape.opts.aname ? '我': data.from;
 		
 		return [
 			'<div class="item-', data.type, '">',
@@ -166,7 +164,7 @@ bmoon.chat = {
 		type = $.inArray(o.cUserID, o.usersOn) != -1 ? 'send': 'msg',
 		databox = $('.data', o._nodeMsg(o.cUserID, true)),
 		html = o._strMsg({
-			from: o.aname,
+			from: o.ape.opts.aname,
 			type: type,
 			tm: Date().match(/\d{1,2}:\d{1,2}:\d{1,2}/)[0],
 			data: {msg: mv}
@@ -218,7 +216,7 @@ bmoon.chat = {
 		}
 
 		if ($.inArray(id, o.usersFetched) == -1) {
-			o.getMessage(id, o.aname, 1);
+			o.getMessage(id, o.ape.opts.aname, 1);
 			o.usersFetched.push(id);
 		}
 
@@ -384,7 +382,7 @@ bmoon.chat = {
 		var o = bmoon.chat.init();
 
 		var
-		uname = data.from == o.aname ? data.to: data.from,
+		uname = data.from == o.ape.opts.aname ? data.to: data.from,
 		userbox = o._nodeUser(uname, true),
 		recentbox = $('.recently', o._nodeMsg(uname, true)),
 		html = o._strMsg(data);

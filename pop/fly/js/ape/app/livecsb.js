@@ -1,12 +1,14 @@
 function liveCS(ape) {
 	var ui = bmoon.chat;
-	this.initialize = function() {
-		// app name
-		ape.lcsaname = Cookie.read('aname_esc');
-		ape.lcsmasn = Cookie.read('masn');
+	this.initialize = function(opts) {
+		opts.pname = opts.pname || 'unknown';
+		opts.aname = opts.aname || Cookie.read('aname_esc');
+		opts.masn = opts.lcsmasn = Cookie.read('masn');
+		ape.opts = opts;
+		
 		ape.lcsCurrentPipe = null;
 		
-		if (!ape.lcsaname || !ape.lcsmasn) return;
+		if (!ape.opts.aname || !ape.opts.masn) return;
 
 		ape.onRaw("ident", this.rawLcsIdent);
 		ape.onRaw("LCS_DEARUSERS", this.rawLcsDearusers);
@@ -32,17 +34,17 @@ function liveCS(ape) {
 
 	this.start = function() {
 		var opt = {'sendStack': false, 'request': 'stack'};
-		ape.start({'uin': ape.lcsaname}, opt);
+		ape.start({'uin': ape.opts.aname}, opt);
 		if (!ape.options.restore) {
 			ape.request.stack.add("LCS_JOINB", {
-				'aname': ape.lcsaname, 'masn': ape.lcsmasn}, opt);
+				'aname': ape.opts.aname, 'masn': ape.opts.masn}, opt);
 		}
 		ape.request.stack.send();
 	};
 
 	this.pipeCreate = function(pipe, options) {
 		// avoid sended pipeCreate event in
-		if (pipe.properties.aname == ape.lcsaname && !options.from) {
+		if (pipe.properties.aname == ape.opts.aname && !options.from) {
 			ape.lcsCurrentPipe = pipe;
 			ui.onready(ape, pipe.getPubid());
 			ape.request.stack.add('LCS_DEARUSERS', null);
@@ -51,15 +53,15 @@ function liveCS(ape) {
 	};
 
 	this.createUser = function(user, pipe) {
-		if (pipe.properties.aname == ape.lcsaname &&
-			user.properties.uin != ape.lcsaname) {
+		if (pipe.properties.aname == ape.opts.aname &&
+			user.properties.uin != ape.opts.aname) {
 			ui.userOn({uname: user.properties.uin, pubid: user.pubid});
 		}
 	};
 
 	this.deleteUser = function(user, pipe) {
-		if (pipe.properties.aname == ape.lcsaname &&
-			user.properties.uin != ape.lcsaname) {
+		if (pipe.properties.aname == ape.opts.aname &&
+			user.properties.uin != ape.opts.aname) {
 			ui.userOff({uname: user.properties.uin});
 		}
 	};
@@ -79,9 +81,9 @@ function liveCS(ape) {
 	this.rawLcsRecently = function(raw, pipe) {
 		// some offline & notice message don't have data.to.properties.uin,
 		// use data.to_uin instead
-		if ((raw.data.from && raw.data.from.properties.uin == ape.lcsaname) ||
-			raw.data.to_uin == ape.lcsaname ||
-			(raw.data.to && raw.data.to.properties.uin == ape.lcsaname)) {
+		if ((raw.data.from && raw.data.from.properties.uin == ape.opts.aname) ||
+			raw.data.to_uin == ape.opts.aname ||
+			(raw.data.to && raw.data.to.properties.uin == ape.opts.aname)) {
 			var
 			type = raw.data.type,
 			
@@ -103,8 +105,8 @@ function liveCS(ape) {
 	this.rawLcsData = function(raw, pipe) {
 		// some notice message don't have data.to.properties.uin,
 		// use data.to_uin instead
-		if (raw.data.to_uin == ape.lcsaname ||
-			(raw.data.to && raw.data.to.properties.uin == ape.lcsaname)) {
+		if (raw.data.to_uin == ape.opts.aname ||
+			(raw.data.to && raw.data.to.properties.uin == ape.opts.aname)) {
 			var
 			type = raw.data.type,
 			stm = new Date(raw.time*1000).toString(),
@@ -115,14 +117,3 @@ function liveCS(ape) {
 		}
 	};
 }
-
-$(document).ready(function() {
-	var client = new APE.Client();
-	client.load({
-		identifier: 'kol_backend',
-		transport: 2,
-		complete: function(ape) {
-			new liveCS(ape).initialize();
-		}
-	});
-});
