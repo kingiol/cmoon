@@ -61,7 +61,7 @@ bmoon.appnew = {
 		email = $('#email').val(),
 		asn = $('#asn').val();
 
-		$.getJSON('/json/app/new', {aname: aname, email: email, asn: asn}, function(data) {
+		$.post('/json/app/new', {_op: 'add', aname: aname, email: email, asn: asn}, function(data) {
 			if (data.success != 1 || !data.aname) {
 				alert(data.errmsg || '操作失败， 请稍后再试');
 				return;

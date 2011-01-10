@@ -21,7 +21,7 @@ NEOERR* blog_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 NEOERR* blog_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
 /* post here */
-NEOERR* blog_mkdparser_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* blog_mkdparser_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
 __END_DECLS
 #endif /* __OBLOG_H__ */

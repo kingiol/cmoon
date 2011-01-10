@@ -34,7 +34,7 @@ bmoon.oms = {
 		p = c.parent(),
 		uname = p.attr('uname');
 
-		$.post('/json/oms/camer', {op: 'del', uname: uname}, function(data) {
+		$.post('/json/oms/camer', {_op: 'del', uname: uname}, function(data) {
 			if (data.success == '1') {
 				p.remove();
 			} else {

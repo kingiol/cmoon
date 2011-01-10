@@ -86,7 +86,6 @@ int main(int argc, char **argv, char **envp)
 			
 			switch (session->reqtype) {
 			case CGI_REQ_HTML:
-				/* post also could get html, so, don't judge CGI_REQ_METHOD() */
 				err = ltpl_render(cgi, tplh, session);
 				if (err != STATUS_OK) {
 					if (nerr_match(err, LERR_NEXIST))

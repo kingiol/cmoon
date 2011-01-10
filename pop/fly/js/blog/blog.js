@@ -94,7 +94,7 @@ bmoon.blog = {
 
 		$.post('/json/comment',
 			   {
-				   op: 'add', type: 0, oid: mgd.bid, pid: 0,
+				   _op: 'add', type: 0, oid: mgd.bid, pid: 0,
 				   author: o.author,
 				   content: content
 			   },

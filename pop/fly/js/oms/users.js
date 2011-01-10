@@ -61,7 +61,7 @@ bmoon.omsusers = {
 		$(".error", p).remove();
 		p.removeClass('success').removeClass('error').addClass('loading');
 
-		$.post('/json/oms/secy', {aname: id}, function(data) {
+		$.post('/json/oms/secy', {_op: 'mod', aname: id}, function(data) {
 			p.removeClass('loading');
 			
 			if (data.success == '1') {
@@ -85,7 +85,7 @@ bmoon.omsusers = {
 		email = $('#email').val(),
 		asn = $('#asn').val();
 
-		$.post('/json/oms/users', {op: 'add', aname: aname, email: email, asn: asn}, function(data) {
+		$.post('/json/oms/users', {_op: 'add', aname: aname, email: email, asn: asn}, function(data) {
 			if (data.success == '1') {
 				o.addoverlay.close();
 				o._nodeUser({aname: aname, email: email});
@@ -101,7 +101,7 @@ bmoon.omsusers = {
 		var aname = $(this).attr('aname');
 		
 		if (confirm("确认删除 " + aname + " ?")) {
-			$.post('/json/oms/users', {op: 'del', aname: aname}, function(data) {
+			$.post('/json/oms/users', {_op: 'del', aname: aname}, function(data) {
 				if (data.success == '1') {
 					$('#user-' + aname).remove();
 				} else {

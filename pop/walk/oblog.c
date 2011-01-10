@@ -204,7 +204,7 @@ NEOERR* blog_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	return STATUS_OK;
 }
 
-NEOERR* blog_mkdparser_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* blog_mkdparser_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	hdf_set_copy(cgi->hdf, PRE_OUTPUT".s", PRE_QUERY".s");
 	

@@ -57,7 +57,7 @@ NEOERR* app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	return STATUS_OK;
 }
 
-NEOERR* app_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* app_new_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *asn, *email, masn[LEN_CK];
