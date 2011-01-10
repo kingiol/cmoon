@@ -46,9 +46,7 @@ function liveCS(ape) {
 			ape.lcsCurrentPipe = pipe;
 			ui.onready(ape, pipe.getPubid());
 			ape.request.stack.add('LCS_DEARUSERS', null);
-			//ape.request.stack.add('LCS_RECENTLY', {uin: "0", type: 0});
 			ape.request.stack.send();
-			//ape.request.send();
 		}
 	};
 

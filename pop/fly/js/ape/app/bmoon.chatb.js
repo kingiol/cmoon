@@ -187,7 +187,7 @@ bmoon.chat = {
 		if (pipe && type == 'send') {
 			pipe.request.send('LCS_SEND', {msg: mv});
 		} else {
-			o.ape.request.send('LCS_MSG', {uname: o.cUserID, msg: mv});
+			o.ape.request.send('LCS_MSG', {uname: o.cUserID, msg: mv, imAdmin: 1});
 		}
 
 		o.soundRemind('send');

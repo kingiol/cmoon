@@ -284,7 +284,10 @@ bmoon.chat = {
 		if (o.adminuser.aname && pipe) {
 			pipe.request.send('LCS_SEND', {msg: mv});
 		} else {
-			o.ape.request.send('LCS_MSG', {uname: o.ape.opts.aname, msg: mv});
+			o.ape.request.send('LCS_MSG', {
+				uname: o.ape.opts.aname ? o.ape.opts.aname : o.ape.opts.pname,
+				msg: mv
+			});
 		}
 		
 		o.soundRemind('send');
