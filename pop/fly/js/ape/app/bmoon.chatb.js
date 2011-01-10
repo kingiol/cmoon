@@ -308,6 +308,9 @@ bmoon.chat = {
 		}
 
 		if (!tc.length) o.usersNew.push(data.uname);
+
+		// forward online user event they aren't dirty
+		o.postUserDirty(data.uname);
 	},
 
 	// {uname: user.properties.uin}

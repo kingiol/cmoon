@@ -18,6 +18,7 @@ bmoon.oms = {
 
 		o.bindClick();
 
+		if (!mgd.appinfo) return;
 		var opts = {
 			pname: mgd.appinfo.pname,
 			aname: mgd.appinfo.aname,
@@ -62,7 +63,7 @@ bmoon.oms = {
 
 		var p = bmoon.chat;
 		
-		p.getMessage(p.cUserID, p.aname, pg);
+		p.getMessage(p.cUserID, p.ape.opts.aname, pg);
 	}
 };
 
