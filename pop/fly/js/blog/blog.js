@@ -46,7 +46,7 @@ bmoon.blog = {
 		var o = bmoon.blog.init();
 
 		o.bindClick();
-		o.getComment();
+		bmoon.utl.after(o.getComment, 'mgd.bid !== undefined', 10);
 	},
 
 	bindClick: function() {

@@ -20,7 +20,10 @@ bmoon.okol = {
 		o.bindClick();
 		//o.stdataxxx =  [ [1286769509810, 8], [1286683109810, 3], [1286596709810, 10] ];
 
-		if (o.stdata) o.flotRend(o.stdata);
+		bmoon.utl.after(function() {
+			o.stdata = mgd.stdata;
+			o.flotRend(o.stdata);
+		}, 'mgd.stdata !== undefined', 10);
 	},
 
 	bindClick: function() {

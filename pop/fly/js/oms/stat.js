@@ -32,10 +32,7 @@ bmoon.omsstat = {
 
 		o.bindClick();
 
-		// avoid js error, which will lead login overlay don't load
-		if (!o.stdata) return;
-		o.rendStat();
-
+		bmoon.utl.after(o.rendStat, 'mgd.stdata !== undefined', 10);
 	},
 
 	bindClick: function() {
@@ -50,6 +47,8 @@ bmoon.omsstat = {
 		var o = bmoon.omsstat.init();
 
 		var type = o.sttype.val();
+
+		o.stdata = o.stdata || mgd.stdata;
 		
 		if (type == 'visit') {
 			$.plot(o.stres,

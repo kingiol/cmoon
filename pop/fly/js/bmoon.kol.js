@@ -1,7 +1,15 @@
-; function _execAfter(func, until) {
+; var _etime = 0;
+function _execAfter(func, until, sec) {
+	sec = sec || 10;
+	if (parseInt(_etime*(100/1000)) > sec) {
+		_etime = 0;
+		return;
+	}
 	if (eval(until)) {
+		_etime = 0;
 		func();
 	} else {
+		_etime++;
 		setTimeout(function() {
 			_execAfter(func, until);
 		}, 100);
@@ -50,7 +58,7 @@ bmoon.kol = {
 			} else {
 				$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat_gb.js" charset="gb2312"></script>');
 			}
-		}, "typeof jQuery == 'function' && typeof jQuery.cookie == 'function'");
+		}, "typeof jQuery == 'function' && typeof jQuery.cookie == 'function'", 10);
 		
 		return o;
 	},
@@ -82,6 +90,6 @@ bmoon.kol = {
 					new liveCS(ape).initialize(opts);
 				}
 			});
-		}, "typeof liveCS == 'function'");
+		}, "typeof liveCS == 'function'", 10);
 	}
 };

@@ -19,19 +19,22 @@ bmoon.oms = {
 		o.bindClick();
 
 		if (!mgd.appinfo) return;
-		var opts = {
-			pname: mgd.appinfo.pname,
-			aname: mgd.appinfo.aname,
-			masn: mgd.appinfo.masn
-		},
-		client = new APE.Client();
-		client.load({
-			identifier: 'kol_backend',
-			transport: 2,
-			complete: function(ape) {
-				new liveCS(ape).initialize(opts);
-			}
-		});
+
+		bmoon.utl.after(function() {
+			var opts = {
+				pname: mgd.appinfo.pname,
+				aname: mgd.appinfo.aname,
+				masn: mgd.appinfo.masn
+			},
+			client = new APE.Client();
+			client.load({
+				identifier: 'kol_backend',
+				transport: 2,
+				complete: function(ape) {
+					new liveCS(ape).initialize(opts);
+				}
+			});
+		}, 'mgd.appinfo !== undefined', 10);
 	},
 
 	bindClick: function() {

@@ -14,7 +14,7 @@ bmoon.blogindex = {
 		var o = bmoon.blogindex.init();
 
 		o.bindClick();
-		o.getCommentNum();
+		bmoon.utl.after(o.getCommentNum, 'mgd.ids !== undefined', 10);
 	},
 
 	bindClick: function() {
