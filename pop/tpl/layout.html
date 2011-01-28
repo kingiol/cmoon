@@ -3,9 +3,9 @@
 
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="keywords" content="开物在线 在线客服 在线客服代码 在线客服源代码 访问跟踪 访问统计 免客户端在线客服 离线消息 开源聊天工具 网页聊天 webim 站长工具 ape ajax push engine" />
-	<meta name="description" content="bmoon" />
-	<title>开物在线 - <?cs var:Layout.title ?></title>
+	<meta name="keywords" content="bomdoo 在线客服 在线客服代码 在线客服源代码 访问跟踪 访问统计 免客户端在线客服 离线消息 开源聊天工具 网页聊天 webim 站长工具 ape ajax push engine" />
+	<meta name="description" content="bomdoo" />
+	<title><?cs var:Layout.title ?> - bomdoo</title>
 
 	<link rel="stylesheet" type="text/css" href="/css/b/base.css" />
 	<?cs var: Layout.css ?>
@@ -14,91 +14,52 @@
 	<script type="text/javascript" src="/js/b/base.js"></script>
 	<?cs var: Layout.js ?>
 	<?cs linclude:Include.js ?>
-
-	<script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" ></script>
-	<script type="text/javascript">
-	  bmoon.kol.onready({
-	  	aname: 'kol',
-		minable: true,
-		hidemidOnMax: false,
-		pos: {
-			bottom: '0',
-			right: '20px'
-		}
-	  });
-	</script>
-	
   </head>
 
   <body>
-	<div id="browser-hint" class="hide">
-	  <p>
-		你正在使用低版本ie浏览器，本站某些功能可能无法正常使用，建议你更新浏览器版本，
-		或者使用更安全的 <a target="_blank" href="http://www.mozillaonline.com/">火狐狸</a> 浏览器。
-		&nbsp; <input type="button" id="browser-later" value="稍后再说" />
-	  </p>
-	</div>
-
-	<div id="top">
-	  <div class="member">
-		<ul class="hide" id="nav-member">
-		  <li>欢迎 <span id="anameLayout"></span></li>
+	<div id="bd-top">
+	  <a href="/index.html"><img src="/img/logo.png" alt="bomdoo logo" /></a>
+	  <div id="bd-personal">
+		<ul id="bd-member">
+		  <li>欢迎 <span id="bd-aname"></span></li>
 		  <li class="last"><a href="javascript:void(0);" id="userlogout">退出</a></li>
+		  <li><a href="/faq.html">常见问题</a></li>
 		</ul>
-		<ul id="nav-guest">
-		  <li><a href="javascript: void(0);" rel="#loginoverlay">登录</a></li>
+		<ul id="bd-guest">
+		  <li><a href="javascript: void(0);" rel="#bd-login">登录</a></li>
 		  <li><a href="/app/new.html">注册</a></li>
-		  <li class="last"><a href="/member/reset.html">忘记密码</a></li>
+		  <li><a href="/member/reset.html">忘记密码</a></li>
+		  <li class="last"><a href="/faq.html">常见问题</a></li>
 		</ul>
-	  </div>
-	  <div class="overlay" id="loginoverlay">
-		<h3 id="login-hint" class="text-center"></h3>
-		<dl class="form">
-		  <dt>站点标识：</dt>
-		  <dd>
-			<input type="text" id="login-aname" class="long VAL_LOGIN vrequire" />
-		  </dd>
-		  
-		  <dt>密码：</dt>
-		  <dd>
-			<input type="password" id="login-asn" class="VAL_LOGIN vrequire" />
-		  </dd>
-		  
-		  <dt>&nbsp; </dt>
-		  <dd>
-			<input type="submit" id="login-submit" class="submitbtn" value="提交" />
-		  </dd>
-		</dl>
-		<h4 class="text-right"><a href="/app/new.html" target="_blank">还没注册？</a></h4>
 	  </div>
 	</div>
 
-	<div id="mid">
-	  <div class="navbanner">
-		<ul class="indentmenu">
-		  <?cs each:tab = Layout.tabs ?>
-		  <li><a href="<?cs var:tab.href ?>" class="<?cs var:tab.class ?>"><?cs var:tab.name ?></a></li>
-		  <?cs /each ?>
-		</ul>
-	  </div>
+	<div id="bd-mid">
+	  <ul id="bd-nav">
+		<?cs each:tab = Layout.tabs ?>
+		<li><a href="<?cs var:tab.href ?>" class="<?cs var:tab.class ?>"><?cs var:tab.name ?></a></li>
+		<?cs /each ?>
+		<li>&nbsp;</li>
+	  </ul>
 
-	  <?cs if: ?Layout.crumbs.0.name || ?Layout.actions.0.name ?>
-	  <div class="navbanner-sub">
-		<ul class="crumbs">
-		  <li class="first">当前位置:</li>
-		  <?cs each:crumb = Layout.crumbs ?>
-		  <li>&raquo; <a href="<?cs var:crumb.href ?>"><?cs var:crumb.name ?></a></li>
-		  <?cs /each ?>
-		</ul>
-		<ul id="userActions" class="uc-menu">
-		  <?cs each:action = Layout.actions ?>
-		  <li><a href="<?cs var:action.href ?>"><?cs var:action.name ?></a></li>
-		  <?cs /each ?>
-		</ul>
-	  </div>
+	  <?cs if: ?Layout.actions.0.name ?>
+	  <ul id="bd-action">
+		<?cs each:action = Layout.actions ?>
+		<li><a href="<?cs var:action.href ?>"><?cs var:action.name ?></a></li>
+		<?cs /each ?>
+	  </ul>
 	  <?cs /if ?>
 	  
-	  <div id="content">
+	  <?cs if: ?Layout.crumbs.0.name ?>
+	  <ul id="bd-crumb">
+		<li class="first">当前位置:</li>
+		<?cs each:crumb = Layout.crumbs ?>
+		<li>&raquo; <a href="<?cs var:crumb.href ?>"><?cs var:crumb.name ?></a></li>
+		<?cs /each ?>
+	  </ul>
+	  <?cs /if ?>
+
+	  <div id="bd-content">
 		<?cs if: ?Output.errmsg && Output.errcode == 15 ?>
 		  <script>
 			$(document).ready(function() {
@@ -117,10 +78,32 @@
 	  </div> <!-- content -->
 	</div> <!-- mid -->
 
-	<div id="bot">
-	  <p>版权所有 &copy; 2010 bmoon</p>
+	<div id="bd-bot">
+	  <p>版权所有 &copy; 2011 bmoon</p>
 	  <p>京ICP备10205734号</p>
 	</div>
 
+	<div class="overlay" id="bd-login">
+	  <h3 id="login-hint" class="text-center">登入 bomdoo</h3>
+	  <div class="sep"></div>
+	  <dl class="inp">
+		<dt>站点标识：</dt>
+		<dd>
+		  <input type="text" id="login-aname" class="long VAL_LOGIN vrequire" />
+		</dd>
+		
+		<dt>密码：</dt>
+		<dd>
+		  <input type="password" id="login-asn" class="VAL_LOGIN vrequire" />
+		</dd>
+		
+		<dt>&nbsp; </dt>
+		<dd>
+		  <input type="submit" id="login-submit" class="btn" value="提 交" />
+		</dd>
+	  </dl>
+	  <h4 class="text-right"><a href="/app/new.html" target="_blank">还没注册？</a></h4>
+	</div>
+	  
   </body>
 </html>

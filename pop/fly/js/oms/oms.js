@@ -8,6 +8,9 @@ bmoon.oms = {
 
 		o.scroll = $(".scrollable").scrollable({api: true});
 		o.navi = $(".scrollable").navigator({api: true});
+		o.browserhint = $('#browser-hint');
+		o.browserlater = $('#browser-later');
+		o.ielow = bmoon.utl.ie() && bmoon.utl.ie() < 7;
 
 		o.inited = true;
 		return o;
@@ -35,6 +38,8 @@ bmoon.oms = {
 				}
 			});
 		}, 'mgd.appinfo !== undefined', 10);
+		
+		o.ielow && !$.cookie('lcs_bs_ignore') && o.browserhint.fadeIn('slow');
 	},
 
 	bindClick: function() {
@@ -42,6 +47,10 @@ bmoon.oms = {
 
 		$('#im-users li .remove').click(o.removeCamer);
 		$('#im-msgs').mnscrollpage({trigpos: 'top', ppage: 1, callback: o.getMessage});
+		o.browserlater.click(function() {
+			o.browserhint.fadeOut();
+			$.cookie('lcs_bs_ignore', '1', {expires: 1});
+		});
 	},
 
 	removeCamer: function() {

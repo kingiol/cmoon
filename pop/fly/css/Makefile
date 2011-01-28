@@ -14,7 +14,7 @@ preload:
 	@mkdir -p b/oms/
 	@mkdir -p b/client/
 
-b/base.css: reset.css base.css mid.css overlay.css
+b/base.css: reset.css base.css layout.css overlay.css
 
 b/client/lcs.css: client/lcs.css
 b/client/mic.css: client/mic.css

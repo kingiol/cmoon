@@ -4,7 +4,7 @@ index {
 		Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/index.css" />
 			js = <script src="/js/b/index.js"></script>
-			title = 首页 - Easy Our Life
+			title = Easy Our Life
 			tabpart = 0
 		}
 		Include {
@@ -24,7 +24,7 @@ manual {
 			<script src="/js/b/manual.js"></script>
 EOM			
 			title = 使用手册
-			tabpart = 1
+			tabpart = 2
 			crumbs {
 				0 {
 					name = 使用手册
@@ -45,17 +45,8 @@ app_new {
 		Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/appnew.css" />
 			js = <script src="/js/b/appnew.js"></script>
-			title = 添加站点
-			crumbs {
-				0 {
-					name = 首页
-					href = /index.html
-				}
-				1 {
-					name = 注册新站点
-					href = /app/new.html
-				}
-			}
+			title = 站点注册
+			tabpart = 1
 		}
 		Include {
 			content = app/new.html

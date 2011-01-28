@@ -1,59 +1,37 @@
 /* ELEMENT */
-body {
-	background: #fff;
-	/*background-image: url(/img/bg/bg.gif);*/
-	color: #111;
-}
-a {color: #DB3946; cursor: pointer; text-decoration: none; }
+body {background: #f6f6f6 url(/img/bg/bg.png) repeat-x;}
+a {color: #DB3946; cursor: pointer; text-decoration: none;}
 h1 {margin: 3ex 0 2ex 0;}
 h2 {margin: 2ex 0 1ex 0;}
 h3 {margin: 1ex 0 0.5ex 0;}
-p {
-/*	text-indent: 2em; */
-	margin: 1ex 0 2ex 0;
-}
-/*a:hover {background-color: #DB3946; color: #FFF !important; text-decoration: none; }*/
-input, textarea {border: 1px solid #676767;}
-input.long {width: 180px;}
-input.middle {width: 100px;}
-input.short {width: 25px;}
-input.submitbtn, button.submitbtn {
-	/*margin-top: 10px;*/
-	padding: 1px 28px;
-	text-align: center;
-	vertical-align: middle;
-	color: #fff;
-	background-color: #686868;
-}
-input.submitbtn:hover {background-color: #9a9a9a; cursor: pointer;}
-input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;}
+p {margin: 1ex 0 2ex 0;}
+
 :focus {outline-style:none;}
-dl.form dt {float: left; width: 100px; margin: 0 13px 0 0; text-align: right;}
-dl.form dd {margin: 10px 0;	line-height:22px;}
-dl.form dd.loading .indicator {
-	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;
-}
-
-dl.form dd.success .indicator {
-	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat
-}
-
-dl.form dd.error .indicator {
-	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;
-}
+input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;}
+input[type=text], input[type=password] {height: 18px; padding: 1px;}
+input, textarea {border: 1px solid #A6A6A6;}
 
 /* SPECIAL CLASS */
+input.btn, button.btn {height: 28px; width: 80px; text-align: center; vertical-align: middle; border: 0px none; color: #fff; background: url(/img/bg/btn.png) 0 0 no-repeat;}
+input.btn:hover {cursor: pointer; background: url(/img/bg/btn.png) 0 -28px no-repeat;}
+input.btn-w, button.btn-w{width: 130px; background: url(/img/bg/btn.png) 0 -80px no-repeat;}
+input.btn-w:hover {background: url(/img/bg/btn.png) -28px -80px no-repeat;}
+input.long {width: 200px;}
+
+dl.inp dt {float: left; width: 100px; margin: 0 13px 0 0; text-align: right;}
+dl.inp dd {margin: 10px 0;	line-height:22px;}
+dl.inp dd.loading .indicator {display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;}
+dl.inp dd.success .indicator {display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat}
+dl.inp dd.error .indicator {display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;}
+
 .hide {display: none;}
 .show {display: block;}
 .valid {border: 2px solid green !important;}
 .invalid {border: 2px solid #800 !important;}
 .clearer {clear: both;}
 .sep {display: block; clear: both; height: 3ex;}
-.sepl {clear: both; height: 2ex;}
-.decimal {
-	font: 12px Georgia;
-	font-weight: bold;
-}
+.sepl {display: block; clear: both; height: 2ex;}
+.decimal {font: 12px Georgia; font-weight: bold;}
 .slight {color:#767676;}
 .em {font-weight: bold;}
 .eem {font-weight: bold; font-size: 120%;}
@@ -61,33 +39,3 @@ dl.form dd.error .indicator {
 .text-right {text-align: right;}
 .text-hint {color: #bb0000}
 .text-error {color: #ff0000}
-
-#top, #mid, #bot {
-	width: 960px;
-	margin: 0 auto;
-}
-#top {
-	height: 42px;
-	/*border-bottom: 1px dashed #101010;*/
-	background-image: url(/img/logo.png);
-	background-repeat:no-repeat;
-	margin-top: 2ex;
-	margin-bottom: 0.5ex;
-}
-#bot {
-	height: 100px;
-	/*border-top: 1px dashed #aaa;*/
-	border-top: 1px solid #aaa;
-	padding: 10px;
-}
-#bot p {text-align: center; text-indent: 0; margin: 2px;}
-#browser-hint {
-	width: 100%;
-	text-align: center;
-	background-color: #676767;
-	color: #aaa;
-	border-top: 1px solid #000;
-	border-bottom: 1px solid #000;
-	font-weight: bold;
-}
-/*#mid {padding: 1ex 0; }*/

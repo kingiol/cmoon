@@ -1,0 +1,32 @@
+#bd-top, #bd-mid, #bd-bot {
+	width: 960px;
+	margin: 0 auto;
+}
+#bd-top {
+	height: 82px;
+	margin-top: 1.5ex;
+}
+#bd-bot {
+	height: 100px;
+	padding: 10px;
+}
+#bd-bot p {text-align: center; text-indent: 0; margin: 2px;}
+
+#bd-personal {float: right; margin: 12px 0 0 0;}
+#bd-personal ul li{display: inline; float: left; margin: 5px 0;	padding: 0 8px; border-right: 1px solid #101010;}
+#bd-personal ul li.last{border-right: 0 none;}
+#bd-member {display: none;}
+
+#bd-nav {font: bold 13px Georgia;}
+#bd-nav li {float: left; height: 40px; background: url(/img/bg/nav.png) no-repeat 0 -14px;}
+#bd-nav li a {display: block; margin-left: 1px;	padding: 18px 20px 7px 20px; background: url(/img/bg/nav.png) repeat-x 0 15px;}
+#bd-nav li a.selected {height: 41px; background: #fff url(/img/bg/nav-current.png) repeat-x 0 0;}
+
+/* content */
+#bd-content {
+	clear: both;
+	padding: 1em;
+	line-height: 18px;
+	border: 1px solid #A6A6A6;
+	background: #FFF;
+}

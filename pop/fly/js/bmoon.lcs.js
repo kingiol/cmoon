@@ -9,25 +9,21 @@ bmoon.lcs = {
 		if (o.inited) return o;
 		o.inited = true;
 
-		o.aname = $('#anameLayout');
-		o.nav_guest = $('#nav-guest');
-		o.nav_member = $('#nav-member');
-		o.login_aname = $('#login-aname');
-		o.login_asn = $('#login-asn');
-		o.loginoverlay = $('a[rel="#loginoverlay"]').overlay({
+		o.aname = $('#bd-aname');
+		o.member = $('#bd-member');
+		o.guest = $('#bd-guest');
+		o.loginaname = $('#login-aname');
+		o.loginasn = $('#login-asn');
+		o.loginoverlay = $('a[rel="#bd-login"]').overlay({
 			mask: '#666', api: true,
 			onLoad: function() {
-				if (o.login_aname.val().length <= 0)
-					o.login_aname.focus();
+				if (o.loginaname.val().length <= 0)
+					o.loginaname.focus();
 				else
-					o.login_asn.focus();
+					o.loginasn.focus();
 			}
 		});
-		o.browserhint = $('#browser-hint');
-		o.browserlater = $('#browser-later');
 		
-		o.ielow = bmoon.utl.ie() && bmoon.utl.ie() < 7;
-
 		return o;
 	},
 
@@ -47,8 +43,6 @@ bmoon.lcs = {
 		if (o.vikierr) {
 			$('#content').empty().append('<div class="error">'+o.vikierr+'</div>')
 		}
-		
-		o.ielow && !$.cookie('lcs_bs_ignore') && o.browserhint.fadeIn('slow');
 	},
 	
 	bindClick: function() {
@@ -56,13 +50,7 @@ bmoon.lcs = {
 		
 		$('#login-submit').click(o.login);
 		$('#userlogout').click(o.logout);
-		o.login_asn.bind('keydown', 'return', o.login);
-		o.browserlater.click(function() {
-			var o = bmoon.lcs.init();
-
-			o.browserhint.fadeOut();
-			$.cookie('lcs_bs_ignore', '1', {expires: 1});
-		});
+		o.loginasn.bind('keydown', 'return', o.login);
 	},
 
 	login: function() {
@@ -71,8 +59,8 @@ bmoon.lcs = {
 		if (!$(".VAL_LOGIN").inputval()) return;
 
 		var
-		aname = o.login_aname.val(),
-		asn = $.md5($.md5(o.login_asn.val()));
+		aname = o.loginaname.val(),
+		asn = $.md5($.md5(o.loginasn.val()));
 
 		$.getJSON("/json/app/login", {aname: aname, asn: asn}, function(data) {
 			if (data.success != 1 || !data.aname) {
@@ -93,7 +81,7 @@ bmoon.lcs = {
         $.cookie('aname_esc', null, {path: '/', domain: g_site_domain});
         $.cookie('asn', null, {path: '/', domain: g_site_domain});
         $.cookie('masn', null, {path: '/', domain: g_site_domain});
-		o.login_aname.val("");
+		o.loginaname.val("");
 		o.loginCheck();
 	},
 	
@@ -103,12 +91,12 @@ bmoon.lcs = {
 		var aname = $.cookie('aname_esc');
 		if (aname != null) {
 			o.aname.text(aname);
-			o.nav_guest.hide();
-			o.nav_member.show();
-			o.login_aname.val(aname);
+			o.guest.hide();
+			o.member.show();
+			o.loginaname.val(aname);
 		} else {
-			o.nav_member.hide();
-			o.nav_guest.show();
+			o.member.hide();
+			o.guest.show();
 		}
 	}
 };

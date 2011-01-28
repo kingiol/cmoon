@@ -1,3 +1,28 @@
+/* ck means chunk */
+.cktitle, .cktitle {
+    border-bottom: 1px solid #101010;
+    font-weight: bold;
+    font-size: 12px;
+}
+.ckhalf {width: 345px;}
+.ckthird {width: 230px;}
+.ckquarter {width: 175px;}
+.ckfifth {width: 135px;}
+.cksixth, #coltwo .ck4em {width: 100px;}
+.ck2em {width: 2em;}
+
+.ckleft {
+    float: left;
+    margin: 0 10px 0 0;
+    text-align: left;
+}
+
+.ckright {
+    float: right;
+    margin: 0 0 0 10px;
+    text-align: right;
+}
+
 <style type="text/css">
 
 /*Credits: Dynamic Drive CSS Library */

@@ -19,10 +19,10 @@ config-avilable
 **************10-simple-vhost.conf:**************
 (测试环境不使用fastcgi, 请取消以下 # 注释)
 
-simple-vhost.default-host        = "www.kaiwuonline.com"
+simple-vhost.default-host        = "www.bomdoo.com"
 
-$HTTP["host"] == "www.kaiwuonline.com" {
-  server.document-root = "/var/www/www.kaiwuonline.com/"
+$HTTP["host"] == "www.bomdoo.com" {
+  server.document-root = "/var/www/www.bomdoo.com/"
   url.rewrite-once= ("^/([^\.\?]+[^\/])$" => "/run/viki?ScriptName=$1",
                      "^/([^\.]+)\?(.*[^\/])$"   => "/run/viki?ScriptName=$1&$2")
 
@@ -46,8 +46,8 @@ $HTTP["host"] == "www.kaiwuonline.com" {
   }
 }
 
-$HTTP["host"] == "kaiwuonline.com" {
-  server.document-root = "/var/www/www.kaiwuonline.com/"
+$HTTP["host"] == "bomdoo.com" {
+  server.document-root = "/var/www/www.bomdoo.com/"
   url.rewrite-once= ("^/([^\.\?]+[^\/])$" => "/run/viki?ScriptName=$1",
                      "^/([^\.]+)\?(.*[^\/])$"   => "/run/viki?ScriptName=$1&$2")
 
@@ -57,13 +57,13 @@ $HTTP["host"] == "kaiwuonline.com" {
 
 }
 
-$HTTP["host"] == "js.kaiwuonline.com" {
-  server.document-root = "/var/www/js.kaiwuonline.com/"
+$HTTP["host"] == "js.bomdoo.com" {
+  server.document-root = "/var/www/js.bomdoo.com/"
   expire.url = ("" => "access 1 days")
 }
 
-$HTTP["host"] == "css.kaiwuonline.com" {
-  server.document-root = "/var/www/css.kaiwuonline.com/"
+$HTTP["host"] == "css.bomdoo.com" {
+  server.document-root = "/var/www/css.bomdoo.com/"
   expire.url = ("" => "access 1 days")
 }
 
@@ -95,9 +95,9 @@ fastcgi.server = ("viki" =>
 /usr/sbin/lighty-enable-mod
 
 cd /var/www &&
-ln -s /usr/local/moon/pop/fly www.kaiwuonline.com
-ln -s /usr/local/moon/pop/fly/js js.kaiwuonline.com
-ln -s /usr/local/moon/pop/fly/css css.kaiwuonline.com
+ln -s /usr/local/moon/pop/fly www.bomdoo.com
+ln -s /usr/local/moon/pop/fly/js js.bomdoo.com
+ln -s /usr/local/moon/pop/fly/css css.bomdoo.com
 
 
 postgresql
