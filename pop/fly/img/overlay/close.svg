@@ -36,6 +36,14 @@
          stdDeviation="0.074293028"
          id="feGaussianBlur3620" />
     </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3640">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.42973821"
+         id="feGaussianBlur3642" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -45,7 +53,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.6568542"
-     inkscape:cx="61.970235"
+     inkscape:cx="30.769148"
      inkscape:cy="-4.9238609"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -74,14 +82,14 @@
      transform="translate(0,-1016.3622)">
     <path
        sodipodi:type="arc"
-       style="fill:#fffafa;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#a9a9a9;stroke-width:0.96777886000000002;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3640)"
        id="path3590"
        sodipodi:cx="19.03665"
        sodipodi:cy="20.670156"
        sodipodi:rx="14.324607"
        sodipodi:ry="14.324607"
        d="m 33.361257,20.670156 a 14.324607,14.324607 0 1 1 -28.6492142,0 14.324607,14.324607 0 1 1 28.6492142,0 z"
-       transform="matrix(1.1690424,0,0,1.1690424,-4.0324386,1010.1547)" />
+       transform="matrix(1.104919,0,0,1.104919,-2.8117444,1011.4801)" />
     <path
        sodipodi:type="arc"
        style="fill:#db3946;fill-opacity:1;fill-rule:evenodd;stroke:none;filter:url(#filter3618)"
@@ -91,7 +99,7 @@
        sodipodi:rx="7.4450264"
        sodipodi:ry="7.4136124"
        d="m 27.267015,17.403141 a 7.4450264,7.4136124 0 1 1 -14.890052,0 7.4450264,7.4136124 0 1 1 14.890052,0 z"
-       transform="matrix(1.8792831,0,0,1.8872462,-19.028917,1001.475)" />
+       transform="matrix(1.647394,0,0,1.6543745,-14.432414,1005.5277)" />
     <rect
        style="fill:#fffafa;fill-opacity:1;fill-rule:evenodd;stroke:none"
        id="rect3604"

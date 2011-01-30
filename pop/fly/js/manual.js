@@ -14,16 +14,6 @@ bmoon.manual = {
 		var o = bmoon.manual.init();
 
 		o.bindClick();
-		
-		bmoon.kol.onready({
-	  		aname: 'kol',
-			css: 'http://css.kaiwuonline.com/b/client/mic.css',
-			maxevent: 'mouseenter',
-			pos: {
-				top: '35%',
-				right: '0'
-			}
-		});
 	},
 
 	bindClick: function() {

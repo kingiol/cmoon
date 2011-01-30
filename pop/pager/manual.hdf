@@ -1,13 +1,10 @@
 manual {
-	Layout = layout_nclient.html
+	Layout = layout.html
 	Dataset {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/manual.css" />
-			js << EOM
-			<script src="/js/b/kol.js"></script>
-			<script src="/js/b/manual.js"></script>
-EOM			
-			tabpart = 3
+			js = <script src="/js/b/manual.js"></script>
+			tabpart = 2
         }
 	}
 }
