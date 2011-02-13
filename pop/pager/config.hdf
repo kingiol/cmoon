@@ -29,3 +29,18 @@ app_new {
 	}
 	Output = app/new.html
 }
+app_reset {
+	Layout = layout.html
+	Dataset {
+		Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/appnew.css" />
+			js = <script src="/js/b/appnew.js"></script>
+			title = 站点注册
+			tabpart = 1
+		}
+		Include {
+			content = app/new.html
+		}
+	}
+	Output = app/new.html
+}

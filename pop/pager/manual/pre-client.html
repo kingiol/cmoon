@@ -1,0 +1,195 @@
+<div id="man-top">
+  <a class="nav-prev nav-prev-w" href="pre-stat.html">页面统计</a>
+  <a class="nav-up" href="index.html">目 录</a>
+  <a class="nav-next nav-next-w" href="use.html">使用服务</a>
+</div>
+
+<h2 class="text-center">为你的页面加上聊天客户端</h2>
+
+<div class="intro">
+  <p>
+	简介： 本节主要描述为你的站点网页中添加在线客服聊天客户端的方法，以及如何定制属于自己的聊天客户端。<br />
+	对象： 本节内容针对希望使用在线客服的网站管理员。<br />
+	预备知识： 添加和定制在线客服客户端，你需要了解基本的 HTML 语法， 和简单的 js 对象使用方法。<br />
+  </p>
+</div>
+<p>完成本站注册后， 在你的网站页面上加入以下代码(页面底部， &lt;/body&gt;标签之前)， 便可为你的页面加上聊天客户端。</p>
+<pre>
+  &lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" &gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+  bmoon.kol.onready({
+  aname: 'MySiteName',
+  ...
+  }
+  });
+&lt;/script&gt;</pre>
+<p>其中， aname 为你注册时候填写的站点名。 聊天客户端的所有行为都可由初始化时的参数来控制， 接下来， 我们来详细了解这些参数(以上代码中的省略号)。</p>
+
+
+<h3>控制聊天客户端的摆放位置</h3>
+<p>首先， 你需要确定将聊天客户端放在你页面的哪个地方， 如下图所示：</p>
+<img src="/img/manual/client.png" alt="聊天客户端" />
+<p>红色框框表示聊天客户端， 我们可以通过 pos 参数来控制其在网页中摆放的位置：</p>
+<pre>
+  pos : {
+  top: 'VALUE',
+  bottom: 'VALUE',
+  left: 'VALUE',
+  right: 'VALUE'
+}</pre>
+<p>VALUE 取值可以是数字后面接px、 或者%。 比如： top: '0', left: '35px', bottom: '20%' 都是合法值， 分别代表紧贴页顶， 距左边35px, 离底边整个页高的 20%。</p>
+<p>值得注意的是， top, left 的优先级要高于 right, bottom。 比如传 pos: {top: '0', bottom: '20%', left: '35px'} 时，将会把客户端放在紧贴页顶， 距左边35px, bottom 参数将被忽略。</p>
+<p>另外， pos 参数的默认值是 {right: '0', bottom: '0'}， 将其放在页面右下角。</p>
+
+
+<h3>深入了解聊天客户端</h3>
+<p>一般情况下， 聊天客户端有以下两种状态：</p>
+<img src="/img/manual/max-mid.png" alt="通常情况下的状态" />
+<p>mid 为多数客户端初始化时的默认展示界面， 多数是“在线客服”几个字， 告诉访客， 这里可以与网站客户聊天， 有的还配上个美女头像， 那就更诱人了：D</p>
+<p>max 为访客触发聊天后的界面，里面有如下几个元素：</p>
+<ul>
+  <li>2： 提示信息， 告诉访客， 他当前正在与哪位客服聊天， 或者没有客服在线。</li>
+  <li>3： 关闭聊天窗口， 切回到 mid 状态的控件。</li>
+  <li>4： 聊天消息列表。</li>
+  <li>5： 访客输入聊天消息控件。</li>
+</ul>
+
+<p>下面， 我们看看控制这两个状态的一些具体参数。</p>
+<ul>
+  <li>maxevent</li>
+  <p>由 mid 状态切换到 max 状态的触发方式。 可取值 'click'、 或者'mouseenter'。 比如指定 maxevent: 'mouseenter' 时， 鼠标移入 mid, 将切换到 max 状态， 不用点击。 默认取值为 'click'。</p>
+
+  <li>defaultUI</li>
+  <p>默认展现给访客的界面。 可取值 'mid'、 'max'。  默认是展现 mid 界面给访客。</p>
+  
+  <li>restoreUI</li>
+  <p>在访客刷新页面，或新开标签页时， 是否记住聊天客户端当前的展开状态。 可取值 true、 false。 默认是true， 这样，用户在触发聊天窗口后刷新页面，聊天窗口还是在触发状态(max状态)。</p>
+  
+  <li>restoreMsg</li>
+  <p>在访客刷新页面，或新开标签页时， 是否展示该访客和客服的最近几条聊天消息给访客。 可取值 true、 false。 默认是true， 这样，用户在刷新页面，或者第二天再打开你的网站时，将能在聊天消息列表中看到于你的最近几次对话。 有情提醒： 隐私性质的网站建议将该值设成 false， 不然客户投诉到时候可不要来找我；D</p>
+
+  <li>hidemidOnMax</li>
+  <p>界面由 mid 状态 切换到 max 状态时， 是否隐藏 mid 状态， 默认隐藏， 但有时为了保证界面的一致性， 你可能不希望 mid 被隐藏， 将其设置成 true 就可以了。</p>
+</ul>
+
+
+<h3>再深入一点</h3>
+<p>好吧， 你一定会奇怪， 为何是 mid 和 max？ 这是因为你可能还需要一个状态： min， 代表聊天客户端最小化时的状态， 如下图：</p>
+<img src="/img/manual/min.png" alt="带最小化的聊天客户端" />
+
+<p>虽然比较直观， 还是解释下上面的几个数字</p>
+<ul>
+  <li>1： 最小化 mid 界面， 我们取名叫 miner。</li>
+  <li>2： 最小化 max 界面， 功能同 miner 一样， 所以也叫 miner。</li>
+  <li>3： 聊天客户端最小化时的状态， 取名 min。</li>
+</ul>
+
+<p>将 minable 参数设成 true， 便可以使用上面这种带 min 状态的聊天客户端， 很简单吧， 别高兴太早， 因为界面上多了以上三个控件， 所以客户端的样式文件同样也会复杂一点(我们为此提供了一个默认的 <a target="_blank" href="http://css.kaiwuonline.com/b/client/lcs.css">样式文件</a> )。 编写和指定样式文件的方法将在下节介绍。</p>
+
+
+<h3>定制客户端</h3>
+<p>不满意我们提供的聊天客户端？ 你可以自己设计各个窗口、空间的大小、风格。。。 设计好后，做好样式文件(.css)文件， 然后通过 css 参数来初始化。  该参数的默认取值是 'http://css.kaiwuonline.com/b/client/lcs.css'。 具体 css 文件的编写方法可以参考：</p>
+<ul>
+  <li><a target="_blank" href="http://css.kaiwuonline.com/b/client/mic.css">mic</a> ： 只有 mid 和 max 状态的样式。</li>
+  <li><a target="_blank" href="http://css.kaiwuonline.com/b/client/lcs.css">lcs</a> ： 带 min 状态的样式。</li>
+</ul>
+<p>各个元素的说明， 在以上示例文件中有简要的解释。 其实很简单， 你需要牢记的仅仅只是 min, mid, max; miner, mider, maxer 代表的意思： min, mid, max 分别代表聊天客户端的最小化， 普通， 最大化 三个状态； miner, mider, maxer 分别代表切换到这三个状态的控件。</p>
+<p>如果你有非常性感的聊天客户端愿意与大家分享， 欢迎与我们取得联系。</p>
+
+
+<h3>小结</h3>
+<p>好的，一切都快结束了！ 来回顾一下所有的参数：</p>
+<table>
+  <tr>
+	<th>参数名</th>
+	<th>类型</th>
+	<th>是否必填</th>
+	<th>简介</th>
+	<th>默认值</th>
+  </tr>
+
+  <tr>
+	<td>aname</td>
+	<td>字符串</td>
+	<td>必填</td>
+	<td>注册时的站点名</td>
+	<td>必填，无默认值</td>
+  </tr>
+  <tr>
+	<td>pos</td>
+	<td>对象</td>
+	<td>选填</td>
+	<td>聊天客户端在页面中摆放的位置</td>
+	<td>{right: 0, bottom: 0}</td>
+  </tr>
+  <tr>
+	<td>maxevent</td>
+	<td>字符串</td>
+	<td>选填</td>
+	<td>窗口由 mid 切换到 max 状态的方式， 可填 click、mouseenter</td>
+	<td>'click'</td>
+  </tr>
+  <tr>
+	<td>defaultUI</td>
+	<td>字符串</td>
+	<td>选填</td>
+	<td>访客来访时， 聊天客户端默认状态， 可取 min, mid, 或max</td>
+	<td>'mid'</td>
+  </tr>
+  <tr>
+	<td>restoreUI</td>
+	<td>布尔</td>
+	<td>选填</td>
+	<td>页面刷新时，是否记住聊天客户端状态</td>
+	<td>true</td>
+  </tr>
+  <tr>
+	<td>restoreMsg</td>
+	<td>布尔</td>
+	<td>选填</td>
+	<td>页面刷新时，是否展示最近几条聊天记录</td>
+	<td>true</td>
+  </tr>
+  <tr>
+	<td>hidemidOnMax</td>
+	<td>布尔值</td>
+	<td>选填</td>
+	<td>窗口由 mid 切换到 max 状态时， 是否隐藏 mid 状态</td>
+	<td>true</td>
+  </tr>
+  <tr>
+	<td>minable</td>
+	<td>布尔</td>
+	<td>选填</td>
+	<td>聊天客户端是否具有 min 状态</td>
+	<td>false</td>
+  </tr>
+  <tr>
+	<td>css</td>
+	<td>字符串</td>
+	<td>选填</td>
+	<td>聊天客户端的样式文件</td>
+	<td>'http://css.kaiwuonline.com/b/client/lcs.css'</td>
+  </tr>
+</table>
+
+<p>最后， 截取本页面的客户端初始化代码以供参考：</p>
+<pre>
+  &lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" &gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+  bmoon.kol.onready({
+  aname: 'kol',
+  css: 'http://css.kaiwuonline.com/b/client/mic.css',
+  maxevent: 'mouseenter',
+  pos: {
+  top: '35%',
+  right: '0'
+  }
+  });
+&lt;/script&gt;</pre>
+
+<div id="man-bot">
+  <a class="nav-prev nav-prev-w" href="pre-stat.html">页面统计</a>
+  <a class="nav-up" href="index.html">目 录</a>
+  <a class="nav-next nav-next-w" href="use.html">使用服务</a>
+</div>

@@ -1,42 +1,39 @@
-<div id="content-sub">
-  <div id="add">
-	<h3>注册新站点</h3>
-	<dl class="inp">
-	  <dt>站点标识：</dt>
-	  <dd>
-		<input type="text" name="aname" id="aname" class="long VAL_NEWAPP vrequire" vmax="256" vmin="3" />
-		<span class="slight">（3 ~ 128个字符）</span>
-		<span class="indicator"></span>
-	  </dd>
-	  
-	  <dt>联系邮箱：</dt>
-	  <dd>
-		<input type="text" name="email" id="email" class="long VAL_NEWAPP vrequire vemail" />
-		<span class="slight">（方便找回密码）</span>
-	  </dd>
-	  
-	  <dt>登录密码：</dt>
-	  <dd>
-		<input type="password" name="asn" id="asn" class="VAL_NEWAPP vrequire" />
-	  </dd>
-	  
-	  <dt>&nbsp; </dt>
-	  <dd>
-		<input type="submit" id="submit" class="btn" value="提  交" />
-	  </dd>
-	</dl>
-  </div>
-
-  <div id="copy" class="hide">
-	<h4>添加站点成功， 请在您网站页面中加入以下代码(建议置于底部,&lt;/body&gt;之前)， 即可<a href="/oms">开始管理站点</a></h4>
-	<div class="sep"></div>
-	<pre>
-&lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" &gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;
-  bmoon.kol.onready({aname: '<span class='copy-aname'></span>'});
-&lt;/script&gt;
-	</pre>
+<div id="add">
+  <h3>注册新站点</h3>
+  <dl class="inp">
+	<dt>站点标识：</dt>
+	<dd>
+	  <input type="text" name="aname" id="aname" class="long VAL_NEWAPP vrequire" vmax="256" vmin="3" />
+	  <span class="slight">（3 ~ 128个字符）</span>
+	  <span class="indicator"></span>
+	</dd>
 	
-  </div>
+	<dt>联系邮箱：</dt>
+	<dd>
+	  <input type="text" name="email" id="email" class="long VAL_NEWAPP vrequire vemail" />
+	  <span class="slight">（方便找回密码）</span>
+	</dd>
+	
+	<dt>登录密码：</dt>
+	<dd>
+	  <input type="password" name="asn" id="asn" class="VAL_NEWAPP vrequire" />
+	</dd>
+	
+	<dt>&nbsp; </dt>
+	<dd>
+	  <input type="submit" id="submit" class="btn" value="提  交" />
+	</dd>
+  </dl>
+</div>
 
+<div id="copy" class="hide">
+  <h4>添加站点成功， 请在您网站页面中加入以下代码(建议置于底部,&lt;/body&gt;之前)， 即可<a href="/oms">开始管理站点</a></h4>
+  <div class="sep"></div>
+  <pre>
+	&lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" &gt;&lt;/script&gt;
+	&lt;script type="text/javascript"&gt;
+	bmoon.kol.onready({aname: '<span class='copy-aname'></span>'});
+	&lt;/script&gt;
+  </pre>
+  
 </div>
