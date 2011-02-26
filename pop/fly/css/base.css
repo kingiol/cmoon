@@ -18,8 +18,8 @@ ul.normal {padding: 0 2em;}
 
 input.btn, button.btn {height: 28px; width: 80px; text-align: center; vertical-align: middle; border: 0px none; color: #fff; background: url(/img/bg/btn.png) 0 0 no-repeat;}
 input.btn:hover {cursor: pointer; background: url(/img/bg/btn.png) 0 -28px no-repeat;}
-input.btn-w, button.btn-w{width: 130px; background: url(/img/bg/btn.png) 0 -80px no-repeat;}
-input.btn-w:hover {background: url(/img/bg/btn.png) -28px -80px no-repeat;}
+input.btn-w, button.btn-w{width: 130px; background: url(/img/bg/btn.png) -80px 0 no-repeat;}
+input.btn-w:hover {background: url(/img/bg/btn.png) -80px -28px no-repeat;}
 input.long {width: 200px;}
 
 a.nav-next {display: inline-block; height: 28px; line-height: 28px; width: 80px; text-align: center; background: url(/img/bg/btn.png) 0 -56px no-repeat; font-weight: bold;}
@@ -49,7 +49,7 @@ dl.inp dd.error .indicator {display:inline-block;margin-left:5px;width:16px;heig
 .invalid {border: 2px solid #800 !important;}
 .clearer {clear: both;}
 .sep {display: block; clear: both; height: 3em;}
-.sepl {display: block; clear: both; height: 2em;}
+.sepl {display: block; clear: both; height: 1em;}
 .decimal {font: 12px Georgia; font-weight: bold;}
 .slight {color:#767676;}
 .em {font-weight: bold;}
