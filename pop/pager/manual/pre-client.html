@@ -1,26 +1,28 @@
+<!--
 <div id="man-top">
   <a class="nav-prev nav-prev-w" href="pre-stat.html">页面统计</a>
   <a class="nav-up" href="index.html">目 录</a>
   <a class="nav-next nav-next-w" href="use.html">使用服务</a>
 </div>
+-->
 
 <h2 class="text-center">为你的页面加上聊天客户端</h2>
 
-<div class="intro">
+<!--<div class="intro">
   <p>
 	简介： 本节主要描述为你的站点网页中添加在线客服聊天客户端的方法，以及如何定制属于自己的聊天客户端。<br />
 	对象： 本节内容针对希望使用在线客服的网站管理员。<br />
 	预备知识： 添加和定制在线客服客户端，你需要了解基本的 HTML 语法， 和简单的 js 对象使用方法。<br />
   </p>
 </div>
-<p>完成本站注册后， 在你的网站页面上加入以下代码(页面底部， &lt;/body&gt;标签之前)， 便可为你的页面加上聊天客户端。</p>
+-->
+<p>完成本站注册后， 在你的网站页面上加入以下代码(页面底部， &lt;/body&gt;标签之前)， 便可为你的页面加上聊天客户端。(聊天客户端同时也具有页面访问统计功能)</p>
 <pre>
   &lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" &gt;&lt;/script&gt;
   &lt;script type="text/javascript"&gt;
   bmoon.kol.onready({
-  aname: 'MySiteName',
-  ...
-  }
+      aname: 'MySiteName',
+      ...
   });
 &lt;/script&gt;</pre>
 <p>其中， aname 为你注册时候填写的站点名。 聊天客户端的所有行为都可由初始化时的参数来控制， 接下来， 我们来详细了解这些参数(以上代码中的省略号)。</p>
@@ -178,13 +180,13 @@
   &lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" &gt;&lt;/script&gt;
   &lt;script type="text/javascript"&gt;
   bmoon.kol.onready({
-  aname: 'kol',
-  css: 'http://css.kaiwuonline.com/b/client/mic.css',
-  maxevent: 'mouseenter',
-  pos: {
-  top: '35%',
-  right: '0'
-  }
+      aname: 'kol',
+      css: 'http://css.kaiwuonline.com/b/client/mic.css',
+      maxevent: 'mouseenter',
+      pos: {
+          top: '35%',
+          right: '0'
+      }
   });
 &lt;/script&gt;</pre>
 

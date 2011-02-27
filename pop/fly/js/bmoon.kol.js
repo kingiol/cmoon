@@ -15,6 +15,34 @@ function _execAfter(func, until, sec) {
 		}, 100);
 	}
 }
+/**
+ * Open a connection to the specified URL, which is
+ * intended to respond with an XML message.
+ * 
+ * @param string method The connection method; either "GET" or "POST".
+ * @param string url    The URL to connect to.
+ * @param string toSend The data to send to the server; must be URL encoded.
+ * @param function responseHandler The function handling server response.
+ */
+function _xmlOpen(method, url, toSend, responseHandler)
+{
+    if (window.XMLHttpRequest) {
+        // browser has native support for XMLHttpRequest object
+        req = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        // try XMLHTTP ActiveX (Internet Explorer) version
+        req = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    if(req) {
+        req.onreadystatechange = responseHandler;
+        req.open(method, url, true);
+        req.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        req.send(toSend);
+    } else {
+        //alert('Your browser does not seem to support XMLHttpRequest.');
+    }
+}
 
 ; var bmoon = bmoon || {};
 bmoon.kol = {
@@ -35,6 +63,8 @@ bmoon.kol = {
 		o.inited = true;
 
 		o.aname = opts.aname || 'unknown';
+
+		if (opts.statOnly) return o;
 
 		if (typeof jQuery != 'function' || jQuery.fn.jquery < '1.4.2') {
 			o._loadJs('http://js.kaiwuonline.com/b/chatb.js');
@@ -66,9 +96,23 @@ bmoon.kol = {
 	onready: function(opts) {
 		var o = bmoon.kol.init(opts);
 
+		if (opts.statOnly) {
+			_execAfter(function() {
+				var sdata = '';
+				
+				_xmlOpen('GET',
+						 'http://www.bomdoo.com/json/stat',
+						 sdata,
+						 function() {return;});
+			}, "document.body != null", 10);
+			
+			return;
+		}
+		
 		_execAfter(function() {
 			// opts part two
 			opts = $.extend({
+				statOnly: false,
 				aname: 'unknown',
 				defaultUI: 'mid',
 				restoreUI: true,

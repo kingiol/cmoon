@@ -1,8 +1,9 @@
 BASEDIR = ../../../
 include $(BASEDIR)Make.env
 
-FILES = b/base.js b/kol.js b/chatb.js b/chatc.js \
+FILES = b/kol.js b/chatb.js b/chatc.js \
 		b/chat.js b/chat_gb.js \
+		b/base.js \
 		b/index.js b/manual.js b/appnew.js\
 		b/blog.js b/blogindex.js b/blogop.js \
 		b/oms.js b/oms/edit.js b/oms/stat_ie.js b/oms/stat.js b/oms/users.js \
@@ -14,13 +15,6 @@ preload:
 	@$(MAKE) -C ape/
 	@mkdir -p b/oms/
 
-b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/jquery.md5.js \
-		   pub/jquery.mninpval.js \
-		   pub/jquerytools/src/toolbox/toolbox.expose.js \
-	       pub/jquerytools/src/overlay/overlay.js \
-	       pub/bmoon.js bmoon.lcs.js \
-		   pub/jquery.hotkeys.js
-
 b/kol.js: bmoon.kol.js
 b/chatb.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/bmoon.js
 b/chatc.js: pub/jquery.cookie.js pub/bmoon.js
@@ -30,6 +24,13 @@ b/chat.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/Buil
 b/chat_gb.js: pub/jquerytools/src/tooltip/tooltip.js pub/jquery.hotkeys.js ape/Build/JSON.js ape/app/gb/bmoon.chat.js ape/Build/apeClient.js ape/app/livecs.js
 
 # Server
+b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/jquery.md5.js \
+		   pub/jquery.mninpval.js \
+		   pub/jquerytools/src/toolbox/toolbox.expose.js \
+	       pub/jquerytools/src/overlay/overlay.js \
+	       pub/bmoon.js bmoon.lcs.js \
+		   pub/jquery.hotkeys.js
+
 b/index.js: pub/jquerytools/src/scrollable/scrollable.js index.js
 b/manual.js: manual.js
 b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
