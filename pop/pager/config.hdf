@@ -4,7 +4,7 @@ index {
 		Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/index.css" />
 			js = <script src="/js/b/index.js"></script>
-			title = Easy Our Life
+			title = 享受播种之美
 			tabpart = 0
 		}
 		Include {
