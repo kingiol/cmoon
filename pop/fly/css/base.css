@@ -15,6 +15,7 @@ input, textarea {border: 1px solid #A6A6A6;}
 /* SPECIAL CLASS */
 ul.normal {padding: 0 2em;}
 /*ul.normal li {list-style: outside;}*/
+ul.emph li {font-weight: bold;}
 
 input.btn, button.btn {height: 28px; width: 80px; text-align: center; vertical-align: middle; border: 0px none; color: #fff; background: url(/img/bg/btn.png) 0 0 no-repeat;}
 input.btn:hover {cursor: pointer; background: url(/img/bg/btn.png) 0 -28px no-repeat;}
