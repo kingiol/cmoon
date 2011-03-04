@@ -2,21 +2,26 @@
 
 <h3>添加统计代码</h3>
 <p>
-  页面访问统计，意为对用户访问你网站页面的行为进行一些统计、分析，以提供运维成效的数据依据。
+  页面访问统计，意为对用户访问你网站页面的行为进行一些统计、分析，为你的网站运维提供数据参考。
 </p>
 <p>
-  完成本站注册后， 在你的网站页面上加入以下代码(页面底部， &lt;/body&gt;标签之前)， 便可为你的页面加上访问统计功能。
+  完成本站站长帐号注册后， 在你的网站需要统计的页面上加入以下代码(页面底部，
+  &lt;/body&gt;标签之前)， 便可为你的页面加上访问统计功能。
 </p>
 <pre>
   &lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" &gt;&lt;/script&gt;
   &lt;script type="text/javascript"&gt;
   bmoon.kol.onready({
-      statOnly: true,
-      aname: 'MySiteName'
+      aname: 'MySiteName',
+      statOnly: true
   });
 &lt;/script&gt;</pre>
 <p>
-  其中， aname 为你注册时候填写的站点名。(<span class="text-hint">以上代码适用于仅仅只想使用访问统计功能的用户</span>，正如前面所说，使用聊天客户端的用户不需要以上代码也能完成同样的统计功能，详见下一章。)
+  其中， aname 为你注册站长帐号时填写的站点名。
+</p>
+<p>
+  <span class="text-hint">以上代码适用于仅仅只想使用访问统计功能的用户</span>，正如前
+  面所说，使用聊天客户端的用户不需要以上代码也能完成同样的统计功能，详见下一章。
 </p>
 
 <div id="man-bot">

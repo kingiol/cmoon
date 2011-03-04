@@ -18,6 +18,10 @@ Dataset {
 				href = /manual/index.html
 			}
 			3 {
+				name = 界面定制
+				href = /demo.html
+			}
+			4 {
 				name = 问题反馈
 				href = /improve.html
 			}
