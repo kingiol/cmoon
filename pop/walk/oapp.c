@@ -2,12 +2,15 @@
 #include "lheads.h"
 #include "oapp.h"
 
-static void app_after_login(CGI *cgi, char *aname, char *masn)
+static void app_after_login(CGI *cgi, HASH *evth, char *aname)
 {
-	char tm[LEN_TM_GMT], *p;
+	char tm[LEN_TM_GMT], *p, masn[LEN_CK];
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	if (!evt) return;
 
-	hdf_set_copy(cgi->hdf, PRE_OUTPUT".aname", PRE_QUERY".aname");
-	
+	memset(masn, 0x0, sizeof(masn));
+	mcs_rand_string(masn, sizeof(masn));
+
 	/*
 	 * set cookie 
 	 */
@@ -19,6 +22,12 @@ static void app_after_login(CGI *cgi, char *aname, char *masn)
 	//cgi_url_escape(masn, &p);
 	mmisc_getdatetime_gmt(tm, sizeof(tm), "%A, %d-%b-%Y %T GMT", 60*60*3);
 	cgi_cookie_set(cgi, "masn", masn, NULL, SITE_DOMAIN, tm, 1, 0);
+
+	hdf_set_value(evt->hdfsnd, "aname", aname);
+	hdf_set_value(evt->hdfsnd, "masn", masn);
+	MEVENT_TRIGGER_NRET(evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
+
+	hdf_set_copy(cgi->hdf, PRE_OUTPUT".aname", PRE_QUERY".aname");
 }
 
 NEOERR* app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
@@ -42,17 +51,124 @@ NEOERR* app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * trigger
 	 */
-	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
+	mevent_trigger(evt, aname, REQ_CMD_APPINFO, FLAGS_SYNC);
+	if (PROCESS_OK(evt->errcode)) {
+		hdf_set_value(cgi->hdf, PRE_OUTPUT".exist", "1");
+		hdf_set_value(cgi->hdf, PRE_OUTPUT".msg", "站点已被注册");
+	} else if (evt->errcode == LERR_NREGIST) {
+		hdf_set_value(cgi->hdf, PRE_OUTPUT".exist", "0");
+		hdf_set_value(cgi->hdf, PRE_OUTPUT".msg", "站点还未注册");
+	} else {
+		return nerr_raise(evt->errcode, "get app %s info failure %d",
+						  evt->ename, evt->errcode);
+	}
+	
+	return STATUS_OK;
+}
+
+NEOERR* app_reset_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mevent_t *evt;
+	char *aname, *email, *sub, *content;
+	char rlink[LEN_CK];
+	
+	HDF_GET_STR(cgi->hdf, PRE_QUERY".aname", aname);
+	mcs_rand_string(rlink, sizeof(rlink));
+	
+	/*
+	 * app reset
+	 */
+	evt = (mevent_t*)hash_lookup(evth, "aic");
+	LPRE_EVTOP(cgi->hdf, evt);
+
+	hdf_set_value(evt->hdfsnd, "aname", aname);
+	hdf_set_value(evt->hdfsnd, "rlink", rlink);
+
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APP_SETRLINK, FLAGS_SYNC);
+
+	email = hdf_get_value(evt->hdfrcv, "email", NULL);
 
 	/*
-	 * set output
+	 * input check
 	 */
-	if (hdf_get_obj(evt->hdfrcv, "state")) {
-		hdf_set_value(cgi->hdf, PRE_OUTPUT".exist", "1");
-		hdf_set_value(cgi->hdf, PRE_OUTPUT".msg", "站点名已被占用");
-	} else {
-		hdf_set_value(cgi->hdf, PRE_OUTPUT".exist", "0");
+	evt = (mevent_t*)hash_lookup(evth, "aux");
+	LPRE_EVTOP(cgi->hdf, evt);
+
+	sub = hdf_get_value(g_cfg, "Email.AppReset.subject", NULL);
+	content = hdf_get_value(g_cfg, "Email.AppReset.content", NULL);
+
+	if (!sub || !content) return nerr_raise(NERR_ASSERT, "param null");
+
+	/*
+	 * prepare data 
+	 */
+	hdf_set_value(evt->hdfsnd, "go", "1");
+	hdf_set_value(evt->hdfsnd, "opt",
+				  hdf_get_value(g_cfg, "Email.AppReset.opt", NULL));
+	hdf_set_value(evt->hdfsnd, "sub", sub);
+	hdf_set_value(evt->hdfsnd, "to", email);
+
+	char *p = NULL;
+	neos_url_escape(aname, &p, NULL);
+	content = mmisc_str_repstr(2, content, "$aname$", aname, "$aname_esc$", p, "$rlink$", rlink);
+	hdf_set_value(evt->hdfsnd, "content", content);
+	SAFE_FREE(content);
+	SAFE_FREE(p);
+	
+	/*
+	 * trigger
+	 */
+	MEVENT_TRIGGER(evt, email, REQ_CMD_MAIL_ADD, FLAGS_NONE);
+
+	return STATUS_OK;
+}
+
+NEOERR* app_pass_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname, *rlink;
+	NEOERR *err;
+
+	HDF_FETCH_STR(cgi->hdf, PRE_QUERY".aname", aname);
+	HDF_FETCH_STR(cgi->hdf, PRE_QUERY".rlink", rlink);
+	LPRE_EVTOP(cgi->hdf, evt);
+
+	if (aname && rlink) {
+		hdf_set_value(evt->hdfsnd, "aname", aname);
+		MEVENT_TRIGGER(evt, aname, REQ_CMD_APP_GETRLINK, FLAGS_SYNC);
+
+		char *s = hdf_get_value(evt->hdfrcv, "rlink", NULL);
+		if (!s || strcmp(s, rlink))
+			return nerr_raise(LERR_WRESET, "reset code error");
+
+		app_after_login(cgi, evth, aname);
+		
+		hdf_set_value(cgi->hdf, PRE_OUTPUT".aname", aname);
+
+		return STATUS_OK;
 	}
+
+	APP_CHECK_LOGIN();
+
+	hdf_set_value(cgi->hdf, PRE_OUTPUT".aname", aname);
+	
+	return STATUS_OK;
+}
+
+NEOERR* app_pass_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname, *asn;
+	NEOERR *err;
+
+	HDF_GET_STR(cgi->hdf, PRE_QUERY".asn", asn);
+	
+	APP_CHECK_LOGIN();
+
+	hdf_set_value(evt->hdfsnd, "aname", aname);
+	hdf_set_value(evt->hdfsnd, "asn", asn);
+
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
 	
 	return STATUS_OK;
 }
@@ -60,7 +176,7 @@ NEOERR* app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 NEOERR* app_new_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
-	char *aname, *asn, *email, masn[LEN_CK];
+	char *aname, *asn, *email, masn[LEN_CK] = "init masn";
 	
 	/*
 	 * input check
@@ -80,9 +196,6 @@ NEOERR* app_new_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 	
 	hdf_set_int_value(evt->hdfsnd, "state", LCS_ST_FREE);
-	
-	memset(masn, 0x0, sizeof(masn));
-	mcs_rand_string(masn, sizeof(masn));
 	hdf_set_value(evt->hdfsnd, "masn", masn);
 
 	/*
@@ -93,7 +206,7 @@ NEOERR* app_new_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	/*
 	 * follow-up
 	 */
-	app_after_login(cgi, aname, masn);
+	app_after_login(cgi, evth, aname);
 	
 	return STATUS_OK;
 }
@@ -101,7 +214,7 @@ NEOERR* app_new_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 NEOERR* app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
-	char *aname, *asn, masn[LEN_CK];
+	char *aname, *asn;
 	
 	/*
 	 * input check
@@ -129,21 +242,13 @@ NEOERR* app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	char *asndb = hdf_get_value(evt->hdfrcv, "asn", NULL);
 	if (asndb) {
 		if (!strcmp(asndb, asn)) {
-			/*
-			 * follow-up
-			 */
-			memset(masn, 0x0, sizeof(masn));
-			mcs_rand_string(masn, sizeof(masn));
-			hdf_set_value(evt->hdfsnd, "aname", aname);
-			hdf_set_value(evt->hdfsnd, "masn", masn);
-			mevent_trigger(evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
-			app_after_login(cgi, aname, masn);
+			app_after_login(cgi, evth, aname);
 			return STATUS_OK;
 		} else 
-			return nerr_raise(LERR_LOGINPSW, "password wrong");
+			return nerr_raise(LERR_LOGINPSW, "password wrong %s %s", asndb, asn);
 	}
 
-	return nerr_raise(LERR_NEXIST, "app %s not exist", aname);
+	return nerr_raise(LERR_NREGIST, "app %s not exist", aname);
 }
 
 NEOERR* app_logout_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)

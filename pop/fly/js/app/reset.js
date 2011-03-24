@@ -1,14 +1,12 @@
 ; var bmoon = bmoon || {};
-bmoon.appnew = {
+bmoon.appreset = {
 	version: '1.0',
 	
 	init: function() {
-		var o = bmoon.appnew;
+		var o = bmoon.appreset;
 		if (o.inited) return o;
 
 		o.aname = $('#aname');
-		o.email = $('#email');
-		o.asn = $('#asn');
 		o.submit = $('#submit');
 
 		o.inited = true;
@@ -16,20 +14,20 @@ bmoon.appnew = {
 	},
 	
 	onready: function() {
-		var o = bmoon.appnew.init();
+		var o = bmoon.appreset.init();
 
 		o.bindClick();
 	},
 
 	bindClick: function() {
-		var o = bmoon.appnew.init();
+		var o = bmoon.appreset.init();
 
-		o.aname.blur(o.appCheck);
-		o.submit.click(o.appAdd);
+		//o.aname.blur(o.appCheck);
+		o.submit.click(o.appReset);
 	},
 
 	appCheck: function() {
-		var o = bmoon.appnew.init();
+		var o = bmoon.appreset.init();
 		
 		var
 		aname = o.aname.val(),
@@ -41,7 +39,7 @@ bmoon.appnew = {
 			$.getJSON('/json/app/exist', {aname: aname}, function(data) {
 				p.removeClass('loading');
 				if (data.success == 1) {
-					if (data.exist == 1) {
+					if (data.exist == 0) {
 						$('<span class="vres">'+ data.msg +'</span>').appendTo(p);
 						p.addClass('error');
 					} else {
@@ -55,30 +53,27 @@ bmoon.appnew = {
 		}
 	},
 
-	appAdd: function() {
-		var o = bmoon.appnew.init();
+	appReset: function() {
+		var o = bmoon.appreset.init();
 
-		if (!$('.VAL_NEWAPP').inputval()) return;
+		if (!$('.VAL_RESETAPP').inputval()) return;
 
-		o.asn.attr('value', $.md5($.md5(o.asn.val())));
+		var aname = o.aname.val(),
+		p = $(this).parent();
 
-		var
-		aname = o.aname.val(),
-		email = o.email.val(),
-		asn = o.asn.val();
-
-		$.post('/json/app/new', {_op: 'add', aname: aname, email: email, asn: asn}, function(data) {
-			if (data.success != 1 || !data.aname) {
-				alert(data.errmsg || '操作失败， 请稍后再试');
-				return;
+		$(".vres", p).remove();
+		p.removeClass('success').removeClass('error').addClass('loading');
+		$.getJSON('/json/app/reset', {aname: aname}, function(data) {
+			p.removeClass('loading');
+			if (data.success == 1) {
+				p.addClass('success');
+				$('<span class="vres">邮件发送成功，一分钟左右送达。</span>').appendTo(p);
+			} else {
+				p.addClass('error');
+				$('<span class="vres">'+ data.errmsg +'</span>').appendTo(p);
 			}
-			$('.copy-aname').text(data.aname);
-			$('#add').fadeOut();
-			$('#copy').fadeIn();
-			
-			bmoon.lcs.loginCheck();
-		}, 'json');
+		});
 	}
 };
 
-$(document).ready(bmoon.appnew.onready);
+$(document).ready(bmoon.appreset.onready);

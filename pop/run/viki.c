@@ -67,15 +67,14 @@ int main(int argc, char **argv, char **envp)
 		err = session_init(cgi, dbh, &session);
 		if (err != STATUS_OK) goto response;
 
-		if (mutil_client_attack(cgi->hdf, "viki", "lcs_uname",
-								LMT_CLI_ATTACK, PERIOD_CLI_ATTACK)) {
-			err = nerr_raise(LERR_ATTACK, "need a rest, babey!");
-			if (err != STATUS_OK) goto response;
+		if (lutil_client_attack(cgi->hdf, session, "lcs_uname")) {
+			err = nerr_raise(LERR_ATTACK, "%s need a rest, babey!", session->dataer);
+			goto response;
 		}
 		
 		if ((data_handler = lutil_get_data_handler(lib, cgi, session)) == NULL) {
-			err = nerr_raise(LERR_NEXIST, "dataer %s not found", session->dataer);
-			if (err != STATUS_OK) goto response;
+			err = nerr_raise(LERR_MISS_DATA, "dataer %s not found", session->dataer);
+			goto response;
 		}
 
 		err = (*data_handler)(cgi, dbh, evth, session);
@@ -88,7 +87,7 @@ int main(int argc, char **argv, char **envp)
 			case CGI_REQ_HTML:
 				err = ltpl_render(cgi, tplh, session);
 				if (err != STATUS_OK) {
-					if (nerr_match(err, LERR_NEXIST))
+					if (nerr_match(err, LERR_MISS_TPL))
 						cgi_redirect(cgi, "/404.html");
 					else
 						cgi_redirect(cgi, "/503.html");

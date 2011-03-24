@@ -22,8 +22,8 @@
 	  <div id="bd-personal">
 		<ul id="bd-member">
 		  <li>欢迎 <span id="bd-aname"></span></li>
-		  <li class="last"><a href="javascript:void(0);" id="userlogout">退出</a></li>
-		  <li><a href="/faq.html">常见问题</a></li>
+		  <li><a href="javascript:void(0);" id="userlogout">退出</a></li>
+		  <li class="last"><a href="/faq.html">常见问题</a></li>
 		</ul>
 		<ul id="bd-guest">
 		  <li><a href="javascript: void(0);" rel="#bd-login">登录</a></li>
@@ -60,7 +60,7 @@
 	  <?cs /if ?>
 
 	  <div id="bd-content">
-		<?cs if: ?Output.errmsg && Output.errcode == 15 ?>
+		<?cs if: ?Output.errmsg && Output.errcode == 25 ?>
 		  <script>
 			$(document).ready(function() {
 			  $('#login-hint').html('<?cs var: Output.errmsg ?>')

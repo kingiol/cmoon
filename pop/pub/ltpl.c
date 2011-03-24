@@ -224,7 +224,7 @@ NEOERR* ltpl_render(CGI *cgi, HASH *tplh, session_t *ses)
 
 	render = ses->render;
 	cs = (CSPARSE*)hash_lookup(tplh, render);
-	if (!cs) return nerr_raise(LERR_NEXIST, "render %s not found", render);
+	if (!cs) return nerr_raise(LERR_MISS_TPL, "render %s not found", render);
 
 	snprintf(tok, sizeof(tok), "%s_hdf", render);
 	dhdf = (HDF*)hash_lookup(tplh, tok);

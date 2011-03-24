@@ -1,13 +1,19 @@
 <h2>重置密码</h2>
 
+<div class="page-hint">
+  通过邮箱找回密码，修改生效前，旧密码仍能正常登录。（注册时没提供有效有效的站点无法找回密码）
+</div>
+
 <dl class="inp">
-  <dt>注册邮箱：</dt>
+  <dt>请输入站点名：</dt>
   <dd>
-	<input type="text" name="email" id="email" class="long VAL_NEWAPP vrequire vemail" />
+	<input type="text" name="aname" id="aname" class="long VAL_RESETAPP vrequire" />
+	<span class="indicator"></span>
   </dd>
 	
-	<dt>&nbsp; </dt>
-	<dd>
-	  <input type="submit" id="submit" class="btn" value="重置密码" />
-	</dd>
+  <dt>&nbsp; </dt>
+  <dd>
+	<input type="submit" id="submit" class="btn" value="重置密码" />
+	<span class="indicator"></span>
+  </dd>
 </dl>

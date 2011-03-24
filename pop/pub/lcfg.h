@@ -5,7 +5,7 @@
 
 __BEGIN_DECLS
 
-#define SITE_DOMAIN	"kaiwuonline.com"
+#define SITE_DOMAIN	"bomdoo.com"
 #define TC_ROOT		"/var/log/moon/pop/"
 
 #ifdef RELEASE
@@ -49,6 +49,7 @@ __BEGIN_DECLS
 #define PRE_CFG_LAYOUT		"Layout"
 #define PRE_CFG_DATASET		"Dataset"
 #define PRE_CFG_DATAER		"data_geter"
+#define PRE_CFG_REQLIMIT	"ClientReqLimit"
 #define PRE_CFG_FILECACHE	"FileCache"
 #define PRE_CFG_UIPLUG		"Uiplug"
 #define PRE_SPECIAL_ACTION	"SpecialAction"

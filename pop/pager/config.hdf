@@ -35,7 +35,7 @@ app_reset {
 		Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/appreset.css" />
 			js = <script src="/js/b/appreset.js"></script>
-			title = 站点注册
+			title = 忘记密码
 			tabpart = 1
 		}
 		Include {

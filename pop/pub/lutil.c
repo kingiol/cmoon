@@ -73,3 +73,13 @@ NEOERR* lutil_fetch_countf(HDF *hdf, mdb_conn *conn, char *table, char *cfmt, ..
 
     return nerr_pass(lutil_fetch_count(hdf, conn, table, cond));
 }
+
+bool lutil_client_attack(HDF *hdf, session_t *ses, char *cname)
+{
+	if (!hdf || !ses || !ses->dataer) return false;
+
+	char *limit = hdf_get_valuef(g_cfg, PRE_CFG_REQLIMIT".%s", ses->dataer);
+	if (!limit || atoi(limit) <= 0) return false;
+
+	return mutil_client_attack(hdf, ses->dataer, cname, atoi(limit), ONE_MINUTE);
+}

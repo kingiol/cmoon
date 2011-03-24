@@ -27,9 +27,4 @@ enum req_cmd_msg {
 	REQ_CMD_DEL_BOTH
 };
 
-enum req_code_msg {
-	REP_ERR_SKGET = 501,
-	REP_OK_SKGET = 1001
-};
-
 #endif	/* __MEVENT_MSG_H__ */

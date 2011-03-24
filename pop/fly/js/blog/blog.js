@@ -115,7 +115,7 @@ bmoon.blog = {
 					   }).prependTo(o.comments).fadeIn('slow');
 				   } else {
 					   p.addClass('error');
-					   $('<span class="error">'+ data.errmsg +'</span>').appendTo(p);
+					   $('<span class="text-error">'+ data.errmsg +'</span>').appendTo(p);
 				   }
 			   },
 			   'json');

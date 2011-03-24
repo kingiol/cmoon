@@ -12,9 +12,4 @@ enum {
 	REQ_CMD_PLACESET
 } req_cmd_place;
 
-enum {
-	REP_ERR_PLACE = 501,
-	REP_OK_PLACE = 1001
-} rep_code_place;
-
 #endif	/* __MEVENT_PLACE_H__ */

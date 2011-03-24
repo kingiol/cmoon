@@ -58,5 +58,7 @@ dl.inp dd.error .indicator {display:inline-block;margin-left:5px;width:16px;heig
 .eem {font-weight: bold; font-size: 120%;}
 .text-center {text-align: center;}
 .text-right {text-align: right;}
-.text-hint {color: #bb0000}
-.text-error {color: #ff0000}
+.text-hint {color: #bb0000;}
+.text-success {color: #00ff00;}
+.text-error {color: #ff0000;}
+.page-hint {width: 82%; text-align: center; margin: 2em auto; margin-bottom: 3em; padding: 1em; background-color: #FCFCFC; border: 1px solid #DDD; font-weight: bold;}

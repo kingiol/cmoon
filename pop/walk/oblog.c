@@ -92,7 +92,7 @@ NEOERR* blog_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	if (err != STATUS_OK) return nerr_pass(err);
 
 	author = hdf_get_value(cgi->hdf, PRE_OUTPUT".blog.author", NULL);
-	if (!author) return nerr_raise(LERR_NEXIST, "%s not exist", aname);
+	if (!author) return nerr_raise(LERR_MISS_DATA, "%s not exist", aname);
 	
 	if (strcmp(aname, author))
 		return nerr_raise(LERR_LIMIT, "%s not %s", aname, author);

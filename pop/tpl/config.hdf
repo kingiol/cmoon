@@ -1,24 +1,14 @@
-blog {
-	Layout = layout_nclient.html
+app_pass {
+	Layout = layout.html
 	Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/blogop.css" />
-			js = <script type="text/javascript" src="/js/b/blogop.js"></script>
-			title = 写博客
-			tabpart = 3
-			crumbs {
-				0 {
-					name = 开物博客
-					href = /blog/index.html
-				}
-				1 {
-					name = 写博客
-					href = /blog
-				}
-			}
+			css = <link rel="stylesheet" type="text/css" href="/css/b/apppass.css" />
+			js = <script type="text/javascript" src="/js/b/apppass.js"></script>
+			title = 修改密码
+			tabpart = 1
         }
 		Include {
-			content = blog/op.html
+			content = app/pass.html
 		}
 	}
 }

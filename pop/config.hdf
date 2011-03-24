@@ -67,6 +67,10 @@ Mevent {
 	6 = mtls
 }
 
+ClientReqLimit {
+	app_reset_data_get = 1
+}
+
 FileCache {
 	0 {
 		uri = ^/blog$
@@ -90,5 +94,18 @@ Limit {
 		11 = 60
 		12 = 100
 		13 = 500
+	}
+}
+
+Email {
+	AppReset {
+		subject = 重置播豆密码
+		opt = -c /usr/local/etc/email/noreply.conf
+		content << EOM
+$aname$ 你好，
+
+	有人通过这个邮箱申请重置播豆网的密码，请在浏览器中打开以下连接以重置密码：
+	http://www.bomdoo.com/app/pass?aname=$aname_esc$&rlink=$rlink$
+EOM
 	}
 }

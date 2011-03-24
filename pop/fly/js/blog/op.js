@@ -47,7 +47,7 @@ bmoon.blogop = {
 				$('#b-content').val("");
 			} else {
 				p.addClass('error');
-				$('<span class="error">'+ data.errmsg +'</span>').appendTo(p);
+				$('<span class="text-error">'+ data.errmsg +'</span>').appendTo(p);
 			}
 		}, 'json');
 	},
@@ -71,7 +71,7 @@ bmoon.blogop = {
 					p.addClass('success');
 				} else {
 					p.addClass('error');
-					$('<span class="error">'+ data.errmsg +'</span>').appendTo(p);
+					$('<span class="text-error">'+ data.errmsg +'</span>').appendTo(p);
 				}
 			});
 		}

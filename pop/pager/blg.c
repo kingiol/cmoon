@@ -16,7 +16,7 @@ static NEOERR* rend_blog_index(HASH *dbh, HASH *tplh, int pageid, int *pgttr)
 	
 	cs = (CSPARSE*)hash_lookup(tplh, "blog_index");
 	dhdf = (HDF*)hash_lookup(tplh, "blog_index_hdf");
-	if (!cs || !dhdf) return nerr_raise(LERR_NEXIST, "blog_index not found");
+	if (!cs || !dhdf) return nerr_raise(LERR_MISS_TPL, "blog_index not found");
 
 	err = hdf_init(&hdf);
 	if (err != STATUS_OK) return nerr_pass(err);
@@ -98,7 +98,7 @@ static NEOERR* rend_blog(HASH *dbh, HASH *tplh, int bid)
 	
 	cs = (CSPARSE*)hash_lookup(tplh, "blog");
 	dhdf = (HDF*)hash_lookup(tplh, "blog_hdf");
-	if (!cs || !dhdf) return nerr_raise(LERR_NEXIST, "blog_index not found");
+	if (!cs || !dhdf) return nerr_raise(LERR_MISS_TPL, "blog_index not found");
 
 	err = hdf_init(&hdf);
 	if (err != STATUS_OK) return nerr_pass(err);

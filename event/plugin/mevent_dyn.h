@@ -13,9 +13,4 @@ enum {
 	REQ_CMD_GETADMIN
 };
 
-enum {
-	REP_ERR_DYN = 501,
-	REP_OK_DYN = 1001
-};
-
 #endif	/* __MEVENT_DYN_H__ */

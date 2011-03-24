@@ -1,19 +1,37 @@
 #include "mheads.h"
 #include "lheads.h"
 
-/* LERR_XXX start from 14 */
-int LERR_MEVENT = 0;
-int LERR_NOTLOGIN = 0;
-int LERR_LOGINPSW = 0;
-int LERR_USERINPUT = 0;
-int LERR_LIMIT = 0;
-int LERR_NEEDUP = 0;
-int LERR_NEEDVIP = 0;
-int LERR_NEEDVVIP = 0;
-int LERR_NEXIST = 0;
-int LERR_EXIST = 0;
-int LERR_IMGPROE = 0;
-int LERR_ATTACK = 0;
+/* LERR_XXX start from 25 */
+
+/*
+ * application error
+ */
+int LERR_NOTLOGIN = 0;			/* 25 */
+int LERR_LOGINPSW = 0;			/* 26 */
+int LERR_USERINPUT = 0;			/* 27 */
+
+int LERR_LIMIT = 0;				/* 28 */
+int LERR_NEEDUP = 0;			/* 29 */
+int LERR_NEEDVIP = 0;			/* 30 */
+int LERR_NEEDVVIP = 0;			/* 31 */
+
+int LERR_MISS_DATA = 0;			/* 32 */
+int LERR_MISS_TPL = 0;			/* 33 */
+int LERR_IMGPROE = 0;			/* 34 */
+int LERR_ATTACK = 0;			/* 35 */
+
+/*
+ * mevent plugin error
+ */
+int LERR_NREGIST = 0;			/* 36 */
+int LERR_ALREADYREGIST = 0;		/* 37 */
+int LERR_MISSEMAIL = 0;			/* 38 */
+int LERR_NRESET = 0;			/* 39 */
+int LERR_WRESET = 0;			/* 40 */
+int LERR_NOTJOIN = 0;			/* 41 */
+int LERR_ALREADYJOIN = 0;		/* 42 */
+
+
 static int lerrInited = 0;
 
 NEOERR* lerr_init()
@@ -23,14 +41,17 @@ NEOERR* lerr_init()
 	if (lerrInited == 0) {
 		err = nerr_init();
 		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_MEVENT, "后台处理失败");
+
+		err = merr_init((MeventLog)mtc_msg);
 		if (err != STATUS_OK) return nerr_pass(err);
+
 		err = nerr_register(&LERR_NOTLOGIN, "请登录后操作");
 		if (err != STATUS_OK) return nerr_pass(err);
 		err = nerr_register(&LERR_LOGINPSW, "密码错误");
 		if (err != STATUS_OK) return nerr_pass(err);
 		err = nerr_register(&LERR_USERINPUT, "输入参数错误");
 		if (err != STATUS_OK) return nerr_pass(err);
+
 		err = nerr_register(&LERR_LIMIT, "用户无权限");
 		if (err != STATUS_OK) return nerr_pass(err);
 		err = nerr_register(&LERR_NEEDUP, "请联系开物客服升级版本");
@@ -39,15 +60,31 @@ NEOERR* lerr_init()
 		if (err != STATUS_OK) return nerr_pass(err);
 		err = nerr_register(&LERR_NEEDVVIP, "完全版功能");
 		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_NEXIST, "资源不存在");
+
+		err = nerr_register(&LERR_MISS_DATA, "资源不存在");
 		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_EXIST, "资源已存在");
+		err = nerr_register(&LERR_MISS_TPL, "找不到渲染模板(忘记了/json ?)");
 		if (err != STATUS_OK) return nerr_pass(err);
 		err = nerr_register(&LERR_IMGPROE, "处理图片失败");
 		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_ATTACK, "休息会儿");
+		err = nerr_register(&LERR_ATTACK, "太过频繁，请稍后请求！");
 		if (err != STATUS_OK) return nerr_pass(err);
 
+		err = nerr_register(&LERR_NREGIST, "站点不存在");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_ALREADYREGIST, "站点名已被注册");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_MISSEMAIL, "注册时没提供邮箱");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_NRESET, "请先申请密码重置");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_WRESET, "邮箱验证码错误");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_NOTJOIN, "用户还没来访");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_ALREADYJOIN, "用户已在列表中");
+		if (err != STATUS_OK) return nerr_pass(err);
+		
 		lerrInited = 1;
 	}
 

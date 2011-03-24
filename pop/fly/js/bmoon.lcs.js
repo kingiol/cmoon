@@ -1,4 +1,4 @@
-; var g_site_domain = "kaiwuonline.com";
+; var g_site_domain = "bomdoo.com";
 var bmoon = bmoon || {};
 bmoon.lcs = {
 	version: "1.0",
@@ -41,7 +41,7 @@ bmoon.lcs = {
 		}
 		o.vikierr = bmoon.utl.getQueryString("vikierr");
 		if (o.vikierr) {
-			$('#content').empty().append('<div class="error">'+o.vikierr+'</div>')
+			$('#content').empty().append('<div class="text-error">'+o.vikierr+'</div>')
 		}
 	},
 	
