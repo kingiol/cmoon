@@ -21,8 +21,6 @@ bmoon.oms = {
 
 		o.bindClick();
 
-		if (!mgd.appinfo) return;
-
 		bmoon.utl.after(function() {
 			var opts = {
 				pname: mgd.appinfo.pname,

@@ -29,7 +29,7 @@ function liveCS(ape) {
 
 		ape.addEvent("load", this.start);
 
-		setTimeout(ui.judgeReady, 10000);
+		setTimeout(ui.judgeReady, 6000);
 	};
 
 	this.start = function() {

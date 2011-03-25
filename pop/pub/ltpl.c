@@ -41,10 +41,10 @@ void ltpl_prepare_rend(HDF *hdf, char *tpl)
 	/*
 	 * set classes
 	 */
-	char *tab = hdf_get_value(hdf, "Layout.tabpart", NULL);
-	if (tab) {
-		hdf_set_valuef(hdf, "Layout.tabs.%s.class=selected", tab);
-	}
+	char *pos = hdf_get_value(hdf, "Layout.tabpart", NULL);
+	if (pos) hdf_set_valuef(hdf, "Layout.tabs.%s.class=selected", pos);
+	pos = hdf_get_value(hdf, "Layout.actionpart", NULL);
+	if (pos) hdf_set_valuef(hdf, "Layout.actions.%s.class=selected", pos);
 }
 
 NEOERR* ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outhash)

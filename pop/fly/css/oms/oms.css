@@ -8,49 +8,26 @@
 	font-weight: bold;
 }
 
-dl.appinfo {margin: 10px 0;}
-dl.appinfo dt{font-weight: bold; font-size: 150%;}
-dl.appinfo dd.remark{color: gray; line-height: 20px;}
-dl.appinfo .state {margin:10px 0;}
-dl.appinfo .state ul li {line-height: 24px;}
+.page-hint img {
+	vertical-align: bottom;
+}
 
-.im-box {
+#chat-box {
 	height: 450px;
+	width: 888px;
 	overflow: hidden;
+	margin: 0 auto;
 	/*border: 1px solid #101010;*/
 	/*padding:15px;*/
 }
 #chat-box.loading {
 	opacity: 0.5;
 }
-#chat-box .indicator {
-	display: none;
-}
-#chat-box.loading .indicator {
-	display: block;
-	background:url(/img/ajax/loader-bar.gif) 0 0 no-repeat;
-	position: absolute;
-	left: 48%;
-	top: 78%;
-	width: 230px;
-	z-index: 2;
-	padding: 18px 5px;
-}
-#chat-box.error .indicator {
-	display: block;
-	position: absolute;
-	left: 48%;
-	top: 78%;
-	width: 230px;
-	z-index: 2;
-	padding: 18px 5px;
-	color: #ff0000;
-}
 .im-op {
 	float:left;
 }
 .im-chat {
-	width: 516px;
+	width: 640px;
 	height: 430px;
 	float: left;
 	border: 0.5em solid #aaa;
@@ -60,7 +37,7 @@ dl.appinfo .state ul li {line-height: 24px;}
 
 
 .im-users {
-	width: 190px;
+	width: 230px;
 	height: 410px;
 	overflow:hidden;
 	position:relative;
@@ -74,14 +51,14 @@ dl.appinfo .state ul li {line-height: 24px;}
 
 .im-users .items ul {
 	margin-top: 3ex;
-	width: 190px;
+	width: 230px;
 	float: left;
 }
 
 .im-users ul li {
 	cursor: pointer;
-	/*margin-top: -1px;*/
 	margin: 0;
+	margin-top: -1px;
 	height: 24px;
 	overflow: hidden;
 	border-color: #aaa;
@@ -91,7 +68,7 @@ dl.appinfo .state ul li {line-height: 24px;}
 
 .im-users ul li .uname {
 	float:left;
-	width:64px;
+	width:80px;
 	margin-left: 1em;
 	line-height: 24px;
 }
@@ -101,7 +78,7 @@ dl.appinfo .state ul li {line-height: 24px;}
 	margin-left: 1em;
 	height: 24px;
 	line-height: 24px;
-	width: 80px;
+	width: 110px;
 	overflow: hidden;
 }
 
@@ -168,7 +145,7 @@ dl.appinfo .state ul li {line-height: 24px;}
 
 .im-input textarea {
 	height: 40px;
-	width: 330px;
+	width: 460px;
 	padding: 5px;
 	margin: 0 0 -3px 1em;
 }

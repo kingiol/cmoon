@@ -26,11 +26,12 @@ bmoon.chat = {
 		
 		$(rmdhtml).appendTo('body');
 		o.imbox = $('#chat-box');
+		o.imindi = $('#chat-indicator');
 		o.m = $('#chat-msg-text');
 		o.btm = $('#chat-msg-submit');
 		o.usersTop = $('#im-users .items');
 		o.userlist = $('#im-users ul:last');
-		o.usersPerTab = 14;
+		o.usersPerTab = 15;
 		o.msglist = $('#im-msgs');
 		o.stat = $('#im-stat');
 		o.reminder = $('#remind-sound')[0];
@@ -136,14 +137,14 @@ bmoon.chat = {
 		o.groupPubid = pubid;
 		o.bindClick();
 		o.imbox.removeClass('loading');
+		o.imindi.hide();
 	},
 
 	judgeReady: function() {
 		var o = bmoon.chat.init({});
 
 		if (o.imbox.hasClass('loading')) {
-			o.imbox.removeClass('loading').addClass('error');
-			$('.indicator', o.imbox).text('数据加载失败，请联系客服或稍后再试');
+			o.imindi.text('数据加载失败，请联系客服或稍后再试').addClass('text-error');
 		}
 	},
 

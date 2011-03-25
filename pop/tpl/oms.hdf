@@ -5,17 +5,19 @@ oms {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/oms.css" />
 			js = <script type="text/javascript" src="/js/b/oms.js"></script>
 			title = Oh, My Site
-			tabpart = 2
-			crumbs {
-				0 {
-					name = 我的站点
-					href = /oms
-				}
-			}
+			tabpart = 1
 			actions {
 				0 {
+					name = 与访客聊天
+					href = /oms
+				}
+				1 {
 					name = 站点统计
 					href = /oms/stat
+				}
+				2 {
+					name = 帐号信息
+					href = /oms/info
 				}
 			}
 			actions_1 {
@@ -27,10 +29,59 @@ oms {
 					name = 用户管理
 					href = /oms/users
 				}
+				1_2 {
+					name = 消费记录
+					href = /oms/bill
+				}
 			}
+			actionpart = 0
         }
 		Include {
 			content = oms/oms.html
+		}
+	}
+}
+
+oms_stat {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/stat.css" />
+			js << EOM
+				<!--[if IE]><script type="text/javascript" src="/js/b/oms/stat_ie.js"></script><![endif]-->
+				<script type="text/javascript" src="/js/b/oms/stat.js"></script>
+EOM
+			title = 站点统计
+			tabpart := oms.Dataset.Layout.tabpart
+			actions := oms.Dataset.Layout.actions
+			actions_1 := oms.Dataset.Layout.actions_1
+			actionpart = 1
+        }
+		Include {
+			content = oms/stat.html
+		}
+	}
+}
+
+oms_info {
+	Layout = layout.html
+	# Dataset := oms.Dataset
+	# : link := copy
+	# overwrite linke will overwrite original node
+	# copy can't be deep
+	# so, done partly
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/info.css" />
+			js = <script type="text/javascript" src="/js/b/oms/info.js"></script>
+			title = 站点设置
+			tabpart := oms.Dataset.Layout.tabpart
+			actions := oms.Dataset.Layout.actions
+			actions_1 := oms.Dataset.Layout.actions_1
+			actionpart = 2
+        }
+		Include {
+			content = oms/info.html
 		}
 	}
 }
@@ -48,69 +99,12 @@ oms_edit {
 			js = <script type="text/javascript" src="/js/b/oms/edit.js"></script>
 			title = 站点设置
 			tabpart := oms.Dataset.Layout.tabpart
-			crumbs {
-				0 {
-					name = 我的站点
-					href = /oms
-				}
-				1 {
-					name = 站点设置
-					href = /oms/edit
-				}
-			}
-			actions {
-				0 {
-					name = 站点统计
-					href = /oms/stat
-				}
-			}
-			actions_1 {
-				1_0 {
-					name = 用户管理
-					href = /oms/users
-				}
-			}
+			actions := oms.Dataset.Layout.actions
+			actions_1 := oms.Dataset.Layout.actions_1
+			actionpart = 3
         }
 		Include {
 			content = oms/edit.html
-		}
-	}
-}
-
-oms_stat {
-	Layout = layout.html
-	Dataset {
-        Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/stat.css" />
-			js << EOM
-				<!--[if IE]><script type="text/javascript" src="/js/b/oms/stat_ie.js"></script><![endif]-->
-				<script type="text/javascript" src="/js/b/oms/stat.js"></script>
-EOM
-			title = 站点设置
-			tabpart := oms.Dataset.Layout.tabpart
-			crumbs {
-				0 {
-					name = 我的站点
-					href = /oms
-				}
-				1 {
-					name = 站点统计
-					href = /oms/stat
-				}
-			}
-			actions_1 {
-				1_0 {
-					name = 站点设置
-					href = /oms/edit
-				}
-				1_1 {
-					name = 用户管理
-					href = /oms/users
-				}
-			}
-        }
-		Include {
-			content = oms/stat.html
 		}
 	}
 }
@@ -121,33 +115,32 @@ oms_users {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/users.css" />
 			js = <script type="text/javascript" src="/js/b/oms/users.js"></script>
-			title = 站点设置
+			title = 客服管理
 			tabpart := oms.Dataset.Layout.tabpart
-			crumbs {
-				0 {
-					name = 我的站点
-					href = /oms
-				}
-				1 {
-					name = 用户管理
-					href = /oms/users
-				}
-			}
-			actions {
-				0 {
-					name = 站点统计
-					href = /oms/stat
-				}
-			}
-			actions_1 {
-				1_0 {
-					name = 站点设置
-					href = /oms/edit
-				}
-			}
+			actions := oms.Dataset.Layout.actions
+			actions_1 := oms.Dataset.Layout.actions_1
+			actionpart = 4
         }
 		Include {
 			content = oms/users.html
+		}
+	}
+}
+
+oms_bill {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/bill.css" />
+			js = <script type="text/javascript" src="/js/b/oms/bill.js"></script>
+			title = 客服管理
+			tabpart := oms.Dataset.Layout.tabpart
+			actions := oms.Dataset.Layout.actions
+			actions_1 := oms.Dataset.Layout.actions_1
+			actionpart = 5
+        }
+		Include {
+			content = oms/bill.html
 		}
 	}
 }

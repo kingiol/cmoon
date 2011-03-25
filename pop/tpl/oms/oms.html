@@ -6,96 +6,57 @@
   </p>
 </div>
 
-<div id="colone">
-  <dl class="appinfo">
-	<dt><?cs var: Output.appinfo.aname ?></dt>
-	<dd class="remark">注册日期：<?cs var: Output.appinfo.intime ?></dd>
-	<dd class="remark">上次登录：<?cs var: Output.appinfo.uptime ?></dd>
-	<dd class="state">
-	  <ul>
-		<?cs if: Output.appinfo.state == #10 && Output.appinfo.pid == #0 ?>
-		<li><a target="_blank" href="/oms/users"><?cs var: Output.appinfo.numuser ?> 位管理员</a></li>
-		<li>用户来访短信通知： 关闭</li>
-		<?cs if: string.find(Output.appinfo.intime, "2010") == -1 ?>
-		<li>保存最近 2 个月聊天记录</li>
-		<?cs else ?>
-		<li>永久保存聊天记录</li>
-		<?cs /if ?>
-		<li>最高支持 20 人在线</li>
-		<li>可创建管理员 10 人</li>
-		<li><a target="_blank" href="/up">我要升级</a>(开发中。。。)</li>
-		<li><a target="_blank" href="/oms/faq.html">常见问题</a></li>
-	  </ul>
-	  <?cs elif: Output.appinfo.state == #11 ?>
-	  <?cs elif: Output.appinfo.state == #12 ?>
-	  <?cs elif: Output.appinfo.state == #13 ?>
-	  <?cs /if ?>
-	</dd>
-  </dl>
-</div>
+<div id="chat-indicator" class="page-hint">数据加载中，请稍后。 <img src="/img/ajax/loader-bar.gif" /></div>
 
-<div id="coltwo">
-  
-  <h3>聊天窗口</h3>
-  
-  <div id="chat-box" class="im-box loading">
-	<div class="indicator">数据加载中，请稍后。</div>
-	<div class="im-op">
-	  
-	  <div id="im-users" class="im-users scrollable">
-
-		<div class="items">
+<div id="chat-box" class="im-box loading">
+  <div class="im-op">
+	<div id="im-users" class="im-users scrollable">
+	  <div class="items">
 		<ul>
 		  <li id="im-user-0" uname="0" class="cur"><span class="uname">所有人</span></li>
 		  
-		<?cs set: count = #1 ?>
-		<?cs each: user = Output.userlist ?>
+		  <?cs set: count = #1 ?>
+		  <?cs each: user = Output.userlist ?>
+		  
+		  <?cs if: count % 15 == #0 ?>
+		  <ul>
+			<?cs /if ?>
+			
+			<li id="im-user-<?cs var: user.uname ?>" uname="<?cs var: user.uname ?>" class="off" >
+			<span class="uname"><?cs var: user.uname ?></span>
+			<span class="place"><?cs var: user.addr ?></span>
+			<span class="remove" title="删除该用户">&nbsp;</span>
+		    </li>
+		  
+			<?cs if: count % 15 == #14 ?>
+		  </ul>
+		  <?cs /if ?>
 		
-		<?cs if: count % 14 == #0 ?>
-		<ul>
-		<?cs /if ?>
-		  
-		  <li id="im-user-<?cs var: user.uname ?>" uname="<?cs var: user.uname ?>" class="off" >
-		  <span class="uname"><?cs var: user.uname ?></span>
-		  <span class="place"><?cs var: user.addr ?></span>
-		  <span class="remove" title="删除该用户">&nbsp;</span>
-		  </li>
-		  
-		<?cs if: count % 14 == #13 ?>
+		  <?cs set: count = count + #1 ?>
+		  <?cs /each ?>
+
+		  <?cs if: count % 15 != #0 ?>
 		</ul>
 		<?cs /if ?>
-		
-		<?cs set: count = count + #1 ?>
-		<?cs /each ?>
+	  </div> <!-- items -->
+	</div> <!-- im-users -->
+  
+	<a class="prev browse left"></a>
+	<div class="navi"></div>
+	<a class="next browse right"></a>
+  </div>	<!-- im-op -->
 
-		<?cs if: count % 14 != #0 ?>
-		</ul>
-		<?cs /if ?>
-		</div> <!-- items -->
-		
-	  </div> <!-- im-users -->
-	  
-	  <a class="prev browse left"></a>
-	  <div class="navi"></div>
-	  <a class="next browse right"></a>
-	  
-	</div>	<!-- im-op -->
-	  
-	<div class="im-chat">
-	  <div id="im-stat" class="im-stat"> 给所有在线访客发送消息 </div>
-	  
-	  <div id="im-msgs" class="im-msgs"></div>
+  <div class="im-chat">
+	<div id="im-stat" class="im-stat"> 给所有在线访客发送消息 </div>
+	<div id="im-msgs" class="im-msgs"></div>
+	<div class="im-input">
+	  <textarea id="chat-msg-text"></textarea>
+	  <input type="button" id="chat-msg-submit" value="发送" />
+	  <input type="checkbox" id="remind-sound-sw" checked="checked" /> 提示音
+	</div>
+  </div>  <!-- im-chat -->
 
-	  <div class="im-input">
-		<textarea id="chat-msg-text"></textarea>
-		<input type="button" id="chat-msg-submit" value="发送" />
-		<input type="checkbox" id="remind-sound-sw" checked="checked" /> 提示音
-	  </div>
-	</div>  <!-- im-chat -->
-  </div>  <!-- im-box -->
-
-  <!--<audio id="remind-sound"></audio>-->
-</div>
+</div>  <!-- im-box -->
 
 <script>
 	var mgd = mgd || {};
