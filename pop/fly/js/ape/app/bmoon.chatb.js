@@ -27,6 +27,7 @@ bmoon.chat = {
 		$(rmdhtml).appendTo('body');
 		o.imbox = $('#chat-box');
 		o.imindi = $('#chat-indicator');
+		o.needa = $('#chat-needa');
 		o.m = $('#chat-msg-text');
 		o.btm = $('#chat-msg-submit');
 		o.usersTop = $('#im-users .items');
@@ -138,6 +139,13 @@ bmoon.chat = {
 		o.bindClick();
 		o.imbox.removeClass('loading');
 		o.imindi.hide();
+	},
+
+	needMoreAdmin: function() {
+		var o = bmoon.chat.init();
+
+		o.imindi.fadeOut();
+		o.needa.fadeIn();
 	},
 
 	judgeReady: function() {

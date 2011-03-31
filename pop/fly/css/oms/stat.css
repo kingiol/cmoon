@@ -15,5 +15,7 @@ dl.query dt {float: left; margin: 0 5px 0 20px; line-height: 20px; text-align: r
 dl.query dd {float: left; line-height: 20px;}
 dl.query dd input {float: left;}
 
-.fresh {width: 500px; margin: 30px auto; font-size: 120%;}
+dl.inp {margin: 2em 0;}
+
 #st-res {width: 900px; height: 350px;}
+#st-table a {color: #666666;}

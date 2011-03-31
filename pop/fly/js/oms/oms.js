@@ -10,6 +10,9 @@ bmoon.oms = {
 		o.navi = $(".scrollable").navigator({api: true});
 		o.browserhint = $('#browser-hint');
 		o.browserlater = $('#browser-later');
+		o.icneeda = $('#ic-needa');
+		o.imindi = $('#chat-indicator');
+		o.needa = $('#chat-needa');
 		o.ielow = bmoon.utl.ie() && bmoon.utl.ie() < 7;
 
 		o.inited = true;
@@ -22,6 +25,12 @@ bmoon.oms = {
 		o.bindClick();
 
 		bmoon.utl.after(function() {
+			if (mgd.appinfo.tune & 8) {
+				o.imindi.fadeOut();
+				o.needa.fadeIn();
+				return;
+			}
+			o.imindi.fadeIn();
 			var opts = {
 				pname: mgd.appinfo.pname,
 				aname: mgd.appinfo.aname,
@@ -48,6 +57,18 @@ bmoon.oms = {
 		o.browserlater.click(function() {
 			o.browserhint.fadeOut();
 			$.cookie('lcs_bs_ignore', '1', {expires: 1});
+		});
+		o.icneeda.click(function() {
+			var p = $(this).parent();
+
+			$.post('/json/oms/edit', {
+				_op: 'mod',
+				aname: mgd.appinfo.pname,
+				tuneop: 0,
+				tune: 8
+			}, function(data) {
+				p.fadeOut();
+			}, 'json');
 		});
 	},
 

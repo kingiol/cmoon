@@ -4,32 +4,39 @@
 /* LERR_XXX start from 25 */
 
 /*
- * application error
+ * static error (layout.html used)
  */
 int LERR_NOTLOGIN = 0;			/* 25 */
-int LERR_LOGINPSW = 0;			/* 26 */
-int LERR_USERINPUT = 0;			/* 27 */
-
-int LERR_LIMIT = 0;				/* 28 */
-int LERR_NEEDUP = 0;			/* 29 */
-int LERR_NEEDVIP = 0;			/* 30 */
-int LERR_NEEDVVIP = 0;			/* 31 */
-
-int LERR_MISS_DATA = 0;			/* 32 */
-int LERR_MISS_TPL = 0;			/* 33 */
-int LERR_IMGPROE = 0;			/* 34 */
-int LERR_ATTACK = 0;			/* 35 */
 
 /*
  * mevent plugin error
  */
-int LERR_NREGIST = 0;			/* 36 */
-int LERR_ALREADYREGIST = 0;		/* 37 */
-int LERR_MISSEMAIL = 0;			/* 38 */
-int LERR_NRESET = 0;			/* 39 */
-int LERR_WRESET = 0;			/* 40 */
-int LERR_NOTJOIN = 0;			/* 41 */
-int LERR_ALREADYJOIN = 0;		/* 42 */
+/* aic */
+int LERR_NREGIST = 0;			/* 26 */
+int LERR_ALREADYREGIST = 0;		/* 27 */
+int LERR_MISSEMAIL = 0;			/* 28 */
+int LERR_NRESET = 0;			/* 29 */
+int LERR_WRESET = 0;			/* 30 */
+int LERR_NOTJOIN = 0;			/* 31 */
+int LERR_ALREADYJOIN = 0;		/* 32 */
+
+/* bank */
+int LERR_NCHARGE = 0;			/* 33 */
+int LERR_NEEDUP = 0;			/* 34 */
+int LERR_NEEDWT = 0;			/* 35 */
+int LERR_NEED_ADMIN = 0;		/* 36 */
+int LERR_NEED_ROOT = 0;			/* 37 */
+
+/*
+ * app error
+ */
+int LERR_LOGINPSW = 0;
+int LERR_USERINPUT = 0;
+int LERR_LIMIT = 0;
+int LERR_MISS_DATA = 0;
+int LERR_MISS_TPL = 0;
+int LERR_IMGPROE = 0;
+int LERR_ATTACK = 0;
 
 
 static int lerrInited = 0;
@@ -47,28 +54,6 @@ NEOERR* lerr_init()
 
 		err = nerr_register(&LERR_NOTLOGIN, "请登录后操作");
 		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_LOGINPSW, "密码错误");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_USERINPUT, "输入参数错误");
-		if (err != STATUS_OK) return nerr_pass(err);
-
-		err = nerr_register(&LERR_LIMIT, "用户无权限");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_NEEDUP, "请联系开物客服升级版本");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_NEEDVIP, "专业版功能");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_NEEDVVIP, "完全版功能");
-		if (err != STATUS_OK) return nerr_pass(err);
-
-		err = nerr_register(&LERR_MISS_DATA, "资源不存在");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_MISS_TPL, "找不到渲染模板(忘记了/json ?)");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_IMGPROE, "处理图片失败");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_ATTACK, "太过频繁，请稍后请求！");
-		if (err != STATUS_OK) return nerr_pass(err);
 
 		err = nerr_register(&LERR_NREGIST, "站点不存在");
 		if (err != STATUS_OK) return nerr_pass(err);
@@ -84,7 +69,34 @@ NEOERR* lerr_init()
 		if (err != STATUS_OK) return nerr_pass(err);
 		err = nerr_register(&LERR_ALREADYJOIN, "用户已在列表中");
 		if (err != STATUS_OK) return nerr_pass(err);
-		
+
+		err = nerr_register(&LERR_NCHARGE, "请先站内充值！");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_NEEDUP, "站长帐号余额不足，请先充值！");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_NEEDWT, "充值还未确认，请稍作等待。");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_NEED_ADMIN, "需要管理员权限");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_NEED_ROOT, "让 kol 来试试吧！");
+		if (err != STATUS_OK) return nerr_pass(err);
+
+		err = nerr_register(&LERR_LOGINPSW, "密码错误");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_USERINPUT, "输入参数错误");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_LIMIT, "用户无权限");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_MISS_DATA, "资源不存在");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_MISS_TPL, "找不到渲染模板(忘记了/json ?)");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_IMGPROE, "处理图片失败");
+		if (err != STATUS_OK) return nerr_pass(err);
+		err = nerr_register(&LERR_ATTACK, "太过频繁，请稍后请求！");
+		if (err != STATUS_OK) return nerr_pass(err);
+
+
 		lerrInited = 1;
 	}
 

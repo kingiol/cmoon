@@ -17,7 +17,7 @@ function liveCS(ape) {
 
 		ape.onError("110", ape.clearSession);
 		ape.onError("111", ape.clearSession);
-		ape.onError("112", ape.clearSession);
+		ape.onError("112", this.needMoreAdmin);
 		ape.onError("113", ape.clearSession);
 
 		ape.onError("210", ape.clearSession);
@@ -40,6 +40,11 @@ function liveCS(ape) {
 				'aname': ape.opts.aname, 'masn': ape.opts.masn}, opt);
 		}
 		ape.request.stack.send();
+	};
+
+	this.needMoreAdmin = function() {
+		ape.clearSession();
+		ui.needMoreAdmin();
 	};
 
 	this.pipeCreate = function(pipe, options) {

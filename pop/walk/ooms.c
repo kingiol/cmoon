@@ -84,9 +84,7 @@ NEOERR* oms_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 * prepare data 
 	 */
 	hdf_set_value(evt->hdfsnd, "aname", aname);
-	char *state = hdf_get_value(evt->hdfrcv, "state", "10");
-	char *limit = hdf_get_valuef(g_cfg, "Limit.maxUsers.%s", state);
-	if (limit) hdf_set_value(evt->hdfsnd, "limit", limit);
+	hdf_set_int_value(evt->hdfsnd, "limit", MAX_USERS_PERADMIN);
 	
 	/*
 	 * trigger
@@ -154,7 +152,7 @@ NEOERR* oms_edit_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	char *aname;
 	NEOERR *err;
 	
-	APP_CHECK_ADMIN();
+	APP_CHECK_LOGIN();
 	
 	/*
 	 * prepare data 
@@ -200,6 +198,7 @@ NEOERR* oms_users_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
 	char *aname, *pname, *email;
+	int cost;
 	NEOERR *err;
 
 	APP_CHECK_ADMIN();
@@ -211,25 +210,67 @@ NEOERR* oms_users_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	LEGAL_CK_ANAME(aname);
 	LEGAL_CK_EMAIL(email);
 
-	char *state = hdf_get_value(evt->hdfrcv, "state", "10");
-	char *limit = hdf_get_valuef(g_cfg, "Limit.maxAdmins.%s", state);
-	if (limit && hdf_get_int_value(evt->hdfrcv, "numuser", 0) >= atoi(limit))
-		return nerr_raise(LERR_NEEDUP, "%s want to add more users %s", pname, aname);
-	
 	/*
-	 * prepare data 
+	 * check
 	 */
+	int state = hdf_get_int_value(evt->hdfrcv, "state", LCS_ST_FREE);
+	if (state <= LCS_ST_FREE)
+		return nerr_raise(LERR_NEEDUP, "%s want to add users %s", pname, aname);
+	else if (state >= LCS_ST_VIP) goto add;
+
+	/*
+	 * chargeback
+	 */
+	cost = hdf_get_int_value(g_cfg, "Cost.account", 0);
+	evt = (mevent_t*)hash_lookup(evth, "bank");
+	hdf_set_value(evt->hdfsnd, "aname", pname);
+	hdf_set_int_value(evt->hdfsnd, "btype", BANK_OP_ADDACCOUNT);
+	hdf_set_int_value(evt->hdfsnd, "fee", cost);
+	hdf_set_value(evt->hdfsnd, "account", aname);
+
+	MEVENT_TRIGGER(evt, pname, REQ_CMD_BANK_ADDBILL, FLAGS_SYNC);
+
+add:
+	/*
+	 * add
+	 */
+	evt = (mevent_t*)hash_lookup(evth, "aic");
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 	hdf_set_value(evt->hdfsnd, "pname", pname);
 	hdf_set_value(evt->hdfsnd, "aname", aname);
 	hdf_set_int_value(evt->hdfsnd, "state",
 					  hdf_get_int_value(evt->hdfrcv, "state", LCS_ST_FREE));
 	hdf_set_value(evt->hdfsnd, "masn", aname);
-	
-	/*
-	 * trigger
-	 */
-	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPNEW, FLAGS_SYNC);
+
+	if (PROCESS_NOK(mevent_trigger(evt, aname, REQ_CMD_APPNEW, FLAGS_SYNC))) {
+		char *zpa = NULL;
+		hdf_write_string(evt->hdfrcv, &zpa);
+		mtc_foo("add %s failure %d %s", aname, evt->errcode, zpa);
+		SAFE_FREE(zpa);
+
+		if (state < LCS_ST_VIP) {
+			/*
+			 * roll back
+			 */
+			evt = (mevent_t*)hash_lookup(evth, "bank");
+			hdf_set_value(evt->hdfsnd, "aname", pname);
+			hdf_set_int_value(evt->hdfsnd, "btype", BANK_OP_ROLLBACK);
+			hdf_set_int_value(evt->hdfsnd, "fee", -cost);
+			hdf_set_valuef(evt->hdfsnd, "remark = rollback for account %s", aname);
+
+			if (PROCESS_NOK(mevent_trigger(evt, pname, REQ_CMD_BANK_ADDBILL,
+										   FLAGS_SYNC))) {
+				/*
+				 * ATTENTION we need pay back to customer manually
+				 */
+				hdf_write_string(evt->hdfrcv, &zpa);
+				mtc_foo("rollback %s failure %d %s", aname, evt->errcode, zpa);
+				SAFE_FREE(zpa);
+			}
+		}
+
+		return nerr_raise(evt->errcode, "add %s failure %d", aname, evt->errcode);
+	}
 	
 	return STATUS_OK;
 }

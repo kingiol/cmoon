@@ -41,10 +41,12 @@ __BEGIN_DECLS
 	} while (0)
 
 NEOERR* app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* app_info_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 NEOERR* app_reset_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 NEOERR* app_pass_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
-NEOERR* app_pass_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 NEOERR* app_new_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* app_charge_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* app_charge_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 /* sb want to login */
 NEOERR* app_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 NEOERR* app_logout_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);

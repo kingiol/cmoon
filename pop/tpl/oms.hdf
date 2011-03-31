@@ -1,39 +1,15 @@
-oms {
+# Dataset := oms.Dataset
+# : link := copy
+# overwrite linke will overwrite original node
+# copy can't be deep
+# so, done partly
+oms [merge = oms.pub] {
 	Layout = layout.html
 	Dataset {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/oms.css" />
 			js = <script type="text/javascript" src="/js/b/oms.js"></script>
 			title = Oh, My Site
-			tabpart = 1
-			actions {
-				0 {
-					name = 与访客聊天
-					href = /oms
-				}
-				1 {
-					name = 站点统计
-					href = /oms/stat
-				}
-				2 {
-					name = 帐号信息
-					href = /oms/info
-				}
-			}
-			actions_1 {
-				1_0 {
-					name = 站点设置
-					href = /oms/edit
-				}
-				1_1 {
-					name = 用户管理
-					href = /oms/users
-				}
-				1_2 {
-					name = 消费记录
-					href = /oms/bill
-				}
-			}
 			actionpart = 0
         }
 		Include {
@@ -42,7 +18,7 @@ oms {
 	}
 }
 
-oms_stat {
+oms_stat [merge = oms.pub] {
 	Layout = layout.html
 	Dataset {
         Layout {
@@ -52,9 +28,6 @@ oms_stat {
 				<script type="text/javascript" src="/js/b/oms/stat.js"></script>
 EOM
 			title = 站点统计
-			tabpart := oms.Dataset.Layout.tabpart
-			actions := oms.Dataset.Layout.actions
-			actions_1 := oms.Dataset.Layout.actions_1
 			actionpart = 1
         }
 		Include {
@@ -63,45 +36,14 @@ EOM
 	}
 }
 
-oms_info {
+oms_edit [merge = oms.pub] {
 	Layout = layout.html
-	# Dataset := oms.Dataset
-	# : link := copy
-	# overwrite linke will overwrite original node
-	# copy can't be deep
-	# so, done partly
-	Dataset {
-        Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/info.css" />
-			js = <script type="text/javascript" src="/js/b/oms/info.js"></script>
-			title = 站点设置
-			tabpart := oms.Dataset.Layout.tabpart
-			actions := oms.Dataset.Layout.actions
-			actions_1 := oms.Dataset.Layout.actions_1
-			actionpart = 2
-        }
-		Include {
-			content = oms/info.html
-		}
-	}
-}
-
-oms_edit {
-	Layout = layout.html
-	# Dataset := oms.Dataset
-	# : link := copy
-	# overwrite linke will overwrite original node
-	# copy can't be deep
-	# so, done partly
 	Dataset {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/edit.css" />
 			js = <script type="text/javascript" src="/js/b/oms/edit.js"></script>
 			title = 站点设置
-			tabpart := oms.Dataset.Layout.tabpart
-			actions := oms.Dataset.Layout.actions
-			actions_1 := oms.Dataset.Layout.actions_1
-			actionpart = 3
+			actionpart = 2
         }
 		Include {
 			content = oms/edit.html
@@ -109,17 +51,14 @@ oms_edit {
 	}
 }
 
-oms_users {
+oms_users [merge = oms.pub] {
 	Layout = layout.html
 	Dataset {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/users.css" />
 			js = <script type="text/javascript" src="/js/b/oms/users.js"></script>
 			title = 客服管理
-			tabpart := oms.Dataset.Layout.tabpart
-			actions := oms.Dataset.Layout.actions
-			actions_1 := oms.Dataset.Layout.actions_1
-			actionpart = 4
+			actionpart = 3
         }
 		Include {
 			content = oms/users.html
@@ -127,17 +66,14 @@ oms_users {
 	}
 }
 
-oms_bill {
+oms_bill [merge = oms.pub] {
 	Layout = layout.html
 	Dataset {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/bill.css" />
 			js = <script type="text/javascript" src="/js/b/oms/bill.js"></script>
 			title = 客服管理
-			tabpart := oms.Dataset.Layout.tabpart
-			actions := oms.Dataset.Layout.actions
-			actions_1 := oms.Dataset.Layout.actions_1
-			actionpart = 5
+			actionpart = 4
         }
 		Include {
 			content = oms/bill.html

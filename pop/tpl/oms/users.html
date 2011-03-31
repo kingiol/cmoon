@@ -1,71 +1,69 @@
-<div id="content-sub">
-  <div class="info">
-	<dl class="form">
-	  <dt>默认接待员：</dt>
-	  <dd>
-		<select id="select-secy">
-		  <?cs each: user = Output.users ?>
-		  <option value="<?cs var: user.aname ?>" <?cs if: bitop.and(user.tune, 4) == #4 ?>selected="selected"<?cs /if ?>><?cs var: user.aname ?></option>
-		  <?cs /each ?>
-		</select>
-		<span class="slight">(所有管理员离线时，新来的用户访问信息和留言会被默认接待员下次登录时收到)</span>
-		<span class="indicator"></span>
-	  </dd>
-	  
-	  <dt><span class="new"><a href="javascript: void(0);" rel="#addoverlay">创建新用户</a></span></dt>
-	  <dd>
-		<p class="slight">您最多可以为 <?cs var: Output.appinfo.aname ?> 创建 10 个后台帐户。 &nbsp; 如果您希望有更多用户，请购买专业版。</p>
-	  </dd>
-	</dl>
-  </div>
+<div class="info">
+  <dl class="inp">
+	<dt>默认接待员：</dt>
+	<dd>
+	  <select id="select-secy">
+		<?cs each: user = Output.users ?>
+		<option value="<?cs var: user.aname ?>" <?cs if: bitop.and(user.tune, 4) == #4 ?>selected="selected"<?cs /if ?>><?cs var: user.aname ?></option>
+		<?cs /each ?>
+	  </select>
+	  <span class="slight">(该用户接受所有管理员离线时新用户的留言信息。)</span>
+	  <span class="indicator"></span>
+	</dd>
 
-  <table class="userlist" id="usertable">
-	<tr>
-	  <th>用户名</th>
-	  <th>邮箱</th>
-	  <th>注册时间</th>
-	  <th>上次登录时间</th>
-	  <th>总接待人数</th>
-	  <th>在线状态</th>
-	  <th>操作</th>
-	</tr>
-
-	<?cs each: user = Output.users ?>
-	<tr id="user-<?cs var: user.aname ?>">
-	  <td><?cs var: user.aname ?></td>
-	  <td><?cs var: user.email ?></td>
-	  <td><?cs var: user.intime ?></td>
-	  <td><?cs var: user.uptime ?></td>
-	  <td><?cs var: user.numcamer ?></td>
-	  <td></td>
-	  <td><a href="javascript: void(0);" class="deluser" aname="<?cs var: user.aname ?>" >删除</td>
-	</tr>
-	<?cs /each ?>
-  </table>
+	<dt><a href="javascript: void(0);" class="btn" rel="#addoverlay">创建新用户</a></dt>
+	<dd>&nbsp; </dd>
+  </dl>
 </div>
 
+<table class="list" id="usertable">
+  <tr>
+	<th>用户名</th>
+	<th>邮箱</th>
+	<th>注册时间</th>
+	<th>上次登录时间</th>
+	<th>总接待人数</th>
+	<th>在线状态</th>
+	<th>操作</th>
+  </tr>
+
+  <?cs each: user = Output.users ?>
+  <tr id="user-<?cs var: user.aname ?>">
+  <td><?cs var: user.aname ?></td>
+  <td><?cs var: user.email ?></td>
+  <td><?cs var: user.intime ?></td>
+  <td><?cs var: user.uptime ?></td>
+  <td><?cs var: user.numcamer ?></td>
+  <td></td>
+  <td><a href="javascript: void(0);" class="deluser" aname="<?cs var: user.aname ?>" >删除</td>
+</tr>
+<?cs /each ?>
+</table>
+
 <div class="overlay-w" id="addoverlay">
-	<dl class="form">
-	  <dt>用户名：</dt>
-	  <dd>
-		<input type="text" name="aname" id="aname" class="long VAL_NEWAPP vrequire" vmax="256" vmin="2" />
-		<span>（2 ~ 128个字符）</span>
-		<span class="indicator"></span>
-	  </dd>
-	  
-	  <dt>联系邮箱：</dt>
-	  <dd>
-		<input type="text" name="email" id="email" class="long VAL_NEWAPP vrequire vemail" />
-	  </dd>
-	  
-	  <dt>密码：</dt>
-	  <dd>
-		<input type="password" name="asn" id="asn" class="VAL_NEWAPP vrequire" />
-	  </dd>
-	  
-	  <dt>&nbsp; </dt>
-	  <dd>
-		<input type="submit" id="submit" class="submitbtn" value="添加" />
-	  </dd>
-	</dl>
+  <h3 class="text-center">为 <?cs var: Output.appinfo.pname ?> 创建客服帐号</h3>
+  <div class="sepl"></div>
+  <dl class="inp adduser">
+	<dt>用户名：</dt>
+	<dd>
+	  <input type="text" name="aname" id="aname" class="long VAL_NEWAPP vrequire" vmax="256" vmin="2" />
+	  <span class="indicator"></span>
+	</dd>
+	
+	<dt>联系邮箱：</dt>
+	<dd>
+	  <input type="text" name="email" id="email" class="long VAL_NEWAPP vrequire vemail" />
+	</dd>
+	
+	<dt>密码：</dt>
+	<dd>
+	  <input type="password" name="asn" id="asn" class="VAL_NEWAPP vrequire" />
+	</dd>
+	
+	<dt>&nbsp; </dt>
+	<dd>
+	  <input type="submit" id="submit" class="btn" value="创建" />
+	  <span class="slight">客户帐号将消耗你的余额</span>
+	</dd>
+  </dl>
 </div>

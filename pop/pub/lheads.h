@@ -21,5 +21,6 @@
 #include "mevent_msg.h"
 #include "mevent_aux.h"
 #include "mevent_mtls.h"
+#include "mevent_bank.h"
 
 #endif	/* __LHEADS_H__ */

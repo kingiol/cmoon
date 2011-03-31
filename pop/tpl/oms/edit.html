@@ -1,7 +1,7 @@
 <div class="vtabs">
   <ul class="css-tabs">
 	<li><a href="javascript:void(0);">基本设置</a></li>
-	<li><a href="javascript:void(0);">站点代码</a></li>
+	<!--<li><a href="javascript:void(0);">站点代码</a></li>-->
   </ul>
 
   <div class="css-panes">
@@ -15,6 +15,18 @@
 		  开启此选项，只有在用户第二次访问我的站点时，才将其计入管理后台的聊天用户列表。 <br />
 		  此选项可以有效过滤掉大部分打酱油用户。  <br />
 		  网站访问量较大时，建议开启此选项。
+		</dd>
+
+		<dt>
+		  <input id="ck-email" class="uptune" type="checkbox" tune="16"
+				 <?cs if: bitop.and(Output.appinfo.tune, 16) == #16 ?>
+				 checked="checked"
+				 <?cs /if ?>
+		   /> 发送统计邮件<span class="indicator"></span>
+		</dt>
+		<dd>
+		  将你网站的访问统计数据发送到注册邮箱。 <br />
+		  每日凌晨发送前一天的访问统计。
 		</dd>
 		
 		<dt>

@@ -36,7 +36,7 @@ bmoon.appnew = {
 		p = $(this).parent();
 		
 		if (aname.length > 0) {
-			$(".vres", p).remove();
+			$('.vres', p).remove();
 			p.removeClass('success').removeClass('error').addClass('loading');
 			$.getJSON('/json/app/exist', {aname: aname}, function(data) {
 				p.removeClass('loading');
@@ -62,8 +62,7 @@ bmoon.appnew = {
 
 		o.asn.attr('value', $.md5($.md5(o.asn.val())));
 
-		var
-		aname = o.aname.val(),
+		var	aname = o.aname.val(),
 		email = o.email.val(),
 		asn = o.asn.val();
 

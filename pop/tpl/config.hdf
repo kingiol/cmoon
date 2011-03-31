@@ -1,3 +1,18 @@
+app_info {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/appinfo.css" />
+			js = <script type="text/javascript" src="/js/b/appinfo.js"></script>
+			title = 帐号信息
+			tabpart = 1
+        }
+		Include {
+			content = app/info.html
+		}
+	}
+}
+
 app_pass {
 	Layout = layout.html
 	Dataset {
@@ -9,6 +24,21 @@ app_pass {
         }
 		Include {
 			content = app/pass.html
+		}
+	}
+}
+
+app_charge {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/appcharge.css" />
+			js = <script type="text/javascript" src="/js/b/appcharge.js"></script>
+			title = 修改密码
+			tabpart = 1
+        }
+		Include {
+			content = app/charge.html
 		}
 	}
 }

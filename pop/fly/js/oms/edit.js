@@ -35,7 +35,6 @@ bmoon.omsedit = {
 
 		$(".vres", p).remove();
 		p.removeClass('success').removeClass('error').addClass('loading');
-
 		$.post('/json/oms/edit', {_op: 'mod', tune: tune, tuneop: val}, function(data) {
 			p.removeClass('loading');
 			if (data.success == '1') {

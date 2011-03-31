@@ -147,11 +147,16 @@ apt-get install postgresql-contrib
 		create database lcs_main encoding='utf8';
 		create database lcs_dyn encoding='utf8';
 		create database lcs_mtool encoding='utf8';
+		create database lcs_aux encoding='utf8';
+		create database lcs_bank encoding='utf8';
 		用postgres帐号登录:
 		\c lcs_main
 		CREATE LANGUAGE plpgsql; -- 开启 plpgsql 语言
         CREATE FUNCTION update_time() RETURNS TRIGGER AS $$ BEGIN NEW.uptime=now(); RETURN NEW; END; $$ LANGUAGE plpgsql;
 		\c lcs_dyn
+		CREATE LANGUAGE plpgsql;
+        CREATE FUNCTION update_time() RETURNS TRIGGER AS $$ BEGIN NEW.uptime=now(); RETURN NEW; END; $$ LANGUAGE plpgsql;
+		\c lcs_bank
 		CREATE LANGUAGE plpgsql;
         CREATE FUNCTION update_time() RETURNS TRIGGER AS $$ BEGIN NEW.uptime=now(); RETURN NEW; END; $$ LANGUAGE plpgsql;
 	以后都可以用 $psql -U lcser -d lcs_main 登录

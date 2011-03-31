@@ -66,6 +66,19 @@ NEOERR* app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	return STATUS_OK;
 }
 
+NEOERR* app_info_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname;
+	NEOERR *err;
+	
+	APP_CHECK_LOGIN();
+
+	hdf_copy(cgi->hdf, PRE_OUTPUT".appinfo", evt->hdfrcv);
+
+	return STATUS_OK;
+}
+
 NEOERR* app_reset_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt;
@@ -155,24 +168,6 @@ NEOERR* app_pass_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	return STATUS_OK;
 }
 
-NEOERR* app_pass_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
-{
-	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
-	char *aname, *asn;
-	NEOERR *err;
-
-	HDF_GET_STR(cgi->hdf, PRE_QUERY".asn", asn);
-	
-	APP_CHECK_LOGIN();
-
-	hdf_set_value(evt->hdfsnd, "aname", aname);
-	hdf_set_value(evt->hdfsnd, "asn", asn);
-
-	MEVENT_TRIGGER(evt, aname, REQ_CMD_APPUP, FLAGS_NONE);
-	
-	return STATUS_OK;
-}
-
 NEOERR* app_new_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
@@ -196,6 +191,7 @@ NEOERR* app_new_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 	
 	hdf_set_int_value(evt->hdfsnd, "state", LCS_ST_FREE);
+	hdf_set_int_value(evt->hdfsnd, "tune", LCS_TUNE_EMAIL);
 	hdf_set_value(evt->hdfsnd, "masn", masn);
 
 	/*
@@ -208,6 +204,42 @@ NEOERR* app_new_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 */
 	app_after_login(cgi, evth, aname);
 	
+	return STATUS_OK;
+}
+
+NEOERR* app_charge_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname;
+	NEOERR *err;
+
+	APP_CHECK_LOGIN();
+
+	hdf_copy(cgi->hdf, PRE_OUTPUT".appinfo", evt->hdfrcv);
+
+	return STATUS_OK;
+}
+
+NEOERR* app_charge_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname, *pname;
+	int mpre;
+	NEOERR *err;
+
+	HDF_GET_INT(cgi->hdf, PRE_QUERY".mpre", mpre);
+
+	APP_CHECK_LOGIN();
+
+	pname = hdf_get_value(evt->hdfrcv, "pname", NULL);
+	if (!pname) return nerr_raise(NERR_ASSERT, "pname null");
+
+	evt = hash_lookup(evth, "bank");
+	hdf_set_value(evt->hdfsnd, "aname", pname);
+	hdf_set_int_value(evt->hdfsnd, "fee", mpre);
+	hdf_set_int_value(evt->hdfsnd, "btype", BANK_OP_PRECHARGE);
+	MEVENT_TRIGGER(evt, pname, REQ_CMD_BANK_ADDBILL, FLAGS_SYNC);
+
 	return STATUS_OK;
 }
 

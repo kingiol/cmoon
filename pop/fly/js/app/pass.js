@@ -59,7 +59,7 @@ bmoon.apppass = {
 
 		$(".vres", p).remove();
 		p.removeClass('success').removeClass('error').addClass('loading');
-		$.post('/json/app/pass', {_op: 'mod', asn: asn}, function(data) {
+		$.post('/json/oms/edit', {_op: 'mod', asn: asn}, function(data) {
 			p.removeClass('loading');
 			if (data.success == 1) {
 				p.addClass('success');

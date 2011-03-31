@@ -49,7 +49,7 @@ void ltpl_prepare_rend(HDF *hdf, char *tpl)
 
 NEOERR* ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outhash)
 {
-	char *tp = NULL, *tpl = NULL, *dataer = NULL;
+	char *tp = NULL, *tpl = NULL, *val = NULL;
 	HDF *node = NULL, *dhdf = NULL, *child = NULL;
 	CSPARSE *cs = NULL;
 	STRING str;
@@ -69,6 +69,18 @@ NEOERR* ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outha
 	while (child != NULL) {
 		mtc_dbg("parse node %s", hdf_obj_name(child));
 		string_init(&str);
+
+		val = mutil_obj_attr(child, "merge");
+		if (val) {
+			snprintf(fname, sizeof(fname), "%s/%s", dir, val);
+			err = hdf_init(&dhdf);
+			JUMP_NOK(err, wnext);
+			err = hdf_read_file(dhdf, fname);
+			JUMP_NOK(err, wnext);
+			err = hdf_copy(child, NULL, dhdf);
+			JUMP_NOK(err, wnext);
+		}
+		
 		err = cs_init(&cs, hdf_get_obj(child, PRE_CFG_DATASET));
 		JUMP_NOK(err, wnext);
 			
@@ -109,9 +121,9 @@ NEOERR* ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outha
 			/*
 			 * get_data
 			 */
-			dataer = hdf_get_value(child, PRE_CFG_DATAER, NULL);
-			if (dataer != NULL && lib) {
-				data_handler = dlsym(lib, dataer);
+			val = hdf_get_value(child, PRE_CFG_DATAER, NULL);
+			if (val != NULL && lib) {
+				data_handler = dlsym(lib, val);
 				if( (tp = dlerror()) != NULL) {
 					mtc_err("%s", tp);
 					//continue;

@@ -65,10 +65,12 @@ Mevent {
 	4 = msg
 	5 = aux
 	6 = mtls
+	7 = bank
 }
 
 ClientReqLimit {
 	app_reset_data_get = 1
+	app_charge_data_add = 1
 }
 
 FileCache {
@@ -79,21 +81,6 @@ FileCache {
 	1 {
 		uri = ^/csc/.*
 		tm_cache = 60
-	}
-}
-
-Limit {
-	maxAdmins {
-		10 = 10
-		11 = 10
-		12 = 50
-		13 = 500
-	}
-	maxUsers {
-		10 = 60
-		11 = 60
-		12 = 100
-		13 = 500
 	}
 }
 
@@ -108,4 +95,10 @@ $aname$ 你好，
 	http://www.bomdoo.com/app/pass?aname=$aname_esc$&rlink=$rlink$
 EOM
 	}
+}
+
+Cost {
+	account = 29
+	sms = 10
+	stat = 999
 }

@@ -7,17 +7,18 @@
 #define PREFIX_APPOUSER	"AppOuser"
 #define AIC_CC_SEC		3600
 
-#define LCS_TUNE_QUIET	0x01
-#define LCS_TUNE_SMS	0x02
-#define LCS_TUNE_SECY	0x04	/* default aname when every body offline */
+#define LCS_TUNE_QUIET	0x1
+#define LCS_TUNE_SMS	0x2
+#define LCS_TUNE_SECY	0x4		/* default aname when every body offline */
+#define LCS_TUNE_NEEDA	0x8		/* aname need add more admin to hold online user */
+#define LCS_TUNE_EMAIL	0x10	/* send email for stat */
 
 enum {
 	LCS_ST_BLACK = 0,
 	LCS_ST_STRANGER,
-	LCS_ST_FREE = 10,			/* 20 online, 20 history raw, 2 admin */
-	LCS_ST_VIPED,				/* ED history raw */
-	LCS_ST_VIP,					/* 200 online, one year history raw, 20 admin */
-	LCS_ST_VVIP,				/* unlimit online, history raw, admin */
+	LCS_ST_FREE = 10,			/* 10 online */
+	LCS_ST_CHARGE,
+	LCS_ST_VIP,
 	LCS_ST_ADMIN,
 	LCS_ST_ROOT = 1001
 } lcsStat;
@@ -39,11 +40,11 @@ enum {
 } req_cmd_aic;
 
 enum {
-	REP_ERR_NREGIST = 36,
+	REP_ERR_NREGIST = 26,
 	REP_ERR_ALREADYREGIST,
 	REP_ERR_MISSEMAIL,
 	REP_ERR_NRESET,
-	REP_ERR_NOTJOIN = 41,
+	REP_ERR_NOTJOIN = 31,
 	REP_ERR_ALREADYJOIN,
 } rep_code_aic;
 
