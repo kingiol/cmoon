@@ -6,7 +6,7 @@ FILES = b/base.css \
 		b/client/mic.css \
 		b/index.css b/manual.css \
 		b/blog.css b/blogindex.css b/blogop.css \
-		b/oms.css b/oms/edit.css b/oms/stat.css b/oms/users.css b/oms/faq.css \
+		b/oms.css b/oms/edit.css b/oms/stat.css b/oms/users.css b/oms/faq.css b/oms/bill.css \
 	    b/okol.css
 all: preload $(FILES)
 
@@ -30,6 +30,7 @@ b/oms/edit.css: oms/tabs.css oms/edit.css
 b/oms/stat.css: okol/datePicker.css oms/stat.css
 b/oms/users.css: oms/users.css oms/overlay.css
 b/oms/faq.css: oms/faq.css
+b/oms/bill.css: okol/datePicker.css oms/bill.css
 b/okol.css: okol/datePicker.css okol/okol.css
 
 %.css:

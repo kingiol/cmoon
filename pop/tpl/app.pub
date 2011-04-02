@@ -1,0 +1,17 @@
+Dataset.Layout {
+	tabpart = 1
+	actions {
+		0 {
+			name = 帐号信息
+			href = /app/info
+		}
+		1 {
+			name = 修改密码
+			href = /app/pass
+		}
+		2 {
+			name = 我要充值
+			href = /app/charge
+		}
+	}
+}

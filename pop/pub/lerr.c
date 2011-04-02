@@ -72,7 +72,8 @@ NEOERR* lerr_init()
 
 		err = nerr_register(&LERR_NCHARGE, "请先站内充值！");
 		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_NEEDUP, "站长帐号余额不足，请先充值！");
+		err = nerr_register(&LERR_NEEDUP, "站长帐号余额不足，请先 "
+							" <a href='/app/charge'>充值！</a>");
 		if (err != STATUS_OK) return nerr_pass(err);
 		err = nerr_register(&LERR_NEEDWT, "充值还未确认，请稍作等待。");
 		if (err != STATUS_OK) return nerr_pass(err);

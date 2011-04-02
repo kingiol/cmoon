@@ -336,3 +336,30 @@ NEOERR* oms_stat_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	
 	return STATUS_OK;
 }
+
+NEOERR* oms_bill_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname;
+	NEOERR *err;
+
+	APP_CHECK_ADMIN();
+	SET_ADMIN_ACTION(evt->hdfrcv, cgi->hdf);
+
+	hdf_copy(cgi->hdf, PRE_OUTPUT".appinfo", evt->hdfrcv);
+	
+	int state = hdf_get_int_value(evt->hdfrcv, "state", LCS_ST_FREE);
+	if (state <= LCS_ST_FREE) return STATUS_OK;
+
+	evt = hash_lookup(evth, "bank");
+	hdf_set_value(evt->hdfsnd, "aname", aname);
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_BANK_INFO, FLAGS_SYNC);
+	hdf_copy(cgi->hdf, PRE_OUTPUT".bankinfo", evt->hdfrcv);
+
+	hdf_set_value(evt->hdfsnd, "aname", aname);
+	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
+	MEVENT_TRIGGER(evt, aname, REQ_CMD_BANK_GETBILL, FLAGS_SYNC);
+	hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
+	
+	return STATUS_OK;
+}

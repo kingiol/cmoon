@@ -32,12 +32,12 @@ static NEOERR* msg_cmd_mysaid(struct queue_entry *q, struct cache *cd, mdb_conn 
 
 	REQ_GET_PARAM_STR(q->hdfrcv, "name", name);
 
-	mmisc_pagediv_get(q->hdfrcv, NULL, &count, &offset);
+	mmisc_pagediv(q->hdfrcv, NULL, &count, &offset, NULL, q->hdfsnd);
 	
 	if (cache_getf(cd, &val, &vsize, PREFIX_MYSAID"%s_%d", name, offset)) {
 		unpack_hdf(val, vsize, &q->hdfsnd);
 	} else {
-		MMISC_PAGEDIV_SET_N(q->hdfsnd, offset, db, "msg", "mfrom=$1", "s", name);
+		MMISC_PAGEDIV_SET_N(q->hdfsnd, db, "msg", "mfrom=$1", "s", name);
 		MDB_QUERY_RAW(db, "msg", MSG_COL, "mfrom=$1 ORDER BY intime DESC "
 					  " LIMIT %d OFFSET %d", "s", count, offset, name);
 		err = mdb_set_rows(q->hdfsnd, db, NULL, "raws", -1);
@@ -57,12 +57,12 @@ static NEOERR* msg_cmd_saytome(struct queue_entry *q, struct cache *cd, mdb_conn
 
 	REQ_GET_PARAM_STR(q->hdfrcv, "name", name);
 
-	mmisc_pagediv_get(q->hdfrcv, NULL, &count, &offset);
+	mmisc_pagediv(q->hdfrcv, NULL, &count, &offset, NULL, q->hdfsnd);
 
 	if (cache_getf(cd, &val, &vsize, PREFIX_SAYTOME"%s_%d", name, offset)) {
 		unpack_hdf(val, vsize, &q->hdfsnd);
 	} else {
-		MMISC_PAGEDIV_SET_N(q->hdfsnd, offset, db, "msg", "mto=$1", "s", name);
+		MMISC_PAGEDIV_SET_N(q->hdfsnd, db, "msg", "mto=$1", "s", name);
 		MDB_QUERY_RAW(db, "msg", MSG_COL, "mto=$1 ORDER BY intime DESC "
 					  " LIMIT %d OFFSET %d", "s", count, offset, name);
 		err = mdb_set_rows(q->hdfsnd, db, NULL, "raws", -1);
@@ -83,7 +83,7 @@ static NEOERR* msg_cmd_saywithother(struct queue_entry *q, struct cache *cd, mdb
 	REQ_GET_PARAM_STR(q->hdfrcv, "name", name);
 	REQ_GET_PARAM_STR(q->hdfrcv, "name2", name2);
 
-	mmisc_pagediv_get(q->hdfrcv, NULL, &count, &offset);
+	mmisc_pagediv(q->hdfrcv, NULL, &count, &offset, NULL, q->hdfsnd);
 
 	if (strcmp(name, name2) > 0) {
 		snprintf(key, sizeof(key), "%s%s", name, name2);
@@ -94,7 +94,7 @@ static NEOERR* msg_cmd_saywithother(struct queue_entry *q, struct cache *cd, mdb
 	if (cache_getf(cd, &val, &vsize, PREFIX_SAYWITHOTHER"%s_%d", key, offset)) {
 		unpack_hdf(val, vsize, &q->hdfsnd);
 	} else {
-		MMISC_PAGEDIV_SET_N(q->hdfsnd, offset, db, "msg",
+		MMISC_PAGEDIV_SET_N(q->hdfsnd, db, "msg",
 							"(mfrom=$1 AND mto=$2) OR (mfrom=$3 AND mto=$4)",
 							"ssss", name, name2, name2, name);
 		MDB_QUERY_RAW(db, "msg", MSG_COL, "(mfrom=$1 AND mto=$2) OR "
@@ -118,12 +118,12 @@ static NEOERR* msg_cmd_mymsg(struct queue_entry *q, struct cache *cd, mdb_conn *
 
 	REQ_GET_PARAM_STR(q->hdfrcv, "name", name);
 
-	mmisc_pagediv_get(q->hdfrcv, NULL, &count, &offset);
+	mmisc_pagediv(q->hdfrcv, NULL, &count, &offset, NULL, q->hdfsnd);
 
 	if (cache_getf(cd, &val, &vsize, PREFIX_MYMSG"%s_%d", name, offset)) {
 		unpack_hdf(val, vsize, &q->hdfsnd);
 	} else {
-		MMISC_PAGEDIV_SET_N(q->hdfsnd, offset, db, "msg", "mfrom=$1 OR mto=$2"
+		MMISC_PAGEDIV_SET_N(q->hdfsnd, db, "msg", "mfrom=$1 OR mto=$2"
 							"ss", name, name);
 		MDB_QUERY_RAW(db, "msg", MSG_COL, "mfrom=$1 OR mto=$2"
 					  " ORDER BY intime DESC LIMIT %d OFFSET %d",

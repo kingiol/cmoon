@@ -60,3 +60,19 @@
     position: relative;
     top: -1px;
 }
+
+.bd-nav {margin: 2em; color: #666666; text-align: right;}
+.bd-nav input {width: 20px; height: 14px; padding: 0;}
+.bd-nav .confirm, .bd-nav .nav-prev, .bd-nav .nav-next {
+	display: inline-block;
+	cursor: pointer;
+	background: url(/img/bg/pagediv.png) 0 0 no-repeat;
+}
+.bd-nav .confirm {width: 24px; height: 18px;}
+.bd-nav .nav-prev {width: 30px; height: 22px; background-position: 0 -18px;}
+.bd-nav .nav-next {width: 70px; height: 22px; background-position: 0 -40px;}
+.bd-nav a {color: #666666;}
+
+.bd-nav .left {width: 100px;}
+.bd-nav .center {width: 100px; margin-left: 30px;}
+.bd-nav .right {width: 150px; margin-left: 80px;}

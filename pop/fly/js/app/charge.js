@@ -25,10 +25,7 @@ bmoon.appcharge = {
 
 		o.mpre.blur(function() {
 			o.link.fadeIn();
-		});
-		o.link.click(function() {
 			o.submit.fadeIn();
-			return true;
 		});
 		o.submit.click(o.charge);
 	},

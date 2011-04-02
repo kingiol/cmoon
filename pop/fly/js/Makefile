@@ -6,7 +6,7 @@ FILES = b/kol.js b/chatb.js b/chatc.js \
 		b/base.js \
 		b/index.js b/manual.js b/appnew.js b/appreset.js b/apppass.js b/appinfo.js b/appcharge.js \
 		b/blog.js b/blogindex.js b/blogop.js \
-		b/oms.js b/oms/edit.js b/oms/stat_ie.js b/oms/stat.js b/oms/users.js \
+		b/oms.js b/oms/edit.js b/oms/stat_ie.js b/oms/stat.js b/oms/users.js b/oms/bill.js \
 	    b/okol_ie.js b/okol.js
 
 all: preload $(FILES)
@@ -52,6 +52,9 @@ b/oms/stat.js: pub/datepicker/date.js pub/datepicker/jquery.datePicker.js \
 		       pub/flot/jquery.flot.js \
 			   pub/jquery.mntable.js oms/stat.js
 b/oms/users.js: app/new.js oms/users.js
+b/oms/bill.js: pub/datepicker/date.js pub/datepicker/jquery.datePicker.js \
+			   pub/jquery.mntable.js pub/jquery.mnnav.js \
+			   oms/bill.js
 
 b/okol_ie.js: pub/datepicker/jquery.bgiframe.min.js pub/flot/excanvas.min.js
 b/okol.js: pub/datepicker/date.js pub/datepicker/jquery.datePicker.js \

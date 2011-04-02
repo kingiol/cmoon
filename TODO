@@ -49,5 +49,6 @@
 		oms/stat mntable 点击排序、支持分页
 		aname_need_more admin email is send at backend on 0:00 clock
 		app/charge 充值，给个连接，然后告诉用户可以用来购买些啥，普通用户的充值将充给站长帐号？
+		每月续扣 account 的逻辑, 删除 account 退费逻辑
 		管理员动作：确认收款（待确认列表）、
 		播豆站长动作：管理（管理员、vip）、全站统计

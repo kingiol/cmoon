@@ -64,18 +64,25 @@ bmoon.appnew = {
 
 		var	aname = o.aname.val(),
 		email = o.email.val(),
-		asn = o.asn.val();
+		asn = o.asn.val(),
+		p = $(this).parent();
 
+		$('.vres', p).remove();
+		p.removeClass('success').removeClass('error').addClass('loading');
 		$.post('/json/app/new', {_op: 'add', aname: aname, email: email, asn: asn}, function(data) {
+			p.removeClass('loading');
 			if (data.success != 1 || !data.aname) {
-				alert(data.errmsg || '操作失败， 请稍后再试');
-				return;
+				p.addClass('error');
+				$('<span class="vres">' + data.errmsg + '</span>').appendTo(p);
+			} else {
+				p.addClass('success');
+				setTimeout(function() {
+					$('.copy-aname').text(data.aname);
+					$('#add').fadeOut();
+					$('#copy').fadeIn();
+					bmoon.lcs.loginCheck();
+				}, 1000);
 			}
-			$('.copy-aname').text(data.aname);
-			$('#add').fadeOut();
-			$('#copy').fadeIn();
-			
-			bmoon.lcs.loginCheck();
 		}, 'json');
 	}
 };

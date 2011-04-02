@@ -1,0 +1,72 @@
+<?cs def:map_val(val, map) ?>
+  <?cs each:item = map ?>
+    <?cs if:val == name(item) ?>
+      <?cs var:item ?>
+    <?cs /if ?>
+  <?cs /each ?>
+<?cs /def ?>
+
+<?cs if: ?Output.bills.0.id ?>
+<div id="bank-info" class="page-hint">
+  <?cs var: Output.appinfo.pname ?>
+  当前可用余额：
+  <span class="eem decimal text-green"><?cs var: Output.bankinfo.msum ?></span>
+  &nbsp; 待确认充值金额：
+  <span class="eem decimal"><?cs var: Output.bankinfo.mpre ?></span>
+</div>
+<?cs /if ?>
+
+<dl class="query">
+  <dt>开始日期</dt>
+  <dd>
+	<input type="text" name="times" class="datep" />
+  </dd>
+  <dt>结束日期</dt>
+  <dd>
+	<input type="text" name="timee" class="datep" />
+  </dd>
+  <dt><input type="submit" id="submit" class="btn" value="查询" /></dt>
+</dl>
+
+<?cs if: ?Output.bills.0.id ?>
+
+<div id="bill-table">
+  <table class="list">
+	<tr>
+	  <th>流水号</th>
+	  <th>交易类型</th>
+	  <th>交易金额</th>
+	  <th>交易时间</th>
+	  <th>交易备注</th>
+	</tr>
+
+	<?cs each: b = Output.bills ?>
+	<tr>
+	  <td><?cs var:b.id ?></td>
+	  <td><?cs call:map_val(b.btype, BillTypes) ?></td>
+	  <td><?cs var:b.fee ?></td>
+	  <td><?cs var:b.intime ?></td>
+	  <td><?cs var:b.remark ?></td>
+	</tr>
+	<?cs /each ?>
+  </table>
+</div>
+
+<div id="nav-bill" class="bd-nav"></div>
+
+<script>
+  var mgd = mgd || {};
+
+  mgd.npp = <?cs var:Output.npp ?>;
+  mgd.npg = <?cs var:Output.npg ?>;
+  mgd.nst = <?cs var:Output.nst ?>;
+  mgd.ntt = <?cs var:Output.ntt ?>;
+</script>
+
+<?cs else ?>
+
+<div class="page-hint">
+  暂无消费记录， <a href="/app/charge">充个值</a> 先！
+</div>
+
+<?cs /if ?>

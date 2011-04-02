@@ -223,6 +223,7 @@ NEOERR* app_charge_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 NEOERR* app_charge_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
 	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	mevent_t *evtb = hash_lookup(evth, "bank");
 	char *aname, *pname;
 	int mpre;
 	NEOERR *err;
@@ -234,11 +235,20 @@ NEOERR* app_charge_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	pname = hdf_get_value(evt->hdfrcv, "pname", NULL);
 	if (!pname) return nerr_raise(NERR_ASSERT, "pname null");
 
-	evt = hash_lookup(evth, "bank");
+	/*
+	 * set ALL value, then trigger
+	 * because TRIGGER will del the hdfrcv, and pname error
+	 */
 	hdf_set_value(evt->hdfsnd, "aname", pname);
-	hdf_set_int_value(evt->hdfsnd, "fee", mpre);
-	hdf_set_int_value(evt->hdfsnd, "btype", BANK_OP_PRECHARGE);
-	MEVENT_TRIGGER(evt, pname, REQ_CMD_BANK_ADDBILL, FLAGS_SYNC);
+	hdf_set_int_value(evt->hdfsnd, "state", LCS_ST_CHARGE);
+
+	hdf_set_value(evtb->hdfsnd, "aname", pname);
+	hdf_set_int_value(evtb->hdfsnd, "fee", mpre);
+	hdf_set_int_value(evtb->hdfsnd, "btype", BANK_OP_PRECHARGE);
+
+	MEVENT_TRIGGER(evt, pname, REQ_CMD_APPUP, FLAGS_NONE);
+
+	MEVENT_TRIGGER(evtb, pname, REQ_CMD_BANK_ADDBILL, FLAGS_SYNC);
 
 	return STATUS_OK;
 }

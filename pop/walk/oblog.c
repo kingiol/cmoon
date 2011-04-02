@@ -14,7 +14,7 @@ NEOERR* blog_index_static_get(HDF *hdf, HASH *dbh)
 	LPRE_DBOP(hdf, conn);
 
 	/* set pgtt for caller use */
-	MMISC_PAGEDIV_SET(hdf, PRE_OUTPUT, 0, conn, "blog", " state=%d ",
+	MMISC_PAGEDIV_SET(hdf, PRE_OUTPUT, conn, "blog", " state=%d ",
 					  NULL, BLOG_ST_NORMAL);
 	int ntt = hdf_get_int_value(hdf, PRE_OUTPUT".ntt", 0);
 	int pgtt = (ntt+BLOG_NUM_PERPAGE-1) / BLOG_NUM_PERPAGE;

@@ -82,14 +82,22 @@ bmoon.omsusers = {
 		var
 		aname = $('#aname').val(),
 		email = $('#email').val(),
-		asn = $('#asn').val();
+		asn = $('#asn').val(),
+		p = $(this).parent();
 
+		$('.vres', p).remove();
+		p.removeClass('success').removeClass('error').addClass('loading');
 		$.post('/json/oms/users', {_op: 'add', aname: aname, email: email, asn: asn}, function(data) {
+			p.removeClass('loading');
 			if (data.success == '1') {
-				o.addoverlay.close();
-				o._nodeUser({aname: aname, email: email});
+				p.addClass('success');
+				setTimeout(function() {
+					o.addoverlay.close();
+					o._nodeUser({aname: aname, email: email});
+				}, 1000);
 			} else {
-				alert(data.errmsg || '操作失败， 请稍后再试');
+				p.addClass('error');
+				$('<span class="vres">' + data.errmsg + '</span>').appendTo(p);
 			}
 		}, 'json');
 	},

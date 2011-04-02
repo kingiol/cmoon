@@ -72,11 +72,17 @@ oms_bill [merge = oms.pub] {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/bill.css" />
 			js = <script type="text/javascript" src="/js/b/oms/bill.js"></script>
-			title = 客服管理
+			title = 消费清单
 			actionpart = 4
         }
 		Include {
 			content = oms/bill.html
+		}
+		BillTypes {
+			0 = 申请充值
+			1 = 确认充值
+			2 = 添加客服帐号
+			3 = 操作回滚
 		}
 	}
 }

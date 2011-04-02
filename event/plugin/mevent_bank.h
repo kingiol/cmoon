@@ -2,7 +2,9 @@
 #define __MEVENT_BANK_H__
 
 #define PREFIX_BANK		"Bank"
+#define PREFIX_BILL		"Bill"
 #define BANK_CC_SEC		60
+#define BILL_CC_SEC		60
 
 enum {
 	BANK_OP_PRECHARGE = 0,
@@ -13,7 +15,8 @@ enum {
 
 enum {
 	REQ_CMD_BANK_INFO = 1001,
-	REQ_CMD_BANK_ADDBILL
+	REQ_CMD_BANK_ADDBILL,
+	REQ_CMD_BANK_GETBILL
 };
 
 enum {

@@ -25,5 +25,7 @@ NEOERR* oms_secy_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
 NEOERR* oms_stat_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
+NEOERR* oms_bill_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+
 __END_DECLS
 #endif /* __OOMS_H__ */

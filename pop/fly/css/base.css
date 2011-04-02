@@ -65,6 +65,9 @@ table.list tr:hover {background-color: #FFFFCC;}
 .slight {color:#767676;}
 .em {font-weight: bold;}
 .eem {font-weight: bold; font-size: 120%;}
+.text-red {color: #ff0000;}
+.text-green {color: #00ff00;}
+.text-blue {color: #0000ff;}
 .text-center {text-align: center;}
 .text-right {text-align: right;}
 .text-hint {color: #bb0000;}
