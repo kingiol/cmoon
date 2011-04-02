@@ -235,6 +235,11 @@ NEOERR* app_charge_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	pname = hdf_get_value(evt->hdfrcv, "pname", NULL);
 	if (!pname) return nerr_raise(NERR_ASSERT, "pname null");
 
+	hdf_set_value(evt->hdfsnd, "aname", pname);
+	MEVENT_TRIGGER(evt, pname, REQ_CMD_APPINFO, FLAGS_SYNC);
+	int state = hdf_get_int_value(evt->hdfrcv, "state", LCS_ST_STRANGER);
+	pname = hdf_get_value(evt->hdfrcv, "aname", NULL);
+
 	/*
 	 * set ALL value, then trigger
 	 * because TRIGGER will del the hdfrcv, and pname error
@@ -246,7 +251,9 @@ NEOERR* app_charge_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_set_int_value(evtb->hdfsnd, "fee", mpre);
 	hdf_set_int_value(evtb->hdfsnd, "btype", BANK_OP_PRECHARGE);
 
-	MEVENT_TRIGGER(evt, pname, REQ_CMD_APPUP, FLAGS_NONE);
+	if (state < LCS_ST_CHARGE) {
+		MEVENT_TRIGGER(evt, pname, REQ_CMD_APPUP, FLAGS_NONE);
+	}
 
 	MEVENT_TRIGGER(evtb, pname, REQ_CMD_BANK_ADDBILL, FLAGS_SYNC);
 
