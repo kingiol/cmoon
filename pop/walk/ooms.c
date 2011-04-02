@@ -184,6 +184,7 @@ NEOERR* oms_users_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	 * prepare data 
 	 */
 	hdf_set_value(evt->hdfsnd, "pname", aname);
+	hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 	
 	/*
 	 * trigger

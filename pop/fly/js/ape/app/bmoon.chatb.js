@@ -261,7 +261,7 @@ bmoon.chat = {
 		
 		if (bmoon.utl.type(o.usersTotalMsg[name]) != 'Number' || (o.usersTotalMsg[name] / 15) > pg) {
 			$.getJSON('http://www.kaiwuonline.com/json/msg?JsonCallback=?',
-					  {name: name, name2: aname, npp: 15, npg: pg+1},
+					  {name: name, name2: aname, _npp: 15, _npg: pg+1},
 					  function(data) {
 						  if (data.success == 1 && bmoon.utl.type(data.raws) == 'Array') {
 							  $.each(data.raws, function(i, v) {

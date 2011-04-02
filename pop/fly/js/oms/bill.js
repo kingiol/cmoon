@@ -34,7 +34,6 @@ bmoon.omsbill = {
 	rendNav: function() {
 		var o = bmoon.omsbill.init();
 
-		//o.nav.mnnav({ntt: mgd.ntt, npg: mgd.npg, npp: mgd.npp});
 		o.nav.mnnav({
 			ntt: mgd.ntt,
 			npg: mgd.npg,
@@ -49,7 +48,7 @@ bmoon.omsbill = {
 		var tms = $('input[name=times]').val(),
 		tme = $('input[name=timee]').val();
 		
-		$.getJSON('/json/oms/bill', {tms: tms, tme: tme, npg: pn}, function(data){
+		$.getJSON('/json/oms/bill', {tms: tms, tme: tme, _npg: pn}, function(data){
 			if (data.success == 1) {
 				$(document).mntable(
 					{
@@ -73,9 +72,9 @@ bmoon.omsbill = {
 					}
 				).appendTo(o.billtable.empty());
 				o.nav.mnnav({
-					ntt: data.ntt,
-					npg: data.npg,
-					npp: data.npp,
+					ntt: data._ntt,
+					npg: data._npg,
+					npp: data._npp,
 					cbk: o.turnPage
 				});
 			} else {

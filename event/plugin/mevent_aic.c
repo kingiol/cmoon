@@ -394,7 +394,7 @@ static NEOERR* aic_cmd_appousers(struct queue_entry *q, struct cache *cd, mdb_co
 		MMISC_PAGEDIV_SET_N(q->hdfsnd, db, "appinfo", "pid=%d OR aid=%d",
 							NULL, pid, pid);
 		MDB_QUERY_RAW(db, "appinfo", APPINFO_COL,
-					  "pid=%d OR aid=%d ORDER BY uptime LIMIT %d OFFSET %d",
+					  "pid=%d OR aid=%d ORDER BY uptime DESC LIMIT %d OFFSET %d",
 					  NULL, pid, pid, count, offset);
 		err = mdb_set_rows(q->hdfsnd, db, APPINFO_COL, "users", 1);
 		if (err != STATUS_OK) return nerr_pass(err);

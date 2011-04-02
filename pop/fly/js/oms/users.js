@@ -9,6 +9,7 @@ bmoon.omsusers = {
 		o.users = $('#usertable');
 		o.secy = $('#select-secy');
 		o.addoverlay = $('a[rel="#addoverlay"]').overlay({mask: '#999', api: true});
+		o.nav = $('#nav-users');
 
 		o.inited = true;
 		return o;
@@ -42,6 +43,8 @@ bmoon.omsusers = {
 		var o = bmoon.omsusers.init();
 
 		o.bindClick();
+
+		bmoon.utl.after(o.rendNav, 'mgd.ntt != undefined', 10);
 	},
 
 	bindClick: function() {
@@ -50,6 +53,17 @@ bmoon.omsusers = {
 		o.secy.change(o.setSecy);
 		$('#submit').unbind('click').click(o.userAdd);
 		$('a.deluser').live('click', o.userDel);
+	},
+
+	rendNav: function() {
+		var o = bmoon.omsusers.init();
+
+		o.nav.mnnav({
+			ntt: mgd.ntt,
+			npg: mgd.npg,
+			npp: mgd.npp,
+			url: '/oms/users'
+		});
 	},
 
 	setSecy: function() {

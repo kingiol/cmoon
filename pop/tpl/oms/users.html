@@ -36,9 +36,20 @@
   <td><?cs var: user.numcamer ?></td>
   <td></td>
   <td><a href="javascript: void(0);" class="deluser" aname="<?cs var: user.aname ?>" >删除</td>
-</tr>
-<?cs /each ?>
+  </tr>
+  <?cs /each ?>
 </table>
+
+<div id="nav-users" class="bd-nav"></div>
+
+<script>
+  var mgd = mgd || {};
+
+  mgd.npp = <?cs var:Output._npp ?>;
+  mgd.npg = <?cs var:Output._npg ?>;
+  mgd.nst = <?cs var:Output._nst ?>;
+  mgd.ntt = <?cs var:Output._ntt ?>;
+</script>
 
 <div class="overlay-w" id="addoverlay">
   <h3 class="text-center">为 <?cs var: Output.appinfo.pname ?> 创建客服帐号</h3>

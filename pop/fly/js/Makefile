@@ -51,7 +51,7 @@ b/oms/stat_ie.js: pub/datepicker/jquery.bgiframe.min.js pub/flot/excanvas.min.js
 b/oms/stat.js: pub/datepicker/date.js pub/datepicker/jquery.datePicker.js \
 		       pub/flot/jquery.flot.js \
 			   pub/jquery.mntable.js oms/stat.js
-b/oms/users.js: app/new.js oms/users.js
+b/oms/users.js: pub/jquery.mnnav.js app/new.js oms/users.js
 b/oms/bill.js: pub/datepicker/date.js pub/datepicker/jquery.datePicker.js \
 			   pub/jquery.mntable.js pub/jquery.mnnav.js \
 			   oms/bill.js
