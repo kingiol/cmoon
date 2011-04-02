@@ -257,7 +257,7 @@ add:
 			hdf_set_value(evt->hdfsnd, "aname", pname);
 			hdf_set_int_value(evt->hdfsnd, "btype", BANK_OP_ROLLBACK);
 			hdf_set_int_value(evt->hdfsnd, "fee", -cost);
-			hdf_set_valuef(evt->hdfsnd, "remark = rollback for account %s", aname);
+			hdf_set_valuef(evt->hdfsnd, "remark = 客服帐号 %s 创建失败", aname);
 
 			if (PROCESS_NOK(mevent_trigger(evt, pname, REQ_CMD_BANK_ADDBILL,
 										   FLAGS_SYNC))) {

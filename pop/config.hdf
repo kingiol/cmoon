@@ -98,7 +98,7 @@ EOM
 }
 
 Cost {
-	account = 29
+	account = 27
 	sms = 10
 	stat = 999
 }

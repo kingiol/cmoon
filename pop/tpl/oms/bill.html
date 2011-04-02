@@ -33,19 +33,17 @@
 <div id="bill-table">
   <table class="list">
 	<tr>
-	  <th>流水号</th>
+	  <th>交易时间</th>
 	  <th>交易类型</th>
 	  <th>交易金额</th>
-	  <th>交易时间</th>
 	  <th>交易备注</th>
 	</tr>
 
 	<?cs each: b = Output.bills ?>
 	<tr>
-	  <td><?cs var:b.id ?></td>
+	  <td><?cs var:b.intime ?></td>
 	  <td><?cs call:map_val(b.btype, BillTypes) ?></td>
 	  <td><?cs var:b.fee ?></td>
-	  <td><?cs var:b.intime ?></td>
 	  <td><?cs var:b.remark ?></td>
 	</tr>
 	<?cs /each ?>

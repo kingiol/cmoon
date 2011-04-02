@@ -52,7 +52,7 @@ bmoon.omsbill = {
 			if (data.success == 1) {
 				$(document).mntable(
 					{
-						id: '流水号',
+						intime: '交易时间',
 						_type: ['交易类型', function(row, col, val, tr) {
 							var r = '';
 							if (row['btype'] == 0) r = '申请充值';
@@ -63,7 +63,6 @@ bmoon.omsbill = {
 							return $('<span>'+r+'</span>');
 						}],
 						fee: '交易金额',
-						intime: '交易时间',
 						remark: '交易备注'
 					},
 					data.bills,

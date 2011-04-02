@@ -34,7 +34,7 @@ app_charge [merge = app.pub] {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/appcharge.css" />
 			js = <script type="text/javascript" src="/js/b/appcharge.js"></script>
-			title = 修改密码
+			title = 充值
 			actionpart = 2
         }
 		Include {

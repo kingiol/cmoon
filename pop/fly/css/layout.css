@@ -42,6 +42,7 @@
 }
 #bd-action li a {
     -moz-border-radius: 4px 4px 4px 4px;
+	display: inline;
     color: #666666;
     float: left;
     height: 26px;

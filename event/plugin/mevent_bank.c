@@ -70,14 +70,16 @@ static NEOERR* bank_cmd_addbill(struct queue_entry *q, struct cache *cd, mdb_con
 
 	switch (type) {
 	case BANK_OP_PRECHARGE:
-		snprintf(remark, sizeof(remark), "user apply charge");
+		REQ_GET_PARAM_STR(q->hdfrcv, "account", account);
+		snprintf(remark, sizeof(remark), "%s 申请充值", account);
 
 		MDB_EXEC_TS(db, NULL, "SELECT merge_bank_pre($1::varchar(256), $2, $3)",
 					"sii", aname, aid, fee);
 		
 		break;
 	case BANK_OP_CFMCHARGE:
-		snprintf(remark, sizeof(remark), "bomdoo confirm charge");
+		REQ_GET_PARAM_STR(q->hdfrcv, "account", account);
+		snprintf(remark, sizeof(remark), "播豆管理员 %s 确认充值成功", account);
 
 		err = bank_cmd_info(q, cd, db);
 		if (err != STATUS_OK) goto finish;
@@ -92,7 +94,7 @@ static NEOERR* bank_cmd_addbill(struct queue_entry *q, struct cache *cd, mdb_con
 		break;
 	case BANK_OP_ADDACCOUNT:
 		REQ_GET_PARAM_STR(q->hdfrcv, "account", account);
-		snprintf(remark, sizeof(remark), "pay for %s open", account);
+		snprintf(remark, sizeof(remark), "开通客服帐号 %s", account);
 
 		err = bank_cmd_info(q, cd, db);
 		if (err != STATUS_OK) goto finish;

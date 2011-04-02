@@ -7,7 +7,7 @@
 }
 
 .intro {
-	width: 300px;
+	width: 280px;
 	float: left;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .intro .title {
-	border-top:2px solid #aaa;
+	/*border-top:2px solid #aaa;*/
 	border-bottom: 1px solid #aaa;
     font-weight: bold;
     font-size: 12px;

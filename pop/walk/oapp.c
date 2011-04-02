@@ -248,6 +248,7 @@ NEOERR* app_charge_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	hdf_set_int_value(evt->hdfsnd, "state", LCS_ST_CHARGE);
 
 	hdf_set_value(evtb->hdfsnd, "aname", pname);
+	hdf_set_value(evtb->hdfsnd, "account", aname);
 	hdf_set_int_value(evtb->hdfsnd, "fee", mpre);
 	hdf_set_int_value(evtb->hdfsnd, "btype", BANK_OP_PRECHARGE);
 
