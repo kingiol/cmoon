@@ -12,7 +12,7 @@ static int tpl_config(const struct dirent *ent)
 void ltpl_prepare_rend(HDF *hdf, char *tpl)
 {
 	char key[LEN_ST];
-	HDF *tmphdf; 
+	HDF *tmphdf, *ahdf; 
 	if (hdf == NULL) return;
 
 	/*
@@ -33,7 +33,8 @@ void ltpl_prepare_rend(HDF *hdf, char *tpl)
 	tmphdf = hdf_get_child(hdf, PRE_SPECIAL_ACTION);
 	while (tmphdf) {
 		snprintf(key, sizeof(key), PRE_LAYOUT".%s", hdf_obj_value(tmphdf));
-		hdf_copy(hdf, PRE_LAYOUT".actions", hdf_get_obj(hdf, key));
+		ahdf = hdf_get_obj(hdf, key);
+		if (ahdf) hdf_copy(hdf, PRE_LAYOUT".actions", ahdf);
 		
 		tmphdf = hdf_obj_next(tmphdf);
 	}

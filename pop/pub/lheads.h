@@ -23,4 +23,11 @@
 #include "mevent_mtls.h"
 #include "mevent_bank.h"
 
+#include "oapp.h"
+#include "ocomment.h"
+#include "omsg.h"
+#include "ookol.h"
+#include "ooms.h"
+#include "ozero.h"
+
 #endif	/* __LHEADS_H__ */
