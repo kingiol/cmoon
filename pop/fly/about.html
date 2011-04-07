@@ -5,15 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="keywords" content="bomdoo 在线客服 在线客服代码 在线客服源代码 访问跟踪 访问统计 免客户端在线客服 离线消息 开源聊天工具 网页聊天 webim 站长工具 ape ajax push engine" />
     <meta name="description" content="bomdoo" />
-    <title><?cs var:Layout.title ?> - bomdoo</title>
+    <title>界面定制 - bomdoo</title>
 
     <link rel="stylesheet" type="text/css" href="/css/b/base.css" />
-    <?cs var: Layout.css ?>
-    <?cs linclude:Include.css ?>
+    <link rel="stylesheet" type="text/css" href="/css/b/about.css" />
+    
 
     <script type="text/javascript" src="/js/b/base.js"></script>
-    <?cs var: Layout.js ?>
-    <?cs linclude:Include.js ?>
+    <script src="/js/b/about.js"></script>
+    
 
   </head>
 
@@ -37,44 +37,32 @@
 
     <div id="bd-mid">
       <ul id="bd-nav">
-        <?cs each:tab = Layout.tabs ?>
-        <li><a href="<?cs var:tab.href ?>" class="<?cs var:tab.class ?>"><?cs var:tab.name ?></a></li>
-        <?cs /each ?>
+        
+        <li><a href="/index.html" class="">首页</a></li>
+        
+        <li><a href="/oms" class="">我的站点</a></li>
+        
+        <li><a href="/manual/index.html" class="">使用手册</a></li>
+        
+        <li><a href="/demo.html" class="">界面定制</a></li>
+        
+        <li><a href="/zero" class="">人工服务</a></li>
+        
         <li>&nbsp;</li>
       </ul>
 
       <div id="bd-content">
-        <?cs if: ?Layout.actions.0.name ?>
-        <ul id="bd-action">
-            <?cs each:action = Layout.actions ?>
-            <li><a href="<?cs var:action.href ?>" class="<?cs var:action.class ?>"><?cs var:action.name ?></a></li>
-            <?cs /each ?>
-        </ul>
-        <?cs /if ?>
         
-        <?cs if: ?Layout.crumbs.0.name ?>
-        <ul id="bd-crumb">
-            <li class="first">当前位置:</li>
-            <?cs each:crumb = Layout.crumbs ?>
-            <li>&raquo; <a href="<?cs var:crumb.href ?>"><?cs var:crumb.name ?></a></li>
-            <?cs /each ?>
-        </ul>
-        <?cs /if ?>
+        
+        
 
-        <?cs if: ?Output.errmsg && Output.errcode == 25 ?>
-          <script>
-            $(document).ready(function() {
-              $('#login-hint').html('<?cs var: Output.errmsg ?>')
-              bmoon.lcs.init().loginoverlay.load();
-            });
-          </script>
-        <?cs elif: ?Output.errmsg && ?Output.errcode?>
-          <h3><?cs var: Output.errcode ?> : <?cs var: Output.errmsg ?></h3>
-          <pre><?cs var: Output.errtrace ?></pre>
-        <?cs else ?>
-          <?cs linclude!Include.content ?>
-          <?cs var:Content.content ?>
-        <?cs /if ?>
+        
+          <h2 class="text-center">关于播豆</h2>
+
+<p>balabala</p>
+
+          
+        
         <div class="clearer"></div>
       </div> <!-- content -->
     </div> <!-- mid -->

@@ -4,7 +4,7 @@ include $(BASEDIR)Make.env
 FILES = b/base.css \
 		b/client/lcs.css \
 		b/client/mic.css \
-		b/index.css b/manual.css \
+		b/index.css b/demo.css b/manual.css \
 		b/blog.css b/blogindex.css b/blogop.css \
 		b/oms.css b/oms/edit.css b/oms/stat.css b/oms/users.css b/oms/faq.css b/oms/bill.css \
 	    b/okol.css
@@ -20,6 +20,7 @@ b/client/lcs.css: client/lcs.css
 b/client/mic.css: client/mic.css
 
 b/index.css: index.css
+b/demo.css: demo.css
 b/manual.css: manual.css
 b/blog.css: blog/blog.css
 b/blogindex.css: blog/index.css

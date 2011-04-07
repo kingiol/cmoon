@@ -14,6 +14,22 @@ index {
 	Output = index.html
 }
 
+demo {
+	Layout = layout.html
+	Dataset {
+		Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/demo.css" />
+			js = <script src="/js/b/demo.js"></script>
+			title = 界面定制
+			tabpart = 3
+		}
+		Include {
+			content = demo.html
+		}
+	}
+	Output = demo.html
+}
+
 app_new {
 	Layout = layout.html
 	Dataset {
@@ -43,4 +59,34 @@ app_reset {
 		}
 	}
 	Output = app/reset.html
+}
+
+faq {
+	Layout = layout.html
+	Dataset {
+		Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/faq.css" />
+			js = <script src="/js/b/faq.js"></script>
+			title = 界面定制
+		}
+		Include {
+			content = faq.html
+		}
+	}
+	Output = faq.html
+}
+
+about {
+	Layout = layout.html
+	Dataset {
+		Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/about.css" />
+			js = <script src="/js/b/about.js"></script>
+			title = 界面定制
+		}
+		Include {
+			content = about.html
+		}
+	}
+	Output = about.html
 }

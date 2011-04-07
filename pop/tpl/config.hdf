@@ -42,3 +42,18 @@ app_charge [merge = app.pub] {
 		}
 	}
 }
+
+zero {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/zero/zero.css" />
+			js = <script type="text/javascript" src="/js/b/zero/zero.js"></script>
+			title = 人工服务
+			tabpart = 4
+        }
+		Include {
+			content = zero/zero.html
+		}
+	}
+}

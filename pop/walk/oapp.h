@@ -40,6 +40,28 @@ __BEGIN_DECLS
 		}																\
 	} while (0)
 
+#define APP_CHECK_STUFF()											\
+	do {															\
+		err = app_check_login_data_get(cgi, dbh, evth, ses);		\
+		if (err != STATUS_OK) return nerr_pass(err);				\
+		HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".aname", aname);		\
+		LEGAL_CK_ANAME(aname);										\
+		if (hdf_get_int_value(evt->hdfrcv, "state", LCS_ST_FREE) < LCS_ST_ADMIN) {	\
+			return nerr_raise(LERR_LIMIT, "%s not admin", aname);	\
+		}															\
+	} while (0)
+
+#define APP_CHECK_ROOT()											\
+	do {															\
+		err = app_check_login_data_get(cgi, dbh, evth, ses);		\
+		if (err != STATUS_OK) return nerr_pass(err);				\
+		HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".aname", aname);		\
+		LEGAL_CK_ANAME(aname);										\
+		if (hdf_get_int_value(evt->hdfrcv, "state", LCS_ST_FREE) != LCS_ST_ROOT) { \
+			return nerr_raise(LERR_LIMIT, "%s not admin", aname);		\
+		}																\
+	} while (0)
+
 NEOERR* app_exist_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 NEOERR* app_info_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 NEOERR* app_reset_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);

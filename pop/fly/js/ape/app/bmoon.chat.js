@@ -214,6 +214,23 @@ bmoon.chat = {
 			else $.cookie('lcs_ui', 'max');
 		})
 	},
+
+	updateUI: function(opts) {
+		var o = bmoon.chat.init();
+
+		o.ape.opts = $.extend(o.ape.opts, opts || {});
+
+		if (opts.pos) {
+			$.each(o.ape.opts.pos, function(k, v){
+				if (!v.match(/.*\%$/))
+					o.ape.opts.pos[k] = parseInt(v);
+			});
+			if (o.ielow) o._rendBox();
+			else o.chatbody.css(o.ape.opts.pos);
+		}
+		if (opts.css) {
+		}
+	},
 	
 	openChat: function() {
 		var o = bmoon.chat.init();

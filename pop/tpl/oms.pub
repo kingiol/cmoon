@@ -24,4 +24,16 @@ Dataset.Layout {
 			href = /oms/bill
 		}
 	}
+	actions_2 {
+		5 {
+			name = 管理员菜单
+			href = /oms/admin
+		}
+	}
+	actions_3 {
+		5 {
+			name = 站长菜单
+			href = /oms/root
+		}
+	}
 }

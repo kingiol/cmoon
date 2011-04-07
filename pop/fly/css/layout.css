@@ -11,7 +11,8 @@
 	padding: 10px;
 }
 #bd-top img {float: left;}
-#bd-bot p {text-align: center; text-indent: 0; margin: 2px;}
+#bd-bot p {text-indent: 0; margin: 2px;}
+#bd-bot p.right {text-align: right;}
 
 #bd-personal {float: right; margin: 12px 0 0 0;}
 #bd-personal ul li{display: inline; float: left; margin: 5px 0;	padding: 0 8px; border-right: 1px solid #101010;}

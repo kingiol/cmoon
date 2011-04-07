@@ -1,0 +1,11 @@
+input.pos {width: 28px;}
+
+#bd-content pre {
+	width:90%;
+	padding:0.5em;
+	margin: 1ex auto;
+	background-color:#EEEEEE;
+	border:1px solid #AAAAAA;
+	color:#112222;
+	font-size:90%;
+}

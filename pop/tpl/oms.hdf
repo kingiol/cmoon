@@ -86,3 +86,33 @@ oms_bill [merge = oms.pub] {
 		}
 	}
 }
+
+oms_admin [merge = oms.pub] {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/admin.css" />
+			js = <script type="text/javascript" src="/js/b/oms/admin.js"></script>
+			title = 消费清单
+			actionpart = 5
+        }
+		Include {
+			content = oms/admin.html
+		}
+	}
+}
+
+oms_root [merge = oms.pub] {
+	Layout = layout.html
+	Dataset {
+        Layout {
+			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/root.css" />
+			js = <script type="text/javascript" src="/js/b/oms/root.js"></script>
+			title = 消费清单
+			actionpart = 5
+        }
+		Include {
+			content = oms/root.html
+		}
+	}
+}

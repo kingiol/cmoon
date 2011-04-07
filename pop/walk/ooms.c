@@ -364,3 +364,27 @@ NEOERR* oms_bill_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	
 	return STATUS_OK;
 }
+
+NEOERR* oms_admin_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname;
+	NEOERR *err;
+
+	APP_CHECK_STUFF();
+	SET_ADMIN_ACTION(evt->hdfrcv, cgi->hdf);
+
+	return STATUS_OK;
+}
+
+NEOERR* oms_root_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+	mevent_t *evt = (mevent_t*)hash_lookup(evth, "aic");
+	char *aname;
+	NEOERR *err;
+
+	APP_CHECK_ROOT();
+	SET_ADMIN_ACTION(evt->hdfrcv, cgi->hdf);
+
+	return STATUS_OK;
+}

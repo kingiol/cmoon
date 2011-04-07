@@ -11,7 +11,7 @@
 #kol-lcs-min {
 	width: 30px;
 	height: 30px;
-	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll -41px -60px;
+	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll -41px -60px;
 	overflow: hidden;
 	cursor: pointer;
 }
@@ -34,16 +34,16 @@
 #kol-lcs-mid .maxer {
 	width: 252px;
 	margin-left: 10px;
-	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll 0 -29px;
+	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 -29px;
 }
 /* dirty: unread new message */
 #kol-lcs-mid .maxer.dirty {
-	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll 0 5px;
+	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 5px;
 }
 #kol-lcs-mid .miner {
 	width: 25px;
 	margin-left: 5px;
-	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll 0 -58px;
+	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 -58px;
 }
 
 /*
@@ -60,7 +60,7 @@
 	height: 20px;
 	width: 30px;
 	padding: 2px 3px 0 0;
-	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll -83px -64px;
+	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll -83px -64px;
 	cursor: pointer;
 }
 #kol-lcs-max .miner {
@@ -70,7 +70,7 @@
 	padding: 2px 3px 0 0;
 	margin-left: 3px;
 	overflow: hidden;
-	background:transparent url(http://www.kaiwuonline.com/img/im/lcs.png) no-repeat scroll 0 -63px;
+	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 -63px;
 	cursor: pointer;
 }
 #kol-lcs-max .hint {

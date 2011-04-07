@@ -11,12 +11,12 @@
 #kol-lcs-mid {
 	width: 42px;
 	height: 151px;
-	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) repeat-x scroll 0 0;
+	background:transparent url(http://www.bomdoo.com/img/im/mic.png) repeat-x scroll 0 0;
 	cursor: pointer;
 }
 /* dirty: unread new message */
 #kol-lcs-mid.dirty {
-	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll -42px 0;
+	background:transparent url(http://www.bomdoo.com/img/im/mic.png) no-repeat scroll -42px 0;
 }
 
 /*
@@ -26,14 +26,14 @@
 	width: 288px;
 	border: 1px solid #ff4500;
 	padding: 5px 10px;
-	background: #fff url(http://www.kaiwuonline.com/img/im/mic_bg.png) repeat-x scroll 0 0;
+	background: #fff url(http://www.bomdoo.com/img/im/mic_bg.png) repeat-x scroll 0 0;
 }
 #kol-lcs-max .mider {
 	float: right;
 	height: 20px;
 	width: 25px;
 	padding: 2px 3px 0 0;
-	background:transparent url(http://www.kaiwuonline.com/img/im/mic.png) no-repeat scroll 0 -170px;
+	background:transparent url(http://www.bomdoo.com/img/im/mic.png) no-repeat scroll 0 -170px;
 	cursor: pointer;
 }
 #kol-lcs-max .hint {

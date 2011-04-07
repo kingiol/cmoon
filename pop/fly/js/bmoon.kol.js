@@ -60,16 +60,18 @@ bmoon.kol = {
 		var o = bmoon.kol;
 
 		if (o.inited) return o;
+		if (!opts) return {};
 		o.inited = true;
 
 		o.aname = opts.aname || 'unknown';
+		o.client = null;
 
 		if (opts.statOnly) return o;
 
 		if (typeof jQuery != 'function' || jQuery.fn.jquery < '1.4.2') {
-			o._loadJs('http://js.kaiwuonline.com/b/chatb.js');
+			o._loadJs('http://js.bomdoo.com/b/chatb.js');
 		} else if (typeof jQuery.cookie != 'function') {
-			$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chatc.js" charset="utf-8"></script>');
+			$('head').append('<script type="text/javascript" src="http://js.bomdoo.com/b/chatc.js" charset="utf-8"></script>');
 		}
 		
 		// wait for chatx.js loaded
@@ -77,16 +79,17 @@ bmoon.kol = {
 			// opts part one
 			// can't extend all opts here, because it's timeouted lead onready's opts can't be trust
 			opts = $.extend({
-				css: 'http://css.kaiwuonline.com/b/client/lcs.css'
+				css: 'http://css.bomdoo.com/b/client/lcs.css'
 			}, opts || {});
 			
-			$('head').append('<link rel="stylesheet" href="' + opts.css + '" />');
+			$('head').append('<link id="kol-lcs-css" rel="stylesheet" href="' +
+							 opts.css + '" />');
 			var unode = $('meta[content*="utf"]');
 			if (!unode.length) unode = $('meta[content*="UTF"]');
 			if (unode.length) {
-				$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js" charset="utf-8"></script>');
+				$('head').append('<script type="text/javascript" src="http://js.bomdoo.com/b/chat.js" charset="utf-8"></script>');
 			} else {
-				$('head').append('<script type="text/javascript" src="http://js.kaiwuonline.com/b/chat_gb.js" charset="gb2312"></script>');
+				$('head').append('<script type="text/javascript" src="http://js.bomdoo.com/b/chat_gb.js" charset="gb2312"></script>');
 			}
 		}, "typeof jQuery == 'function' && typeof jQuery.cookie == 'function'", 10);
 		
@@ -126,8 +129,8 @@ bmoon.kol = {
 				}
 			}, opts || {});
 			
-			var client = new APE.Client();
-			client.load({
+			o.client = new APE.Client();
+			o.client.load({
 				identifier: o.aname,
 				transport: 2,
 				complete: function(ape) {
