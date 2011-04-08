@@ -15,7 +15,7 @@ CREATE TRIGGER tg_uptime_blog BEFORE UPDATE ON blog FOR EACH ROW EXECUTE PROCEDU
 
 CREATE TABLE comment (
 	   id SERIAL,
-	   type int NOT NULL DEFAULT 0, -- 0 blog
+	   type int NOT NULL DEFAULT 0, -- 0 blog, 1 improve
 	   state int NOT NULL DEFAULT 0,
 	   oid int NOT NULL DEFAULT 0,
 	   pid int NOT NULL DEFAULT 0,
@@ -58,3 +58,19 @@ CREATE AGGREGATE str_concat(
   stype       = text,
   initcond    = ''
 );
+
+
+-- zero (personal help)
+CREATE TABLE improve (
+	id SERIAL,
+	aid int NOT NULL DEFAULT 0,
+	aname varchar(256) NOT NULL DEFAULT '',
+	state int NOT NULL DEFAULT 0,
+	title varchar(256) NOT NULL DEFAULT '',
+	content varchar(1024) NOT NULL DEFAULT '',
+	contact varchar(64) NOT NULL DEFAULT '',
+	intime timestamp DEFAULT now(),
+	PRIMARY KEY (id)
+);
+
+CREATE INDEX improve_index ON improve (aid, state);

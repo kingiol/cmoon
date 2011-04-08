@@ -1,0 +1,35 @@
+<h2 class="text-center"><?cs var:Output.title ?></h2>
+
+<pre>
+  <?cs var:Output.content ?>
+</pre>
+
+<!-- 评论显示 -->
+<div id="comments">
+</div>
+
+<!-- 评论获取 -->
+<div id="comments-get" class="hide">
+  <a href="javascript:void(0);" id="get-comment">查看更多回复</a>
+</div>
+
+<!-- 写新评论 -->
+<a name="addcomment"></a>
+<ul id="comment-add" class="commentnew">
+  <li>
+	<h4 class="slight">发布回复 (1 ~ 256 个字)</h4>
+  </li>
+  <li>
+	<textarea id="b-comment" class="content VAL_NEWCOMMENT vrequire" vmax="256"></textarea>
+  </li>
+  <li>
+	<input type="button" id="submit-comment-add" class="btn" value="提交" />
+	<span class="indicator"></span>
+  </li>
+</ul>
+
+<script>
+  var mgd = mgd || {};
+
+  mgd.id = <?cs var: Output.id ?>;
+</script>

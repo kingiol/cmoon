@@ -29,3 +29,18 @@ BEGIN
 END
 $$
 LANGUAGE plpgsql;
+
+\c lcs_aux
+CREATE TABLE improve (
+	id SERIAL,
+	aid int NOT NULL DEFAULT 0,
+	aname varchar(256) NOT NULL DEFAULT '',
+	state int NOT NULL DEFAULT 0,
+	title varchar(256) NOT NULL DEFAULT '',
+	content varchar(1024) NOT NULL DEFAULT '',
+	contact varchar(64) NOT NULL DEFAULT '',
+	intime timestamp DEFAULT now(),
+	PRIMARY KEY (id)
+);
+
+CREATE INDEX improve_index ON improve (aid, state);

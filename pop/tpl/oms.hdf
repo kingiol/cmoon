@@ -3,7 +3,7 @@
 # overwrite linke will overwrite original node
 # copy can't be deep
 # so, done partly
-oms [merge = oms.pub] {
+oms [merge=oms.pub] {
 	Layout = layout.html
 	Dataset {
         Layout {
@@ -18,7 +18,7 @@ oms [merge = oms.pub] {
 	}
 }
 
-oms_stat [merge = oms.pub] {
+oms_stat [merge=oms.pub] {
 	Layout = layout.html
 	Dataset {
         Layout {
@@ -36,7 +36,7 @@ EOM
 	}
 }
 
-oms_edit [merge = oms.pub] {
+oms_edit [merge=oms.pub] {
 	Layout = layout.html
 	Dataset {
         Layout {
@@ -51,7 +51,7 @@ oms_edit [merge = oms.pub] {
 	}
 }
 
-oms_users [merge = oms.pub] {
+oms_users [merge=oms.pub] {
 	Layout = layout.html
 	Dataset {
         Layout {
@@ -66,7 +66,7 @@ oms_users [merge = oms.pub] {
 	}
 }
 
-oms_bill [merge = oms.pub] {
+oms_bill [merge=oms.pub] {
 	Layout = layout.html
 	Dataset {
         Layout {
@@ -87,7 +87,7 @@ oms_bill [merge = oms.pub] {
 	}
 }
 
-oms_admin [merge = oms.pub] {
+oms_admin [merge=oms.pub] {
 	Layout = layout.html
 	Dataset {
         Layout {
@@ -102,7 +102,7 @@ oms_admin [merge = oms.pub] {
 	}
 }
 
-oms_root [merge = oms.pub] {
+oms_root [merge=oms.pub] {
 	Layout = layout.html
 	Dataset {
         Layout {

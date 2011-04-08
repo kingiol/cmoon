@@ -1,0 +1,10 @@
+Dataset {
+	Layout {
+		tabpart = 4
+	}
+	ImpStates {
+	    0 = 新创建
+	    1 = 已回复
+	    2 = 已关闭
+	}
+}

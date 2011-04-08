@@ -21,6 +21,9 @@ struct aux_entry {
 	struct aux_stats st;
 };
 
+#define IMP_COL "id, aid, aname, state, title, content, contact, "	\
+	" to_char(intime, 'YYYY-MM-DD HH:mm:SS') as intime "
+
 #define CMT_COL " id, type, oid, pid, ip, addr, author, content, " \
 	" to_char(intime, 'YYYY-MM-DD HH24:MI:SS') as intime, "		   \
 	" to_char(uptime, 'YYYY-MM-DD HH24:MI:SS') as uptime "
@@ -163,6 +166,79 @@ static NEOERR* aux_cmd_mailadd(struct queue_entry *q, struct cache *cd, mdb_conn
 	return STATUS_OK;
 }
 
+static NEOERR* aux_cmd_impget(struct queue_entry *q, struct cache *cd, mdb_conn *db)
+{
+	unsigned char *val = NULL; size_t vsize = 0;
+	NEOERR *err;
+	char *aname;
+	int aid, count, offset;
+
+	REQ_GET_PARAM_STR(q->hdfrcv, "aname", aname);
+	aid = hash_string(aname);
+
+	mmisc_pagediv(q->hdfrcv, NULL, &count, &offset, NULL, q->hdfsnd);
+
+	if (cache_getf(cd, &val, &vsize, PREFIX_IMP"%d_%d", aid, offset)) {
+		unpack_hdf(val, vsize, &q->hdfsnd);
+	} else {
+		MMISC_PAGEDIV_SET_N(q->hdfsnd, db, "improve", "aid=%d", NULL, aid);
+
+		MDB_QUERY_RAW(db, "improve", IMP_COL, "aid=%d ORDER BY id DESC LIMIT "
+					  " %d OFFSET %d", NULL, aid, count, offset);
+		err = mdb_set_rows(q->hdfsnd, db, IMP_COL, "imps", 0);
+		if (err != STATUS_OK) return nerr_pass(err);
+
+		CACHE_HDF(q->hdfsnd, IMP_CC_SEC, PREFIX_IMP"%d_%d", aid, offset);
+	}
+	
+	return STATUS_OK;
+}
+
+static NEOERR* aux_cmd_impadd(struct queue_entry *q, struct cache *cd, mdb_conn *db)
+{
+	STRING str; string_init(&str);
+	NEOERR *err;
+	char *aname;
+	int aid;
+
+	REQ_GET_PARAM_STR(q->hdfrcv, "aname", aname);
+	aid = hash_string(aname);
+	hdf_set_int_value(q->hdfrcv, "aid", aid);
+
+	err = mcs_build_incol(q->hdfrcv,
+						  hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.improve"),
+						  &str);
+	if (err != STATUS_OK) return nerr_pass(err);
+
+	MDB_EXEC(db, NULL, "INSERT INTO improve %s", NULL, str.buf);
+	string_clear(&str);
+
+	cache_delf(cd, PREFIX_IMP"%d_0", aid);
+	
+	return STATUS_OK;
+}
+
+static NEOERR* aux_cmd_impdetail(struct queue_entry *q, struct cache *cd, mdb_conn *db)
+{
+	unsigned char *val = NULL; size_t vsize = 0;
+	NEOERR *err;
+	int id;
+
+	REQ_GET_PARAM_INT(q->hdfrcv, "id", id);
+
+	if (cache_getf(cd, &val, &vsize, PREFIX_IMP_DETAIL"%d", id)) {
+		unpack_hdf(val, vsize, &q->hdfsnd);
+	} else {
+		MDB_QUERY_RAW(db, "improve", IMP_COL, "id=%d", NULL, id);
+		err = mdb_set_row(q->hdfsnd, db, IMP_COL, NULL);
+		if (err != STATUS_OK) return nerr_pass(err);
+
+		CACHE_HDF(q->hdfsnd, IMP_CC_SEC, PREFIX_IMP_DETAIL"%d", id);
+	}
+	
+	return STATUS_OK;
+}
+
 static void aux_process_driver(struct event_entry *entry, struct queue_entry *q)
 {
 	struct aux_entry *e = (struct aux_entry*)entry;
@@ -189,6 +265,15 @@ static void aux_process_driver(struct event_entry *entry, struct queue_entry *q)
 		break;
 	case REQ_CMD_MAIL_ADD:
 		err = aux_cmd_mailadd(q, cd, db);
+		break;
+	case REQ_CMD_IMP_GET:
+		err = aux_cmd_impget(q, cd, db);
+		break;
+	case REQ_CMD_IMP_ADD:
+		err = aux_cmd_impadd(q, cd, db);
+		break;
+	case REQ_CMD_IMP_DETAIL:
+		err = aux_cmd_impdetail(q, cd, db);
 		break;
 	case REQ_CMD_STATS:
 		st->msg_stats++;

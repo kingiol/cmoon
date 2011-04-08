@@ -8,13 +8,15 @@ FILES = b/kol.js b/chatb.js b/chatc.js \
 		b/appnew.js b/appreset.js b/apppass.js b/appinfo.js b/appcharge.js \
 		b/blog.js b/blogindex.js b/blogop.js \
 		b/oms.js b/oms/edit.js b/oms/stat_ie.js b/oms/stat.js b/oms/users.js b/oms/bill.js \
-	    b/okol_ie.js b/okol.js
+	    b/okol_ie.js b/okol.js \
+		b/zero/zero.js b/zero/detail.js
 
 all: preload $(FILES)
 
 preload:
 	@$(MAKE) -C ape/
 	@mkdir -p b/oms/
+	@mkdir -p b/zero/
 
 b/kol.js: bmoon.kol.js
 b/chatb.js: pub/jquery-1.4.2.js pub/jquery.cookie.js pub/bmoon.js
@@ -62,6 +64,9 @@ b/okol_ie.js: pub/datepicker/jquery.bgiframe.min.js pub/flot/excanvas.min.js
 b/okol.js: pub/datepicker/date.js pub/datepicker/jquery.datePicker.js \
 	       pub/flot/jquery.flot.js \
 	       okol/okol.js
+
+b/zero/zero.js: pub/jquery.mnnav.js zero/zero.js
+b/zero/detail.js: zero/detail.js
 
 %.js:
 	@echo -n > $@

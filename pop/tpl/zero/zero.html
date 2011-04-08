@@ -1,1 +1,80 @@
-<h2 class="text-center"><?cs var:Output.appinfo.aname ?> 的人工服务</h2>
+<?cs def:map_val(val, map) ?>
+  <?cs each:item = map ?>
+    <?cs if:val == name(item) ?>
+      <?cs var:item ?>
+    <?cs /if ?>
+  <?cs /each ?>
+<?cs /def ?>
+
+<?cs if:?Output.imps.0.id ?>
+<h2 class="text-center"><?cs var:Output.appinfo.aname ?> 的人工服务单</h2>
+<table class="list">
+  <tr>
+	<th>服务单标题</th>
+	<th>服务单状态</th>
+	<th>服务单回复数</th>
+	<th>创建时间</th>
+  </tr>
+
+  <?cs each: m = Output.imps ?>
+  <tr>
+	<td><a href="/zero/detail?id=<?cs var:m.id ?>"><?cs var:m.title ?></a></td>
+	<td><?cs call:map_val(m.state, ImpStates) ?></td>
+	<td><span id="comment-<?cs var:m.id ?>"></span></td>
+	<td><?cs var:m.intime ?></td>
+  </tr>
+  <?cs /each ?>
+</table>
+
+<div id="nav-zero" class="bd-nav"></div>
+
+<script>
+  var mgd = mgd || {};
+
+  mgd.npp = <?cs var:Output._npp ?>;
+  mgd.npg = <?cs var:Output._npg ?>;
+  mgd.nst = <?cs var:Output._nst ?>;
+  mgd.ntt = <?cs var:Output._ntt ?>;
+
+  mgd.ids = [];
+  <?cs each:m=Output.imps ?>
+  mgd.ids.push(<?cs var:m.id ?>);
+  <?cs /each ?>
+</script>
+
+<?cs else ?>
+<div class="page-hint">
+  <?cs var:Output.appinfo.aname ?> 暂无人工服务单。
+</div>
+<?cs /if ?>
+
+<p>
+  <a href="javascript: void(0);" class="btn" rel="#addoverlay">创建新单</a>
+</p>
+
+<div class="overlay-w" id="addoverlay">
+  <h3 class="text-center">创建新的人工服务单</h3>
+  <div class="sepl"></div>
+  <dl class="inp add">
+	<dt>标题：</dt>
+	<dd>
+	  <input type="text" id="title" class="long VAL_ADD vrequire" vmax="256" vmin="2" />
+	</dd>
+	
+	<dt>问题详细描述：</dt>
+	<dd>
+	  <textarea type="text" id="content" class="VAL_ADD vrequire" vmax="1024" vmin="2"></textarea>
+	</dd>
+	
+	<dt>联系电话：</dt>
+	<dd>
+	  <input type="text" id="contact" class="VAL_ADD" vmax="64" />
+	</dd>
+	
+	<dt>&nbsp; </dt>
+	<dd>
+	  <input type="submit" id="submit" class="btn" value="提交" />
+	  <span class="indicator"></span>
+	</dd>
+  </dl>
+</div>

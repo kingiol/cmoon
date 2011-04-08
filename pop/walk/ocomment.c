@@ -23,6 +23,18 @@ NEOERR* comment_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	mevent_t *evt_place = (mevent_t*)hash_lookup(evth, "place");
 
 	LPRE_EVTOP(cgi->hdf, evt);
+
+	/*
+	 * TODO other user can't comment on my improve...
+	 */
+#if 0
+	HDF_GET_INT(cgi->hdf, PRE_QUERY".type", type);
+	if (type == CMT_TYPE_IMPROVE) {
+		APP_CHECK_LOGIN();
+		state = hdf_get_int_value(evt->hdfrcv, "state", LCS_ST_FREE);
+		if (state < LCS_ST_ADMIN && ())
+	}
+#endif
 	
 	char *ip = hdf_get_value(cgi->hdf, "CGI.RemoteAddress", "unknownHost");
 	hdf_set_value(evt_place->hdfsnd, "ip", ip);

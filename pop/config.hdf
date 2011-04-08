@@ -71,6 +71,7 @@ Mevent {
 ClientReqLimit {
 	app_reset_data_get = 1
 	app_charge_data_add = 1
+	zero_data_add = 3
 }
 
 FileCache {
