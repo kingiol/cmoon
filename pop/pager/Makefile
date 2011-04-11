@@ -32,8 +32,10 @@ include $(DEPEND)
 cflag:
 	@echo "=== "$(CFLAGS)
 	@echo "=== "$(INCS)
+
 install: $(BINARY)
 	@find -name '*.js' -exec $(CPWITHDIR) -p $(PATH_DOC)/js/ {} \;
 	@$(PEREXEC) $^
+
 clean:
 	@rm -rf ${BINARY}

@@ -78,7 +78,7 @@ function liveCS(ape) {
 				});
 			}
 			if (ape.opts.restoreMsg) {
-				$.getJSON('http://www.kaiwuonline.com/json/msg?JsonCallback=?',
+				$.getJSON('http://www.bomdoo.com/json/msg?JsonCallback=?',
 						  {name: ape.opts.aname, name2: ape.opts.uname},
 						  function(data) {
 							  if (data.success == 1 && bmoon.utl.type(data.raws) == 'Array') {

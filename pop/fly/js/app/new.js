@@ -77,7 +77,6 @@ bmoon.appnew = {
 			} else {
 				p.addClass('success');
 				setTimeout(function() {
-					$('.copy-aname').text(data.aname);
 					$('#add').fadeOut();
 					$('#copy').fadeIn();
 					bmoon.lcs.loginCheck();

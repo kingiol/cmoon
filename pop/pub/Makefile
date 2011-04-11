@@ -32,6 +32,8 @@ cflag:
 	@echo "=== "$(CFLAGS)
 	@echo "=== "$(INCS)
 
+install:
+
 clean:
 	@rm -f $(OBJS) *.a
 

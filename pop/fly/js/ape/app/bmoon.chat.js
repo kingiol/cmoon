@@ -361,7 +361,7 @@ bmoon.chat = {
 		var o = bmoon.chat.init();
 
 		if (o.rmdsw.attr('checked') == true) {
-			o.reminder.src = 'http://www.kaiwuonline.com/obj/audio/'+type+'.wav';
+			o.reminder.src = 'http://www.bomdoo.com/obj/audio/'+type+'.wav';
 			if (!$.browser.msie) {
 				o.reminder.load();
 				o.reminder.play();

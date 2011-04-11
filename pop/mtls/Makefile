@@ -42,6 +42,7 @@ install:all
 	@chmod a+x $(PATH_MTLS)/$(BINARY)
 	@cp $(SCRIPT) $(PATH_MTLS)/
 	@chmod a+x $(PATH_MTLS)/$(SCRIPT)
+	@cp -rf conf/ $(PATH_MTLS)/
 clean:
 	@rm -rf ${BINARY}
 distclean:

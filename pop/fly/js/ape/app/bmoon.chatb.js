@@ -12,8 +12,8 @@ bmoon.chat = {
 	usersLoadPage: {},
 
 	debug: function(msg) {
-		$('<div>'+ msg +'</div>').appendTo('body');
-		console.log(msg);
+		//$('<div>'+ msg +'</div>').appendTo('body');
+		//console.log(msg);
 	},
 	
 	init: function(ape) {
@@ -260,7 +260,7 @@ bmoon.chat = {
 		o.debug("get " + name + "'s msg page" + parseInt(pg + 1));
 		
 		if (bmoon.utl.type(o.usersTotalMsg[name]) != 'Number' || (o.usersTotalMsg[name] / 15) > pg) {
-			$.getJSON('http://www.kaiwuonline.com/json/msg?JsonCallback=?',
+			$.getJSON('http://www.bomdoo.com/json/msg?JsonCallback=?',
 					  {name: name, name2: aname, _npp: 15, _npg: pg+1},
 					  function(data) {
 						  if (data.success == 1 && bmoon.utl.type(data.raws) == 'Array') {

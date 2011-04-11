@@ -1,5 +1,5 @@
 okol {
-	Layout = layout_nclient.html
+	Layout = layout.html
 	Dataset {
         Layout {
 			css = <link rel="stylesheet" type="text/css" href="/css/b/okol.css" />
