@@ -1,3 +1,13 @@
+#browser-hint {
+	width: 100%;
+	text-align: center;
+	background-color: #676767;
+	color: #aaa;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	font-weight: bold;
+}
+
 #bd-top, #bd-mid, #bd-bot {
 	width: 960px;
 	margin: 0 auto;
