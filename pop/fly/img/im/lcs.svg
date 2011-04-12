@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,7 +14,7 @@
    height="1052.3622047"
    id="svg2906"
    version="1.1"
-   inkscape:version="0.46"
+   inkscape:version="0.47 r22583"
    sodipodi:docname="lcs.svg"
    inkscape:export-filename="/home/bigml/web/moon/pop/fly/img/im/lcs.png"
    inkscape:export-xdpi="90"
@@ -1366,13 +1367,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="439.63347"
+     inkscape:cx="424.63347"
      inkscape:cy="806.2462"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1016"
-     inkscape:window-height="701"
+     inkscape:window-width="1440"
+     inkscape:window-height="830"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
@@ -1384,7 +1385,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1411,25 +1412,25 @@
     <text
        xml:space="preserve"
        style="font-size:16.63342285px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#888888;fill-opacity:1;stroke:none;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold"
-       x="225.39282"
+       x="269.39282"
        y="194.64771"
        id="text3422"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3424"
-         x="225.39282"
+         x="269.39282"
          y="194.64771"
-         dx="0 0 0 -3.9205348 0 0 0 0 0 0 0 0 0 0">by KaiwuOnline</tspan></text>
+         dx="0 0 0">by Bomdoo</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14.78526497px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"
-       x="155.68594"
+       x="175.68594"
        y="194.01251"
        id="text3430"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3432"
-         x="155.68594"
+         x="175.68594"
          y="194.01251"
          dx="0 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906">Live Chat</tspan></text>
     <g
@@ -1559,25 +1560,24 @@
     <text
        xml:space="preserve"
        style="font-size:16.63342285px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#888888;fill-opacity:1;stroke:none;font-family:Comic Sans MS;-inkscape-font-specification:Comic Sans MS Bold"
-       x="225.1649"
+       x="269.16492"
        y="160.52866"
        id="text3422-1"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3424-3"
-         x="225.1649"
-         y="160.52866"
-         dx="0 0 0 -3.9205348 0 0 0 0 0 0 0 0 0 0">by KaiwuOnline</tspan></text>
+         x="269.16492"
+         y="160.52866">by Bomdoo</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14.78526497px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#fd3301;fill-opacity:1;stroke:none;font-family:Century Schoolbook L;-inkscape-font-specification:Century Schoolbook L Medium"
-       x="155.45802"
+       x="175.45802"
        y="159.89346"
        id="text3430-1"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3432-5"
-         x="155.45802"
+         x="175.45802"
          y="159.89346"
          dx="0 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906 -0.92407906">Live Chat</tspan></text>
   </g>
