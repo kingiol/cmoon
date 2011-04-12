@@ -52,11 +52,11 @@ bmoon.omsstat = {
 		$.plot(
 			o.stres,
 			[
-				{label: '日访问量', data: o.stdata.pv},
-				{label: '日用户量', data: o.stdata.uv}
+				{label: '访问量', data: o.stdata.pv},
+				{label: '用户量', data: o.stdata.uv}
 			],
 			{
-				xaxis: {mode: 'time', timeformat: "%y-%m-%d"},
+				xaxis: {mode: 'time', timeformat: "%y-%m-%d %H:%M"},
 				series: {
 					lines: {show: true},
 					points: {show:true}
@@ -78,19 +78,14 @@ bmoon.omsstat = {
                 $("#tooltip").remove();
 				
                 var	x = item.datapoint[0],
-                y = item.datapoint[1];
-
-				if (o.sttype.val() == 'visit') {
-					var dt = new Date(x),
-					Y = dt.getFullYear(), m = dt.getMonth()+1, d = dt.getDate(),
-					tm = Y+"-"+m+"-"+d;
-					
-					o._showTooltip(item.pageX, item.pageY,
-								   tm + ' ' + item.series.label + ' : ' + y);
-				} else {
-					o._showTooltip(item.pageX, item.pageY,
-                                   o.stdata.aux[x] + ' ' + ' : ' + y);
-				}
+                y = item.datapoint[1],
+				dt = new Date(x),
+				Y = dt.getFullYear(), m = dt.getMonth()+1, d = dt.getDate(),
+				h = dt.getHours(),
+				tm = Y+"-"+m+"-"+d+" "+h;
+				
+				o._showTooltip(item.pageX, item.pageY,
+							   tm + ' ' + item.series.label + ' : ' + y);
             }
         } else {
             $("#tooltip").remove();

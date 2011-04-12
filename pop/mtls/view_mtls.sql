@@ -37,3 +37,14 @@ CREATE VIEW visit_today AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost u
 CREATE VIEW topref_today AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost user=lcser password=loveu', 'SELECT aid, refer, COUNT(id) FROM track WHERE intime > current_date GROUP BY aid, refer') AS t1(aid int, refer varchar(256), count int);
 CREATE VIEW topurl_today AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost user=lcser password=loveu', 'SELECT aid, url, max(title), COUNT(id) FROM track WHERE intime > current_date GROUP BY aid, url') AS t1(aid int, url varchar(256), title varchar(256), count int);
 CREATE VIEW toparea_today AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost user=lcser password=loveu', 'SELECT aid, area, COUNT(id) FROM track WHERE intime > current_date GROUP BY aid, area') AS t1(aid int, area varchar(256), count int);
+
+
+DROP VIEW visit_tohour;
+DROP VIEW topref_tohour;
+DROP VIEW topurl_tohour;
+DROP VIEW toparea_tohour;
+
+CREATE VIEW visit_tohour AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost user=lcser password=loveu', 'SELECT aid, COUNT(id), COUNT(DISTINCT uid) FROM track WHERE intime > now() - interval ''1 hour'' GROUP BY aid') AS t1(aid int, pv int, uv int);
+CREATE VIEW topref_tohour AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost user=lcser password=loveu', 'SELECT aid, refer, COUNT(id) FROM track WHERE intime > now() - interval ''1 hour'' GROUP BY aid, refer') AS t1(aid int, refer varchar(256), count int);
+CREATE VIEW topurl_tohour AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost user=lcser password=loveu', 'SELECT aid, url, max(title), COUNT(id) FROM track WHERE intime > now() - interval ''1 hour'' GROUP BY aid, url') AS t1(aid int, url varchar(256), title varchar(256), count int);
+CREATE VIEW toparea_tohour AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost user=lcser password=loveu', 'SELECT aid, area, COUNT(id) FROM track WHERE intime > now() - interval ''1 hour'' GROUP BY aid, area') AS t1(aid int, area varchar(256), count int);

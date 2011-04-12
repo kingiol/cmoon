@@ -101,9 +101,11 @@ bmoon.kol = {
 
 		if (opts.statOnly) {
 			_execAfter(function() {
-				var sdata = '';
+				var sdata = 'aname=' + encodeURIComponent(opts.aname) +
+					'&url=' + encodeURIComponent(location.href) +
+					'&title=' + encodeURIComponent(document.title);
 				
-				_xmlOpen('GET',
+				_xmlOpen('POST',
 						 'http://www.bomdoo.com/json/stat',
 						 sdata,
 						 function() {return;});

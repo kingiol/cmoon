@@ -29,5 +29,6 @@
 #include "ookol.h"
 #include "ooms.h"
 #include "ozero.h"
+#include "ostat.h"
 
 #endif	/* __LHEADS_H__ */

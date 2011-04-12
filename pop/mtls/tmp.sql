@@ -1,46 +1,21 @@
-\c lcs_main
+DROP VIEW visit_tohour;
+DROP VIEW topref_tohour;
+DROP VIEW topurl_tohour;
+DROP VIEW toparea_tohour;
 
-CREATE TABLE appreset (
-	   aname varchar(256) NOT NULL DEFAULT '',
-	   rlink varchar(256) NOT NULL DEFAULT '',
-	   intime timestamp DEFAULT now(),
-	   PRIMARY KEY (aname)
-);
+CREATE VIEW visit_tohour AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost user=lcser password=loveu', 'SELECT aid, COUNT(id), COUNT(DISTINCT uid) FROM track WHERE intime > now() - interval ''1 hour'' GROUP BY aid') AS t1(aid int, pv int, uv int);
+CREATE VIEW topref_tohour AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost user=lcser password=loveu', 'SELECT aid, refer, COUNT(id) FROM track WHERE intime > now() - interval ''1 hour'' GROUP BY aid, refer') AS t1(aid int, refer varchar(256), count int);
+CREATE VIEW topurl_tohour AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost user=lcser password=loveu', 'SELECT aid, url, max(title), COUNT(id) FROM track WHERE intime > now() - interval ''1 hour'' GROUP BY aid, url') AS t1(aid int, url varchar(256), title varchar(256), count int);
+CREATE VIEW toparea_tohour AS SELECT * FROM dblink('dbname=lcs_dyn host=localhost user=lcser password=loveu', 'SELECT aid, area, COUNT(id) FROM track WHERE intime > now() - interval ''1 hour'' GROUP BY aid, area') AS t1(aid int, area varchar(256), count int);
 
-CREATE FUNCTION merge_appreset(e TEXT, r TEXT) RETURNS VOID AS
-$$
-BEGIN
-    LOOP
-        -- first try to update the key
-        UPDATE appreset SET rlink = r WHERE aname = e;
-        IF found THEN
-            RETURN;
-        END IF;
-        -- not there, so try to insert the key
-        -- if someone else inserts the same key concurrently,
-        -- we could get a unique-key failure
-        BEGIN
-            INSERT INTO appreset(aname, rlink) VALUES (e, r);
-            RETURN;
-        EXCEPTION WHEN unique_violation THEN
-            -- do nothing, and loop to try the UPDATE again
-        END;
-    END LOOP;
-END
-$$
-LANGUAGE plpgsql;
+\c lcs_mtool;
 
-\c lcs_aux
-CREATE TABLE improve (
-	id SERIAL,
-	aid int NOT NULL DEFAULT 0,
-	aname varchar(256) NOT NULL DEFAULT '',
-	state int NOT NULL DEFAULT 0,
-	title varchar(256) NOT NULL DEFAULT '',
-	content varchar(1024) NOT NULL DEFAULT '',
-	contact varchar(64) NOT NULL DEFAULT '',
-	intime timestamp DEFAULT now(),
-	PRIMARY KEY (id)
-);
+alter table visit ALTER dt TYPE timestamp;
+alter table topref ALTER dt TYPE timestamp;
+alter table topurl ALTER dt TYPE timestamp;
+alter table toparea ALTER dt TYPE timestamp;
 
-CREATE INDEX improve_index ON improve (aid, state);
+alter table visit ALTER dt set default now();
+alter table topref ALTER dt set default now();
+alter table topurl ALTER dt set default now();
+alter table toparea ALTER dt set default now();
