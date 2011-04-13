@@ -331,6 +331,7 @@ NEOERR* oms_stat_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 	SET_ADMIN_ACTION(evt->hdfrcv, cgi->hdf);
 
 	hdf_set_value(evtm->hdfsnd, "aname", aname);
+	hdf_copy(evtm->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 
 	MEVENT_TRIGGER(evtm, aname, REQ_CMD_GETSTAT, FLAGS_SYNC);
 	hdf_copy(cgi->hdf, PRE_OUTPUT, evtm->hdfrcv);

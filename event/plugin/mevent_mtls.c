@@ -30,7 +30,7 @@ static NEOERR* mtls_cmd_getstat(struct queue_entry *q, struct cache *cd, mdb_con
 {
 	STRING str; string_init(&str);
 	unsigned char *val = NULL; size_t vsize = 0;
-	char *aname;
+	char *aname, *ts;
 	int aid;
 	NEOERR *err;
 
@@ -40,9 +40,12 @@ static NEOERR* mtls_cmd_getstat(struct queue_entry *q, struct cache *cd, mdb_con
 
 	err = mcs_build_querycond(q->hdfrcv,
 							  hdf_get_obj(g_cfg, CONFIG_PATH".QueryCond.stat"),
-							  &str, " dt > current_date - 7 ");
+							  &str, NULL);
 	if (err != STATUS_OK) return nerr_pass(err);
-
+	
+	ts = hdf_get_value(q->hdfrcv, "times", NULL);
+	if (!ts || !*ts) string_appendf(&str, " AND dt > current_date - 7 ");
+	
 	if (cache_getf(cd, &val, &vsize, PREFIX_MTLS"%s", str.buf)) {
 		unpack_hdf(val, vsize, &q->hdfsnd);
 	} else {

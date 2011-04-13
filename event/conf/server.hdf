@@ -109,8 +109,8 @@ Plugin {
 		QueryCond {
 			stat {
 				aid [type=int, require=true] = aid=
-				dts = dt >
-				dte = dt <
+				times = dt >
+				timee = dt <
 			}
 		}
 	}
