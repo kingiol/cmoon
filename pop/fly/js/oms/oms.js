@@ -12,6 +12,10 @@ bmoon.oms = {
 		o.imindi = $('#chat-indicator');
 		o.needa = $('#chat-needa');
 
+		o.browserhint = $('#browser-hint');
+		o.browserlater = $('#browser-later');
+		o.ielow = bmoon.utl.ie() && bmoon.utl.ie() < 7;
+
 		o.inited = true;
 		return o;
 	},
@@ -42,6 +46,7 @@ bmoon.oms = {
 				}
 			});
 		}, 'mgd.appinfo !== undefined', 10);
+		o.ielow && !$.cookie('lcs_bs_ignore') && o.browserhint.fadeIn('slow');
 	},
 
 	bindClick: function() {
@@ -60,6 +65,11 @@ bmoon.oms = {
 			}, function(data) {
 				p.fadeOut();
 			}, 'json');
+		});
+
+		o.browserlater.click(function() {
+			o.browserhint.fadeOut();
+			$.cookie('lcs_bs_ignore', '1', {expires: 1});
 		});
 	},
 

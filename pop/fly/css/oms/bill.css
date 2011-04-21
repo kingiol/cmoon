@@ -2,6 +2,7 @@ a.dp-choose-date {
 	background:transparent url(/img/bg/calendar.png) no-repeat scroll 0 0;
 	display:block;
 	float:left;
+	display:inline;
 	height:16px;
 	margin:3px 3px 0;
 	overflow:hidden;
@@ -11,6 +12,6 @@ a.dp-choose-date {
 }
 
 dl.query {height: 20px; margin-bottom: 2em;}
-dl.query dt {float: left; margin: 0 5px 0 20px; line-height: 20px; text-align: right;}
+dl.query dt {float: left; display: inline; margin: 0 5px 0 20px; line-height: 20px; text-align: right;}
 dl.query dd {float: left; line-height: 20px;}
 dl.query dd input {float: left;}

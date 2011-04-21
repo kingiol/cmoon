@@ -24,15 +24,15 @@
 #bd-bot p {text-indent: 0; margin: 2px;}
 #bd-bot p.right {text-align: right;}
 
-#bd-personal {float: right; margin: 12px 0 0 0;}
-#bd-personal ul li{display: inline; float: left; margin: 5px 0;	padding: 0 8px; border-right: 1px solid #101010;}
+#bd-personal {float: right; margin: 12px 0 0 0; display: inline;}
+#bd-personal ul li{display: inline; float: left; margin: 5px 0;	padding: 0 8px; border-right: 1px solid #101010; display: inline;}
 #bd-personal ul li.last{border-right: 0 none;}
 #bd-member {display: none;}
 
-#bd-nav {font: bold 13px Georgia;}
-#bd-nav li {float: left; height: 32px; background: url(/img/bg/nav.png) no-repeat 0 -14px;}
-#bd-nav li a {display: block; line-height: 16px; margin-left: 1px;	padding: 10px 20px 6px; background: url(/img/bg/nav.png) repeat-x 0 0;}
-#bd-nav li a.selected {float: left; height: 17px; background: #fff url(/img/bg/nav-current.png) repeat-x 0 0;}
+#bd-nav {font: bold 13px Georgia; float:left;}
+#bd-nav li {float: left; height: 32px; background: url(/img/bg/nav.jpg) no-repeat 0 -14px;}
+#bd-nav li a {display: block; line-height: 16px; margin-left: 1px;	padding: 10px 20px 6px; background: url(/img/bg/nav.jpg) repeat-x 0 0;}
+#bd-nav li a.selected {float: left; height: 17px; background: #fff url(/img/bg/nav-current.jpg) repeat-x 0 0;}
 
 /* content */
 #bd-content {
@@ -55,21 +55,24 @@
 
 #bd-action {
 	-moz-border-radius: 5px 5px 5px 5px;
-    background: url("/img/bg/nav.png") repeat-x scroll 0 0 transparent;
+    background: url(/img/bg/nav.jpg) repeat-x scroll 0 0 transparent;
     border: 1px solid #DDDDDD;
-    height: 26px;
-    margin: 10px 0 30px;
+	float: left;
+    margin: 1em 0 2em;
     padding: 6px 10px;
+	width: 97%;
+}
+
+#bd-action li {
+    float: left;
 }
 #bd-action li a {
     -moz-border-radius: 4px 4px 4px 4px;
-	display: inline;
+	display: block;
     color: #666666;
-    float: left;
-    height: 26px;
     line-height: 26px;
-    margin-right: 10px;
-    padding: 0 8px;
+    margin-right: 1em;
+    padding: 0 1em;
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.698);
 }
 #bd-action li a.selected {

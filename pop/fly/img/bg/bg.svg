@@ -70,7 +70,7 @@
        x2="10"
        y2="962.36218"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.2,0,0,1.1633042,4,-157.15779)" />
+       gradientTransform="matrix(0.2,0,0,1.1633042,4,-155.90561)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -91,7 +91,7 @@
      inkscape:snap-to-guides="false"
      inkscape:snap-page="false"
      inkscape:window-width="1440"
-     inkscape:window-height="820"
+     inkscape:window-height="830"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1">
@@ -126,7 +126,7 @@
        width="1"
        height="87.247818"
        x="5"
-       y="962.36218"
+       y="963.61438"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect

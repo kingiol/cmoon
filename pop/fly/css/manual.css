@@ -25,3 +25,31 @@
 #man-top .nav-next, #man-bot .nav-next {
 	float: right;
 }
+
+a.nav-next, a.nav-prev, a.nav-up, a.nav-next-w, a.nav-prev-w, a.nav-up-w {
+	display: inline-block;
+	height: 28px;
+	line-height: 28px;
+	width: 80px;
+	text-align: center;
+	background: url(/img/bg/btn-nav.png) no-repeat;
+	font-weight: bold;
+}
+
+a.nav-next-w, a.nav-prev-w, a.nav-up-w {width: 130px;}
+
+a.nav-next {background-position: 0 0;}
+a.nav-prev {background-position: 0 -56px;}
+a.nav-up {background-position: 0 -112px;}
+
+a.nav-next:hover {background-position: 0 -28px;}
+a.nav-prev:hover {background-position: 0 -84px;}
+a.nav-up:hover {background-position: 0 -140px;}
+
+a.nav-next-w {background-position: -80px 0;}
+a.nav-prev-w {background-position: -80px -56px;}
+a.nav-up-w {background-position: -80px -112px;}
+
+a.nav-next-w:hover {background-position: -80px -28px;}
+a.nav-prev-w:hover {background-position: -80px -84px;}
+a.nav-up-w:hover {background-position: -80px -140px;}

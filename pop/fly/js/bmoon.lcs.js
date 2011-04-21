@@ -9,9 +9,6 @@ bmoon.lcs = {
 		if (o.inited) return o;
 		o.inited = true;
 
-		o.browserhint = $('#browser-hint');
-		o.browserlater = $('#browser-later');
-		o.ielow = bmoon.utl.ie() && bmoon.utl.ie() < 7;
 		o.aname = $('#bd-aname');
 		o.member = $('#bd-member');
 		o.guest = $('#bd-guest');
@@ -46,7 +43,6 @@ bmoon.lcs = {
 		if (o.vikierr) {
 			$('#content').empty().append('<div class="text-error">'+o.vikierr+'</div>')
 		}
-		o.ielow && !$.cookie('lcs_bs_ignore') && o.browserhint.fadeIn('slow');
 	},
 	
 	bindClick: function() {
@@ -55,10 +51,6 @@ bmoon.lcs = {
 		$('#login-submit').click(o.login);
 		$('#userlogout').click(o.logout);
 		o.loginasn.bind('keydown', 'return', o.login);
-		o.browserlater.click(function() {
-			o.browserhint.fadeOut();
-			$.cookie('lcs_bs_ignore', '1', {expires: 1});
-		});
 	},
 
 	login: function() {

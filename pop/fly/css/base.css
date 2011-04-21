@@ -1,5 +1,5 @@
 /* ELEMENT */
-body {background: #f6f6f6 url(/img/bg/bg.png) repeat-x;}
+body {background: #f6f6f6 url(/img/bg/bg.jpg) repeat-x;}
 a {color: #DB3946; cursor: pointer; text-decoration: none;}
 h1 {margin: 2.5em 0 2em   0;}
 h2 {margin: 2em   0 1.5em 0;}
@@ -15,7 +15,7 @@ input[type=button] {cursor: pointer;}
 input, textarea {border: 1px solid #A6A6A6; padding: 2px 10px;}
 
 /* SPECIAL CLASS */
-ul.align {padding: 0;}*/
+ul.align {padding: 0;}
 /*ul.normal li {list-style: outside;}*/
 ul.emph li {font-weight: bold;}
 
@@ -27,21 +27,6 @@ input.long {width: 200px;}
 
 a.btn {display: inline-block; height: 28px; width: 80px; text-align: center; color: #fff; background: url(/img/bg/btn.png) 0 0 no-repeat;}
 a.btn:hover {background-position: 0 -28px;}
-
-a.nav-next {display: inline-block; height: 28px; line-height: 28px; width: 80px; text-align: center; background: url(/img/bg/btn.png) 0 -56px no-repeat; font-weight: bold;}
-a.nav-next:hover {cursor: pointer; background-position: 0 -84px;}
-a.nav-next-w {width: 130px; background-position: -80px -56px;}
-a.nav-next-w:hover {width: 130px; background-position: -80px -84px;}
-
-a.nav-prev {display: inline-block; height: 28px; line-height: 28px; width: 80px; text-align: center; background: url(/img/bg/btn.png) 0 -112px no-repeat; font-weight: bold;}
-a.nav-prev:hover {cursor: pointer; background-position: 0 -140px;}
-a.nav-prev-w {width: 130px; background-position: -80px -112px;}
-a.nav-prev-w:hover {width: 130px; background-position: -80px -140px;}
-
-a.nav-up {display: inline-block; height: 28px; line-height: 28px; width: 80px; text-align: center; background: url(/img/bg/btn.png) 0 -168px no-repeat; font-weight: bold;}
-a.nav-up:hover {cursor: pointer; background-position: 0 -196px;}
-a.nav-up-w {width: 130px; background-position: -80px -168px;}
-a.nav-up-w:hover {width: 130px; background-position: -80px -196px;}
 
 dl.inp dt {float: left; width: 100px; line-height: 22px; margin: 0 13px 0 0; text-align: right;}
 dl.inp dd {margin: 10px 0;	line-height: 22px;}
