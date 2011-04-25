@@ -61,12 +61,13 @@ bmoon.kol = {
 
 		if (o.inited) return o;
 		if (!opts) return {};
+		if (opts.statOnly) return o;
+		
 		o.inited = true;
 
 		o.aname = opts.aname || 'unknown';
 		o.client = null;
 
-		if (opts.statOnly) return o;
 
 		if (typeof jQuery != 'function' || jQuery.fn.jquery < '1.4.2') {
 			o._loadJs('http://js.bomdoo.com/b/chatb.js');
