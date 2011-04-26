@@ -23,6 +23,7 @@ a {
 a:hover {
     text-decoration:underline;
 }
+a img {border: none;}
 ul.none {
     list-style:none;
 }
@@ -67,6 +68,18 @@ input, textarea {
 #bot p {
     padding-top: 10px;
     margin: 0 auto;
+}
+
+#bot p.link {
+	/*float: right;*/
+	position: relative;
+	top: -76px;
+	right: -414px;
+}
+
+#bot p.link img {
+	width: 42px;
+	height: 42px;
 }
 
 /* header */
