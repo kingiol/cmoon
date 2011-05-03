@@ -65,7 +65,7 @@ bmoon.omsstat = {
 			}
 		);
 
-		o.rendUrl();
+		o.rendTable();
 	},
 
 	plotOver: function(event, pos, item) {
@@ -105,6 +105,8 @@ bmoon.omsstat = {
 		} else if (type == 'area') {
 			o.rendArea();
 		}
+
+		$('table', o.sttable).tablesorter({sortList: [[1,1]]});
 	},
 
 	rendUrl: function() {
@@ -120,7 +122,7 @@ bmoon.omsstat = {
 				count: '访问次数'
 			},
 			o.stdata.url,
-			{tbattr: 'class="list"'}
+			{tbattr: 'class="list tablesorter"'}
 		));
 	},
 
@@ -129,7 +131,7 @@ bmoon.omsstat = {
 
 		o.sttable.html($(document).mntable(
 			['首次访问来路', '来路次数'], o.stdata.refer,
-			{tbattr: 'class="list"'}));
+			{tbattr: 'class="list tablesorter"'}));
 	},
 
 	rendArea: function() {
@@ -137,7 +139,7 @@ bmoon.omsstat = {
 
 		o.sttable.html($(document).mntable(
 			['用户所在省份', '用户个数'], o.stdata.area,
-			{tbattr: 'class="list"'}));
+			{tbattr: 'class="list tablesorter"'}));
 	}
 };
 
