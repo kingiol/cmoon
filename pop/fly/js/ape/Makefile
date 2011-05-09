@@ -3,7 +3,7 @@ include $(BASEDIR)Make.env
 
 FILES = Build/JSON.js Build/apeCore.js Build/apeClient.js
 
-DIR_JSF = /home/bigml/web/APE_JSF/
+DIR_JSF = $(BASEDIR)../APE_JSF/
 DIR_CORE = $(DIR_JSF)Source/
 DIR_CLIENT = $(DIR_JSF)Clients/
 
