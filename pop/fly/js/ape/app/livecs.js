@@ -38,6 +38,7 @@ function liveCS(ape) {
 
 		ape.onRaw("RAW_RECENTLY", this.rawLcsRecently);
 		ape.onRaw("LCS_DATA", this.rawLcsData);
+		ape.onRaw("RAW_VHOST", this.rawVhost);
 
 		ape.onError("110", ape.clearSession);
 		ape.onError("111", ape.clearSession);
@@ -143,5 +144,9 @@ function liveCS(ape) {
 			
 			ui.onData({from: from, type: type, tm: tm, data: raw.data});
 		}
+	};
+
+	this.rawVhost = function(raw, pip) {
+		ape.serverUri = 'http://'+ $data.data.value +'/2/?';
 	};
 }
