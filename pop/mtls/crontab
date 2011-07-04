@@ -1,4 +1,7 @@
 # m h  dom mon dow   command
+@reboot /usr/local/bin/mevent -c /etc/mevent/server.hdf >> /tmp/mevent.log
+@reboot cd /usr/local/ape/bin && ./aped >> /tmp/ape.log
+
 55 23 * * * /usr/local/moon/pop/mtls/stat.sh >> /tmp/stat.log
 58 * * * * /usr/local/moon/pop/mtls/statHourly.sh >> /tmp/statHourly.log
 0 0 1,15 * * /usr/local/moon/pop/mtls/backupdb.sh >> /tmp/backupdb.log
