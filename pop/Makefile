@@ -1,7 +1,7 @@
 BASEDIR = ../
-include ../Make.env
+include $(BASEDIR)/Make.env
 
-SUBDIR = pub walk run pager fly mtls
+SUBDIR = xport pub walk run pager mtls fly
 
 all: $(SUBDIR)
 	@$(MULTIMAKE) $(SUBDIR)
@@ -10,8 +10,6 @@ clean:
 	@$(MULTIMAKE) -m clean $(SUBDIR)
 
 install:
-	@mkdir -p -m 775 $(SITE_ROOT)
-	@cp config.hdf $(SITE_ROOT)/
 	@$(MULTIMAKE) -m install $(SUBDIR)
 
 backup:

@@ -1,12 +1,11 @@
-BASEDIR = ../../
-include $(BASEDIR)Make.env
 LOCALBASE = ../
 include $(LOCALBASE)Make.env
+include $(BASEDIR)Make.env
 
 CFLAGS += -rdynamic
 
-INCS	= $(INC_PUB) $(INC_ROBOT) $(INC_MEVENT) $(INC_MNL) $(INC_MEMC) $(INC_CS) $(INC_JSON) $(INC_FCGI) $(INC_SYSTEM)
-LIBS	= $(LIB_ROBOT) $(LIB_PUB) $(LIB_ROBOT) $(LIB_PUB) $(LIB_MEVENT) $(LIB_MNL) $(LIB_MEMC) $(LIB_CS) $(LIB_JSON) $(LIB_FCGI) $(LIB_MARKDOWN) $(LIB_SYSTEM)
+INCS	= $(INC_LOCAL) $(INC_MOON)
+LIBS	= $(LIB_LOCAL) $(LIB_MOON)
 
 SOURCES = $(wildcard *.c)
 BINARY = $(patsubst %.c, %, $(SOURCES))
@@ -19,11 +18,11 @@ $(DEPEND): $(SOURCES)
 	@$(CC) $(CFLAGS) -MM $^ $(INCS) > $@
 
 preload:
-	@$(MAKE) -C $(MNLBASE)
+	@$(MAKE) -C $(LIBBASE)
 	@$(MAKE) -C $(PUBBASE)
 	@$(MAKE) -C $(ROBOTBASE)
 
-include $(DEPEND)
+-include $(DEPEND)
 %:%.c
 	@if [ "$<" = `ls *.c|awk '{print $1}'|sed -n '1p'` ]; then \
 		echo "=== "$(CFLAGS); \
@@ -35,16 +34,8 @@ include $(DEPEND)
 cflag:
 	@echo "=== "$(CFLAGS)
 	@echo "=== "$(INCS)
-install:all
-	@mkdir -p -m 775 $(PATH_MTLS)
-	@strip $(BINARY)
-	@cp $(BINARY) $(PATH_MTLS)/
-	@chmod a+x $(PATH_MTLS)/$(BINARY)
-	@cp $(SCRIPT) $(PATH_MTLS)/
-	@chmod a+x $(PATH_MTLS)/$(SCRIPT)
-	@cp -rf conf/ $(PATH_MTLS)/
+
 clean:
 	@rm -rf ${BINARY}
-distclean:
-	@rm -rf $(PATH_MTLS)/*
-	@rm -rf ${BINARY}
+
+install:

@@ -1,4 +1,5 @@
-BASEDIR = ../../../
+LOCALBASE = ../../
+include $(LOCALBASE)Make.env
 include $(BASEDIR)Make.env
 
 FILES = b/base.js

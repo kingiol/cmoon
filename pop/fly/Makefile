@@ -1,7 +1,6 @@
-BASEDIR = ../../
-include $(BASEDIR)Make.env
 LOCALBASE = ../
 include $(LOCALBASE)Make.env
+include $(BASEDIR)Make.env
 
 SUBDIR = js css
 

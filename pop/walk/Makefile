@@ -1,11 +1,8 @@
-BASEDIR = ../../
-include $(BASEDIR)Make.env
 LOCALBASE = ../
 include $(LOCALBASE)Make.env
+include $(BASEDIR)Make.env
 
-CFLAGS += -rdynamic
-
-INCS	= $(INC_MEVENT) $(INC_MNL) $(INC_MEMC) $(INC_CS) $(INC_JSON) $(INC_FCGI) $(INC_SYSTEM) $(INC_PUB)
+INCS	= $(INC_LOCAL) $(INC_MOON)
 
 SOURCES = $(wildcard *.c)
 OBJS	= $(patsubst %.c, %.o, $(SOURCES))
@@ -20,10 +17,7 @@ libwalk.a:$(OBJS) $(DEPEND)
 	@rm -rf $@
 	$(AR) rcs $@ $(OBJS)
 
-libwalk.so:$(OBJS) $(DEPEND)
-	@$(CC) $(CFLAGS) -shared -o $@ $(OBJS)
-
-include $(DEPEND)
+-include $(DEPEND)
 %.o:%.c
 	@if [ "$<" = `ls *.c|awk '{print $1}'|sed -n '1p'` ]; then \
 		echo "=== "$(CFLAGS); \
@@ -35,12 +29,7 @@ cflag:
 	@echo "=== "$(CFLAGS)
 	@echo "=== "$(INCS)
 
-install:
-
 clean:
 	@rm -f $(OBJS) *.a
 
-backup:
-	@$(MAKE) clean
-	@$(TAR) zcvf walk.tar.gz *
-
+install:

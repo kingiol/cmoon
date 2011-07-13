@@ -1,9 +1,11 @@
-BASEDIR = ../../
-include $(BASEDIR)Make.env
 LOCALBASE = ../
 include $(LOCALBASE)Make.env
+include $(BASEDIR)Make.env
 
 CFLAGS += -rdynamic
+
+INCS	= $(INC_LOCAL) $(INC_MOON)
+LIBS	= $(LIB_LOCAL) $(LIB_MOON)
 
 SOURCES = $(wildcard *.c)
 BINARY = $(patsubst %.c, %, $(SOURCES))

@@ -1,11 +1,10 @@
 #include "mheads.h"
 #include "lheads.h"
 
-#include "oapp.h"
-
 /*
  * TODO how make local dlsym ok? so tired 
  */
+#if 0
 static void lutil_donotcall()
 {
 	app_exist_data_get(NULL, NULL, NULL, NULL);
@@ -16,6 +15,7 @@ static void lutil_donotcall()
 	zero_data_get(NULL, NULL, NULL, NULL);
 	stat_data_get(NULL, NULL, NULL, NULL);
 }
+#endif
 
 void* lutil_get_data_handler(void *lib, CGI *cgi, session_t *ses)
 {
