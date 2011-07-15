@@ -1,21 +1,14 @@
 #include "mheads.h"
 #include "lheads.h"
+#include "ozero.h"
 
 /*
  * TODO how make local dlsym ok? so tired 
  */
-#if 0
 static void lutil_donotcall()
 {
-	app_exist_data_get(NULL, NULL, NULL, NULL);
-	oms_data_get(NULL, NULL, NULL, NULL);
-	msg_data_get(NULL, NULL, NULL, NULL);
-	okol_data_get(NULL, NULL, NULL, NULL);
-	comment_data_get(NULL, NULL, NULL, NULL);
 	zero_data_get(NULL, NULL, NULL, NULL);
-	stat_data_get(NULL, NULL, NULL, NULL);
 }
-#endif
 
 void* lutil_get_data_handler(void *lib, CGI *cgi, session_t *ses)
 {

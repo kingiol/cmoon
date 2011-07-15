@@ -6,37 +6,22 @@
 /*
  * static error (layout.html used)
  */
-int LERR_NOTLOGIN = 0;			/* 25 */
+int LERR_NOTLOGIN  = 0;			/* 25 */
+int LERR_LOGINPSW  = 0;			/* 26 */
+int LERR_LIMIT     = 0;			/* 27 */
+int LERR_MISS_DATA = 0;			/* 28 */
+int LERR_MISS_TPL  = 0;			/* 29 */
+int LERR_ATTACK    = 0;			/* 30 */
 
 /*
  * mevent plugin error
  */
-/* aic */
-int LERR_NREGIST = 0;			/* 26 */
-int LERR_ALREADYREGIST = 0;		/* 27 */
-int LERR_MISSEMAIL = 0;			/* 28 */
-int LERR_NRESET = 0;			/* 29 */
-int LERR_WRESET = 0;			/* 30 */
-int LERR_NOTJOIN = 0;			/* 31 */
-int LERR_ALREADYJOIN = 0;		/* 32 */
-
-/* bank */
-int LERR_NCHARGE = 0;			/* 33 */
-int LERR_NEEDUP = 0;			/* 34 */
-int LERR_NEEDWT = 0;			/* 35 */
-int LERR_NEED_ADMIN = 0;		/* 36 */
-int LERR_NEED_ROOT = 0;			/* 37 */
 
 /*
  * app error
  */
-int LERR_LOGINPSW = 0;
 int LERR_USERINPUT = 0;
-int LERR_LIMIT = 0;
-int LERR_MISS_DATA = 0;
-int LERR_MISS_TPL = 0;
 int LERR_IMGPROE = 0;
-int LERR_ATTACK = 0;
 
 
 static int lerrInited = 0;
@@ -53,33 +38,6 @@ NEOERR* lerr_init()
 		if (err != STATUS_OK) return nerr_pass(err);
 
 		err = nerr_register(&LERR_NOTLOGIN, "请登录后操作");
-		if (err != STATUS_OK) return nerr_pass(err);
-
-		err = nerr_register(&LERR_NREGIST, "站点不存在");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_ALREADYREGIST, "站点名已被注册");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_MISSEMAIL, "注册时没提供邮箱");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_NRESET, "请先申请密码重置");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_WRESET, "邮箱验证码错误");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_NOTJOIN, "用户还没来访");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_ALREADYJOIN, "用户已在列表中");
-		if (err != STATUS_OK) return nerr_pass(err);
-
-		err = nerr_register(&LERR_NCHARGE, "请先站内充值！");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_NEEDUP, "站长帐号余额不足，请先 "
-							" <a href='/app/charge'>充值！</a>");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_NEEDWT, "充值还未确认，请稍作等待。");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_NEED_ADMIN, "需要管理员权限");
-		if (err != STATUS_OK) return nerr_pass(err);
-		err = nerr_register(&LERR_NEED_ROOT, "让 kol 来试试吧！");
 		if (err != STATUS_OK) return nerr_pass(err);
 
 		err = nerr_register(&LERR_LOGINPSW, "密码错误");

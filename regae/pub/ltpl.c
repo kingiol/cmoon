@@ -185,7 +185,7 @@ NEOERR* ltpl_parse_dir(char *dir, HASH *outhash)
 	dlclose(lib);
 	
 	if (n > 0) free(eps);
-	else mtc_warn("not .hdf file found in %s", dir);
+	else mtc_warn("no .hdf file found in %s", dir);
 
 	return STATUS_OK;
 }

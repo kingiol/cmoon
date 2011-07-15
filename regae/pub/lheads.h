@@ -5,6 +5,7 @@
 #include "ltypes.h"
 #include "lerr.h"
 #include "ldb.h"
+#include "levt.h"
 #include "lcfg.h"
 #include "lutil.h"
 #include "ltpl.h"

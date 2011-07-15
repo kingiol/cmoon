@@ -1,4 +1,5 @@
-BASEDIR = ../
+LOCALBASE = ./
+include $(LOCALBASE)Make.env
 include $(BASEDIR)Make.env
 
 SUBDIR = xport pub walk run pager mtl fly

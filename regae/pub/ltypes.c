@@ -15,7 +15,10 @@ NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses)
 	hdf_get_copy(cgi->hdf, PRE_COOKIE".uname", &lses->uname, NULL);
 
 	char *uri = hdf_get_value(cgi->hdf, PRE_REQ_URI_RW, NULL);
-	if (!uri) return nerr_raise(LERR_USERINPUT, ".ScriptName disappear!");
+	if (!uri) {
+		uri = "terminal";
+		lses->reqtype = CGI_REQ_TERMINAL;
+	}
 	/* TODO uniq req uri */
 	//uri = mmisc_str_uniq(uri, '/');
 	mmisc_str_repchr(uri, '/', '_');
