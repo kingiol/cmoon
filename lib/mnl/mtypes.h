@@ -12,8 +12,7 @@ typedef struct _nav {
     char target[LEN_SM];
 } anchor_t;
 
-anchor_t* anchor_new(char *name, char *href,
-                     char *title, char *target);
+anchor_t* anchor_new(char *name, char *href, char *title, char *target);
 void anchor_del(anchor_t *anc);
 
 __END_DECLS
