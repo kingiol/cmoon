@@ -12,7 +12,7 @@ bmoon.omsstat = {
 			padding: '2px',
 			'background-color': '#fee',
 			opacity: 0.80
-		}).appendTo("body").fadeIn(200);
+		}).appendTo('body').fadeIn(200);
 	},
 		
 	init: function() {
@@ -56,7 +56,7 @@ bmoon.omsstat = {
 				{label: '用户量', data: o.stdata.uv}
 			],
 			{
-				xaxis: {mode: 'time', timeformat: "%y-%m-%d %H:%M"},
+				xaxis: {mode: 'time', timeformat: '%y-%m-%d %H:%M'},
 				series: {
 					lines: {show: true},
 					points: {show:true}
@@ -75,20 +75,20 @@ bmoon.omsstat = {
             if (o.previousPoint != item.datapoint) {
                 o.previousPoint = item.datapoint;
                 
-                $("#tooltip").remove();
+                $('#tooltip').remove();
 				
                 var	x = item.datapoint[0],
                 y = item.datapoint[1],
 				dt = new Date(x),
 				Y = dt.getFullYear(), m = dt.getMonth()+1, d = dt.getDate(),
 				h = dt.getHours(),
-				tm = Y+"-"+m+"-"+d+" "+h;
+				tm = Y+'-'+m+'-'+d+' '+h;
 				
 				o._showTooltip(item.pageX, item.pageY,
 							   tm + ' ' + item.series.label + ' : ' + y);
             }
         } else {
-            $("#tooltip").remove();
+            $('#tooltip').remove();
             o.previousPoint = null;            
         }
 	},

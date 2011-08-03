@@ -80,6 +80,7 @@ NEOERR* ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outha
 		err = cs_init(&cs, hdf_get_obj(child, PRE_CFG_DATASET));
 		JUMP_NOK(err, wnext);
 			
+		hdf_set_value(cs->hdf, "hdf.loadpaths.tpl", PATH_TPL);
 		hdf_set_value(cs->hdf, "hdf.loadpaths.local", dir);
 
 		err = cgi_register_strfuncs(cs);
@@ -200,7 +201,7 @@ NEOERR* ltpl_init(HASH **tplh)
 	err = hash_init(&ltplh, hash_str_hash, hash_str_comp);
 	if (err != STATUS_OK) return nerr_pass(err);
 
-	err = ltpl_parse_dir(PATH_TPL, ltplh);
+	err = ltpl_parse_dir(PATH_TPL"config/run/", ltplh);
 	if (err != STATUS_OK) return nerr_pass_ctx(err, "pase dir %s", PATH_TPL);
 	
 	*tplh = ltplh;

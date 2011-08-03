@@ -5,7 +5,7 @@ include $(BASEDIR)Make.env
 # prefix for installing the binaries
 PREFIX=/usr/local
 
-CFLAGS += -shared -fPIC -rdynamic
+CFLAGS += -shared -fPIC -rdynamic -liconv
 
 CFLAGS += -I$(BASEDIR)event/daemon/ -I$(BASEDIR)deliver/v/ $(INC_MOON)
 
