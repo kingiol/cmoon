@@ -1,14 +1,14 @@
 <form method="post" action="/oms/stat">
   <dl class="query">
-	<dt>开始日期</dt>
-	<dd>
-	  <input type="text" name="times" class="datep" value="<?cs var: Query.times ?>" />
-	</dd>
-	<dt>结束日期</dt>
-	<dd>
-	  <input type="text" name="timee" class="datep" value="<?cs var: Query.timee ?>" />
-	</dd>
-	<dt><input type="submit" class="btn" value="查询" /></dt>
+    <dt>开始日期</dt>
+    <dd>
+      <input type="text" name="times" class="datep" value="<?cs var: Query.times ?>" />
+    </dd>
+    <dt>结束日期</dt>
+    <dd>
+      <input type="text" name="timee" class="datep" value="<?cs var: Query.timee ?>" />
+    </dd>
+    <dt><input type="submit" class="btn" value="查询" /></dt>
   </dl>
 </form>
 
@@ -20,11 +20,11 @@
 <dl class="inp">
   <dt>排行统计</dt>
   <dd>
-	<select name="stat-type">
-	  <option value="url">页面访问次数排行</option>
-	  <option value="refer">首次访问来路排行</option>
-	  <option value="area">访问用户地理位置分布</option>
-	</select>
+    <select name="stat-type">
+      <option value="url">页面访问次数排行</option>
+      <option value="refer">首次访问来路排行</option>
+      <option value="area">访问用户地理位置分布</option>
+    </select>
   </dd>
 </dl>
 <div id="st-table"></div>

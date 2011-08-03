@@ -10,4 +10,4 @@ NEOERR* lutil_fetch_countf(HDF *hdf, mdb_conn *conn, char *table, char *cfmt, ..
 bool lutil_client_attack(HDF *hdf, session_t *ses, char *cname);
 
 __END_DECLS
-#endif	/* __LUTIL_H__ */
+#endif    /* __LUTIL_H__ */

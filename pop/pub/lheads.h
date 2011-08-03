@@ -31,4 +31,4 @@
 #include "ozero.h"
 #include "ostat.h"
 
-#endif	/* __LHEADS_H__ */
+#endif    /* __LHEADS_H__ */

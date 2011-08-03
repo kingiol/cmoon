@@ -9,4 +9,4 @@ int comment_get(HDF *hdf, mdb_conn *conn);
 int comment_add(HDF *hdf, mdb_conn *conn);
 
 __END_DECLS
-#endif	/* __COMMENT_H__ */
+#endif    /* __COMMENT_H__ */

@@ -1,8 +1,8 @@
 <div id="browser-hint" class="hide">
   <p>
-	你正在使用低版本ie浏览器，本站某些功能可能无法正常使用，建议你更新浏览器版本，
-	或者使用更安全的 <a target="_blank" href="http://www.mozillaonline.com/">火狐狸</a> 浏览器。
-	&nbsp; <input type="button" id="browser-later" class="btn" value="稍后再说" />
+    你正在使用低版本ie浏览器，本站某些功能可能无法正常使用，建议你更新浏览器版本，
+    或者使用更安全的 <a target="_blank" href="http://www.mozillaonline.com/">火狐狸</a> 浏览器。
+    &nbsp; <input type="button" id="browser-later" class="btn" value="稍后再说" />
   </p>
 </div>
 
@@ -17,62 +17,62 @@
 
 <div id="chat-box" class="im-box loading">
   <div class="im-op">
-	<div id="im-users" class="im-users scrollable">
-	  <div class="items">
-		<ul>
-		  <li id="im-user-0" uname="0" class="cur"><span class="uname">所有人</span></li>
-		  
-		  <?cs set: count = #1 ?>
-		  <?cs each: user = Output.userlist ?>
-		  
-		  <?cs if: count % 15 == #0 ?>
-		  <ul>
-			<?cs /if ?>
-			
-			<li id="im-user-<?cs var: user.uname ?>" uname="<?cs var: user.uname ?>" class="off" >
-			<span class="uname"><?cs var: user.uname ?></span>
-			<span class="place"><?cs var: user.addr ?></span>
-			<span class="remove" title="删除该用户">&nbsp;</span>
-		    </li>
-		  
-			<?cs if: count % 15 == #14 ?>
-		  </ul>
-		  <?cs /if ?>
-		
-		  <?cs set: count = count + #1 ?>
-		  <?cs /each ?>
+    <div id="im-users" class="im-users scrollable">
+      <div class="items">
+        <ul>
+          <li id="im-user-0" uname="0" class="cur"><span class="uname">所有人</span></li>
+          
+          <?cs set: count = #1 ?>
+          <?cs each: user = Output.userlist ?>
+          
+          <?cs if: count % 15 == #0 ?>
+          <ul>
+            <?cs /if ?>
+            
+            <li id="im-user-<?cs var: user.uname ?>" uname="<?cs var: user.uname ?>" class="off" >
+            <span class="uname"><?cs var: user.uname ?></span>
+            <span class="place"><?cs var: user.addr ?></span>
+            <span class="remove" title="删除该用户">&nbsp;</span>
+            </li>
+          
+            <?cs if: count % 15 == #14 ?>
+          </ul>
+          <?cs /if ?>
+        
+          <?cs set: count = count + #1 ?>
+          <?cs /each ?>
 
-		  <?cs if: count % 15 != #0 ?>
-		</ul>
-		<?cs /if ?>
-	  </div> <!-- items -->
-	</div> <!-- im-users -->
+          <?cs if: count % 15 != #0 ?>
+        </ul>
+        <?cs /if ?>
+      </div> <!-- items -->
+    </div> <!-- im-users -->
   
-	<a class="prev browse left"></a>
-	<div class="navi"></div>
-	<a class="next browse right"></a>
-  </div>	<!-- im-op -->
+    <a class="prev browse left"></a>
+    <div class="navi"></div>
+    <a class="next browse right"></a>
+  </div>    <!-- im-op -->
 
   <div class="im-chat">
-	<div id="im-stat" class="im-stat"> 给所有在线访客发送消息 </div>
-	<div id="im-msgs" class="im-msgs"></div>
-	<div class="im-input">
-	  <textarea id="chat-msg-text"></textarea>
-	  <input type="button" id="chat-msg-submit" value="发送" />
-	  <input type="checkbox" id="remind-sound-sw" checked="checked" /> 提示音
-	</div>
+    <div id="im-stat" class="im-stat"> 给所有在线访客发送消息 </div>
+    <div id="im-msgs" class="im-msgs"></div>
+    <div class="im-input">
+      <textarea id="chat-msg-text"></textarea>
+      <input type="button" id="chat-msg-submit" value="发送" />
+      <input type="checkbox" id="remind-sound-sw" checked="checked" /> 提示音
+    </div>
   </div>  <!-- im-chat -->
 
 </div>  <!-- im-box -->
 
 <script>
-	var mgd = mgd || {};
+    var mgd = mgd || {};
 
-	mgd.appinfo = {
-		pname: '<?cs var: Output.appinfo.pname ?>',
-		aname: '<?cs var: Output.appinfo.aname ?>',
-		masn: '<?cs var: Output.appinfo.masn ?>',
-		tune: <?cs var: Output.appinfo.tune ?>
-	};
+    mgd.appinfo = {
+        pname: '<?cs var: Output.appinfo.pname ?>',
+        aname: '<?cs var: Output.appinfo.aname ?>',
+        masn: '<?cs var: Output.appinfo.masn ?>',
+        tune: <?cs var: Output.appinfo.tune ?>
+    };
 </script>
   

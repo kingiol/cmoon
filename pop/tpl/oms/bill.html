@@ -19,11 +19,11 @@
 <dl class="query">
   <dt>开始日期</dt>
   <dd>
-	<input type="text" name="times" class="datep" />
+    <input type="text" name="times" class="datep" />
   </dd>
   <dt>结束日期</dt>
   <dd>
-	<input type="text" name="timee" class="datep" />
+    <input type="text" name="timee" class="datep" />
   </dd>
   <dt><input type="submit" id="submit" class="btn" value="查询" /></dt>
 </dl>
@@ -32,21 +32,21 @@
 
 <div id="bill-table">
   <table class="list">
-	<tr>
-	  <th>交易时间</th>
-	  <th>交易类型</th>
-	  <th>交易金额</th>
-	  <th>交易备注</th>
-	</tr>
+    <tr>
+      <th>交易时间</th>
+      <th>交易类型</th>
+      <th>交易金额</th>
+      <th>交易备注</th>
+    </tr>
 
-	<?cs each: b = Output.bills ?>
-	<tr>
-	  <td><?cs var:b.intime ?></td>
-	  <td><?cs call:map_val(b.btype, BillTypes) ?></td>
-	  <td><?cs var:b.fee ?></td>
-	  <td><?cs var:b.remark ?></td>
-	</tr>
-	<?cs /each ?>
+    <?cs each: b = Output.bills ?>
+    <tr>
+      <td><?cs var:b.intime ?></td>
+      <td><?cs call:map_val(b.btype, BillTypes) ?></td>
+      <td><?cs var:b.fee ?></td>
+      <td><?cs var:b.remark ?></td>
+    </tr>
+    <?cs /each ?>
   </table>
 </div>
 

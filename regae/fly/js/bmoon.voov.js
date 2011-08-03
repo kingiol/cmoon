@@ -1,29 +1,29 @@
 ; var g_site_domain = "voov.com";
 var bmoon = bmoon || {};
 bmoon.voov = {
-	version: '1.0',
+    version: '1.0',
 
-	init: function() {
-		var o = bmoon.voov;
+    init: function() {
+        var o = bmoon.voov;
 
-		if (o.inited) return o;
-		o.inited = true;
+        if (o.inited) return o;
+        o.inited = true;
 
-		o.content = $('#bd-content');
+        o.content = $('#bd-content');
 
-		return o;
-	},
+        return o;
+    },
 
-	onready: function() {
-		var o = bmoon.voov.init();
+    onready: function() {
+        var o = bmoon.voov.init();
 
-		o.bindClick();
-	},
-	
-	bindClick: function() {
-		var o = bmoon.voov.init();
-		
-	}
+        o.bindClick();
+    },
+    
+    bindClick: function() {
+        var o = bmoon.voov.init();
+        
+    }
 };
 
 $(document).ready(bmoon.voov.onready);

@@ -4,115 +4,115 @@
 # copy can't be deep
 # so, done partly
 oms [merge=oms.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/oms.css" />
-			js = <script type="text/javascript" src="/js/b/oms.js"></script>
-			title = Oh, My Site
-			actionpart = 0
+            css = <link rel="stylesheet" type="text/css" href="/css/b/oms.css" />
+            js = <script type="text/javascript" src="/js/b/oms.js"></script>
+            title = Oh, My Site
+            actionpart = 0
         }
-		Include {
-			content = oms/oms.html
-		}
-	}
+        Include {
+            content = oms/oms.html
+        }
+    }
 }
 
 oms_stat [merge=oms.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/stat.css" />
-			js << EOM
-				<!--[if IE]><script type="text/javascript" src="/js/b/oms/stat_ie.js"></script><![endif]-->
-				<script type="text/javascript" src="/js/b/oms/stat.js"></script>
+            css = <link rel="stylesheet" type="text/css" href="/css/b/oms/stat.css" />
+            js << EOM
+                <!--[if IE]><script type="text/javascript" src="/js/b/oms/stat_ie.js"></script><![endif]-->
+                <script type="text/javascript" src="/js/b/oms/stat.js"></script>
 EOM
-			title = 站点统计
-			actionpart = 1
+            title = 站点统计
+            actionpart = 1
         }
-		Include {
-			content = oms/stat.html
-		}
-	}
+        Include {
+            content = oms/stat.html
+        }
+    }
 }
 
 oms_edit [merge=oms.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/edit.css" />
-			js = <script type="text/javascript" src="/js/b/oms/edit.js"></script>
-			title = 站点设置
-			actionpart = 2
+            css = <link rel="stylesheet" type="text/css" href="/css/b/oms/edit.css" />
+            js = <script type="text/javascript" src="/js/b/oms/edit.js"></script>
+            title = 站点设置
+            actionpart = 2
         }
-		Include {
-			content = oms/edit.html
-		}
-	}
+        Include {
+            content = oms/edit.html
+        }
+    }
 }
 
 oms_users [merge=oms.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/users.css" />
-			js = <script type="text/javascript" src="/js/b/oms/users.js"></script>
-			title = 客服管理
-			actionpart = 3
+            css = <link rel="stylesheet" type="text/css" href="/css/b/oms/users.css" />
+            js = <script type="text/javascript" src="/js/b/oms/users.js"></script>
+            title = 客服管理
+            actionpart = 3
         }
-		Include {
-			content = oms/users.html
-		}
-	}
+        Include {
+            content = oms/users.html
+        }
+    }
 }
 
 oms_bill [merge=oms.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/bill.css" />
-			js = <script type="text/javascript" src="/js/b/oms/bill.js"></script>
-			title = 消费清单
-			actionpart = 4
+            css = <link rel="stylesheet" type="text/css" href="/css/b/oms/bill.css" />
+            js = <script type="text/javascript" src="/js/b/oms/bill.js"></script>
+            title = 消费清单
+            actionpart = 4
         }
-		Include {
-			content = oms/bill.html
-		}
-		BillTypes {
-			0 = 申请充值
-			1 = 确认充值
-			2 = 添加客服帐号
-			3 = 操作回滚
-		}
-	}
+        Include {
+            content = oms/bill.html
+        }
+        BillTypes {
+            0 = 申请充值
+            1 = 确认充值
+            2 = 添加客服帐号
+            3 = 操作回滚
+        }
+    }
 }
 
 oms_admin [merge=oms.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/admin.css" />
-			js = <script type="text/javascript" src="/js/b/oms/admin.js"></script>
-			title = 消费清单
-			actionpart = 5
+            css = <link rel="stylesheet" type="text/css" href="/css/b/oms/admin.css" />
+            js = <script type="text/javascript" src="/js/b/oms/admin.js"></script>
+            title = 消费清单
+            actionpart = 5
         }
-		Include {
-			content = oms/admin.html
-		}
-	}
+        Include {
+            content = oms/admin.html
+        }
+    }
 }
 
 oms_root [merge=oms.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/oms/root.css" />
-			js = <script type="text/javascript" src="/js/b/oms/root.js"></script>
-			title = 消费清单
-			actionpart = 5
+            css = <link rel="stylesheet" type="text/css" href="/css/b/oms/root.css" />
+            js = <script type="text/javascript" src="/js/b/oms/root.js"></script>
+            title = 消费清单
+            actionpart = 5
         }
-		Include {
-			content = oms/root.html
-		}
-	}
+        Include {
+            content = oms/root.html
+        }
+    }
 }

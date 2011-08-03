@@ -1,22 +1,22 @@
 .blog-item {
-/*	margin: 30px 0;*/
+/*    margin: 30px 0;*/
 }
 
 .blog-item .info {
-	color: gray;
+    color: gray;
 }
 
 .blog-item .info .left{
-	float: right;
+    float: right;
 }
 
 .blog-item .content {
-	margin: 20px 0 10px 0;
-	/*text-indent: 2em;*/
+    margin: 20px 0 10px 0;
+    /*text-indent: 2em;*/
 }
 
 .blog-item .end {
-	color: gray;
+    color: gray;
 }
 
 .content p.pre {
@@ -33,63 +33,63 @@
 }
 
 .nav {
-	border-top: 1px solid #aaa;
-	text-align: right;
-	line-height: 24px;
+    border-top: 1px solid #aaa;
+    text-align: right;
+    line-height: 24px;
 }
 
 .nav .center {
-	margin:0 50px;
+    margin:0 50px;
 }
 
 ul.commentnew h4 {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 ul.commentnew li {
-	margin: 3px 0;
+    margin: 3px 0;
 }
 
 ul.commentnew li.loading .indicator {
-	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;
+    display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;
 }
 ul.commentnew li.success .indicator {
-	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat
+    display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat
 }
 ul.commentnew li.error .indicator {
-	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;
+    display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;
 }
 textarea.content {
-	height: 150px;
-	width: 520px;
-	padding: 5px;
+    height: 150px;
+    width: 520px;
+    padding: 5px;
 }
 textarea.reply {
-	height: 62px;
-	width: 270px;
-	padding: 2px;
-	margin-right: 1em;
+    height: 62px;
+    width: 270px;
+    padding: 2px;
+    margin-right: 1em;
 }
 
 #comments {
-	clear: both;
-	margin: 5ex 1ex;
+    clear: both;
+    margin: 5ex 1ex;
 }
 
 #comments h3 {
-	margin:1em 0 0.5em;
+    margin:1em 0 0.5em;
 }
 
 #comments .comment-item {
-	margin-top: 2ex;
+    margin-top: 2ex;
 }
 
 .comment-item .author {
-	color:#767676;
+    color:#767676;
 }
 
 .comment-item p.pre {
-	margin: 0 10px;
+    margin: 0 10px;
     white-space: pre-wrap;       /* css 3 */
     white-space: -moz-pre-wrap;  /* Mozilla*/
     white-space: -pre-wrap;      /* Opera 4-6 */

@@ -1,92 +1,92 @@
 index {
-	Layout = layout.html
-	Dataset {
-		Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/index.css" />
-			js = <script src="/js/b/index.js"></script>
-			title = 享受播种之美
-			tabpart = 0
-		}
-		Include {
-			content = index.html
-		}
-	}
-	Output = index.html
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/index.css" />
+            js = <script src="/js/b/index.js"></script>
+            title = 享受播种之美
+            tabpart = 0
+        }
+        Include {
+            content = index.html
+        }
+    }
+    Output = index.html
 }
 
 demo {
-	Layout = layout.html
-	Dataset {
-		Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/demo.css" />
-			js = <script src="/js/b/demo.js"></script>
-			title = 界面定制
-			tabpart = 3
-		}
-		Include {
-			content = demo.html
-		}
-	}
-	Output = demo.html
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/demo.css" />
+            js = <script src="/js/b/demo.js"></script>
+            title = 界面定制
+            tabpart = 3
+        }
+        Include {
+            content = demo.html
+        }
+    }
+    Output = demo.html
 }
 
 app_new {
-	Layout = layout.html
-	Dataset {
-		Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/appnew.css" />
-			js = <script src="/js/b/appnew.js"></script>
-			title = 站点注册
-			tabpart = 1
-		}
-		Include {
-			content = app/new.html
-		}
-	}
-	Output = app/new.html
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/appnew.css" />
+            js = <script src="/js/b/appnew.js"></script>
+            title = 站点注册
+            tabpart = 1
+        }
+        Include {
+            content = app/new.html
+        }
+    }
+    Output = app/new.html
 }
 app_reset {
-	Layout = layout.html
-	Dataset {
-		Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/appreset.css" />
-			js = <script src="/js/b/appreset.js"></script>
-			title = 忘记密码
-			tabpart = 1
-		}
-		Include {
-			content = app/reset.html
-		}
-	}
-	Output = app/reset.html
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/appreset.css" />
+            js = <script src="/js/b/appreset.js"></script>
+            title = 忘记密码
+            tabpart = 1
+        }
+        Include {
+            content = app/reset.html
+        }
+    }
+    Output = app/reset.html
 }
 
 faq {
-	Layout = layout.html
-	Dataset {
-		Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/faq.css" />
-			js = <script src="/js/b/faq.js"></script>
-			title = 界面定制
-		}
-		Include {
-			content = faq.html
-		}
-	}
-	Output = faq.html
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/faq.css" />
+            js = <script src="/js/b/faq.js"></script>
+            title = 界面定制
+        }
+        Include {
+            content = faq.html
+        }
+    }
+    Output = faq.html
 }
 
 about {
-	Layout = layout.html
-	Dataset {
-		Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/about.css" />
-			js = <script src="/js/b/about.js"></script>
-			title = 界面定制
-		}
-		Include {
-			content = about.html
-		}
-	}
-	Output = about.html
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/about.css" />
+            js = <script src="/js/b/about.js"></script>
+            title = 界面定制
+        }
+        Include {
+            content = about.html
+        }
+    }
+    Output = about.html
 }

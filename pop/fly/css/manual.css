@@ -1,39 +1,39 @@
 #bd-content .intro {
-	font-size: 110%;
+    font-size: 110%;
 }
 
 #bd-content img {
-	margin: 0 auto;
+    margin: 0 auto;
 }
 
 #bd-content ul {
-	margin-left: 2em;
-	list-style-type: disc;
+    margin-left: 2em;
+    list-style-type: disc;
 }
 
 #man-top, #man-bot {
-	height: 30px;
-	margin: 20px;
-	padding: 10px;
+    height: 30px;
+    margin: 20px;
+    padding: 10px;
 }
 #man-top {
-	border-bottom: 1px solid #A6A6A6;
+    border-bottom: 1px solid #A6A6A6;
 }
 #man-bot {
-	border-top: 1px solid #A6A6A6;
+    border-top: 1px solid #A6A6A6;
 }
 #man-top .nav-next, #man-bot .nav-next {
-	float: right;
+    float: right;
 }
 
 a.nav-next, a.nav-prev, a.nav-up, a.nav-next-w, a.nav-prev-w, a.nav-up-w {
-	display: inline-block;
-	height: 28px;
-	line-height: 28px;
-	width: 80px;
-	text-align: center;
-	background: url(/img/bg/btn-nav.png) no-repeat;
-	font-weight: bold;
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    width: 80px;
+    text-align: center;
+    background: url(/img/bg/btn-nav.png) no-repeat;
+    font-weight: bold;
 }
 
 a.nav-next-w, a.nav-prev-w, a.nav-up-w {width: 130px;}

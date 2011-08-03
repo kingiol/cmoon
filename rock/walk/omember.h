@@ -26,4 +26,4 @@ bool member_uin_is_root(int uin);
 bool member_is_root(member_t *mb);
 
 __END_DECLS
-#endif	/* __OMEMBER_H__ */
+#endif    /* __OMEMBER_H__ */

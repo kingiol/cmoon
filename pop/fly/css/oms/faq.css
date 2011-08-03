@@ -2,16 +2,16 @@
 #content p {text-indent: 2em;}
 
 .index {
-	padding: 8px;
-	margin-bottom: 20px;
-	border: 1px solid #aaa;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #aaa;
 }
 
 .index .title {
     font: bold 13px Georgia;
-	margin: 10px 0;
+    margin: 10px 0;
 }
 
 .index ul li {
-	line-height: 22px;
+    line-height: 22px;
 }

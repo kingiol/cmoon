@@ -6,9 +6,9 @@
 #define TJT_QUERY_COL " id, aid, fid, uid, img, exp, to_char(intime, 'YYYY-MM-DD') " \
     " as intime, to_char(uptime, 'YYYY-MM-DD') as uptime "
 
-#define TJT_GET_RAW(conn, tjt)										\
-	mdb_get(conn, "iiiiSSSS", &(tjt->id), &(tjt->aid), &(tjt->fid), &(tjt->uid), \
-			&(tjt->img), &(tjt->exp), &(tjt->intime), &(tjt->uptime))
+#define TJT_GET_RAW(conn, tjt)                                        \
+    mdb_get(conn, "iiiiSSSS", &(tjt->id), &(tjt->aid), &(tjt->fid), &(tjt->uid), \
+            &(tjt->img), &(tjt->exp), &(tjt->intime), &(tjt->uptime))
 
 int tjt_get_data(HDF *hdf, HASH *dbh, session_t *ses)
 {
@@ -16,22 +16,22 @@ int tjt_get_data(HDF *hdf, HASH *dbh, session_t *ses)
     size_t datalen;
     file_t *fl;
     ULIST *ul = NULL;
-	int count, offset, aid, fid, ret;
+    int count, offset, aid, fid, ret;
 
-	mdb_conn *dbsys, *dbtjt;
+    mdb_conn *dbsys, *dbtjt;
 
-	dbsys = (mdb_conn*)hash_lookup(dbh, "Sys");
-	dbtjt = (mdb_conn*)hash_lookup(dbh, "Tjt");
+    dbsys = (mdb_conn*)hash_lookup(dbh, "Sys");
+    dbtjt = (mdb_conn*)hash_lookup(dbh, "Tjt");
 
-	PRE_DBOP(hdf, dbsys);
-	PRE_DBOP(hdf, dbtjt);
+    PRE_DBOP(hdf, dbsys);
+    PRE_DBOP(hdf, dbtjt);
 
-	aid = ses->file->aid;
-	fid = ses->file->id;
+    aid = ses->file->aid;
+    fid = ses->file->id;
     snprintf(tbl, sizeof(tbl), "tjt_%d", aid);
 
     /* TODO ses->file not null all time? */
-	//if (ses->file != NULL)
+    //if (ses->file != NULL)
     lutil_fill_layout_by_file(dbsys, ses->file, hdf);
     if (file_get_info_by_id(dbsys, aid, NULL, -1, &fl) == RET_RBTOP_OK) {
         hdf_set_value(hdf, PRE_OUTPUT".navtitle", fl->remark);
@@ -39,13 +39,13 @@ int tjt_get_data(HDF *hdf, HASH *dbh, session_t *ses)
     }
     file_get_nav_by_id(dbsys, aid, PRE_OUTPUT, hdf);
 
-	ret = file_check_user_power(hdf, dbsys, ses, ses->file, LMT_APPEND);
-	if (ret == RET_RBTOP_OK) {
-		hdf_set_value(hdf, PRE_OUTPUT".appendable", "1");
-	}
+    ret = file_check_user_power(hdf, dbsys, ses, ses->file, LMT_APPEND);
+    if (ret == RET_RBTOP_OK) {
+        hdf_set_value(hdf, PRE_OUTPUT".appendable", "1");
+    }
 
     lutil_fetch_countf(hdf, dbtjt, tbl, "fid=%d", fid);
-	mmisc_get_offset(hdf, &count, &offset);
+    mmisc_get_offset(hdf, &count, &offset);
     
     buf = mmc_getf(&datalen, 0, PRE_MMC_TJT".%d.%d", fid, offset);
     if (buf == NULL || datalen < sizeof(tjt_t)) {
@@ -88,34 +88,34 @@ void tjt_refresh_info(int aid, int fid)
 
 int tjt_add_image(CGI *cgi, mdb_conn *conn, session_t *ses)
 {
-	unsigned char hash[LEN_MD5];
-	int ret;
+    unsigned char hash[LEN_MD5];
+    int ret;
 
-	FILE *fp = cgi_filehandle(cgi, "imagename");
-	
-	PRE_DBOP(cgi->hdf, conn);
-	
-	if (fp == NULL) {
-		mtc_err("input file named: imagename not found");
-		return RET_RBTOP_INPUTE;
-	}
+    FILE *fp = cgi_filehandle(cgi, "imagename");
+    
+    PRE_DBOP(cgi->hdf, conn);
+    
+    if (fp == NULL) {
+        mtc_err("input file named: imagename not found");
+        return RET_RBTOP_INPUTE;
+    }
 
     /* TODO image don't divide into tjt_x currently */
-	ret = lutil_image_accept(fp, "tjt", hash);
-	if (ret != RET_RBTOP_OK) {
-		mtc_err("accept image failure %d", ret);
-		return ret;
-	}
-	
-	hdf_set_valuef(cgi->hdf, PRE_OUTPUT".imageurl=%s/%s/%s/%s.jpg",
+    ret = lutil_image_accept(fp, "tjt", hash);
+    if (ret != RET_RBTOP_OK) {
+        mtc_err("accept image failure %d", ret);
+        return ret;
+    }
+    
+    hdf_set_valuef(cgi->hdf, PRE_OUTPUT".imageurl=%s/%s/%s/%s.jpg",
                    IMG_DOMAIN, IMG_PATH, IMG_ORI, hash);
-	hdf_set_valuef(cgi->hdf, PRE_OUTPUT".imagename=%s.jpg", hash);
-	return RET_RBTOP_OK;
+    hdf_set_valuef(cgi->hdf, PRE_OUTPUT".imagename=%s.jpg", hash);
+    return RET_RBTOP_OK;
 }
 
 int tjt_add_atom(HDF *hdf, mdb_conn *conn, session_t *ses)
 {
-	PRE_DBOP(hdf, conn);
+    PRE_DBOP(hdf, conn);
 
     int aid, fid, uid;
     char *img, *exp, tbl[LEN_TB];
@@ -139,5 +139,5 @@ int tjt_add_atom(HDF *hdf, mdb_conn *conn, session_t *ses)
     }
     tjt_refresh_info(aid, fid);
     
-	return RET_RBTOP_OK;
+    return RET_RBTOP_OK;
 }

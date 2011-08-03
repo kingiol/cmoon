@@ -12,31 +12,31 @@
   <div class="sep"></div>
 
   <div id="memberadd" class="overlay">
-	<form class="infoform" id="formgroupadd" method="post" enctype="multipart/form-data" action="/admin/group">
-	  <input type="hidden" rel="#memberadd" />
-	  <input type="hidden" name="op" value="add" />
-	  <input type="hidden" name="gid" value="0" id="gid" />
-	  <input type="hidden" name="status" value="2" id="status" /> <!--GROUP_STAT_INVITE-->
-	  <ul>
-		<li>
-		  <div class="leftitem">uid</div>
-		  <input type="text" name="uid" id="uid" class="is_required vint" />
-	    </li>
-		<li id="mode_admin">
-		  <div class="leftitem">权限类型</div>
+    <form class="infoform" id="formgroupadd" method="post" enctype="multipart/form-data" action="/admin/group">
+      <input type="hidden" rel="#memberadd" />
+      <input type="hidden" name="op" value="add" />
+      <input type="hidden" name="gid" value="0" id="gid" />
+      <input type="hidden" name="status" value="2" id="status" /> <!--GROUP_STAT_INVITE-->
+      <ul>
+        <li>
+          <div class="leftitem">uid</div>
+          <input type="text" name="uid" id="uid" class="is_required vint" />
+        </li>
+        <li id="mode_admin">
+          <div class="leftitem">权限类型</div>
           <select name="mode" id="mode">
             <option value="0" selected="selected">普通组员</option>
             <option value="1">初级会员</option>
             <option value="2">高级会员</option>
             <option value="3">组管理员</option>
           </select>
-	    </li>
-	    <li>
-	      <div class="leftitem"> &nbsp; </div>
-	      <input type="submit" class="submitbtn" value="提交" />
-	    </li>
-	  </ul>
-	</form>
+        </li>
+        <li>
+          <div class="leftitem"> &nbsp; </div>
+          <input type="submit" class="submitbtn" value="提交" />
+        </li>
+      </ul>
+    </form>
   </div>
   
 </div>

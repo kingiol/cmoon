@@ -11,19 +11,19 @@
 <script type="text/javascript" src="/js/b/base.js"></script>
 
 <!-- kaiwuonline begin -->
-	<link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />
-	<!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->
+    <link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat.css" />
+    <!--[if IE 6]><link rel="stylesheet" href="http://css.kaiwuonline.com/b/chat_ie6.css" /><![endif]-->
 <script type="text/javascript" src="http://js.kaiwuonline.com/b/chat.js" ></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	var client = new APE.Client();
-	client.load({
-		identifier: 'ksc',
-		transport: 2,
-		complete: function(ape) {
-			new liveCS(ape).initialize({aname: 'ksc'});
-		}
-	});
+    var client = new APE.Client();
+    client.load({
+        identifier: 'ksc',
+        transport: 2,
+        complete: function(ape) {
+            new liveCS(ape).initialize({aname: 'ksc'});
+        }
+    });
 });
 </script>
 <!-- kaiwuonline end -->
@@ -41,18 +41,18 @@ $(document).ready(function() {
 <body>
 <div id="top">
   <ul id="nav-guest" class="inline right">
-	<li><a href="/en/index.html">English</a></li>
-	<li><a href="/login.html" rel="#loginoverlay">登录</a></li>
+    <li><a href="/en/index.html">English</a></li>
+    <li><a href="/login.html" rel="#loginoverlay">登录</a></li>
   </ul>
   <ul id="nav-member" class="inline right hide">
-	<li><a href="/en/index.html">English</a></li>
-	<li>欢迎 <span id="unameLayout"></span></li>
-	<li><a href="javascript:void(0);" id="userlogout">退出</a></li>
+    <li><a href="/en/index.html">English</a></li>
+    <li>欢迎 <span id="unameLayout"></span></li>
+    <li><a href="javascript:void(0);" id="userlogout">退出</a></li>
   </ul>
 </div>
 
   <div class="overlay" id="loginoverlay">
-	<div class="wrap"></div>
+    <div class="wrap"></div>
   </div>
 
 <div id="mid">
@@ -64,7 +64,7 @@ $(document).ready(function() {
     </ul>
       
     <div id="crumbs">
-	  Position:
+      Position:
       <?cs each:crumb = Layout.crumbs ?>
       &raquo;<a href="<?cs var:crumb.href ?>"><?cs var:crumb.name ?></a>
       <?cs /each ?>
@@ -72,15 +72,15 @@ $(document).ready(function() {
   </div> <!-- header -->
   
   <div id="content">
-	<?cs include:Include.content ?>
-	<?cs var:Content.content ?>
+    <?cs include:Include.content ?>
+    <?cs var:Content.content ?>
     <div class="clearer"></div>
   </div> <!-- content -->
 </div> <!-- mid -->
 
 <div id="bot">
   <p style="text-indent: 0px">
-	TODO
+    TODO
   </p>
 </div>
 

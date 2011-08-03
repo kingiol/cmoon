@@ -1,37 +1,37 @@
 <div id='content-sub'>
   <?cs escape: "html" ?>
   <dl class="blognew">
-	<dt>博客标题 (1 ~ 128 个字)</dt>
-	<dd>
-	  <input type="text" id="title" class="title VAL_NEWBLOG vrequire" vmax="256" value="<?cs var: Output.blog.title ?>" />
-	</dd>
+    <dt>博客标题 (1 ~ 128 个字)</dt>
+    <dd>
+      <input type="text" id="title" class="title VAL_NEWBLOG vrequire" vmax="256" value="<?cs var: Output.blog.title ?>" />
+    </dd>
 
-	<dt>博客内容</dt>
-	<dd>
-	  <textarea id="b-content" class="content VAL_NEWBLOG vrequire"><?cs var: Output.blog.content ?></textarea>
-	</dd>
+    <dt>博客内容</dt>
+    <dd>
+      <textarea id="b-content" class="content VAL_NEWBLOG vrequire"><?cs var: Output.blog.content ?></textarea>
+    </dd>
 
-	<dt>&nbsp;</dt>
-	<dd>
-	  <input type="button" id="submit" class="submitbtn" value="提交" />
-	  <?cs if: ?Output.blog.title ?>
-	    <?cs if: Output.blog.state == #0 ?>
-	    &nbsp; <input type="button" id="submit-del" class="submitbtn" value="删除" />
-	    <?cs else ?>
-	    &nbsp; <input type="button" id="submit-rev" class="submitbtn" value="恢复" />
-	    <?cs /if ?>
-	  <?cs /if ?>
-	  <span class="indicator"></span>
-	</dd>
+    <dt>&nbsp;</dt>
+    <dd>
+      <input type="button" id="submit" class="submitbtn" value="提交" />
+      <?cs if: ?Output.blog.title ?>
+        <?cs if: Output.blog.state == #0 ?>
+        &nbsp; <input type="button" id="submit-del" class="submitbtn" value="删除" />
+        <?cs else ?>
+        &nbsp; <input type="button" id="submit-rev" class="submitbtn" value="恢复" />
+        <?cs /if ?>
+      <?cs /if ?>
+      <span class="indicator"></span>
+    </dd>
   </dl>
   <?cs /escape ?>
 </div>
 
 <?cs if: ?Output.blog.title ?>
 <script>
-	var mgd = mgd || {};
+    var mgd = mgd || {};
 
-	mgd.bid = <?cs var: Output.blog.id ?>
-	mgd.op = 'mod';
+    mgd.bid = <?cs var: Output.blog.id ?>
+    mgd.op = 'mod';
 </script>
 <?cs /if ?>

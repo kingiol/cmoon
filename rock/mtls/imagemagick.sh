@@ -3,9 +3,9 @@
 PATH=/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/usr/sbin
 
 if [ $# -lt 2 ]; then
-	echo "useage: $0 DOMAIN PIC_FILENAME"
-	echo "example: $0 tjt c874a89d1ebd57ea622c1d1e7df815de.jpg"
-	exit 1
+    echo "useage: $0 DOMAIN PIC_FILENAME"
+    echo "example: $0 tjt c874a89d1ebd57ea622c1d1e7df815de.jpg"
+    exit 1
 fi
 
 IMG_ROOT="/data/pic/"

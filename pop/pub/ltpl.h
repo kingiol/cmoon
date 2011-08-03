@@ -13,4 +13,4 @@ NEOERR* ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outha
 NEOERR* ltpl_parse_dir(char *dir, HASH *outhash);
 
 __END_DECLS
-#endif	/* __LTPL_H__ */
+#endif    /* __LTPL_H__ */

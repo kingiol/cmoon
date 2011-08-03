@@ -4,25 +4,25 @@
 
 __BEGIN_DECLS
 
-#define LMT_MASK	0xFF
-#define LMT_GET		0x1
-#define LMT_MOD		0x2
-#define LMT_APPEND	0x4
-#define LMT_DEL		0x8
+#define LMT_MASK    0xFF
+#define LMT_GET        0x1
+#define LMT_MOD        0x2
+#define LMT_APPEND    0x4
+#define LMT_DEL        0x8
 
-#define PMS_ALL(mode)		(mode & LMT_MASK)
-#define PMS_MEMBER(mode)	((mode>>8) & LMT_MASK)
-#define PMS_JOIN(mode)		((mode>>16) & LMT_MASK)
+#define PMS_ALL(mode)        (mode & LMT_MASK)
+#define PMS_MEMBER(mode)    ((mode>>8) & LMT_MASK)
+#define PMS_JOIN(mode)        ((mode>>16) & LMT_MASK)
 
-#define MODE_ALL(mode)		(mode & LMT_MASK)
-#define MODE_MEMBER(mode)	((mode & LMT_MASK) << 8)
-#define MODE_JOIN(mode)		((mode & LMT_MASK) << 16)
+#define MODE_ALL(mode)        (mode & LMT_MASK)
+#define MODE_MEMBER(mode)    ((mode & LMT_MASK) << 8)
+#define MODE_JOIN(mode)        ((mode & LMT_MASK) << 16)
 /*
  * user have priviliage >= GROUP_MODE_SENIOR can do ANY Not-system operation
  */
 
 int file_check_user_power(HDF *hdf, mdb_conn *conn, session_t *ses,
-						  file_t *file, int access);
+                          file_t *file, int access);
 
 /*
  * low level file operater, by id/ pid+name/ uri

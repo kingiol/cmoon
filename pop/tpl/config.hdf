@@ -1,44 +1,44 @@
 app_info [merge = app.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/appinfo.css" />
-			js = <script type="text/javascript" src="/js/b/appinfo.js"></script>
-			title = 帐号信息
-			actionpart = 0
+            css = <link rel="stylesheet" type="text/css" href="/css/b/appinfo.css" />
+            js = <script type="text/javascript" src="/js/b/appinfo.js"></script>
+            title = 帐号信息
+            actionpart = 0
         }
-		Include {
-			content = app/info.html
-		}
-	}
+        Include {
+            content = app/info.html
+        }
+    }
 }
 
 app_pass [merge = app.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/apppass.css" />
-			js = <script type="text/javascript" src="/js/b/apppass.js"></script>
-			title = 修改密码
-			actionpart = 1
+            css = <link rel="stylesheet" type="text/css" href="/css/b/apppass.css" />
+            js = <script type="text/javascript" src="/js/b/apppass.js"></script>
+            title = 修改密码
+            actionpart = 1
         }
-		Include {
-			content = app/pass.html
-		}
-	}
+        Include {
+            content = app/pass.html
+        }
+    }
 }
 
 app_charge [merge = app.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/appcharge.css" />
-			js = <script type="text/javascript" src="/js/b/appcharge.js"></script>
-			title = 充值
-			actionpart = 2
+            css = <link rel="stylesheet" type="text/css" href="/css/b/appcharge.css" />
+            js = <script type="text/javascript" src="/js/b/appcharge.js"></script>
+            title = 充值
+            actionpart = 2
         }
-		Include {
-			content = app/charge.html
-		}
-	}
+        Include {
+            content = app/charge.html
+        }
+    }
 }

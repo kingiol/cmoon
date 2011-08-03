@@ -8,4 +8,4 @@ int lutil_image_accept(FILE *fp, char *path, unsigned char *result);
 
 
 __END_DECLS
-#endif	/* __LUTIL_H__ */
+#endif    /* __LUTIL_H__ */

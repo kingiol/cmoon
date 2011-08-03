@@ -28,9 +28,9 @@ ul.none {
     list-style:none;
 }
 ul.clean {
-	margin: 0;
-	padding: 0;
-	list-style:none;
+    margin: 0;
+    padding: 0;
+    list-style:none;
 }
 ul.clean li {
     padding: 15px;
@@ -71,15 +71,15 @@ input, textarea {
 }
 
 #bot p.link {
-	/*float: right;*/
-	position: relative;
-	top: -76px;
-	right: -414px;
+    /*float: right;*/
+    position: relative;
+    top: -76px;
+    right: -414px;
 }
 
 #bot p.link img {
-	width: 42px;
-	height: 42px;
+    width: 42px;
+    height: 42px;
 }
 
 /* header */
@@ -147,7 +147,7 @@ input, textarea {
 }
 
 #coltwo {
-    width: 680px;			/* 960 = 190+15*4+x 15px~~15px -30px for ie6, ri */
+    width: 680px;            /* 960 = 190+15*4+x 15px~~15px -30px for ie6, ri */
     float: left;
     margin: 0 15px;
     padding: 0;
@@ -178,7 +178,7 @@ input, textarea {
     color: #aaaaaa;
 }
 #coltwo pre.light a {
-	color: #aaaaaa;
+    color: #aaaaaa;
 }
 
 .valid{border:2px solid green !important;}

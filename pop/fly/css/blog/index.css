@@ -1,18 +1,18 @@
 .blog-item {
-	margin: 30px 0;
+    margin: 30px 0;
 }
 
 .blog-item .info {
-	color: gray;
+    color: gray;
 }
 
 .blog-item .info .left{
-	float: right;
+    float: right;
 }
 
 .blog-item .content {
-	margin: 20px 0 10px 0;
-	/*text-indent: 2em;*/
+    margin: 20px 0 10px 0;
+    /*text-indent: 2em;*/
 }
 
 .content p.pre {
@@ -25,18 +25,18 @@
 }
 
 .blog-item .end {
-	color: gray;
+    color: gray;
 }
 
 .nav {
-	border-top: 1px solid #aaa;
-	text-align: right;
-	line-height: 24px;
+    border-top: 1px solid #aaa;
+    text-align: right;
+    line-height: 24px;
 }
 
 .nav .left {
-	float: left;
+    float: left;
 }
 .nav .right {
-	float: right;
+    float: right;
 }

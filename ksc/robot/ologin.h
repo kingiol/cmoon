@@ -9,4 +9,4 @@ int login_get(CGI *cgi, mdb_conn *conn);
 int login_check(HDF *hdf, mdb_conn *conn);
 
 __END_DECLS
-#endif	/* __LOGIN_H__ */
+#endif    /* __LOGIN_H__ */

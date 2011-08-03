@@ -79,16 +79,16 @@ $HTTP["host"] == "css.bomdoo.com" {
 var.socket_dir = "/var/run/lighttpd/sockets/"
 
 fastcgi.server = ("viki" => 
-	( "viki" =>
-		(
-			"socket" => socket_dir + "viki",
-			"check-local" => "disable",
-			"bin-path" => "/usr/local/moon/pop/run/viki",
-			"min-procs" => 1,
-			"max-procs" => 10,
-			"idle-timeout" => 30
-		)
-	)
+    ( "viki" =>
+        (
+            "socket" => socket_dir + "viki",
+            "check-local" => "disable",
+            "bin-path" => "/usr/local/moon/pop/run/viki",
+            "min-procs" => 1,
+            "max-procs" => 10,
+            "idle-timeout" => 30
+        )
+    )
 )
 
 
@@ -104,72 +104,72 @@ postgresql
 ==========
 
 0, post-installation setup
-	LD_LIBRARY_PATH=/usr/local/pgsql/lib
-	export LD_LIBRARY_PATH
+    LD_LIBRARY_PATH=/usr/local/pgsql/lib
+    export LD_LIBRARY_PATH
 
     export PATH=/usr/local/pgsql/bin:$PATH
 
-	root# mkdir /usr/local/pgsql/data
-	root# chown postgres /usr/local/pgsql/data
+    root# mkdir /usr/local/pgsql/data
+    root# chown postgres /usr/local/pgsql/data
     root# useradd postgres
-	root# su postgres
-	postgres$ initdb -D /usr/local/pgsql/data
+    root# su postgres
+    postgres$ initdb -D /usr/local/pgsql/data
     修改 /usr/local/pgsql/*.conf
     postgres -D /usr/local/pgsql/data
     pg_ctl -D /usr/local/pgsql/data -l logfile start
 
 apt-get install postgresql-contrib
 1, 建立 postgresql 账号
-	用 postgres 用户登录psql,	执行
-	CREATE USER lcser CREATEDB password 'loveu';
-	这样就建立了一个 可以创建数据库的 lcser 用户, 通过非ident方式链接的时候密码为 loveu
-	\du 查看当前用户
-	select * from pg_trigger; 查看系统中所有的 trigger
+    用 postgres 用户登录psql,    执行
+    CREATE USER lcser CREATEDB password 'loveu';
+    这样就建立了一个 可以创建数据库的 lcser 用户, 通过非ident方式链接的时候密码为 loveu
+    \du 查看当前用户
+    select * from pg_trigger; 查看系统中所有的 trigger
 
 2, 配置访问方式
-	...pg_hba.conf
-	----------------
-	-local	all		all		ident	sameuser
-	+local   all     lcser    ident lcser (8.3)
-	+local   all         lcser	ident	map=lcser (8.4)
-	#local 允许本地链接, all 数据库名, lcser 我们上面创建的数据库用户名,
-	#ident 使用pg_ident.conf里的方式验证认证, lcser pg_ident.conf 中的关键字
+    ...pg_hba.conf
+    ----------------
+    -local    all        all        ident    sameuser
+    +local   all     lcser    ident lcser (8.3)
+    +local   all         lcser    ident    map=lcser (8.4)
+    #local 允许本地链接, all 数据库名, lcser 我们上面创建的数据库用户名,
+    #ident 使用pg_ident.conf里的方式验证认证, lcser pg_ident.conf 中的关键字
 
-	.../pg_ident.conf
-	-----------------
-	+lcser            bigml           lcser
-	#lcser 关键字, pg_hba.con 中ident 后的映射方式, sameuser不用在这里存在
-	#bigml Unix登录用户名, lcser postgresql 用户名(ROLE名)
+    .../pg_ident.conf
+    -----------------
+    +lcser            bigml           lcser
+    #lcser 关键字, pg_hba.con 中ident 后的映射方式, sameuser不用在这里存在
+    #bigml Unix登录用户名, lcser postgresql 用户名(ROLE名)
 
 3, 建立数据库
-	用刚建立和配置的 lcser 账号登录:
-	$psql -U lcser -d postgres (当前还没建立lcs_main库)
-		create database lcs_main encoding='utf8';
-		create database lcs_dyn encoding='utf8';
-		create database lcs_mtool encoding='utf8';
-		create database lcs_aux encoding='utf8';
-		create database lcs_bank encoding='utf8';
-		用postgres帐号登录:
-		\c lcs_main
-		CREATE LANGUAGE plpgsql; -- 开启 plpgsql 语言
+    用刚建立和配置的 lcser 账号登录:
+    $psql -U lcser -d postgres (当前还没建立lcs_main库)
+        create database lcs_main encoding='utf8';
+        create database lcs_dyn encoding='utf8';
+        create database lcs_mtool encoding='utf8';
+        create database lcs_aux encoding='utf8';
+        create database lcs_bank encoding='utf8';
+        用postgres帐号登录:
+        \c lcs_main
+        CREATE LANGUAGE plpgsql; -- 开启 plpgsql 语言
         CREATE FUNCTION update_time() RETURNS TRIGGER AS $$ BEGIN NEW.uptime=now(); RETURN NEW; END; $$ LANGUAGE plpgsql;
-		\c lcs_dyn
-		CREATE LANGUAGE plpgsql;
+        \c lcs_dyn
+        CREATE LANGUAGE plpgsql;
         CREATE FUNCTION update_time() RETURNS TRIGGER AS $$ BEGIN NEW.uptime=now(); RETURN NEW; END; $$ LANGUAGE plpgsql;
-		\c lcs_bank
-		CREATE LANGUAGE plpgsql;
+        \c lcs_bank
+        CREATE LANGUAGE plpgsql;
         CREATE FUNCTION update_time() RETURNS TRIGGER AS $$ BEGIN NEW.uptime=now(); RETURN NEW; END; $$ LANGUAGE plpgsql;
-	以后都可以用 $psql -U lcser -d lcs_main 登录
+    以后都可以用 $psql -U lcser -d lcs_main 登录
 
 4, 修改postgresql可选配置
-	/etc/postgresql/xx/main/postgresql.conf
-	------------------
-	
-	-#fsync = on                    # turns forced synchronization on or off
-	+fsync = off
-	
-	-#full_page_writes = on			# recover from partial page writes
-	+full_page_writes = off			# recover from partial page writes
+    /etc/postgresql/xx/main/postgresql.conf
+    ------------------
+    
+    -#fsync = on                    # turns forced synchronization on or off
+    +fsync = off
+    
+    -#full_page_writes = on            # recover from partial page writes
+    +full_page_writes = off            # recover from partial page writes
 
 5, 建立mn表
    moon 登录 psql:
@@ -184,9 +184,9 @@ apt-get install postgresql-contrib
    \i /usr/local/moon/pop/mtls/view_mtls.sql
 
 备注:
-	上述配置, mnuser 只能以bigml通过 local 方式登录, 如需其他方式请修改 pg_hba.conf 文件,
-	pg_ident.conf 文件只是在 认证方式为 ident 的时候配合修改(ident也可以存在于TCP/IP方式)
-	关于 pg_hba.conf 的说明可以参考 http://www.chinaunix.net/jh/18/8176.html
+    上述配置, mnuser 只能以bigml通过 local 方式登录, 如需其他方式请修改 pg_hba.conf 文件,
+    pg_ident.conf 文件只是在 认证方式为 ident 的时候配合修改(ident也可以存在于TCP/IP方式)
+    关于 pg_hba.conf 的说明可以参考 http://www.chinaunix.net/jh/18/8176.html
 
 
 useradd -d /opt -g code -N forge

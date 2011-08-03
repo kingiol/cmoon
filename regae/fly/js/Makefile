@@ -10,8 +10,8 @@ preload:
 	@mkdir -p b/
 
 b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js \
-	       pub/bmoon.js \
-		   bmoon.voov.js
+           pub/bmoon.js \
+           bmoon.voov.js
 
 %.js:
 	@echo -n > $@

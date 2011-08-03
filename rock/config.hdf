@@ -1,65 +1,65 @@
 Config {
-	trace_level = 7
-	Dataset_layout.html {
-		Layout {
-			tabs {
-				0 {
-					name = 市中心
-					href = /index.html
-				}
-				1 {
-					name = 菜市场
-					href = /csc.html
-				}
-			}
-		}
-	}
+    trace_level = 7
+    Dataset_layout.html {
+        Layout {
+            tabs {
+                0 {
+                    name = 市中心
+                    href = /index.html
+                }
+                1 {
+                    name = 菜市场
+                    href = /csc.html
+                }
+            }
+        }
+    }
 }
 
 Db {
-	Dsn {
-		Sys = pgsql:dbname=mn_sys host=localhost user=mner password=loveu
-		Tjt = pgsql:dbname=mn_tjt host=localhost user=mner password=loveu
-	}
-	Table {
-		release_user = rls_user_4
-	}
+    Dsn {
+        Sys = pgsql:dbname=mn_sys host=localhost user=mner password=loveu
+        Tjt = pgsql:dbname=mn_tjt host=localhost user=mner password=loveu
+    }
+    Table {
+        release_user = rls_user_4
+    }
 }
 
 Mevent {
-	0 {
-		ip = 127.0.0.1
-		port = 26010
-	}
+    0 {
+        ip = 127.0.0.1
+        port = 26010
+    }
 }
 
 FileCache {
-	0 {
-		uri = ^/service/action$
-		tm_cache = 1800
-	}
-	1 {
-		uri = ^/csc/.*
-		tm_cache = 60
-	}
+    0 {
+        uri = ^/service/action$
+        tm_cache = 1800
+    }
+    1 {
+        uri = ^/csc/.*
+        tm_cache = 60
+    }
 }
 
 Uiplug {
-	0 {
-    	uri = ^/csc.*
+    0 {
+        uri = ^/csc.*
         mole {
-        	0 {
-            	name = tjt_atomadd
+            0 {
+                name = tjt_atomadd
                 gmode = 3
             }
-			1 {
-				name = tjt_dcadmin
-				gmode = 4
-			}
+            1 {
+                name = tjt_dcadmin
+                gmode = 4
+            }
         }
         atom {
-        	0 {
-            	name = tjt_atommod
+            0 {
+                name = tjt_atommod
                 gmode = 3
             }
         }

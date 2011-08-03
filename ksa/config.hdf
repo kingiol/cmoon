@@ -1,44 +1,44 @@
 Config {
-	trace_level = 7
+    trace_level = 7
 }
 
 Layout {
-	tabs {
-		0 {
-			name = 首页
-			page = index
-		}
-		1 {
-			name = Kosher知识
-			page = kosher
-		}
-		2 {
-			name = 申请流程
-			page = process
-		}
-		3 {
-			name = 获取申请表
-			page = dld
-		}
-		4 {
-			name = 已认证公司产品查询
-			page = query
-		}
-		5 {
-			name = 获证企业名单
-			page = com_pass
-		}
-		6 {
-			name = 认证资质
-			page = zizhi
-		}
-		7 {
-			name = 公告通知
-			page = notice
-		}
-		8 {
-			name = 联系我们
-			page = about
-		}
-	}
+    tabs {
+        0 {
+            name = 首页
+            page = index
+        }
+        1 {
+            name = Kosher知识
+            page = kosher
+        }
+        2 {
+            name = 申请流程
+            page = process
+        }
+        3 {
+            name = 获取申请表
+            page = dld
+        }
+        4 {
+            name = 已认证公司产品查询
+            page = query
+        }
+        5 {
+            name = 获证企业名单
+            page = com_pass
+        }
+        6 {
+            name = 认证资质
+            page = zizhi
+        }
+        7 {
+            name = 公告通知
+            page = notice
+        }
+        8 {
+            name = 联系我们
+            page = about
+        }
+    }
 }

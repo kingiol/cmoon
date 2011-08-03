@@ -7,7 +7,7 @@
 myMarkdownSettings = {
     nameSpace:          'markdown', // Useful to prevent multi-instances CSS conflict
     previewParserPath:  '/blog/mkdparser',
-	previewParserVar:   's',
+    previewParserVar:   's',
     onShiftEnter:       {keepDefault:false, openWith:'\n\n'},
     markupSet: [
         {name:'First Level Heading', key:"1", placeHolder:'这里写标题内容...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '=') } },

@@ -1,57 +1,57 @@
 <div class="vtabs">
   <ul class="css-tabs">
-	<li><a href="javascript:void(0);">基本设置</a></li>
-	<!--<li><a href="javascript:void(0);">站点代码</a></li>-->
+    <li><a href="javascript:void(0);">基本设置</a></li>
+    <!--<li><a href="javascript:void(0);">站点代码</a></li>-->
   </ul>
 
   <div class="css-panes">
-	<div>
-	  <dl class="edit">
-		<dt>
-		  <input id="ck-quiet" class="uptune" type="checkbox" tune="1"
-				 <?cs if: Output.appinfo.quiet == 1 ?>checked="checked"<?cs /if ?>
-		  / > 不记住首次访问用户<span class="indicator"></span></dt>
-		<dd>
-		  开启此选项，只有在用户第二次访问我的站点时，才将其计入管理后台的聊天用户列表。 <br />
-		  此选项可以有效过滤掉大部分打酱油用户。  <br />
-		  网站访问量较大时，建议开启此选项。
-		</dd>
+    <div>
+      <dl class="edit">
+        <dt>
+          <input id="ck-quiet" class="uptune" type="checkbox" tune="1"
+                 <?cs if: Output.appinfo.quiet == 1 ?>checked="checked"<?cs /if ?>
+          / > 不记住首次访问用户<span class="indicator"></span></dt>
+        <dd>
+          开启此选项，只有在用户第二次访问我的站点时，才将其计入管理后台的聊天用户列表。 <br />
+          此选项可以有效过滤掉大部分打酱油用户。  <br />
+          网站访问量较大时，建议开启此选项。
+        </dd>
 
-		<dt>
-		  <input id="ck-email" class="uptune" type="checkbox" tune="16"
-				 <?cs if: bitop.and(Output.appinfo.tune, 16) == #16 ?>
-				 checked="checked"
-				 <?cs /if ?>
-		   /> 发送统计邮件<span class="indicator"></span>
-		</dt>
-		<dd>
-		  将你网站的访问统计数据发送到注册邮箱。 <br />
-		  每日凌晨发送前一天的访问统计。
-		</dd>
+        <dt>
+          <input id="ck-email" class="uptune" type="checkbox" tune="16"
+                 <?cs if: bitop.and(Output.appinfo.tune, 16) == #16 ?>
+                 checked="checked"
+                 <?cs /if ?>
+           /> 发送统计邮件<span class="indicator"></span>
+        </dt>
+        <dd>
+          将你网站的访问统计数据发送到注册邮箱。 <br />
+          每日凌晨发送前一天的访问统计。
+        </dd>
 
-		<!--
-		<dt>
-		  <input id="ck-sms" class="uptune" type="checkbox" tune="2"
-				 <?cs if: Output.appinfo.sms ?>checked="checked"<?cs /if ?>
-		  / > 短信通知<span class="indicator"></span></dt>
-		<dd>
-		  用户来访和消息发送时短信通知到您设置的手机。  <br />
-		  网站访问量较小时，建议开启此选项。 <br />
-		  <span class="hint">该功能开发中。。。</span>
-		</dd>
-		-->
-	  </dl>
-	</div>
+        <!--
+        <dt>
+          <input id="ck-sms" class="uptune" type="checkbox" tune="2"
+                 <?cs if: Output.appinfo.sms ?>checked="checked"<?cs /if ?>
+          / > 短信通知<span class="indicator"></span></dt>
+        <dd>
+          用户来访和消息发送时短信通知到您设置的手机。  <br />
+          网站访问量较小时，建议开启此选项。 <br />
+          <span class="hint">该功能开发中。。。</span>
+        </dd>
+        -->
+      </dl>
+    </div>
 
-	<div>
-	  <h4>在您网站页面中加入以下代码(建议置于底部,&lt;/body&gt;之前)</h4>
-	  <span class="sep"></span>
-	  <pre>
+    <div>
+      <h4>在您网站页面中加入以下代码(建议置于底部,&lt;/body&gt;之前)</h4>
+      <span class="sep"></span>
+      <pre>
 &lt;script type="text/javascript" src="http://js.kaiwuonline.com/b/kol.js" &gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
   bmoon.kol.onready({aname: '<?cs var: Output.appinfo.aname ?>'});
 &lt;/script&gt;
-	  </pre>
-	</div>
+      </pre>
+    </div>
   </div>
 </div>

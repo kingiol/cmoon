@@ -14,4 +14,4 @@ int lfile_access_rewrited(CGI *cgi, HASH *dbh, session_t *ses);
 int lfile_filter_uiplug(HDF *hdf, session_t *ses);
 
 __END_DECLS
-#endif	/* __LFILE_H__ */
+#endif    /* __LFILE_H__ */

@@ -8,4 +8,4 @@ NEOERR* levt_init(HASH **evth);
 void levt_destroy(HASH *evth);
 
 __END_DECLS
-#endif	/* __LEVT_H__ */
+#endif    /* __LEVT_H__ */

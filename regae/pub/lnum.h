@@ -6,11 +6,11 @@
 __BEGIN_DECLS
 
 enum {
-	CGI_REQ_HTML = 0,
-	CGI_REQ_AJAX,
-	CGI_REQ_TERMINAL,
-	CGI_REQ_UNSUPPORT
+    CGI_REQ_HTML = 0,
+    CGI_REQ_AJAX,
+    CGI_REQ_TERMINAL,
+    CGI_REQ_UNSUPPORT
 };
 
 __END_DECLS
-#endif	/* __LNUM_H__ */
+#endif    /* __LNUM_H__ */

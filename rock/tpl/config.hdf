@@ -1,38 +1,38 @@
 table {
-	Layout = layout.html
-	Dataset {
-		Layout {
-			title = xxx啊啊啊
-			crumbs {
-				0 {
-					name = xxx
-					href = /
-				}
-				1 {
-					name = xxx
-					href = /
-				}
-			}
-		}
-		Include {
-			css = table/table.css.html
-			js = table/table.js.html
-			content = table/table.html
-		}
-	}
+    Layout = layout.html
+    Dataset {
+        Layout {
+            title = xxx啊啊啊
+            crumbs {
+                0 {
+                    name = xxx
+                    href = /
+                }
+                1 {
+                    name = xxx
+                    href = /
+                }
+            }
+        }
+        Include {
+            css = table/table.css.html
+            js = table/table.js.html
+            content = table/table.html
+        }
+    }
 }
 
 tjt {
-	Layout = layout.html
-	Dataset {
-		Include {
-			css = tjt/tjt.css.html
-			js = tjt/tjt.js.html
-			content = tjt/tjt.html
-		}
+    Layout = layout.html
+    Dataset {
+        Include {
+            css = tjt/tjt.css.html
+            js = tjt/tjt.js.html
+            content = tjt/tjt.html
+        }
         Layout {
-        	js = tjt/tjt.js
+            js = tjt/tjt.js
             html = uiplug.html
         }
-	}
+    }
 }

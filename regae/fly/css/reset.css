@@ -39,8 +39,8 @@ a { text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 abbr[title], acronym[title] { /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */
-	border-bottom: 1px dotted;
-	cursor: help;
+    border-bottom: 1px dotted;
+    cursor: help;
 }
 
 q:before, q:after { content: ''; }
@@ -55,8 +55,8 @@ button, input, select, textarea {
 
 /* 重置表格元素 */
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 /* 重置 hr */

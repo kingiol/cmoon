@@ -1,30 +1,30 @@
 <div class="info">
   <dl class="inp">
-	<dt>默认接待员：</dt>
-	<dd>
-	  <select id="select-secy">
-		<?cs each: user = Output.users ?>
-		<option value="<?cs var: user.aname ?>" <?cs if: bitop.and(user.tune, 4) == #4 ?>selected="selected"<?cs /if ?>><?cs var: user.aname ?></option>
-		<?cs /each ?>
-	  </select>
-	  <span class="slight">(该用户接受所有管理员离线时新用户的留言信息。)</span>
-	  <span class="indicator"></span>
-	</dd>
+    <dt>默认接待员：</dt>
+    <dd>
+      <select id="select-secy">
+        <?cs each: user = Output.users ?>
+        <option value="<?cs var: user.aname ?>" <?cs if: bitop.and(user.tune, 4) == #4 ?>selected="selected"<?cs /if ?>><?cs var: user.aname ?></option>
+        <?cs /each ?>
+      </select>
+      <span class="slight">(该用户接受所有管理员离线时新用户的留言信息。)</span>
+      <span class="indicator"></span>
+    </dd>
 
-	<dt><a href="javascript: void(0);" class="btn" rel="#addoverlay">创建新用户</a></dt>
-	<dd>&nbsp; </dd>
+    <dt><a href="javascript: void(0);" class="btn" rel="#addoverlay">创建新用户</a></dt>
+    <dd>&nbsp; </dd>
   </dl>
 </div>
 
 <table class="list" id="usertable">
   <tr>
-	<th>用户名</th>
-	<th>邮箱</th>
-	<th>注册时间</th>
-	<th>上次登录时间</th>
-	<th>总接待人数</th>
-	<th>在线状态</th>
-	<th>操作</th>
+    <th>用户名</th>
+    <th>邮箱</th>
+    <th>注册时间</th>
+    <th>上次登录时间</th>
+    <th>总接待人数</th>
+    <th>在线状态</th>
+    <th>操作</th>
   </tr>
 
   <?cs each: user = Output.users ?>
@@ -55,26 +55,26 @@
   <h3 class="text-center">为 <?cs var: Output.appinfo.pname ?> 创建客服帐号</h3>
   <div class="sepl"></div>
   <dl class="inp adduser">
-	<dt>用户名：</dt>
-	<dd>
-	  <input type="text" name="aname" id="aname" class="long VAL_NEWAPP vrequire" vmax="256" vmin="2" />
-	  <span class="indicator"></span>
-	</dd>
-	
-	<dt>联系邮箱：</dt>
-	<dd>
-	  <input type="text" name="email" id="email" class="long VAL_NEWAPP vrequire vemail" />
-	</dd>
-	
-	<dt>密码：</dt>
-	<dd>
-	  <input type="password" name="asn" id="asn" class="VAL_NEWAPP vrequire" />
-	</dd>
-	
-	<dt>&nbsp; </dt>
-	<dd>
-	  <input type="submit" id="submit" class="btn" value="创建" />
-	  <span class="indicator"></span>
-	</dd>
+    <dt>用户名：</dt>
+    <dd>
+      <input type="text" name="aname" id="aname" class="long VAL_NEWAPP vrequire" vmax="256" vmin="2" />
+      <span class="indicator"></span>
+    </dd>
+    
+    <dt>联系邮箱：</dt>
+    <dd>
+      <input type="text" name="email" id="email" class="long VAL_NEWAPP vrequire vemail" />
+    </dd>
+    
+    <dt>密码：</dt>
+    <dd>
+      <input type="password" name="asn" id="asn" class="VAL_NEWAPP vrequire" />
+    </dd>
+    
+    <dt>&nbsp; </dt>
+    <dd>
+      <input type="submit" id="submit" class="btn" value="创建" />
+      <span class="indicator"></span>
+    </dd>
   </dl>
 </div>

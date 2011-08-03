@@ -10,4 +10,4 @@ int feedback_add(HDF *hdf, mdb_conn *conn);
 int feedback_del(HDF *hdf, mdb_conn *conn);
 
 __END_DECLS
-#endif	/* __FEEDBACK_H__ */
+#endif    /* __FEEDBACK_H__ */

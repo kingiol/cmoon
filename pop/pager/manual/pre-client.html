@@ -62,9 +62,9 @@
 <ul>
   <li>maxevent</li>
   <p>
-	由 mid 状态切换到 max 状态的触发方式。 可取值 'click'、 或者'mouseenter'。 比如指定
-	maxevent: 'mouseenter' 时， 鼠标移入 mid, 将切换到 max 状态， 不用点击。 默认取值为
-	'click'。 
+    由 mid 状态切换到 max 状态的触发方式。 可取值 'click'、 或者'mouseenter'。 比如指定
+    maxevent: 'mouseenter' 时， 鼠标移入 mid, 将切换到 max 状态， 不用点击。 默认取值为
+    'click'。 
   </p>
 
   <li>defaultUI</li>
@@ -72,23 +72,23 @@
   
   <li>restoreUI</li>
   <p>
-	在访客刷新页面，或新开标签页时， 是否记住聊天客户端当前的展开状态。 可取值 true、
-	false。 默认是true， 这样，用户在触发聊天窗口后刷新页面，聊天窗口还是在触发状态(max
-	状态)。
+    在访客刷新页面，或新开标签页时， 是否记住聊天客户端当前的展开状态。 可取值 true、
+    false。 默认是true， 这样，用户在触发聊天窗口后刷新页面，聊天窗口还是在触发状态(max
+    状态)。
   </p>
   
   <li>restoreMsg</li>
   <p>
-	在访客刷新页面，或新开标签页时， 是否展示该访客和客服的最近几条聊天消息给访客。 可取
-	值 true、 false。 默认是true， 这样，用户在刷新页面，或者第二天再打开你的网站时，将
-	能在聊天消息列表中看到于你的最近几次对话。 有情提醒： 隐私性质的网站建议将该值设成
-	false， 不然客户投诉到时候可不要来找我；D
+    在访客刷新页面，或新开标签页时， 是否展示该访客和客服的最近几条聊天消息给访客。 可取
+    值 true、 false。 默认是true， 这样，用户在刷新页面，或者第二天再打开你的网站时，将
+    能在聊天消息列表中看到于你的最近几次对话。 有情提醒： 隐私性质的网站建议将该值设成
+    false， 不然客户投诉到时候可不要来找我；D
   </p>
 
   <li>hidemidOnMax</li>
   <p>
-	界面由 mid 状态 切换到 max 状态时， 是否隐藏 mid 状态， 默认隐藏， 但有时为了保证界
-	面的一致性， 你可能不希望 mid 被隐藏， 将其设置成 true 就可以了。
+    界面由 mid 状态 切换到 max 状态时， 是否隐藏 mid 状态， 默认隐藏， 但有时为了保证界
+    面的一致性， 你可能不希望 mid 被隐藏， 将其设置成 true 就可以了。
   </p>
 </ul>
 
@@ -122,11 +122,11 @@
 </p>
 <ul>
   <li>
-	<a target="_blank" href="http://css.kaiwuonline.com/b/client/mic.css">mic</a> ： 只有 mid 和 max 状态。
+    <a target="_blank" href="http://css.kaiwuonline.com/b/client/mic.css">mic</a> ： 只有 mid 和 max 状态。
   </li>
 
   <li>
-	<a target="_blank" href="http://css.kaiwuonline.com/b/client/lcs.css">lcs</a> ： 带 min、mid、max 三种状态。
+    <a target="_blank" href="http://css.kaiwuonline.com/b/client/lcs.css">lcs</a> ： 带 min、mid、max 三种状态。
   </li>
 </ul>
 <p>
@@ -146,75 +146,75 @@
 <p>好的，一切都快结束了！ 来回顾一下所有的参数：</p>
 <table class="list">
   <tr>
-	<th>参数名</th>
-	<th>类型</th>
-	<th>是否必填</th>
-	<th>简介</th>
-	<th>默认值</th>
+    <th>参数名</th>
+    <th>类型</th>
+    <th>是否必填</th>
+    <th>简介</th>
+    <th>默认值</th>
   </tr>
 
   <tr>
-	<td>aname</td>
-	<td>字符串</td>
-	<td>必填</td>
-	<td>注册时的站点名</td>
-	<td>必填，无默认值</td>
+    <td>aname</td>
+    <td>字符串</td>
+    <td>必填</td>
+    <td>注册时的站点名</td>
+    <td>必填，无默认值</td>
   </tr>
   <tr>
-	<td>pos</td>
-	<td>对象</td>
-	<td>选填</td>
-	<td>聊天客户端在页面中摆放的位置</td>
-	<td>{right: 0, bottom: 0}</td>
+    <td>pos</td>
+    <td>对象</td>
+    <td>选填</td>
+    <td>聊天客户端在页面中摆放的位置</td>
+    <td>{right: 0, bottom: 0}</td>
   </tr>
   <tr>
-	<td>maxevent</td>
-	<td>字符串</td>
-	<td>选填</td>
-	<td>窗口由 mid 切换到 max 状态的方式， 可填 click、mouseenter</td>
-	<td>'click'</td>
+    <td>maxevent</td>
+    <td>字符串</td>
+    <td>选填</td>
+    <td>窗口由 mid 切换到 max 状态的方式， 可填 click、mouseenter</td>
+    <td>'click'</td>
   </tr>
   <tr>
-	<td>defaultUI</td>
-	<td>字符串</td>
-	<td>选填</td>
-	<td>访客来访时， 聊天客户端默认状态， 可取 min, mid, 或max</td>
-	<td>'mid'</td>
+    <td>defaultUI</td>
+    <td>字符串</td>
+    <td>选填</td>
+    <td>访客来访时， 聊天客户端默认状态， 可取 min, mid, 或max</td>
+    <td>'mid'</td>
   </tr>
   <tr>
-	<td>restoreUI</td>
-	<td>布尔</td>
-	<td>选填</td>
-	<td>页面刷新时，是否记住聊天客户端状态</td>
-	<td>true</td>
+    <td>restoreUI</td>
+    <td>布尔</td>
+    <td>选填</td>
+    <td>页面刷新时，是否记住聊天客户端状态</td>
+    <td>true</td>
   </tr>
   <tr>
-	<td>restoreMsg</td>
-	<td>布尔</td>
-	<td>选填</td>
-	<td>页面刷新时，是否展示最近几条聊天记录</td>
-	<td>true</td>
+    <td>restoreMsg</td>
+    <td>布尔</td>
+    <td>选填</td>
+    <td>页面刷新时，是否展示最近几条聊天记录</td>
+    <td>true</td>
   </tr>
   <tr>
-	<td>hidemidOnMax</td>
-	<td>布尔值</td>
-	<td>选填</td>
-	<td>窗口由 mid 切换到 max 状态时， 是否隐藏 mid 状态</td>
-	<td>true</td>
+    <td>hidemidOnMax</td>
+    <td>布尔值</td>
+    <td>选填</td>
+    <td>窗口由 mid 切换到 max 状态时， 是否隐藏 mid 状态</td>
+    <td>true</td>
   </tr>
   <tr>
-	<td>minable</td>
-	<td>布尔</td>
-	<td>选填</td>
-	<td>聊天客户端是否具有 min 状态</td>
-	<td>false</td>
+    <td>minable</td>
+    <td>布尔</td>
+    <td>选填</td>
+    <td>聊天客户端是否具有 min 状态</td>
+    <td>false</td>
   </tr>
   <tr>
-	<td>css</td>
-	<td>字符串</td>
-	<td>选填</td>
-	<td>聊天客户端的样式文件</td>
-	<td>'http://css.kaiwuonline.com/b/client/lcs.css'</td>
+    <td>css</td>
+    <td>字符串</td>
+    <td>选填</td>
+    <td>聊天客户端的样式文件</td>
+    <td>'http://css.kaiwuonline.com/b/client/lcs.css'</td>
   </tr>
 </table>
 

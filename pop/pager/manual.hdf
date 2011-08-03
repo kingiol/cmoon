@@ -1,11 +1,11 @@
 manual {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/manual.css" />
-			js = <script src="/js/b/manual.js"></script>
-			tabpart = 2
-			title = 使用手册
+            css = <link rel="stylesheet" type="text/css" href="/css/b/manual.css" />
+            js = <script src="/js/b/manual.js"></script>
+            tabpart = 2
+            title = 使用手册
         }
-	}
+    }
 }

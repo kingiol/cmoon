@@ -11,4 +11,4 @@ int lcs_list2hdf(ULIST *ul, char *prefix,
                  HDF *hdf);
 
 __END_DECLS
-#endif	/* __LCS_H__ */
+#endif    /* __LCS_H__ */

@@ -1,11 +1,11 @@
 <div id="colone">
   <div class="title">Products Category</div>
   <div class="listcon">
-	<ul class="clean">
-	  <?cs each:dir = Output.dirs?>
-	  <li><a href="/cgi-bin/prd?tid=<?cs var:dir.id ?>"><?cs var:dir.name ?></a></li>
-	  <?cs /each ?>
-	</ul>
+    <ul class="clean">
+      <?cs each:dir = Output.dirs?>
+      <li><a href="/cgi-bin/prd?tid=<?cs var:dir.id ?>"><?cs var:dir.name ?></a></li>
+      <?cs /each ?>
+    </ul>
   </div>
 
   <!--<img src="/pic/index.jpg" />-->
@@ -20,7 +20,7 @@
   <img src="/img/prd/<?cs if: Output.item.url ?>ori/<?cs var:Output.item.url ?><?cs else ?>default.jpg<?cs /if ?>">
 
   <pre>
-	<?cs var: Output.item.des ?>
+    <?cs var: Output.item.des ?>
   </pre>
 
 </div>

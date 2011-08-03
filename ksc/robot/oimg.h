@@ -8,4 +8,4 @@ __BEGIN_DECLS
 int img_add(CGI *cgi, mdb_conn *conn);
 
 __END_DECLS
-#endif	/* __IMG_H__ */
+#endif    /* __IMG_H__ */

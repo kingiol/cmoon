@@ -8,17 +8,17 @@ for i in `seq 0 99`
 do
     psql -U mner -d mn_sys -c "
     CREATE TABLE user_$i (
-	uin int CHECK (Uin > 998),
-	uname varchar(64) NOT NULL DEFAULT '',
-	usn varchar(64) NOT NULL DEFAULT '',
-	musn varchar(64) NOT NULL DEFAULT '',
-	male boolean DEFAULT true,
-	email varchar(64) NOT NULL DEFAULT '',
-	intime timestamp DEFAULT now(),
-	uptime timestamp DEFAULT now(),
-	status smallint NOT NULL DEFAULT 0,
-	confirmkey varchar(64) NOT NULL DEFAULT '',
-	PRIMARY KEY (Uin)
+    uin int CHECK (Uin > 998),
+    uname varchar(64) NOT NULL DEFAULT '',
+    usn varchar(64) NOT NULL DEFAULT '',
+    musn varchar(64) NOT NULL DEFAULT '',
+    male boolean DEFAULT true,
+    email varchar(64) NOT NULL DEFAULT '',
+    intime timestamp DEFAULT now(),
+    uptime timestamp DEFAULT now(),
+    status smallint NOT NULL DEFAULT 0,
+    confirmkey varchar(64) NOT NULL DEFAULT '',
+    PRIMARY KEY (Uin)
     );";
     psql -U mner -d mn_sys -c "CREATE INDEX user_index_$i ON user_$i (status);";
     psql -U mner -d mn_sys -c "CREATE TRIGGER tg_uptime_user_$i BEFORE UPDATE ON user_$i FOR EACH ROW EXECUTE PROCEDURE update_time();";
@@ -29,17 +29,17 @@ for i in `seq 3 9`
 do
     psql -U mner -d mn_sys -c "
     CREATE TABLE rls_user_$i (
-	uin int CHECK (Uin > 998),
-	uname varchar(64) NOT NULL DEFAULT '',
-	usn varchar(64) NOT NULL DEFAULT '',
-	musn varchar(64) NOT NULL DEFAULT '',
-	male boolean DEFAULT true,
-	email varchar(64) NOT NULL DEFAULT '',
-	intime timestamp DEFAULT now(),
-	uptime timestamp DEFAULT now(),
-	status smallint NOT NULL DEFAULT 0,
-	confirmkey varchar(64) NOT NULL DEFAULT '',
-	PRIMARY KEY (Uin)
+    uin int CHECK (Uin > 998),
+    uname varchar(64) NOT NULL DEFAULT '',
+    usn varchar(64) NOT NULL DEFAULT '',
+    musn varchar(64) NOT NULL DEFAULT '',
+    male boolean DEFAULT true,
+    email varchar(64) NOT NULL DEFAULT '',
+    intime timestamp DEFAULT now(),
+    uptime timestamp DEFAULT now(),
+    status smallint NOT NULL DEFAULT 0,
+    confirmkey varchar(64) NOT NULL DEFAULT '',
+    PRIMARY KEY (Uin)
     );";
     psql -U mner -d mn_sys -c "CREATE INDEX rls_user_index_$i ON rls_user_$i (status);";
     psql -U mner -d mn_sys -c "CREATE TRIGGER tg_uptime_rls_user_$i BEFORE UPDATE ON rls_user_$i FOR EACH ROW EXECUTE PROCEDURE update_time();";

@@ -6,60 +6,60 @@
 __BEGIN_DECLS
 
 typedef struct _gnode {
-	int uid;
-	int gid;
-	int mode;
-	int status;
-	char *intime;
-	char *uptime;
+    int uid;
+    int gid;
+    int mode;
+    int status;
+    char *intime;
+    char *uptime;
 } gnode_t;
 
 typedef struct _file {
-	int id;
+    int id;
     int aid;
-	int pid;
-	int uid;
-	int gid;
-	int mode;					/* file mode */
-	int reqtype;				/* file request type */
-	int lmttype;				/* some extra limit to access this file */
-	char *name;
-	char *remark;
-	char *uri;
-	char *dataer;				/* data handler plugin name */
-	char *render;				/* html rend plugin name */
-	char *intime;
-	char *uptime;
+    int pid;
+    int uid;
+    int gid;
+    int mode;                    /* file mode */
+    int reqtype;                /* file request type */
+    int lmttype;                /* some extra limit to access this file */
+    char *name;
+    char *remark;
+    char *uri;
+    char *dataer;                /* data handler plugin name */
+    char *render;                /* html rend plugin name */
+    char *intime;
+    char *uptime;
 } file_t;
 
 typedef struct _member {
-	int uin;
-	int male;
-	int status;
-	char *uname;
-	char *usn;
-	char *musn;
-	char *email;
-	char *intime;
-	char *uptime;
-	ULIST *gnode;
+    int uin;
+    int male;
+    int status;
+    char *uname;
+    char *usn;
+    char *musn;
+    char *email;
+    char *intime;
+    char *uptime;
+    ULIST *gnode;
 } member_t;
 
 typedef struct _group {
-	int gid;
-	ULIST *node;
+    int gid;
+    ULIST *node;
 } group_t;
 
 typedef struct _tjt {
-	int id;
-	int aid;
-	int fid;
-	int uid;
-	char *img;
+    int id;
+    int aid;
+    int fid;
+    int uid;
+    char *img;
     char *imgurl;
-	char *exp;
-	char *intime;
-	char *uptime;
+    char *exp;
+    char *intime;
+    char *uptime;
 } tjt_t;
 
 /* memory alloced already, e.g. in member's gnode */
@@ -73,7 +73,7 @@ int list_pack(ULIST *ul, size_t (*item_len)(void *item),
 /* if *ul == NULL, i'll init it */
 char* list_unpack(char *buf,
                   int (*unpack)(char *buf, size_t inlen, void **item, size_t *outlen),
-				  size_t inlen, ULIST **ul);
+                  size_t inlen, ULIST **ul);
 
 file_t* file_new();
 int  file_pack(file_t *file, char **res, size_t *outlen);
@@ -116,7 +116,7 @@ void tjt_del(void *tjt);
  */
 typedef struct _uiplug {
     int type;
-	char *name;
+    char *name;
     int gmode;
 } uiplug_t;
 
@@ -126,14 +126,14 @@ void uiplug_item2hdf(void *uiplug, char *prefix, HDF *hdf);
 void uiplug_del(void *up);
 
 typedef struct _session {
-	member_t *member;
-	file_t *file;
+    member_t *member;
+    file_t *file;
     ULIST *uiplug;
-	time_t tm_cache_browser;
+    time_t tm_cache_browser;
 } session_t;
 
 int session_init(HDF *hdf, HASH *dbh, session_t **ses);
 void session_destroy(session_t **ses);
 
 __END_DECLS
-#endif	/* __LTYPES_H__ */
+#endif    /* __LTYPES_H__ */

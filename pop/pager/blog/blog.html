@@ -2,64 +2,64 @@
 
   <!-- 博客内容 -->
   <div class="blog-item">
-	<?cs escape: "html" ?>
-	<div class="cktitle"><?cs var: Output.blog.title ?></div>
-	<?cs /escape ?>
-	<div class="info">
-	  <?cs var: Output.blog.author ?> 发布于 <?cs var: Output.blog.intime ?>
-	</div>
-	
-	<div class="content">
-	  <p class="pre"><?cs var: mkd.escape(html_escape(Output.blog.content)) ?></p>
-	</div>
+    <?cs escape: "html" ?>
+    <div class="cktitle"><?cs var: Output.blog.title ?></div>
+    <?cs /escape ?>
+    <div class="info">
+      <?cs var: Output.blog.author ?> 发布于 <?cs var: Output.blog.intime ?>
+    </div>
+    
+    <div class="content">
+      <p class="pre"><?cs var: mkd.escape(html_escape(Output.blog.content)) ?></p>
+    </div>
   </div>
   
   <!-- 博客导航 -->
   <div class="nav">
-	<?cs if: ?Output.blog.titleprev ?>
-	<span class="left">
-	  <a href="/blog/<?cs var: Output.blog.fnameprev ?>.html">&lt; <?cs var: Output.blog.titleprev ?></a>
-	</span>
-	<?cs /if ?>
-	
-	<span class="center">
-	  <a href="/blog/index.html">
-		开物博客
-	  </a>
-	</span>
-	
-	<?cs if: ?Output.blog.titlenext ?>
-	<span class="right">
-	  <a href="/blog/<?cs var: Output.blog.fnamenext ?>.html"><?cs var: Output.blog.titlenext ?> &gt;</a>
-	</span>
-	<?cs /if ?>
+    <?cs if: ?Output.blog.titleprev ?>
+    <span class="left">
+      <a href="/blog/<?cs var: Output.blog.fnameprev ?>.html">&lt; <?cs var: Output.blog.titleprev ?></a>
+    </span>
+    <?cs /if ?>
+    
+    <span class="center">
+      <a href="/blog/index.html">
+        开物博客
+      </a>
+    </span>
+    
+    <?cs if: ?Output.blog.titlenext ?>
+    <span class="right">
+      <a href="/blog/<?cs var: Output.blog.fnamenext ?>.html"><?cs var: Output.blog.titlenext ?> &gt;</a>
+    </span>
+    <?cs /if ?>
   </div>
 
   <!-- 评论显示 -->
   <h3>
-	<span id="comment-num-<?cs var: Output.blog.id ?>" class="decimal"></span> 条评论
+    <span id="comment-num-<?cs var: Output.blog.id ?>" class="decimal"></span> 条评论
   </h3>
   <div id="comments">
   </div>
 
   <!-- 评论获取 -->
   <div id="comments-get" class="hide">
-	<a href="javascript:void(0);" id="get-comment">查看更多评论</a>
+    <a href="javascript:void(0);" id="get-comment">查看更多评论</a>
   </div>
 
   <!-- 写新获取 -->
   <a name="addcomment"></a>
   <ul id="comment-add" class="commentnew">
-	<li>
-	  <h4 class="slight">发布留言 (1 ~ 256 个字)</h4>
-	</li>
-	<li>
-	  <textarea id="b-comment" class="content VAL_NEWCOMMENT vrequire" vmax="256"></textarea>
-	</li>
-	<li>
-	  <input type="button" id="submit-comment-add" class="submitbtn" value="提交" />
-	  <span class="indicator"></span>
-	</li>
+    <li>
+      <h4 class="slight">发布留言 (1 ~ 256 个字)</h4>
+    </li>
+    <li>
+      <textarea id="b-comment" class="content VAL_NEWCOMMENT vrequire" vmax="256"></textarea>
+    </li>
+    <li>
+      <input type="button" id="submit-comment-add" class="submitbtn" value="提交" />
+      <span class="indicator"></span>
+    </li>
   </ul>
 
 </div>

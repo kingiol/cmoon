@@ -4,8 +4,8 @@
 
 __BEGIN_DECLS
 
-#define	REDIRECT_MODE_1 0x01
-#define	REDIRECT_MODE_2 0x02
+#define    REDIRECT_MODE_1 0x01
+#define    REDIRECT_MODE_2 0x02
 #define IP_RECORD_LENGTH 7
 
 NEOERR* ip2addr_data_get(char *ip, char **c, char **a);

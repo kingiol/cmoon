@@ -11,4 +11,4 @@
 #include "lfile.h"
 #include "lglobal.h"
 
-#endif	/* __LHEADS_H__ */
+#endif    /* __LHEADS_H__ */

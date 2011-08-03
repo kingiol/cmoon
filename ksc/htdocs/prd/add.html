@@ -1,77 +1,77 @@
 <ul class='clean'>
   <li>
-	<div class="leftitem">产品图片:</div>
-	<img id="previewimg" src="/img/prd/default.jpg" width='150' />
-	<input id="prdimg" type="hidden" value="" />
+    <div class="leftitem">产品图片:</div>
+    <img id="previewimg" src="/img/prd/default.jpg" width='150' />
+    <input id="prdimg" type="hidden" value="" />
   </li>
   
   <li>
-	<div class="leftitem">产品名称:</div>
-	<input type='text' id='prdname' name='name' class='VAL_ADD vrequire' vmax='256' />
+    <div class="leftitem">产品名称:</div>
+    <input type='text' id='prdname' name='name' class='VAL_ADD vrequire' vmax='256' />
   </li>
   
   <li>
-	<div class="leftitem">产品描述:</div>
-	<textarea id="prddes" class="VAL_ADD vrequire" vmax="1024" rows="5" cols="26"></textarea>
+    <div class="leftitem">产品描述:</div>
+    <textarea id="prddes" class="VAL_ADD vrequire" vmax="1024" rows="5" cols="26"></textarea>
   </li>
   
   <li>
-	<div class="leftitem"> &nbsp; </div>
-	<input type='submit' value='提交' id='addprd' />
+    <div class="leftitem"> &nbsp; </div>
+    <input type='submit' value='提交' id='addprd' />
   </li>
 </ul>
 
 
 <script type="text/javascript">
 (function() {
-	var button = $("#previewimg");
-	var uploader = new AjaxUpload(button,
-	{
-		action: '/cgi-bin/img',
-		name: 'imagename',
-		data: {op: 'add', tp: 'imageadd'},
-		responseType: "json",
-		autoSubmit: true,
-		onChange: replaceImage,
-		onComplete: function(file, resp) {
-			if (resp.success == "1") {
-				$("#previewimg").attr("src", resp.imageurl);
-				$("#prdimg").val(resp.imagename);
-			} else {
-				alert(resp.errmsg || "上传图片失败，请稍后再试！");
-			}
-		}
-	});
+    var button = $("#previewimg");
+    var uploader = new AjaxUpload(button,
+    {
+        action: '/cgi-bin/img',
+        name: 'imagename',
+        data: {op: 'add', tp: 'imageadd'},
+        responseType: "json",
+        autoSubmit: true,
+        onChange: replaceImage,
+        onComplete: function(file, resp) {
+            if (resp.success == "1") {
+                $("#previewimg").attr("src", resp.imageurl);
+                $("#prdimg").val(resp.imagename);
+            } else {
+                alert(resp.errmsg || "上传图片失败，请稍后再试！");
+            }
+        }
+    });
 
-	function replaceImage(file, ext) {
-		if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))) {
-			alert("请选择图片");
-			return false;
-		}
-		return true;
-	}
+    function replaceImage(file, ext) {
+        if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))) {
+            alert("请选择图片");
+            return false;
+        }
+        return true;
+    }
 
-	$("#addprd").click(function()
-	{
-		if (!$(".VAL_ADD").inputval()) {
-			return;
-		}
+    $("#addprd").click(function()
+    {
+        if (!$(".VAL_ADD").inputval()) {
+            return;
+        }
 
-		$.post("/cgi-bin/prd",
-			   {
-				   tid: $("#prdtid").val(),
-				   name: $("#prdname").val(),
-				   url: $("#prdimg").val(),
-				   des: $("#prddes").val()
-			   },
-			   function(data) {
-			   if (data.success == "1") {
-			   		$("a[rel=#addoverlay]").overlay().close();
-					window.location.reload();
-				} else {
-					alert(data.errmsg || "添加产品失败， 请稍后再试");
-				}
-			   }, "json");
-	});
+        $.post("/cgi-bin/prd",
+               {
+                   tid: $("#prdtid").val(),
+                   name: $("#prdname").val(),
+                   url: $("#prdimg").val(),
+                   des: $("#prddes").val()
+               },
+               function(data) {
+               if (data.success == "1") {
+                       $("a[rel=#addoverlay]").overlay().close();
+                    window.location.reload();
+                } else {
+                    alert(data.errmsg || "添加产品失败， 请稍后再试");
+                }
+               }, "json");
+    });
 })();
 </script>

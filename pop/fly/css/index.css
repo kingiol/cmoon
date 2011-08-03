@@ -1,36 +1,36 @@
 .intro-img {
-	background:transparent url(/img/bg/h300.png) repeat-x scroll 0 0;
-	border:1px solid #ccc;
-	height:200px;
-	overflow:hidden;
-	margin-bottom: 3ex;
+    background:transparent url(/img/bg/h300.png) repeat-x scroll 0 0;
+    border:1px solid #ccc;
+    height:200px;
+    overflow:hidden;
+    margin-bottom: 3ex;
 }
 
 .intro {
-	width: 280px;
-	float: left;
+    width: 280px;
+    float: left;
 }
 
 .intro.center {
-	margin: 0 30px;
+    margin: 0 30px;
 }
 
 .intro .title {
-	/*border-top:2px solid #aaa;*/
-	border-bottom: 1px solid #aaa;
+    /*border-top:2px solid #aaa;*/
+    border-bottom: 1px solid #aaa;
     font-weight: bold;
     font-size: 12px;
-	line-height:24px;
+    line-height:24px;
 }
 
 .intro .content {
-	margin:10px 0 0 0;
+    margin:10px 0 0 0;
 }
 
 ul.wwh {
-	margin-top: 5px;
+    margin-top: 5px;
 }
 
 ul.wwh li {
-	line-height: 22px;
+    line-height: 22px;
 }

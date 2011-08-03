@@ -1,22 +1,22 @@
 dl.blognew dt {clear: left; float:left; width: 180px; margin: 5px 13px 5px 0; text-align: right;}
 dl.blognew dd {float:left; margin: 5px 0;}
 dl.blognew dd.loading .indicator {
-	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;
+    display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;
 }
 
 dl.blognew dd.success .indicator {
-	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat
+    display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat
 }
 
 dl.blognew dd.error .indicator {
-	display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;
+    display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;
 }
 
 input.title {
-	width: 400px;
-	margin-right: 1em;
+    width: 400px;
+    margin-right: 1em;
 }
 
 textarea.content {
-	padding: 5px;
+    padding: 5px;
 }

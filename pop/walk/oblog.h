@@ -4,12 +4,12 @@
 
 __BEGIN_DECLS
 
-#define BLOG_SUBDIR_NUM		32
-#define BLOG_NUM_PERPAGE	10
+#define BLOG_SUBDIR_NUM        32
+#define BLOG_NUM_PERPAGE    10
 
 typedef enum {
-	BLOG_ST_NORMAL = 0,
-	BLOG_ST_DEL
+    BLOG_ST_NORMAL = 0,
+    BLOG_ST_DEL
 } blog_state;
 
 NEOERR* blog_index_static_get(HDF *hdf, HASH *dbh);

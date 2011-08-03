@@ -5,7 +5,7 @@
 
 __BEGIN_DECLS
 
-#define MAX_USERS_PERADMIN	90
+#define MAX_USERS_PERADMIN    90
 
 __END_DECLS
-#endif	/* __LNUM_H__ */
+#endif    /* __LNUM_H__ */

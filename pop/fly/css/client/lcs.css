@@ -1,115 +1,115 @@
 #kol-lcs {
-	position:fixed;
-	font-family:verdana,arial,sans-serif;
-	font-size:12px;
-	z-index:99999;
+    position:fixed;
+    font-family:verdana,arial,sans-serif;
+    font-size:12px;
+    z-index:99999;
 }
 
 /*
  * min
  */
 #kol-lcs-min {
-	width: 30px;
-	height: 30px;
-	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll -41px -60px;
-	overflow: hidden;
-	cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll -41px -60px;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 /*
  * mid
  */
 #kol-lcs-mid {
-	width: 300px;
-	height: 30px;
-	background-color:#EEEEEE;
-	border: 1px solid #666666;
+    width: 300px;
+    height: 30px;
+    background-color:#EEEEEE;
+    border: 1px solid #666666;
 }
 #kol-lcs-mid .maxer, #kol-lcs-mid .miner {
-	float: left;
-	height: 28px;
-	overflow: hidden;
-	cursor: pointer;
+    float: left;
+    height: 28px;
+    overflow: hidden;
+    cursor: pointer;
 }
 #kol-lcs-mid .maxer {
-	width: 252px;
-	margin-left: 10px;
-	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 -29px;
+    width: 252px;
+    margin-left: 10px;
+    background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 -29px;
 }
 /* dirty: unread new message */
 #kol-lcs-mid .maxer.dirty {
-	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 5px;
+    background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 5px;
 }
 #kol-lcs-mid .miner {
-	width: 25px;
-	margin-left: 5px;
-	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 -58px;
+    width: 25px;
+    margin-left: 5px;
+    background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 -58px;
 }
 
 /*
  * max
  */
 #kol-lcs-max {
-	width: 280px;
-	padding: 5px 10px;
-	border: 1px solid #666666;
-	background-color:#EEEEEE;
+    width: 280px;
+    padding: 5px 10px;
+    border: 1px solid #666666;
+    background-color:#EEEEEE;
 }
 #kol-lcs-max .mider {
-	float: right;
-	height: 20px;
-	width: 30px;
-	padding: 2px 3px 0 0;
-	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll -83px -64px;
-	cursor: pointer;
+    float: right;
+    height: 20px;
+    width: 30px;
+    padding: 2px 3px 0 0;
+    background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll -83px -64px;
+    cursor: pointer;
 }
 #kol-lcs-max .miner {
-	float: right;
-	width: 25px;
-	height: 22px;
-	padding: 2px 3px 0 0;
-	margin-left: 3px;
-	overflow: hidden;
-	background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 -63px;
-	cursor: pointer;
+    float: right;
+    width: 25px;
+    height: 22px;
+    padding: 2px 3px 0 0;
+    margin-left: 3px;
+    overflow: hidden;
+    background:transparent url(http://www.bomdoo.com/img/im/lcs.png) no-repeat scroll 0 -63px;
+    cursor: pointer;
 }
 #kol-lcs-max .hint {
-	height: 24px;
-	line-height: 23px;
-	margin: 0 auto;
-	color: #999;
-	float: left;
-	width: 70%;
-	overflow: hidden;
+    height: 24px;
+    line-height: 23px;
+    margin: 0 auto;
+    color: #999;
+    float: left;
+    width: 70%;
+    overflow: hidden;
 }
 #kol-lcs-max .msgs {
-	height: 200px;
-	width: 100%;
-	margin: 5px 0;
-	border: 1px solid #666666;
-	overflow: auto;
+    height: 200px;
+    width: 100%;
+    margin: 5px 0;
+    border: 1px solid #666666;
+    overflow: auto;
 }
 textarea#kol-lcs-input {
-	padding: 5px;
-	width: 96%;
-	height: 18px;
+    padding: 5px;
+    width: 96%;
+    height: 18px;
 }
 #kol-lcs-max .bot {
-	color: #999;
-	margin-bottom: 5px;
-	overflow: hidden;
+    color: #999;
+    margin-bottom: 5px;
+    overflow: hidden;
 }
 
 #kol-lcs-max .msgs .item-join, #kol-lcs-max .msgs .item-visit, #kol-lcs-max .msgs .item-send, #kol-lcs-max .msgs .item-msg {
-	margin: 5px 0 0 0;
+    margin: 5px 0 0 0;
 }
 #kol-lcs-max .msgs .item-name, #kol-lcs-max .msgs .item-time {
-	margin-left: 10px;
-	color: #999;
+    margin-left: 10px;
+    color: #999;
 }
 #kol-lcs-max .msgs .item-content {
-	display: block;
-	text-indent: 2em;
+    display: block;
+    text-indent: 2em;
 }
 
 /* sound remind checkbox */

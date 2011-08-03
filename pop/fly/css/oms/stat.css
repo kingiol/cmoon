@@ -1,13 +1,13 @@
 a.dp-choose-date {
-	background:transparent url(/img/bg/calendar.png) no-repeat scroll 0 0;
-	display:block;
-	float:left;
-	height:16px;
-	margin:3px 3px 0;
-	overflow:hidden;
-	padding:0;
-	text-indent:-2000px;
-	width:16px;
+    background:transparent url(/img/bg/calendar.png) no-repeat scroll 0 0;
+    display:block;
+    float:left;
+    height:16px;
+    margin:3px 3px 0;
+    overflow:hidden;
+    padding:0;
+    text-indent:-2000px;
+    width:16px;
 }
 
 dl.query {height: 20px; margin-bottom: 2em;}

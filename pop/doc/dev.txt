@@ -3,82 +3,82 @@ kol 开发手册（一）
 
 环境和语言
 =======
-	公用开发环境： http://forge.kaiwuonline.com/
-	可更新公用开发环境的　开发帐号请在qq群 55593669 中申请， 或邮件给 maliang@kaiwuonline.com。
-	
-	或者，　你也可以搭建自己的开发环境。 　
-	请 fork http://github.com/bigml/cmoon 或者 http://github.com/bigml/APE_Server　参与开发。
-	
-	kol 目前在 Debian GNU/Linux 环境下运行。  建议使用相同或类似的开发环境。
-	kol 数据后端使用 c 语言开发， 前端采用用 xhtml、 css、 和js。
+    公用开发环境： http://forge.kaiwuonline.com/
+    可更新公用开发环境的　开发帐号请在qq群 55593669 中申请， 或邮件给 maliang@kaiwuonline.com。
+    
+    或者，　你也可以搭建自己的开发环境。 　
+    请 fork http://github.com/bigml/cmoon 或者 http://github.com/bigml/APE_Server　参与开发。
+    
+    kol 目前在 Debian GNU/Linux 环境下运行。  建议使用相同或类似的开发环境。
+    kol 数据后端使用 c 语言开发， 前端采用用 xhtml、 css、 和js。
 
 
 程序结构
 ======
-	kol 在程序结构上由以下几部分组成：
-	.
-	|-- APE_JSF				聊天服务器 js 端
-	|-- APE_Server			聊天服务器　后台
-	|-- moon				web 程序
-	|   |-- doc
-	|   |-- event			web 程序　之　数据服务器
-	|   |-- lib				web 程序　之　公共库
-	|   |-- maketool		web 程序　之　编译工具
-	|   |-- mtools			web 程序　之　维护工具
-	|   |-- pop				web 程序　之　kol　代码
-	|	|   |-- doc
-	|	|   |-- pub			kol 之　公共库
-	
-	|	|   |-- walk		kol 之　数据逻辑 (model)
-	|	|   |-- run			kol 之　数据、页面粘合 (controller)
-	|	|   |-- fly			kol 之　静态html,js,css (view)
-	
-	|	|   |-- tpl			kol 之　动态页面模板
-	|	|   |-- pager		kol 之　静态页面生成程序
-	|	|   `-- mtls		kol 之　维护工具
+    kol 在程序结构上由以下几部分组成：
+    .
+    |-- APE_JSF                聊天服务器 js 端
+    |-- APE_Server            聊天服务器　后台
+    |-- moon                web 程序
+    |   |-- doc
+    |   |-- event            web 程序　之　数据服务器
+    |   |-- lib                web 程序　之　公共库
+    |   |-- maketool        web 程序　之　编译工具
+    |   |-- mtools            web 程序　之　维护工具
+    |   |-- pop                web 程序　之　kol　代码
+    |    |   |-- doc
+    |    |   |-- pub            kol 之　公共库
+    
+    |    |   |-- walk        kol 之　数据逻辑 (model)
+    |    |   |-- run            kol 之　数据、页面粘合 (controller)
+    |    |   |-- fly            kol 之　静态html,js,css (view)
+    
+    |    |   |-- tpl            kol 之　动态页面模板
+    |    |   |-- pager        kol 之　静态页面生成程序
+    |    |   `-- mtls        kol 之　维护工具
 
 
-	注：
-	---
-	1, web 程序
-		kol 目前使用 lighttpd 作为　web 服务器，　用来处理浏览器的html, cgi, js, css, png 等资源文件的请求。
-	2, 数据服务器
-		大部分动态页面所需数据都走　数据服务器　后台接口进行获取和更新。
-	3, 聊天服务器
-		所有聊天信息等即时数据都通过聊天服务器传送。
-		
+    注：
+    ---
+    1, web 程序
+        kol 目前使用 lighttpd 作为　web 服务器，　用来处理浏览器的html, cgi, js, css, png 等资源文件的请求。
+    2, 数据服务器
+        大部分动态页面所需数据都走　数据服务器　后台接口进行获取和更新。
+    3, 聊天服务器
+        所有聊天信息等即时数据都通过聊天服务器传送。
+        
 
 前端开发
 ======
-	目前 kol 前端开发主要是对 moon/pop/tpl  和　moon/pop/fly 两个目录下的文件进行开发。
-	1, moon/pop/tpl
-		kol 之　动态页面模板目录。　类似如　我的站点、用户管理、博客更新之类的　cgi 吐出的页面模板，　全在该目录下。
-		该目录下有两类特殊的文件：
-		1, 所有 .hdf 后缀文件为 kol 动态 cgi 的模板配置文件。
-			所有用户能够请求到的 cgi 程序，　必须在这些配置文件中有对应的配置项。
-			如：　/oms/users URL 对应　oms.hdf 中的　oms_users {} 配置项。
-		2, layout.html, layout_nclient.html 整站页面的模板。
-			模板配置文件中，所有配置项都有　Layout 参数，　用来指定使用哪个模板。
+    目前 kol 前端开发主要是对 moon/pop/tpl  和　moon/pop/fly 两个目录下的文件进行开发。
+    1, moon/pop/tpl
+        kol 之　动态页面模板目录。　类似如　我的站点、用户管理、博客更新之类的　cgi 吐出的页面模板，　全在该目录下。
+        该目录下有两类特殊的文件：
+        1, 所有 .hdf 后缀文件为 kol 动态 cgi 的模板配置文件。
+            所有用户能够请求到的 cgi 程序，　必须在这些配置文件中有对应的配置项。
+            如：　/oms/users URL 对应　oms.hdf 中的　oms_users {} 配置项。
+        2, layout.html, layout_nclient.html 整站页面的模板。
+            模板配置文件中，所有配置项都有　Layout 参数，　用来指定使用哪个模板。
 
-	ok, 解释一下一个普通 cgi 从浏览器发起请求　到　吐出页面展现给用户的流程：
-		I, lighttpd 收到用户的 cgi 页面请求　/oms/users
-		II, lighttpd 通过 rewrite 将请求重定向到　/run/viki?ScriptName=/oms/users
-		III, viki cgi 收到请求后将 /oms/users 转换成　oms_users，　去数据后台(walk目录)取数据，　套上模板(tpl目录)文件，　吐出页面。
+    ok, 解释一下一个普通 cgi 从浏览器发起请求　到　吐出页面展现给用户的流程：
+        I, lighttpd 收到用户的 cgi 页面请求　/oms/users
+        II, lighttpd 通过 rewrite 将请求重定向到　/run/viki?ScriptName=/oms/users
+        III, viki cgi 收到请求后将 /oms/users 转换成　oms_users，　去数据后台(walk目录)取数据，　套上模板(tpl目录)文件，　吐出页面。
 
-	2, moon/pop/fly
-		kol 之　静态html,js,css (view)
-		为了减少浏览器请求数，　所有页面的 js 和 css 被合并到两个文件中：　base.[js/css], b/xxx.js
-		base为 layout 中引用，是整站公用的资源文件，　xxx 为具体应用需要的资源文件。　b/ 为资源文件的安装目录。
-		用户编写的多个资源文件最后通过　js/Makefile, css/Makefile 合并到一个文件中。　比如：
-			b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
+    2, moon/pop/fly
+        kol 之　静态html,js,css (view)
+        为了减少浏览器请求数，　所有页面的 js 和 css 被合并到两个文件中：　base.[js/css], b/xxx.js
+        base为 layout 中引用，是整站公用的资源文件，　xxx 为具体应用需要的资源文件。　b/ 为资源文件的安装目录。
+        用户编写的多个资源文件最后通过　js/Makefile, css/Makefile 合并到一个文件中。　比如：
+            b/appnew.js: pub/jquery.md5.js pub/jquery.mninpval.js app/new.js
 
-		fly 目录下的其他 img [素材图片], pic [日志、手册之类用到的大图], obj [多媒体文件] 之类都像其他网站一样存放一些静态文件。
+        fly 目录下的其他 img [素材图片], pic [日志、手册之类用到的大图], obj [多媒体文件] 之类都像其他网站一样存放一些静态文件。
 
 
-	最后， 如果你有意改善 kol用户体验、用户界面，　请把 简洁、易用、易维护　放在首位，　enjoy coding... 。
+    最后， 如果你有意改善 kol用户体验、用户界面，　请把 简洁、易用、易维护　放在首位，　enjoy coding... 。
 
 
 代码约定
 ======
-	1, c, js, css, shell　源代码中，　tab　占　４　个空格，　html 文件请用两个空格作为缩进
-	2, js 文件中请使用单引号处理字符串
+    1, c, js, css, shell　源代码中，　tab　占　４　个空格，　html 文件请用两个空格作为缩进
+    2, js 文件中请使用单引号处理字符串

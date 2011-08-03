@@ -1,39 +1,39 @@
 Dataset.Layout {
-	tabpart = 1
-	actions {
-		0 {
-			name = 与访客聊天
-			href = /oms
-		}
-		1 {
-			name = 站点统计
-			href = /oms/stat
-		}
-	}
-	actions_1 {
-		2 {
-			name = 站点设置
-			href = /oms/edit
-		}
-		3 {
-			name = 用户管理
-			href = /oms/users
-		}
-		4 {
-			name = 消费清单
-			href = /oms/bill
-		}
-	}
-	actions_2 {
-		5 {
-			name = 管理员菜单
-			href = /oms/admin
-		}
-	}
-	actions_3 {
-		5 {
-			name = 站长菜单
-			href = /oms/root
-		}
-	}
+    tabpart = 1
+    actions {
+        0 {
+            name = 与访客聊天
+            href = /oms
+        }
+        1 {
+            name = 站点统计
+            href = /oms/stat
+        }
+    }
+    actions_1 {
+        2 {
+            name = 站点设置
+            href = /oms/edit
+        }
+        3 {
+            name = 用户管理
+            href = /oms/users
+        }
+        4 {
+            name = 消费清单
+            href = /oms/bill
+        }
+    }
+    actions_2 {
+        5 {
+            name = 管理员菜单
+            href = /oms/admin
+        }
+    }
+    actions_3 {
+        5 {
+            name = 站长菜单
+            href = /oms/root
+        }
+    }
 }

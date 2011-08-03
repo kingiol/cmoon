@@ -1,10 +1,10 @@
 CREATE TABLE bank (
-	aid int PRIMARY KEY,
-	aname varchar(256) NOT NULL DEFAULT '',
-	msum int NOT NULL DEFAULT 0,
-	mpre int NOT NULL DEFAULT 0,
-	intime timestamp DEFAULT now(),
-	uptime timestamp DEFAULT now()
+    aid int PRIMARY KEY,
+    aname varchar(256) NOT NULL DEFAULT '',
+    msum int NOT NULL DEFAULT 0,
+    mpre int NOT NULL DEFAULT 0,
+    intime timestamp DEFAULT now(),
+    uptime timestamp DEFAULT now()
 );
 
 CREATE TRIGGER tg_uptime_app BEFORE UPDATE ON bank FOR EACH ROW EXECUTE PROCEDURE update_time();
@@ -34,14 +34,14 @@ LANGUAGE plpgsql;
 
 
 CREATE TABLE bill (
-	id SERIAL,
-	aid int NOT NULL DEFAULT 0,
-	aname varchar(256) NOT NULL DEFAULT '',
-	btype int NOT NULL DEFAULT 0,
-	fee int NOT NULL DEFAULT 0,
-	remark varchar(256) NOT NULL DEFAULT '',
-	intime timestamp DEFAULT now(),
-	PRIMARY KEY (id)
+    id SERIAL,
+    aid int NOT NULL DEFAULT 0,
+    aname varchar(256) NOT NULL DEFAULT '',
+    btype int NOT NULL DEFAULT 0,
+    fee int NOT NULL DEFAULT 0,
+    remark varchar(256) NOT NULL DEFAULT '',
+    intime timestamp DEFAULT now(),
+    PRIMARY KEY (id)
 );
 
 CREATE INDEX bill_index ON bill (aid, btype);

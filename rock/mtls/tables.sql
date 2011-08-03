@@ -2,41 +2,41 @@
 CREATE FUNCTION update_time() RETURNS TRIGGER AS $$ BEGIN NEW.uptime=now(); RETURN NEW; END; $$ LANGUAGE plpgsql;
 
 CREATE TABLE fileinfo (
-	   id SERIAL,
+       id SERIAL,
        aid int NOT NULL DEFAULT 1, -- anchor id
-	   pid int NOT NULL DEFAULT 1, -- parent id
-	   uid int NOT NULL DEFAULT 0,
-	   gid int NOT NULL DEFAULT 0,
-	   mode int NOT NULL DEFAULT 0,	   -- ofile.h
-	   reqtype int NOT NULL DEFAULT 0,	  -- request type 0 html; 1 ajax
-	   lmttype int NOT NULL DEFAULT 0,	  -- action type (need some extra limit to access this file)
-	   name varchar(256) NOT NULL DEFAULT '', --file name present in url
-	   remark varchar(256) NOT NULL DEFAULT '', --description remark
-	   uri varchar(1024) NOT NULL DEFAULT '',	--consider as file's absolute path
-	   dataer varchar(256) NOT NULL DEFAULT '',
-	   render varchar(256) NOT NULL DEFAULT '',
-	   intime timestamp DEFAULT now(),
-	   uptime timestamp DEFAULT now(),
-	   PRIMARY KEY (id)
+       pid int NOT NULL DEFAULT 1, -- parent id
+       uid int NOT NULL DEFAULT 0,
+       gid int NOT NULL DEFAULT 0,
+       mode int NOT NULL DEFAULT 0,       -- ofile.h
+       reqtype int NOT NULL DEFAULT 0,      -- request type 0 html; 1 ajax
+       lmttype int NOT NULL DEFAULT 0,      -- action type (need some extra limit to access this file)
+       name varchar(256) NOT NULL DEFAULT '', --file name present in url
+       remark varchar(256) NOT NULL DEFAULT '', --description remark
+       uri varchar(1024) NOT NULL DEFAULT '',    --consider as file's absolute path
+       dataer varchar(256) NOT NULL DEFAULT '',
+       render varchar(256) NOT NULL DEFAULT '',
+       intime timestamp DEFAULT now(),
+       uptime timestamp DEFAULT now(),
+       PRIMARY KEY (id)
 );
 
 CREATE TABLE groupinfo (
-	   uid int NOT NULL DEFAULT 0,
-	   gid int NOT NULL DEFAULT 0,
-	   mode int NOT NULL DEFAULT 0, -- lnum.h
-	   status int NOT NULL DEFAULT 0, -- lnum.h
-	   intime timestamp DEFAULT now(),
-	   uptime timestamp DEFAULT now(),
-	   PRIMARY KEY (uid, gid)
+       uid int NOT NULL DEFAULT 0,
+       gid int NOT NULL DEFAULT 0,
+       mode int NOT NULL DEFAULT 0, -- lnum.h
+       status int NOT NULL DEFAULT 0, -- lnum.h
+       intime timestamp DEFAULT now(),
+       uptime timestamp DEFAULT now(),
+       PRIMARY KEY (uid, gid)
 );
 
 CREATE TABLE accountinfo (
-	uin int CHECK (Uin > 998),
-	uname varchar(64) NOT NULL DEFAULT '',
-	status smallint NOT NULL DEFAULT 0,
-	intime timestamp DEFAULT now(),
-	uptime timestamp DEFAULT now(),
-	PRIMARY KEY (Uin)
+    uin int CHECK (Uin > 998),
+    uname varchar(64) NOT NULL DEFAULT '',
+    status smallint NOT NULL DEFAULT 0,
+    intime timestamp DEFAULT now(),
+    uptime timestamp DEFAULT now(),
+    PRIMARY KEY (Uin)
 );
 
 -- insert root row before trigger create
@@ -48,34 +48,34 @@ CREATE TRIGGER tg_uptime_file BEFORE UPDATE ON fileinfo FOR EACH ROW EXECUTE PRO
 CREATE TRIGGER tg_uptime_group BEFORE UPDATE ON groupinfo FOR EACH ROW EXECUTE PROCEDURE update_time();
 
 CREATE OR REPLACE FUNCTION after_file_insert() RETURNS TRIGGER AS $file_insert$
-	BEGIN
-		UPDATE fileinfo SET
-		gid = NEW.id,
-		uri = (SELECT uri FROM fileinfo WHERE id=NEW.pid) || '/' || NEW.name
-		WHERE id=NEW.id;
+    BEGIN
+        UPDATE fileinfo SET
+        gid = NEW.id,
+        uri = (SELECT uri FROM fileinfo WHERE id=NEW.pid) || '/' || NEW.name
+        WHERE id=NEW.id;
 
-		IF NEW.pid = 1 THEN
-			UPDATE fileinfo SET
-			dataer = NEW.name, render = NEW.name, aid = NEW.id WHERE id=NEW.id;
-		ELSE
-			UPDATE fileinfo SET
-			--dataer = SUBSTRING((SELECT dataer FROM fileinfo WHERE id=NEW.pid) || '_' || NEW.name FROM '^[^_]*_[^_]*')
-			dataer = (SELECT dataer FROM fileinfo WHERE id=NEW.pid),
-			render = (SELECT render FROM fileinfo WHERE id=NEW.pid),
+        IF NEW.pid = 1 THEN
+            UPDATE fileinfo SET
+            dataer = NEW.name, render = NEW.name, aid = NEW.id WHERE id=NEW.id;
+        ELSE
+            UPDATE fileinfo SET
+            --dataer = SUBSTRING((SELECT dataer FROM fileinfo WHERE id=NEW.pid) || '_' || NEW.name FROM '^[^_]*_[^_]*')
+            dataer = (SELECT dataer FROM fileinfo WHERE id=NEW.pid),
+            render = (SELECT render FROM fileinfo WHERE id=NEW.pid),
             aid = (SELECT aid FROM fileinfo WHERE id=NEW.pid)
-			WHERE id=NEW.id;
-		END IF;
+            WHERE id=NEW.id;
+        END IF;
 
-		INSERT INTO groupinfo (uid, gid, mode, status) VALUES (NEW.uid, NEW.id, 255, 4);
-		RETURN NULL;
-	END;
+        INSERT INTO groupinfo (uid, gid, mode, status) VALUES (NEW.uid, NEW.id, 255, 4);
+        RETURN NULL;
+    END;
 $file_insert$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION after_file_delete() RETURNS TRIGGER AS $$
-	BEGIN
-		DELETE FROM groupinfo WHERE gid=OLD.gid;
-		RETURN NULL;
-	END;
+    BEGIN
+        DELETE FROM groupinfo WHERE gid=OLD.gid;
+        RETURN NULL;
+    END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER tg_suf_fileinfo_insert AFTER INSERT ON fileinfo FOR EACH ROW EXECUTE PROCEDURE after_file_insert();

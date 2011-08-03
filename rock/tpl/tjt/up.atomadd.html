@@ -3,65 +3,65 @@
   
   <input id="atomimg" type="hidden" value="" />
   <ul>
-	<li>
-	  <div class="left ck4em">商品图片:</div>
-	  <img class="left ckthird" id="previewimg" src="http://img.eol.com:26040/tjt/ori/default.jpg" width="250" />
+    <li>
+      <div class="left ck4em">商品图片:</div>
+      <img class="left ckthird" id="previewimg" src="http://img.eol.com:26040/tjt/ori/default.jpg" width="250" />
       
-	  <div class="left ck4em">商品描述:</div>
-	  <textarea class="right ckthird" id="atomexp" class="VAL_APPEND vrequire" vmax="1024" rows="5" cols="20"></textarea>
-	</li>
+      <div class="left ck4em">商品描述:</div>
+      <textarea class="right ckthird" id="atomexp" class="VAL_APPEND vrequire" vmax="1024" rows="5" cols="20"></textarea>
+    </li>
 
-	<li>
-	  <div class="leftitem"> &nbsp; </div>
-	  <input id="addatom" type="button" class="submitbtn" value="提交" />
-	</li>
+    <li>
+      <div class="leftitem"> &nbsp; </div>
+      <input id="addatom" type="button" class="submitbtn" value="提交" />
+    </li>
   </ul>
 </div>
 
 <script type="text/javascript">
 (function() {
     var uri = window.location;
-	var button = $("#previewimg");
-	var uploader = new AjaxUpload(button,
-	{
-		action: uri,
-		name: 'imagename',
-		data: {op: 'add', tp: 'imageadd'},
-		responseType: "json",
-		autoSubmit: true,
-		onChange: replaceImage,
-		onComplete: function(file, resp) {
-			if (jsonCbkSuc(resp, {suctip: false})) {
-				$("#previewimg").attr("src", resp.imageurl);
-				$("#atomimg").val(resp.imagename);
-			}
-		}
-	});
+    var button = $("#previewimg");
+    var uploader = new AjaxUpload(button,
+    {
+        action: uri,
+        name: 'imagename',
+        data: {op: 'add', tp: 'imageadd'},
+        responseType: "json",
+        autoSubmit: true,
+        onChange: replaceImage,
+        onComplete: function(file, resp) {
+            if (jsonCbkSuc(resp, {suctip: false})) {
+                $("#previewimg").attr("src", resp.imageurl);
+                $("#atomimg").val(resp.imagename);
+            }
+        }
+    });
 
-	function replaceImage(file, ext) {
-		if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))) {
-			alert("请选择图片");
-			return false;
-		}
-		return true;
-	}
+    function replaceImage(file, ext) {
+        if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))) {
+            alert("请选择图片");
+            return false;
+        }
+        return true;
+    }
 
-	$("#addatom").click(function()
-	{
-		if (!$(".VAL_APPEND").inputval()) {
-			return;
-		}
+    $("#addatom").click(function()
+    {
+        if (!$(".VAL_APPEND").inputval()) {
+            return;
+        }
 
-		$.post(uri,
-			   {
-				   img: $("#atomimg").val(),
-				   exp: $("#atomexp").val(),
-				   op: 'add'
-			   },
-			   function(data) {
-				   if (jsonCbkSuc(data, {rurl: uri}))
-					   overlay_append.close();
-			   }, "json");
-	});
+        $.post(uri,
+               {
+                   img: $("#atomimg").val(),
+                   exp: $("#atomexp").val(),
+                   op: 'add'
+               },
+               function(data) {
+                   if (jsonCbkSuc(data, {rurl: uri}))
+                       overlay_append.close();
+               }, "json");
+    });
 })();
 </script>

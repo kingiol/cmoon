@@ -22,4 +22,4 @@
  */
 //#include "oapp.h"
 
-#endif	/* __LHEADS_H__ */
+#endif    /* __LHEADS_H__ */

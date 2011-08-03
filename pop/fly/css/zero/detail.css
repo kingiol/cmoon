@@ -1,29 +1,29 @@
 #bd-content pre {
-	width: auto;
+    width: auto;
 }
 
 textarea.content {
-	height: 150px;
-	width: 520px;
-	padding: 5px;
+    height: 150px;
+    width: 520px;
+    padding: 5px;
 }
 
 #comments {
-	clear: both;
-	margin: 5ex 1ex;
+    clear: both;
+    margin: 5ex 1ex;
 }
 
 #comments .comment-item {
-	margin-top: 2ex;
+    margin-top: 2ex;
 }
 
 .comment-item .author {
-	font-weight: bold;
-	color:#767676;
+    font-weight: bold;
+    color:#767676;
 }
 
 .comment-item p.pre {
-	margin: 0 10px;
+    margin: 0 10px;
     white-space: pre-wrap;       /* css 3 */
     white-space: -moz-pre-wrap;  /* Mozilla*/
     white-space: -pre-wrap;      /* Opera 4-6 */

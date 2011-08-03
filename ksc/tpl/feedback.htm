@@ -2,9 +2,9 @@
   <div class="title">News</div>
   <div class="listcon">
     <marquee  behavior="scroll" direction="up" scrollamount="2">
-	  <ul>
-		<li><a href="/notice.html#genxin">TODO</a> </li>
-	  </ul>
+      <ul>
+        <li><a href="/notice.html#genxin">TODO</a> </li>
+      </ul>
     </marquee>
   </div>
 </div>
@@ -18,28 +18,28 @@
   <div class="title">Leave Us a Message</div>
   
   <ul class="clean">
-	<li>
-	  <div class="leftitem_long">My Contact info:</div>
-	  <input type="text" id="contact" class="VAL_ADD vrequire long" vmax="256" />
-	</li>
-	
-	<li>
-	  <div class="leftitem_long">Message Content:</div>
-	  <textarea id="feedbackcontent" class="VAL_ADD vrequire" vmax="1024" rows="5" cols="46"></textarea>
-	</li>
-	
-	<li>
-	  <div class="leftitem_long"> &nbsp; </div>
-	  <input type="submit" id="addfeedback" value="Submit" />
-	</li>
+    <li>
+      <div class="leftitem_long">My Contact info:</div>
+      <input type="text" id="contact" class="VAL_ADD vrequire long" vmax="256" />
+    </li>
+    
+    <li>
+      <div class="leftitem_long">Message Content:</div>
+      <textarea id="feedbackcontent" class="VAL_ADD vrequire" vmax="1024" rows="5" cols="46"></textarea>
+    </li>
+    
+    <li>
+      <div class="leftitem_long"> &nbsp; </div>
+      <input type="submit" id="addfeedback" value="Submit" />
+    </li>
   </ul>
 
   <?cs if: Output.admin == 1 ?>
   <div class="sep"></div>
   <?cs each: item = Output.items ?>
   <div class="feedback_item">
-	<div class="feedback_contact"><?cs var: item.contact ?><a href="javascript:void(0);" class="delfeedback" idval="<?cs var: item.id ?>">删除</a></div>
-	<div class="feedback_content"><?cs var: item.content ?></div>
+    <div class="feedback_contact"><?cs var: item.contact ?><a href="javascript:void(0);" class="delfeedback" idval="<?cs var: item.id ?>">删除</a></div>
+    <div class="feedback_content"><?cs var: item.content ?></div>
   </div>
   <?cs /each ?>
   <?cs /if ?>
@@ -48,40 +48,40 @@
 
 
 <script type="text/javascript">
-	$("#addfeedback").click(function()
-	{
-		if (!$(".VAL_ADD").inputval()) {
-			return;
-		}
+    $("#addfeedback").click(function()
+    {
+        if (!$(".VAL_ADD").inputval()) {
+            return;
+        }
 
-		$.post("/cgi-bin/feedback",
-			   {
-				   contact: $("#contact").val(),
-				   content: $("#feedbackcontent").val()
-			   },
-			   function(data) {
-			   if (data.success == "1") {
-					alert("Thanks, We'll contact you as soon as possible!");
-				} else {
-					alert(data.errmsg || "Oops, failure, try again later.");
-				}
-			   }, "json");
-	});
-	
-	$(".delfeedback").click(
-	function(){
-		if (confirm("确认删除该留言？")) {
-			var id = $(this).attr("idval");
-			$.getJSON("/cgi-bin/feedback", {id: id, op: "del"},
-					 function(data) {
-						 if (data.success == 1) {
-							 alert("成功删除");
-							 window.location.reload();
-						 } else {
-							 alert("删除失败， 请稍后再试");
-						 }
-					 }
-			);
-		}
-	});
+        $.post("/cgi-bin/feedback",
+               {
+                   contact: $("#contact").val(),
+                   content: $("#feedbackcontent").val()
+               },
+               function(data) {
+               if (data.success == "1") {
+                    alert("Thanks, We'll contact you as soon as possible!");
+                } else {
+                    alert(data.errmsg || "Oops, failure, try again later.");
+                }
+               }, "json");
+    });
+    
+    $(".delfeedback").click(
+    function(){
+        if (confirm("确认删除该留言？")) {
+            var id = $(this).attr("idval");
+            $.getJSON("/cgi-bin/feedback", {id: id, op: "del"},
+                     function(data) {
+                         if (data.success == 1) {
+                             alert("成功删除");
+                             window.location.reload();
+                         } else {
+                             alert("删除失败， 请稍后再试");
+                         }
+                     }
+            );
+        }
+    });
 </script>

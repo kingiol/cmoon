@@ -1,74 +1,74 @@
 #kol-lcs {
-	position:fixed;
-	font-family:verdana,arial,sans-serif;
-	font-size:12px;
-	z-index:99999;
+    position:fixed;
+    font-family:verdana,arial,sans-serif;
+    font-size:12px;
+    z-index:99999;
 }
 
 /*
  * mid
  */
 #kol-lcs-mid {
-	width: 42px;
-	height: 151px;
-	background:transparent url(http://www.bomdoo.com/img/im/mic.png) repeat-x scroll 0 0;
-	cursor: pointer;
+    width: 42px;
+    height: 151px;
+    background:transparent url(http://www.bomdoo.com/img/im/mic.png) repeat-x scroll 0 0;
+    cursor: pointer;
 }
 /* dirty: unread new message */
 #kol-lcs-mid.dirty {
-	background:transparent url(http://www.bomdoo.com/img/im/mic.png) no-repeat scroll -42px 0;
+    background:transparent url(http://www.bomdoo.com/img/im/mic.png) no-repeat scroll -42px 0;
 }
 
 /*
  * max
  */
 #kol-lcs-max {
-	width: 288px;
-	border: 1px solid #ff4500;
-	padding: 5px 10px;
-	background: #fff url(http://www.bomdoo.com/img/im/mic_bg.png) repeat-x scroll 0 0;
+    width: 288px;
+    border: 1px solid #ff4500;
+    padding: 5px 10px;
+    background: #fff url(http://www.bomdoo.com/img/im/mic_bg.png) repeat-x scroll 0 0;
 }
 #kol-lcs-max .mider {
-	float: right;
-	height: 20px;
-	width: 25px;
-	padding: 2px 3px 0 0;
-	background:transparent url(http://www.bomdoo.com/img/im/mic.png) no-repeat scroll 0 -170px;
-	cursor: pointer;
+    float: right;
+    height: 20px;
+    width: 25px;
+    padding: 2px 3px 0 0;
+    background:transparent url(http://www.bomdoo.com/img/im/mic.png) no-repeat scroll 0 -170px;
+    cursor: pointer;
 }
 #kol-lcs-max .hint {
-	height: 24px;
-	line-height: 23px;
-	margin: 0 auto;
-	border-bottom: 1px solid #ff4545;
-	overflow: hidden;
+    height: 24px;
+    line-height: 23px;
+    margin: 0 auto;
+    border-bottom: 1px solid #ff4545;
+    overflow: hidden;
 }
 #kol-lcs-max .msgs {
-	height: 234px;
-	margin: 5px 0;
-	overflow: auto;
+    height: 234px;
+    margin: 5px 0;
+    overflow: auto;
 }
 textarea#kol-lcs-input {
-	padding: 5px;
-	width: 96%;
-	height: 18px;
+    padding: 5px;
+    width: 96%;
+    height: 18px;
 }
 #kol-lcs-max .bot {
-	color: #999;
-	margin-bottom: 5px;
-	overflow: hidden;
+    color: #999;
+    margin-bottom: 5px;
+    overflow: hidden;
 }
 
 #kol-lcs-max .msgs .item-join, #kol-lcs-max .msgs .item-visit, #kol-lcs-max .msgs .item-send, #kol-lcs-max .msgs .item-msg {
-	margin: 5px 0 0 0;
+    margin: 5px 0 0 0;
 }
 #kol-lcs-max .msgs .item-name, #kol-lcs-max .msgs .item-time {
-	margin-left: 10px;
-	color: #999;
+    margin-left: 10px;
+    color: #999;
 }
 #kol-lcs-max .msgs .item-content {
-	display: block;
-	text-indent: 2em;
+    display: block;
+    text-indent: 2em;
 }
 
 /* sound remind checkbox */

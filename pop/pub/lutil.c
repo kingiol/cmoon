@@ -7,29 +7,29 @@
 #if 0
 static void lutil_donotcall()
 {
-	app_exist_data_get(NULL, NULL, NULL, NULL);
-	oms_data_get(NULL, NULL, NULL, NULL);
-	msg_data_get(NULL, NULL, NULL, NULL);
-	okol_data_get(NULL, NULL, NULL, NULL);
-	comment_data_get(NULL, NULL, NULL, NULL);
-	zero_data_get(NULL, NULL, NULL, NULL);
-	stat_data_get(NULL, NULL, NULL, NULL);
+    app_exist_data_get(NULL, NULL, NULL, NULL);
+    oms_data_get(NULL, NULL, NULL, NULL);
+    msg_data_get(NULL, NULL, NULL, NULL);
+    okol_data_get(NULL, NULL, NULL, NULL);
+    comment_data_get(NULL, NULL, NULL, NULL);
+    zero_data_get(NULL, NULL, NULL, NULL);
+    stat_data_get(NULL, NULL, NULL, NULL);
 }
 #endif
 
 void* lutil_get_data_handler(void *lib, CGI *cgi, session_t *ses)
 {
-	char *hname, *tp;
-	void *res;
+    char *hname, *tp;
+    void *res;
 
-	hname = ses->dataer;
-	res = dlsym(lib, hname);
-	if ((tp = dlerror()) != NULL) {
-		mtc_err("%s", tp);
-		return NULL;
-	} else
-		mtc_info("%s found for data handler", hname);
-	return res;
+    hname = ses->dataer;
+    res = dlsym(lib, hname);
+    if ((tp = dlerror()) != NULL) {
+        mtc_err("%s", tp);
+        return NULL;
+    } else
+        mtc_info("%s found for data handler", hname);
+    return res;
 }
 
 NEOERR* lutil_fetch_count(HDF *hdf, mdb_conn *conn, char *table, char *cond)
@@ -39,16 +39,16 @@ NEOERR* lutil_fetch_count(HDF *hdf, mdb_conn *conn, char *table, char *cond)
     char *buf;
     size_t datalen;
     int count = 0;
-	NEOERR *err;
+    NEOERR *err;
     
     buf = mmc_getf(&datalen, 0, PRE_MMC_COUNT".%s.%s", table, cond);
     if (buf == NULL) {
         err = mdb_exec(conn, NULL, "SELECT count(*) FROM %s WHERE %s;",
-					   NULL, table, cond);
-		if (err != STATUS_OK) return nerr_pass(err);
+                       NULL, table, cond);
+        if (err != STATUS_OK) return nerr_pass(err);
 
         err = mdb_get(conn, "s", &buf);
-		if (err != STATUS_OK) return nerr_pass(err);
+        if (err != STATUS_OK) return nerr_pass(err);
 
         count = atoi(buf);
         mmc_storef(MMC_OP_SET, (void*)buf, 0, ONE_HOUR, 0,
@@ -76,10 +76,10 @@ NEOERR* lutil_fetch_countf(HDF *hdf, mdb_conn *conn, char *table, char *cfmt, ..
 
 bool lutil_client_attack(HDF *hdf, session_t *ses, char *cname)
 {
-	if (!hdf || !ses || !ses->dataer) return false;
+    if (!hdf || !ses || !ses->dataer) return false;
 
-	char *limit = hdf_get_valuef(g_cfg, PRE_CFG_REQLIMIT".%s", ses->dataer);
-	if (!limit || atoi(limit) <= 0) return false;
+    char *limit = hdf_get_valuef(g_cfg, PRE_CFG_REQLIMIT".%s", ses->dataer);
+    if (!limit || atoi(limit) <= 0) return false;
 
-	return mutil_client_attack(hdf, ses->dataer, cname, atoi(limit), ONE_MINUTE);
+    return mutil_client_attack(hdf, ses->dataer, cname, atoi(limit), ONE_MINUTE);
 }

@@ -5,17 +5,17 @@
   <dd>
     <?cs if: Output.appinfo.pid == 0 ?>
     站长帐号：
-	  <?cs if: Output.appinfo.state == #10 ?>
-  	  免费用户
-  	  <?cs elif: Output.appinfo.state == #11 ?>
-  	  付费用户 <a href="/oms/bill">查看消费清单</a>
-  	  <?cs elif: Output.appinfo.state == #12 ?>
-  	  VIP 用户
-  	  <?cs elif: Output.appinfo.state == #13 ?>
-  	  播豆管理员
-  	  <?cs elif: Output.appinfo.state == #1001 ?>
-  	  播豆站长
-  	  <?cs /if ?>
+      <?cs if: Output.appinfo.state == #10 ?>
+        免费用户
+        <?cs elif: Output.appinfo.state == #11 ?>
+        付费用户 <a href="/oms/bill">查看消费清单</a>
+        <?cs elif: Output.appinfo.state == #12 ?>
+        VIP 用户
+        <?cs elif: Output.appinfo.state == #13 ?>
+        播豆管理员
+        <?cs elif: Output.appinfo.state == #1001 ?>
+        播豆站长
+        <?cs /if ?>
     <?cs else ?>
     客服帐号，由 <?cs var: Output.appinfo.pname ?> 创建。
     <?cs /if ?>
@@ -30,15 +30,15 @@
   <dt>邦定邮箱</dt>
   <dd>
     <input type="text" id="email" class="VAL_INFO vrequire vemail" value="<?cs var: Output.appinfo.email ?>"
-	disabled="disabled" />
-	<!--<a href="javascript:void(0);" id="email-mod">修改邮箱</a>-->
-	<input type="button" id="email-mod" value="修改邮箱" />
-	<span class="indicator"></span>
+    disabled="disabled" />
+    <!--<a href="javascript:void(0);" id="email-mod">修改邮箱</a>-->
+    <input type="button" id="email-mod" value="修改邮箱" />
+    <span class="indicator"></span>
   </dd>
 
   <dt>&nbsp; </dt>
   <dd>
-	<a href="/app/pass">点此修改密码</a>
+    <a href="/app/pass">点此修改密码</a>
   </dd>
 
   <dt>&nbsp; </dt>

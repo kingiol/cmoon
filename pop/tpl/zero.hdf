@@ -1,27 +1,27 @@
 zero [merge=zero.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/zero/zero.css" />
-			js = <script type="text/javascript" src="/js/b/zero/zero.js"></script>
-			title = 人工服务
+            css = <link rel="stylesheet" type="text/css" href="/css/b/zero/zero.css" />
+            js = <script type="text/javascript" src="/js/b/zero/zero.js"></script>
+            title = 人工服务
         }
-		Include {
-			content = zero/zero.html
-		}
-	}
+        Include {
+            content = zero/zero.html
+        }
+    }
 }
 
 zero_detail [merge=zero.pub] {
-	Layout = layout.html
-	Dataset {
+    Layout = layout.html
+    Dataset {
         Layout {
-			css = <link rel="stylesheet" type="text/css" href="/css/b/zero/detail.css" />
-			js = <script type="text/javascript" src="/js/b/zero/detail.js"></script>
-			title = 服务单详情
+            css = <link rel="stylesheet" type="text/css" href="/css/b/zero/detail.css" />
+            js = <script type="text/javascript" src="/js/b/zero/detail.js"></script>
+            title = 服务单详情
         }
-		Include {
-			content = zero/detail.html
-		}
-	}
+        Include {
+            content = zero/detail.html
+        }
+    }
 }

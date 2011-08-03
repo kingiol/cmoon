@@ -1,152 +1,152 @@
 .page-hint img {
-	vertical-align: bottom;
+    vertical-align: bottom;
 }
 
 #chat-box {
-	height: 450px;
-	width: 888px;
-	overflow: hidden;
-	margin: 0 auto;
-	/*border: 1px solid #101010;*/
-	/*padding:15px;*/
+    height: 450px;
+    width: 888px;
+    overflow: hidden;
+    margin: 0 auto;
+    /*border: 1px solid #101010;*/
+    /*padding:15px;*/
 }
 #chat-box.loading {
-	opacity: 0.5;
+    opacity: 0.5;
 }
 .im-op {
-	float:left;
+    float:left;
 }
 .im-chat {
-	width: 620px;
-	height: 430px;
-	float: left;
-	border: 0.5em solid #aaa;
-	background-color:#eee;
-	text-indent:1em;
+    width: 620px;
+    height: 430px;
+    float: left;
+    border: 0.5em solid #aaa;
+    background-color:#eee;
+    text-indent:1em;
 }
 
 
 .im-users {
-	width: 230px;
-	height: 410px;
-	overflow:hidden;
-	position:relative;
+    width: 230px;
+    height: 410px;
+    overflow:hidden;
+    position:relative;
 }
 
 .im-users .items {
-	clear:both;
-	position:absolute;
-	width:20000em;
+    clear:both;
+    position:absolute;
+    width:20000em;
 }
 
 .im-users .items ul {
-	margin-top: 3ex;
-	width: 230px;
-	float: left;
+    margin-top: 3ex;
+    width: 230px;
+    float: left;
 }
 
 .im-users ul li {
-	cursor: pointer;
-	margin: 0;
-	margin-top: -1px;
-	height: 24px;
-	overflow: hidden;
-	border-color: #aaa;
-	border-style:solid none solid solid;
-	border-width:1px 0 1px 1px;
+    cursor: pointer;
+    margin: 0;
+    margin-top: -1px;
+    height: 24px;
+    overflow: hidden;
+    border-color: #aaa;
+    border-style:solid none solid solid;
+    border-width:1px 0 1px 1px;
 }
 
 .im-users ul li .uname {
-	float:left;
-	display: inline;
-	width:80px;
-	margin-left: 1em;
-	line-height: 24px;
+    float:left;
+    display: inline;
+    width:80px;
+    margin-left: 1em;
+    line-height: 24px;
 }
 
 .im-users ul li .place {
-	float: left;
-	display: inline;
-	margin-left: 1em;
-	height: 24px;
-	line-height: 24px;
-	width: 110px;
-	overflow: hidden;
+    float: left;
+    display: inline;
+    margin-left: 1em;
+    height: 24px;
+    line-height: 24px;
+    width: 110px;
+    overflow: hidden;
 }
 
 .im-users ul li.cur .remove {
-	background:transparent url(/img/ajax/close_pill.png) no-repeat scroll 0 0;
-	height:18px;
-	width:18px;
-	float: left;
-	display: inline;
-	margin: 3px 0 0 2px;
-	text-ident: -9999px;
+    background:transparent url(/img/ajax/close_pill.png) no-repeat scroll 0 0;
+    height:18px;
+    width:18px;
+    float: left;
+    display: inline;
+    margin: 3px 0 0 2px;
+    text-ident: -9999px;
 }
 
 .im-users ul li.cur .remove:hover {
-	background-position: 0 -50px;
+    background-position: 0 -50px;
 }
 
 .im-users ul li.off {
-	background-color: #fff;
+    background-color: #fff;
 }
 
 .im-users ul li.on {
-	background-color: #ddd;
+    background-color: #ddd;
 }
 
 .im-users ul li.dirty {
-	background-color: #777;
+    background-color: #777;
 }
 
 .im-users ul li.cur {
-	background-color: #aaa;
+    background-color: #aaa;
 }
 
 .im-stat {
-	font-weight:bold;
-	line-height:26px;
+    font-weight:bold;
+    line-height:26px;
 }
 .im-msgs {
-	height: 330px;
-	border-top: 1px solid #aaa;
-	border-bottom: 1px solid #aaa;
-	margin-bottom: 10px;
-	overflow: auto;
+    height: 330px;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 10px;
+    overflow: auto;
 }
 
 .item-join, .item-visit, .item-send, .item-msg, .item-divide {
-	margin-bottom:2px;
+    margin-bottom:2px;
 }
 .im-msgs .item-name, .im-msgs .item-time{
-	margin-left: 10px;
-	color: #999;
+    margin-left: 10px;
+    color: #999;
 }
 .im-msgs .item-divide {
-	height: 24px;
-	background-color: #fff;
+    height: 24px;
+    background-color: #fff;
 }
 .im-msgs .item-content {
-	display: block;
-	text-indent: 3em;
+    display: block;
+    text-indent: 3em;
 }
 
 .im-msgs .item-content a {
-	color: #999;
+    color: #999;
 }
 
 .im-input textarea {
-	height: 40px;
-	width: 440px;
-	padding: 5px;
-	margin: 0 0 -3px 1em;
+    height: 40px;
+    width: 440px;
+    padding: 5px;
+    margin: 0 0 -3px 1em;
 }
 
 .im-input input {
-	margin: 0 2px;
+    margin: 0 2px;
 }
 
 .im-input input[type=button] {
-	width: 70px;
+    width: 70px;
 }

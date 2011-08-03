@@ -4,14 +4,14 @@
 CREATE FUNCTION update_time() RETURNS TRIGGER AS $$ BEGIN NEW.uptime=now(); RETURN NEW; END; $$ LANGUAGE plpgsql;
 
 CREATE TABLE tjt_5 (
-	   id SERIAL,
+       id SERIAL,
        aid int NOT NULL DEFAULT 1, --anchor file's id
        fid int NOT NULL DEFAULT 1, --which file this item belongs to
-	   uid int NOT NULL DEFAULT 0, --who created this item
-	   img varchar(256) NOT NULL DEFAULT '', --image file name, without path
-	   exp text NOT NULL DEFAULT '', --explanation text, present by <pre></pre>
-	   intime timestamp DEFAULT now(),
-	   uptime timestamp DEFAULT now(),
-	   PRIMARY KEY (id)
+       uid int NOT NULL DEFAULT 0, --who created this item
+       img varchar(256) NOT NULL DEFAULT '', --image file name, without path
+       exp text NOT NULL DEFAULT '', --explanation text, present by <pre></pre>
+       intime timestamp DEFAULT now(),
+       uptime timestamp DEFAULT now(),
+       PRIMARY KEY (id)
 );
 CREATE TRIGGER tg_uptime_tjt_5 BEFORE UPDATE ON tjt_5 FOR EACH ROW EXECUTE PROCEDURE update_time();

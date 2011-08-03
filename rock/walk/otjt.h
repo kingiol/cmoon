@@ -4,7 +4,7 @@
 
 __BEGIN_DECLS
 
-#define IMG_PATH	"tjt"
+#define IMG_PATH    "tjt"
 
 int tjt_get_data(HDF *hdf, HASH *dbh, session_t *ses);
 void tjt_refresh_info(int aid, int fid);

@@ -3,13 +3,13 @@ include $(LOCALBASE)Make.env
 include $(BASEDIR)Make.env
 
 FILES = b/base.css \
-		b/client/lcs.css \
-		b/client/mic.css \
-		b/index.css b/demo.css b/manual.css \
-		b/blog.css b/blogindex.css b/blogop.css \
-		b/oms.css b/oms/edit.css b/oms/stat.css b/oms/users.css b/oms/faq.css b/oms/bill.css \
-	    b/okol.css \
-		b/zero/zero.css b/zero/detail.css
+        b/client/lcs.css \
+        b/client/mic.css \
+        b/index.css b/demo.css b/manual.css \
+        b/blog.css b/blogindex.css b/blogop.css \
+        b/oms.css b/oms/edit.css b/oms/stat.css b/oms/users.css b/oms/faq.css b/oms/bill.css \
+        b/okol.css \
+        b/zero/zero.css b/zero/detail.css
 all: preload $(FILES)
 
 preload:

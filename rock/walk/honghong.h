@@ -35,4 +35,4 @@ int tjt_data_get(CGI *cgi, HASH *dbh, session_t *ses);
 int tjt_data_add(CGI *cgi, HASH *dbh, session_t *ses);
 
 __END_DECLS
-#endif	/* __HONGHONG_H__ */
+#endif    /* __HONGHONG_H__ */

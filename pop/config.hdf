@@ -1,105 +1,105 @@
 Config {
-	trace_level = 7
+    trace_level = 7
 }
 
 Dataset {
-	layout.html {
-		tabs {
-			0 {
-				name = 首页
-				href = /index.html
-			}
-			1 {
-				name = 我的站点
-				href = /oms
-			}
-			2 {
-				name = 使用手册
-				href = /manual/index.html
-			}
-			3 {
-				name = 界面定制
-				href = /demo.html
-			}
-			4 {
-				name = 人工服务
-				href = /zero
-			}
-		}
-	}
+    layout.html {
+        tabs {
+            0 {
+                name = 首页
+                href = /index.html
+            }
+            1 {
+                name = 我的站点
+                href = /oms
+            }
+            2 {
+                name = 使用手册
+                href = /manual/index.html
+            }
+            3 {
+                name = 界面定制
+                href = /demo.html
+            }
+            4 {
+                name = 人工服务
+                href = /zero
+            }
+        }
+    }
 }
 
 Db {
-	Dsn {
-		main = pgsql:dbname=lcs_main host=localhost user=lcser password=loveu
-		dyn = pgsql:dbname=lcs_dyn host=localhost user=lcser password=loveu
-		msg = pgsql:dbname=lcs_msg host=localhost user=lcser password=loveu
-		mtool = pgsql:dbname=lcs_mtool host=localhost user=lcser password=loveu
-		aux = pgsql:dbname=lcs_aux host=localhost user=lcser password=loveu
-	}
-	QueryCond {
-		kol {
-			tms [type=str] = intime >
-			tme [type=str] = intime <
-			type [type=int] = type =
-		}
-	}
-	UpdateCol {
-		blog {
-			title [type=str, clen=256] = title
-			content [type=str] = content
-		}
-	}
+    Dsn {
+        main = pgsql:dbname=lcs_main host=localhost user=lcser password=loveu
+        dyn = pgsql:dbname=lcs_dyn host=localhost user=lcser password=loveu
+        msg = pgsql:dbname=lcs_msg host=localhost user=lcser password=loveu
+        mtool = pgsql:dbname=lcs_mtool host=localhost user=lcser password=loveu
+        aux = pgsql:dbname=lcs_aux host=localhost user=lcser password=loveu
+    }
+    QueryCond {
+        kol {
+            tms [type=str] = intime >
+            tme [type=str] = intime <
+            type [type=int] = type =
+        }
+    }
+    UpdateCol {
+        blog {
+            title [type=str, clen=256] = title
+            content [type=str] = content
+        }
+    }
 }
 
 Memcached {
-	ip = 127.0.0.1
-	port = 11211
+    ip = 127.0.0.1
+    port = 11211
 }
 
 Mevent {
-	0 = rawdb
-	1 = dyn
-	2 = aic
-	3 = place
-	4 = msg
-	5 = aux
-	6 = mtls
-	7 = bank
+    0 = rawdb
+    1 = dyn
+    2 = aic
+    3 = place
+    4 = msg
+    5 = aux
+    6 = mtls
+    7 = bank
 }
 
 ClientReqLimit {
-	app_reset_data_get = 1
-	app_charge_data_add = 1
-	zero_data_add = 3
+    app_reset_data_get = 1
+    app_charge_data_add = 1
+    zero_data_add = 3
 }
 
 FileCache {
-	0 {
-		uri = ^/blog$
-		tm_cache = 1800
-	}
-	1 {
-		uri = ^/csc/.*
-		tm_cache = 60
-	}
+    0 {
+        uri = ^/blog$
+        tm_cache = 1800
+    }
+    1 {
+        uri = ^/csc/.*
+        tm_cache = 60
+    }
 }
 
 Email {
-	AppReset {
-		subject = 重置播豆密码
-		opt = -c /usr/local/etc/email/noreply.conf
-		content << EOM
+    AppReset {
+        subject = 重置播豆密码
+        opt = -c /usr/local/etc/email/noreply.conf
+        content << EOM
 $aname$ 你好，
 
-	有人通过这个邮箱申请重置播豆网的密码，请在浏览器中打开以下连接以重置密码：
-	http://www.bomdoo.com/app/pass?aname=$aname_esc$&rlink=$rlink$
+    有人通过这个邮箱申请重置播豆网的密码，请在浏览器中打开以下连接以重置密码：
+    http://www.bomdoo.com/app/pass?aname=$aname_esc$&rlink=$rlink$
 EOM
-	}
+    }
 }
 
 Cost {
-	account = 27
-	sms = 10
-	stat = 999
+    account = 27
+    sms = 10
+    stat = 999
 }

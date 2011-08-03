@@ -4,7 +4,7 @@
 
 __BEGIN_DECLS
 
-//extern HDF *g_cfg;			/* g_cfg currently moved to mglobal.h */
+//extern HDF *g_cfg;            /* g_cfg currently moved to mglobal.h */
 
 __END_DECLS
-#endif	/* __LGLOBAL_H__ */
+#endif    /* __LGLOBAL_H__ */

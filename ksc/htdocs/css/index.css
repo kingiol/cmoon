@@ -21,17 +21,17 @@ a:hover {
  * list
  */
 ul.clean {
-	margin: 0;
-	padding: 0;
-	list-style:none;
+    margin: 0;
+    padding: 0;
+    list-style:none;
 }
 ul.clean li {
     padding: 5px;
-	clear: both;
+    clear: both;
 }
 ul.inline {
     list-style:none;
-	padding: 15px 0;
+    padding: 15px 0;
 }
 ul.inline li {
     display: inline;
@@ -47,18 +47,18 @@ input, textarea {
     border: 1px solid #aaaaaa;
 }
 input.long {
-	width: 200px;
+    width: 200px;
 }
 
 /* top level div */
 #top {
     background: #a2a09b URL('/pic/bg_top.jpg');
     border: 0px none;
-	height: 60px;
-	width:960px;
-	margin:0 auto;
-	border-left:1px solid #aaaaaa;
-	border-right:1px solid #aaaaaa;
+    height: 60px;
+    width:960px;
+    margin:0 auto;
+    border-left:1px solid #aaaaaa;
+    border-right:1px solid #aaaaaa;
 }
 #bot {
     /*background: #a2a09b URL('/images/bot.png') no-repeat;
@@ -93,7 +93,7 @@ input.long {
     margin: 0;
     margin-left: 0.5em;
     list-style: none;
-	height: 28px;
+    height: 28px;
 }
 #global-nav li {
     display: inline;
@@ -104,13 +104,13 @@ input.long {
 }
 #global-nav li.selected {
     /*background-color: #6f91d6;*/
-	font-weight:bold;
+    font-weight:bold;
 }
 #crumbs {
     border-top: 1px solid #aaaaaa;
     border-bottom: 1px solid #aaaaaa;
     /*padding: 1px 0 1px 15px;*/
-	padding: 10px 15px;
+    padding: 10px 15px;
 }
 
 /* content */
@@ -133,7 +133,7 @@ input.long {
 }
 
 #coltwo {
-    width: 680px;			/* 960 = 190+15*4+x 15px~~15px -30px for ie6, ri */
+    width: 680px;            /* 960 = 190+15*4+x 15px~~15px -30px for ie6, ri */
     float: left;
     margin: 0 15px;
     padding: 0;
@@ -156,7 +156,7 @@ input.long {
     color: #aaaaaa;
 }
 #coltwo pre.light a {
-	color: #aaaaaa;
+    color: #aaaaaa;
 }
 
 .valid{border:2px solid green !important;}
@@ -166,12 +166,12 @@ input.long {
 .hide {display: none;}
 .show {display: block;}
 .leftitem, .leftitem_long {
-	float: left;
-	width: 80px;
-	margin: 0 18px 0 0;
+    float: left;
+    width: 80px;
+    margin: 0 18px 0 0;
 }
 .leftitem_long{
-	width: 120px;
+    width: 120px;
 }
 .clearer {
     clear: both;
@@ -181,19 +181,19 @@ input.long {
 }
 
 .prditem {
-	float: left;
-	width: 150px;
-	margin: 10px;
+    float: left;
+    width: 150px;
+    margin: 10px;
 }
 
 .feedback_item {
-	margin: 10px;
+    margin: 10px;
 }
 .feedback_contact {
     border-bottom: solid 1px #aaaaaa;
 }
 .feedback_content {
-	padding: 5px;
+    padding: 5px;
 }
 .feedback_del {
 }

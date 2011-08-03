@@ -1,13 +1,13 @@
 <?cs def:rend_li(item) ?>
   <?cs if:?item.navs.0.href ?>
     <li>
-	  <a class="sf-with-ul" href="<?cs var:item.href?>"><?cs var:item.name ?></a>
+      <a class="sf-with-ul" href="<?cs var:item.href?>"><?cs var:item.name ?></a>
       <ul>
         <?cs each:child=item.navs ?>
-	      <?cs call:rend_li(child) ?>
+          <?cs call:rend_li(child) ?>
         <?cs /each ?>
       </ul>
-	</li>
+    </li>
     <?cs else ?>
       <li><a href="<?cs var:item.href?>"><?cs var:item.name ?></a></li>
   <?cs /if ?>

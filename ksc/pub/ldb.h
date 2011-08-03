@@ -4,9 +4,9 @@
 
 __BEGIN_DECLS
 
-#define DB_DSN			(hdf_get_value(g_cfg, "Dbsn", "sqlite:../data/prddb"))
+#define DB_DSN            (hdf_get_value(g_cfg, "Dbsn", "sqlite:../data/prddb"))
 
 void ldb_opfinish_json(int ret, HDF *hdf, mdb_conn *conn);
 
 __END_DECLS
-#endif	/* __LDB_H__ */
+#endif    /* __LDB_H__ */
