@@ -1,5 +1,6 @@
-BASEDIR = ../
-include ../Make.env
+LOCALBASE = ./
+include $(LOCALBASE)Make.env
+include $(BASEDIR)Make.env
 
 SUBDIR = pub robot cgi pager
 

@@ -22,7 +22,7 @@ int main()
 
     mdb_conn *conn = NULL;
     ret = mdb_init(&conn, DB_DSN);
-    mdb_opfinish_json(ret, cgi->hdf, conn);
+    //mdb_opfinish_json(ret, cgi->hdf, conn);
 
     //hdf_set_value(cgi->hdf, PRE_QUERY".op", "show");
     char *op = hdf_get_value(cgi->hdf, PRE_QUERY".op", "");
@@ -31,9 +31,9 @@ int main()
     } else if (!strcmp(op, "add")) {
         ret = comment_add(cgi->hdf, conn);
     } else {
-        ret = RET_RBTOP_INPUTE;
+        ret = 22;
     }
-    mdb_opfinish_json(ret, cgi->hdf, conn);
+    //mdb_opfinish_json(ret, cgi->hdf, conn);
     
     //mdb_destroy(conn);
     mjson_output_hdf(cgi->hdf, 0);

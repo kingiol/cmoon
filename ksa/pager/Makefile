@@ -1,10 +1,9 @@
-BASEDIR = ../../
-include $(BASEDIR)Make.env
 LOCALBASE = ../
 include $(LOCALBASE)Make.env
+include $(BASEDIR)Make.env
 
-INCS	= $(INC_MEVENT) $(INC_MNL) $(INC_MEMC) $(INC_CS) $(INC_JSON) $(INC_FCGI) $(INC_SYSTEM) $(INC_PUB)
-LIBS	= $(LIB_MEVENG) $(LIB_MNL) $(LIB_MEMC) $(LIB_CS) $(LIB_JSON) $(LIB_FCGI) $(LIB_MARKDOWN) $(LIB_SYSTEM) $(LIB_PUB)
+INCS	= $(INC_LOCAL) $(INC_MOON)
+LIBS	= $(LIB_LOCAL) $(LIB_MOON)
 
 SOURCES = $(wildcard *.c)
 BINARY = $(patsubst %.c, %, $(SOURCES))
@@ -16,8 +15,6 @@ $(DEPEND): $(SOURCES)
 	@$(CC) $(CFLAGS) -MM $^ $(INCS) > $@
 
 preload:
-	@$(MAKE) -C $(MNLBASE)
-	@$(MAKE) -C $(ROBOTBASE)
 
 include $(DEPEND)
 %:%.c

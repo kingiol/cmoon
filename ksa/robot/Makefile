@@ -1,9 +1,8 @@
-BASEDIR = ../../
-include $(BASEDIR)Make.env
 LOCALBASE = ../
 include $(LOCALBASE)Make.env
+include $(BASEDIR)Make.env
 
-INCS	= $(INC_MEVENT) $(INC_MNL) $(INC_MEMC) $(INC_CS) $(INC_JSON) $(INC_FCGI) $(INC_SYSTEM) $(INC_PUB)
+INCS	= $(INC_LOCAL) $(INC_MOON)
 
 SOURCES = $(wildcard *.c)
 OBJS	= $(patsubst %.c, %.o, $(SOURCES))
