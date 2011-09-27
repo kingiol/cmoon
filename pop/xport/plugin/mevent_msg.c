@@ -40,7 +40,7 @@ static NEOERR* msg_cmd_mysaid(struct queue_entry *q, struct cache *cd, mdb_conn 
         MMISC_PAGEDIV_SET_N(q->hdfsnd, db, "msg", "mfrom=$1", "s", name);
         MDB_QUERY_RAW(db, "msg", MSG_COL, "mfrom=$1 ORDER BY intime DESC "
                       " LIMIT %d OFFSET %d", "s", count, offset, name);
-        err = mdb_set_rows(q->hdfsnd, db, NULL, "raws", -1);
+        err = mdb_set_rows(q->hdfsnd, db, NULL, "raws", NULL);
         if (err != STATUS_OK) return nerr_pass(err);
         CACHE_HDF(q->hdfsnd, MSG_CC_SEC, PREFIX_MYSAID"%s_%d", name, offset);
     }
@@ -65,7 +65,7 @@ static NEOERR* msg_cmd_saytome(struct queue_entry *q, struct cache *cd, mdb_conn
         MMISC_PAGEDIV_SET_N(q->hdfsnd, db, "msg", "mto=$1", "s", name);
         MDB_QUERY_RAW(db, "msg", MSG_COL, "mto=$1 ORDER BY intime DESC "
                       " LIMIT %d OFFSET %d", "s", count, offset, name);
-        err = mdb_set_rows(q->hdfsnd, db, NULL, "raws", -1);
+        err = mdb_set_rows(q->hdfsnd, db, NULL, "raws", NULL);
         if (err != STATUS_OK) return nerr_pass(err);
         CACHE_HDF(q->hdfsnd, MSG_CC_SEC, PREFIX_SAYTOME"%s_%d", name, offset);
     }
@@ -101,7 +101,7 @@ static NEOERR* msg_cmd_saywithother(struct queue_entry *q, struct cache *cd, mdb
                       " (mfrom=$3 AND mto=$4)"
                       " ORDER BY intime DESC LIMIT %d OFFSET %d",
                       "ssss", count, offset, name, name2, name2, name);
-        err = mdb_set_rows(q->hdfsnd, db, NULL, "raws", -1);
+        err = mdb_set_rows(q->hdfsnd, db, NULL, "raws", NULL);
         if (err != STATUS_OK) return nerr_pass(err);
         CACHE_HDF(q->hdfsnd, MSG_CC_SEC, PREFIX_SAYWITHOTHER"%s_%d", key, offset);
     }
@@ -128,7 +128,7 @@ static NEOERR* msg_cmd_mymsg(struct queue_entry *q, struct cache *cd, mdb_conn *
         MDB_QUERY_RAW(db, "msg", MSG_COL, "mfrom=$1 OR mto=$2"
                       " ORDER BY intime DESC LIMIT %d OFFSET %d",
                       "ss", count, offset, name, name);
-        err = mdb_set_rows(q->hdfsnd, db, NULL, "raws", -1);
+        err = mdb_set_rows(q->hdfsnd, db, NULL, "raws", NULL);
         if (err != STATUS_OK) return nerr_pass(err);
         CACHE_HDF(q->hdfsnd, MSG_CC_SEC, PREFIX_MYMSG"%s_%d", name, offset);
     }

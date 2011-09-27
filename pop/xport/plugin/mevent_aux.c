@@ -74,7 +74,7 @@ static NEOERR* aux_cmd_cmtget(struct queue_entry *q, struct cache *cd, mdb_conn 
                                   " ORDER BY intime DESC LIMIT %d OFFSET %d",
                                   NULL, type, CMT_ST_NORMAL, oid, count, offset);
                     sprintf(tok, "%d.%d.cmts", type, oid);
-                    err = mdb_set_rows(q->hdfsnd, db, CMT_COL, tok, -1);
+                    err = mdb_set_rows(q->hdfsnd, db, CMT_COL, tok, NULL);
                     if (err != STATUS_OK) return nerr_pass(err);
                     mcs_html_escape(hdf_get_child(q->hdfsnd, tok), "content");
                     type = oid = -1;
@@ -94,7 +94,7 @@ static NEOERR* aux_cmd_cmtget(struct queue_entry *q, struct cache *cd, mdb_conn 
                           " ORDER BY intime DESC LIMIT %d OFFSET %d",
                           NULL, type, CMT_ST_NORMAL, oid, count, offset);
             sprintf(tok, "%d.%d.cmts", type, oid);
-            err = mdb_set_rows(q->hdfsnd, db, CMT_COL, tok, -1);
+            err = mdb_set_rows(q->hdfsnd, db, CMT_COL, tok, NULL);
             if (err != STATUS_OK) return nerr_pass(err);
             mcs_html_escape(hdf_get_child(q->hdfsnd, tok), "content");
         }
@@ -185,7 +185,7 @@ static NEOERR* aux_cmd_impget(struct queue_entry *q, struct cache *cd, mdb_conn 
 
         MDB_QUERY_RAW(db, "improve", IMP_COL, "aid=%d ORDER BY id DESC LIMIT "
                       " %d OFFSET %d", NULL, aid, count, offset);
-        err = mdb_set_rows(q->hdfsnd, db, IMP_COL, "imps", 0);
+        err = mdb_set_rows(q->hdfsnd, db, IMP_COL, "imps", "0");
         if (err != STATUS_OK) return nerr_pass(err);
 
         CACHE_HDF(q->hdfsnd, IMP_CC_SEC, PREFIX_IMP"%d_%d", aid, offset);

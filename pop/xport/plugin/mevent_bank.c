@@ -171,7 +171,7 @@ static NEOERR* bank_cmd_getbill(struct queue_entry *q, struct cache *cd, mdb_con
 
         MDB_QUERY_RAW(db, "bill", BILL_COL, "%s ORDER BY id DESC LIMIT %d OFFSET %d",
                       NULL, str.buf, count, offset);
-        err = mdb_set_rows(q->hdfsnd, db, BILL_COL, "bills", 0);
+        err = mdb_set_rows(q->hdfsnd, db, BILL_COL, "bills", "0");
         if (err != STATUS_OK) return nerr_pass(err);
 
         CACHE_HDF(q->hdfsnd, BILL_CC_SEC, PREFIX_BILL"%s_%d", str.buf, offset);

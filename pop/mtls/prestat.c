@@ -30,7 +30,7 @@ NEOERR* fill_trackarea(HASH *evth, HASH *dbh)
 
     MDB_QUERY_RAW(conn, "track", COL_TRACK, "intime > current_date AND "
                   " area='' GROUP BY aid, uid", NULL);
-    err = mdb_set_rows(node, conn, COL_TRACK, NULL, -1);
+    err = mdb_set_rows(node, conn, COL_TRACK, NULL, NULL);
     if (err != STATUS_OK) return nerr_pass(err);
 
     node = hdf_obj_child(node);

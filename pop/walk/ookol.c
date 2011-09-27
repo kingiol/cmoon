@@ -37,7 +37,7 @@ NEOERR* okol_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
      */
     MDB_QUERY_RAW(conn, "kol", KOL_COL, "%s ORDER BY intime", NULL, str.buf);
     string_clear(&str);
-    err = mdb_set_rows(cgi->hdf, conn, KOL_COL, PRE_OUTPUT".sts", 0);
+    err = mdb_set_rows(cgi->hdf, conn, KOL_COL, PRE_OUTPUT".sts", "0");
     if (err != STATUS_OK) return nerr_pass(err);
 
     hdf_set_attr(cgi->hdf, PRE_OUTPUT".sts", "type", "array");

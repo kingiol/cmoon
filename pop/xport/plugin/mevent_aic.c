@@ -282,7 +282,7 @@ static NEOERR* aic_cmd_appusers(struct queue_entry *q, struct cache *cd, mdb_con
             MDB_QUERY_RAW(db, "userinfo", USERINFO_COL,
                           "aid=%d ORDER BY uptime DESC;", NULL, aid);
         }
-        err = mdb_set_rows(q->hdfsnd, db, USERINFO_COL, "userlist", 1);
+        err = mdb_set_rows(q->hdfsnd, db, USERINFO_COL, "userlist", "1");
         if (err != STATUS_OK) return nerr_pass(err);
         CACHE_HDF(q->hdfsnd, AIC_CC_SEC, PREFIX_USERLIST"%d", aid);
     }
@@ -396,7 +396,7 @@ static NEOERR* aic_cmd_appousers(struct queue_entry *q, struct cache *cd, mdb_co
         MDB_QUERY_RAW(db, "appinfo", APPINFO_COL,
                       "pid=%d OR aid=%d ORDER BY uptime DESC LIMIT %d OFFSET %d",
                       NULL, pid, pid, count, offset);
-        err = mdb_set_rows(q->hdfsnd, db, APPINFO_COL, "users", 1);
+        err = mdb_set_rows(q->hdfsnd, db, APPINFO_COL, "users", "1");
         if (err != STATUS_OK) return nerr_pass(err);
         HDF *node = hdf_get_child(q->hdfsnd, "users");
         while (node) {

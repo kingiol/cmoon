@@ -50,19 +50,19 @@ static NEOERR* mtls_cmd_getstat(struct queue_entry *q, struct cache *cd, mdb_con
         unpack_hdf(val, vsize, &q->hdfsnd);
     } else {
         MDB_QUERY_RAW(db, "visit", COL_VISIT, "%s ORDER BY dt", NULL, str.buf);
-        err = mdb_set_rows(q->hdfsnd, db, COL_VISIT, "visit", -1);
+        err = mdb_set_rows(q->hdfsnd, db, COL_VISIT, "visit", NULL);
         if (err != STATUS_OK) return nerr_pass(err);
 
         MDB_QUERY_RAW(db, "topref", COL_REFER, "%s GROUP BY refer", NULL, str.buf);
-        err = mdb_set_rows(q->hdfsnd, db, COL_REFER, "refer", -1);
+        err = mdb_set_rows(q->hdfsnd, db, COL_REFER, "refer", NULL);
         if (err != STATUS_OK) return nerr_pass(err);
 
         MDB_QUERY_RAW(db, "topurl", COL_URL, "%s GROUP BY url, title", NULL, str.buf);
-        err = mdb_set_rows(q->hdfsnd, db, COL_URL, "url", -1);
+        err = mdb_set_rows(q->hdfsnd, db, COL_URL, "url", NULL);
         if (err != STATUS_OK) return nerr_pass(err);
 
         MDB_QUERY_RAW(db, "toparea", COL_AREA, "%s GROUP BY area", NULL, str.buf);
-        err = mdb_set_rows(q->hdfsnd, db, COL_AREA, "area", -1);
+        err = mdb_set_rows(q->hdfsnd, db, COL_AREA, "area", NULL);
         if (err != STATUS_OK) return nerr_pass(err);
 
         CACHE_HDF(q->hdfsnd, ONE_HOUR, PREFIX_MTLS"%s", str.buf);

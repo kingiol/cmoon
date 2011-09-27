@@ -30,7 +30,7 @@ NEOERR* blog_index_static_get(HDF *hdf, HASH *dbh)
                   " LIMIT %d OFFSET %d", NULL,
                   BLOG_ST_NORMAL, BLOG_NUM_PERPAGE, offset);
 
-    return nerr_pass(mdb_set_rows(hdf, conn, BLOG_COL, PRE_OUTPUT".blogs", 0));
+    return nerr_pass(mdb_set_rows(hdf, conn, BLOG_COL, PRE_OUTPUT".blogs", "0"));
 }
 
 NEOERR* blog_static_get(HDF *hdf, HASH *dbh)
