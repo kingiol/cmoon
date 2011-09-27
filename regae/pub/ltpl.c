@@ -191,18 +191,20 @@ NEOERR* ltpl_parse_dir(char *dir, HASH *outhash)
     return STATUS_OK;
 }
 
-NEOERR* ltpl_init(HASH **tplh)
+NEOERR* ltpl_init(HASH **tplh, char *path)
 {
     HASH *ltplh = NULL;
     NEOERR *err;
 
     *tplh = NULL;
     
+    path = path ? path: PATH_TPL"config/run/";
+	
     err = hash_init(&ltplh, hash_str_hash, hash_str_comp);
     if (err != STATUS_OK) return nerr_pass(err);
 
-    err = ltpl_parse_dir(PATH_TPL"config/run/", ltplh);
-    if (err != STATUS_OK) return nerr_pass_ctx(err, "pase dir %s", PATH_TPL);
+    err = ltpl_parse_dir(path, ltplh);
+    if (err != STATUS_OK) return nerr_pass_ctx(err, "pase dir %s", path);
     
     *tplh = ltplh;
     return STATUS_OK;
