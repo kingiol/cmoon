@@ -1,4 +1,4 @@
-<mockup version="1.0" skin="sketch" measuredW="964" measuredH="700" mockupW="927" mockupH="642">
+<mockup version="1.0" skin="sketch" measuredW="1020" measuredH="700" mockupW="983" mockupH="642">
   <controls>
     <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="100" y="100" w="800" h="600" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
       <controlProperties>
@@ -88,12 +88,12 @@
         <icon>EmoticonIcon%7Cxsmall</icon>
       </controlProperties>
     </control>
-    <control controlID="22" controlTypeID="com.balsamiq.mockups::StickyNote" x="876" y="458" w="88" h="70" measuredW="109" measuredH="123" zOrder="18" locked="false" isInGroup="-1">
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::StickyNote" x="876" y="458" w="144" h="117" measuredW="109" measuredH="123" zOrder="18" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>false</bold>
         <italic>false</italic>
         <size>10</size>
-        <text>%u7ED9%u4ED6%u8BC4%u4EF7</text>
+        <text>%u7ED9%u4ED6%u8BC4%u4EF7%0A%20%0A%u8BC4%u4EF7%u6B21%u6570%20%25%205%20%3D%3D%200%20%u65F6%uFF0C%0A%u63D0%u9192%u7528%u6237%u4ED8%u6B3E%281%u5143/%u6B21%29</text>
       </controlProperties>
     </control>
     <control controlID="23" controlTypeID="com.balsamiq.mockups::Arrow" x="765" y="453" w="107" h="25" measuredW="150" measuredH="100" zOrder="19" locked="false" isInGroup="-1">

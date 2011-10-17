@@ -5,7 +5,7 @@
         <text>A%20Web%20Page%0Ahttp%3A//</text>
       </controlProperties>
     </control>
-    <control controlID="1" controlTypeID="com.balsamiq.mockups::CallOut" x="100" y="57" w="36" h="36" measuredW="37" measuredH="40" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::CallOut" x="100" y="57" w="36" h="36" measuredW="37" measuredH="39" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <text>2</text>
       </controlProperties>
@@ -22,6 +22,7 @@
     </control>
     <control controlID="6" controlTypeID="com.balsamiq.mockups::PointyButton" x="306" y="361" w="95" h="27" measuredW="88" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>03%26bm%3B03.bmml%26bm%3B03.bmml%26bm%3B03.bmml</href>
         <text>%u9080%u8F66%u524D%u5F80...</text>
       </controlProperties>
     </control>
@@ -35,7 +36,7 @@
         <text>3</text>
       </controlProperties>
     </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::CallOut" x="407" y="412" w="36" h="36" measuredW="37" measuredH="40" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::CallOut" x="407" y="412" w="36" h="36" measuredW="37" measuredH="39" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
         <text>4</text>
       </controlProperties>
@@ -68,12 +69,12 @@
         <text>3A</text>
       </controlProperties>
     </control>
-    <control controlID="16" controlTypeID="com.balsamiq.mockups::CallOut" x="817" y="382" w="49" h="36" measuredW="46" measuredH="40" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::CallOut" x="817" y="382" w="49" h="36" measuredW="46" measuredH="39" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
         <text>3B</text>
       </controlProperties>
     </control>
-    <control controlID="17" controlTypeID="com.balsamiq.mockups::CallOut" x="817" y="427" w="49" h="36" measuredW="46" measuredH="40" zOrder="14" locked="false" isInGroup="-1">
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::CallOut" x="817" y="427" w="49" h="36" measuredW="46" measuredH="39" zOrder="14" locked="false" isInGroup="-1">
       <controlProperties>
         <text>3C</text>
       </controlProperties>
