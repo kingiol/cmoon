@@ -5,17 +5,17 @@
         <text>A%20Web%20Page%0Ahttp%3A//</text>
       </controlProperties>
     </control>
-    <control controlID="2" controlTypeID="com.balsamiq.mockups::CallOut" x="102" y="58" w="49" h="36" measuredW="46" measuredH="40" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::CallOut" x="102" y="58" w="49" h="36" measuredW="46" measuredH="45" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <text>3A</text>
       </controlProperties>
     </control>
-    <control controlID="3" controlTypeID="com.balsamiq.mockups::CallOut" x="157" y="58" w="49" h="36" measuredW="46" measuredH="40" zOrder="2" locked="false" isInGroup="-1">
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::CallOut" x="157" y="58" w="49" h="36" measuredW="46" measuredH="39" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
         <text>3B</text>
       </controlProperties>
     </control>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::CallOut" x="212" y="58" w="49" h="36" measuredW="46" measuredH="39" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::CallOut" x="212" y="58" w="49" h="36" measuredW="46" measuredH="40" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <text>3C</text>
       </controlProperties>
@@ -125,6 +125,11 @@
     <control controlID="28" controlTypeID="com.balsamiq.mockups::Icon" x="596" y="611" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="24" locked="false" isInGroup="-1">
       <controlProperties>
         <icon>LeftFillTriangleIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Label" x="294" y="73" w="-1" h="-1" measuredW="57" measuredH="23" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%u6211%u7684%u9080%u8BF7</text>
       </controlProperties>
     </control>
   </controls>

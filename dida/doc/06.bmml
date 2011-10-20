@@ -10,9 +10,9 @@
         <text>2</text>
       </controlProperties>
     </control>
-    <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="145" y="70" w="-1" h="-1" measuredW="126" measuredH="23" zOrder="2" locked="false" isInGroup="-1">
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="145" y="70" w="-1" h="-1" measuredW="96" measuredH="23" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>%u767B%u5F55/%u6CE8%u518C%u5B8C%u6210%u540E%u9875%u9762</text>
+        <text>%u9080%u4EBA%u540C%u53BB%u3002%u3002%u3002</text>
       </controlProperties>
     </control>
     <control controlID="3" controlTypeID="com.balsamiq.mockups::TabBar" x="115" y="244" w="770" h="420" measuredW="222" measuredH="100" zOrder="3" locked="true" isInGroup="-1">
