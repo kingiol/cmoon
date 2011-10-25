@@ -46,6 +46,7 @@
     <control controlID="18" controlTypeID="com.balsamiq.mockups::Button" x="381" y="508" w="-1" h="-1" measuredW="50" measuredH="28" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <href>02%26bm%3B02.bmml%26bm%3B02.bmml%26bm%3B02.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22281%2C451%2C331%2C479%22%20href%3D%2202.bmml%22%20alt%3D%2202%22%20id%3D%2218%22/%3E</map>
         <text>%u786E%u5B9A</text>
       </controlProperties>
     </control>
