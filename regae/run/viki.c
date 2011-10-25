@@ -28,7 +28,7 @@ int main(int argc, char **argv, char **envp)
     err = mconfig_parse_file(SITE_CONFIG, &g_cfg);
     DIE_NOK_CGI(err);
 
-    err = ltpl_init(&tplh);
+    err = ltpl_init(&tplh, NULL);
     DIE_NOK_CGI(err);
 
     err = ldb_init(&dbh);
