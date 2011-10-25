@@ -13,3 +13,20 @@ index {
     }
     Output = index.html
 }
+
+map {
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/map.css" />
+            js << EOM
+                <script src="http://maps.google.com/maps/api/js?sensor=false&language=zh-CN&libraries=places"></script>
+                <script type="text/javascript" src="/js/b/map.js"></script>
+EOM
+        }
+        Include {
+            content = map.html
+        }
+    }
+    Output = map.html
+}
