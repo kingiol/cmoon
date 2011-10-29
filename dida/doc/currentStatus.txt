@@ -1,5 +1,15 @@
 比较年轻，还没做起来的网站
 ======================
+http://www.pickride.com/
+http://www.nbweekly.com/news/business/201105/25827.aspx
+PickRide:帮你拼个顺风车
+http://www.techweb.com.cn/innovation/2011-04-07/1013158.shtml
+PickRide：信誉拼车好帮手
+  适合上下班，及室内临时起意的拼车
+  附近用户 列出你附近的有车用户（有签名，按距离排序，非实时），你可以选择，和他们对话
+  实时拼车 没有问你想去哪里，而是列出附近用户(1km内？)空位数、和他们的目的地让你选（没有线路过滤？不过过滤就没了）
+  预约拼车(上下班、长途拼车，列表模式)
+  社交（拼客、活动）
 http://51carpool.com/
 http://www.kmyoyo.com/
 http://www.51pinche.cn/
@@ -51,8 +61,6 @@ http://www.jlppl.com.cn/
 http://www.aspcw.com/
 http://www.whycools.com/wuhan/index.asp
   做个拼车信息抓取爬虫
-
-
 
 
 
