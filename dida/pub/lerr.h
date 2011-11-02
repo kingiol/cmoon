@@ -12,6 +12,9 @@ extern NERR_TYPE LERR_MISS_DATA;
 extern NERR_TYPE LERR_MISS_TPL;            
 extern NERR_TYPE LERR_ATTACK;            
 
+extern NERR_TYPE LERR_MEMBERED;
+extern NERR_TYPE LERR_CARED;
+
 extern NERR_TYPE LERR_USERINPUT;
 extern NERR_TYPE LERR_IMGPROE;            
 

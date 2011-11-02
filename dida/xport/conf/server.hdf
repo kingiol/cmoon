@@ -6,6 +6,8 @@ Mevent {
     logfile = /var/log/moon/dida/mevent
     plugins {
         0 = skeleton
+        1 = member
+        2 = plan
     }
     smsalarm {
         db {
@@ -20,5 +22,62 @@ Mevent {
 Plugin {
     skeleton {
         dbsn = pgsql:dbname=lcs_msg host=localhost user=lcser password=loveu
+    }
+    member {
+        dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
+        spd {
+            58 = 1
+        }
+        InsertCol {
+            member {
+                mid [type=int, require=true] = mid
+                mname [maxlen=256, require=true] = mname
+                ori [type=int] = ori
+                male [type=int] = male
+                pass [maxlen=64] = pass
+                mstatu [type=int] = mstatu
+                verify [type=int] = verify
+                credit [type=int] = credit
+                cityid [type=int] = cityid
+                phone [maxlen=128] = phone
+                contact [maxlen=128] = contact
+            }
+            car {
+                mid [type=int, require=true] = mid
+                size [type=int] = size
+                model [maxlen=64] = model
+                mdate [maxlen=64] = mdate
+            }
+        }
+    }
+    plan {
+        dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
+        InsertCol {
+            plan {
+                mid [type=int, require=true] = mid
+                dad [type=int] = dad
+                pstatu [type=int] = pstatu
+                repeat [type=int] = repeat
+                seat [type=int] = seat
+                fee [type=int] = fee
+                attach [maxlen=256] = attach
+
+                scityid [type=int] = scityid
+                ecityid [type=int] = ecityid
+                saddr [maxlen=256] = saddr
+                eaddr [maxlen=256] = eaddr
+                marks [maxlen=256] = marks
+                
+                rect [type=box] = rect
+                route [type=path] = route
+                km [type=float] = km
+
+                sdate [maxlen=16] = sdate
+                edate [maxlen=16] = edate
+                stime [maxlen=16] = stime
+                etime [maxlen=16] = etime
+                estmin [type=int] = estmin
+            }
+        }
     }
 }

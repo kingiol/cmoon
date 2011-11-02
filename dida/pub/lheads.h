@@ -15,11 +15,12 @@
 /*
  * mevent plugin
  */
-//#include "mevent_aic.h"
+#include "mevent_member.h"
+#include "mevent_plan.h"
 
 /*
  * walker
  */
-//#include "oapp.h"
+#include "ospd.h"
 
 #endif    /* __LHEADS_H__ */

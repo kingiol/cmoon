@@ -30,3 +30,17 @@ EOM
     }
     Output = map.html
 }
+
+spd {
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/spd.css" />
+            js = <script type="text/javascript" src="/js/b/spd.js"></script>
+        }
+        Include {
+            content = spd.html
+        }
+    }
+    Output = spd.html
+}

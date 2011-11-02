@@ -29,6 +29,8 @@ Memcached {
 
 Mevent {
     0 = skeleton
+    1 = member
+    3 = plan
 }
 
 ClientReqLimit {

@@ -16,6 +16,8 @@ int LERR_ATTACK    = 0;            /* 30 */
 /*
  * mevent plugin error
  */
+int LERR_MEMBERED = 0;
+int LERR_CARED = 0;
 
 /*
  * app error
@@ -39,10 +41,7 @@ NEOERR* lerr_init()
 
         err = nerr_register(&LERR_NOTLOGIN, "请登录后操作");
         if (err != STATUS_OK) return nerr_pass(err);
-
         err = nerr_register(&LERR_LOGINPSW, "密码错误");
-        if (err != STATUS_OK) return nerr_pass(err);
-        err = nerr_register(&LERR_USERINPUT, "输入参数错误");
         if (err != STATUS_OK) return nerr_pass(err);
         err = nerr_register(&LERR_LIMIT, "用户无权限");
         if (err != STATUS_OK) return nerr_pass(err);
@@ -50,11 +49,18 @@ NEOERR* lerr_init()
         if (err != STATUS_OK) return nerr_pass(err);
         err = nerr_register(&LERR_MISS_TPL, "找不到渲染模板(忘记了/json ?)");
         if (err != STATUS_OK) return nerr_pass(err);
-        err = nerr_register(&LERR_IMGPROE, "处理图片失败");
-        if (err != STATUS_OK) return nerr_pass(err);
         err = nerr_register(&LERR_ATTACK, "太过频繁，请稍后请求！");
         if (err != STATUS_OK) return nerr_pass(err);
 
+        err = nerr_register(&LERR_MEMBERED, "用户名已被注册！");
+        if (err != STATUS_OK) return nerr_pass(err);
+        err = nerr_register(&LERR_CARED, "一个帐户只能拥有一辆车！");
+        if (err != STATUS_OK) return nerr_pass(err);
+
+        err = nerr_register(&LERR_USERINPUT, "输入参数错误");
+        if (err != STATUS_OK) return nerr_pass(err);
+        err = nerr_register(&LERR_IMGPROE, "处理图片失败");
+        if (err != STATUS_OK) return nerr_pass(err);
 
         lerrInited = 1;
     }
