@@ -17,6 +17,7 @@
  */
 #include "mevent_member.h"
 #include "mevent_plan.h"
+#include "mevent_city.h"
 
 /*
  * walker

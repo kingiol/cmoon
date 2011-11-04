@@ -8,6 +8,7 @@ Mevent {
         0 = skeleton
         1 = member
         2 = plan
+        3 = city
     }
     smsalarm {
         db {
@@ -74,10 +75,14 @@ Plugin {
 
                 sdate [maxlen=16] = sdate
                 edate [maxlen=16] = edate
-                stime [maxlen=16] = stime
-                etime [maxlen=16] = etime
+                stime = stime
+                etime = etime
                 estmin [type=int] = estmin
             }
         }
+    }
+    city {
+        dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
+        ipfile = /usr/local/lib/QQWry.Dat
     }
 }

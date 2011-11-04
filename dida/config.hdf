@@ -1,3 +1,5 @@
+dida = 不接受捐款、不组织义工的慈善组织。
+
 Config {
     trace_level = 7
 }
@@ -31,6 +33,7 @@ Mevent {
     0 = skeleton
     1 = member
     3 = plan
+    4 = city
 }
 
 ClientReqLimit {

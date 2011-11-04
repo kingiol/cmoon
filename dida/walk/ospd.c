@@ -13,15 +13,30 @@ NEOERR* spd_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
 NEOERR* spd_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
+    mevent_t *evt;
+    int cityid = 0;
+    
+    if (!cgi || !cgi->hdf) return nerr_raise(NERR_ASSERT, "paramter null");
+
     /*
      * member
      */
-    mevent_t *evt = hash_lookup(evth, "member");
+    char *city = hdf_get_value(cgi->hdf, PRE_QUERY".city", NULL);
+    if (city) {
+        evt = hash_lookup(evth, "city");
+        if (!evt) return nerr_raise(NERR_ASSERT, "city null");
 
-    if (!cgi || !cgi->hdf || !evt) return nerr_raise(NERR_ASSERT, "paramter null");
+        hdf_set_value(evt->hdfsnd, "c", city);
+        MEVENT_TRIGGER_NRET(evt, NULL, REQ_CMD_CITY_BY_S, FLAGS_SYNC);
+        cityid = hdf_get_int_value(evt->hdfrcv, "city.id", 0);
+    }
+    
+    evt = hash_lookup(evth, "member");
+    if (!evt) return nerr_raise(NERR_ASSERT, "member null");
 
     hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 
+    hdf_set_int_value(evt->hdfsnd, "cityid", cityid);
     hdf_set_value(evt->hdfsnd, "mstatu", "10");
     if (hdf_get_int_value(evt->hdfsnd, "dad", 0) == 1)
         hdf_set_value(evt->hdfsnd, "_addcar", "1");

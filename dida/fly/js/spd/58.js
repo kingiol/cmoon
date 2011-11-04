@@ -120,6 +120,12 @@ bmoon.spd58 = {
         console.log('sdate ' + sdate);
         console.log('stime ' + stime);
         console.log('attach ' + attach);
+
+        console.log('uid' + uid);
+        console.log('uname' + uname);
+        console.log('phone' + phone);
+        console.log('contact' + contact);
+        console.log('city' + city);
     },
     
     parseList: function() {
