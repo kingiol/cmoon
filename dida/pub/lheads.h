@@ -23,5 +23,6 @@
  * walker
  */
 #include "ospd.h"
+#include "opos.h"
 
 #endif    /* __LHEADS_H__ */

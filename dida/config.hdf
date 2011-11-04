@@ -17,10 +17,14 @@ Dataset {
 
 Db {
     Dsn {
+        city = pgsql:dbname=merry host=localhost user=dida password=loveu
     }
     QueryCond {
     }
     UpdateCol {
+        city {
+            latlng [type=point] = geopos
+        }
     }
 }
 

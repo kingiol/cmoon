@@ -4,6 +4,8 @@
 #define PREFIX_CITY   "City"
 #define CITY_CC_SEC   60000
 
+#define _COL_CITY "id, grade, pid, s, geopos"
+
 #define REDIRECT_MODE_1	 0x01
 #define	REDIRECT_MODE_2	 0x02
 #define	IP_RECORD_LENGTH 7

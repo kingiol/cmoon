@@ -9,6 +9,7 @@ static void lutil_donotcall()
 {
     zero_data_get(NULL, NULL, NULL, NULL);
     spd_data_get(NULL, NULL, NULL, NULL);
+    pos_data_get(NULL, NULL, NULL, NULL);
 }
 
 void* lutil_get_data_handler(void *lib, CGI *cgi, session_t *ses)

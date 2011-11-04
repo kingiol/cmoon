@@ -4,6 +4,7 @@ include $(BASEDIR)Make.env
 
 FILES = b/base.js \
 		b/map.js \
+		b/pos.js \
 		b/spd/58.user.js b/spd/58.js
 
 all: preload $(FILES)
@@ -17,6 +18,7 @@ b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js \
            bmoon.dida.js
 
 b/map.js: map.js
+b/pos.js: pos.js
 
 b/spd/58.user.js: spd/58.user.js
 b/spd/58.js: spd/58.js

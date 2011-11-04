@@ -7,6 +7,10 @@
 #define MEMBER_CC_SEC   60
 #define CAR_CC_SEC      60
 
+#define _COL_MEMBER "mid, mname, male, verify, credit, cityid, phone, contact, " \
+    " to_char(intime, 'YYYY-MM-DD') as intime"
+#define _COL_CAR "mid, size, model, mdate"
+
 enum {
     REQ_CMD_MEMBER_GET = 1001,
     REQ_CMD_MEMBER_ADD,

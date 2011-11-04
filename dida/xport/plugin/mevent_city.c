@@ -186,8 +186,6 @@ static bool ip2place(HDF *hdf, char *ip, char *key)
     return false;
 }
 
-#define CITY_COL "id, grade, pid, s, geopos"
-
 static NEOERR* city_cmd_s(struct city_entry *e, QueueEntry *q)
 {
 	unsigned char *val = NULL; size_t vsize = 0;
@@ -209,23 +207,23 @@ static NEOERR* city_cmd_s(struct city_entry *e, QueueEntry *q)
             if (!strstr(p, "省") && !strstr(p, "区"))
                 snprintf(tok, sizeof(tok), "%s省", p);
 
-            MDB_QUERY_RAW(db, "city", CITY_COL, "s=$1", "s", tok);
-            err = mdb_set_row(q->hdfsnd, db, CITY_COL, "province");
+            MDB_QUERY_RAW(db, "city", _COL_CITY, "s=$1", "s", tok);
+            err = mdb_set_row(q->hdfsnd, db, _COL_CITY, "province");
             nerr_ignore(&err);
         }
 
-        MDB_QUERY_RAW(db, "city", CITY_COL, "s=$1", "s", c);
-        err = mdb_set_row(q->hdfsnd, db, CITY_COL, "city");
+        MDB_QUERY_RAW(db, "city", _COL_CITY, "s=$1", "s", c);
+        err = mdb_set_row(q->hdfsnd, db, _COL_CITY, "city");
         if (nerr_handle(&err, NERR_NOT_FOUND)) {
             if (strstr(c, "市")) c[strlen(c)-3] = '\0';
-            MDB_QUERY_RAW(db, "city", CITY_COL, "s=$1", "s", c);
-            err = mdb_set_row(q->hdfsnd, db, CITY_COL, "city");
+            MDB_QUERY_RAW(db, "city", _COL_CITY, "s=$1", "s", c);
+            err = mdb_set_row(q->hdfsnd, db, _COL_CITY, "city");
         }
         if (err != STATUS_OK) return nerr_pass(err);
         
         int id = hdf_get_int_value(q->hdfsnd, "city.id", 0);
-        MDB_QUERY_RAW(db, "city", CITY_COL, "pid=%d", NULL, id);
-        err = mdb_set_rows(q->hdfsnd, db, CITY_COL, "subcities", NULL);
+        MDB_QUERY_RAW(db, "city", _COL_CITY, "pid=%d", NULL, id);
+        err = mdb_set_rows(q->hdfsnd, db, _COL_CITY, "subcities", NULL);
         if (err != STATUS_OK) return nerr_pass(err);
         
         CACHE_HDF(q->hdfsnd, CITY_CC_SEC, PREFIX_CITY"%s.%s", p, c);
@@ -286,8 +284,8 @@ static NEOERR* city_cmd_id(struct city_entry *e, QueueEntry *q)
     if (cache_getf(cd, &val, &vsize, PREFIX_CITY"%d", id)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
     } else {
-        MDB_QUERY_RAW(db, "city", CITY_COL, "id=%d", NULL, id);
-        err = mdb_set_row(q->hdfsnd, db, CITY_COL, "city");
+        MDB_QUERY_RAW(db, "city", _COL_CITY, "id=%d", NULL, id);
+        err = mdb_set_row(q->hdfsnd, db, _COL_CITY, "city");
         if (err != STATUS_OK) return nerr_pass(err);
 
         CACHE_HDF(q->hdfsnd, CITY_CC_SEC, PREFIX_CITY"%d", id);

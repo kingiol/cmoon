@@ -21,11 +21,6 @@ struct member_entry {
     struct member_stats st;
 };
 
-#define MEMBER_COL "mid, mname, male, verify, credit, cityid, phone, contact, " \
-    " to_char(intime, 'YYYY-MM-DD') as intime"
-
-#define CAR_COL "mid, size, model, mdate"
-
 static NEOERR* member_cmd_car_get(struct member_entry *e, QueueEntry *q)
 {
 	unsigned char *val = NULL; size_t vsize = 0;
@@ -44,8 +39,8 @@ static NEOERR* member_cmd_car_get(struct member_entry *e, QueueEntry *q)
     if (cache_getf(cd, &val, &vsize, PREFIX_CAR"%d", mid)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
     } else {
-        MDB_QUERY_RAW(db, "car", CAR_COL, "mid=%d", NULL, mid);
-        err = mdb_set_row(q->hdfsnd, db, CAR_COL, NULL);
+        MDB_QUERY_RAW(db, "car", _COL_CAR, "mid=%d", NULL, mid);
+        err = mdb_set_row(q->hdfsnd, db, _COL_CAR, NULL);
         if (err != STATUS_OK) return nerr_pass(err);
 
         CACHE_HDF(q->hdfsnd, CAR_CC_SEC, PREFIX_CAR"%d", mid);
@@ -70,12 +65,12 @@ static NEOERR* member_cmd_mem_get(struct member_entry *e, QueueEntry *q)
     if (cache_getf(cd, &val, &vsize, PREFIX_MEMBER"%d", mid)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
     } else {
-        MDB_QUERY_RAW(db, "member", MEMBER_COL, "mid=%d", NULL, mid);
-        err = mdb_set_row(q->hdfsnd, db, MEMBER_COL, NULL);
+        MDB_QUERY_RAW(db, "member", _COL_MEMBER, "mid=%d", NULL, mid);
+        err = mdb_set_row(q->hdfsnd, db, _COL_MEMBER, NULL);
         if (err != STATUS_OK) return nerr_pass(err);
 
-        MDB_QUERY_RAW(db, "car", CAR_COL, "mid=%d", NULL, mid);
-        err = mdb_set_row(q->hdfsnd, db, CAR_COL, NULL);
+        MDB_QUERY_RAW(db, "car", _COL_CAR, "mid=%d", NULL, mid);
+        err = mdb_set_row(q->hdfsnd, db, _COL_CAR, NULL);
         nerr_handle(&err, NERR_NOT_FOUND);
         if (err != STATUS_OK) return nerr_pass(err);
 
