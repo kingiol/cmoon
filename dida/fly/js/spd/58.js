@@ -6,8 +6,6 @@ bmoon.spd58 = {
         var o = bmoon.spd58;
         if (o.inited) return o;
 
-        o.dir = 'http://cs.58.com/pinche/';
-
         o.inited = true;
         return o;
     },
@@ -15,10 +13,11 @@ bmoon.spd58 = {
     onready: function() {
         var o = bmoon.spd58.init();
 
-        var ids = location.href.match(/.*\/([0-9]+)x\.shtml$/);
-        if (ids && ids[1]) {
-            o.parseNode(ids[1]);
-        } else {
+        var href = location.href;
+        
+        if (href.match(/.*\/([0-9]+)x\.shtml$/)) {
+            o.parseNode(href.match(/.*\/([0-9]+)x\.shtml$/)[1]);
+        } else if (href.match(/.*58.com\/pinche\//)) {
             o.parseList();
         }
     },
@@ -86,12 +85,13 @@ bmoon.spd58 = {
         $.getJSON('http://user.58.com/userdata/?callback=?',
                   {userid: uid},
                   function(data) {
-                      $.getJSON('http://admin.dida.com/json/spd?JsonCallback=?',
+                      $.getJSON('http://admin.dida.com/json/spd/do?JsonCallback=?',
                             {
                                 _op: 'add',
 
                                 ori: '58',
-                                mname: '_rsv_58_' + data.name,
+                                oid: id,
+                                mname: data.name + '@58.com',
                                 verify: data.license,
                                 credit: data.credit,
                                 city: city, // need convert to cityid
@@ -108,7 +108,10 @@ bmoon.spd58 = {
                                 sdate: sdate,
                                 stime: stime,
                                 attach: '来自58网友：' + uname + ' ' + attach
-                            }, function() {;});
+                            }, function() {
+                                window.opener = null;
+                                window.close();
+                            });
                   });
 
         console.log('dad ' + dad);
@@ -131,7 +134,31 @@ bmoon.spd58 = {
     parseList: function() {
         var o = bmoon.spd58.init();
 
-        console.log('list');
+        var
+        ids = [],
+        objs = $('a.t', '#infolist'),
+        reg = /.*\/pinche\/([0-9]+)x\.shtml$/;
+
+        $.each(objs, function(i, obj) {
+            if ($(obj).attr('href').match(reg)) {
+                ids.push($(obj).attr('href').match(reg)[1]);
+            }
+        });
+
+        $.getJSON('http://admin.dida.com/json/spd/pre?JsonCallback=?',
+                 {
+                     ori: '58',
+                     oids: ids
+                 }, function(data) {
+                     if (data.success == 1 && bmoon.utl.type(data.oids) == 'Object') {
+                         $.each(data.oids, function(key, val) {
+                             console.log(val);
+                             window.open(location.href.match(/.*58.com\/pinche\//)[0] + val + 'x.shtml');
+                         });
+                     } else {
+                         alert(data.errmsg || '操作失败');
+                     }
+                 })
     }
 };
 

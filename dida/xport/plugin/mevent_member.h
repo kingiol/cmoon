@@ -3,9 +3,11 @@
 
 #define PREFIX_MEMBER   "Member"
 #define PREFIX_CAR      "Car"
+#define PREFIX_SPD      "Spider"
 
 #define MEMBER_CC_SEC   60
 #define CAR_CC_SEC      60
+#define SPD_CC_SEC      60000
 
 #define _COL_MEMBER "mid, mname, male, verify, credit, cityid, phone, contact, " \
     " to_char(intime, 'YYYY-MM-DD') as intime"
@@ -15,7 +17,8 @@ enum {
     REQ_CMD_MEMBER_GET = 1001,
     REQ_CMD_MEMBER_ADD,
     REQ_CMD_CAR_GET,
-    REQ_CMD_CAR_ADD
+    REQ_CMD_CAR_ADD,
+    REQ_CMD_SPD_PEEL
 };
 
 enum {

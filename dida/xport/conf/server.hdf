@@ -34,6 +34,7 @@ Plugin {
                 mid [type=int, require=true] = mid
                 mname [maxlen=256, require=true] = mname
                 ori [type=int] = ori
+                oid [maxlen=64] = oid
                 male [type=int] = male
                 pass [maxlen=64] = pass
                 mstatu [type=int] = mstatu

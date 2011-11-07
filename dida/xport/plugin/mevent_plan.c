@@ -31,7 +31,7 @@ static NEOERR* plan_cmd_plan_add(struct plan_entry *e, QueueEntry *q)
 
     REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
 
-    hdf_set_int_value(q->hdfrcv, "mid", hash_string(mname));
+    hdf_set_int_value(q->hdfrcv, "mid", hash_string_rev(mname));
 
     err = mcs_build_incol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.plan"),

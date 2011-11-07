@@ -21,7 +21,7 @@ b/map.js: map.js
 b/pos.js: pos.js
 
 b/spd/58.user.js: spd/58.user.js
-b/spd/58.js: spd/58.js
+b/spd/58.js: pub/bmoon.js spd/58.js
 
 %.js:
 	@echo -n > $@
