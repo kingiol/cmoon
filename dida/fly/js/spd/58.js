@@ -65,7 +65,7 @@ bmoon.spd58 = {
         sdate = repeat == 2 ? '1,2,3,4,5': time.split(' ')[0];
         stime = time.split(' ')[1] ? time.split(' ')[1]: time.split(' ')[0];
 
-        attach = $('.maincon').html();
+        attach = $('.maincon').html().replace(/\<[^\>]+\>/g, "");
 
         var
         uid = $('.user').html().match('uid: \'([0-9]+)\''),
@@ -101,13 +101,14 @@ bmoon.spd58 = {
                                 size: size,
                                 
                                 dad: dad,
+                                nick: uname,
                                 saddr: saddr,
                                 eaddr: eaddr,
                                 marks: marks, // convert
                                 repeat: repeat,
                                 sdate: sdate,
                                 stime: stime,
-                                attach: '来自58网友：' + uname + ' ' + attach
+                                attach: attach
                             }, function() {
                                 window.opener = null;
                                 window.close();
@@ -135,13 +136,14 @@ bmoon.spd58 = {
         var o = bmoon.spd58.init();
 
         var
-        ids = [],
+        ids = [], urls = {},
         objs = $('a.t', '#infolist'),
         reg = /.*\/pinche\/([0-9]+)x\.shtml$/;
 
         $.each(objs, function(i, obj) {
             if ($(obj).attr('href').match(reg)) {
                 ids.push($(obj).attr('href').match(reg)[1]);
+                urls[$(obj).attr('href').match(reg)[1]] = $(obj).attr('href');
             }
         });
 
@@ -153,7 +155,7 @@ bmoon.spd58 = {
                      if (data.success == 1 && bmoon.utl.type(data.oids) == 'Object') {
                          $.each(data.oids, function(key, val) {
                              console.log(val);
-                             window.open(location.href.match(/.*58.com\/pinche\//)[0] + val + 'x.shtml');
+                             window.open(urls[val]);
                          });
                      } else {
                          alert(data.errmsg || '操作失败');

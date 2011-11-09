@@ -40,6 +40,7 @@ CREATE TABLE plan (
     id SERIAL,
     mid int NOT NULL DEFAULT 0,
     dad smallint NOT NULL DEFAULT 0,   --0 person, 1 car
+    nick varchar(32) NOT NULL DEFAULT '',
     pstatu smallint NOT NULL DEFAULT 0, --0 fresh, 1 pause, 2 delete, 10 spd fresh
     repeat smallint NOT NULL DEFAULT 0, --0 no, 1 day, 2 week
     seat smallint NOT NULL DEFAULT 4,

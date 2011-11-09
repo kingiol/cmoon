@@ -58,6 +58,7 @@ Plugin {
             plan {
                 mid [type=int, require=true] = mid
                 dad [type=int] = dad
+                nick [maxlen=32] = nick
                 pstatu [type=int] = pstatu
                 repeat [type=int] = repeat
                 seat [type=int] = seat
