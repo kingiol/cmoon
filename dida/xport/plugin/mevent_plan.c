@@ -21,6 +21,30 @@ struct plan_entry {
     struct plan_stats st;
 };
 
+static NEOERR* plan_cmd_plan_get(struct plan_entry *e, QueueEntry *q)
+{
+	unsigned char *val = NULL; size_t vsize = 0;
+    int id;
+	NEOERR *err;
+
+    mdb_conn *db = e->db;
+    struct cache *cd = e->cd;
+    
+    REQ_GET_PARAM_INT(q->hdfrcv, "id", id);
+
+    if (cache_getf(cd, &val, &vsize, PREFIX_PLAN"%d", id)) {
+        unpack_hdf(val, vsize, &q->hdfsnd);
+    } else {
+        MDB_QUERY_RAW(db, "plan", _COL_PLAN, "id=%d", NULL, id);
+        err = mdb_set_row(q->hdfsnd, db, _COL_PLAN, NULL);
+        if (err != STATUS_OK) return nerr_pass(err);
+
+        CACHE_HDF(q->hdfsnd, PLAN_CC_SEC, PREFIX_PLAN"%d", id);
+    }
+    
+    return STATUS_OK;
+}
+
 static NEOERR* plan_cmd_plan_add(struct plan_entry *e, QueueEntry *q)
 {
 	STRING str; string_init(&str);
@@ -45,6 +69,36 @@ static NEOERR* plan_cmd_plan_add(struct plan_entry *e, QueueEntry *q)
     return STATUS_OK;
 }
 
+static NEOERR* plan_cmd_plan_up(struct plan_entry *e, QueueEntry *q)
+{
+	STRING str; string_init(&str);
+    int id;
+	NEOERR *err;
+
+    mdb_conn *db = e->db;
+    struct cache *cd = e->cd;
+
+    REQ_GET_PARAM_INT(q->hdfrcv, "id", id);
+
+    err = plan_cmd_plan_get(e, q);
+	if (err != STATUS_OK) return nerr_pass(err);
+
+    if (!hdf_get_obj(q->hdfsnd, "mid"))
+        return nerr_raise(REP_ERR_PLAN_NEXIST, "plan %d not exist", id);
+
+    err = mcs_build_upcol(q->hdfrcv,
+                          hdf_get_obj(g_cfg, CONFIG_PATH".UpdateCol.appinfo"), &str);
+	if (err != STATUS_OK) return nerr_pass(err);
+
+    MDB_EXEC(db, NULL, "UPDATE plan SET %s WHERE id=%d;", NULL, str.buf, id);
+
+    string_clear(&str);
+
+    cache_delf(cd, PREFIX_PLAN"%d", id);
+    
+    return STATUS_OK;
+}
+
 static void plan_process_driver(EventEntry *entry, QueueEntry *q)
 {
     struct plan_entry *e = (struct plan_entry*)entry;
@@ -62,6 +116,9 @@ static void plan_process_driver(EventEntry *entry, QueueEntry *q)
         break;
     case REQ_CMD_PLAN_ADD:
         err = plan_cmd_plan_add(e, q);
+        break;
+    case REQ_CMD_PLAN_UP:
+        err = plan_cmd_plan_up(e, q);
         break;
     case REQ_CMD_STATS:
         st->msg_stats++;

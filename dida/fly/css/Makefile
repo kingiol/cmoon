@@ -3,18 +3,17 @@ include $(LOCALBASE)Make.env
 include $(BASEDIR)Make.env
 
 FILES = b/base.css \
-		b/map.css \
-		b/spd.css
+		b/admin/spd/post.css
 
 all: preload $(FILES)
 
 preload:
 	@mkdir -p b/
+	@mkdir -p b/admin/spd/
 
 b/base.css: reset.css base.css layout.css
 
-b/map.css: map.css
-b/spd.css: spd.css
+b/admin/spd/post.css: admin/spd/post.css
 
 %.css:
 	$(CSSGLUE) $^ > $@

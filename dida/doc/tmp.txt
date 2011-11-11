@@ -1,0 +1,18 @@
+member
+cityid 设置地图中心
+phone  设置 phone
+contact 设置 contact
+
+plan
+pstatu = 10
+
+saddr 设置起点  ==> scityid, rect, km
+eaddr 设置终点  ==> ecityid
+
++marks 设置 route
+
+
+seat
+
+scityid
+ecityid

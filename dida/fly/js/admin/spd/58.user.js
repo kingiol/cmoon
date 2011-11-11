@@ -9,6 +9,6 @@
 
 var e = document.createElement("script");
 
-e.src = 'http://www.dida.com/js/b/spd/58.js';
+e.src = 'http://www.dida.com/js/b/admin/spd/58.js';
 e.type="text/javascript";
 document.getElementsByTagName("head")[0].appendChild(e);

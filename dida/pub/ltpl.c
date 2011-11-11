@@ -198,7 +198,7 @@ NEOERR* ltpl_init(HASH **tplh, char *path)
 
     *tplh = NULL;
     
-    path = path ? path: PATH_TPL"config/";
+    path = path ? path: PATH_TPL"config/run/";
 	
     err = hash_init(&ltplh, hash_str_hash, hash_str_comp);
     if (err != STATUS_OK) return nerr_pass(err);

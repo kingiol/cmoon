@@ -17,7 +17,9 @@ Dataset {
 
 Db {
     Dsn {
+        member = pgsql:dbname=merry host=localhost user=dida password=loveu
         city = pgsql:dbname=merry host=localhost user=dida password=loveu
+        plan = pgsql:dbname=merry host=localhost user=dida password=loveu
     }
     QueryCond {
     }

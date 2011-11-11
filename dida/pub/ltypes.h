@@ -8,7 +8,7 @@ __BEGIN_DECLS
 typedef struct _session {
     int reqtype;
     time_t tm_cache_browser;
-    char *uname;
+    char *mname;
     char *dataer;
     char *render;
 } session_t;

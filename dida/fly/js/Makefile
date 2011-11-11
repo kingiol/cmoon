@@ -3,25 +3,23 @@ include $(LOCALBASE)Make.env
 include $(BASEDIR)Make.env
 
 FILES = b/base.js \
-		b/map.js \
-		b/pos.js \
-		b/spd/58.user.js b/spd/58.js
+		b/admin/pos.js \
+		b/admin/spd/58.user.js b/admin/spd/58.js b/admin/spd/post.js
 
 all: preload $(FILES)
 
 preload:
 	@mkdir -p b/
-	@mkdir -p b/spd/
+	@mkdir -p b/admin/spd/
 
 b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js \
            pub/bmoon.js \
            bmoon.dida.js
 
-b/map.js: map.js
-b/pos.js: pos.js
-
-b/spd/58.user.js: spd/58.user.js
-b/spd/58.js: pub/bmoon.js spd/58.js
+b/admin/pos.js: admin/pos.js
+b/admin/spd/58.user.js: admin/spd/58.user.js
+b/admin/spd/58.js: pub/bmoon.js admin/spd/58.js
+b/admin/spd/post.js: admin/spd/post.js
 
 %.js:
 	@echo -n > $@
