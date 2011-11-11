@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     err = mconfig_parse_file(SITE_CONFIG, &g_cfg);
     DIE_NOK_MTL(err);
 
-    err = ltpl_parse_file(NULL, NULL, PATH_TPL, "config/static.hdf", NULL);
+    err = ltpl_parse_file(NULL, NULL, PATH_TPL, "config/static/static.hdf", NULL);
     DIE_NOK_MTL(err);
 
     return 0;
