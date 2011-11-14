@@ -24,7 +24,7 @@ bmoon.spdpost = {
         o.eaddr = $('#eaddr');
         o.km = $('#km');
         o.marks = $('#marks');
-        o.submit = $('#submit');
+        o.next = $('#next');
         o.map = $('#map');
 
         o.plan = {};
@@ -39,22 +39,19 @@ bmoon.spdpost = {
 
         o.gsauto = new google.maps.places.Autocomplete($('#saddr')[0]);
         o.geauto = new google.maps.places.Autocomplete($('#eaddr')[0]);
-        o.gmauto = new google.maps.places.Autocomplete($('#marks')[0]);
+        o.ggeocode = new google.maps.Geocoder();
         o.gdirservice = new google.maps.DirectionsService();
         o.gdirrender = new google.maps.DirectionsRenderer();
-        o.ggeocode = new google.maps.Geocoder();
         o.ginfow = new google.maps.InfoWindow();
         o.gsmarker = new google.maps.Marker({
             map: o.gmap,
             draggable: true,
-            title: '设置起始位置',
-            icon: 'images/beachflag.png'
+            title: '设置起始位置'
         });
         o.gemarker = new google.maps.Marker({
             map: o.gmap,
             draggable: true,
-            title: '设置终点位置',
-            icon: '/img/bg.png'
+            title: '设置终点位置'
         });
         
 
@@ -77,7 +74,7 @@ bmoon.spdpost = {
         o.gdirrender.setMap(o.gmap);
 
         o.bindChange();
-        o.submit.click(o.savePlan);
+        o.next.click(o.savePlan);
     },
 
     getPlan: function() {
@@ -90,7 +87,7 @@ bmoon.spdpost = {
                 o.eaddr.val(p.eaddr);
                 o.plan = data.plan;
 
-                o.submit.attr('disabled', 'disabled');
+                o.next.attr('disabled', 'disabled');
             } else {
                 alert(data.errmsg || '获取数据失败，请稍后再试！');
             }
@@ -122,16 +119,21 @@ bmoon.spdpost = {
             p.ecity = city;
         }
 
-        if (p.sll && p.ell) o.submit.removeAttr('disabled');
+        if (p.sll && p.ell) o.next.removeAttr('disabled');
     },
 
     savePlan: function() {
         var o = bmoon.spdpost.init();
 
-        var p = o.plan;
+        var p = $(this).parent();
         if (!o.plan.sll || !o.plan.ell) return;
 
-        p.rect = '((' + p.sll.join(',') + '),(' + p.ell.join(',') + '))';
+        o.plan.rect = '((' + o.plan.sll.join(',') + '),(' +
+            o.plan.ell.join(',') + '))';
+
+		$('.vres', p).remove();
+		p.removeClass('success').removeClass('error').addClass('loading');
+        
 
         $.getJSON('/json/spd/post',
                {
@@ -140,9 +142,14 @@ bmoon.spdpost = {
                    _type_plan: 'object'
                }, function(data) {
                    if (data.success == 1) {
-                       ;
+                       setTimeout(function() {
+                           o.getPlan();
+                           p.removeClass('loading');
+                           p.addClass('success');
+                       }, 2000);
                    } else {
-                       alert(data.errmsg || '操作失败，请联系ml！');
+                       p.addClass('error');
+                       $('<span class="vres">'+ data.errmsg +'</span>').appendTo(p);
                    }
                });
     },

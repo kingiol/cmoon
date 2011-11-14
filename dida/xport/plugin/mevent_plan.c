@@ -87,7 +87,7 @@ static NEOERR* plan_cmd_plan_up(struct plan_entry *e, QueueEntry *q)
         return nerr_raise(REP_ERR_PLAN_NEXIST, "plan %d not exist", id);
 
     err = mcs_build_upcol(q->hdfrcv,
-                          hdf_get_obj(g_cfg, CONFIG_PATH".UpdateCol.appinfo"), &str);
+                          hdf_get_obj(g_cfg, CONFIG_PATH".UpdateCol.plan"), &str);
 	if (err != STATUS_OK) return nerr_pass(err);
 
     MDB_EXEC(db, NULL, "UPDATE plan SET %s WHERE id=%d;", NULL, str.buf, id);

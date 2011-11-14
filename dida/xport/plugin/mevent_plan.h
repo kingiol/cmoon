@@ -19,6 +19,7 @@ enum {
 
 enum {
     PLAN_ST_FRESH = 0,
+    PLAN_ST_SPD_OK,
     PLAN_ST_PAUSE,
     PLAN_ST_DELETE,
     PLAN_ST_SPD_FRESH = 10

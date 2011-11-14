@@ -95,13 +95,13 @@ NEOERR* spd_post_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     int mid = hdf_get_int_value(cgi->hdf, PRE_OUTPUT".plan.mid", 0);
 
     MDB_QUERY_RAW(db, "member", _COL_MEMBER, "mid=%d", NULL, mid);
-    err = mdb_set_row(cgi->hdf, db, _COL_MEMBER, PRE_OUTPUT".plan");
+    err = mdb_set_row(cgi->hdf, db, _COL_MEMBER, PRE_OUTPUT".member");
     if (err != STATUS_OK) return nerr_pass(err);
 
     int cityid = hdf_get_int_value(cgi->hdf, PRE_OUTPUT".plan.cityid", 0);
 
     MDB_QUERY_RAW(db, "city", _COL_CITY, "id=%d", NULL, cityid);
-    mdb_set_row(cgi->hdf, db, _COL_CITY, PRE_OUTPUT".plan");
+    mdb_set_row(cgi->hdf, db, _COL_CITY, PRE_OUTPUT".city");
     nerr_ignore(&err);
     
     return STATUS_OK;
@@ -128,11 +128,15 @@ NEOERR* spd_post_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
         if (sc) {
             sc = hdf_get_valuef(evt->hdfrcv, "city.%s.id", sc);
-            scid = atoi(sc);
+            if (sc) scid = atoi(sc);
+            else mtc_warn("start city %s cityid not found",
+                          hdf_get_value(cgi->hdf, PRE_QUERY".plan.scity", NULL));
         }
         if (ec) {
             ec = hdf_get_valuef(evt->hdfrcv, "city.%s.id", ec);
-            ecid = atoi(ec);
+            if (ec) ecid = atoi(ec);
+            else mtc_warn("end city %s cityid not found",
+                          hdf_get_value(cgi->hdf, PRE_QUERY".plan.ecity", NULL));
         }
     }
     
@@ -145,6 +149,7 @@ NEOERR* spd_post_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY".plan"));
     if (sc) hdf_set_int_value(evt->hdfsnd, "scityid", scid);
     if (ec )hdf_set_int_value(evt->hdfsnd, "ecityid", ecid);
+    hdf_set_int_value(evt->hdfsnd, "pstatu", PLAN_ST_SPD_OK);
 
     MEVENT_TRIGGER(evt, NULL, REQ_CMD_PLAN_UP, FLAGS_NONE);
 

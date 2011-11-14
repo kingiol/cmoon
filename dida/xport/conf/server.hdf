@@ -82,6 +82,20 @@ Plugin {
                 estmin [type=int] = estmin
             }
         }
+        UpdateCol {
+            plan {
+                id [type=int, require=true] = id
+                pstatu [type=int] = pstatu
+                scityid [type=int] = scityid
+                ecityid [type=int] = ecityid
+                saddr [maxlen=256] = saddr
+                eaddr [maxlen=256] = eaddr
+
+                rect [type=box] = rect
+                route [type=path] = route
+                km [type=float] = km
+            }
+        }
     }
     city {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
