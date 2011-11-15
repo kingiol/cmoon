@@ -80,15 +80,29 @@ NEOERR* spd_do_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 NEOERR* spd_post_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
     mdb_conn *db = hash_lookup(dbh, "plan");
+
+    if (!cgi || !cgi->hdf || !db) return nerr_raise(NERR_ASSERT, "paramter null");
+
+    MMISC_PAGEDIV_SET(cgi->hdf, PRE_OUTPUT, db, "plan", "pstatu=%d",
+                      NULL, PLAN_ST_SPD_FRESH);
+    
+    return STATUS_OK;
+}
+
+NEOERR* spd_post_do_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+    mdb_conn *db = hash_lookup(dbh, "plan");
 	NEOERR *err;
 
     if (!cgi || !cgi->hdf || !db) return nerr_raise(NERR_ASSERT, "paramter null");
 
-    MDB_QUERY_RAW(db, "plan", _COL_PLAN, "pstatu=%d LIMIT 1",
-                  NULL, PLAN_ST_SPD_FRESH);
+    int id = hdf_get_int_value(cgi->hdf, PRE_QUERY".exceptid", 0);
+
+    MDB_QUERY_RAW(db, "plan", _COL_PLAN, "pstatu=%d AND id !=%d LIMIT 1",
+                  NULL, PLAN_ST_SPD_FRESH, id);
     err = mdb_set_row(cgi->hdf, db, _COL_PLAN, PRE_OUTPUT".plan");
 	if (err != STATUS_OK) return nerr_pass(err);
-
+    
     db = hash_lookup(dbh, "member");
     if (!db) return nerr_raise(NERR_ASSERT, "member null");
 
@@ -107,7 +121,7 @@ NEOERR* spd_post_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     return STATUS_OK;
 }
 
-NEOERR* spd_post_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* spd_post_do_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
     mevent_t *evt;
     char *sc, *ec;

@@ -24,6 +24,7 @@ bmoon.spdpost = {
         o.eaddr = $('#eaddr');
         o.km = $('#km');
         o.marks = $('#marks');
+        o.count = $('#count');
         o.next = $('#next');
         o.map = $('#map');
 
@@ -80,7 +81,9 @@ bmoon.spdpost = {
     getPlan: function() {
         var o = bmoon.spdpost.init();
 
-        $.getJSON('/json/spd/post', null, function(data) {
+        var opt = o.plan.id ? {exceptid: o.plan.id} : null;
+
+        $.getJSON('/json/spd/post/do', opt, function(data) {
             if (data.success == 1 && bmoon.utl.type(data.plan) == 'Object') {
                 var p = data.plan;
                 o.saddr.val(p.saddr);
@@ -135,23 +138,22 @@ bmoon.spdpost = {
 		p.removeClass('success').removeClass('error').addClass('loading');
         
 
-        $.getJSON('/json/spd/post',
+        $.post('/json/spd/post/do',
                {
                    _op: 'mod',
                    plan: JSON.stringify(o.plan),
                    _type_plan: 'object'
                }, function(data) {
                    if (data.success == 1) {
-                       setTimeout(function() {
-                           o.getPlan();
-                           p.removeClass('loading');
-                           p.addClass('success');
-                       }, 2000);
+                       o.count.text(--mgd._ntt);
+                       p.removeClass('loading');
+                       p.addClass('success');
+                       o.getPlan();
                    } else {
                        p.addClass('error');
                        $('<span class="vres">'+ data.errmsg +'</span>').appendTo(p);
                    }
-               });
+               }, 'json');
     },
 
     rendDirect: function() {

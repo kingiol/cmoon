@@ -1,4 +1,8 @@
-<h2>入库前</h2>
+<h2>入库前
+<span class="slight">
+  <span id="count" class="text-red"> <?cs var: Output._ntt ?></span> 条待入库
+</span>
+</h2>
 
 <div>
   <dl class="inp">
@@ -17,3 +21,11 @@
 
 <div id="map">
 </div>
+
+<script>
+  var mgd = mgd || {};
+
+  mgd._ntt = <?cs var: Output._ntt ?>;
+
+  mgd._done = 1;  
+</script>
