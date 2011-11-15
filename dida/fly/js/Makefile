@@ -19,7 +19,7 @@ b/base.js: pub/jquery-1.4.2.js pub/jquery.cookie.js \
 b/admin/pos.js: admin/pos.js
 b/admin/spd/58.user.js: admin/spd/58.user.js
 b/admin/spd/58.js: pub/bmoon.js admin/spd/58.js
-b/admin/spd/post.js: admin/spd/post.js
+b/admin/spd/post.js: pub/bmoon.js admin/spd/post.js
 
 %.js:
 	@echo -n > $@

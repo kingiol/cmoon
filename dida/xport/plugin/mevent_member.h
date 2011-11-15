@@ -16,6 +16,7 @@
 enum {
     REQ_CMD_MEMBER_GET = 1001,
     REQ_CMD_MEMBER_ADD,
+    REQ_CMD_MEMBER_UP,
     REQ_CMD_CAR_GET,
     REQ_CMD_CAR_ADD,
     REQ_CMD_SPD_PEEL
@@ -23,7 +24,8 @@ enum {
 
 enum {
     REP_ERR_MEMBERED = 31,
-    REP_ERR_CARED
+    REP_ERR_CARED,
+    REP_ERR_MEMBER_NEXIST
 };
 
 #endif    /* __MEVENT_MEMBER_H__ */

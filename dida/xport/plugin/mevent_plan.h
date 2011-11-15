@@ -26,7 +26,7 @@ enum {
 };
 
 enum {
-    REP_ERR_PLAN_NEXIST = 33
+    REP_ERR_PLAN_NEXIST = 34
 };
 
 #endif    /* __MEVENT_PLAN_H__ */

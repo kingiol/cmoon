@@ -18,6 +18,8 @@ int LERR_ATTACK    = 0;            /* 30 */
  */
 int LERR_MEMBERED = 0;
 int LERR_CARED = 0;
+int LERR_MEMBER_NEXIST = 0;
+int LERR_PLAN_NEXIST = 0;
 
 /*
  * app error
@@ -55,6 +57,10 @@ NEOERR* lerr_init()
         err = nerr_register(&LERR_MEMBERED, "用户名已被注册！");
         if (err != STATUS_OK) return nerr_pass(err);
         err = nerr_register(&LERR_CARED, "一个帐户只能拥有一辆车！");
+        if (err != STATUS_OK) return nerr_pass(err);
+        err = nerr_register(&LERR_MEMBER_NEXIST, "用户不存在");
+        if (err != STATUS_OK) return nerr_pass(err);
+        err = nerr_register(&LERR_PLAN_NEXIST, "路线不存在");
         if (err != STATUS_OK) return nerr_pass(err);
 
         err = nerr_register(&LERR_USERINPUT, "输入参数错误");

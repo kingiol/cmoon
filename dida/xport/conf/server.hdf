@@ -51,6 +51,22 @@ Plugin {
                 mdate [maxlen=64] = mdate
             }
         }
+        UpdateCol {
+            member {
+                mid [type=int, require=true] = mid
+                mname [maxlen=256, require=true] = mname
+                ori [type=int] = ori
+                oid [maxlen=64] = oid
+                male [type=int] = male
+                pass [maxlen=64] = pass
+                mstatu [type=int] = mstatu
+                verify [type=int] = verify
+                credit [type=int] = credit
+                cityid [type=int] = cityid
+                phone [maxlen=128] = phone
+                contact [maxlen=128] = contact
+            }
+        }
     }
     plan {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu

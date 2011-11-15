@@ -167,5 +167,13 @@ NEOERR* spd_post_do_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
     MEVENT_TRIGGER(evt, NULL, REQ_CMD_PLAN_UP, FLAGS_NONE);
 
+    if (hdf_get_obj(cgi->hdf, PRE_QUERY".member")) {
+        evt = hash_lookup(evth, "member");
+        if (!evt) return nerr_raise(NERR_ASSERT, "member null");
+
+        hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY".member"));
+        MEVENT_TRIGGER(evt, NULL, REQ_CMD_MEMBER_UP, FLAGS_NONE);
+    }
+
     return STATUS_OK;
 }

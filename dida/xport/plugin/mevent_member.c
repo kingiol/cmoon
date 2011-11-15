@@ -175,6 +175,36 @@ static NEOERR* member_cmd_mem_add(struct member_entry *e, QueueEntry *q)
     return STATUS_OK;
 }
 
+static NEOERR* member_cmd_mem_up(struct member_entry *e, QueueEntry *q)
+{
+	STRING str; string_init(&str);
+    int mid;
+	NEOERR *err;
+
+    mdb_conn *db = e->db;
+    struct cache *cd = e->cd;
+
+    REQ_GET_PARAM_INT(q->hdfrcv, "mid", mid);
+
+    err = member_cmd_mem_get(e, q);
+	if (err != STATUS_OK) return nerr_pass(err);
+
+    if (!hdf_get_obj(q->hdfsnd, "mid"))
+        return nerr_raise(REP_ERR_MEMBER_NEXIST, "member %d not exist", mid);
+
+    err = mcs_build_upcol(q->hdfrcv,
+                          hdf_get_obj(g_cfg, CONFIG_PATH".UpdateCol.member"), &str);
+	if (err != STATUS_OK) return nerr_pass(err);
+
+    MDB_EXEC(db, NULL, "UPDATE member SET %s WHERE mid=%d;", NULL, str.buf, mid);
+
+    string_clear(&str);
+
+    cache_delf(cd, PREFIX_MEMBER"%d", mid);
+    
+    return STATUS_OK;
+}
+
 static NEOERR* member_cmd_spd_peel(struct member_entry *e, QueueEntry *q)
 {
     char *ori, *id;
@@ -213,6 +243,9 @@ static void member_process_driver(EventEntry *entry, QueueEntry *q)
         break;
     case REQ_CMD_MEMBER_ADD:
         err = member_cmd_mem_add(e, q);
+        break;
+    case REQ_CMD_MEMBER_UP:
+        err = member_cmd_mem_up(e, q);
         break;
     case REQ_CMD_CAR_GET:
         err = member_cmd_car_get(e, q);

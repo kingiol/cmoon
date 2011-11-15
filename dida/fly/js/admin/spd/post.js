@@ -25,6 +25,10 @@ bmoon.spdpost = {
         o.km = $('#km');
         o.marks = $('#marks');
         o.count = $('#count');
+        o.phone = $('#phone');
+        o.phoneimg = $('#img-phone');
+        o.contact = $('#contact');
+        o.contactimg = $('img-contact');
         o.next = $('#next');
         o.map = $('#map');
 
@@ -89,6 +93,9 @@ bmoon.spdpost = {
                 o.saddr.val(p.saddr);
                 o.eaddr.val(p.eaddr);
                 o.plan = data.plan;
+                o.member = data.member;
+                o.phoneimg.attr('src', bmoon.utl.clotheHTML(data.member.phone));
+                o.contactimg.attr('src', bmoon.utl.clotheHTML(data.member.contact));
 
                 o.next.attr('disabled', 'disabled');
             } else {
@@ -128,32 +135,41 @@ bmoon.spdpost = {
     savePlan: function() {
         var o = bmoon.spdpost.init();
 
-        var p = $(this).parent();
+        var phone = o.phone.val(),
+        contact = o.contact.val(),
+        p = $(this).parent();
+        
         if (!o.plan.sll || !o.plan.ell) return;
 
+        var pdata = {
+            _op: 'mod',
+            plan: JSON.stringify(o.plan),
+            _type_plan: 'object'
+        };
+        if (phone.length || contact.length) {
+            if (phone) o.member.phone = phone;
+            if (contact) o.member.contact = contact;
+            pdata.member = JSON.stringify(o.member);
+            pdata._type_member = 'object';
+        }
+        
         o.plan.rect = '((' + o.plan.sll.join(',') + '),(' +
             o.plan.ell.join(',') + '))';
 
 		$('.vres', p).remove();
 		p.removeClass('success').removeClass('error').addClass('loading');
-        
 
-        $.post('/json/spd/post/do',
-               {
-                   _op: 'mod',
-                   plan: JSON.stringify(o.plan),
-                   _type_plan: 'object'
-               }, function(data) {
-                   if (data.success == 1) {
-                       o.count.text(--mgd._ntt);
-                       p.removeClass('loading');
-                       p.addClass('success');
-                       o.getPlan();
-                   } else {
-                       p.addClass('error');
-                       $('<span class="vres">'+ data.errmsg +'</span>').appendTo(p);
-                   }
-               }, 'json');
+        $.post('/json/spd/post/do', pdata, function(data) {
+            if (data.success == 1) {
+                o.count.text(--mgd._ntt);
+                p.removeClass('loading');
+                p.addClass('success');
+                o.getPlan();
+            } else {
+                p.addClass('error');
+                $('<span class="vres">'+ data.errmsg +'</span>').appendTo(p);
+            }
+        }, 'json');
     },
 
     rendDirect: function() {

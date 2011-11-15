@@ -7,11 +7,19 @@
 <div>
   <dl class="inp">
     <dt>起点</dt>
-    <dd><input type="text" class="llong" id="saddr" /></dd>
-    
-    <dt>终点</dt>
     <dd>
+      <input type="text" class="llong" id="saddr" />
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      终点&nbsp;&nbsp;
       <input type="text" class="llong" id="eaddr" /><span id="km"></span>
+    </dd>
+    
+    <dt>电话</dt>
+    <dd>
+      <input type="text" id="phone" /> <img id="img-phone" src="" />
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      联系&nbsp;&nbsp;
+      <input type="text" id="contact" /> <img id="img-contact" src="" />
       &nbsp;&nbsp;&nbsp;&nbsp;
       <input type="button" id="next" value="下一条" />
       <span class="indicator"></span>
@@ -27,5 +35,5 @@
 
   mgd._ntt = <?cs var: Output._ntt ?>;
 
-  mgd._done = 1;  
+  mgd._done = 1;
 </script>
