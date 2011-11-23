@@ -13,7 +13,14 @@
   </head>
 
   <body>
+    <div id="bd-bg-left"></div>
+    <div id="bd-bg-right"></div>
     <div id="bd-top">
+      <ul id="bd-nav">
+        <?cs each:tab = Layout.tabs ?>
+        <li><a class="btn" href="<?cs var:tab.href ?>" class="<?cs var:tab.class ?>"><?cs var:tab.name ?></a></li>
+        <?cs /each ?>
+      </ul>
     </div>
 
     <div id="bd-mid">
@@ -24,6 +31,8 @@
     </div>
 
     <div id="bd-bot">
+      <div class="l"></div>
+      <div class="r"></div>
     </div>
   </body>
   

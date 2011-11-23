@@ -1,6 +1,7 @@
 /* ELEMENT */
-body {background: #f6f6f6 url(/img/bg/bg.jpg) repeat-x;}
-a {color: #DB3946; cursor: pointer; text-decoration: none;}
+body {background: #e1ecee url(/img/bg/bg.jpg) repeat-x;}
+/*a {color: #DB3946; cursor: pointer; text-decoration: none;}*/
+a {color: #962828; cursor: pointer; text-decoration: none;}
 h1 {margin: 2.5em 0 2em   0;}
 h2 {margin: 2em   0 1.5em 0;}
 h3 {margin: 1.5em 0 0.8em 0;}
@@ -26,8 +27,15 @@ input.btn-w:hover {cursor: pointer; background-positon: -80px -28px;}
 input.long {width: 200px;}
 input.llong {width: 300px;}
 
-a.btn {display: inline-block; height: 28px; width: 80px; text-align: center; color: #fff; background: url(/img/bg/btn.png) 0 0 no-repeat;}
-a.btn:hover {background-position: 0 -28px;}
+a.btn {
+    display: inline-block;
+    height: 40px;
+    width: 120px;
+    line-height: 40px;
+    text-align: center;
+    background: url(/img/bg/btn.png) 0 0 no-repeat;
+}
+a.btn:hover {background-position: 0 -40px;}
 
 dl.inp dt {float: left; width: 100px; line-height: 22px; margin: 0 13px 0 0; text-align: right;}
 dl.inp dd {margin: 10px 0;    line-height: 22px;}

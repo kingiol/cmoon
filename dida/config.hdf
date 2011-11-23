@@ -8,8 +8,12 @@ Dataset {
     layout.html {
         tabs {
             0 {
-                name = 首页
-                href = /index.html
+                name = 邀人同去
+                href = /iman
+            }
+            1 {
+                name = 邀车前往
+                href = /icar
             }
         }
     }
