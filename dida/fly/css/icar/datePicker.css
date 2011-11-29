@@ -62,10 +62,10 @@ table.jCalendar td.unselectable.dp-hover {
 div.dp-popup {
 	position: relative;
 	background: #ccc;
-	font-size: 10px;
-	font-family: arial, sans-serif;
+/*	font-size: 10px; */
+/*	font-family: arial, sans-serif;*/
 	padding: 2px;
-	width: 171px;
+	width: 186px;
 	line-height: 1.2em;
 }
 div#dp-popup {

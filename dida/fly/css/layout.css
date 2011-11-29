@@ -51,7 +51,7 @@
 }
 
 #bd-top img {float: left;}
-#bd-mid {margin-top: 2ex; min-height: 300px;}
+#bd-mid {margin-top: 2ex; min-height: 270px;}
 #bd-bot p {text-indent: 0; margin: 2px;}
 #bd-bot p.right {text-align: right;}
 
@@ -61,7 +61,7 @@
 #bd-member {display: none;}
 
 #bd-nav {
-    font: bold 12px Georgia;
+    font: bold 14px Georgia;
     height: 40px;
     padding: 0;
 }
@@ -107,6 +107,7 @@
     line-height: 18px;
     border: 1px solid #78f1fe;
     background: #FFF;
+    overflow: auto;
 }
 
 #bd-content pre {

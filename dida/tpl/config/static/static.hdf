@@ -14,33 +14,21 @@ index {
     Output = index.html
 }
 
-map {
+icar {
     Layout = layout.html
     Dataset {
         Layout {
-            css = <link rel="stylesheet" type="text/css" href="/css/b/map.css" />
+            css = <link rel="stylesheet" type="text/css" href="/css/b/icar.css" />
             js << EOM
-                <script src="http://maps.google.com/maps/api/js?sensor=false&language=zh-CN&libraries=places"></script>
-                <script type="text/javascript" src="/js/b/map.js"></script>
+                <!--[if IE]><script type="text/javascript" src="/js/b/icar_ie.js"></script><![endif]-->
+                <script type="text/javascript" src="/js/b/icar.js"></script>
 EOM
+            title = 邀车前往
+            tabpart = 1
         }
         Include {
-            content = map.html
+            content = icar.html
         }
     }
-    Output = map.html
-}
-
-spd {
-    Layout = layout.html
-    Dataset {
-        Layout {
-            css = <link rel="stylesheet" type="text/css" href="/css/b/spd.css" />
-            js = <script type="text/javascript" src="/js/b/spd.js"></script>
-        }
-        Include {
-            content = spd.html
-        }
-    }
-    Output = spd.html
+    Output = icar.html
 }

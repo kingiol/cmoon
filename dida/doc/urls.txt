@@ -8,3 +8,8 @@ admin
     	GET /json/spd/pre   爬虫入库前数据查询
     	ADD /json/spd/do    爬虫入数据 member, car, plan
     	GET /json/spd/post  爬虫数据入库前最后一步人工干预
+
+
+index.html
+icar.html
+iman.html

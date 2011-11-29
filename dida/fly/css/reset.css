@@ -23,8 +23,8 @@ button, input, select, textarea { /* for ie */
 }
 
 h1 { font-size: 18px; /* 18px / 12px = 1.5 */ }
-h2 { font-size: 16px; }
-h3 { font-size: 13px; }
+h2 { font-size: 14px; }
+h3 { font-size: 12px; }
 h4, h5, h6 { font-size: 100%; }
 
 address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
