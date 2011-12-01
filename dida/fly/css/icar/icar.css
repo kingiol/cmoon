@@ -1,8 +1,68 @@
-#s-date {
-    float: left;
-    margin-right: 20px;
+.page-hint, .active, #calroot {
+	-moz-border-radius:4px;		
 }
 
-#s-time {
-    padding: 60px;
+.page-hint label {
+	float:left;
+	display:block;
+	border:1px solid transparent;
+	margin-right:15px;
+    padding: 6px;
+    line-height: 28px;
+}
+
+.page-hint .active {
+	background-color:#fff;
+	color:#333;
+	border:1px solid #ccc;
+	border-bottom:0;
+}
+
+.active input {
+	color:#333;
+	text-shadow:none;
+}
+
+.active .caltrigger {
+	background-position: 0 -32px;		
+}
+
+#date-hint {
+    position: relative;
+	text-shadow:0 0 1px #000;
+    width: 40px;
+    height: 20px;
+    top: -28px;
+    left: 111px;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+#timestamp {
+	-moz-border-radius:5px;
+	background-color:#36387B;
+	color:#FFFFFF;
+	float:left;
+	height:117px;
+	padding:40px 60px;
+	text-shadow:0 0 5px #DDDDDD;
+	text-align:center;
+	width:117px;
+}
+
+#timestamp span {
+	display:block;
+	font-size:16px;
+    margin-top:40px;
+}
+
+#timestamp .top {
+    margin: 0 auto;
+}
+
+#timestamp .mid {
+	font-size:90px;
 }

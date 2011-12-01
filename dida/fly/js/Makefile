@@ -3,6 +3,7 @@ include $(LOCALBASE)Make.env
 include $(BASEDIR)Make.env
 
 FILES = b/base.js \
+		b/loadgmap.js \
 		b/icar.js \
 		b/admin/pos.js \
 		b/admin/spd/58.user.js b/admin/spd/58.js b/admin/spd/post.js
@@ -17,8 +18,9 @@ b/base.js: pub/jquery-1.7.1.js pub/jquery.cookie.js \
            pub/bmoon.js \
            bmoon.dida.js
 
-b/icar_ie.js: pub/datepicker/jquery.bgiframe.min.js
-b/icar.js: pub/datepicker/date.js pub/datepicker/date_zh.js pub/datepicker/jquery.datePicker.js pub/jquerytools/src/tabs/tabs.js icar.js
+b/loadgmap.js: loadgmap.js
+
+b/icar.js: pub/jquerytools/src/dateinput/dateinput.js icar.js
 
 b/admin/pos.js: admin/pos.js
 b/admin/spd/58.user.js: admin/spd/58.user.js

@@ -14,7 +14,7 @@ preload:
 
 b/base.css: reset.css base.css layout.css
 
-b/icar.css: icar/datePicker.css icar/tabs.css icar/icar.css
+b/icar.css: icar/dateinput.css icar/icar.css
 
 b/admin/spd/post.css: admin/spd/post.css
 
