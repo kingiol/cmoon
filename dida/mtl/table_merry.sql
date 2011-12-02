@@ -35,7 +35,7 @@ CREATE TABLE car (
 );
 CREATE INDEX car_index ON car (size);
 
-
+--keep plan clean (no history useless plan) please
 CREATE TABLE plan (
     id SERIAL,
     mid int NOT NULL DEFAULT 0,

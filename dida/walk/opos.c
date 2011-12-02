@@ -32,3 +32,40 @@ NEOERR* pos_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
     return STATUS_OK;
 }
+
+NEOERR* city_ip_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+    mevent_t *evt = hash_lookup(evth, "city");
+    char *ip;
+
+    if (!cgi || !cgi->hdf || !evt) return nerr_raise(NERR_ASSERT, "paramter null");
+
+    ip = hdf_get_value(cgi->hdf, PRE_QUERY".ip", NULL);
+    if (!ip) ip = hdf_get_value(cgi->hdf, PRE_REQ_IP, "0.0.0.0");
+
+    hdf_set_value(evt->hdfsnd, "ip", ip);
+
+    MEVENT_TRIGGER(evt, NULL, REQ_CMD_CITY_BY_IP, FLAGS_SYNC);
+
+    hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
+
+    return STATUS_OK;
+}
+
+NEOERR* city_s_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+    mevent_t *evt = hash_lookup(evth, "city");
+    char *s;
+
+    if (!cgi || !cgi->hdf || !evt) return nerr_raise(NERR_ASSERT, "paramter null");
+
+    HDF_GET_STR(cgi->hdf, PRE_QUERY".c", s);
+
+    hdf_set_value(evt->hdfsnd, "c", s);
+
+    MEVENT_TRIGGER(evt, NULL, REQ_CMD_CITY_BY_S, FLAGS_SYNC);
+
+    hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
+
+    return STATUS_OK;
+}

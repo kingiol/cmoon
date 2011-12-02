@@ -15,6 +15,7 @@ __BEGIN_DECLS
 #define PATH_TPL		PATH_SITE"tpl/"
 #define PATH_MTL		PATH_SITE"mtl/"
 
+#define PRE_REQ_IP      PRE_CGI".RemoteAddress"
 #define PRE_REQ_URI     PRE_CGI".ScriptName"    /* lutil_file_access() */
 #define PRE_REQ_URI_RW  PRE_QUERY".ScriptName"  /* lutil_file_access_rewrited() */
 #define PRE_REQ_AJAX_FN PRE_QUERY".JsonCallback"/* main() */

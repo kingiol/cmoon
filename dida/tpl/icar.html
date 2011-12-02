@@ -1,7 +1,7 @@
 <h2>邀车前往，请输入出发日期和地点</h2>
 
 <div class="page-hint">
-  <label>
+  <div class="label">
     　
     <select id="num" value="1">
       <option value="1">1人</option>
@@ -11,16 +11,16 @@
       <option value="5">5人</option>
       <option value="6">5人以上</option>
     </select>
-  </label>
+  </div>
 
-  <label>于</label>
+  <div class="label">于</div>
 
-  <label>
+  <div class="label">
     <input type="date" id="date-input" name="departure" value="0" />
     <div id="date-hint">今天</div>
-  </label>
+  </div>
 
-  <label>
+  <div class="label">
     　<select id="hour">
       <option value="08" selected="selected">08</option>
       <option value="09">09</option>
@@ -56,11 +56,10 @@
       <option value="40">40</option>
       <option value="50">50</option>
     </select>
-  </label>
+  </div>
 
-  <label>
-    之后
-    <select id="day" value="0">
+  <div class="label">
+    　<select id="day" value="0">
       <option value="0">仅当天</option>
       <option value="1">1天内</option>
       <option value="2">2天内</option>
@@ -68,19 +67,20 @@
       <option value="4">4天内</option>
       <option value="5">5天内</option>
       <option value="6">6天内</option>
-      <option value="7">7天内</option>
+      <option value="7">之后所有时间</option>
     </select>
-  </label>
+  </div>
   
   <div class="clearer"></div>
 
-  <label>
+  <div class="label">
     从 <input type="text" class="llong" id="saddr" placeholder="输入起点" />
-  </label>
+  </div>
 
-  <label>
+  <div class="label">
     出发至 <input type="text" class="llong" id="eaddr" placeholder="输入终点" />
-  </label>
+    &nbsp; <input type="button" id="submit" value="搜索" disabled="disabled" />
+  </div>
 
   <div class="clearer"></div>
 </div>

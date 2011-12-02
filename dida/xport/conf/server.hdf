@@ -70,6 +70,8 @@ Plugin {
     }
     plan {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
+        geoaMin = 10
+        geoaMax = 100
         InsertCol {
             plan {
                 mid [type=int, require=true] = mid
@@ -110,6 +112,19 @@ Plugin {
                 rect [type=box] = rect
                 route [type=path] = route
                 km [type=float] = km
+            }
+        }
+        QueryCond {
+            geoa {
+                dad [type=int, require=true] = dad =
+                pstatu [type=int, require=true] = pstatu <
+                scityid [type=int] = scityid =
+                ecityid [type=int] = ecityid =
+            }
+            geob {
+                dad [type=int, require=true] = dad =
+                pstatu [type=int, require=true] = pstatu <
+                rect [type=box] = rect @>
             }
         }
     }

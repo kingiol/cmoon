@@ -45,6 +45,79 @@ static NEOERR* plan_cmd_plan_get(struct plan_entry *e, QueueEntry *q)
     return STATUS_OK;
 }
 
+/*
+ * get plans by geographically (must be very fast...)
+ * keep plan clean (no history useless plan) please
+ * limit by:
+ *    dad, pstatu, (scityid, ecityid) / rect
+ * TODO limit by km
+ */
+static NEOERR* plan_cmd_plan_get_by_geo(struct plan_entry *e, QueueEntry *q)
+{
+	STRING str; string_init(&str);
+	unsigned char *val = NULL; size_t vsize = 0;
+	NEOERR *err;
+
+    mdb_conn *db = e->db;
+    struct cache *cd = e->cd;
+    
+    int dad, scityid, ecityid;
+    char *rect;
+
+    REQ_GET_PARAM_INT(q->hdfrcv, "dad", dad);
+    REQ_GET_PARAM_INT(q->hdfrcv, "scityid", scityid);
+    REQ_GET_PARAM_INT(q->hdfrcv, "ecityid", ecityid);
+    REQ_GET_PARAM_STR(q->hdfrcv, "rect", rect);
+    
+    hdf_set_int_value(q->hdfrcv, "pstatu", PLAN_ST_PAUSE);
+
+    if (cache_getf(cd, &val, &vsize, PREFIX_PLAN"%d_%d_%d", dad, scityid, ecityid)) {
+        unpack_hdf(val, vsize, &q->hdfsnd);
+    } else {
+        err = mcs_build_querycond(q->hdfrcv,
+                                  hdf_get_obj(g_cfg, CONFIG_PATH".QueryCond.geoa"),
+                                  &str, NULL);
+        if (err != STATUS_OK) return nerr_pass(err);
+
+        MDB_QUERY_RAW(db, "plan", _COL_PLAN, "%s", NULL, str.buf);
+        err = mdb_set_rows(q->hdfsnd, db, _COL_PLAN, "plans", "0");
+
+        if (nerr_handle(&err, NERR_NOT_FOUND) ||
+            (mdb_get_rows(db) <
+             hdf_get_int_value(g_cfg, CONFIG_PATH".geoaMin", 0)) ) {
+            /*
+             * too few plans
+             */
+        geob:
+            string_clear(&str);
+            mcs_build_querycond(q->hdfrcv,
+                                hdf_get_obj(g_cfg, CONFIG_PATH".QueryCond.geob"),
+                                &str, NULL);
+            MDB_QUERY_RAW(db, "plan", _COL_PLAN, "%s", NULL, str.buf);
+            err = mdb_set_rows(q->hdfsnd, db, _COL_PLAN, "plans", "0");
+            if (nerr_handle(&err, NERR_NOT_FOUND))
+                return nerr_raise(REP_ERR_PLAN_NMATCH, "no result %d %d %s",
+                                  scityid, ecityid, rect);
+            if (err != STATUS_OK) return nerr_pass(err);
+        } else if (mdb_get_rows(db) >
+                   hdf_get_int_value(g_cfg, CONFIG_PATH".geoaMax", 0)) {
+            /*
+             * too many plans
+             */
+            hdf_destroy(&q->hdfsnd);
+            hdf_init(&q->hdfsnd);
+            goto geob;
+        }
+        
+        CACHE_HDF(q->hdfsnd, PLAN_CC_SEC, PREFIX_PLAN"%d_%d_%d",
+                  dad, scityid, ecityid);
+    }
+    
+    string_clear(&str);
+    
+    return STATUS_OK;
+}
+
 static NEOERR* plan_cmd_plan_add(struct plan_entry *e, QueueEntry *q)
 {
 	STRING str; string_init(&str);
@@ -113,6 +186,10 @@ static void plan_process_driver(EventEntry *entry, QueueEntry *q)
     switch (q->operation) {
         CASE_SYS_CMD(q->operation, q, e->cd, err);
     case REQ_CMD_PLAN_GET:
+        err = plan_cmd_plan_get(e, q);
+        break;
+    case REQ_CMD_PLAN_GET_BY_GEO:
+        err = plan_cmd_plan_get_by_geo(e, q);
         break;
     case REQ_CMD_PLAN_ADD:
         err = plan_cmd_plan_add(e, q);

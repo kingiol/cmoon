@@ -30,45 +30,20 @@ bmoon.icar = {
         o.e_saddr = $('#saddr');
         o.e_eaddr = $('#eaddr');
 
+        o.e_submit = $('#submit');
+
         o.plan = {};
 
         o.inited = true;
         return o;
     },
     
-    onready: function() {
+    initMap: function(lat, lng) {
         var o = bmoon.icar.init();
 
-        $.tools.dateinput.localize("zh",  {
-            months:        '一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月',
-            shortMonths:   '一,二,三,四,五,六,七,八,九,十,十一,十二',
-            days:          '星期日,星期一,星期二,星期三,星期四,星期五,星期六',
-            shortDays:     '日,一,二,三,四,五,六'
-        });
-        
-        o.calendar = o.e_dateinput.dateinput({
-            format: 'yyyy-mm-dd',
-            lang: 'zh',
-            trigger: true,
-            firstDay: 1,
-            change: function(e, date) {
-                o.e_datehint.html(this.getValue('dddd'))
-            }
-        });
-        
-        $('.bot', o.e_timestamp).html(o.e_hour.val() + ':' + o.e_min.val());
-
-        // seems o.dates will modify e_dateinput
-        //$('#date-input').hide();
-        
-        o.initMap();
-        o.bindClick();
-    },
-
-    initMap: function() {
-        var o = bmoon.icar.init();
-
-        o.g_lat = new google.maps.LatLng(28.188, 113.033);
+        lat = parseFloat(lat) || 28.188;
+        lng = parseFloat(lng) || 113.033;
+        o.g_lat = new google.maps.LatLng(lat, lng);
         o.g_map = new google.maps.Map($('#map')[0], {
             zoom: 10,
             center: o.g_lat,
@@ -92,6 +67,45 @@ bmoon.icar = {
             draggable: true,
             title: '设置终点位置'
         });
+
+        o.g_sauto.bindTo('bounds', o.g_map);
+        o.g_eauto.bindTo('bounds', o.g_map);
+        o.g_dirrender.setMap(o.g_map);
+        o.bindMapChange();
+    },
+
+    onready: function() {
+        var o = bmoon.icar.init();
+
+        $.tools.dateinput.localize("zh",  {
+            months:        '一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月',
+            shortMonths:   '一,二,三,四,五,六,七,八,九,十,十一,十二',
+            days:          '星期日,星期一,星期二,星期三,星期四,星期五,星期六',
+            shortDays:     '日,一,二,三,四,五,六'
+        });
+        
+        o.calendar = o.e_dateinput.dateinput({
+            format: 'yyyy-mm-dd',
+            lang: 'zh',
+            trigger: true,
+            firstDay: 1,
+            change: function(e, date) {
+                o.e_datehint.html(this.getValue('dddd'))
+            }
+        });
+        
+        $('.bot', o.e_timestamp).html(o.e_hour.val() + ':' + o.e_min.val());
+        
+        //$.getJSON('/json/city/ip', {ip: '118.145.22.78'}, function(data) {
+        $.getJSON('/json/city/ip', null, function(data) {
+            if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
+                var ts = data.city.geopos.split(','),
+                geopos = [ts[0].match(/[0-9\.]+/), ts[1].match(/[0-9\.]+/)];
+                o.initMap(geopos[0], geopos[1]);
+            } else o.initMap();
+        });
+
+        o.bindClick();
     },
 
     bindClick: function() {
@@ -103,10 +117,7 @@ bmoon.icar = {
 	        $(this).parent().toggleClass("active"); 
         });
 
-        o.g_sauto.bindTo('bounds', o.g_map);
-        o.g_eauto.bindTo('bounds', o.g_map);
-        o.g_dirrender.setMap(o.g_map);
-        o.bindMapChange();
+        o.e_submit.click(o.matchPlan);
     },
 
     hourChanged: function() {
@@ -119,6 +130,38 @@ bmoon.icar = {
         var o = bmoon.icar.init();
 
         $('.bot', o.e_timestamp).html(o.e_hour.val() + ':' + o.e_min.val());
+    },
+
+    matchPlan: function() {
+        var o = bmoon.icar.init();
+
+        var p = o.plan;
+        
+        if (!p.sll) {
+            o.e_saddr.focus();
+            return;
+        }
+        if (!p.ell) {
+            o.e_eaddr.focus();
+            return;
+        }
+
+        p.dad = 1;
+        
+        p.num  = o.e_num.val();
+        p.date = o.e_dateinput.val();
+        //o.dayow = xxx;
+        p.time = o.e_hour.val() + ':' + o.e_min.val();
+        p.day  = o.e_day.val();
+        p.rect = '((' + p.sll.join(',') + '),(' + p.ell.join(',') + '))';
+        //p.sll = [212.12, 232.33];
+        //p.ell = [212.12, 232.33];
+        //p.saddr = ... p.scity = ..
+        //p.eaddr = ... p.ecity = ..
+        //p.scityid = x p.ecityid = x
+
+        $.getJSON('/json/plan/match', p, function(data) {
+        });
     },
 
     // {address_components: [], formatted_address: "", geometry: {}...} gdata.js
@@ -140,13 +183,23 @@ bmoon.icar = {
             p.sll = [data.geometry.location.lat(), data.geometry.location.lng()];
             p.saddr = data.formatted_address;
             p.scity = city;
+            $.getJSON('/json/city/s', {c: city}, function(data) {
+                if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
+                    p.scityid = data.city.id;
+                }
+            });
         } else {
             p.ell = [data.geometry.location.lat(), data.geometry.location.lng()];
             p.eaddr = data.formatted_address;
             p.ecity = city;
+            $.getJSON('/json/city/s', {c: city}, function(data) {
+                if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
+                    p.ecityid = data.city.id;
+                }
+            });
         }
 
-        //if (p.sll && p.ell) o.next.removeAttr('disabled');
+        if (p.sll && p.ell) o.e_submit.removeAttr('disabled');
     },
 
     rendDirect: function() {

@@ -13,8 +13,9 @@
 
 enum {
     REQ_CMD_PLAN_GET = 1001,
+    REQ_CMD_PLAN_GET_BY_GEO,
     REQ_CMD_PLAN_ADD,
-    REQ_CMD_PLAN_UP
+    REQ_CMD_PLAN_UP,
 };
 
 enum {
@@ -26,7 +27,8 @@ enum {
 };
 
 enum {
-    REP_ERR_PLAN_NEXIST = 34
+    REP_ERR_PLAN_NEXIST = 34,
+    REP_ERR_PLAN_NMATCH
 };
 
 #endif    /* __MEVENT_PLAN_H__ */

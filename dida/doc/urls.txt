@@ -13,3 +13,10 @@ admin
 index.html
 icar.html
 iman.html
+
+    opos.h
+        GET /json/city/ip       通过ip获取用户的城市信息
+        GET /json/city/s        通过字符串获取用户的城市信息
+
+    oplan.h
+        GET /json/plan/match

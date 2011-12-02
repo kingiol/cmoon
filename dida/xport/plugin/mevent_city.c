@@ -249,6 +249,10 @@ static NEOERR* city_cmd_s(struct city_entry *e, QueueEntry *q)
         int id = hdf_get_int_value(q->hdfsnd, "city.id", 0);
         MDB_QUERY_RAW(db, "city", _COL_CITY, "pid=%d", NULL, id);
         err = mdb_set_rows(q->hdfsnd, db, _COL_CITY, "subcities", NULL);
+        /*
+         * 北京市 has no subcities
+         */
+        nerr_handle(&err, NERR_NOT_FOUND);
         if (err != STATUS_OK) return nerr_pass(err);
         
         CACHE_HDF(q->hdfsnd, CITY_CC_SEC, PREFIX_CITY"%s.%s", p, c);
@@ -284,7 +288,7 @@ static NEOERR* city_cmd_ip(struct city_entry *e, QueueEntry *q)
             hdf_set_value(q->hdfrcv, "c", s);
         } else {
             mtc_err("%s doesn't contain 省/区(%s)", c, a);
-            hdf_set_value(q->hdfrcv, "c", s);
+            hdf_set_value(q->hdfrcv, "c", c);
         }
         err = city_cmd_s(e, q);
         if (err != STATUS_OK) return nerr_pass(err);

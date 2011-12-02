@@ -1,8 +1,12 @@
+.page-hint {
+    width: 90%;
+}
+
 .page-hint, .active, #calroot {
 	-moz-border-radius:4px;		
 }
 
-.page-hint label {
+.page-hint .label {
 	float:left;
 	display:block;
 	border:1px solid transparent;

@@ -9,6 +9,7 @@
 #include "lcfg.h"
 #include "lutil.h"
 #include "ltpl.h"
+#include "lcs.h"
 
 #include "mevent.h"
 
@@ -24,5 +25,6 @@
  */
 #include "ospd.h"
 #include "opos.h"
+#include "oplan.h"
 
 #endif    /* __LHEADS_H__ */
