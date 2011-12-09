@@ -13,6 +13,7 @@ NEOERR* plan_match_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     MEVENT_TRIGGER(evt, NULL, REQ_CMD_PLAN_GET_BY_GEO, FLAGS_SYNC);
 
     hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
+    hdf_set_attr(cgi->hdf, PRE_OUTPUT".plans", "type", "array");
 
     /*
      * fuck the time

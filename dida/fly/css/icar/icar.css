@@ -1,43 +1,22 @@
-.page-hint {
-    width: 90%;
-}
+dl.inp {font-weight: bold;}
+dl.inp dt {width: 60px; text-align: right;}
 
-.page-hint, .active, #calroot {
-	-moz-border-radius:4px;		
-}
+dl.inp dt, dl.inp dd {margin: 5px;}
 
 .page-hint .label {
 	float:left;
-	display:block;
-	border:1px solid transparent;
 	margin-right:15px;
     padding: 6px;
     line-height: 28px;
+    font-weight: normal;
 }
 
-.page-hint .active {
-	background-color:#fff;
-	color:#333;
-	border:1px solid #ccc;
-	border-bottom:0;
-}
-
-.active input {
-	color:#333;
-	text-shadow:none;
+.page-hint .label span {
+    font-weight: bold;
 }
 
 .active .caltrigger {
 	background-position: 0 -32px;		
-}
-
-#date-hint {
-    position: relative;
-	text-shadow:0 0 1px #000;
-    width: 40px;
-    height: 20px;
-    top: -28px;
-    left: 111px;
 }
 
 #map {

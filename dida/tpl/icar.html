@@ -1,87 +1,105 @@
-<h2>邀车前往，请输入出发日期和地点</h2>
+<dl class="inp">
+  <dt>于</dt>
 
-<div class="page-hint">
-  <div class="label">
-    　
-    <select id="num" value="1">
-      <option value="1">1人</option>
-      <option value="2">2人</option>
-      <option value="3">3人</option>
-      <option value="4">4人</option>
-      <option value="5">5人</option>
-      <option value="6">5人以上</option>
-    </select>
-  </div>
-
-  <div class="label">于</div>
-
-  <div class="label">
+  <dd>
     <input type="date" id="date-input" name="departure" value="0" />
-    <div id="date-hint">今天</div>
-  </div>
+    <span id="date-hint">今天</span>
+    <span>
+      <select id="hour">
+        <option value="08" selected="selected">08</option>
+        <option value="09">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="00">00</option>
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+        <option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06</option>
+        <option value="07">07</option>
+      </select>
+      ：
+      <select id="min">
+        <option value="00" selected="selected">00</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+      </select>
+    </span>
 
-  <div class="label">
-    　<select id="hour">
-      <option value="08" selected="selected">08</option>
-      <option value="09">09</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-      <option value="13">13</option>
-      <option value="14">14</option>
-      <option value="15">15</option>
-      <option value="16">16</option>
-      <option value="17">17</option>
-      <option value="18">18</option>
-      <option value="19">19</option>
-      <option value="20">20</option>
-      <option value="21">21</option>
-      <option value="22">22</option>
-      <option value="23">23</option>
-      <option value="00">00</option>
-      <option value="01">01</option>
-      <option value="02">02</option>
-      <option value="03">03</option>
-      <option value="04">04</option>
-      <option value="05">05</option>
-      <option value="06">06</option>
-      <option value="07">07</option>
-    </select>
-    ：
-    <select id="min">
-      <option value="00" selected="selected">00</option>
-      <option value="10">10</option>
-      <option value="20">20</option>
-      <option value="30">30</option>
-      <option value="40">40</option>
-      <option value="50">50</option>
-    </select>
-  </div>
-
-  <div class="label">
-    　<select id="day" value="0">
-      <option value="0">仅当天</option>
-      <option value="1">1天内</option>
-      <option value="2">2天内</option>
-      <option value="3">3天内</option>
-      <option value="4">4天内</option>
-      <option value="5">5天内</option>
-      <option value="6">6天内</option>
-      <option value="7">之后所有时间</option>
-    </select>
-  </div>
+    <span>
+      <select id="dad">
+        <option value="1" selected="selected">找车</option>
+        <option value="0">邀人</option>
+      </select>
+    </span>
+  </dd>
   
+  <dt>
+    从
+  </dt>
+  <dd>
+    <input type="text" class="llong" id="saddr" placeholder="输入起点" />
+  </dd>
+
+  <dt>
+    出发至
+  </dt>
+  <dd>
+    <input type="text" class="llong" id="eaddr" placeholder="输入终点" />
+    &nbsp; <input type="button" id="submit" value="搜索" />
+    <span class="indicator"></span>
+  </dd>
+
   <div class="clearer"></div>
 
+</dl>
+
+<div class="page-hint hide" id="mc-result">
+  <div class="label hide">
+    <a href="javascript:void(0);" id="mc-prev">上一条</a>
+  </div>
+  
   <div class="label">
-    从 <input type="text" class="llong" id="saddr" placeholder="输入起点" />
+    第 <span id="mc-num-cur" class="decimal"></span> /
+    <span id="mc-num-total" class="decimal"></span> 条线路 <br />
+  </div>
+
+  <div class="label hide">
+    <a href="javascript:void(0);" id="mc-next">下一条</a>
   </div>
 
   <div class="label">
-    出发至 <input type="text" class="llong" id="eaddr" placeholder="输入终点" />
-    &nbsp; <input type="button" id="submit" value="搜索" disabled="disabled" />
+    联系人： <span id="mc-nick"></span> <img id="mc-phone" src="" />
   </div>
 
+  <div class="label">
+    路线： <span id="mc-saddr"></span> 至 <span id="mc-eaddr"></span>
+  </div>
+
+  <div class="label">
+    时间： <span id="mc-sdate"></span> <span id="mc-stime"></span>
+  </div>
+
+  <div class="label">
+    留言： <span id="mc-attach"></span>
+  </div>
+  
   <div class="clearer"></div>
 </div>
 

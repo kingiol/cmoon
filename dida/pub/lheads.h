@@ -26,5 +26,6 @@
 #include "ospd.h"
 #include "opos.h"
 #include "oplan.h"
+#include "omember.h"
 
 #endif    /* __LHEADS_H__ */

@@ -19,4 +19,8 @@ iman.html
         GET /json/city/s        通过字符串获取用户的城市信息
 
     oplan.h
-        GET /json/plan/match
+        GET /json/plan/match    通过路线信息匹配相关路线
+
+    omember.h
+        GET /json/member/info   通过mname获取用户信息
+        

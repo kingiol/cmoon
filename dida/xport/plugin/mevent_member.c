@@ -82,10 +82,14 @@ static NEOERR* member_cmd_mem_get(struct member_entry *e, QueueEntry *q)
 
     mdb_conn *db = e->db;
     struct cache *cd = e->cd;
-    
-    REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
-    mid = hash_string_rev(mname);
 
+    if (hdf_get_value(q->hdfrcv, "mid", NULL)) {
+        mid = hdf_get_int_value(q->hdfrcv, "mid", 0);
+    } else {
+        REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
+        mid = hash_string_rev(mname);
+    }
+    
     if (cache_getf(cd, &val, &vsize, PREFIX_MEMBER"%d", mid)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
     } else {

@@ -12,7 +12,7 @@ ul {padding: 0 2em;}
 :focus {outline-style:none;}
 input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;}
 input[type=text], input[type=password] {height: 18px; padding-left: 2px; padding-right: 2px;}
-input[type=button] {cursor: pointer;}
+input[type=button] {cursor: pointer; padding: 2px 20px;}
 input, textarea {border: 1px solid #A6A6A6; padding: 2px 10px;}
 
 /* SPECIAL CLASS */
@@ -25,7 +25,7 @@ input.btn:hover {cursor: pointer; background-position: 0 -28px;}
 input.btn-w, button.btn-w{width: 130px; background: url(/img/bg/btn.png) -80px 0 no-repeat;}
 input.btn-w:hover {cursor: pointer; background-positon: -80px -28px;}
 input.long {width: 200px;}
-input.llong {width: 300px;}
+input.llong {width: 260px;}
 
 a.btn {
     display: inline-block;
@@ -39,6 +39,7 @@ a.btn:hover {background-position: 0 -40px;}
 
 dl.inp dt {float: left; clear: left; margin: 10px; line-height: 22px;}
 dl.inp dd {margin: 10px; line-height: 22px; float: left;}
+dl.inp dd span {margin-left: 20px;}
 dl.inp dd.loading .indicator {display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;}
 dl.inp dd.success .indicator {display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat}
 dl.inp dd.error .indicator {display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;}
@@ -67,4 +68,4 @@ table.list tr:hover {background-color: #FFFFCC;}
 .text-hint {color: #bb0000;}
 .text-success {color: #00ff00;}
 .text-error {color: #ff0000;}
-.page-hint {width: 82%; text-align: center; margin: 2em auto; margin-bottom: 3em; padding: 1em; background-color: #FCFCFC; border: 1px solid #DDD; font-weight: bold;}
+.page-hint {width: 82%; text-align: center; margin: 2em auto; margin-bottom: 3em; padding: 1em; background-color: #FCFCFC; border: 1px solid #DDD; font-weight: bold; -moz-border-radius:4px;}

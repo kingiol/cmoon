@@ -16,14 +16,38 @@ bmoon.icar = {
         } else return ' ';
     },
 
+    // "(28.228209,114.057868)" => [28.228209, 114.057868]
+    _dbpoint2ll: function(s) {
+        var a = s.split(','),
+        lat = a[0].match(/[0-9\.]+/),
+        lng = a[1].match(/[0-9\.]+/),
+        ret = [parseFloat(lat), parseFloat(lng)];
+        return ret;
+    },
+
+    // "(28.228209,114.057868),(22.543099,112.938814)"
+    // => [[22.543099,112.938814], [28.228209,114.057868]]
+    _dbbox2ll: function(s) {
+        var a = s.split(','),
+        lat1 = parseFloat(a[0].match(/[0-9\.]+/)),
+        lng1 = parseFloat(a[1].match(/[0-9\.]+/)),
+        lat2 = parseFloat(a[2].match(/[0-9\.]+/)),
+        lng2 = parseFloat(a[3].match(/[0-9\.]+/));
+
+        if (lat1 < lat2) {
+            return [[lat1,lng1], [lat2,lng2]];
+        } else {
+            return [[lat2,lng2], [lat1,lng1]];
+        }
+    },
+    
     init: function() {
         var o = bmoon.icar;
         if (o.inited) return o;
 
-        o.e_num = $('#num');
         o.e_hour = $('#hour');
         o.e_min = $('#min');
-        o.e_day = $('#day');
+        o.e_dad = $('#dad');
         o.e_dateinput = $('#date-input');
         o.e_datehint = $('#date-hint');
 
@@ -32,18 +56,30 @@ bmoon.icar = {
 
         o.e_submit = $('#submit');
 
+        o.e_mc_result = $('#mc-result');
+        o.e_mc_prev = $('#mc-prev');
+        o.e_mc_next = $('#mc-next');
+        o.e_mc_nick = $('#mc-nick');
+        o.e_mc_saddr = $('#mc-saddr');
+        o.e_mc_eaddr = $('#mc-eaddr');
+        o.e_mc_sdate = $('#mc-sdate');
+        o.e_mc_stime = $('#mc-stime');
+        o.e_mc_phone = $('#mc-phone');
+        o.e_mc_attach = $('#mc-attach');
+        o.e_mc_num_total = $('#mc-num-total');
+        o.e_mc_num_cur = $('#mc-num-cur');
+
         o.plan = {};
 
         o.inited = true;
         return o;
     },
     
-    initMap: function(lat, lng) {
+    initMap: function(geo) {
         var o = bmoon.icar.init();
 
-        lat = parseFloat(lat) || 28.188;
-        lng = parseFloat(lng) || 113.033;
-        o.g_lat = new google.maps.LatLng(lat, lng);
+        geo = geo || [28.188,113.033];
+        o.g_lat = new google.maps.LatLng(geo[0], geo[1]);
         o.g_map = new google.maps.Map($('#map')[0], {
             zoom: 10,
             center: o.g_lat,
@@ -56,6 +92,7 @@ bmoon.icar = {
         o.g_geocode = new google.maps.Geocoder();
         o.g_dirservice = new google.maps.DirectionsService();
         o.g_dirrender = new google.maps.DirectionsRenderer();
+        o.g_prect = new google.maps.Rectangle(); // matched plan's rect
         o.g_infow = new google.maps.InfoWindow();
         o.g_smarker = new google.maps.Marker({
             map: o.g_map,
@@ -94,14 +131,10 @@ bmoon.icar = {
             }
         });
         
-        $('.bot', o.e_timestamp).html(o.e_hour.val() + ':' + o.e_min.val());
-        
         //$.getJSON('/json/city/ip', {ip: '118.145.22.78'}, function(data) {
         $.getJSON('/json/city/ip', null, function(data) {
             if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
-                var ts = data.city.geopos.split(','),
-                geopos = [ts[0].match(/[0-9\.]+/), ts[1].match(/[0-9\.]+/)];
-                o.initMap(geopos[0], geopos[1]);
+                o.initMap(o._dbpoint2ll(data.city.geopos));
             } else o.initMap();
         });
 
@@ -111,56 +144,114 @@ bmoon.icar = {
     bindClick: function() {
         var o = bmoon.icar.init();
 
-        o.e_hour.change(o.hourChanged);
-        o.e_min.change(o.minChanged);
         o.calendar.bind("onShow onHide", function()  {
 	        $(this).parent().toggleClass("active"); 
         });
 
         o.e_submit.click(o.matchPlan);
-    },
-
-    hourChanged: function() {
-        var o = bmoon.icar.init();
-
-        $('.bot', o.e_timestamp).html(o.e_hour.val() + ':' + o.e_min.val());
-    },
-
-    minChanged: function() {
-        var o = bmoon.icar.init();
-
-        $('.bot', o.e_timestamp).html(o.e_hour.val() + ':' + o.e_min.val());
+        o.e_mc_prev.click(function() {o.rendPlan(o._pcur-1);});
+        o.e_mc_next.click(function() {o.rendPlan(o._pcur+1);});
     },
 
     matchPlan: function() {
         var o = bmoon.icar.init();
 
-        var p = o.plan;
+        var p = $(this).parent(),
+        plan = o.plan;
+
+        o.e_mc_result.fadeOut();
+        o.g_prect.setMap(null);
         
-        if (!p.sll) {
+        if (!plan.sll) {
             o.e_saddr.focus();
             return;
         }
-        if (!p.ell) {
+        if (!plan.ell) {
             o.e_eaddr.focus();
             return;
         }
 
-        p.dad = 1;
-        
-        p.num  = o.e_num.val();
-        p.date = o.e_dateinput.val();
+        plan.dad  = o.e_dad.val();
+        plan.date = o.e_dateinput.val();
         //o.dayow = xxx;
-        p.time = o.e_hour.val() + ':' + o.e_min.val();
-        p.day  = o.e_day.val();
-        p.rect = '((' + p.sll.join(',') + '),(' + p.ell.join(',') + '))';
-        //p.sll = [212.12, 232.33];
-        //p.ell = [212.12, 232.33];
-        //p.saddr = ... p.scity = ..
-        //p.eaddr = ... p.ecity = ..
-        //p.scityid = x p.ecityid = x
+        plan.time = o.e_hour.val() + ':' + o.e_min.val();
+        plan.rect = '((' + plan.sll.join(',') + '),(' + plan.ell.join(',') + '))';
+        //plan.sll = [212.12, 232.33];
+        //plan.ell = [212.12, 232.33];
+        //plan.saddr = ... plan.scity = ..
+        //plan.eaddr = ... plan.ecity = ..
+        //plan.scityid = x plan.ecityid = x
 
-        $.getJSON('/json/plan/match', p, function(data) {
+		$('.vres', p).remove();
+		p.removeClass('success').removeClass('error').addClass('loading');
+        
+        $.getJSON('/json/plan/match', plan, function(data) {
+            p.removeClass('loading');
+            if (data.success == '1' && bmoon.utl.type(data.plans) == 'Array') {
+                p.addClass('success');
+
+                o._pnum = data._ntt;
+                o.mplans = data.plans;
+                o.e_mc_num_total.html(data._ntt);
+                o.rendPlan(0);
+            } else {
+                p.addClass('error');
+                $('<span class="vres">'+ data.errmsg + '</span>').appendTo(p);
+            }
+        });
+    },
+
+    rendPlan: function(ncur) {
+        var o = bmoon.icar.init();
+        
+        var plan = o.mplans[ncur],
+        geo = o._dbbox2ll(plan.rect),
+        bounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(geo[0][0], geo[0][1]),
+          new google.maps.LatLng(geo[1][0], geo[1][1])
+        );
+
+        o.g_prect.setOptions({
+            strokeColor: "#008888",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#aaaaaa",
+            fillOpacity: 0.35,
+            bounds: bounds,
+            map: o.g_map
+        });
+
+        o.rendMatch(plan, ncur);
+    },
+
+    rendMatch: function(plan, ncur) {
+        var o = bmoon.icar.init();
+
+        o._pcur = ncur;
+        if (ncur > 0) o.e_mc_prev.parent().show();
+        else o.e_mc_prev.parent().hide();
+        if (ncur < o._pnum-1) o.e_mc_next.parent().show();
+        else o.e_mc_next.parent().hide();
+        
+        o.e_mc_nick.html(plan.nick);
+        o.e_mc_attach.html(plan.attach);
+        o.e_mc_num_cur.html(ncur+1);
+        o.e_mc_saddr.html(plan.saddr);
+        o.e_mc_eaddr.html(plan.eaddr);
+        if (plan.repeat == 1) {
+            o.e_mc_sdate.html('每日');
+        } else if (plan.repeat == 2) {
+            o.e_mc_sdate.html('每周 ' + plan.sdate);
+        } else o.e_mc_sdate.html(plan.sdate);
+        o.e_mc_stime.html(plan.stime);
+        
+        o.e_mc_result.fadeIn('slow');
+
+        o.e_mc_phone.attr('src', '');
+        $.getJSON('/json/member/info', {mid: plan.mid}, function(data) {
+            if (data.success == '1' && data.phone.match(/http:.*/)) {
+                o.e_mc_phone.attr('src', bmoon.utl.clotheHTML(data.phone));
+            }
         });
     },
 
@@ -183,23 +274,19 @@ bmoon.icar = {
             p.sll = [data.geometry.location.lat(), data.geometry.location.lng()];
             p.saddr = data.formatted_address;
             p.scity = city;
-            $.getJSON('/json/city/s', {c: city}, function(data) {
-                if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
-                    p.scityid = data.city.id;
-                }
-            });
         } else {
             p.ell = [data.geometry.location.lat(), data.geometry.location.lng()];
             p.eaddr = data.formatted_address;
             p.ecity = city;
-            $.getJSON('/json/city/s', {c: city}, function(data) {
-                if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
-                    p.ecityid = data.city.id;
-                }
-            });
         }
+        $.getJSON('/json/city/s', {c: city}, function(data) {
+            if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
+                if (x != 'e') p.scityid = data.city.id;
+                else p.ecityid = data.city.id;
 
-        if (p.sll && p.ell) o.e_submit.removeAttr('disabled');
+                if (p.sll && p.ell) o.e_submit.removeAttr('disabled');
+            }
+        });
     },
 
     rendDirect: function() {
@@ -257,6 +344,7 @@ bmoon.icar = {
                     results[0].address_components,
                     results[0].geometry.location));
                 o.g_infow.open(o.g_map, marker);
+                setTimeout(function() {o.g_infow.close();}, 2000);
 
                 o.upPlan(x, results[0]);
                 o.rendDirect();
@@ -290,6 +378,7 @@ bmoon.icar = {
             place.address_components,
             place.geometry.location));
         o.g_infow.open(o.g_map, marker);
+        setTimeout(function() {o.g_infow.close();}, 2000);
 
         o.upPlan(x, place);
         o.rendDirect();

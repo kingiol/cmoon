@@ -11,6 +11,7 @@ static void lutil_donotcall()
     spd_pre_data_get(NULL, NULL, NULL, NULL);
     pos_data_get(NULL, NULL, NULL, NULL);
     plan_match_data_get(NULL, NULL, NULL, NULL);
+    member_info_data_get(NULL, NULL, NULL, NULL);
 }
 
 void* lutil_get_data_handler(void *lib, CGI *cgi, session_t *ses)
