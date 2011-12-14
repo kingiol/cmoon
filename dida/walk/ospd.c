@@ -83,8 +83,8 @@ NEOERR* spd_post_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
     if (!cgi || !cgi->hdf || !db) return nerr_raise(NERR_ASSERT, "paramter null");
 
-    MMISC_PAGEDIV_SET(cgi->hdf, PRE_OUTPUT, db, "plan", "pstatu=%d",
-                      NULL, PLAN_ST_SPD_FRESH);
+    MDB_PAGEDIV_SET(cgi->hdf, PRE_OUTPUT, db, "plan", "pstatu=%d",
+                    NULL, PLAN_ST_SPD_FRESH);
     
     return STATUS_OK;
 }

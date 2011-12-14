@@ -23,7 +23,7 @@ NEOERR* pos_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
     int id = hdf_get_int_value(cgi->hdf, PRE_QUERY".id", 0);
     
-    err = mcs_build_upcol(hdf_get_obj(cgi->hdf, PRE_QUERY),
+    err = mdb_build_upcol(hdf_get_obj(cgi->hdf, PRE_QUERY),
                           hdf_get_obj(g_cfg, "Db.UpdateCol.city"), &str);
 	if (err != STATUS_OK) return nerr_pass(err);
 

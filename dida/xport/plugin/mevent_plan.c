@@ -74,7 +74,7 @@ static NEOERR* plan_cmd_plan_get_by_geo(struct plan_entry *e, QueueEntry *q)
     if (cache_getf(cd, &val, &vsize, PREFIX_PLAN"%d_%d_%d", dad, scityid, ecityid)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
     } else {
-        err = mcs_build_querycond(q->hdfrcv,
+        err = mdb_build_querycond(q->hdfrcv,
                                   hdf_get_obj(g_cfg, CONFIG_PATH".QueryCond.geoa"),
                                   &str, NULL);
         if (err != STATUS_OK) return nerr_pass(err);
@@ -90,7 +90,7 @@ static NEOERR* plan_cmd_plan_get_by_geo(struct plan_entry *e, QueueEntry *q)
              */
         geob:
             string_clear(&str);
-            mcs_build_querycond(q->hdfrcv,
+            mdb_build_querycond(q->hdfrcv,
                                 hdf_get_obj(g_cfg, CONFIG_PATH".QueryCond.geob"),
                                 &str, NULL);
             MDB_QUERY_RAW(db, "plan", _COL_PLAN, "%s", NULL, str.buf);
@@ -102,7 +102,7 @@ static NEOERR* plan_cmd_plan_get_by_geo(struct plan_entry *e, QueueEntry *q)
                  * ok, try larger at last
                  */
                 string_clear(&str);
-                mcs_build_querycond(q->hdfrcv,
+                mdb_build_querycond(q->hdfrcv,
                                     hdf_get_obj(g_cfg, CONFIG_PATH".QueryCond.geox"),
                                     &str, NULL);
                 MDB_QUERY_RAW(db, "plan", _COL_PLAN, "%s", NULL, str.buf);
@@ -146,7 +146,7 @@ static NEOERR* plan_cmd_plan_add(struct plan_entry *e, QueueEntry *q)
 
     hdf_set_int_value(q->hdfrcv, "mid", hash_string_rev(mname));
 
-    err = mcs_build_incol(q->hdfrcv,
+    err = mdb_build_incol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.plan"),
                           &str);
 	if (err != STATUS_OK) return nerr_pass(err);
@@ -175,7 +175,7 @@ static NEOERR* plan_cmd_plan_up(struct plan_entry *e, QueueEntry *q)
     if (!hdf_get_obj(q->hdfsnd, "mid"))
         return nerr_raise(REP_ERR_PLAN_NEXIST, "plan %d not exist", id);
 
-    err = mcs_build_upcol(q->hdfrcv,
+    err = mdb_build_upcol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".UpdateCol.plan"), &str);
 	if (err != STATUS_OK) return nerr_pass(err);
 

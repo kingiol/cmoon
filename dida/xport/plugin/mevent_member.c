@@ -158,7 +158,7 @@ static NEOERR* member_cmd_car_add(struct member_entry *e, QueueEntry *q)
     if (hdf_get_obj(q->hdfsnd, "size"))
         return nerr_raise(REP_ERR_CARED, "%d already has car", mid);
     
-    err = mcs_build_incol(q->hdfrcv,
+    err = mdb_build_incol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.car"),
                           &str);
 	if (err != STATUS_OK) return nerr_pass(err);
@@ -193,7 +193,7 @@ static NEOERR* member_cmd_mem_add(struct member_entry *e, QueueEntry *q)
     if (hdf_get_obj(q->hdfsnd, "male"))
         return nerr_raise(REP_ERR_MEMBERED, "%s already regist", mname);
     
-    err = mcs_build_incol(q->hdfrcv,
+    err = mdb_build_incol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.member"),
                           &str);
 	if (err != STATUS_OK) return nerr_pass(err);
@@ -226,7 +226,7 @@ static NEOERR* member_cmd_mem_up(struct member_entry *e, QueueEntry *q)
     if (!hdf_get_obj(q->hdfsnd, "mid"))
         return nerr_raise(REP_ERR_MEMBER_NEXIST, "member %d not exist", mid);
 
-    err = mcs_build_upcol(q->hdfrcv,
+    err = mdb_build_upcol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".UpdateCol.member"), &str);
 	if (err != STATUS_OK) return nerr_pass(err);
 

@@ -39,7 +39,7 @@ NEOERR* member_pic_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
         /*
          * turn &amp; into & in url format
          */
-        mcs_html_unescape(evt->hdfrcv, s);
+        mstr_html_unescape(evt->hdfrcv, s);
         s = hdf_get_value(evt->hdfrcv, s, NULL);
         if (s && *s) {
             if (!strncmp(s, "http:", 5)) {
