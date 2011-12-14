@@ -44,7 +44,7 @@ bmoon.spd58 = {
         dad = $('.headline').html().match('有车') ? 1: 0;
 
         x = $('.info').html().match(/途经：<\/i>([^\<]+)/);
-        marks = x && $.trim(x[1]);
+        marks = x && $.trim(x[1]) || '';
         
         x = $('.info').html().match(/时间：<\/i>([^\<]+)/);
         time = x && $.trim(x[1]).replace("&nbsp;", " ");
@@ -77,9 +77,9 @@ bmoon.spd58 = {
         uid = uid && uid[1];
         uname = uname && uname[1];
         phone = phone.match('http://image.58.com/showphone[^\'"]+');
-        phone = phone && phone[0];
+        phone = phone && phone[0] || '';
         contact = contact.match('http://image.58.com/showphone[^\'"]+');
-        contact = contact && contact[0];
+        contact = contact && contact[0] || '';
         city = city && city[1];
 
         $.getJSON('http://user.58.com/userdata/?callback=?',
@@ -95,8 +95,8 @@ bmoon.spd58 = {
                                 verify: data.license,
                                 credit: data.credit,
                                 city: city, // need convert to cityid
-                                phone: phone,
-                                contact: contact,
+                                phone: bmoon.utl.clotheHTML(phone),
+                                contact: bmoon.utl.clotheHTML(contact),
 
                                 size: size,
                                 

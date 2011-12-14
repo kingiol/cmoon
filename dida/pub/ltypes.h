@@ -11,6 +11,7 @@ typedef struct _session {
     char *mname;
     char *dataer;
     char *render;
+    void *data;
 } session_t;
 
 NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses);

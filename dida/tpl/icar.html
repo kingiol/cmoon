@@ -64,6 +64,13 @@
     <input type="text" class="llong" id="eaddr" placeholder="输入终点" />
     &nbsp; <input type="button" id="submit" value="搜索" />
     <span class="indicator"></span>
+
+    <span class="hide" id="mc-nav">
+        <a class="hide" href="javascript:void(0);" id="mc-prev">上一条</a>
+        第 <span id="mc-num-nav" class="decimal"></span>
+        <span>条线路</span>
+        <a class="hide" href="javascript:void(0);" id="mc-next">下一条</a>
+    </span>
   </dd>
 
   <div class="clearer"></div>
@@ -71,18 +78,6 @@
 </dl>
 
 <div class="page-hint hide" id="mc-result">
-  <div class="label hide">
-    <a href="javascript:void(0);" id="mc-prev">上一条</a>
-  </div>
-  
-  <div class="label">
-    第 <span id="mc-num-cur" class="decimal"></span> /
-    <span id="mc-num-total" class="decimal"></span> 条线路 <br />
-  </div>
-
-  <div class="label hide">
-    <a href="javascript:void(0);" id="mc-next">下一条</a>
-  </div>
 
   <div class="label">
     联系人： <span id="mc-nick"></span> <img id="mc-phone" src="" />

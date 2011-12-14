@@ -15,10 +15,6 @@ dl.inp dt, dl.inp dd {margin: 5px;}
     font-weight: bold;
 }
 
-.active .caltrigger {
-	background-position: 0 -32px;		
-}
-
 #map {
     height: 400px;
     width: 100%;

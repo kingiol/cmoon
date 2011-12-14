@@ -1,6 +1,13 @@
 #ifndef __LHEADS_H__
 #define __LHEADS_H__
 
+#include "gd.h"
+#include "gdfontt.h"
+#include "gdfonts.h"
+#include "gdfontmb.h"
+#include "gdfontl.h"
+#include "gdfontg.h"
+
 #include "lnum.h"
 #include "ltypes.h"
 #include "lerr.h"

@@ -2,6 +2,7 @@
 #define __MEVENT_MEMBER_H__
 
 #define PREFIX_MEMBER   "Member"
+#define PREFIX_MEMBER_PRIV   "MemberPriv"
 #define PREFIX_CAR      "Car"
 #define PREFIX_SPD      "Spider"
 
@@ -9,12 +10,14 @@
 #define CAR_CC_SEC      60
 #define SPD_CC_SEC      60000
 
-#define _COL_MEMBER "mid, mname, male, verify, credit, cityid, phone, contact, " \
+#define _COL_MEMBER "mid, mname, male, verify, credit, cityid, " \
     " to_char(intime, 'YYYY-MM-DD') as intime"
 #define _COL_CAR "mid, size, model, mdate"
+#define _COL_MEMBER_PRIV "mid, mname, phone, contact"
 
 enum {
     REQ_CMD_MEMBER_GET = 1001,
+    REQ_CMD_MEMBER_PRIV_GET,
     REQ_CMD_MEMBER_ADD,
     REQ_CMD_MEMBER_UP,
     REQ_CMD_CAR_GET,

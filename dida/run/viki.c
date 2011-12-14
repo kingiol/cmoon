@@ -14,12 +14,13 @@ int main(int argc, char **argv, char **envp)
 
     HASH *dbh, *tplh, *evth;
     session_t *session = NULL;
-    char *jsoncb;
+    char *temps;
 
     NEOERR* (*data_handler)(CGI *cgi, HASH *dbh, HASH *evth, session_t *session);
     void *lib;
-
+    
     //sleep(20);
+    mutil_makesure_coredump();
     mtc_init(TC_ROOT"viki");
 
     err = lerr_init();
@@ -54,7 +55,7 @@ int main(int argc, char **argv, char **envp)
         if (err != STATUS_OK) goto response;
 
 #ifdef NCGI_MODE
-        hdf_set_value(cgi->hdf, PRE_REQ_URI_RW, "/blog/mkdparser");
+        hdf_set_value(cgi->hdf, PRE_REQ_URI_RW, "/image/member/pic");
         hdf_set_value(cgi->hdf, PRE_COOKIE".uin", "1001");
         hdf_set_value(cgi->hdf, PRE_COOKIE".uname", "bigml");
         hdf_set_value(cgi->hdf, PRE_COOKIE".musn", "8Y]u0|v=*MS]U3J");
@@ -62,6 +63,8 @@ int main(int argc, char **argv, char **envp)
         hdf_set_value(cgi->hdf, PRE_QUERY".to", "cj_BXTSJ");
         hdf_set_value(cgi->hdf, PRE_QUERY".s", "koldddd");
         hdf_set_value(cgi->hdf, PRE_QUERY".JsonCallback", "Ape.transport.read");
+        hdf_set_value(cgi->hdf, PRE_QUERY".type", "phone");
+        hdf_set_value(cgi->hdf, PRE_QUERY".mid", "485010473");
 #endif
         
         err = session_init(cgi, dbh, &session);
@@ -95,12 +98,25 @@ int main(int argc, char **argv, char **envp)
                 }
                 break;
             case CGI_REQ_AJAX:
-                jsoncb = hdf_get_value(cgi->hdf, PRE_REQ_AJAX_FN, NULL);
-                if (jsoncb != NULL) {
-                    mjson_execute_hdf(cgi->hdf, jsoncb, session->tm_cache_browser);
+            resp_ajax:
+                temps = hdf_get_value(cgi->hdf, PRE_REQ_AJAX_FN, NULL);
+                if (temps != NULL) {
+                    mjson_execute_hdf(cgi->hdf, temps, session->tm_cache_browser);
                 } else {
                     mjson_output_hdf(cgi->hdf, session->tm_cache_browser);
                 }
+                break;
+            case CGI_REQ_IMAGE:
+                temps = hdf_get_value(cgi->hdf, PRE_OUTPUT".302", NULL);
+                if (temps) {
+                    cgi_redirect_uri(cgi, temps);
+                } else if (session->data) {
+                    err = cgiwrap_writef("Content-Type: image/jpeg\r\n\r\n");
+                    TRACE_NOK(err);
+                    gdImageJpeg((gdImagePtr) session->data, stdout, -1);
+                    gdImageDestroy((gdImagePtr) session->data);
+                    session->data = NULL;
+                } else goto resp_ajax;
                 break;
             default:
                 cgi_redirect(cgi, "/503.html");

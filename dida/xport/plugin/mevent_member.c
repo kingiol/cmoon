@@ -108,6 +108,36 @@ static NEOERR* member_cmd_mem_get(struct member_entry *e, QueueEntry *q)
     return STATUS_OK;
 }
 
+static NEOERR* member_cmd_mem_priv_get(struct member_entry *e, QueueEntry *q)
+{
+	unsigned char *val = NULL; size_t vsize = 0;
+    char *mname;
+    int mid;
+	NEOERR *err;
+
+    mdb_conn *db = e->db;
+    struct cache *cd = e->cd;
+
+    if (hdf_get_value(q->hdfrcv, "mid", NULL)) {
+        mid = hdf_get_int_value(q->hdfrcv, "mid", 0);
+    } else {
+        REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
+        mid = hash_string_rev(mname);
+    }
+    
+    if (cache_getf(cd, &val, &vsize, PREFIX_MEMBER_PRIV"%d", mid)) {
+        unpack_hdf(val, vsize, &q->hdfsnd);
+    } else {
+        MDB_QUERY_RAW(db, "member", _COL_MEMBER_PRIV, "mid=%d", NULL, mid);
+        err = mdb_set_row(q->hdfsnd, db, _COL_MEMBER_PRIV, NULL);
+        if (err != STATUS_OK) return nerr_pass(err);
+
+        CACHE_HDF(q->hdfsnd, MEMBER_CC_SEC, PREFIX_MEMBER_PRIV"%d", mid);
+    }
+    
+    return STATUS_OK;
+}
+
 static NEOERR* member_cmd_car_add(struct member_entry *e, QueueEntry *q)
 {
 	STRING str; string_init(&str);
@@ -205,6 +235,7 @@ static NEOERR* member_cmd_mem_up(struct member_entry *e, QueueEntry *q)
     string_clear(&str);
 
     cache_delf(cd, PREFIX_MEMBER"%d", mid);
+    cache_delf(cd, PREFIX_MEMBER_PRIV"%d", mid);
     
     return STATUS_OK;
 }
@@ -244,6 +275,9 @@ static void member_process_driver(EventEntry *entry, QueueEntry *q)
         CASE_SYS_CMD(q->operation, q, e->cd, err);
     case REQ_CMD_MEMBER_GET:
         err = member_cmd_mem_get(e, q);
+        break;
+    case REQ_CMD_MEMBER_PRIV_GET:
+        err = member_cmd_mem_priv_get(e, q);
         break;
     case REQ_CMD_MEMBER_ADD:
         err = member_cmd_mem_add(e, q);

@@ -23,4 +23,4 @@ iman.html
 
     omember.h
         GET /json/member/info   通过mname获取用户信息
-        
+        GET /image/member/pic   通过mname获取用户phone, contact等图片数据

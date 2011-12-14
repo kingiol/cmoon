@@ -57,6 +57,7 @@ bmoon.icar = {
         o.e_submit = $('#submit');
 
         o.e_mc_result = $('#mc-result');
+        o.e_mc_nav = $('#mc-nav');
         o.e_mc_prev = $('#mc-prev');
         o.e_mc_next = $('#mc-next');
         o.e_mc_nick = $('#mc-nick');
@@ -66,8 +67,7 @@ bmoon.icar = {
         o.e_mc_stime = $('#mc-stime');
         o.e_mc_phone = $('#mc-phone');
         o.e_mc_attach = $('#mc-attach');
-        o.e_mc_num_total = $('#mc-num-total');
-        o.e_mc_num_cur = $('#mc-num-cur');
+        o.e_mc_num_nav = $('#mc-num-nav');
 
         o.plan = {};
 
@@ -160,6 +160,7 @@ bmoon.icar = {
         plan = o.plan;
 
         o.e_mc_result.fadeOut();
+        o.e_mc_nav.fadeOut();
         o.g_prect.setMap(null);
         
         if (!plan.sll) {
@@ -192,7 +193,7 @@ bmoon.icar = {
 
                 o._pnum = data._ntt;
                 o.mplans = data.plans;
-                o.e_mc_num_total.html(data._ntt);
+                o.e_mc_num_nav.html('0 / ' + data._ntt);
                 o.rendPlan(0);
             } else {
                 p.addClass('error');
@@ -228,14 +229,14 @@ bmoon.icar = {
         var o = bmoon.icar.init();
 
         o._pcur = ncur;
-        if (ncur > 0) o.e_mc_prev.parent().show();
-        else o.e_mc_prev.parent().hide();
-        if (ncur < o._pnum-1) o.e_mc_next.parent().show();
-        else o.e_mc_next.parent().hide();
+        if (ncur > 0) o.e_mc_prev.show();
+        else o.e_mc_prev.hide();
+        if (ncur < o._pnum-1) o.e_mc_next.show();
+        else o.e_mc_next.hide();
         
         o.e_mc_nick.html(plan.nick);
         o.e_mc_attach.html(plan.attach);
-        o.e_mc_num_cur.html(ncur+1);
+        o.e_mc_num_nav.html(ncur+1 + ' / ' + o._pnum);
         o.e_mc_saddr.html(plan.saddr);
         o.e_mc_eaddr.html(plan.eaddr);
         if (plan.repeat == 1) {
@@ -244,15 +245,12 @@ bmoon.icar = {
             o.e_mc_sdate.html('每周 ' + plan.sdate);
         } else o.e_mc_sdate.html(plan.sdate);
         o.e_mc_stime.html(plan.stime);
-        
+
+        o.e_mc_nav.fadeIn();
         o.e_mc_result.fadeIn('slow');
 
-        o.e_mc_phone.attr('src', '');
-        $.getJSON('/json/member/info', {mid: plan.mid}, function(data) {
-            if (data.success == '1' && data.phone.match(/http:.*/)) {
-                o.e_mc_phone.attr('src', bmoon.utl.clotheHTML(data.phone));
-            }
-        });
+        o.e_mc_phone.attr('src', '/image/member/pic?type=phone&type=contact&mid=' +
+                          plan.mid);
     },
 
     // {address_components: [], formatted_address: "", geometry: {}...} gdata.js
@@ -283,8 +281,6 @@ bmoon.icar = {
             if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
                 if (x != 'e') p.scityid = data.city.id;
                 else p.ecityid = data.city.id;
-
-                if (p.sll && p.ell) o.e_submit.removeAttr('disabled');
             }
         });
     },
