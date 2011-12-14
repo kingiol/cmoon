@@ -26,6 +26,9 @@ NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses)
     if (!strncmp(uri, "json_", 5)) {
         uri = uri+5;
         lses->reqtype = CGI_REQ_AJAX;
+    } else if (!strncmp(uri, "image_", 6)) {
+        uri = uri+6;
+        lses->reqtype = CGI_REQ_IMAGE;
     }
     switch (CGI_REQ_METHOD(cgi)) {
         case CGI_REQ_POST:
