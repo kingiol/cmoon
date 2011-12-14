@@ -26,7 +26,7 @@ int main(int argc, char **argv, char **envp)
     err = lerr_init();
     DIE_NOK_CGI(err);
     
-    err = mconfig_parse_file(SITE_CONFIG, &g_cfg);
+    err = mcfg_parse_file(SITE_CONFIG, &g_cfg);
     DIE_NOK_CGI(err);
 
     err = ltpl_init(&tplh, NULL);
@@ -44,7 +44,7 @@ int main(int argc, char **argv, char **envp)
         DIE_NOK_CGI(err);
     }
     
-#ifndef DROP_FCGI
+#ifdef USE_FASTCGI
     cgiwrap_init_emu(NULL, &read_cb, &printf_cb, &write_cb, NULL, NULL, NULL);
     while (FCGI_Accept() >= 0) {
 #endif
@@ -130,13 +130,13 @@ int main(int argc, char **argv, char **envp)
             cgi_destroy(&cgi);
             session_destroy(&session);
         }
-#ifndef DROP_FCGI
+#ifdef USE_FASTCGI
     }
 #endif
 
     levt_destroy(evth);
     ldb_destroy(dbh);
     ltpl_destroy(tplh);
-    mconfig_cleanup(&g_cfg);
+    mcfg_cleanup(&g_cfg);
     return 0;
 }

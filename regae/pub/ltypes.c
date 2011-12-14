@@ -20,9 +20,9 @@ NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses)
         lses->reqtype = CGI_REQ_TERMINAL;
     }
     /* TODO uniq req uri */
-    //uri = mmisc_str_uniq(uri, '/');
-    mmisc_str_repchr(uri, '/', '_');
-    uri = mmisc_str_strip(uri, '_');
+    //uri = mstr_uniq(uri, '/');
+    mstr_repchr(uri, '/', '_');
+    uri = mstr_strip(uri, '_');
     if (!strncmp(uri, "json_", 5)) {
         uri = uri+5;
         lses->reqtype = CGI_REQ_AJAX;
@@ -30,7 +30,7 @@ NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses)
         uri = uri+6;
         lses->reqtype = CGI_REQ_IMAGE;
     }
-    switch (CGI_REQ_METHOD(cgi)) {
+    switch (http_req_method(cgi)) {
         case CGI_REQ_POST:
             snprintf(tok, sizeof(tok), "%s_data_mod", uri);
             break;

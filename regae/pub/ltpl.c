@@ -66,7 +66,7 @@ NEOERR* ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outha
         mtc_dbg("parse node %s", hdf_obj_name(child));
         string_init(&str);
 
-        val = mutil_obj_attr(child, "merge");
+        val = mcs_obj_attr(child, "merge");
         if (val) {
             snprintf(fname, sizeof(fname), "%s/%s", dir, val);
             err = hdf_init(&dhdf);
