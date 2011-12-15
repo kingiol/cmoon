@@ -45,8 +45,10 @@ int main(int argc, char **argv, char **envp)
         DIE_NOK_CGI(err);
     }
     
+#ifdef USE_FASTCGI
     cgiwrap_init_emu(NULL, &read_cb, &printf_cb, &write_cb, NULL, NULL, NULL);
     while (FCGI_Accept() >= 0) {
+#endif
         cgiwrap_init_std(argc, argv, environ);
         err = cgi_init(&cgi, NULL);
         if (err != STATUS_OK) goto response;
@@ -135,7 +137,9 @@ int main(int argc, char **argv, char **envp)
             cgi_destroy(&cgi);
             session_destroy(&session);
         }
+#ifdef USE_FASTCGI
     }
+#endif
 
     levt_destroy(evth);
     ldb_destroy(dbh);
