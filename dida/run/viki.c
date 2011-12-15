@@ -15,6 +15,7 @@ int main(int argc, char **argv, char **envp)
     HASH *dbh, *tplh, *evth;
     session_t *session = NULL;
     char *temps;
+    int tempi;
 
     NEOERR* (*data_handler)(CGI *cgi, HASH *dbh, HASH *evth, session_t *session);
     void *lib;
@@ -44,10 +45,8 @@ int main(int argc, char **argv, char **envp)
         DIE_NOK_CGI(err);
     }
     
-#ifdef USE_FASTCGI
     cgiwrap_init_emu(NULL, &read_cb, &printf_cb, &write_cb, NULL, NULL, NULL);
     while (FCGI_Accept() >= 0) {
-#endif
         cgiwrap_init_std(argc, argv, environ);
         err = cgi_init(&cgi, NULL);
         if (err != STATUS_OK) goto response;
@@ -113,8 +112,14 @@ int main(int argc, char **argv, char **envp)
                 } else if (session->data) {
                     err = cgiwrap_writef("Content-Type: image/jpeg\r\n\r\n");
                     TRACE_NOK(err);
-                    gdImageJpeg((gdImagePtr) session->data, stdout, -1);
+                    /*
+                     * gdImageJpegCtx(data, gdoutctx, -1) core dump on fastcgi mode
+                     */
+                    temps = (char*) gdImageJpegPtr((gdImagePtr) session->data,
+                                                   &tempi, -1);
+                    cgiwrap_write(temps, tempi);
                     gdImageDestroy((gdImagePtr) session->data);
+                    gdFree(temps);
                     session->data = NULL;
                 } else goto resp_ajax;
                 break;
@@ -130,13 +135,12 @@ int main(int argc, char **argv, char **envp)
             cgi_destroy(&cgi);
             session_destroy(&session);
         }
-#ifdef USE_FASTCGI
     }
-#endif
 
     levt_destroy(evth);
     ldb_destroy(dbh);
     ltpl_destroy(tplh);
     mcfg_cleanup(&g_cfg);
+
     return 0;
 }
