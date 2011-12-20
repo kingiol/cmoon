@@ -7,6 +7,14 @@ __BEGIN_DECLS
 /*
  * 获取请求中参数
  */
+#define HDF_GET_OBJ(hdf, key, ret)                              \
+    do {                                                        \
+        if (!hdf_get_obj(hdf, key)) {                           \
+            return nerr_raise(LERR_USERINPUT, "need %s", key);  \
+        }                                                       \
+        ret = hdf_get_obj(hdf, key);                            \
+    } while (0)
+
 #define HDF_GET_INT(hdf, key, ret)                              \
     do {                                                        \
         if (!hdf_get_value(hdf, key, NULL)) {                   \
