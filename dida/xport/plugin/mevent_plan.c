@@ -142,9 +142,10 @@ static NEOERR* plan_cmd_plan_add(struct plan_entry *e, QueueEntry *q)
 
     mdb_conn *db = e->db;
 
-    REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
-
-    hdf_set_int_value(q->hdfrcv, "mid", hash_string_rev(mname));
+    if (!hdf_get_value(q->hdfrcv, "mid", NULL)) {
+        REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
+        hdf_set_int_value(q->hdfrcv, "mid", hash_string_rev(mname));
+    }
 
     err = mdb_build_incol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.plan"),

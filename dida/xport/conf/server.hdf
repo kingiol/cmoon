@@ -124,12 +124,12 @@ Plugin {
             geob {
                 dad [type=int, require=true] = dad =
                 pstatu [type=int, require=true] = pstatu <
-                rect [type=box] = ((rect - @@rect) * point(10.5,0) + @@rect) @>
+                rect [type=box] = ((rect - @@rect) * point(1.5,0) + @@rect) @>
             }
             geox {
                 dad [type=int, require=true] = dad =
                 pstatu [type=int, require=true] = pstatu <
-                rect [type=box] = ((rect - @@rect) * point(20,0) + @@rect) @>
+                rect [type=box] = ((rect - @@rect) * point(2,0) + @@rect) @>
             }
         }
     }

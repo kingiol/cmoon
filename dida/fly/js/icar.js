@@ -56,6 +56,7 @@ bmoon.icar = {
 
         o.e_submit = $('#submit');
 
+        o.e_mc_noresult = $('#mc-noresult');
         o.e_mc_result = $('#mc-result');
         o.e_mc_nav = $('#mc-nav');
         o.e_mc_prev = $('#mc-prev');
@@ -69,6 +70,11 @@ bmoon.icar = {
         o.e_mc_phone = $('#mc-phone');
         o.e_mc_attach = $('#mc-attach');
         o.e_mc_num_nav = $('#mc-num-nav');
+
+        o.e_mc_no_phone = $('#mc-no-phone');
+        o.e_mc_no_nick = $('#mc-no-nick');
+        o.e_mc_no_attach = $('#mc-no-attach');
+        o.e_mc_no_submit = $('#mc-no-submit');
 
         o.plan = {};
 
@@ -150,6 +156,7 @@ bmoon.icar = {
         });
 
         o.e_submit.click(o.matchPlan);
+        o.e_mc_no_submit.click(o.leavePlan);
         o.e_mc_prev.click(function() {o.rendPlan(o._pcur-1);});
         o.e_mc_next.click(function() {o.rendPlan(o._pcur+1);});
     },
@@ -160,9 +167,11 @@ bmoon.icar = {
         var p = $(this).parent(),
         plan = o.plan;
 
+        o.e_mc_noresult.fadeOut();
         o.e_mc_result.fadeOut();
         o.e_mc_nav.fadeOut();
         o.g_prect.setMap(null);
+        o.mplans = {};
         
         if (!plan.sll) {
             o.e_saddr.focus();
@@ -199,8 +208,42 @@ bmoon.icar = {
             } else {
                 p.addClass('error');
                 $('<span class="vres">'+ data.errmsg + '</span>').appendTo(p);
+                if (data.errcode == 35) o.e_mc_noresult.fadeIn();
             }
         });
+    },
+
+    leavePlan: function() {
+        var o = bmoon.icar.init();
+        
+        if (!$('.VAL_LEAVE').inputval()) return;
+
+        var p = $(this).parent(),
+        plan = o.plan;
+
+        plan.phone = o.e_mc_no_phone.val();
+        plan.nick = o.e_mc_no_nick.val().length ? o.e_mc_no_nick.val(): '嘀嗒网友';
+        plan.attach = o.e_mc_no_attach.val();
+
+        var pdata = {
+            _op: 'add',
+            plan: JSON.stringify(o.plan),
+            _type_plan: 'object'
+        };
+
+		$('.vres', p).remove();
+		p.removeClass('success').removeClass('error').addClass('loading');
+        $.post('/json/plan/leave', pdata, function(data) {
+            p.removeClass('loading');
+            if (data.success == 1) {
+                o.e_mc_no_submit.attr('disabled', 'disabled');
+                p.addClass('success');
+                $('<span class="vres">提交成功，期待有人联系你:D</span>').appendTo(p);
+            } else {
+                p.addClass('error');
+                $('<span class="vres">'+ data.errmsg + '</span>').appendTo(p);
+            }
+        }, 'json');
     },
 
     rendPlan: function(ncur) {

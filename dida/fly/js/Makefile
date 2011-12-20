@@ -20,7 +20,9 @@ b/base.js: pub/jquery-1.7.1.js pub/jquery.cookie.js \
 
 b/loadgmap.js: loadgmap.js
 
-b/icar.js: pub/jquerytools/src/dateinput/dateinput.js icar.js
+b/icar.js: pub/jquerytools/src/dateinput/dateinput.js \
+		   pub/jquery.mninpval.js \
+		   icar.js
 
 b/admin/pos.js: admin/pos.js
 b/admin/spd/58.user.js: admin/spd/58.user.js

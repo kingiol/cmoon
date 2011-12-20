@@ -20,6 +20,7 @@ iman.html
 
     oplan.h
         GET /json/plan/match    通过路线信息匹配相关路线
+        ADD /json/plan/leave    用户站内留下带联系方式的路线
 
     omember.h
         GET /json/member/info   通过mname获取用户信息
