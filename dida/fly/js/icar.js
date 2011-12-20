@@ -63,6 +63,7 @@ bmoon.icar = {
         o.e_mc_nick = $('#mc-nick');
         o.e_mc_saddr = $('#mc-saddr');
         o.e_mc_eaddr = $('#mc-eaddr');
+        o.e_mc_from = $('#mc-from');
         o.e_mc_sdate = $('#mc-sdate');
         o.e_mc_stime = $('#mc-stime');
         o.e_mc_phone = $('#mc-phone');
@@ -248,6 +249,23 @@ bmoon.icar = {
 
         o.e_mc_nav.fadeIn();
         o.e_mc_result.fadeIn('slow');
+
+        var siteinfo = {
+            1: {
+                url: 'http://www.58.com',
+                img: '/img/logo/58.gif',
+                title: '58同城'
+            }
+        };
+
+        o.e_mc_from.empty();
+        $.getJSON('/json/member/info', {mid: plan.mid}, function(data) {
+            if (data.success == 1 && data.ori > 0) {
+                o.e_mc_from.attr('href', siteinfo[data.ori].url);
+                o.e_mc_from.attr('title', '数据来源：　' + siteinfo[data.ori].title);
+                $('<img/>').attr('src', siteinfo[data.ori].img).appendTo(o.e_mc_from);
+            }
+        });
 
         o.e_mc_phone.attr('src', '/image/member/pic?type=phone&type=contact&mid=' +
                           plan.mid);

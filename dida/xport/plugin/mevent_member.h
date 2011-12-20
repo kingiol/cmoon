@@ -10,7 +10,7 @@
 #define CAR_CC_SEC      60
 #define SPD_CC_SEC      60000
 
-#define _COL_MEMBER "mid, mname, male, verify, credit, cityid, " \
+#define _COL_MEMBER "mid, mname, ori, male, verify, credit, cityid, " \
     " to_char(intime, 'YYYY-MM-DD') as intime"
 #define _COL_CAR "mid, size, model, mdate"
 #define _COL_MEMBER_PRIV "mid, mname, phone, contact"

@@ -1,18 +1,33 @@
 dl.inp {font-weight: bold;}
-dl.inp dt {width: 60px; text-align: right;}
+dl.inp dt {width: 75px; text-align: right;}
 
 dl.inp dt, dl.inp dd {margin: 5px;}
 
-.page-hint .label {
-	float:left;
-	margin-right:15px;
-    padding: 6px;
+#mc-result {
     line-height: 28px;
     font-weight: normal;
 }
 
-.page-hint .label span {
+#mc-result dt, #mc-result dd {
+    margin: 2px;
+}
+
+#mc-result dd {
+    width: 650px;
+    text-align: left;
+}
+
+#mc-result img {
+    vertical-align: middle;
+}
+
+#mc-result span {
     font-weight: bold;
+    margin-left: 0;
+}
+
+#mc-from {
+    float: right;
 }
 
 #map {
