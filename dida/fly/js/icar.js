@@ -71,6 +71,8 @@ bmoon.icar = {
         o.e_mc_attach = $('#mc-attach');
         o.e_mc_num_nav = $('#mc-num-nav');
 
+        o.e_mc_no_repeat = $('#mc-no-repeat');
+        o.e_mc_no_wday = $('#mc-no-wday');
         o.e_mc_no_phone = $('#mc-no-phone');
         o.e_mc_no_nick = $('#mc-no-nick');
         o.e_mc_no_attach = $('#mc-no-attach');
@@ -155,10 +157,21 @@ bmoon.icar = {
 	        $(this).parent().toggleClass("active"); 
         });
 
+        o.e_mc_no_repeat.change(o.wdayChanged);
         o.e_submit.click(o.matchPlan);
         o.e_mc_no_submit.click(o.leavePlan);
         o.e_mc_prev.click(function() {o.rendPlan(o._pcur-1);});
         o.e_mc_next.click(function() {o.rendPlan(o._pcur+1);});
+    },
+
+    wdayChanged: function() {
+        var o = bmoon.icar.init();
+
+        if (o.e_mc_no_repeat.val() == 2) {
+            o.e_mc_no_wday.show();
+        } else {
+            o.e_mc_no_wday.hide();
+        }
     },
 
     matchPlan: function() {
@@ -222,6 +235,16 @@ bmoon.icar = {
         var p = $(this).parent(),
         plan = o.plan;
 
+        plan.repeat = o.e_mc_no_repeat.val();
+        if (plan.repeat == 2) {
+            var os = $('input[name=wday]:checked'),
+            days = [];
+            $.each(os, function(i, o) {
+                days.push($(o).val());
+            });
+            plan.sdate = days.join(',');
+        } else plan.sdate = plan.date;
+        plan.stime = plan.time;
         plan.phone = o.e_mc_no_phone.val();
         plan.nick = o.e_mc_no_nick.val().length ? o.e_mc_no_nick.val(): '嘀嗒网友';
         plan.attach = o.e_mc_no_attach.val();

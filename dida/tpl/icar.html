@@ -108,18 +108,26 @@
     经过不断努力，我们还是没有为您找到满意的匹配路线，建议您留下联系方式，以便日后同路线的与您取得联系：
   </p>
   <dl class="inp">
-    <!--
-    <dt>找人需求：</dt>
+    <dt>我的需求：</dt>
     <dd>
       <select id="mc-no-repeat">
-        <option value="1">不重复</option>
-        <option value="1">每日</option>
-        <option value="1">每周</option>
+        <option value="0">仅此一次</option>
+        <option value="1">每天都有</option>
+        <option value="2">每周都有</option>
       </select>
+      <span id="mc-no-wday" class="hide">
+        星期
+        &nbsp; <input type="checkbox" name="wday" value="1" /> 一
+        &nbsp; <input type="checkbox" name="wday" value="2" /> 二
+        &nbsp; <input type="checkbox" name="wday" value="3" /> 三
+        &nbsp; <input type="checkbox" name="wday" value="4" /> 四
+        &nbsp; <input type="checkbox" name="wday" value="5" /> 五
+        &nbsp; <input type="checkbox" name="wday" value="6" /> 六
+        &nbsp; <input type="checkbox" name="wday" value="7" /> 日
+        </span>
     </dd>
-    -->
     
-    <dt>电话/QQ/MSN：</dt>
+    <dt>电话/IM：</dt>
     <dd>
       <input type="text" class="VAL_LEAVE vrequire" id="mc-no-phone" />*
     </dd>
