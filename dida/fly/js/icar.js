@@ -183,7 +183,8 @@ bmoon.icar = {
         }
 
         plan.dad  = o.e_dad.val();
-        plan.date = o.e_dateinput.val();
+        //plan.date = o.e_dateinput.val();
+        plan.date = $('#date-input').val();
         //o.dayow = xxx;
         plan.time = o.e_hour.val() + ':' + o.e_min.val();
         plan.rect = '((' + plan.sll.join(',') + '),(' + plan.ell.join(',') + '))';
