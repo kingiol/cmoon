@@ -13,14 +13,6 @@ Config {
 Dataset {
     layout.html {
         tabs {
-            0 {
-                name = 邀人同去
-                href = /iman.html
-            }
-            1 {
-                name = 邀车前往
-                href = /icar.html
-            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ; var bmoon = bmoon || {};
-bmoon.icar = {
+bmoon.index = {
     version: '1.0',
 
     _formAddr: function(name, addrs, loc) {
@@ -42,7 +42,7 @@ bmoon.icar = {
     },
     
     init: function() {
-        var o = bmoon.icar;
+        var o = bmoon.index;
         if (o.inited) return o;
 
         o.e_hour = $('#hour');
@@ -85,7 +85,7 @@ bmoon.icar = {
     },
     
     initMap: function(geo) {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
 
         geo = geo || [28.188,113.033];
         o.g_lat = new google.maps.LatLng(geo[0], geo[1]);
@@ -121,7 +121,7 @@ bmoon.icar = {
     },
 
     onready: function() {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
 
         $.tools.dateinput.localize("zh",  {
             months:        '一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月',
@@ -151,7 +151,7 @@ bmoon.icar = {
     },
 
     bindClick: function() {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
 
         o.calendar.bind("onShow onHide", function()  {
 	        $(this).parent().toggleClass("active"); 
@@ -165,7 +165,7 @@ bmoon.icar = {
     },
 
     wdayChanged: function() {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
 
         if (o.e_mc_no_repeat.val() == 2) {
             o.e_mc_no_wday.show();
@@ -175,7 +175,7 @@ bmoon.icar = {
     },
 
     matchPlan: function() {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
 
         var p = $(this).parent(),
         plan = o.plan;
@@ -228,7 +228,7 @@ bmoon.icar = {
     },
 
     leavePlan: function() {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
         
         if (!$('.VAL_LEAVE').inputval()) return;
 
@@ -271,7 +271,7 @@ bmoon.icar = {
     },
 
     rendPlan: function(ncur) {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
         
         var plan = o.mplans[ncur],
         geo = o._dbbox2ll(plan.rect),
@@ -294,7 +294,7 @@ bmoon.icar = {
     },
 
     rendMatch: function(plan, ncur) {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
 
         o._pcur = ncur;
         if (ncur > 0) o.e_mc_prev.show();
@@ -340,7 +340,7 @@ bmoon.icar = {
 
     // {address_components: [], formatted_address: "", geometry: {}...} gdata.js
     upPlan: function(x, data) {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
 
         var p = o.plan,
         addrs = data.address_components,
@@ -371,7 +371,7 @@ bmoon.icar = {
     },
 
     rendDirect: function() {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
 
         if (!o.plan.sll || !o.plan.ell) return;
 
@@ -389,7 +389,7 @@ bmoon.icar = {
     },
 
     bindMapChange: function() {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
 
         google.maps.event.addListener(o.g_smarker, 'dragend', function() {
             o.markDraged('s');
@@ -407,7 +407,7 @@ bmoon.icar = {
     },
 
     markDraged: function(x) {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
 
         var marker = o.g_smarker,
         addr = o.e_saddr;
@@ -434,7 +434,7 @@ bmoon.icar = {
     },
 
     autoChanged: function(x) {
-        var o = bmoon.icar.init();
+        var o = bmoon.index.init();
         
         var marker = o.g_smarker,
         auto = o.g_sauto;
@@ -466,4 +466,4 @@ bmoon.icar = {
     }
 };
 
-$(document).ready(bmoon.icar.onready);
+$(document).ready(bmoon.index.onready);

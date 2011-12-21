@@ -4,7 +4,7 @@ include $(BASEDIR)Make.env
 
 FILES = b/base.js \
 		b/loadgmap.js \
-		b/icar.js \
+		b/index.js \
 		b/admin/pos.js \
 		b/admin/spd/58.user.js b/admin/spd/58.js b/admin/spd/post.js
 
@@ -20,9 +20,9 @@ b/base.js: pub/jquery-1.7.1.js pub/jquery.cookie.js \
 
 b/loadgmap.js: loadgmap.js
 
-b/icar.js: pub/jquerytools/src/dateinput/dateinput.js \
+b/index.js: pub/jquerytools/src/dateinput/dateinput.js \
 		   pub/jquery.mninpval.js \
-		   icar.js
+		   index.js
 
 b/admin/pos.js: admin/pos.js
 b/admin/spd/58.user.js: admin/spd/58.user.js
