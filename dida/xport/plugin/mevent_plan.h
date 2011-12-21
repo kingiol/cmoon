@@ -27,6 +27,12 @@ enum {
 };
 
 enum {
+    PLAN_RPT_NONE = 0,
+    PLAN_RPT_DAY,
+    PLAN_RPT_WEEK
+};
+
+enum {
     REP_ERR_PLAN_NEXIST = 34,
     REP_ERR_PLAN_NMATCH
 };
