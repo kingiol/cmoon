@@ -110,7 +110,7 @@
     overflow: auto;
 }
 
-#bd-content pre {
+#bd-content pre.notice {
     width:90%;
     padding:0.5em;
     margin: 1ex auto;

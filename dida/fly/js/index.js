@@ -201,6 +201,7 @@ bmoon.index = {
         //o.dayow = xxx;
         plan.time = o.e_hour.val() + ':' + o.e_min.val();
         plan.rect = '((' + plan.sll.join(',') + '),(' + plan.ell.join(',') + '))';
+        plan.km = bmoon.utl.earthDis(plan.sll, plan.ell);
         //plan.sll = [212.12, 232.33];
         //plan.ell = [212.12, 232.33];
         //plan.saddr = ... plan.scity = ..

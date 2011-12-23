@@ -50,7 +50,6 @@ static NEOERR* plan_cmd_plan_get(struct plan_entry *e, QueueEntry *q)
  * keep plan clean (no history useless plan) please
  * limit by:
  *    dad, pstatu, (scityid, ecityid) / rect
- * TODO limit by km
  */
 static NEOERR* plan_cmd_plan_get_by_geo(struct plan_entry *e, QueueEntry *q)
 {

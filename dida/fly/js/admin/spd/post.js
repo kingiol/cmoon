@@ -129,7 +129,10 @@ bmoon.spdpost = {
             p.ecity = city;
         }
 
-        if (p.sll && p.ell) o.next.removeAttr('disabled');
+        if (p.sll && p.ell) {
+            p.km = bmoon.utl.earthDis(p.sll, p.ell);
+            o.next.removeAttr('disabled');
+        }
     },
 
     savePlan: function() {

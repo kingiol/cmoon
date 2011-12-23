@@ -120,16 +120,19 @@ Plugin {
                 pstatu [type=int, require=true] = pstatu <
                 scityid [type=int] = scityid =
                 ecityid [type=int] = ecityid =
+                km [type=float] = (km / 2) <
             }
             geob {
                 dad [type=int, require=true] = dad =
                 pstatu [type=int, require=true] = pstatu <
                 rect [type=box] = ((rect - @@rect) * point(1.5,0) + @@rect) @>
+                km [type=float] = (km / 3) <
             }
             geox {
                 dad [type=int, require=true] = dad =
                 pstatu [type=int, require=true] = pstatu <
                 rect [type=box] = ((rect - @@rect) * point(2,0) + @@rect) @>
+                km [type=float] = (km / 4) <
             }
         }
     }

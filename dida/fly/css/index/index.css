@@ -30,6 +30,11 @@ dl.inp dt, dl.inp dd {margin: 5px;}
     float: right;
 }
 
+#mc-no-attach {
+    width: 545px;
+    height: 70px;
+}
+
 #map {
     height: 400px;
     width: 100%;
