@@ -22,7 +22,7 @@ Mevent {
 
 Plugin {
     skeleton {
-        dbsn = pgsql:dbname=lcs_msg host=localhost user=lcser password=loveu
+        dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
     }
     member {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
