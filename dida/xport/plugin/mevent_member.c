@@ -173,7 +173,7 @@ static NEOERR* member_cmd_car_add(struct member_entry *e, QueueEntry *q)
 static NEOERR* member_cmd_mem_add(struct member_entry *e, QueueEntry *q)
 {
 	STRING str; string_init(&str);
-    char *mname, *ori, *tmps;
+    char *mname, *ori = NULL, *tmps;
 	NEOERR *err;
 
     mdb_conn *db = e->db;
@@ -181,8 +181,10 @@ static NEOERR* member_cmd_mem_add(struct member_entry *e, QueueEntry *q)
     REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
     REQ_FETCH_PARAM_STR(q->hdfrcv, "ori", ori);
 
-    tmps = hdf_get_valuef(g_cfg, CONFIG_PATH".spd.%s", ori);
-    if (tmps) hdf_set_value(q->hdfrcv, "ori", tmps);
+    if (ori) {
+        tmps = hdf_get_valuef(g_cfg, CONFIG_PATH".spd.%s", ori);
+        if (tmps) hdf_set_value(q->hdfrcv, "ori", tmps);
+    }
 
     hdf_set_int_value(q->hdfrcv, "mid", hash_string_rev(mname));
 
