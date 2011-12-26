@@ -53,6 +53,7 @@ bmoon.index = {
 
         o.e_saddr = $('#saddr');
         o.e_eaddr = $('#eaddr');
+        o.e_km = $('#km');
 
         o.e_submit = $('#submit');
 
@@ -376,6 +377,8 @@ bmoon.index = {
 
         if (!o.plan.sll || !o.plan.ell) return;
 
+        o.e_km.html('约 '+ bmoon.utl.earthDis(o.plan.sll, o.plan.ell) +' 千米');
+        
         var opts = {
             origin: new google.maps.LatLng(o.plan.sll[0], o.plan.sll[1]),
             destination: new google.maps.LatLng(o.plan.ell[0], o.plan.ell[1]),
