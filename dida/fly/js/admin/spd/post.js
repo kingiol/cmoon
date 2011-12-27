@@ -144,6 +144,9 @@ bmoon.spdpost = {
         
         if (!o.plan.sll || !o.plan.ell) return;
 
+        o.plan.rect = '((' + o.plan.sll.join(',') + '),(' +
+            o.plan.ell.join(',') + '))';
+
         var pdata = {
             _op: 'mod',
             plan: JSON.stringify(o.plan),
@@ -156,18 +159,15 @@ bmoon.spdpost = {
             pdata._type_member = 'object';
         }
         
-        o.plan.rect = '((' + o.plan.sll.join(',') + '),(' +
-            o.plan.ell.join(',') + '))';
-
-		$('.vres', p).remove();
-		p.removeClass('success').removeClass('error').addClass('loading');
+        $('.vres', p).remove();
+        p.removeClass('success').removeClass('error').addClass('loading');
 
         $.post('/json/spd/post/do', pdata, function(data) {
             if (data.success == 1) {
                 o.count.text(--mgd._ntt);
                 p.removeClass('loading');
                 p.addClass('success');
-                o.getPlan();
+                if (mgd._ntt > 0) o.getPlan();
             } else {
                 p.addClass('error');
                 $('<span class="vres">'+ data.errmsg +'</span>').appendTo(p);
