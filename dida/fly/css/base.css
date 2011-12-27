@@ -8,6 +8,13 @@ h3 {margin: 1.5em 0 0.8em 0;}
 h4 {margin: 1em   0 0.5em 0}
 p {margin:  0.5em 0 1em   0;}
 ul {padding: 0 2em;}
+pre {
+    white-space: pre-wrap;       / css-3 /
+    white-space: -moz-pre-wrap;  / Mozilla, since 1999 /
+    white-space: -pre-wrap;      / Opera 4-6 /
+    white-space: -o-pre-wrap;    / Opera 7 /
+    word-wrap: break-word;       / Internet Explorer 5.5+ /
+}
 
 :focus {outline-style:none;}
 input[type=checkbox] {vertical-align:middle; margin-top:-2px; margin-bottom:1px;}
@@ -37,8 +44,8 @@ a.btn {
 }
 a.btn:hover {background-position: 0 -40px;}
 
-dl.inp dt {float: left; clear: left; margin: 10px; line-height: 22px;}
-dl.inp dd {margin: 10px; line-height: 22px; float: left;}
+dl.inp dt {float: left; clear: left; margin: 5px; line-height: 22px; text-align: right; width: 75px;}
+dl.inp dd {margin: 5px; line-height: 22px; float: left;}
 dl.inp dd span {margin-left: 20px;}
 dl.inp dd.loading .indicator {display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;}
 dl.inp dd.success .indicator {display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat}

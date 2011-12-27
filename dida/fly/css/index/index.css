@@ -1,7 +1,4 @@
 dl.inp {font-weight: bold;}
-dl.inp dt {width: 75px; text-align: right;}
-
-dl.inp dt, dl.inp dd {margin: 5px;}
 
 #mc-result {
     line-height: 28px;

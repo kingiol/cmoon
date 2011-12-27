@@ -148,3 +148,23 @@ NEOERR* spd_post_do_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
     return STATUS_OK;
 }
+
+NEOERR* spd_post_do_data_del(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+    mevent_t *evt;
+
+    if (!cgi || !cgi->hdf) return nerr_raise(NERR_ASSERT, "paramter null");
+
+    evt = hash_lookup(evth, "plan");
+    if (!evt) return nerr_raise(NERR_ASSERT, "plan null");
+    
+    if (!hdf_get_obj(cgi->hdf, PRE_QUERY".plan"))
+        return nerr_raise(NERR_ASSERT, "plan null");
+    
+    hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY".plan"));
+    hdf_set_int_value(evt->hdfsnd, "pstatu", PLAN_ST_DELETE);
+
+    MEVENT_TRIGGER(evt, NULL, REQ_CMD_PLAN_UP, FLAGS_NONE);
+
+    return STATUS_OK;
+}

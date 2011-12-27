@@ -246,6 +246,8 @@ bmoon.index = {
             });
             plan.sdate = days.join(',');
         } else plan.sdate = plan.date;
+        if (plan.dad == 0) plan.dad = 1; // if i lookup man, i'm a car
+        else plan.dad = 0;
         plan.stime = plan.time;
         plan.phone = o.e_mc_no_phone.val();
         plan.nick = o.e_mc_no_nick.val().length ? o.e_mc_no_nick.val(): '嘀嗒网友';

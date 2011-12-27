@@ -22,6 +22,10 @@ bmoon.spdpost = {
 
         o.saddr = $('#saddr');
         o.eaddr = $('#eaddr');
+        o.sdate = $('#sdate');
+        o.stime = $('#stime');
+        o.attach = $('#attach');
+        o.ourl = $('#ourl');
         o.km = $('#km');
         o.marks = $('#marks');
         o.count = $('#count');
@@ -29,7 +33,9 @@ bmoon.spdpost = {
         o.phoneimg = $('#img-phone');
         o.contact = $('#contact');
         o.contactimg = $('img-contact');
+        o.del = $('#del');
         o.next = $('#next');
+        o.save = $('#save');
         o.map = $('#map');
 
         o.plan = {};
@@ -79,12 +85,16 @@ bmoon.spdpost = {
         o.gdirrender.setMap(o.gmap);
 
         o.bindChange();
-        o.next.click(o.savePlan);
+        o.del.click(o.delPlan);
+        o.next.click(o.getPlan);
+        o.save.click(o.savePlan);
     },
 
     getPlan: function() {
         var o = bmoon.spdpost.init();
 
+        if (mgd._ntt <= 0) return;
+        
         var opt = o.plan.id ? {exceptid: o.plan.id} : null;
 
         $.getJSON('/json/spd/post/do', opt, function(data) {
@@ -92,12 +102,16 @@ bmoon.spdpost = {
                 var p = data.plan;
                 o.saddr.val(p.saddr);
                 o.eaddr.val(p.eaddr);
+                o.sdate.val(p.sdate);
+                o.stime.val(p.stime);
+                o.attach.html(p.attach);
+                o.ourl.attr('href', data.member.ourl);
                 o.plan = data.plan;
                 o.member = data.member;
                 o.phoneimg.attr('src', bmoon.utl.clotheHTML(data.member.phone));
                 o.contactimg.attr('src', bmoon.utl.clotheHTML(data.member.contact));
 
-                o.next.attr('disabled', 'disabled');
+                o.count.text(--mgd._ntt);
             } else {
                 alert(data.errmsg || '获取数据失败，请稍后再试！');
             }
@@ -128,11 +142,43 @@ bmoon.spdpost = {
             p.eaddr = data.formatted_address;
             p.ecity = city;
         }
+        $.getJSON('/json/city/s', {c: city}, function(data) {
+            if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
+                if (x != 'e') p.scityid = data.city.id;
+                else p.ecityid = data.city.id;
+            }
+        });
 
         if (p.sll && p.ell) {
             p.km = bmoon.utl.earthDis(p.sll, p.ell);
-            o.next.removeAttr('disabled');
         }
+    },
+
+    delPlan: function() {
+        var o = bmoon.spdpost.init();
+
+        if (!o.plan) return;
+
+        var pdata = {
+            _op: 'del',
+            plan: JSON.stringify(o.plan),
+            _type_plan: 'object'
+        },
+        p = $(this).parent();
+        
+        $('.vres', p).remove();
+        p.removeClass('success').removeClass('error').addClass('loading');
+
+        $.post('/json/spd/post/do', pdata, function(data) {
+            p.removeClass('loading');
+            if (data.success == 1) {
+                p.addClass('success');
+                if (mgd._ntt > 0) o.getPlan();
+            } else {
+                p.addClass('error');
+                $('<span class="vres">'+ data.errmsg + '</span>').appendTo(p);
+            }
+        }, 'json');
     },
 
     savePlan: function() {
@@ -144,6 +190,8 @@ bmoon.spdpost = {
         
         if (!o.plan.sll || !o.plan.ell) return;
 
+        o.plan.sdate = o.sdate.val();
+        o.plan.stime = o.stime.val();
         o.plan.rect = '((' + o.plan.sll.join(',') + '),(' +
             o.plan.ell.join(',') + '))';
 
@@ -163,9 +211,8 @@ bmoon.spdpost = {
         p.removeClass('success').removeClass('error').addClass('loading');
 
         $.post('/json/spd/post/do', pdata, function(data) {
+            p.removeClass('loading');
             if (data.success == 1) {
-                o.count.text(--mgd._ntt);
-                p.removeClass('loading');
                 p.addClass('success');
                 if (mgd._ntt > 0) o.getPlan();
             } else {

@@ -35,6 +35,7 @@ Plugin {
                 mname [maxlen=256, require=true] = mname
                 ori [type=int] = ori
                 oid [maxlen=64] = oid
+                ourl [maxlen=256] = ourl
                 male [type=int] = male
                 pass [maxlen=64] = pass
                 mstatu [type=int] = mstatu
@@ -112,6 +113,11 @@ Plugin {
                 rect [type=box] = rect
                 route [type=path] = route
                 km [type=float] = km
+
+                sdate [maxlen=16] = sdate
+                edate [maxlen=16] = edate
+                stime = stime
+                etime = etime
             }
         }
         QueryCond {

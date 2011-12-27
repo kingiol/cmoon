@@ -1,0 +1,1 @@
+ALTER TABLE member ADD COLUMN ourl varchar(256) NOT NULL DEFAULT '';

@@ -91,6 +91,7 @@ bmoon.spd58 = {
 
                                 ori: '58',
                                 oid: id,
+                                ourl: location.href,
                                 mname: data.name + '@58.com',
                                 verify: data.license,
                                 credit: data.credit,

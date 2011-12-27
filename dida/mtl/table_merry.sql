@@ -13,6 +13,7 @@ CREATE TABLE member (
     mname varchar(256) NOT NULL DEFAULT '',
     ori smallint NOT NULL DEFAULT 0, --see server.hdf
     oid varchar(64) NOT NULL DEFAULT '',
+    ourl varchar(256) NOT NULL DEFAULT '', -- spd's origin url
     male smallint NOT NULL DEFAULT 0,
     pass varchar(64) NOT NULL DEFAULT '',
     mpass varchar(64) NOT NULL DEFAULT '',
