@@ -108,8 +108,8 @@ NEOERR* spd_post_do_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
     int mid = hdf_get_int_value(cgi->hdf, PRE_OUTPUT".plan.mid", 0);
 
-    MDB_QUERY_RAW(db, "member", _COL_MEMBER, "mid=%d", NULL, mid);
-    err = mdb_set_row(cgi->hdf, db, _COL_MEMBER, PRE_OUTPUT".member");
+    MDB_QUERY_RAW(db, "member", _COL_MEMBER_ADMIN, "mid=%d", NULL, mid);
+    err = mdb_set_row(cgi->hdf, db, _COL_MEMBER_ADMIN, PRE_OUTPUT".member");
     if (err != STATUS_OK) return nerr_pass(err);
 
     int cityid = hdf_get_int_value(cgi->hdf, PRE_OUTPUT".plan.cityid", 0);
@@ -124,36 +124,9 @@ NEOERR* spd_post_do_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 NEOERR* spd_post_do_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
     mevent_t *evt;
-    char *sc, *ec;
-    int scid = 0, ecid = 0;
 
     if (!cgi || !cgi->hdf) return nerr_raise(NERR_ASSERT, "paramter null");
 
-    sc = hdf_get_value(cgi->hdf, PRE_QUERY".plan.scity", NULL);
-    ec = hdf_get_value(cgi->hdf, PRE_QUERY".plan.ecity", NULL);
-    if (sc || ec) {
-        evt = hash_lookup(evth, "city");
-        if (!evt) return nerr_raise(NERR_ASSERT, "city null");
-
-        if (sc) hdf_set_value(evt->hdfsnd, "c.0", sc);
-        if (ec) hdf_set_value(evt->hdfsnd, "c.1", ec);
-
-        MEVENT_TRIGGER_NRET(evt, NULL, REQ_CMD_CITY_BY_S, FLAGS_SYNC);
-
-        if (sc) {
-            sc = hdf_get_valuef(evt->hdfrcv, "city.%s.id", sc);
-            if (sc) scid = atoi(sc);
-            else mtc_warn("start city %s cityid not found",
-                          hdf_get_value(cgi->hdf, PRE_QUERY".plan.scity", NULL));
-        }
-        if (ec) {
-            ec = hdf_get_valuef(evt->hdfrcv, "city.%s.id", ec);
-            if (ec) ecid = atoi(ec);
-            else mtc_warn("end city %s cityid not found",
-                          hdf_get_value(cgi->hdf, PRE_QUERY".plan.ecity", NULL));
-        }
-    }
-    
     evt = hash_lookup(evth, "plan");
     if (!evt) return nerr_raise(NERR_ASSERT, "plan null");
     
@@ -161,8 +134,6 @@ NEOERR* spd_post_do_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
         return nerr_raise(NERR_ASSERT, "plan null");
     
     hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY".plan"));
-    if (sc) hdf_set_int_value(evt->hdfsnd, "scityid", scid);
-    if (ec )hdf_set_int_value(evt->hdfsnd, "ecityid", ecid);
     hdf_set_int_value(evt->hdfsnd, "pstatu", PLAN_ST_SPD_OK);
 
     MEVENT_TRIGGER(evt, NULL, REQ_CMD_PLAN_UP, FLAGS_NONE);
