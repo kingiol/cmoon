@@ -20,22 +20,21 @@ Mevent {
     }
 }
 
+Odomain {
+    58 = 1
+}
+
 Plugin {
     skeleton {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
     }
     member {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
-        spd {
-            58 = 1
-        }
         InsertCol {
             member {
                 mid [type=int, require=true] = mid
                 mname [maxlen=256, require=true] = mname
                 ori [type=int] = ori
-                oid [maxlen=64] = oid
-                ourl [maxlen=256] = ourl
                 male [type=int] = male
                 pass [maxlen=64] = pass
                 mstatu [type=int] = mstatu
@@ -56,8 +55,6 @@ Plugin {
             member {
                 mid [type=int, require=true] = mid
                 mname [maxlen=256, require=true] = mname
-                ori [type=int] = ori
-                oid [maxlen=64] = oid
                 male [type=int] = male
                 pass [maxlen=64] = pass
                 mstatu [type=int] = mstatu
@@ -76,6 +73,11 @@ Plugin {
         InsertCol {
             plan {
                 mid [type=int, require=true] = mid
+
+                ori [type=int] = ori
+                oid [maxlen=64] = oid
+                ourl [maxlen=256] = ourl
+
                 dad [type=int] = dad
                 nick [maxlen=32] = nick
                 pstatu [type=int] = pstatu
@@ -104,6 +106,10 @@ Plugin {
         UpdateCol {
             plan {
                 id [type=int, require=true] = id
+
+                ori [type=int] = ori
+                oid [maxlen=64] = oid
+
                 pstatu [type=int] = pstatu
                 scityid [type=int] = scityid
                 ecityid [type=int] = ecityid
@@ -131,13 +137,13 @@ Plugin {
             geob {
                 dad [type=int, require=true] = dad =
                 pstatu [type=int, require=true] = pstatu <
-                rect [type=box] = ((rect - @@rect) * point(1.5,0) + @@rect) @>
+                rect [type=box] = ((rect - @@rect) * point(1.2,0) + @@rect) @>
                 km [type=float] = (km / 3) <
             }
             geox {
                 dad [type=int, require=true] = dad =
                 pstatu [type=int, require=true] = pstatu <
-                rect [type=box] = ((rect - @@rect) * point(2,0) + @@rect) @>
+                rect [type=box] = ((rect - @@rect) * point(1.6,0) + @@rect) @>
                 km [type=float] = (km / 4) <
             }
         }

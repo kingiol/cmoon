@@ -4,7 +4,7 @@
 
 NEOERR* spd_pre_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-    mevent_t *evt = hash_lookup(evth, "member");
+    mevent_t *evt = hash_lookup(evth, "plan");
 
     if (!cgi || !cgi->hdf || !evt) return nerr_raise(NERR_ASSERT, "paramter null");
 
@@ -49,11 +49,11 @@ NEOERR* spd_do_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 
     hdf_set_int_value(evt->hdfsnd, "cityid", cityid);
-    hdf_set_value(evt->hdfsnd, "mstatu", "10");
+    hdf_set_int_value(evt->hdfsnd, "mstatu", MEMBER_ST_SPD_FRESH);
     if (hdf_get_int_value(evt->hdfsnd, "dad", 0) == 1)
         hdf_set_value(evt->hdfsnd, "_addcar", "1");
     
-    MEVENT_TRIGGER(evt, NULL, REQ_CMD_MEMBER_ADD, FLAGS_SYNC);
+    MEVENT_TRIGGER_NRET(evt, NULL, REQ_CMD_MEMBER_ADD, FLAGS_NONE);
 
     /*
      * plan
@@ -62,7 +62,7 @@ NEOERR* spd_do_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     if (!evt) return nerr_raise(NERR_ASSERT, "plan backend error");
     
     hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
-    hdf_set_value(evt->hdfsnd, "pstatu", "10");
+    hdf_set_int_value(evt->hdfsnd, "pstatu", PLAN_ST_SPD_FRESH);
 
     s = hdf_get_value(evt->hdfsnd, "stime", NULL);
     if (s && !reg_search("^[0-2][0-9](:[0-9][0-9])+$", s))

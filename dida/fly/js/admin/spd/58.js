@@ -20,6 +20,8 @@ bmoon.spd58 = {
         } else if (href.match(/.*58.com\/pinche\//)) {
             o.parseList();
         }
+
+        setTimeout(function() {window.location.reload();}, 10*60*1000);
     },
 
     bindClick: function() {
@@ -153,11 +155,15 @@ bmoon.spd58 = {
                      ori: '58',
                      oids: ids
                  }, function(data) {
-                     if (data.success == 1 && bmoon.utl.type(data.oids) == 'Object') {
-                         $.each(data.oids, function(key, val) {
-                             console.log(val);
-                             window.open(urls[val]);
-                         });
+                     if (data.success == 1) {
+                         if (bmoon.utl.type(data.oids) == 'Object') {
+                             $.each(data.oids, function(key, val) {
+                                 console.log(val);
+                                 window.open(urls[val]);
+                             });
+                         } else {
+                             console.log('dida ALL DONE');
+                         }
                      } else {
                          alert(data.errmsg || '操作失败');
                      }

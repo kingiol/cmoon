@@ -4,17 +4,15 @@
 #define PREFIX_MEMBER   "Member"
 #define PREFIX_MEMBER_PRIV   "MemberPriv"
 #define PREFIX_CAR      "Car"
-#define PREFIX_SPD      "Spider"
 
 #define MEMBER_CC_SEC   60
 #define CAR_CC_SEC      60
-#define SPD_CC_SEC      60000
 
 #define _COL_MEMBER "mid, mname, ori, male, verify, credit, cityid, "   \
     " to_char(intime, 'YYYY-MM-DD') as intime"
 #define _COL_MEMBER_PRIV "mid, mname, phone, contact"
-#define _COL_MEMBER_ADMIN "mid, mname, ori, ourl, male, phone, contact, " \
-    " verify, credit, cityid, "                                     \
+#define _COL_MEMBER_ADMIN "mid, mname, male, phone, contact, "  \
+    " verify, credit, cityid, "                                 \
     " to_char(intime, 'YYYY-MM-DD') as intime"
 #define _COL_CAR "mid, size, model, mdate"
 
@@ -24,8 +22,15 @@ enum {
     REQ_CMD_MEMBER_ADD,
     REQ_CMD_MEMBER_UP,
     REQ_CMD_CAR_GET,
-    REQ_CMD_CAR_ADD,
-    REQ_CMD_SPD_PEEL
+    REQ_CMD_CAR_ADD
+};
+
+enum {
+    MEMBER_ST_FRESH = 0,
+    MEMBER_ST_SPD_OK,
+    MEMBER_ST_PAUSE,
+    MEMBER_ST_DELETE,
+    MEMBER_ST_SPD_FRESH = 10
 };
 
 enum {

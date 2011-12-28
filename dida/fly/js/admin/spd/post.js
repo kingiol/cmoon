@@ -105,7 +105,7 @@ bmoon.spdpost = {
                 o.sdate.val(p.sdate);
                 o.stime.val(p.stime);
                 o.attach.html(p.attach);
-                o.ourl.attr('href', data.member.ourl);
+                o.ourl.attr('href', p.ourl);
                 o.plan = data.plan;
                 o.member = data.member;
                 o.phoneimg.attr('src', bmoon.utl.clotheHTML(data.member.phone));

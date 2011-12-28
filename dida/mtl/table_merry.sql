@@ -11,9 +11,7 @@ CREATE TABLE city (
 CREATE TABLE member (
     mid int PRIMARY KEY,
     mname varchar(256) NOT NULL DEFAULT '',
-    ori smallint NOT NULL DEFAULT 0, --see server.hdf
-    oid varchar(64) NOT NULL DEFAULT '',
-    ourl varchar(256) NOT NULL DEFAULT '', -- spd's origin url
+    ori smallint NOT NULL DEFAULT 0, -- plan's origin domain, see server.hdf
     male smallint NOT NULL DEFAULT 0,
     pass varchar(64) NOT NULL DEFAULT '',
     mpass varchar(64) NOT NULL DEFAULT '',
@@ -40,6 +38,11 @@ CREATE INDEX car_index ON car (size);
 CREATE TABLE plan (
     id SERIAL,
     mid int NOT NULL DEFAULT 0,
+
+    ori smallint NOT NULL DEFAULT 0, -- plan's origin domain, see server.hdf
+    oid varchar(64) NOT NULL DEFAULT '',   -- plan's origin id
+    ourl varchar(256) NOT NULL DEFAULT '', -- plan's origin url
+
     dad smallint NOT NULL DEFAULT 0,   --0 person, 1 car
     nick varchar(32) NOT NULL DEFAULT '',
     pstatu smallint NOT NULL DEFAULT 0, --0 fresh, 1 pause, 2 delete, 10 spd fresh

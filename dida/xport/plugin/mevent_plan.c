@@ -21,6 +21,30 @@ struct plan_entry {
     struct plan_stats st;
 };
 
+static bool plan_spd_exist(struct plan_entry *e, QueueEntry *q,
+                           char *ori, char *id)
+{
+	unsigned char *val = NULL; size_t vsize = 0;
+	NEOERR *err;
+
+    if (!ori || !id) return false;
+    
+    mdb_conn *db = e->db;
+    struct cache *cd = e->cd;
+    
+    ori = hdf_get_valuef(g_cfg, "Odomain.%s", ori);
+    
+    if (!cache_getf(cd, &val, &vsize, PREFIX_SPD"%s%s", ori, id)) {
+        MDB_QUERY_RAW(db, "plan", "mid", "ori=$1 AND oid=$2", "ss", ori, id);
+        err = mdb_set_row(q->hdfsnd, db, "mid", NULL);
+        if(nerr_handle(&err, NERR_NOT_FOUND)) return false;
+        nerr_ignore(&err);
+        
+        CACHE_HDF(q->hdfsnd, SPD_CC_SEC, PREFIX_SPD"%s%s", ori, id);
+    }
+    return true;
+}
+
 static NEOERR* plan_cmd_plan_get(struct plan_entry *e, QueueEntry *q)
 {
 	unsigned char *val = NULL; size_t vsize = 0;
@@ -136,15 +160,27 @@ static NEOERR* plan_cmd_plan_get_by_geo(struct plan_entry *e, QueueEntry *q)
 static NEOERR* plan_cmd_plan_add(struct plan_entry *e, QueueEntry *q)
 {
 	STRING str; string_init(&str);
-    char *mname;
+    char *mname, *ori = NULL, *oid = NULL, *tmps;
 	NEOERR *err;
 
     mdb_conn *db = e->db;
 
+    REQ_FETCH_PARAM_STR(q->hdfrcv, "ori", ori);
+    REQ_FETCH_PARAM_STR(q->hdfrcv, "oid", oid);
+    
     if (!hdf_get_value(q->hdfrcv, "mid", NULL)) {
         REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
         hdf_set_int_value(q->hdfrcv, "mid", hash_string_rev(mname));
     }
+    
+    if (ori) {
+        if (plan_spd_exist(e, q, ori, oid))
+            return nerr_raise(REP_ERR_PLANED, "%s %s planed", ori, oid);
+        
+        tmps = hdf_get_valuef(g_cfg, "Odomain.%s", ori);
+        if (tmps) hdf_set_value(q->hdfrcv, "ori", tmps);
+    }
+
 
     err = mdb_build_incol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.plan"),
@@ -188,6 +224,26 @@ static NEOERR* plan_cmd_plan_up(struct plan_entry *e, QueueEntry *q)
     return STATUS_OK;
 }
 
+static NEOERR* plan_cmd_spd_peel(struct plan_entry *e, QueueEntry *q)
+{
+    char *ori, *id;
+    HDF *oids;
+    int cnt = 0;
+
+    REQ_GET_PARAM_STR(q->hdfrcv, "ori", ori);
+    REQ_GET_PARAM_CHILD(q->hdfrcv, "oids", oids);
+
+    while (oids) {
+        id = hdf_obj_value(oids);
+        if (!plan_spd_exist(e, q, ori, id)) {
+            hdf_set_valuef(q->hdfsnd, "oids.%d=%s", cnt++, id);
+        }
+        oids = hdf_obj_next(oids);
+    }
+
+    return STATUS_OK;
+}
+
 static void plan_process_driver(EventEntry *entry, QueueEntry *q)
 {
     struct plan_entry *e = (struct plan_entry*)entry;
@@ -212,6 +268,9 @@ static void plan_process_driver(EventEntry *entry, QueueEntry *q)
         break;
     case REQ_CMD_PLAN_UP:
         err = plan_cmd_plan_up(e, q);
+        break;
+    case REQ_CMD_SPD_PEEL:
+        err = plan_cmd_spd_peel(e, q);
         break;
     case REQ_CMD_STATS:
         st->msg_stats++;

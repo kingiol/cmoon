@@ -22,7 +22,7 @@ b/loadgmap.js: loadgmap.js
 
 b/index.js: pub/jquerytools/src/dateinput/dateinput.js \
 		   pub/jquery.mninpval.js \
-		   index.js
+		   bmoon.dida.js index.js
 
 b/admin/pos.js: admin/pos.js
 b/admin/spd/58.user.js: admin/spd/58.user.js

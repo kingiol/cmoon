@@ -2,12 +2,14 @@
 #define __MEVENT_PLAN_H__
 
 #define PREFIX_PLAN     "Plan"
+#define PREFIX_SPD      "Spd"
 
 #define PLAN_CC_SEC     60
+#define SPD_CC_SEC      60000
 
-#define _COL_PLAN "id, mid, dad, nick, pstatu, repeat, seat, fee, attach, " \
-    " scityid, ecityid, saddr, eaddr, marks, rect, route, km, "         \
-    " sdate, edate, stime, etime, estmin, "                             \
+#define _COL_PLAN "id, mid, ori, ourl, dad, nick, pstatu, repeat, seat, " \
+    " fee, attach, scityid, ecityid, saddr, eaddr, marks, rect, route, " \
+    " km, sdate, edate, stime, etime, estmin, "                         \
     " to_char(intime, 'YYYY-MM-DD') as intime, "                        \
     " to_char(uptime, 'YYYY-MM-DD') as uptime "
 
@@ -16,6 +18,7 @@ enum {
     REQ_CMD_PLAN_GET_BY_GEO,
     REQ_CMD_PLAN_ADD,
     REQ_CMD_PLAN_UP,
+    REQ_CMD_SPD_PEEL
 };
 
 enum {
@@ -34,7 +37,8 @@ enum {
 
 enum {
     REP_ERR_PLAN_NEXIST = 34,
-    REP_ERR_PLAN_NMATCH
+    REP_ERR_PLAN_NMATCH,
+    REP_ERR_PLANED
 };
 
 #endif    /* __MEVENT_PLAN_H__ */

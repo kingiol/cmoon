@@ -21,30 +21,6 @@ struct member_entry {
     struct member_stats st;
 };
 
-static bool member_spd_exist(struct member_entry *e, QueueEntry *q,
-                             char *ori, char *id)
-{
-	unsigned char *val = NULL; size_t vsize = 0;
-	NEOERR *err;
-
-    if (!ori || !id) return false;
-    
-    mdb_conn *db = e->db;
-    struct cache *cd = e->cd;
-
-    ori = hdf_get_valuef(g_cfg, CONFIG_PATH".spd.%s", ori);
-
-    if (!cache_getf(cd, &val, &vsize, PREFIX_SPD"%s%s", ori, id)) {
-        MDB_QUERY_RAW(db, "member", "mid", "ori=$1 AND oid=$2", "ss", ori, id);
-        err = mdb_set_row(q->hdfsnd, db, "mid", NULL);
-        if(nerr_handle(&err, NERR_NOT_FOUND)) return false;
-        nerr_ignore(&err);
-
-        CACHE_HDF(q->hdfsnd, SPD_CC_SEC, PREFIX_SPD"%s%s", ori, id);
-    }
-    return true;
-}
-
 static NEOERR* member_cmd_car_get(struct member_entry *e, QueueEntry *q)
 {
 	unsigned char *val = NULL; size_t vsize = 0;
@@ -182,7 +158,7 @@ static NEOERR* member_cmd_mem_add(struct member_entry *e, QueueEntry *q)
     REQ_FETCH_PARAM_STR(q->hdfrcv, "ori", ori);
 
     if (ori) {
-        tmps = hdf_get_valuef(g_cfg, CONFIG_PATH".spd.%s", ori);
+        tmps = hdf_get_valuef(g_cfg, "Odomain.%s", ori);
         if (tmps) hdf_set_value(q->hdfrcv, "ori", tmps);
     }
 
@@ -242,26 +218,6 @@ static NEOERR* member_cmd_mem_up(struct member_entry *e, QueueEntry *q)
     return STATUS_OK;
 }
 
-static NEOERR* member_cmd_spd_peel(struct member_entry *e, QueueEntry *q)
-{
-    char *ori, *id;
-    HDF *oids;
-    int cnt = 0;
-
-    REQ_GET_PARAM_STR(q->hdfrcv, "ori", ori);
-    REQ_GET_PARAM_CHILD(q->hdfrcv, "oids", oids);
-
-    while (oids) {
-        id = hdf_obj_value(oids);
-        if (!member_spd_exist(e, q, ori, id)) {
-            hdf_set_valuef(q->hdfsnd, "oids.%d=%s", cnt++, id);
-        }
-        oids = hdf_obj_next(oids);
-    }
-
-    return STATUS_OK;
-}
-
 static void member_process_driver(EventEntry *entry, QueueEntry *q)
 {
     struct member_entry *e = (struct member_entry*)entry;
@@ -292,9 +248,6 @@ static void member_process_driver(EventEntry *entry, QueueEntry *q)
         break;
     case REQ_CMD_CAR_ADD:
         err = member_cmd_car_add(e, q);
-        break;
-    case REQ_CMD_SPD_PEEL:
-        err = member_cmd_spd_peel(e, q);
         break;
     case REQ_CMD_STATS:
         st->msg_stats++;

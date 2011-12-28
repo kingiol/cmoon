@@ -3,6 +3,14 @@ var bmoon = bmoon || {};
 bmoon.dida = {
     version: '1.0',
 
+    odomain: {
+        1: {
+            url: 'http://www.58.com',
+            img: '/img/logo/58.gif',
+            title: '58同城'
+        }
+    },
+    
     init: function() {
         var o = bmoon.dida;
 
