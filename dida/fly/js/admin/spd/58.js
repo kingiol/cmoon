@@ -49,7 +49,7 @@ bmoon.spd58 = {
         marks = x && $.trim(x[1]) || '';
         
         x = $('.info').html().match(/时间：<\/i>([^\<]+)/);
-        time = x && $.trim(x[1]).replace("&nbsp;", " ");
+        time = x && $.trim(x[1]).replace("&nbsp;", " ") || '2011-12-31 08:00:00';
 
         x = $('.info').html().match(/类型：<\/i>([^\<]+)/)[1];
         x = x.split('\n');
@@ -76,13 +76,13 @@ bmoon.spd58 = {
         contact = $('.user > .userinfo').html(),
         city = $('.user > .vuser').html().match('（归属地：(.*)）');
         
-        uid = uid && uid[1];
-        uname = uname && uname[1];
+        uid = uid && uid[1] || '';
+        uname = uname && uname[1] || '';
         phone = phone.match('http://image.58.com/showphone[^\'"]+');
         phone = phone && phone[0] || '';
         contact = contact.match('http://image.58.com/showphone[^\'"]+');
         contact = contact && contact[0] || '';
-        city = city && city[1];
+        city = city && city[1] || $('#topbar .bar_left h2').html() || '';
 
         $.getJSON('http://user.58.com/userdata/?callback=?',
                   {userid: uid},
