@@ -15,7 +15,7 @@ CREATE TABLE member (
     male smallint NOT NULL DEFAULT 0,
     pass varchar(64) NOT NULL DEFAULT '',
     mpass varchar(64) NOT NULL DEFAULT '',
-    mstatu smallint NOT NULL DEFAULT 0,  --0 normal, 1 pause, 2 delete, 10 spd fresh
+    statu smallint NOT NULL DEFAULT 0,  --0 normal, 1 pause, 2 delete, 10 spd fresh
     verify smallint NOT NULL DEFAULT 0, --0 fresh, 1 id credit, 2 subed, 4 jiazhao
     credit int NOT NULL DEFAULT 0,
     cityid int NOT NULL DEFAULT 0,
@@ -45,7 +45,7 @@ CREATE TABLE plan (
 
     dad smallint NOT NULL DEFAULT 0,   --0 person, 1 car
     nick varchar(32) NOT NULL DEFAULT '',
-    pstatu smallint NOT NULL DEFAULT 0, --0 fresh, 1 pause, 2 delete, 10 spd fresh
+    statu smallint NOT NULL DEFAULT 0, --0 fresh, 1 pause, 2 delete, 10 spd fresh
     repeat smallint NOT NULL DEFAULT 0, --0 no, 1 day, 2 week
     seat smallint NOT NULL DEFAULT 4,
     fee int NOT NULL DEFAULT 0,

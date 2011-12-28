@@ -73,7 +73,7 @@ static NEOERR* plan_cmd_plan_get(struct plan_entry *e, QueueEntry *q)
  * get plans by geographically (must be very fast...)
  * keep plan clean (no history useless plan) please
  * limit by:
- *    dad, pstatu, (scityid, ecityid) / rect
+ *    dad, statu, (scityid, ecityid) / rect
  */
 static NEOERR* plan_cmd_plan_get_by_geo(struct plan_entry *e, QueueEntry *q)
 {
@@ -92,7 +92,7 @@ static NEOERR* plan_cmd_plan_get_by_geo(struct plan_entry *e, QueueEntry *q)
     REQ_GET_PARAM_INT(q->hdfrcv, "ecityid", ecityid);
     REQ_GET_PARAM_STR(q->hdfrcv, "rect", rect);
     
-    hdf_set_int_value(q->hdfrcv, "pstatu", PLAN_ST_PAUSE);
+    hdf_set_int_value(q->hdfrcv, "statu", PLAN_ST_PAUSE);
 
     if (cache_getf(cd, &val, &vsize, PREFIX_PLAN"%d_%d_%d", dad, scityid, ecityid)) {
         unpack_hdf(val, vsize, &q->hdfsnd);

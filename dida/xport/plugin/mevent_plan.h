@@ -7,7 +7,7 @@
 #define PLAN_CC_SEC     60
 #define SPD_CC_SEC      60000
 
-#define _COL_PLAN "id, mid, ori, ourl, dad, nick, pstatu, repeat, seat, " \
+#define _COL_PLAN "id, mid, ori, ourl, dad, nick, statu, repeat, seat, " \
     " fee, attach, scityid, ecityid, saddr, eaddr, marks, rect, route, " \
     " km, sdate, edate, stime, etime, estmin, "                         \
     " to_char(intime, 'YYYY-MM-DD') as intime, "                        \
@@ -27,6 +27,11 @@ enum {
     PLAN_ST_PAUSE,
     PLAN_ST_DELETE,
     PLAN_ST_SPD_FRESH = 10
+};
+
+enum {
+    PLAN_DAD_MAN = 0,
+    PLAN_DAD_CAR
 };
 
 enum {

@@ -37,7 +37,7 @@ Plugin {
                 ori [type=int] = ori
                 male [type=int] = male
                 pass [maxlen=64] = pass
-                mstatu [type=int] = mstatu
+                statu [type=int] = statu
                 verify [type=int] = verify
                 credit [type=int] = credit
                 cityid [type=int] = cityid
@@ -57,7 +57,7 @@ Plugin {
                 mname [maxlen=256, require=true] = mname
                 male [type=int] = male
                 pass [maxlen=64] = pass
-                mstatu [type=int] = mstatu
+                statu [type=int] = statu
                 verify [type=int] = verify
                 credit [type=int] = credit
                 cityid [type=int] = cityid
@@ -80,7 +80,7 @@ Plugin {
 
                 dad [type=int] = dad
                 nick [maxlen=32] = nick
-                pstatu [type=int] = pstatu
+                statu [type=int] = statu
                 repeat [type=int] = repeat
                 seat [type=int] = seat
                 fee [type=int] = fee
@@ -110,7 +110,7 @@ Plugin {
                 ori [type=int] = ori
                 oid [maxlen=64] = oid
 
-                pstatu [type=int] = pstatu
+                statu [type=int] = statu
                 scityid [type=int] = scityid
                 ecityid [type=int] = ecityid
                 saddr [maxlen=256] = saddr
@@ -129,20 +129,20 @@ Plugin {
         QueryCond {
             geoa {
                 dad [type=int, require=true] = dad =
-                pstatu [type=int, require=true] = pstatu <
+                statu [type=int, require=true] = statu <
                 scityid [type=int] = scityid =
                 ecityid [type=int] = ecityid =
                 km [type=float] = (km / 2) <
             }
             geob {
                 dad [type=int, require=true] = dad =
-                pstatu [type=int, require=true] = pstatu <
+                statu [type=int, require=true] = statu <
                 rect [type=box] = ((rect - @@rect) * point(1.2,0) + @@rect) @>
                 km [type=float] = (km / 3) <
             }
             geox {
                 dad [type=int, require=true] = dad =
-                pstatu [type=int, require=true] = pstatu <
+                statu [type=int, require=true] = statu <
                 rect [type=box] = ((rect - @@rect) * point(1.6,0) + @@rect) @>
                 km [type=float] = (km / 4) <
             }

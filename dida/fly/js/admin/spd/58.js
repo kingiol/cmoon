@@ -87,37 +87,56 @@ bmoon.spd58 = {
         $.getJSON('http://user.58.com/userdata/?callback=?',
                   {userid: uid},
                   function(data) {
+                      var ori = '58',
+                      mname = data.name + '@58.com';
+                      
                       $.getJSON('http://admin.dida.com/json/spd/do?JsonCallback=?',
                             {
                                 _op: 'add',
 
-                                ori: '58',
-                                oid: id,
-                                ourl: location.href,
-                                mname: data.name + '@58.com',
-                                verify: data.license,
-                                credit: data.credit,
-                                city: city, // need convert to cityid
-                                phone: bmoon.utl.clotheHTML(phone),
-                                contact: bmoon.utl.clotheHTML(contact),
+                                member: JSON.stringify({
+                                    mname: mname,
+                                    ori: ori,
+                                    verify: data.license,
+                                    credit: data.credit,
+                                    city: city, // need convert to cityid
+                                    phone: bmoon.utl.clotheHTML(phone),
+                                    contact: bmoon.utl.clotheHTML(contact),
 
-                                size: size,
+                                    size: size
+                                }),
+
+                                _type_member: 'object',
+
+                                plan: JSON.stringify({
+                                    mname: mname,
+                                    ori: ori,
+                                    oid: id,
+                                    ourl: location.href,
+                                    dad: dad,
+                                    nick: uname,
+                                    saddr: saddr,
+                                    eaddr: eaddr,
+                                    marks: marks, // convert
+                                    repeat: repeat,
+                                    sdate: sdate,
+                                    stime: stime,
+                                    attach: attach
+                                }),
                                 
-                                dad: dad,
-                                nick: uname,
-                                saddr: saddr,
-                                eaddr: eaddr,
-                                marks: marks, // convert
-                                repeat: repeat,
-                                sdate: sdate,
-                                stime: stime,
-                                attach: attach
-                            }, function() {
-                                window.opener = null;
-                                window.close();
+                                _type_plan: 'object',
+                                
+                            }, function(mydata) {
+                                if (mydata.success == 1) {
+                                    window.opener = null;
+                                    window.close();
+                                } else {
+                                    console.log(mydata.errmsg);
+                                    console.log(mydata.errtrace);
+                                }
                             });
                   });
-
+        
         console.log('dad ' + dad);
         console.log('saddr ' + saddr);
         console.log('eaddr ' + eaddr);
