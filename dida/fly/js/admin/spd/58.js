@@ -90,7 +90,7 @@ bmoon.spd58 = {
                       var ori = '58',
                       mname = data.name + '@58.com';
                       
-                      $.getJSON('http://admin.dida.com/json/spd/do?JsonCallback=?',
+                      $.getJSON(g_site_admin + 'json/spd/do?JsonCallback=?',
                             {
                                 _op: 'add',
 
@@ -169,7 +169,7 @@ bmoon.spd58 = {
             }
         });
 
-        $.getJSON('http://admin.dida.com/json/spd/pre?JsonCallback=?',
+        $.getJSON(g_site_admin + 'json/spd/pre?JsonCallback=?',
                  {
                      ori: '58',
                      oids: ids

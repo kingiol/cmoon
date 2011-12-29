@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          58 spider
-// @namespace     http://www.dida.com/
+// @namespace     http://www.dididada.org/
 // @description   get 58's pinche imformation
 // @include       http://*.58.com/pinche/*
 // @exclude       http://diveintogreasemonkey.org/*
@@ -9,6 +9,6 @@
 
 var e = document.createElement("script");
 
-e.src = 'http://www.dida.com/js/b/admin/spd/58.js';
+e.src = 'http://www.dididada.org/js/b/admin/spd/58.js';
 e.type="text/javascript";
 document.getElementsByTagName("head")[0].appendChild(e);

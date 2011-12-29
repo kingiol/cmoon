@@ -1,4 +1,7 @@
-; var g_site_domain = "dida.com";
+; var g_site_domain = "dididada.org",
+g_site_admin = "http://admin.dididada.org/",
+g_site_www = "http://www.dididada.org/";
+
 var bmoon = bmoon || {};
 bmoon.dida = {
     version: '1.0',

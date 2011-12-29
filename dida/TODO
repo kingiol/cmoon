@@ -1,2 +1,5 @@
 查询该电话有多少拼车信息
-修改mstatus, pstatus => statu， 上报请求中将 member 和 plan 信息分开
+mjson.c :145 city:null will core dump
+/spd/post 能获取到坐标的，自动执行...
+
+DONE 修改mstatus, pstatus => statu， 上报请求中将 member 和 plan 信息分开

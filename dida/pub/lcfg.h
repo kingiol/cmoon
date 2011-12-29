@@ -5,7 +5,7 @@
 
 __BEGIN_DECLS
 
-#define SITE_DOMAIN     "dida.com"
+#define SITE_DOMAIN     "dididada.org"
 #define TC_ROOT         "/var/log/moon/dida/"
 
 #define PATH_SITE       "/var/www/dida/"
