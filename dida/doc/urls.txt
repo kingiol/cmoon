@@ -7,10 +7,15 @@ admin
     ospd.h
         GET /json/spd/pre      爬虫入库前数据查询
         ADD /json/spd/do       爬虫入数据 member, car, plan
-        GET /json/spd/post     爬虫入库前人工干预，获取总数
+        
+        GET /spd/post          爬虫入库前人工干预，获取总数
         GET /json/spd/post/do  爬虫入库前人工干预，获取单条拼车数据
         MOD /json/spd/post/do  人工确认爬虫单条数据入库
         DEL /json/spd/post/do  人工删除爬虫单条数据
+
+        GET /spd/robot           机器入库干预页面
+        GET /json/spd/post/robot 机器获取待入库数据
+        MOD /json/spd/post/robot 机器修改待入库数据
 
 
 index.html

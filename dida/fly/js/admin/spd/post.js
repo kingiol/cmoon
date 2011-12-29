@@ -122,30 +122,20 @@ bmoon.spdpost = {
     upPlan: function(x, data) {
         var o = bmoon.spdpost.init();
 
-        var p = o.plan,
-        addrs = data.address_components,
-        city = '';
-
-        for (var i = 0; i < addrs.length; i++) {
-            if (addrs[i].types[1] == 'political') {
-                city = addrs[i].short_name;
-                break;
-            }
-        }
+        var p = o.plan;
 
         if (x != 'e') {
             p.sll = [data.geometry.location.lat(), data.geometry.location.lng()];
             p.saddr = data.formatted_address;
-            p.scity = city;
         } else {
             p.ell = [data.geometry.location.lat(), data.geometry.location.lng()];
             p.eaddr = data.formatted_address;
-            p.ecity = city;
         }
-        $.getJSON('/json/city/s', {c: city}, function(data) {
-            if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
-                if (x != 'e') p.scityid = data.city.id;
-                else p.ecityid = data.city.id;
+
+        bmoon.dida.getCityByGeores(data, function(city) {
+            if (bmoon.utl.type(city) == 'Object') {
+                if (x != 'e') p.scityid = city.id;
+                else p.ecityid = city.id;
             }
         });
 

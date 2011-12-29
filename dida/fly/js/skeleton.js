@@ -6,7 +6,7 @@ bmoon.skeleton = {
         var o = bmoon.skeleton;
         if (o.inited) return o;
 
-        o.content = $('#bd-content');
+        o.e_content = $('#bd-content');
         
         o.inited = true;
         return o;

@@ -23,10 +23,12 @@ enum {
 
 enum {
     PLAN_ST_FRESH = 0,
-    PLAN_ST_SPD_OK,
+    PLAN_ST_SPD_OK,             /* man confirmed ok */
+    PLAN_ST_SPD_RBT_OK,         /* machine confirmed ok */
     PLAN_ST_PAUSE,
     PLAN_ST_DELETE,
-    PLAN_ST_SPD_FRESH = 10
+    PLAN_ST_SPD_FRESH = 10,
+    PLAN_ST_SPD_RBTED           /* machine checked, but can't confirm */
 };
 
 enum {
