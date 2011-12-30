@@ -86,7 +86,8 @@ bmoon.spdrobot = {
             var geo = bmoon.dida.dbpoint2ll(plan.geopos);
             o.g_lat = new google.maps.LatLng(geo[0], geo[1]);
             o.g_map.setCenter(o.g_lat);
-            pdata.LatLngBounds = o.g_map.getBounds();
+            var bounds = o.g_map.getBounds();
+            if (bounds) pdata.bounds = bounds;
         }
         
         o.g_geocode.geocode(pdata, function(results, status) {
