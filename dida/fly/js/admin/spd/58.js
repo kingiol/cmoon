@@ -51,9 +51,9 @@ bmoon.spd58 = {
         x = $('.info').html().match(/时间：<\/i>([^\<]+)/);
         time = x && $.trim(x[1]).replace("&nbsp;", " ") || '2011-12-31 08:00:00';
 
-        x = $('.info').html().match(/类型：<\/i>([^\<]+)/)[1];
-        x = x.split('\n');
-        repeat = $.trim(x[0]) == '上下班拼车' ? 2: 0;
+        x = $('.info').html().match(/类型：<\/i>([^\<]+)/);
+        x = x && x[1] && x[1].split('\n');
+        repeat = x && $.trim(x[0]) == '上下班拼车' ? 2: 0;
         x = $.trim(x[1]);
         if (x) {
             for (var i = 0; i < sizes.length; i++) {
