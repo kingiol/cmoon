@@ -8,10 +8,22 @@
 #define SPD_CC_SEC      60000
 
 #define _COL_PLAN "id, mid, ori, ourl, dad, nick, statu, repeat, seat, " \
-    " fee, attach, scityid, ecityid, saddr, eaddr, marks, rect, route, " \
+    " fee, attach, cityid, scityid, ecityid, saddr, eaddr, marks, rect, route, " \
     " km, sdate, edate, stime, etime, estmin, "                         \
     " to_char(intime, 'YYYY-MM-DD') as intime, "                        \
     " to_char(uptime, 'YYYY-MM-DD') as uptime "
+
+#define _COL_PLAN_C "p.id AS id, p.mid AS mid, p.ori AS ori, p.ourl AS ourl, " \
+    " p.dad AS dad, p.nick AS nick, p.statu AS statu, p.repeat AS repeat, " \
+    " p.seat AS seat, p.fee AS fee, p.attach AS attach, "               \
+    " p.cityid AS cityid, p.scityid AS scityid, p.ecityid AS ecityid, " \
+    " p.saddr AS saddr, p.eaddr AS eaddr, p.marks AS marks, "           \
+    " p.rect AS rect, p.route AS route, p.km AS km, "                   \
+    " p.sdate AS sdate, p.edate AS edate, "                             \
+    " p.stime AS stime, p.etime AS etime, p.estmin AS estmin, "         \
+    " to_char(p.intime, 'YYYY-MM-DD') as intime, "                      \
+    " to_char(p.uptime, 'YYYY-MM-DD') as uptime, "                      \
+    " c.geopos AS geopos "
 
 enum {
     REQ_CMD_PLAN_GET = 1001,

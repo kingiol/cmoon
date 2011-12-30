@@ -60,6 +60,7 @@ NEOERR* spd_do_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     if (!evt) return nerr_raise(NERR_ASSERT, "plan backend error");
     
     hdf_copy(evt->hdfsnd, NULL, plan);
+    hdf_set_int_value(evt->hdfsnd, "cityid", cityid);
     hdf_set_int_value(evt->hdfsnd, "statu", PLAN_ST_SPD_FRESH);
 
     s = hdf_get_value(evt->hdfsnd, "stime", NULL);
@@ -178,10 +179,10 @@ NEOERR* spd_post_robot_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     NEOERR *err;
 
     if (!cgi || !cgi->hdf || !db) return nerr_raise(NERR_ASSERT, "paramter null");
-
-    MDB_QUERY_RAW(db, "plan", _COL_PLAN, "statu=%d LIMIT 100",
-                  NULL, PLAN_ST_SPD_FRESH);
-    err = mdb_set_rows(cgi->hdf, db, _COL_PLAN, PRE_OUTPUT".plans", NULL);
+    
+    MDB_EXEC(db, NULL, "SELECT " _COL_PLAN_C " FROM plan p, city c WHERE "
+             "p.statu=%d AND c.id=p.cityid LIMIT 100", NULL, PLAN_ST_SPD_FRESH);
+    err = mdb_set_rows(cgi->hdf, db, _COL_PLAN_C, PRE_OUTPUT".plans", NULL);
 	if (err != STATUS_OK) return nerr_pass(err);
 
     hdf_set_attr(cgi->hdf, PRE_OUTPUT".plans", "type", "array");

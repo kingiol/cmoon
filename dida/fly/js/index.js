@@ -16,31 +16,6 @@ bmoon.index = {
         } else return ' ';
     },
 
-    // "(28.228209,114.057868)" => [28.228209, 114.057868]
-    _dbpoint2ll: function(s) {
-        var a = s.split(','),
-        lat = a[0].match(/[0-9\.]+/),
-        lng = a[1].match(/[0-9\.]+/),
-        ret = [parseFloat(lat), parseFloat(lng)];
-        return ret;
-    },
-
-    // "(28.228209,114.057868),(22.543099,112.938814)"
-    // => [[22.543099,112.938814], [28.228209,114.057868]]
-    _dbbox2ll: function(s) {
-        var a = s.split(','),
-        lat1 = parseFloat(a[0].match(/[0-9\.]+/)),
-        lng1 = parseFloat(a[1].match(/[0-9\.]+/)),
-        lat2 = parseFloat(a[2].match(/[0-9\.]+/)),
-        lng2 = parseFloat(a[3].match(/[0-9\.]+/));
-
-        if (lat1 < lat2) {
-            return [[lat1,lng1], [lat2,lng2]];
-        } else {
-            return [[lat2,lng2], [lat1,lng1]];
-        }
-    },
-    
     init: function() {
         var o = bmoon.index;
         if (o.inited) return o;
@@ -144,7 +119,7 @@ bmoon.index = {
         //$.getJSON('/json/city/ip', {ip: '118.145.22.78'}, function(data) {
         $.getJSON('/json/city/ip', null, function(data) {
             if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
-                o.initMap(o._dbpoint2ll(data.city.geopos));
+                o.initMap(bmoon.dida.dbpoint2ll(data.city.geopos));
             } else o.initMap();
         });
 
@@ -278,7 +253,7 @@ bmoon.index = {
         var o = bmoon.index.init();
         
         var plan = o.mplans[ncur],
-        geo = o._dbbox2ll(plan.rect),
+        geo = bmoon.dida.dbbox2ll(plan.rect),
         bounds = new google.maps.LatLngBounds(
           new google.maps.LatLng(geo[0][0], geo[0][1]),
           new google.maps.LatLng(geo[1][0], geo[1][1])

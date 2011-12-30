@@ -9,7 +9,14 @@ bmoon.spdrobot = {
         o.e_count = $('#count');
         o.e_res = $('#res');
         
-        o.ggeocode = new google.maps.Geocoder();
+        o.g_geocode = new google.maps.Geocoder();
+        o.g_map = new google.maps.Map($('#map')[0], {
+            zoom: 10,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            region: 'zh-CN'
+        });
+
+        o.cur_geopos = 0;
 
         o.inited = true;
         return o;
@@ -71,8 +78,18 @@ bmoon.spdrobot = {
         setTimeout(o.parsePlan, 5*1000);
 
         o.outPut('解析 ' + plan.id + ':' + plan.saddr + ' - ' + plan.eaddr + ' ...');
+
+        var pdata = {address: plan.saddr};
         
-        o.ggeocode.geocode({address: plan.saddr}, function(results, status) {
+        if (plan.geopos && plan.geopos != o.cur_geopos) {
+            o.cur_geopos = plan.geopos;
+            var geo = bmoon.dida.dbpoint2ll(plan.geopos);
+            o.g_lat = new google.maps.LatLng(geo[0], geo[1]);
+            o.g_map.setCenter(o.g_lat);
+            pdata.LatLngBounds = o.g_map.getBounds();
+        }
+        
+        o.g_geocode.geocode(pdata, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 var res = results[0];
 
@@ -94,7 +111,9 @@ bmoon.spdrobot = {
             
         });
 
-        o.ggeocode.geocode({address: plan.eaddr}, function(results, status) {
+        pdata.address = plan.eaddr;
+        
+        o.g_geocode.geocode(pdata, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 var res = results[0];
 

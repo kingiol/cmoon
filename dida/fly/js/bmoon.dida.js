@@ -36,6 +36,31 @@ bmoon.dida = {
         
     },
 
+    // "(28.228209,114.057868)" => [28.228209, 114.057868]
+    dbpoint2ll: function(s) {
+        var a = s.split(','),
+        lat = a[0].match(/[0-9\.]+/),
+        lng = a[1].match(/[0-9\.]+/),
+        ret = [parseFloat(lat), parseFloat(lng)];
+        return ret;
+    },
+
+    // "(28.228209,114.057868),(22.543099,112.938814)"
+    // => [[22.543099,112.938814], [28.228209,114.057868]]
+    dbbox2ll: function(s) {
+        var a = s.split(','),
+        lat1 = parseFloat(a[0].match(/[0-9\.]+/)),
+        lng1 = parseFloat(a[1].match(/[0-9\.]+/)),
+        lat2 = parseFloat(a[2].match(/[0-9\.]+/)),
+        lng2 = parseFloat(a[3].match(/[0-9\.]+/));
+
+        if (lat1 < lat2) {
+            return [[lat1,lng1], [lat2,lng2]];
+        } else {
+            return [[lat2,lng2], [lat1,lng1]];
+        }
+    },
+    
     // {address_components: [], formatted_address: "", geometry: {}...}
     getCityByGeoresult: function(res, callback) {
         var o = bmoon.dida.init();

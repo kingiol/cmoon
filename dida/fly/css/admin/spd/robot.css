@@ -1,4 +1,6 @@
-#res {
+#map, #res {
     height: 500px;
-    width: 100%;
+    width: 45%;
+    float: left;
+    margin: 10px;
 }

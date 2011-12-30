@@ -86,6 +86,7 @@ Plugin {
                 fee [type=int] = fee
                 attach [maxlen=256] = attach
 
+                cityid [type=int] = cityid
                 scityid [type=int] = scityid
                 ecityid [type=int] = ecityid
                 saddr [maxlen=256] = saddr

@@ -1,2 +1,1 @@
-ALTER TABLE member RENAME COLUMN mstatu TO statu;
-ALTER TABLE plan RENAME COLUMN pstatu TO statu;
+ALTER TABLE plan ADD COLUMN cityid int NOT NULL DEFAULT 0;
