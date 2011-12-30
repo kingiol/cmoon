@@ -348,7 +348,7 @@ bmoon.index = {
             p.eaddr = data.formatted_address;
         }
 
-        bmoon.dida.getCityByGeores(data, function(city) {
+        bmoon.dida.getCityByGeoresult(data, function(city) {
             if (bmoon.utl.type(city) == 'Object') {
                 if (x != 'e') p.scityid = city.id;
                 else p.ecityid = city.id;
