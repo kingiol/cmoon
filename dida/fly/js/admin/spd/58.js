@@ -54,7 +54,7 @@ bmoon.spd58 = {
         x = $('.info').html().match(/类型：<\/i>([^\<]+)/);
         x = x && x[1] && x[1].split('\n');
         repeat = x && $.trim(x[0]) == '上下班拼车' ? 2: 0;
-        x = $.trim(x[1]);
+        x = x && $.trim(x[1]);
         if (x) {
             for (var i = 0; i < sizes.length; i++) {
                 if (x.match(sizes[i])) {
