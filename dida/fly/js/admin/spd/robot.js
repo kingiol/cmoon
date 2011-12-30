@@ -126,7 +126,7 @@ bmoon.spdrobot = {
                 });
             } else {
                 o.outPut(status);
-                o.outPut('处理有错，置位...');
+                o.parsePlanErr(plan);
             }
         });
     },
