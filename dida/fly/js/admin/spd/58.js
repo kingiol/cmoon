@@ -72,14 +72,16 @@ bmoon.spd58 = {
         var
         uid = $('.user').html().match('uid: \'([0-9]+)\''),
         uname = $('.user').html().match('username:\'(.*)\''),
-        phone = $('.user > .vuser').html(),
+        phone = $('#t_phone').html(),
         contact = $('.user > .userinfo').html(),
         city = $('.user > .vuser').html().match('（归属地：(.*)）');
         
         uid = uid && uid[1] || '';
         uname = uname && uname[1] || '';
-        phone = phone.match('http://image.58.com/showphone[^\'"]+');
-        phone = phone && phone[0] || '';
+        if (!phone.match(/^[0-9]+$/)) {
+            phone = phone.match('http://image.58.com/showphone[^\'"]+');
+            phone = phone && phone[0] || '';
+        }
         contact = contact.match('http://image.58.com/showphone[^\'"]+');
         contact = contact && contact[0] || '';
         city = city && city[1] || $('#topbar .bar_left h2').html() || '';
