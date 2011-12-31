@@ -7,8 +7,8 @@ static time_t m_thatsec = 0;
 static int plan_compare(const void *a, const void *b)
 {
     HDF *ha = *(HDF**)a, *hb = *(HDF**)b;
-    int seca = hdf_get_int_value(ha, "epochsec", 0);
-    int secb = hdf_get_int_value(hb, "epochsec", 0);
+    unsigned int seca = mcs_get_uint_value(ha, "epochsec", 0);
+    unsigned int secb = mcs_get_uint_value(hb, "epochsec", 0);
 
     return abs(seca - m_thatsec) - abs(secb - m_thatsec);
 }
@@ -63,7 +63,7 @@ static void plan_prepare_time(HDF *node, char *date, struct tm *todaystm)
     tm = mktime(&thatdaystm);
 
     hdf_set_value(node, "datetime", datetime);
-    hdf_set_int_value(node, "epochsec", tm);
+    mcs_set_uint_value(node, "epochsec", tm);
 }
 
 NEOERR* plan_match_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
