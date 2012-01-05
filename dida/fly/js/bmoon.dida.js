@@ -11,6 +11,11 @@ bmoon.dida = {
             url: 'http://www.58.com',
             img: '/img/logo/58.gif',
             title: '58同城'
+        },
+        2: {
+            url: 'http://www.ganji.con',
+            img: '/img/logo/ganji.png',
+            title: '赶集网'
         }
     },
     
