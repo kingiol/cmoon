@@ -44,12 +44,14 @@ bmoon.index = {
         o.e_mc_sdate = $('#mc-sdate');
         o.e_mc_stime = $('#mc-stime');
         o.e_mc_phone = $('#mc-phone');
+        o.e_mc_contact = $('#mc-contact');
         o.e_mc_attach = $('#mc-attach');
         o.e_mc_num_nav = $('#mc-num-nav');
 
         o.e_mc_no_repeat = $('#mc-no-repeat');
         o.e_mc_no_wday = $('#mc-no-wday');
         o.e_mc_no_phone = $('#mc-no-phone');
+        o.e_mc_no_contact = $('#mc-no-contact');
         o.e_mc_no_nick = $('#mc-no-nick');
         o.e_mc_no_attach = $('#mc-no-attach');
         o.e_mc_no_submit = $('#mc-no-submit');
@@ -225,6 +227,7 @@ bmoon.index = {
         else plan.dad = 0;
         plan.stime = plan.time;
         plan.phone = o.e_mc_no_phone.val();
+        plan.contact = o.e_mc_no_contact.val();
         plan.nick = o.e_mc_no_nick.val().length ? o.e_mc_no_nick.val(): '嘀嗒网友';
         plan.attach = o.e_mc_no_attach.val();
 
@@ -305,8 +308,10 @@ bmoon.index = {
             $('<img/>').attr('src', domains[plan.ori].img).appendTo(o.e_mc_from);
         }
         
-        o.e_mc_phone.attr('src', '/image/member/pic?type=phone&type=contact&mid=' +
+        o.e_mc_phone.attr('src', '/image/member/pic?defs=segv&type=phone&mid=' +
                           plan.mid);
+        o.e_mc_contact.attr('src', '/image/member/pic?defs=segv&type=contact&mid=' +
+                            plan.mid);
     },
 
     // {address_components: [], formatted_address: "", geometry: {}...} gdata.js

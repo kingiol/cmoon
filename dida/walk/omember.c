@@ -21,9 +21,11 @@ NEOERR* member_pic_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
     mevent_t *evt = hash_lookup(evth, "member");
     HDF *node;
-    char *s = NULL;
+    char *s = NULL, *defs = NULL;
     
     if (!cgi || !cgi->hdf || !evt) return nerr_raise(NERR_ASSERT, "paramter null");
+
+    HDF_FETCH_STR(cgi->hdf, PRE_QUERY".defs", defs);
 
     node = hdf_get_child(cgi->hdf, PRE_QUERY".type");
     if (!node) HDF_GET_STR(cgi->hdf, PRE_QUERY".type", s);
@@ -52,7 +54,11 @@ NEOERR* member_pic_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
         node = hdf_obj_next(node);
     }
 
-    if (!s || !*s) s = SITE_DOMAIN;
+    if (!s || !*s) {
+        if (!defs) s = SITE_DOMAIN;
+        else if (!strcmp(defs, "segv")) return STATUS_OK;
+        else s = defs;
+    }
 
     /*
      * drawing the string
