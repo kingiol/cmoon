@@ -84,17 +84,21 @@ static NEOERR* plan_cmd_plan_get_by_geo(struct plan_entry *e, QueueEntry *q)
     mdb_conn *db = e->db;
     struct cache *cd = e->cd;
     
-    int dad, scityid, ecityid, ttnum;
-    char *rect;
+    int dad, scityid = 0, ecityid = 0, ttnum;
+    char *rect = NULL;
 
     REQ_GET_PARAM_INT(q->hdfrcv, "dad", dad);
-    REQ_GET_PARAM_INT(q->hdfrcv, "scityid", scityid);
-    REQ_GET_PARAM_INT(q->hdfrcv, "ecityid", ecityid);
-    REQ_GET_PARAM_STR(q->hdfrcv, "rect", rect);
+    REQ_FETCH_PARAM_INT(q->hdfrcv, "scityid", scityid);
+    REQ_FETCH_PARAM_INT(q->hdfrcv, "ecityid", ecityid);
+    REQ_FETCH_PARAM_STR(q->hdfrcv, "rect", rect);
     
     hdf_set_int_value(q->hdfrcv, "statu", PLAN_ST_PAUSE);
 
-    if (cache_getf(cd, &val, &vsize, PREFIX_PLAN"%d_%d_%d", dad, scityid, ecityid)) {
+    if ((scityid == 0 || ecityid == 0) && rect == NULL)
+        return nerr_raise(REP_ERR_BADPARAM, "paramter null");
+
+    if (cache_getf(cd, &val, &vsize, PREFIX_PLAN"%d_%d_%d_%s",
+                   dad, scityid, ecityid, rect)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
     } else {
         err = mdb_build_querycond(q->hdfrcv,
@@ -148,8 +152,8 @@ static NEOERR* plan_cmd_plan_get_by_geo(struct plan_entry *e, QueueEntry *q)
 
         mtc_foo("get %d results", ttnum);
         hdf_set_int_value(q->hdfsnd, "_ntt", ttnum);
-        CACHE_HDF(q->hdfsnd, PLAN_CC_SEC, PREFIX_PLAN"%d_%d_%d",
-                  dad, scityid, ecityid);
+        CACHE_HDF(q->hdfsnd, PLAN_CC_SEC, PREFIX_PLAN"%d_%d_%d_%s",
+                  dad, scityid, ecityid, rect);
     }
     
     string_clear(&str);
