@@ -194,9 +194,9 @@ bmoon.index = {
             if (data.success == '1' && bmoon.utl.type(data.plans) == 'Array') {
                 p.addClass('success');
 
-                o._pnum = data._ntt;
+                o._pnum = data._ntt ? data._ntt: data.plans.length;
                 o.mplans = data.plans;
-                o.e_mc_num_nav.html('0 / ' + data._ntt);
+                o.e_mc_num_nav.html('0 / ' + o._pnum);
                 o.rendPlan(0);
             } else {
                 p.addClass('error');
