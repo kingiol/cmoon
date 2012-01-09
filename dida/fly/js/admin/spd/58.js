@@ -180,7 +180,8 @@ bmoon.spd58 = {
                          if (bmoon.utl.type(data.oids) == 'Object') {
                              $.each(data.oids, function(key, val) {
                                  console.log(val);
-                                 window.open(urls[val]);
+                                 setTimeout(function() {window.open(urls[val]);},
+                                            Math.random()*50*1000);
                              });
                          } else {
                              console.log('dida ALL DONE');
