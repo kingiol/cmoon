@@ -129,6 +129,12 @@ bmoon.spdrobot = {
                             plan.rect = '((' + plan.sll.join(',') + '),(' +
                                 plan.ell.join(',') + '))';
                             plan.km = bmoon.utl.earthDis(plan.sll, plan.ell);
+
+                            if (plan.repeat > 0 && plan.km > 120.0) {
+                                o.outPut('长途拼车，却重复。');
+                                o.parsePlanErr(plan);
+                            }
+
                             var pdata = {
                                 _op: 'mod',
                                 plan: JSON.stringify(plan),

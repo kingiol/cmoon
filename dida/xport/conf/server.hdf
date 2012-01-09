@@ -70,7 +70,7 @@ Plugin {
     plan {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
         geoaMin = 10
-        geoaMax = 100
+        geoaMax = 60
         InsertCol {
             plan {
                 mid [type=int, require=true] = mid
@@ -134,19 +134,19 @@ Plugin {
                 statu [type=int, require=true] = statu <
                 scityid [type=int] = scityid =
                 ecityid [type=int] = ecityid =
-                km [type=float] = (km / 2) <
+                km [type=float] = (km / 1.2) <
             }
             geob {
                 dad [type=int, require=true] = dad =
                 statu [type=int, require=true] = statu <
                 rect [type=box] = ((rect - @@rect) * point(1.2,0) + @@rect) @>
-                km [type=float] = (km / 3) <
+                km [type=float] = (km / 1.5) <
             }
             geox {
                 dad [type=int, require=true] = dad =
                 statu [type=int, require=true] = statu <
                 rect [type=box] = ((rect - @@rect) * point(1.6,0) + @@rect) @>
-                km [type=float] = (km / 4) <
+                km [type=float] = (km / 1.8) <
             }
         }
     }
