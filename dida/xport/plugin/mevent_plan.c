@@ -175,8 +175,8 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
     if ((scityid == 0 || ecityid == 0) && rect == NULL)
         return nerr_raise(REP_ERR_BADPARAM, "paramter null");
 
-    if (cache_getf(cd, &val, &vsize, PREFIX_PLAN"%d_%d_%d_%s_%d",
-                   dad, scityid, ecityid, rect, nmax)) {
+    if (cache_getf(cd, &val, &vsize, PREFIX_PLAN"%d_%d_%d_%s_%d_%d",
+                   dad, scityid, ecityid, rect, nmax, maxday)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
     } else {
         err = mdb_build_querycond(q->hdfrcv,
@@ -264,10 +264,8 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
         if (node) hdf_sort_obj(node, plan_compare);
         
         if (nmax > 0) {
-
             if (ttnum < nmax) goto done;
             
-            mtc_dbg("ttnum %d, but return nmax %d", ttnum, nmax);
             /*
              * remove plan according nmax
              */
@@ -287,7 +285,6 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
                 ttnum--;
             }
         } else {
-            mtc_dbg("ttnum %d, return near %d day's result", ttnum, maxday);
             /*
              * remove plan according time
              */
@@ -310,8 +307,8 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
     done:
         mtc_foo("get %d results", ttnum);
         hdf_set_int_value(q->hdfsnd, "_ntt", ttnum);
-        CACHE_HDF(q->hdfsnd, PLAN_CC_SEC, PREFIX_PLAN"%d_%d_%d_%s_%d",
-                  dad, scityid, ecityid, rect, nmax);
+        CACHE_HDF(q->hdfsnd, PLAN_CC_SEC, PREFIX_PLAN"%d_%d_%d_%s_%d_%d",
+                  dad, scityid, ecityid, rect, nmax, maxday);
     }
     
     string_clear(&str);
