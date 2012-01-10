@@ -23,6 +23,7 @@ Mevent {
 Odomain {
     58 = 1
     ganji = 2
+    edeng = 3
 }
 
 Plugin {

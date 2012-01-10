@@ -13,9 +13,14 @@ bmoon.dida = {
             title: '58同城'
         },
         2: {
-            url: 'http://www.ganji.con',
+            url: 'http://www.ganji.com',
             img: '/img/logo/ganji.png',
             title: '赶集网'
+        },
+        3: {
+            url: 'http://www.edeng.cn',
+            img: '/img/logo/edeng.jpg',
+            title: '易登网'
         }
     },
     
