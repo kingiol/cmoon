@@ -70,7 +70,8 @@ Plugin {
     plan {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
         geoaMin = 10
-        geoaMax = 60
+        geoaMax = 20
+        dayAround = 7
         InsertCol {
             plan {
                 mid [type=int, require=true] = mid
