@@ -159,13 +159,16 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
     struct cache *cd = e->cd;
     
     int dad, scityid = 0, ecityid = 0, ttnum, nmax = 0, maxday;
-    char *rect = NULL;
+    char *rect = NULL, *pdate, *ptime;
 
     REQ_GET_PARAM_INT(q->hdfrcv, "dad", dad);
     REQ_FETCH_PARAM_INT(q->hdfrcv, "_nmax", nmax);
     REQ_FETCH_PARAM_INT(q->hdfrcv, "scityid", scityid);
     REQ_FETCH_PARAM_INT(q->hdfrcv, "ecityid", ecityid);
     REQ_FETCH_PARAM_STR(q->hdfrcv, "rect", rect);
+
+    pdate = hdf_get_value(q->hdfrcv, "date", NULL);
+    ptime = hdf_get_value(q->hdfrcv, "time", "08:00:00");
     maxday = hdf_get_int_value(q->hdfrcv, "dayaround", 0);
     if (maxday <= 0)
         maxday = hdf_get_int_value(g_cfg, CONFIG_PATH".dayAround", 7);
@@ -175,8 +178,8 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
     if ((scityid == 0 || ecityid == 0) && rect == NULL)
         return nerr_raise(REP_ERR_BADPARAM, "paramter null");
 
-    if (cache_getf(cd, &val, &vsize, PREFIX_PLAN"%d_%d_%d_%s_%d_%d",
-                   dad, scityid, ecityid, rect, nmax, maxday)) {
+    if (cache_getf(cd, &val, &vsize, PREFIX_PLAN"%d_%d_%d_%s_%d_%d_%s_%s",
+                   dad, scityid, ecityid, rect, nmax, maxday, pdate, ptime)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
     } else {
         err = mdb_build_querycond(q->hdfrcv,
@@ -234,13 +237,10 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
          * this could be done by robot side,
          * process here for more efficient transport, and more user likely
          */
-        char *pdate, *ptime, datetime[LEN_TM] = {0}, name[LEN_HDF_KEY];
+        char datetime[LEN_TM] = {0}, name[LEN_HDF_KEY];
         struct tm thatdaystm, *todaystm;
         time_t todaysec;
             
-        pdate = hdf_get_value(q->hdfrcv, "date", NULL);
-        ptime = hdf_get_value(q->hdfrcv, "time", "08:00:00");
-
         if (!pdate) goto done;
             
         snprintf(datetime, LEN_TM, "%s %s", pdate, ptime);
@@ -307,8 +307,8 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
     done:
         mtc_foo("get %d results", ttnum);
         hdf_set_int_value(q->hdfsnd, "_ntt", ttnum);
-        CACHE_HDF(q->hdfsnd, PLAN_CC_SEC, PREFIX_PLAN"%d_%d_%d_%s_%d_%d",
-                  dad, scityid, ecityid, rect, nmax, maxday);
+        CACHE_HDF(q->hdfsnd, PLAN_CC_SEC, PREFIX_PLAN"%d_%d_%d_%s_%d_%d_%s_%s",
+                  dad, scityid, ecityid, rect, nmax, maxday, pdate, ptime);
     }
     
     string_clear(&str);
