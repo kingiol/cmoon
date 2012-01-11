@@ -32,7 +32,7 @@ static int plan_compare(const void *a, const void *b)
     return abs(seca - m_thatsec) - abs(secb - m_thatsec);
 }
 
-static void plan_prepare_time(HDF *node, char *date, struct tm *todaystm)
+static void plan_prepare_time(HDF *node, char *date, struct tm *todaystm, float km)
 {
     if (!node || !date || !todaystm) return;
 
@@ -86,6 +86,14 @@ static void plan_prepare_time(HDF *node, char *date, struct tm *todaystm)
     struct tm thatdaystm;
     strptime(datetime, "%Y-%m-%d %H:%M:%S", &thatdaystm);
     tm = mktime(&thatdaystm);
+
+    if (km != 0.0) {
+        float mkm, delta;
+        mkm = mcs_get_float_value(node, "km", 0.0);
+        delta = abs(km - mkm) + 0.5;
+
+        tm = m_thatsec + (tm - m_thatsec) * (delta / km);
+    }
 
     hdf_set_value(node, "datetime", datetime);
     mcs_set_uint_value(node, "epochsec", tm);
@@ -160,6 +168,7 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
     
     int dad, scityid = 0, ecityid = 0, ttnum, nmax = 0, maxday = 0;
     char *rect = NULL, *pdate, *ptime;
+    float km;
 
     REQ_GET_PARAM_INT(q->hdfrcv, "dad", dad);
     REQ_FETCH_PARAM_INT(q->hdfrcv, "scityid", scityid);
@@ -170,6 +179,7 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
 
     pdate = hdf_get_value(q->hdfrcv, "date", NULL);
     ptime = hdf_get_value(q->hdfrcv, "time", "08:00:00");
+    km = mcs_get_float_value(q->hdfrcv, "km", 0.0);
     if (nmax <= 0) nmax = hdf_get_int_value(g_cfg, CONFIG_PATH".geoMax", 30);
     
     hdf_set_int_value(q->hdfrcv, "statu", PLAN_ST_PAUSE);
@@ -251,7 +261,7 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
             
         HDF *node = hdf_get_child(q->hdfsnd, "plans");
         while (node) {
-            plan_prepare_time(node, pdate, todaystm);
+            plan_prepare_time(node, pdate, todaystm, km);
 
             node = hdf_obj_next(node);
         }
