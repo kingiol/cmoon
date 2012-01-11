@@ -17,7 +17,7 @@ bmoon.spdedeng = {
 
         if (href.match(/.*\/([0-9|_]+)\.html$/)) {
             o.parseNode(href.match(/.*\/([0-9|_]+)\.html$/)[1]);
-        } else if (href.match(/.*edeng.com\/13\/pinche\//)){
+        } else if (href.match(/.*edeng.cn\/13\/pinche\//)){
             o.parseList();
         }
 
@@ -110,7 +110,7 @@ bmoon.spdedeng = {
         } else if (phone) {
             mname = phone;
         } else
-            mname = id + '@edeng.com';
+            mname = id + '@edeng.cn';
 
 
         console.log('city ' + city);
