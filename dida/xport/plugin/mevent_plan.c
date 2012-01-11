@@ -146,8 +146,8 @@ static NEOERR* plan_cmd_plan_get(struct plan_entry *e, QueueEntry *q)
  *    dad, statu, (scityid, ecityid) / rect
  * PARAMETERS:
  *   dad, scityid, ecityid, rect, date, time
- *   _nmax     : max plans number returned
- *   dayaround : nearest day number returned (ignore if _nmax presented)
+ *   dayaround : nearest day number returned
+ *   _nmax     : max plans number returned (ignore if dayaround presented)
  */
 static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
 {
@@ -158,20 +158,19 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
     mdb_conn *db = e->db;
     struct cache *cd = e->cd;
     
-    int dad, scityid = 0, ecityid = 0, ttnum, nmax = 0, maxday;
+    int dad, scityid = 0, ecityid = 0, ttnum, nmax = 0, maxday = 0;
     char *rect = NULL, *pdate, *ptime;
 
     REQ_GET_PARAM_INT(q->hdfrcv, "dad", dad);
-    REQ_FETCH_PARAM_INT(q->hdfrcv, "_nmax", nmax);
     REQ_FETCH_PARAM_INT(q->hdfrcv, "scityid", scityid);
     REQ_FETCH_PARAM_INT(q->hdfrcv, "ecityid", ecityid);
     REQ_FETCH_PARAM_STR(q->hdfrcv, "rect", rect);
+    REQ_FETCH_PARAM_INT(q->hdfrcv, "dayaround", maxday);
+    REQ_FETCH_PARAM_INT(q->hdfrcv, "_nmax", nmax);
 
     pdate = hdf_get_value(q->hdfrcv, "date", NULL);
     ptime = hdf_get_value(q->hdfrcv, "time", "08:00:00");
-    maxday = hdf_get_int_value(q->hdfrcv, "dayaround", 0);
-    if (maxday <= 0)
-        maxday = hdf_get_int_value(g_cfg, CONFIG_PATH".dayAround", 7);
+    if (nmax <= 0) nmax = hdf_get_int_value(g_cfg, CONFIG_PATH".geoMax", 30);
     
     hdf_set_int_value(q->hdfrcv, "statu", PLAN_ST_PAUSE);
 
@@ -263,9 +262,25 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
         node = hdf_get_obj(q->hdfsnd, "plans");
         if (node) hdf_sort_obj(node, plan_compare);
         
-        if (nmax > 0) {
-            if (ttnum < nmax) goto done;
-            
+        if (maxday > 0) {
+            /*
+             * remove plan according datetime
+             */
+            node = hdf_get_child(q->hdfsnd, "plans");
+            while (node) {
+                todaysec = mcs_get_uint_value(node, "epochsec", 0);
+
+                if (abs(todaysec - m_thatsec) < (maxday * 24 * 60 * 60)) {
+                    node = hdf_obj_next(node);
+                    continue;
+                }
+                    
+                snprintf(name, sizeof(name), "plans.%s", hdf_obj_name(node));
+                node = hdf_obj_next(node);
+                hdf_remove_tree(q->hdfsnd, name);
+                ttnum--;
+            }
+        } else if (ttnum > nmax){
             /*
              * remove plan according nmax
              */
@@ -279,24 +294,6 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
                     continue;
                 }
 
-                snprintf(name, sizeof(name), "plans.%s", hdf_obj_name(node));
-                node = hdf_obj_next(node);
-                hdf_remove_tree(q->hdfsnd, name);
-                ttnum--;
-            }
-        } else {
-            /*
-             * remove plan according time
-             */
-            node = hdf_get_child(q->hdfsnd, "plans");
-            while (node) {
-                todaysec = mcs_get_uint_value(node, "epochsec", 0);
-
-                if (abs(todaysec - m_thatsec) < (maxday * 24 * 60 * 60)) {
-                    node = hdf_obj_next(node);
-                    continue;
-                }
-                    
                 snprintf(name, sizeof(name), "plans.%s", hdf_obj_name(node));
                 node = hdf_obj_next(node);
                 hdf_remove_tree(q->hdfsnd, name);
