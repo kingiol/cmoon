@@ -1,9 +1,9 @@
 ; var bmoon = bmoon || {};
-bmoon.spdedeng = {
+bmoon.spdliebiao = {
     version: '1.0',
 
     init: function() {
-        var o = bmoon.spdedeng;
+        var o = bmoon.spdliebiao;
         if (o.inited) return o;
 
         o.inited = true;
@@ -11,13 +11,13 @@ bmoon.spdedeng = {
     },
     
     onready: function() {
-        var o = bmoon.spdedeng.init();
+        var o = bmoon.spdliebiao.init();
 
         var href = location.href;
 
-        if (href.match(/.*\/([0-9|_]+)\.html$/)) {
-            o.parseNode(href.match(/.*\/([0-9|_]+)\.html$/)[1]);
-        } else if (href.match(/.*edeng.cn\/13\/pinche\//)){
+        if (href.match(/.*\/[0-9]+\.html$/)) {
+            o.parseNode(href.match(/.*\/([0-9]+)\.html$/)[1]);
+        } else if (href.match(/.*liebiao.com\/pinche\//)){
             o.parseList();
         }
 
@@ -25,92 +25,67 @@ bmoon.spdedeng = {
     },
 
     bindClick: function() {
-        var o = bmoon.spdedeng.init();
+        var o = bmoon.spdliebiao.init();
     },
 
     parseNode: function(id) {
-        var o = bmoon.spdedeng.init();
+        var o = bmoon.spdliebiao.init();
 
-        var ori = 'edeng', city = '', phone = '', contact = '', size = 0, model = '',
+        var ori = 'liebiao', city = '', phone = '', contact = '', size = 0, model = '',
         dad = 0, repeat = 0, saddr = '', eaddr = '', sdate = '', stime = '',
         attach = '', nick = id, seat = 4, fee = 0, marks = '', mname = '';
 
-        var s = $('#center_left').html(), x;
+        var s = $('tr', '.lb_pp'), x;
 
         // PART 1
         // city, phone, contact
         // size, model
-        x = s.match(/起点：.*>(.*)</);
-        city = x && x[1] || '';
-        phone = $('.contactphonefc a').text() || '';
+        city = $('.top_a').html() || '';
 
-        x = $('.properties2 .email').text();
-        contact = x && x.match(/([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+/)[0] || '';
+        $.each(s, function(i, ele){
+            var c = $(':first', ele),
+            t = c.html(),
+            v = c.next().html();
 
-        x = $('.properties3').html().match(/车型：.*>(.*)</);
-        model = x && x[1] || '';
-
+            if (t.match(/联系电话/)) {
+                x = $('img', c.next()).attr('src');
+                phone = bmoon.utl.clotheHTML(x);
+            } else if (t.match(/是否有车/)) {
+                dad = v.match(/有车/) ? 1: 0;
+            } else if (t.match(/出发地/)) {
+                saddr = $.trim(v);
+            } else if (t.match(/到达地/)) {
+                eaddr = $.trim(v);
+            } else if (t.match(/途径地/)) {
+                marks = $.trim(v);
+            }
+        });
+        
 
         // PART 2
         // dad
         // repeat
         // saddr, eaddr
         // sdate, stime
-        dad = s.match(/我是车主/) ? 1: 0;
-
-        x = $('.properties3').html().match(/出发日：.*>(.*)</);
-        x = x && x[1] || '';
-        var xx = [
-            ['其他','0'],
-            ['每天', '0'],
-            ['工作日', '1,2,3,4,5'],
-            ['周末节假日', '6,7']
-        ];
-        if (x) {
-            for (var i = 0; i < xx.length; i++) {
-                if (xx[i][0].match(x)) {
-                    repeat = i < 2 ? i: 2;
-                    sdate = xx[i][1];
-                }
-            }
-        }
-        
-        x = s.match(/起点：.*>(.*)</);
-        saddr = x && x[1] || '';
-
-        x = s.match(/终点：.*>(.*)</);
-        eaddr = x && x[1] || '';
-        
-        x = $('.properties3').html().match(/出发时间：.*>(.*)</);
-        x = x && x[1] || '2011-12-31 08:00:00';
-        if (repeat == 0) sdate = x.split(' ')[0];
-        stime = x.split(' ')[1] ? x.split(' ')[1]: '08:00:00';
+        sdate = $('.postdate').html() || '';
         
 
         // PART 3
         // attach, nick
         // seat, fee, marks
-        attach = $('#center_left .edcontent p').html().replace(/\<[^\>]+\>/g, "");
-        nick = $('#center_left .username a').html();
-
-        x = $('.properties3').html().match(/座位数：.*>(.*)</);
-        seat = x && parseInt(x[1]) || '';
-
-        x = $('.properties3').html().match(/价格：.*>(.*)</);
-        fee = x && parseInt(x[1]) || '';
-
-        x = s.match(/途经地点：.*>(.*)</);
-        marks = x && x[1] || '';
-
-
+        attach = $('.messagebody') &&
+            $.trim($('.messagebody').html().replace('<b>信息详细内容</b><br>', ''));
+        if (attach.match(/每天/)) repeat = 1;
+        nick = '列表网友';
+        
 
         // mname
-        if (contact && !contace.match('http') {
+        if (contact && !contace.match('http')) {
             mname = contact;
         } else if (phone && !phone.match('http')) {
             mname = phone;
         } else
-            mname = id + '@edeng.cn';
+            mname = id + '@liebiao.com';
 
 
         console.log('city ' + city);
@@ -180,12 +155,12 @@ bmoon.spdedeng = {
     },
     
     parseList: function() {
-        var o = bmoon.spdedeng.init();
+        var o = bmoon.spdliebiao.init();
 
         var
         ids = [], urls = {},
-        objs = $('a', '.house_infor1'),
-        reg = /.*\/jiedaoxinxi\/(.*)\.html$/;
+        objs = $('a', '.article_list'),
+        reg = /liebiao.com\/pinche\/([0-9]+)\.html$/;
 
         $.each(objs, function(i, obj) {
             if ($(obj).attr('href').match(reg)) {
@@ -197,7 +172,7 @@ bmoon.spdedeng = {
 
         $.getJSON(g_site_admin + 'json/spd/pre?JsonCallback=?',
                  {
-                     ori: 'edeng',
+                     ori: 'liebiao',
                      oids: ids
                  }, function(data) {
                      if (data.success == 1) {
@@ -217,4 +192,4 @@ bmoon.spdedeng = {
     }
 };
 
-$(document).ready(bmoon.spdedeng.onready);
+$(document).ready(bmoon.spdliebiao.onready);

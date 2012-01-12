@@ -21,6 +21,11 @@ bmoon.dida = {
             url: 'http://www.edeng.cn',
             img: '/img/logo/edeng.jpg',
             title: '易登网'
+        },
+        4: {
+            url: 'http://www.liebiao.com',
+            img: '/img/logo/liebiao.png',
+            title: '列表网'
         }
     },
     

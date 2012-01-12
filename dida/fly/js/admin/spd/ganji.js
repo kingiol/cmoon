@@ -36,7 +36,7 @@ bmoon.spdganji = {
         var
         sizes = ['小轿车', '商务车', '越野车', '面包车', '客车', '货车'], model = '',
         dad = 0, saddr = '', eaddr = '', marks = '', time = '', size = 0, fee = 0,
-        repeat = 0, sdate = '', stime = '', attach = '', uname = id;
+        repeat = 0, sdate = '', stime = '', attach = '', uname = '赶集网友';
 
         var x = $.trim($('h1', '.body_left').html()).split('→');
         if (x) {

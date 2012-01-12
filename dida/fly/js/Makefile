@@ -9,6 +9,7 @@ FILES = b/base.js \
         b/admin/spd/58.user.js b/admin/spd/58.js \
         b/admin/spd/ganji.user.js b/admin/spd/ganji.js \
         b/admin/spd/edeng.user.js b/admin/spd/edeng.js \
+        b/admin/spd/liebiao.user.js b/admin/spd/liebiao.js \
         b/admin/spd/post.js b/admin/spd/robot.js
 
 all: preload $(FILES)
@@ -37,6 +38,10 @@ b/admin/spd/ganji.js: pub/jquery-1.7.1.js pub/jquery.cookie.js \
 b/admin/spd/edeng.user.js: admin/spd/edeng.user.js
 b/admin/spd/edeng.js: pub/jquery-1.7.1.js pub/jquery.cookie.js \
                       pub/bmoon.js bmoon.dida.js admin/spd/edeng.js
+
+b/admin/spd/liebiao.user.js: admin/spd/liebiao.user.js
+b/admin/spd/liebiao.js: pub/jquery-1.7.1.js pub/jquery.cookie.js \
+						pub/bmoon.js bmoon.dida.js admin/spd/liebiao.js
 
 b/admin/pos.js: admin/pos.js
 b/admin/spd/post.js: admin/spd/post.js
