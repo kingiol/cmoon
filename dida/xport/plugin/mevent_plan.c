@@ -90,9 +90,9 @@ static void plan_prepare_time(HDF *node, char *date, struct tm *todaystm, float 
     if (km != 0.0) {
         float mkm, delta;
         mkm = mcs_get_float_value(node, "km", 0.0);
-        delta = abs(km - mkm) + 0.5;
+        delta = abs(km - mkm);
 
-        tm = m_thatsec + (tm - m_thatsec) * (delta / km);
+        tm = m_thatsec + (tm - m_thatsec) * ((delta / km) + 0.01);
     }
 
     hdf_set_value(node, "datetime", datetime);
