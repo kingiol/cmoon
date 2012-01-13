@@ -17,3 +17,18 @@ EOM
     }
     Output = index.html
 }
+
+readme {
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/readme.css" />
+            js = <script type="text/javascript" src="/js/b/readme.js"></script>
+            title = 关于滴滴嗒嗒
+        }
+        Include {
+            content = readme.html
+        }
+    }
+    Output = readme.html
+}

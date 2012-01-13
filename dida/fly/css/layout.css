@@ -49,11 +49,12 @@
     float: right;
     width: 400px;
 }
+#bd-bot p {padding-top:330px; text-align: center;}
+#bd-bot p span {margin: 0 10px;}
+#bd-bot p.right {text-align: right;}
 
 #bd-top img {float: left;}
-#bd-mid {margin-top: 2ex; min-height: 270px;}
-#bd-bot p {text-indent: 0; margin: 2px;}
-#bd-bot p.right {text-align: right;}
+#bd-mid {margin-top: 2ex; min-height: 320px;}
 
 #bd-personal {float: right; margin: 12px 0 0 0; display: inline;}
 #bd-personal ul li{display: inline; float: left; margin: 5px 0;    padding: 0 8px; border-right: 1px solid #101010; display: inline;}
