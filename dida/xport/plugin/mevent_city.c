@@ -243,6 +243,10 @@ static NEOERR* city_cmd_s(struct city_entry *e, QueueEntry *q)
                 MDB_QUERY_RAW(db, "city", _COL_CITY, "s=$1", "s", c);
                 err = mdb_set_row(q->hdfsnd, db, _COL_CITY, "city");
             }
+            /*
+             * return not found useless, supress it
+             */
+            nerr_handle(&err, NERR_NOT_FOUND);
             if (err != STATUS_OK) return nerr_pass(err);
         }
 

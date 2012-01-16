@@ -184,6 +184,8 @@ bmoon.spdpost = {
         o.plan.stime = o.stime.val();
         o.plan.rect = '((' + o.plan.sll.join(',') + '),(' +
             o.plan.ell.join(',') + '))';
+        o.plan.sgeo = '(' + o.plan.sll.join(',') +')';
+        o.plan.egeo = '(' + o.plan.ell.join(',') +')';
 
         var pdata = {
             _op: 'mod',

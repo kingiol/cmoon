@@ -128,6 +128,8 @@ bmoon.spdrobot = {
                         if (plan.scityid && plan.ecityid) {
                             plan.rect = '((' + plan.sll.join(',') + '),(' +
                                 plan.ell.join(',') + '))';
+                            plan.sgeo = '(' + plan.sll.join(',') +')';
+                            plan.egeo = '(' + plan.ell.join(',') +')';
                             plan.km = bmoon.utl.earthDis(plan.sll, plan.ell);
 
                             if (plan.repeat > 0 && plan.km > 120.0) {

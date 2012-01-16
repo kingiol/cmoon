@@ -95,6 +95,8 @@ Plugin {
                 ecityid [type=int] = ecityid
                 saddr [maxlen=256] = saddr
                 eaddr [maxlen=256] = eaddr
+                sgeo [type=point] = sgeo
+                egeo [type=point] = egeo
                 marks [maxlen=256] = marks
                 
                 rect [type=box] = rect
@@ -120,6 +122,8 @@ Plugin {
                 ecityid [type=int] = ecityid
                 saddr [maxlen=256] = saddr
                 eaddr [maxlen=256] = eaddr
+                sgeo [type=point] = sgeo
+                egeo [type=point] = egeo
 
                 rect [type=box] = rect
                 route [type=path] = route
@@ -143,12 +147,14 @@ Plugin {
                 dad [type=int, require=true] = dad =
                 statu [type=int, require=true] = statu <
                 rect [type=box] = ((rect - @@rect) * point(1.2,0) + @@rect) @>
+                sgeo[type=point] = ((rect[0] <-> rect[1]) / 5) > sgeo <-> 
                 km [type=float] = (km / 1.5) <
             }
             geox {
                 dad [type=int, require=true] = dad =
                 statu [type=int, require=true] = statu <
                 rect [type=box] = ((rect - @@rect) * point(1.6,0) + @@rect) @>
+                sgeo[type=point] = ((rect[0] <-> rect[1]) / 5) > sgeo <-> 
                 km [type=float] = (km / 1.8) <
             }
         }

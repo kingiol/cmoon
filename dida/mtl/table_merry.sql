@@ -56,6 +56,8 @@ CREATE TABLE plan (
     ecityid int NOT NULL DEFAULT 0,
     saddr varchar(256) NOT NULL DEFAULT '',
     eaddr varchar(256) NOT NULL DEFAULT '',
+    sgeo point NOT NULL DEFAULT '(0,0)',
+    egeo point NOT NULL DEFAULT '(0,0)',
     marks varchar(256) NOT NULL DEFAULT '',
 
     rect box NOT NULL DEFAULT '((0,0), (1,1))',
