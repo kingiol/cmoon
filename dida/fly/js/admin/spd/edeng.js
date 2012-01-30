@@ -105,7 +105,7 @@ bmoon.spdedeng = {
 
 
         // mname
-        if (contact && !contace.match('http') {
+        if (contact && !contace.match('http')) {
             mname = contact;
         } else if (phone && !phone.match('http')) {
             mname = phone;
