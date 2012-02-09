@@ -68,6 +68,10 @@
 }
 #bd-nav li {float: left;}
 
+#bd-nav li a.selected {
+    background-position: 0 -40px;
+}
+
 #bd-action {
     -moz-border-radius: 5px 5px 5px 5px;
     background: url(/img/bg/nav.jpg) repeat-x scroll 0 0 transparent;

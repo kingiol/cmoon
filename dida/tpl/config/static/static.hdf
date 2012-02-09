@@ -8,14 +8,29 @@ index {
                 <script type="text/javascript" src="/js/b/index.js"></script>
 EOM
             title = 首页
-#            botjs = <script src="http://maps.google.com/maps/api/js?sensor=false&language=zh-CN&libraries=places">
-            tabpart = 1
+            tabpart = 0
         }
         Include {
             content = index.html
         }
     }
     Output = index.html
+}
+
+boring {
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/boring.css" />
+            js = <script type="text/javascript" src="/js/b/boring.js"></script>
+            title = 随便逛逛
+            tabpart = 1
+        }
+        Include {
+            content = boring.html
+        }
+    }
+    Output = boring.html
 }
 
 readme {
@@ -25,6 +40,7 @@ readme {
             css = <link rel="stylesheet" type="text/css" href="/css/b/readme.css" />
             js = <script type="text/javascript" src="/js/b/readme.js"></script>
             title = 关于滴滴嗒嗒
+            tabpart = 2
         }
         Include {
             content = readme.html

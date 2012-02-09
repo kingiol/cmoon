@@ -13,6 +13,18 @@ Config {
 Dataset {
     layout.html {
         tabs {
+            0 {
+                name = 拼车
+                href = /index.html
+            }
+            1 {
+                name = 随便逛逛
+                href = /boring.html
+            }
+            2 {
+                name = 关于我们
+                href = /readme.html
+            }
         }
     }
 }
