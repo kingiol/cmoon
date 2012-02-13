@@ -34,15 +34,8 @@ input.btn-w:hover {cursor: pointer; background-positon: -80px -28px;}
 input.long {width: 200px;}
 input.llong {width: 260px;}
 
-a.btn {
-    display: inline-block;
-    height: 40px;
-    width: 120px;
-    line-height: 40px;
-    text-align: center;
-    background: url(/img/bg/btn.png) 0 0 no-repeat;
-}
-a.btn:hover {background-position: 0 -40px;}
+a.btn {display: inline-block; height: 28px; width: 80px; text-align: center; color: #fff; background: url(/img/bg/btn.png) 0 0 no-repeat;}
+a.btn:hover {background-position: 0 -28px;}
 
 dl.inp dt {float: left; clear: left; margin: 5px; line-height: 22px; text-align: right; width: 75px;}
 dl.inp dd {margin: 5px; line-height: 22px; float: left;}

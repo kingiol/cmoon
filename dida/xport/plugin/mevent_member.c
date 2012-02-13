@@ -71,6 +71,8 @@ static NEOERR* member_cmd_mem_get(struct member_entry *e, QueueEntry *q)
     } else {
         MDB_QUERY_RAW(db, "member", _COL_MEMBER, "mid=%d", NULL, mid);
         err = mdb_set_row(q->hdfsnd, db, _COL_MEMBER, NULL);
+        if (nerr_handle(&err, NERR_NOT_FOUND))
+            return nerr_raise(REP_ERR_MEMBER_NEXIST, "member %d not exist", mid);
         if (err != STATUS_OK) return nerr_pass(err);
 
         MDB_QUERY_RAW(db, "car", _COL_CAR, "mid=%d", NULL, mid);
@@ -165,7 +167,7 @@ static NEOERR* member_cmd_mem_add(struct member_entry *e, QueueEntry *q)
     hdf_set_int_value(q->hdfrcv, "mid", hash_string_rev(mname));
 
     err = member_cmd_mem_get(e, q);
-    nerr_handle(&err, NERR_NOT_FOUND);
+    nerr_handle(&err, REP_ERR_MEMBER_NEXIST);
 	if (err != STATUS_OK) return nerr_pass(err);
 
     if (hdf_get_obj(q->hdfsnd, "male"))
@@ -190,19 +192,21 @@ static NEOERR* member_cmd_mem_add(struct member_entry *e, QueueEntry *q)
 static NEOERR* member_cmd_mem_up(struct member_entry *e, QueueEntry *q)
 {
 	STRING str; string_init(&str);
+    char *mname;
     int mid;
 	NEOERR *err;
 
     mdb_conn *db = e->db;
     struct cache *cd = e->cd;
 
-    REQ_GET_PARAM_INT(q->hdfrcv, "mid", mid);
+    if (!hdf_get_value(q->hdfrcv, "mid", NULL)) {
+        REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
+        mid = hash_string_rev(mname);
+        hdf_set_int_value(q->hdfrcv, "mid", mid);
+    } else mid = hdf_get_int_value(q->hdfrcv, "mid", 0);
 
     err = member_cmd_mem_get(e, q);
 	if (err != STATUS_OK) return nerr_pass(err);
-
-    if (!hdf_get_obj(q->hdfsnd, "mid"))
-        return nerr_raise(REP_ERR_MEMBER_NEXIST, "member %d not exist", mid);
 
     err = mdb_build_upcol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".UpdateCol.member"), &str);
@@ -215,6 +219,46 @@ static NEOERR* member_cmd_mem_up(struct member_entry *e, QueueEntry *q)
     cache_delf(cd, PREFIX_MEMBER"%d", mid);
     cache_delf(cd, PREFIX_MEMBER_PRIV"%d", mid);
     
+    return STATUS_OK;
+}
+
+static NEOERR* member_cmd_mem_getrlink(struct member_entry *e, QueueEntry *q)
+{
+    char *mname;
+    NEOERR *err;
+
+    REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
+
+    err = member_cmd_mem_get(e, q);
+	if (err != STATUS_OK) return nerr_pass(err);
+
+    mdb_conn *db = e->db;
+
+    MDB_QUERY_RAW(db, "memberreset", _COL_RESET, "mname=$1", "s", mname);
+    err = mdb_set_row(q->hdfsnd, db, _COL_RESET, NULL);
+	if (err != STATUS_OK) return nerr_pass(err);
+    //if (nerr_handle(&err, NERR_NOT_FOUND))
+    //return nerr_raise(REP_ERR_NRESET, "%s hasn't reseted", mname);
+
+    return nerr_pass(err);
+}
+
+static NEOERR* member_cmd_mem_setrlink(struct member_entry *e, QueueEntry *q)
+{
+    char *mname, *rlink;
+    NEOERR *err;
+
+    REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
+    REQ_GET_PARAM_STR(q->hdfrcv, "rlink", rlink);
+
+    mdb_conn *db = e->db;
+
+    err = member_cmd_mem_get(e, q);
+	if (err != STATUS_OK) return nerr_pass(err);
+
+    MDB_EXEC(db, NULL, "SELECT merge_memberreset($1::varchar(256), $2::varchar(256))",
+             "ss", mname, rlink);
+
     return STATUS_OK;
 }
 
@@ -242,6 +286,12 @@ static void member_process_driver(EventEntry *entry, QueueEntry *q)
         break;
     case REQ_CMD_MEMBER_UP:
         err = member_cmd_mem_up(e, q);
+        break;
+    case REQ_CMD_MEMBER_GETRLINK:
+        err = member_cmd_mem_getrlink(e, q);
+        break;
+    case REQ_CMD_MEMBER_SETRLINK:
+        err = member_cmd_mem_setrlink(e, q);
         break;
     case REQ_CMD_CAR_GET:
         err = member_cmd_car_get(e, q);

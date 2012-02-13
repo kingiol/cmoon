@@ -19,7 +19,7 @@ Dataset {
             }
             1 {
                 name = 随便逛逛
-                href = /boring.html
+                href = /bore
             }
             2 {
                 name = 关于我们
@@ -34,6 +34,7 @@ Db {
         member = pgsql:dbname=merry host=localhost user=dida password=loveu
         city = pgsql:dbname=merry host=localhost user=dida password=loveu
         plan = pgsql:dbname=merry host=localhost user=dida password=loveu
+        aux = pgsql:dbname=merry host=localhost user=dida password=loveu
     }
     QueryCond {
     }
@@ -54,6 +55,7 @@ Mevent {
     1 = member
     3 = plan
     4 = city
+    5 = aux
 }
 
 ClientReqLimit {
@@ -64,5 +66,18 @@ FileCache {
     0 {
         uri = ^/test/request$
         tm_cache = 1800
+    }
+}
+
+Email {
+    MemberReset {
+        subject = 重置dida密码
+        opt = -c /var/www/dida/mtls/conf/noreply.conf
+        content << EOM
+$mnick$ 你好，
+
+    有人通过这个邮箱申请重置嘀嗒网的密码，请在浏览器中打开以下连接以重置密码：
+    http://www.dididada.org/member/pass?mname=$mname_esc$&rlink=$rlink$
+EOM
     }
 }

@@ -19,8 +19,8 @@ admin
 
 
 index.html
-icar.html
-iman.html
+bore
+readme.html
 
     opos.h
         GET /json/city/ip       通过ip获取用户的城市信息
@@ -33,3 +33,13 @@ iman.html
     omember.h
         GET /json/member/info   通过mname获取用户信息
         GET /image/member/pic   通过mname获取用户phone, contact等图片数据
+        GET /member/regist.html 用户注册页面
+        GET /member/reset.html  用户申请找回密码
+        GET /json/member/exist  判断用户是否注册
+        ADD /json/member/new    用户注册接口
+        GET /json/member/login  用户登录接口
+        GET /json/member/logout 用户登出接口
+        GET /json/member/reset  用户申请密码重置接口
+        MOD /json/member/edit   修改用户信息接口
+        GET /member/pass        修改用户密码页面
+        GET /member/info        查看用户信息页面

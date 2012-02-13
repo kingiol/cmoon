@@ -5,6 +5,7 @@ include $(BASEDIR)Make.env
 FILES = b/base.js \
         b/loadgmap.js \
         b/index.js \
+        b/member/regist.js b/member/reset.js b/member/pass.js\
         b/admin/pos.js \
         b/admin/spd/58.user.js b/admin/spd/58.js \
         b/admin/spd/ganji.user.js b/admin/spd/ganji.js \
@@ -17,16 +18,23 @@ all: preload $(FILES)
 preload:
 	@mkdir -p b/
 	@mkdir -p b/admin/spd/
+	@mkdir -p b/member/
 
-b/base.js: pub/jquery-1.7.1.js pub/jquery.cookie.js \
+b/base.js: pub/jquery-1.7.1.js pub/jquery.cookie.js pub/jquery.md5.js \
+           pub/jquery.hotkeys.js pub/jquery.mninpval.js \
+           pub/jquerytools/src/toolbox/toolbox.expose.js \
+           pub/jquerytools/src/overlay/overlay.js \
            pub/bmoon.js \
            bmoon.dida.js
 
 b/loadgmap.js: loadgmap.js
 
 b/index.js: pub/jquerytools/src/dateinput/dateinput.js \
-            pub/jquery.mninpval.js \
             index.js
+
+b/member/regist.js: member/regist.js
+b/member/reset.js: member/reset.js
+b/member/pass.js: member/pass.js
 
 b/admin/spd/58.user.js: admin/spd/58.user.js
 b/admin/spd/58.js: pub/bmoon.js bmoon.dida.js admin/spd/58.js
@@ -41,7 +49,7 @@ b/admin/spd/edeng.js: pub/jquery-1.7.1.js pub/jquery.cookie.js \
 
 b/admin/spd/liebiao.user.js: admin/spd/liebiao.user.js
 b/admin/spd/liebiao.js: pub/jquery-1.7.1.js pub/jquery.cookie.js \
-						pub/bmoon.js bmoon.dida.js admin/spd/liebiao.js
+                        pub/bmoon.js bmoon.dida.js admin/spd/liebiao.js
 
 b/admin/pos.js: admin/pos.js
 b/admin/spd/post.js: admin/spd/post.js

@@ -10,7 +10,10 @@ CREATE TABLE city (
 
 CREATE TABLE member (
     mid int PRIMARY KEY,
-    mname varchar(256) NOT NULL DEFAULT '',
+    mname varchar(256) NOT NULL DEFAULT '', --email
+    mnick varchar(256) NOT NULL DEFAULT '',
+    msn varchar(256) NOT NULL DEFAULT '',
+    mmsn varchar(256) NOT NULL DEFAULT '',
     ori smallint NOT NULL DEFAULT 0, -- plan's origin domain, see server.hdf
     male smallint NOT NULL DEFAULT 0,
     pass varchar(64) NOT NULL DEFAULT '',
@@ -24,6 +27,36 @@ CREATE TABLE member (
     intime timestamp DEFAULT now()
 );
 CREATE INDEX member_index ON member (ori, male, verify);
+
+CREATE TABLE memberreset (
+       mname varchar(256) NOT NULL DEFAULT '',
+       rlink varchar(256) NOT NULL DEFAULT '',
+       intime timestamp DEFAULT now(),
+       PRIMARY KEY (mname)
+);
+
+CREATE FUNCTION merge_memberreset(e TEXT, r TEXT) RETURNS VOID AS
+$$
+BEGIN
+    LOOP
+        -- first try to update the key
+        UPDATE memberreset SET rlink = r WHERE mname = e;
+        IF found THEN
+            RETURN;
+        END IF;
+        -- not there, so try to insert the key
+        -- if someone else inserts the same key concurrently,
+        -- we could get a unique-key failure
+        BEGIN
+            INSERT INTO memberreset(mname, rlink) VALUES (e, r);
+            RETURN;
+        EXCEPTION WHEN unique_violation THEN
+            -- do nothing, and loop to try the UPDATE again
+        END;
+    END LOOP;
+END
+$$
+LANGUAGE plpgsql;
 
 
 CREATE TABLE car (

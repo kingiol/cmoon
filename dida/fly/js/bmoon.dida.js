@@ -37,6 +37,21 @@ bmoon.dida = {
 
         o.e_content = $('#bd-content');
 
+        o.mnick = $('#bd-mnick');
+        o.member = $('#bd-member');
+        o.guest = $('#bd-guest');
+        o.loginmname = $('#login-mname');
+        o.loginmsn = $('#login-msn');
+        o.loginoverlay = $('a[rel="#bd-login"]').overlay({
+            mask: '#666', api: true,
+            onLoad: function() {
+                if (o.loginmname.val().length <= 0)
+                    o.loginmname.focus();
+                else
+                    o.loginmsn.focus();
+            }
+        });
+        
         return o;
     },
 
@@ -44,11 +59,73 @@ bmoon.dida = {
         var o = bmoon.dida.init();
 
         o.bindClick();
+        o.loginCheck();
+
+        o.loginref = bmoon.utl.getQueryString("loginref");
+        if (o.loginref) {
+            o.loginoverlay.load();
+        }
+        o.vikierr = bmoon.utl.getQueryString("vikierr");
+        if (o.vikierr) {
+            $('#content').empty().append('<div class="text-error">'+o.vikierr+'</div>')
+        }
     },
     
     bindClick: function() {
         var o = bmoon.dida.init();
         
+        $('#login-submit').click(o.login);
+        $('#userlogout').click(o.logout);
+        o.loginmsn.bind('keydown', 'return', o.login);
+    },
+
+    login: function() {
+        var o = bmoon.dida.init();
+        
+        if (!$(".VAL_LOGIN").inputval()) return;
+
+        var mname = o.loginmname.val(),
+        msn = $.md5($.md5(o.loginmsn.val()));
+
+        $.getJSON("/json/member/login", {mname: mname, msn: msn}, function(data) {
+            if (data.success != 1 || !data.mname) {
+                alert(data.errmsg || "操作失败， 请稍后再试");
+                return;
+            }
+            o.loginoverlay.close();
+            setTimeout(function() {location.href = o.loginref || location.href;}, 1000);
+        });
+    },
+    
+    logout: function() {
+        var o = bmoon.dida.init();
+        
+        $.getJSON('/json/member/logout');
+        
+        $.cookie('mname', null, {path: '/', domain: g_site_domain});
+        $.cookie('mnick', null, {path: '/', domain: g_site_domain});
+        $.cookie('mnick_esc', null, {path: '/', domain: g_site_domain});
+        $.cookie('msn', null, {path: '/', domain: g_site_domain});
+        //$.cookie('mmsn', null, {path: '/', domain: g_site_domain});
+        o.loginmname.val("");
+        o.loginCheck();
+    },
+    
+    loginCheck: function() {
+        var o = bmoon.dida.init();
+        
+        var mnick = $.cookie('mnick_esc'),
+        mname = $.cookie('mname');
+        
+        if (mnick != null) {
+            o.mnick.text(mnick);
+            o.guest.hide();
+            o.member.show();
+            o.loginmname.val(mname);
+        } else {
+            o.member.hide();
+            o.guest.show();
+        }
     },
 
     // "(28.228209,114.057868)" => [28.228209, 114.057868]

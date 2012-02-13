@@ -1,7 +1,3 @@
-ALTER TABLE member ADD COLUMN mnick varchar(256) NOT NULL DEFAULT '';
-ALTER TABLE member ADD COLUMN msn varchar(256) NOT NULL DEFAULT '';
-ALTER TABLE member ADD COLUMN mmsn varchar(256) NOT NULL DEFAULT '';
-
 CREATE TABLE memory (
     id SERIAL,
     statu int NOT NULL DEFAULT 0,
@@ -36,45 +32,14 @@ CREATE TABLE comment (
     content text NOT NULL DEFAULT '',
 
     intime timestamp DEFAULT now(),
-    uptime timestamp DEFAULT now(),    
+    uptime timestamp DEFAULT now(),
     PRIMARY KEY (id)
 );
 CREATE TRIGGER tg_uptime_comment BEFORE UPDATE ON comment FOR EACH ROW EXECUTE PROCEDURE update_time();
 
-
-CREATE TABLE memberreset (
-       mname varchar(256) NOT NULL DEFAULT '',
-       rlink varchar(256) NOT NULL DEFAULT '',
-       intime timestamp DEFAULT now(),
-       PRIMARY KEY (mname)
-);
-
-CREATE FUNCTION merge_memberreset(e TEXT, r TEXT) RETURNS VOID AS
-$$
-BEGIN
-    LOOP
-        -- first try to update the key
-        UPDATE memberreset SET rlink = r WHERE mname = e;
-        IF found THEN
-            RETURN;
-        END IF;
-        -- not there, so try to insert the key
-        -- if someone else inserts the same key concurrently,
-        -- we could get a unique-key failure
-        BEGIN
-            INSERT INTO memberreset(mname, rlink) VALUES (e, r);
-            RETURN;
-        EXCEPTION WHEN unique_violation THEN
-            -- do nothing, and loop to try the UPDATE again
-        END;
-    END LOOP;
-END
-$$
-LANGUAGE plpgsql;
-
 CREATE TABLE email (
        id SERIAL,
-       state int NOT NULL DEFAULT 0, -- 0 fresh 1 sended
+       statu int NOT NULL DEFAULT 0, -- 0 fresh 1 sended
        gotime int NOT NULL DEFAULT 0, -- 0 immediatly 1 minute 2 O clock 3 midnight
        opts varchar(512) NOT NULL DEFAULT '', -- -c /usr/local/etc/email/liuchunsheng.conf -html -s....
        subject varchar(256) NOT NULL DEFAULT '',
@@ -84,7 +49,7 @@ CREATE TABLE email (
        content text NOT NULL DEFAULT '',
        checksum varchar(64) NOT NULL DEFAULT '',
        intime timestamp DEFAULT now(),
-       uptime timestamp DEFAULT now(),    
+       uptime timestamp DEFAULT now(),
        PRIMARY KEY (id)
 );
 

@@ -9,6 +9,7 @@ Mevent {
         1 = member
         2 = plan
         3 = city
+        4 = aux
     }
     smsalarm {
         db {
@@ -37,6 +38,9 @@ Plugin {
             member {
                 mid [type=int, require=true] = mid
                 mname [maxlen=256, require=true] = mname
+                mnick [maxlen=256] = mnick
+                msn [maxlen=256] = msn
+                mmsn [maxlen=256] = mmsn
                 ori [type=int] = ori
                 male [type=int] = male
                 pass [maxlen=64] = pass
@@ -58,6 +62,9 @@ Plugin {
             member {
                 mid [type=int, require=true] = mid
                 mname [maxlen=256, require=true] = mname
+                mnick [maxlen=256] = mnick
+                msn [maxlen=256] = msn
+                mmsn [maxlen=256] = mmsn
                 male [type=int] = male
                 pass [maxlen=64] = pass
                 statu [type=int] = statu
@@ -162,5 +169,18 @@ Plugin {
     city {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
         ipfile = /usr/local/lib/QQWry.Dat
+    }
+    aux {
+        dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
+        InsertCol {
+            email {
+                go [type=int] = gotime
+                opt [maxlen=512, require=true] = opts
+                sub [maxlen=256, require=true] = subject
+                to [require=true] = sendto
+                content [require=true] = content
+                checksum [require=true, maxlen=64] = checksum
+            }
+        }
     }
 }

@@ -17,22 +17,6 @@ EOM
     Output = index.html
 }
 
-boring {
-    Layout = layout.html
-    Dataset {
-        Layout {
-            css = <link rel="stylesheet" type="text/css" href="/css/b/boring.css" />
-            js = <script type="text/javascript" src="/js/b/boring.js"></script>
-            title = 随便逛逛
-            tabpart = 1
-        }
-        Include {
-            content = boring.html
-        }
-    }
-    Output = boring.html
-}
-
 readme {
     Layout = layout.html
     Dataset {

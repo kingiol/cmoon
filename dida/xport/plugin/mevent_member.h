@@ -8,19 +8,23 @@
 #define MEMBER_CC_SEC   60
 #define CAR_CC_SEC      60
 
-#define _COL_MEMBER "mid, mname, ori, male, verify, credit, cityid, "   \
+#define _COL_MEMBER "mid, mname, mnick, msn, mmsn, "    \
+    " ori, male, verify, credit, cityid, "              \
     " to_char(intime, 'YYYY-MM-DD') as intime"
-#define _COL_MEMBER_PRIV "mid, mname, phone, contact"
-#define _COL_MEMBER_ADMIN "mid, mname, male, phone, contact, "  \
-    " verify, credit, cityid, "                                 \
+#define _COL_MEMBER_PRIV "mid, mname, mnick, msn, mmsn, phone, contact"
+#define _COL_MEMBER_ADMIN "mid, mname, mnick, msn, mmsn, male, phone, contact, " \
+    " verify, credit, cityid, "                                         \
     " to_char(intime, 'YYYY-MM-DD') as intime"
 #define _COL_CAR "mid, size, model, mdate"
+#define _COL_RESET " mname, rlink, to_char(intime, 'YYYY-MM-DD') as intime "
 
 enum {
     REQ_CMD_MEMBER_GET = 1001,
     REQ_CMD_MEMBER_PRIV_GET,
     REQ_CMD_MEMBER_ADD,
     REQ_CMD_MEMBER_UP,
+    REQ_CMD_MEMBER_GETRLINK,
+    REQ_CMD_MEMBER_SETRLINK,
     REQ_CMD_CAR_GET,
     REQ_CMD_CAR_ADD
 };

@@ -1,6 +1,10 @@
 查询该电话有多少拼车信息
 “我愿意再等等”
 “邮件订阅该线路”
+统计
+随便看看
+faq.html
+member/reset
 
 DONE /spd/post/robot 能获取到坐标的，自动执行...
 DONE /json/city/s 会取不到鸭子港镇的cityid，所以要递归往上取city

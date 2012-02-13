@@ -26,6 +26,7 @@
 #include "mevent_member.h"
 #include "mevent_plan.h"
 #include "mevent_city.h"
+#include "mevent_aux.h"
 
 /*
  * walker
@@ -34,5 +35,6 @@
 #include "opos.h"
 #include "oplan.h"
 #include "omember.h"
+#include "obore.h"
 
 #endif    /* __LHEADS_H__ */

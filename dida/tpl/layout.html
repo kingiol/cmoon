@@ -17,17 +17,45 @@
     <div id="bd-bg-left"></div>
     <div id="bd-bg-right"></div>
     <div id="bd-top">
+      <div id="bd-personal">
+        <ul id="bd-member">
+          <li>欢迎 <a href="/member/info"><span id="bd-mnick"></span></a></li>
+          <li class="last"><a href="javascript:void(0);" id="userlogout">退出登录</a></li>
+        </ul>
+        <ul id="bd-guest">
+          <li><a href="javascript: void(0);" rel="#bd-login">登录</a></li>
+          <li><a href="/member/regist.html">注册</a></li>
+          <li class="last"><a href="/member/reset.html">忘记密码</a></li>
+        </ul>
+      </div>
+
+      <div class="clearer"></div>
+
       <ul id="bd-nav">
         <?cs each:tab = Layout.tabs ?>
-        <li><a class="btn <?cs var:tab.class ?>" href="<?cs var:tab.href ?>"><?cs var:tab.name ?></a></li>
+        <li><a class="<?cs var:tab.class ?>" href="<?cs var:tab.href ?>"><?cs var:tab.name ?></a></li>
         <?cs /each ?>
       </ul>
     </div>
 
     <div id="bd-mid">
       <div id="bd-content">
-        <?cs linclude!Include.content ?>
-        <?cs var: Content.content ?>
+
+        <?cs if: ?Output.errmsg && Output.errcode == 25 ?>
+          <script>
+            $(document).ready(function() {
+              $('#login-hint').html('<?cs var: Output.errmsg ?>')
+              bmoon.init().loginoverlay.load();
+            });
+          </script>
+        <?cs elif: ?Output.errmsg && ?Output.errcode?>
+          <h3><?cs var: Output.errcode ?> : <?cs var: Output.errmsg ?></h3>
+          <pre><?cs var: Output.errtrace ?></pre>
+        <?cs else ?>
+          <?cs linclude!Include.content ?>
+          <?cs var:Content.content ?>
+        <?cs /if ?>
+
       </div>
     </div>
 
@@ -39,6 +67,29 @@
         <span><a href="/readme.html">关于本站</a></span>
       </p>
     </div>
+
+    <div class="overlay" id="bd-login">
+      <h3 id="login-hint" class="text-center">登入滴滴嗒嗒</h3>
+      <div class="sepl"></div>
+      <dl class="inp">
+        <dt>邮箱：</dt>
+        <dd>
+          <input type="text" id="login-mname" class="VAL_LOGIN vrequire" />
+        </dd>
+        
+        <dt>密码：</dt>
+        <dd>
+          <input type="password" id="login-msn" class="VAL_LOGIN vrequire" />
+        </dd>
+        
+        <dt>&nbsp; </dt>
+        <dd>
+          <input type="submit" id="login-submit" class="btn" value="提 交" />
+        </dd>
+      </dl>
+      <h4 class="text-right"><a href="/member/regist.html" target="_blank">还没注册？</a></h4>
+    </div>
+
   </body>
 
 </html>

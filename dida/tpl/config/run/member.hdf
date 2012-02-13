@@ -1,0 +1,13 @@
+member_pass {
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/member/pass.css" />
+            js = <script type="text/javascript" src="/js/b/member/pass.js"></script>
+            title = 修改密码
+        }
+        Include {
+            content = member/pass.html
+        }
+    }
+}

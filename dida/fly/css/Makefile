@@ -13,7 +13,7 @@ preload:
 	@mkdir -p b/
 	@mkdir -p b/admin/spd/
 
-b/base.css: reset.css base.css layout.css
+b/base.css: reset.css base.css layout.css overlay.css
 
 b/index.css: index/dateinput.css index/index.css
 b/readme.css: readme.css
