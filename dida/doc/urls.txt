@@ -19,7 +19,7 @@ admin
 
 
 index.html
-bore
+
 readme.html
 
     opos.h
@@ -43,3 +43,14 @@ readme.html
         MOD /json/member/edit   修改用户信息接口
         GET /member/pass        修改用户密码页面
         GET /member/info        查看用户信息页面
+
+    obore.h
+        GET bore                随便看看页面
+        GET bore/op             修改随便看看页面
+        ADD /json/bore/op       添加随便看看接口
+        MOD /json/bore/op       修改随便看看接口
+        GET /bore/preview       随便看看预览页面
+    
+    ocomment.h
+        GET /json/comment       获取评论接口
+        ADD /json/comment       新增评论接口

@@ -37,6 +37,15 @@ enum {
     MEMBER_ST_SPD_FRESH = 10
 };
 
+/* verify */
+enum {
+    MEMBER_VF_FRESH = 0,
+    MEMBER_VF_ID,
+    MEMBER_VF_DRIVE,
+    MEMBER_VF_ADMIN = 90,
+    MEMBER_VF_ROOT = 100
+};
+
 enum {
     REP_ERR_MEMBERED = 31,
     REP_ERR_CARED,

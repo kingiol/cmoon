@@ -42,6 +42,19 @@ Db {
         city {
             latlng [type=point] = geopos
         }
+        memory {
+            title [maxlen=256] = title
+            hint [maxlen=256] = hint
+            content = content
+            statu [type=int] = statu
+        }
+    }
+    InsertCol {
+        memory {
+            title [maxlen=256, require=true] = title
+            hint [maxlen=256] = hint
+            content [require=true] = content
+        }
     }
 }
 

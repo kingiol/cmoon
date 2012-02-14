@@ -2,13 +2,32 @@ bore {
     Layout = layout.html
     Dataset {
         Layout {
-            css = <link rel="stylesheet" type="text/css" href="/css/b/bore.css" />
-            js = <script type="text/javascript" src="/js/b/bore.js"></script>
+            css = <link rel="stylesheet" type="text/css" href="/css/b/bore/bore.css" />
+            js = <script type="text/javascript" src="/js/b/bore/bore.js"></script>
             title = 随便逛逛
             tabpart = 1
         }
         Include {
-            content = bore.html
+            content = bore/bore.html
         }
     }
+}
+
+bore_op {
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/bore/op.css" />
+            js = <script type="text/javascript" src="/js/b/bore/op.js"></script>
+            title = 改写记忆
+            tabpart = 1
+        }
+        Include {
+            content = bore/op.html
+        }
+    }
+}
+
+bore_preview {
+    Layout = bore/preview.html
 }

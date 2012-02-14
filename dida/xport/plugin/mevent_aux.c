@@ -21,6 +21,130 @@ struct aux_entry {
     struct aux_stats st;
 };
 
+/*
+ * ids=0:1
+ * { "0": { "1": { "ntt": "0", "nst": "0" } }, "success": "1" }
+ *
+ * ids=0:1,0:20
+ * { "0": { "1": { "ntt": "0", "nst": "0" }, "20": { "ntt": "0", "nst": "0" } }, "success": "1" }
+ *
+ * ids=0:1,1:20
+ * { "0": { "1": { "ntt": "0", "nst": "0" } }, "1": { "20": { "ntt": "0", "nst": "0" } }, "success": "1" } 
+ */
+static NEOERR* aux_cmd_cmtget(struct aux_entry *e, QueueEntry *q)
+{
+    unsigned char *val = NULL; size_t vsize = 0;
+    int count, offset;
+    char *ids, *idsdump, tok[128];
+    int type = -1, oid = -1;
+    NEOERR *err;
+
+    REQ_GET_PARAM_STR(q->hdfrcv, "ids", ids);
+
+    mdb_conn *db = e->db;
+    struct cache *cd = e->cd;
+
+    mdb_pagediv(q->hdfrcv, NULL, &count, &offset, NULL, q->hdfsnd);
+
+    if (cache_getf(cd, &val, &vsize, PREFIX_COMMENT"%s_%d", ids, offset)) {
+        unpack_hdf(val, vsize, &q->hdfsnd);
+    } else {
+        idsdump = strdup(ids);
+        char *p = ids;
+        while (*p) {
+            if (*p == ':') {
+                *p = '\0';
+                type = atoi(ids);
+                ids = p+1;
+            }
+            if (*p == ',') {
+                *p = '\0';
+                oid = atoi(ids);
+                if (type >= 0 && oid >= 0) {
+                    sprintf(tok, "%d.%d", type, oid);
+                    MDB_PAGEDIV_SET(q->hdfsnd, tok, db, "comment",
+                                    "type=%d AND statu=%d AND oid=%d",
+                                      NULL, type, CMT_ST_NORMAL, oid);
+                    MDB_QUERY_RAW(db, "comment", _COL_CMT,
+                                  "type=%d AND statu=%d AND oid=%d "
+                                  " ORDER BY intime DESC LIMIT %d OFFSET %d",
+                                  NULL, type, CMT_ST_NORMAL, oid, count, offset);
+                    sprintf(tok, "%d.%d.cmts", type, oid);
+                    err = mdb_set_rows(q->hdfsnd, db, _COL_CMT, tok, NULL);
+                    nerr_handle(&err, NERR_NOT_FOUND);
+                    if (err != STATUS_OK) return nerr_pass(err);
+                    mstr_html_escape(hdf_get_child(q->hdfsnd, tok), "content");
+                    type = oid = -1;
+                }
+                ids = p+1;
+            }
+            p++;
+        }
+        oid = atoi(ids);
+        if (type >= 0 && oid >=0) {
+            sprintf(tok, "%d.%d", type, oid);
+            MDB_PAGEDIV_SET(q->hdfsnd, tok, db, "comment",
+                            "type=%d AND statu=%d AND oid=%d",
+                            NULL, type, CMT_ST_NORMAL, oid);
+            MDB_QUERY_RAW(db, "comment", _COL_CMT,
+                          "type=%d AND statu=%d AND oid=%d "
+                          " ORDER BY intime DESC LIMIT %d OFFSET %d",
+                          NULL, type, CMT_ST_NORMAL, oid, count, offset);
+            sprintf(tok, "%d.%d.cmts", type, oid);
+            err = mdb_set_rows(q->hdfsnd, db, _COL_CMT, tok, NULL);
+            nerr_handle(&err, NERR_NOT_FOUND);
+            if (err != STATUS_OK) return nerr_pass(err);
+            mstr_html_escape(hdf_get_child(q->hdfsnd, tok), "content");
+        }
+        
+        CACHE_HDF(q->hdfsnd, CMT_CC_SEC, PREFIX_COMMENT"%s_%d", idsdump, offset);
+        free(idsdump);
+    }
+
+    return STATUS_OK;
+}
+
+static NEOERR* aux_cmd_cmtadd(struct aux_entry *e, QueueEntry *q)
+{
+	STRING str; string_init(&str);
+    int type, oid;
+    NEOERR *err;
+
+    REQ_GET_PARAM_INT(q->hdfrcv, "type", type);
+    REQ_GET_PARAM_INT(q->hdfrcv, "oid", oid);
+
+    mdb_conn *db = e->db;
+    struct cache *cd = e->cd;
+
+    err = mdb_build_incol(q->hdfrcv,
+                          hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.comment"),
+                          &str);
+	if (err != STATUS_OK) return nerr_pass(err);
+    
+    MDB_EXEC(db, NULL, "INSERT INTO comment %s", NULL, str.buf);
+    
+    string_clear(&str);
+    
+    cache_delf(cd, PREFIX_COMMENT"%d:%d_0", type, oid);
+    
+    return STATUS_OK;
+}
+
+static NEOERR* aux_cmd_cmtdel (struct aux_entry *e, QueueEntry *q)
+{
+    int id;
+    NEOERR *err;
+
+    REQ_GET_PARAM_INT(q->hdfrcv, "id", id);
+
+    mdb_conn *db = e->db;
+
+    MDB_EXEC(db, NULL, "UPDATE comment SET statu=%d WHERE id=%d;",
+             NULL, CMT_ST_DEL, id);
+    
+    return STATUS_OK;
+}
+
 static NEOERR* aux_cmd_mail_add(struct aux_entry *e, QueueEntry *q)
 {
     STRING str; string_init(&str);
@@ -58,10 +182,13 @@ static void aux_process_driver(EventEntry *entry, QueueEntry *q)
     switch (q->operation) {
         CASE_SYS_CMD(q->operation, q, e->cd, err);
     case REQ_CMD_CMT_GET:
-        //err = aux_cmd_cmt_get(e, q);
+        err = aux_cmd_cmtget(e, q);
         break;
     case REQ_CMD_CMT_ADD:
-        //err = aux_cmd_cmt_add(e, q);
+        err = aux_cmd_cmtadd(e, q);
+        break;
+    case REQ_CMD_CMT_DEL:
+        err = aux_cmd_cmtdel(e, q);
         break;
     case REQ_CMD_MAIL_ADD:
         err = aux_cmd_mail_add(e, q);

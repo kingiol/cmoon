@@ -36,5 +36,6 @@
 #include "oplan.h"
 #include "omember.h"
 #include "obore.h"
+#include "ocomment.h"
 
 #endif    /* __LHEADS_H__ */

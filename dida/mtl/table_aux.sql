@@ -21,7 +21,7 @@ CREATE TABLE comment (
     type int NOT NULL DEFAULT 0, --0 memory
     statu int NOT NULL DEFAULT 0,
 
-    oid int NOT NULL DEFAULT 0,
+    oid int NOT NULL DEFAULT 0, --object id
     pid int NOT NULL DEFAULT 0,
 
     ip varchar(64) NOT NULL DEFAULT '',

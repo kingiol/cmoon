@@ -5,13 +5,14 @@ include $(BASEDIR)Make.env
 FILES = b/base.js \
         b/loadgmap.js \
         b/index.js \
-        b/member/regist.js b/member/reset.js b/member/pass.js\
         b/admin/pos.js \
         b/admin/spd/58.user.js b/admin/spd/58.js \
         b/admin/spd/ganji.user.js b/admin/spd/ganji.js \
         b/admin/spd/edeng.user.js b/admin/spd/edeng.js \
         b/admin/spd/liebiao.user.js b/admin/spd/liebiao.js \
-        b/admin/spd/post.js b/admin/spd/robot.js
+        b/admin/spd/post.js b/admin/spd/robot.js \
+        b/member/regist.js b/member/reset.js b/member/pass.js \
+        b/bore/bore.js b/bore/op.js
 
 all: preload $(FILES)
 
@@ -19,6 +20,7 @@ preload:
 	@mkdir -p b/
 	@mkdir -p b/admin/spd/
 	@mkdir -p b/member/
+	@mkdir -p b/bore/
 
 b/base.js: pub/jquery-1.7.1.js pub/jquery.cookie.js pub/jquery.md5.js \
            pub/jquery.hotkeys.js pub/jquery.mninpval.js \
@@ -31,10 +33,6 @@ b/loadgmap.js: loadgmap.js
 
 b/index.js: pub/jquerytools/src/dateinput/dateinput.js \
             index.js
-
-b/member/regist.js: member/regist.js
-b/member/reset.js: member/reset.js
-b/member/pass.js: member/pass.js
 
 b/admin/spd/58.user.js: admin/spd/58.user.js
 b/admin/spd/58.js: pub/bmoon.js bmoon.dida.js admin/spd/58.js
@@ -54,6 +52,13 @@ b/admin/spd/liebiao.js: pub/jquery-1.7.1.js pub/jquery.cookie.js \
 b/admin/pos.js: admin/pos.js
 b/admin/spd/post.js: admin/spd/post.js
 b/admin/spd/robot.js: admin/spd/robot.js
+
+b/member/regist.js: member/regist.js
+b/member/reset.js: member/reset.js
+b/member/pass.js: member/pass.js
+
+b/bore/bore.js: bore/bore.js
+b/bore/op.js: pub/markitup/markitup/jquery.markitup.js bore/mku_set.js bore/op.js
 
 %.js:
 	@echo -n > $@

@@ -19,7 +19,7 @@ CREATE TABLE member (
     pass varchar(64) NOT NULL DEFAULT '',
     mpass varchar(64) NOT NULL DEFAULT '',
     statu smallint NOT NULL DEFAULT 0,  --0 normal, 1 pause, 2 delete, 10 spd fresh
-    verify smallint NOT NULL DEFAULT 0, --0 fresh, 1 id credit, 2 subed, 4 jiazhao
+    verify smallint NOT NULL DEFAULT 0, --0 fresh, 1 id credit, 2 subed, 4 jiazhao, 90 admin, ..., 100 root
     credit int NOT NULL DEFAULT 0,
     cityid int NOT NULL DEFAULT 0,
     phone varchar(128) NOT NULL DEFAULT '',

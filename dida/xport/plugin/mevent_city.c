@@ -327,6 +327,41 @@ static NEOERR* city_cmd_id(struct city_entry *e, QueueEntry *q)
     return STATUS_OK;
 }
 
+static NEOERR* place_cmd_get(struct city_entry *e, QueueEntry *q)
+{
+    unsigned char *val = NULL; size_t vsize = 0;
+    int count = 0;
+    char *ip, tok[64];
+    
+    REQ_GET_PARAM_STR(q->hdfrcv, "ip", ip);
+    
+    struct cache *cd = e->cd;
+
+    if (cache_getf(cd, &val, &vsize, PREFIX_PLACE"%s", ip)) {
+        unpack_hdf(val, vsize, &q->hdfsnd);
+    } else {
+        char *s = strdup(ip);
+        char *dupip = s, *p = s;
+        while (*p != '\0') {
+            if (*p == ',') {
+                *p = '\0';
+                sprintf(tok, "%d", count);
+                ip2place(q->hdfsnd, s, tok);
+                count++;
+                s = p+1;
+            }
+            p++;
+        }
+        sprintf(tok, "%d", count);
+        ip2place(q->hdfsnd, s, tok);
+        free(dupip);
+
+        CACHE_HDF(q->hdfsnd, 0, PREFIX_PLACE"%s", ip);
+    }
+    
+    return STATUS_OK;
+}
+
 static void city_process_driver(EventEntry *entry, QueueEntry *q)
 {
     struct city_entry *e = (struct city_entry*)entry;
@@ -348,6 +383,9 @@ static void city_process_driver(EventEntry *entry, QueueEntry *q)
         break;
     case REQ_CMD_CITY_BY_S:
         err = city_cmd_s(e, q);
+        break;
+    case REQ_CMD_PLACE_GET:
+        err = place_cmd_get(e, q);
         break;
     case REQ_CMD_STATS:
         st->msg_stats++;

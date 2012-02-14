@@ -11,6 +11,24 @@ __BEGIN_DECLS
         HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".mname", mname); \
     } while (0)
 
+#define MEMBER_CHECK_ADMIN()                                            \
+    do {                                                                \
+        err = member_check_login_data_get(cgi, dbh, evth, ses);         \
+        if (err != STATUS_OK) return nerr_pass(err);                    \
+        HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".mname", mname);         \
+        if (hdf_get_int_value(evt->hdfrcv, "verify", -1) < MEMBER_VF_ADMIN) \
+            return nerr_raise(LERR_LIMIT, "%s not admin", mname);       \
+    } while (0)
+
+#define MEMBER_CHECK_ROOT()                                             \
+    do {                                                                \
+        err = member_check_login_data_get(cgi, dbh, evth, ses);         \
+        if (err != STATUS_OK) return nerr_pass(err);                    \
+        HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".mname", mname);         \
+        if (hdf_get_int_value(evt->hdfrcv, "verify", -1) < MEMBER_VF_ROOT) \
+            return nerr_raise(LERR_LIMIT, "%s not admin", mname);       \
+    } while (0)
+
 /* TODO */
 #if 0
 #define LEGAL_CHECK_NICK(mnick)                                     \

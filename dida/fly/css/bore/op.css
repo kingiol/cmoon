@@ -1,0 +1,22 @@
+dl.boreop dt {clear: left; float:left; width: 180px; margin: 5px 13px 5px 0; text-align: right;}
+dl.boreop dd {float:left; margin: 5px 0;}
+dl.boreop dd.loading .indicator {
+    display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;
+}
+
+dl.boreop dd.success .indicator {
+    display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/success.png) 0 0 no-repeat
+}
+
+dl.boreop dd.error .indicator {
+    display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/error.png) 0 0 no-repeat;
+}
+
+input.title, input.hint {
+    width: 400px;
+    margin-right: 1em;
+}
+
+textarea.content {
+    padding: 5px;
+}

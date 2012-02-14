@@ -173,6 +173,19 @@ Plugin {
     aux {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
         InsertCol {
+            comment {
+                type [type=int, require=true] = type
+
+                oid [type=int, require=true] = oid
+                pid [type=int] = pid
+
+                ip [maxlen=64] = ip
+                addr [maxlen=256] = addr
+
+                author [maxlen=64] = author
+                contact [maxlen=256] = contact
+                content [require=true] = content
+            }
             email {
                 go [type=int] = gotime
                 opt [maxlen=512, require=true] = opts
