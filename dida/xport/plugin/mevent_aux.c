@@ -351,6 +351,10 @@ static EventEntry* aux_init_driver(void)
     err = mdb_exec(e->db, NULL, "SELECT id from memory ORDER BY id DESC LIMIT 1", NULL);
     JUMP_NOK(err, error);
     err = mdb_get(e->db, "i", &m_memory_maxid);
+    if (nerr_handle(&err, NERR_NOT_FOUND)) {
+        mtc_err("table memory empty");
+        wlog("table memory empty");
+    }
     JUMP_NOK(err, error);
     
     return (EventEntry*)e;
