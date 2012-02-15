@@ -12,7 +12,7 @@ bmoon.bore = {
                         '来自 ', cmt.addr, ' 的 ',
                     '</span> ',
                     '<span class="author">', cmt.author, '</span> ',
-                    '<span class="date">', cmt.intime, '</span> 说 ',
+                    '<span class="date">', cmt.intime, '</span> ',
                 '</div>',
                 '<div class="content">',
                     '<p class="pre">', bmoon.utl.stripHTML(cmt.content), '</p>',

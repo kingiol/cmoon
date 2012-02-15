@@ -4,6 +4,9 @@
 #define PLUGIN_NAME    "aux"
 #define CONFIG_PATH    PRE_PLUGIN"."PLUGIN_NAME
 
+static unsigned int m_memory_maxid = 0;
+static unsigned int m_memory_curid = 1;
+
 struct aux_stats {
     unsigned long msg_total;
     unsigned long msg_unrec;
@@ -130,7 +133,7 @@ static NEOERR* aux_cmd_cmtadd(struct aux_entry *e, QueueEntry *q)
     return STATUS_OK;
 }
 
-static NEOERR* aux_cmd_cmtdel (struct aux_entry *e, QueueEntry *q)
+static NEOERR* aux_cmd_cmtdel(struct aux_entry *e, QueueEntry *q)
 {
     int id;
     NEOERR *err;
@@ -145,7 +148,81 @@ static NEOERR* aux_cmd_cmtdel (struct aux_entry *e, QueueEntry *q)
     return STATUS_OK;
 }
 
-static NEOERR* aux_cmd_mail_add(struct aux_entry *e, QueueEntry *q)
+static NEOERR* aux_cmd_memoryget(struct aux_entry *e, QueueEntry *q)
+{
+	unsigned char *val = NULL; size_t vsize = 0;
+	NEOERR *err;
+    int id = 0;
+
+    mdb_conn *db = e->db;
+    struct cache *cd = e->cd;
+
+    REQ_FETCH_PARAM_INT(q->hdfrcv, "id", id);
+
+    if (m_memory_maxid < 1) return nerr_raise(NERR_ASSERT, "empty memory");
+
+    if (id == 0) id = m_memory_curid++;
+
+    if (m_memory_curid > m_memory_maxid) m_memory_curid = 1;
+
+    if (cache_getf(cd, &val, &vsize, PREFIX_MEMORY"%d", id)) {
+        unpack_hdf(val, vsize, &q->hdfsnd);
+    } else {
+        MDB_QUERY_RAW(db, "memory", _COL_MEMORY,
+                      "id<=%d AND statu=%d ORDER BY id DESC LIMIT 1",
+                      NULL, id, MEMORY_ST_OK);
+        err = mdb_set_row(q->hdfsnd, db, _COL_MEMORY, NULL);
+        if (err != STATUS_OK) return nerr_pass(err);
+
+        CACHE_HDF(q->hdfsnd, MEMORY_CC_SEC, PREFIX_MEMORY"%d", id);
+    }
+    
+    return STATUS_OK;
+}
+
+static NEOERR* aux_cmd_memoryadd(struct aux_entry *e, QueueEntry *q)
+{
+	STRING str; string_init(&str);
+	NEOERR *err;
+    
+    mdb_conn *db = e->db;
+
+    err = mdb_build_incol(q->hdfrcv,
+                          hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.memory"), &str);
+	if (err != STATUS_OK) return nerr_pass(err);
+    
+    MDB_EXEC(db, NULL, "INSERT into memory %s", NULL, str.buf);
+
+    string_clear(&str);
+
+    return STATUS_OK;
+}
+
+static NEOERR* aux_cmd_memorymod(struct aux_entry *e, QueueEntry *q)
+{
+	STRING str; string_init(&str);
+    int id;
+	NEOERR *err;
+
+    mdb_conn *db = e->db;
+    struct cache *cd = e->cd;
+
+    REQ_GET_PARAM_INT(q->hdfrcv, "id", id);
+    
+    err = mdb_build_upcol(q->hdfrcv,
+                          hdf_get_obj(g_cfg, CONFIG_PATH".UpdateCol.memory"), &str);
+	if (err != STATUS_OK) return nerr_pass(err);
+
+    MDB_EXEC(db, NULL, "UPDATE memory SET %s WHERE id=%d;", NULL, str.buf, id);
+
+    string_clear(&str);
+
+    cache_delf(cd, PREFIX_MEMORY"%d", id);
+
+    return STATUS_OK;
+}
+
+static NEOERR* aux_cmd_mailadd(struct aux_entry *e, QueueEntry *q)
 {
     STRING str; string_init(&str);
     char sum[LEN_MD5], *content;
@@ -190,8 +267,17 @@ static void aux_process_driver(EventEntry *entry, QueueEntry *q)
     case REQ_CMD_CMT_DEL:
         err = aux_cmd_cmtdel(e, q);
         break;
+    case REQ_CMD_MEMORY_GET:
+        err = aux_cmd_memoryget(e, q);
+        break;
+    case REQ_CMD_MEMORY_ADD:
+        err = aux_cmd_memoryadd(e, q);
+        break;
+    case REQ_CMD_MEMORY_MOD:
+        err = aux_cmd_memorymod(e, q);
+        break;
     case REQ_CMD_MAIL_ADD:
-        err = aux_cmd_mail_add(e, q);
+        err = aux_cmd_mailadd(e, q);
         break;
     case REQ_CMD_STATS:
         st->msg_stats++;
@@ -259,6 +345,11 @@ static EventEntry* aux_init_driver(void)
         wlog("init cache failure");
         goto error;
     }
+
+    err = mdb_exec(e->db, NULL, "SELECT id from memory ORDER BY id DESC LIMIT 1", NULL);
+    JUMP_NOK(err, error);
+    err = mdb_get(e->db, "i", &m_memory_maxid);
+    JUMP_NOK(err, error);
     
     return (EventEntry*)e;
     

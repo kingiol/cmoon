@@ -2,7 +2,9 @@
 #define __MEVENT_AUX_H__
 
 #define PREFIX_COMMENT     "Comment"
+#define PREFIX_MEMORY      "Memory"
 #define CMT_CC_SEC      60
+#define MEMORY_CC_SEC   0
 
 #define _COL_MEMORY "id, statu, title, hint, content, previd, nextid, " \
     " to_char(intime, 'YYYY-MM-DD') as intime, "                        \
@@ -30,6 +32,9 @@ enum {
     REQ_CMD_CMT_GET = 1001,
     REQ_CMD_CMT_ADD,
     REQ_CMD_CMT_DEL,
+    REQ_CMD_MEMORY_GET,
+    REQ_CMD_MEMORY_ADD,
+    REQ_CMD_MEMORY_MOD,
     REQ_CMD_MAIL_ADD = 2001
 };
 

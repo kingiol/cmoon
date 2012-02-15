@@ -194,6 +194,19 @@ Plugin {
                 content [require=true] = content
                 checksum [require=true, maxlen=64] = checksum
             }
+            memory {
+                title [maxlen=256, require=true] = title
+                hint [maxlen=256] = hint
+                content [require=true] = content
+            }
+        }
+        UpdateCol {
+            memory {
+                title [maxlen=256] = title
+                hint [maxlen=256] = hint
+                content = content
+                statu [type=int] = statu
+            }
         }
     }
 }
