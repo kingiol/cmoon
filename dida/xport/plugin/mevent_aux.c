@@ -195,6 +195,8 @@ static NEOERR* aux_cmd_memoryadd(struct aux_entry *e, QueueEntry *q)
 
     string_clear(&str);
 
+    m_memory_maxid++;
+
     return STATUS_OK;
 }
 

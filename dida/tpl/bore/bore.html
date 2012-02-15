@@ -8,6 +8,12 @@
 
 <?cs /escape ?>
 
+<div>
+  <a href="/bore?id=<?cs var:Output.memory.id ?>">本文固定连接</a>
+  <?cs if:?SpecialAction.0 ?>
+  <br /> <a href="/bore/op?id=<?cs var:Output.memory.id ?>">修改本文</a>
+  <?cs /if ?>
+</div>
 
 <!-- 评论显示 -->
 <h3>

@@ -41,6 +41,15 @@
     <div id="bd-mid">
       <div id="bd-content">
 
+        <?cs if: ?Layout.actions.0.name ?>
+        <ul id="bd-action">
+            <?cs each:action = Layout.actions ?>
+            <li><a href="<?cs var:action.href ?>" class="<?cs var:action.class ?>"><?cs var:action.name ?></a></li>
+            <?cs /each ?>
+        </ul>
+        <div class="clearer"></div>
+        <?cs /if ?>
+
         <?cs if: ?Output.errmsg && Output.errcode == 25 ?>
           <script>
             $(document).ready(function() {
