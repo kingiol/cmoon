@@ -31,6 +31,40 @@ void* lutil_get_data_handler(void *lib, CGI *cgi, session_t *ses)
     return res;
 }
 
+/* make sure result has enough capacity */
+NEOERR* lutil_image_accept(FILE *fp, char *result)
+{
+	NEOERR *err;
+    MCS_NOT_NULLB(fp, result);
+
+    unsigned char data[IMAGE_MAX_SIZE];
+    unsigned int bytes;
+
+    memset(data, 0x0, sizeof(data));
+
+    fseek(fp, 0, SEEK_SET);
+    bytes = fread(data, 1, IMAGE_MAX_SIZE, fp);
+
+    if (bytes <= 0) return nerr_raise(NERR_IO, "read image file error %d ", bytes);
+    mstr_md5_buf(data, bytes, result);
+
+    char fname[LEN_FN];
+    char tok[3];
+    strncpy(tok, result, 2);
+    tok[2] = '\0';
+    snprintf(fname, sizeof(fname), IMG_ROOT"%s/%s.jpg", tok, result);
+
+    err = mutil_makesure_dir(fname);
+	if (err != STATUS_OK) return nerr_pass(err);
+
+    FILE *fpout = fopen(fname, "w+");
+    if (!fpout) return nerr_raise(NERR_SYSTEM, "create %s failre", fname);
+    fwrite(data, 1, bytes, fpout);
+    fclose(fpout);
+
+    return STATUS_OK;
+}
+
 NEOERR* lutil_fetch_count(HDF *hdf, mdb_conn *conn, char *table, char *cond)
 {
     if (!table || !cond) return nerr_raise(NERR_ASSERT, "paramter null");

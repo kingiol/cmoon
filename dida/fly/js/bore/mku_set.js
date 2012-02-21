@@ -25,7 +25,8 @@ myMarkdownSettings = {
             return markItUp.line+'. ';
         }},
         {separator:'---------------' },
-        {name:'Picture', key:"P", replaceWith:'![[![图片描述]!]]([![图片连接:!:http://]!] "[![图片标题]!]")'},
+        //{name:'Picture', key:"P", replaceWith:'![[![图片描述]!]]([![图片连接:!:http://]!] "[![图片标题]!]")'},
+        {name:'Picture', key:"p", replaceWith:'![aaa](bbb "ccc")'},
         {name:'Link', key:"L", openWith:'[', closeWith:']([![连接地址:!:http://]!] "[![连接标题]!]")', placeHolder:'这里写连接的说明文字...' },
         {separator:'---------------'},    
         {name:'Quotes', openWith:'> '},

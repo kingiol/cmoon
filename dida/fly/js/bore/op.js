@@ -7,6 +7,8 @@ bmoon.boreop = {
         if (o.inited) return o;
         o.inited = true;
 
+        o.imagenum = 0;
+        
         o.e_title = $('#title');
         o.e_hint = $('#hint');
         o.e_content = $('#content');
@@ -21,6 +23,18 @@ bmoon.boreop = {
         var o = bmoon.boreop.init();
 
         o.e_content.markItUp(myMarkdownSettings);
+        o.e_content.uploader({
+            fileField: '#mkd-input-file',
+            url: '/image/zero/img',
+	        afterUpload: function (data) {
+                data = jQuery.parseJSON(data);
+                o.imagenum++;
+                $.markItUp({replaceWith: '\n![图片'+o.imagenum+']('+data.imageurl+' "'+data.imagename+'")\n'});
+	        },
+            onDragOver: function() {
+                // linux don't support drag
+            }
+        });
 
         o.bindClick();
     },

@@ -58,7 +58,8 @@ b/member/reset.js: member/reset.js
 b/member/pass.js: member/pass.js
 
 b/bore/bore.js: bore/bore.js
-b/bore/op.js: pub/markitup/markitup/jquery.markitup.js bore/mku_set.js bore/op.js
+b/bore/op.js: pub/markitup/markitup/jquery.markitup.js bore/mku_set.js \
+              pub/jqueryUploader/src/jquery.uploader.js bore/op.js
 
 %.js:
 	@echo -n > $@
