@@ -5,6 +5,8 @@
 
 __BEGIN_DECLS
 
+#define IMAGE_MAX_SIZE  (2*1024*1024)
+
 enum {
     CGI_REQ_HTML = 0,
     CGI_REQ_AJAX,

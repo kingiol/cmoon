@@ -6,6 +6,7 @@ __BEGIN_DECLS
 
 NEOERR* zero_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 NEOERR* zero_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+NEOERR* zero_img_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
 __END_DECLS
 #endif /* __OZERO_H__ */

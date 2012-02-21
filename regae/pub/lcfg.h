@@ -6,6 +6,8 @@
 __BEGIN_DECLS
 
 #define SITE_DOMAIN    "voov.com"
+#define IMG_URL         "http://www.voov.com/data/"
+#define IMG_ROOT        "/var/www/voov/fly/data/"
 #define TC_ROOT        "/var/log/moon/voov/"
 
 #define PATH_SITE   "/var/www/voov/"
