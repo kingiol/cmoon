@@ -163,7 +163,7 @@ static NEOERR* aux_cmd_memoryget(struct aux_entry *e, QueueEntry *q)
     /*
      * neo_rand() may get 0, so, +1
      */
-    id = neo_rand(m_memory_maxid-1) + 1;
+    id = neo_rand(m_memory_maxid) + 1;
 
     if (cache_getf(cd, &val, &vsize, PREFIX_MEMORY"%d", id)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
