@@ -6,7 +6,10 @@
 // ----------------------------------------------------------------------------
 myMarkdownSettings = {
     nameSpace:          'markdown', // Useful to prevent multi-instances CSS conflict
+    previewPosition: 'before',
+    //previewInWindow: 'width=800, height=600, resizable=yes, scrollbars=yes',
     previewParserPath:  '/bore/preview',
+    previewScroll: 'bottom',
     previewParserVar:   's',
     onShiftEnter:       {keepDefault:false, openWith:'\n\n'},
     markupSet: [

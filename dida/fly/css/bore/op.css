@@ -1,4 +1,4 @@
-dl.boreop dt {clear: left; float:left; width: 180px; margin: 5px 13px 5px 0; text-align: right;}
+dl.boreop dt {clear: left; float:left; width: 160px; margin: 5px 13px 5px 0; text-align: right;}
 dl.boreop dd {float:left; margin: 5px 0;}
 dl.boreop dd.loading .indicator {
     display:inline-block;margin-left:5px;width:16px;height:16px;background:url(/img/ajax/indicator.gif) 0 0 no-repeat;

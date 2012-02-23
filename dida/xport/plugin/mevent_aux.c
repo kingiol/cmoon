@@ -5,7 +5,6 @@
 #define CONFIG_PATH    PRE_PLUGIN"."PLUGIN_NAME
 
 static unsigned int m_memory_maxid = 0;
-static unsigned int m_memory_curid = 1;
 
 struct aux_stats {
     unsigned long msg_total;
@@ -161,9 +160,10 @@ static NEOERR* aux_cmd_memoryget(struct aux_entry *e, QueueEntry *q)
 
     if (m_memory_maxid < 1) return nerr_raise(NERR_ASSERT, "empty memory");
 
-    if (id == 0) id = m_memory_curid++;
-
-    if (m_memory_curid > m_memory_maxid) m_memory_curid = 1;
+    /*
+     * neo_rand() may get 0, so, +1
+     */
+    id = neo_rand(m_memory_maxid-1) + 1;
 
     if (cache_getf(cd, &val, &vsize, PREFIX_MEMORY"%d", id)) {
         unpack_hdf(val, vsize, &q->hdfsnd);

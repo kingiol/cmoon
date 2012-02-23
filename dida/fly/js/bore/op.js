@@ -29,7 +29,12 @@ bmoon.boreop = {
 	        afterUpload: function (data) {
                 data = jQuery.parseJSON(data);
                 o.imagenum++;
-                $.markItUp({replaceWith: '\n![图片'+o.imagenum+']('+data.imageurl+' "'+data.imagename+'")\n'});
+                var s = '\n' +
+                    '![图片' + o.imagenum+ '](' + data.imageurl_zoom + ' "' + data.imagename+ '")' +
+                    ' ' +
+                    '[原图](' + data.imageurl + ' "' + '点击查看原图")' +
+                    '\n';
+                $.markItUp({replaceWith: s});
 	        },
             onDragOver: function() {
                 // linux don't support drag
