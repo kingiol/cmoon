@@ -15,7 +15,6 @@ int main(int argc, char **argv, char **envp)
     HASH *dbh, *tplh, *evth;
     session_t *session = NULL;
     char *temps;
-    int tempi;
 
     NEOERR* (*data_handler)(CGI *cgi, HASH *dbh, HASH *evth, session_t *session);
     void *lib;
@@ -112,16 +111,7 @@ int main(int argc, char **argv, char **envp)
                 if (temps) {
                     cgi_redirect_uri(cgi, temps);
                 } else if (session->data) {
-                    err = cgiwrap_writef("Content-Type: image/jpeg\r\n\r\n");
-                    TRACE_NOK(err);
-                    /*
-                     * gdImageJpegCtx(data, gdoutctx, -1) core dump on fastcgi mode
-                     */
-                    temps = (char*) gdImageJpegPtr((gdImagePtr) session->data,
-                                                   &tempi, -1);
-                    cgiwrap_write(temps, tempi);
-                    gdImageDestroy((gdImagePtr) session->data);
-                    gdFree(temps);
+                    mimg_output(session->data);
                     session->data = NULL;
                 } else goto resp_ajax;
                 break;
