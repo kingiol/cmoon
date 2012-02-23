@@ -52,6 +52,7 @@ NEOERR* member_pic_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     mevent_t *evt = hash_lookup(evth, "member");
     HDF *node;
     char *s = NULL, *defs = NULL;
+    NEOERR *err;
     
     MCS_NOT_NULLB(cgi->hdf, evt);
 
@@ -89,37 +90,16 @@ NEOERR* member_pic_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
         else if (!strcmp(defs, "segv")) return STATUS_OK;
         else s = defs;
     }
-
-    /*
-     * drawing the string
-     */
-    gdImagePtr im;
-    int draw, back, brect[8], x, y;
-    char *f, *gderr;
-    double sz;
-
-    f = hdf_get_value(g_cfg, "Config.font.member.path", "/usr/share/ttf/Times.ttf");
-    sz = atof(hdf_get_value(g_cfg, "Config.font.member.size", "14."));
-
-    gderr = gdImageStringFT(NULL, &brect[0], 0, f, sz, 0., 0, 0, s);
-    if (gderr) return nerr_raise(NERR_ASSERT, "create image failure %s", gderr);
     
-    x = brect[2]-brect[6] + 6;
-    y = brect[3]-brect[7] + 6;
-    im = gdImageCreate(x, y);
-
-    /* background color */
-    back = gdImageColorResolve(im, 252, 252, 252);
-    /* foreground color */
-    draw = gdImageColorResolve(im, 150, 40, 40);
-    
-    x = 3 - brect[6];
-    y = 3 - brect[7];
-
-    gderr = gdImageStringFT(im, &brect[0], draw, f, sz, 0.0, x, y, s);
-    if (gderr) return nerr_raise(NERR_ASSERT, "rend image failure %s", gderr);
-
-    ses->data = (void*) im;
+    err = mimg_create_from_string(s,
+                                  hdf_get_value(g_cfg,
+                                                "Config.font.member.path",
+                                                "/usr/share/ttf/Times.ttf"),
+                                  atof(hdf_get_value(g_cfg,
+                                                     "Config.font.member.size",
+                                                     "14.")),
+                                  &ses->data);
+    if (err != STATUS_OK) return nerr_pass(err);
     
     return STATUS_OK;
 }
@@ -226,7 +206,7 @@ NEOERR* member_logout_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
     mevent_t *evt = hash_lookup(evth, "member");
     char *mname;
-	NEOERR *err;
+    NEOERR *err;
     
     MCS_NOT_NULLB(cgi->hdf, evt);
 
