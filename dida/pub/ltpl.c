@@ -135,7 +135,7 @@ NEOERR* ltpl_parse_file(HASH *dbh, void *lib, char *dir, char *name, HASH *outha
                 
             snprintf(fname, sizeof(fname), PATH_DOC"%s",
                      hdf_get_value(child, PRE_CFG_OUTPUT, "null.html"));
-            err = mutil_makesure_dir(fname);
+            err = mfile_makesure_dir(fname);
             JUMP_NOK(err, wnext);
 
             err = mcs_str2file(str, fname);

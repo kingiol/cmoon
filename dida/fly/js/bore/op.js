@@ -28,12 +28,13 @@ bmoon.boreop = {
             url: '/image/zero/img',
 	        afterUpload: function (data) {
                 data = jQuery.parseJSON(data);
-                o.imagenum++;
-                var s = '\n' +
-                    '![图片' + o.imagenum+ '](' + data.imageurl_zoom + ' "' + data.imagename+ '")' +
-                    ' ' +
-                    '[原图](' + data.imageurl + ' "' + '点击查看原图")' +
-                    '\n';
+                if (data.success == 1) {
+                    o.imagenum++;
+                    var s = '\n' +
+                        '[![图片' + o.imagenum+ '](' + data.imageurl_zoom + ' "' + data.imagename+ '")]'+
+                        '(' + data.imageurl + ' "' + '点击查看原图")' +
+                        '\n';
+                } else var s = data.errmsg || '上传图片失败';
                 $.markItUp({replaceWith: s});
 	        },
             onDragOver: function() {
