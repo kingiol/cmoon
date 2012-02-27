@@ -37,7 +37,7 @@ bmoon.dida = {
 
         // bmoon.dida.js will used on other site
         // so, we return on other site to avoid js error
-        if (!$('a[rel="#bd-login"]').length) return;
+        if (!jQuery('a[rel="#bd-login"]').length) return;
         
         o.e_content = $('#bd-content');
 
@@ -62,8 +62,6 @@ bmoon.dida = {
     onready: function() {
         var o = bmoon.dida.init();
 
-        if (!$.overlay) return;
-        
         o.mnick && o.bindClick();
         o.mnick && o.loginCheck();
 
