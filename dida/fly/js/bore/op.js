@@ -26,6 +26,9 @@ bmoon.boreop = {
         o.e_content.uploader({
             fileField: '#mkd-input-file',
             url: '/image/zero/img',
+            dataName: 'upfile',
+            extraData: {_op: 'add'},
+            allowedExtension: 'jpeg, bmp, png, gif',
 	        afterUpload: function (data) {
                 data = jQuery.parseJSON(data);
                 if (data.success == 1) {
@@ -34,11 +37,11 @@ bmoon.boreop = {
                         '[![图片' + o.imagenum+ '](' + data.imageurl_zoom + ' "' + data.imagename+ '")]'+
                         '(' + data.imageurl + ' "' + '点击查看原图")' +
                         '\n';
-                } else var s = data.errmsg || '上传图片失败';
-                $.markItUp({replaceWith: s});
+                    $.markItUp({replaceWith: s});
+                } else alert(data.errmsg || '上传图片失败');
 	        },
-            onDragOver: function() {
-                // linux don't support drag
+            error: function(msg) {
+                alert(msg);
             }
         });
 

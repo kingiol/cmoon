@@ -16,13 +16,13 @@ NEOERR* zero_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     return STATUS_OK;
 }
 
-NEOERR* zero_img_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* zero_img_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
     char fname[LEN_MD5];
     int ftype;
 	NEOERR *err;
     
-    err = mimg_accept_and_zoomout(cgi, IMG_ROOT, fname, &ftype, 900, 0);
+    err = mimg_accept_and_zoomout(cgi, "upfile", IMG_ROOT, fname, &ftype, 900, 0);
 	if (err != STATUS_OK) return nerr_pass(err);
     
     char tok[3] = {0}; strncpy(tok, fname, 2);
