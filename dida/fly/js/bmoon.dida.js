@@ -35,6 +35,10 @@ bmoon.dida = {
         if (o.inited) return o;
         o.inited = true;
 
+        // bmoon.dida.js will used on other site without overlay,
+        // so, we return on other site to avoid js error
+        if (!$.overlay || !$('a[rel="#bd-login"]').length) return;
+        
         o.e_content = $('#bd-content');
 
         o.mnick = $('#bd-mnick');
@@ -58,16 +62,18 @@ bmoon.dida = {
     onready: function() {
         var o = bmoon.dida.init();
 
-        o.bindClick();
-        o.loginCheck();
+        if (!$.overlay) return;
+        
+        o.mnick && o.bindClick();
+        o.mnick && o.loginCheck();
 
         o.loginref = bmoon.utl.getQueryString("loginref");
         if (o.loginref) {
-            o.loginoverlay.load();
+            o.mnick && o.loginoverlay.load();
         }
         o.vikierr = bmoon.utl.getQueryString("vikierr");
         if (o.vikierr) {
-            $('#content').empty().append('<div class="text-error">'+o.vikierr+'</div>')
+            o.mnick && $('#content').empty().append('<div class="text-error">'+o.vikierr+'</div>')
         }
     },
     
