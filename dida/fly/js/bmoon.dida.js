@@ -35,9 +35,9 @@ bmoon.dida = {
         if (o.inited) return o;
         o.inited = true;
 
-        // bmoon.dida.js will used on other site without overlay,
+        // bmoon.dida.js will used on other site
         // so, we return on other site to avoid js error
-        if (!$.overlay || !$('a[rel="#bd-login"]').length) return;
+        if (!$('a[rel="#bd-login"]').length) return;
         
         o.e_content = $('#bd-content');
 
