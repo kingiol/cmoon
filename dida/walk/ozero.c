@@ -16,7 +16,7 @@ NEOERR* zero_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     return STATUS_OK;
 }
 
-NEOERR* zero_img_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+NEOERR* zero_image_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
     char fname[LEN_MD5];
     int ftype;

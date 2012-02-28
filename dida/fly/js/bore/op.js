@@ -25,7 +25,7 @@ bmoon.boreop = {
         o.e_content.markItUp(myMarkdownSettings);
         o.e_content.uploader({
             fileField: '#mkd-input-file',
-            url: '/image/zero/img',
+            url: '/json/zero/image',
             dataName: 'upfile',
             extraData: {_op: 'add'},
             allowedExtension: 'jpeg, bmp, png, gif',
