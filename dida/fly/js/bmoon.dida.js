@@ -44,6 +44,7 @@ bmoon.dida = {
         o.mnick = $('#bd-mnick');
         o.member = $('#bd-member');
         o.guest = $('#bd-guest');
+        o.loginhint = $('#login-hint');
         o.loginmname = $('#login-mname');
         o.loginmsn = $('#login-msn');
         o.loginoverlay = $('a[rel="#bd-login"]').overlay({
@@ -55,6 +56,7 @@ bmoon.dida = {
                     o.loginmsn.focus();
             }
         });
+        o.reloadAfterLogin = true;
         
         return o;
     },
@@ -97,7 +99,8 @@ bmoon.dida = {
                 return;
             }
             o.loginoverlay.close();
-            setTimeout(function() {location.href = o.loginref || location.href;}, 1000);
+            o.loginCheck();
+            o.reloadAfterLogin && setTimeout(function() {location.href = o.loginref || location.href;}, 1000);
         });
     },
     
@@ -126,9 +129,11 @@ bmoon.dida = {
             o.guest.hide();
             o.member.show();
             o.loginmname.val(mname);
+            return true;
         } else {
             o.member.hide();
             o.guest.show();
+            return false;
         }
     },
 

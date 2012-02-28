@@ -37,6 +37,7 @@ bmoon.index = {
         o.e_mc_nav = $('#mc-nav');
         o.e_mc_prev = $('#mc-prev');
         o.e_mc_next = $('#mc-next');
+        o.e_mc_continue = $('#mc-continue');
         o.e_mc_nick = $('#mc-nick');
         o.e_mc_saddr = $('#mc-saddr');
         o.e_mc_eaddr = $('#mc-eaddr');
@@ -54,6 +55,8 @@ bmoon.index = {
         o.e_mc_no_contact = $('#mc-no-contact');
         o.e_mc_no_nick = $('#mc-no-nick');
         o.e_mc_no_attach = $('#mc-no-attach');
+        o.e_mc_no_subscribes = $('input[name=subscribe]');
+        o.e_mc_no_subscribed = $('input[name=subscribe]:checked');
         o.e_mc_no_submit = $('#mc-no-submit');
 
         o.plan = {};
@@ -140,6 +143,16 @@ bmoon.index = {
         o.e_mc_no_submit.click(o.leavePlan);
         o.e_mc_prev.click(function() {o.rendPlan(o._pcur-1);});
         o.e_mc_next.click(function() {o.rendPlan(o._pcur+1);});
+        o.e_mc_continue.click(function() {o.e_mc_noresult.toggle();});
+        o.e_mc_no_subscribes.click(function() {
+            if ($(this).attr('checked') == 'checked') {
+                if (!bmoon.dida.loginCheck()) {
+                    bmoon.dida.loginhint.html('订阅线路需要登录');
+                    bmoon.dida.reloadAfterLogin = false;
+                    bmoon.dida.loginoverlay.load();
+                }
+            }
+        });
     },
 
     wdayChanged: function() {
@@ -232,6 +245,10 @@ bmoon.index = {
         plan.contact = o.e_mc_no_contact.val();
         plan.nick = o.e_mc_no_nick.val().length ? o.e_mc_no_nick.val(): '嘀嗒网友';
         plan.attach = o.e_mc_no_attach.val();
+        plan.subscribe = 0;
+        $.each(o.e_mc_no_subscribed, function(i, o) {
+            plan.subscribe += parseInt($(this).val());
+        });
 
         var pdata = {
             _op: 'add',

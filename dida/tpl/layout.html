@@ -54,7 +54,7 @@
           <script>
             $(document).ready(function() {
               $('#login-hint').html('<?cs var: Output.errmsg ?>')
-              bmoon.dida.init().loginoverlay.load();
+              bmoon.dida.loginoverlay.load();
             });
           </script>
         <?cs elif: ?Output.errmsg && ?Output.errcode?>

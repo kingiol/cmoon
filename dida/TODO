@@ -2,7 +2,6 @@
 “我愿意再等等”
 “邮件订阅该线路”
 统计
-cgi_register_parse_cb 限制上传大小
 mfile_get_type 正确获取文件类型
 
 DONE /spd/post/robot 能获取到坐标的，自动执行...
@@ -12,3 +11,4 @@ DONE mjson.c :145 city:null will core dump
 DONE 随便看看
 DONE mimg_accept 支持 post 方式
 DONE /bore/op js 限制图片文件类型
+DONE cgi_register_parse_cb 限制上传大小
