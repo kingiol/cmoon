@@ -89,9 +89,9 @@ void lerr_opfinish_json(NEOERR *err, HDF *hdf)
     char buf[1024], errname[128];
     NEOERR *neede = mcs_err_valid(err);
     if (!neede) neede = err;
-    snprintf(buf, sizeof(buf), "%s:%d %s() %s:%s",
-             neede->file, neede->lineno, neede->func,
-             _lookup_errname(neede, errname, sizeof(errname)), neede->desc);
+    snprintf(buf, sizeof(buf), "%s:%d %s",
+             neede->file, neede->lineno,
+             _lookup_errname(neede, errname, sizeof(errname)));
     /* set PRE_ERRXXX with the most recently err */
     if (!hdf_get_obj(hdf, PRE_ERRMSG)) {
         hdf_set_value(hdf, PRE_ERRMSG, buf);
