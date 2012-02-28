@@ -2,6 +2,7 @@ dida = 维持健康、绿色、自由的生活。 不接受捐款、不组织义
 
 Config {
     trace_level = 7
+    http_max_upload = 2097152
     font {
         member {
             path = /var/www/dida/tpl/FreeMonoBold.ttf

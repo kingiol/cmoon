@@ -15,6 +15,7 @@ int main(int argc, char **argv, char **envp)
     HASH *dbh, *tplh, *evth;
     session_t *session = NULL;
     char *temps;
+    int http_max_upload;
 
     NEOERR* (*data_handler)(CGI *cgi, HASH *dbh, HASH *evth, session_t *session);
     void *lib;
@@ -51,6 +52,13 @@ int main(int argc, char **argv, char **envp)
         cgiwrap_init_std(argc, argv, environ);
         err = cgi_init(&cgi, NULL);
         if (err != STATUS_OK) goto response;
+        
+        http_max_upload = hdf_get_int_value(g_cfg, PRE_CONFIG".http_max_upload", 0);
+        if (http_max_upload > 0) {
+            err = mcs_register_upload_parse_cb(cgi, &http_max_upload);
+            if (err != STATUS_OK) goto response;
+        }
+        
         err = cgi_parse(cgi);
         if (err != STATUS_OK) goto response;
 
@@ -85,7 +93,8 @@ int main(int argc, char **argv, char **envp)
     response:
         if (cgi != NULL && cgi->hdf != NULL) {
             lerr_opfinish_json(err, cgi->hdf);
-            
+
+            if (!session) session = session_default();
             switch (session->reqtype) {
             case CGI_REQ_HTML:
                 err = ltpl_render(cgi, tplh, session);

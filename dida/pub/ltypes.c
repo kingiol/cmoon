@@ -1,6 +1,15 @@
 #include "mheads.h"
 #include "lheads.h"
 
+session_t* session_default()
+{
+    session_t *ses = calloc(1, sizeof(session_t));
+
+    ses->reqtype = CGI_REQ_AJAX;
+    
+    return ses;
+}
+
 NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses)
 {
     session_t *lses;

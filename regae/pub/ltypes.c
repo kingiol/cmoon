@@ -1,10 +1,30 @@
 #include "mheads.h"
 #include "lheads.h"
 
+session_t* session_default()
+{
+    session_t *ses = calloc(1, sizeof(session_t));
+
+    ses->reqtype = CGI_REQ_AJAX;
+    
+    return ses;
+}
+
 NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses)
 {
     session_t *lses;
     char tok[_POSIX_PATH_MAX];
+
+    HDF *node = hdf_get_child(cgi->hdf, PRE_QUERY);
+    while (node) {
+        snprintf(tok, sizeof(tok), "%s._type_%s", PRE_QUERY, hdf_obj_name(node));
+        char *type = hdf_get_value(cgi->hdf, tok, NULL);
+        if (type && !strcmp(type, "object")) {
+            mjson_str2hdf(node, NULL);
+        }
+
+        node = hdf_obj_next(node);
+    }
     
     *ses = NULL;
 
@@ -12,7 +32,7 @@ NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses)
     if (!lses) return nerr_raise(NERR_NOMEM, "calloc memory for session_t failure");
     
     lses->reqtype = CGI_REQ_HTML;
-    hdf_get_copy(cgi->hdf, PRE_COOKIE".uname", &lses->uname, NULL);
+    hdf_get_copy(cgi->hdf, PRE_COOKIE".mname", &lses->mname, NULL);
 
     char *uri = hdf_get_value(cgi->hdf, PRE_REQ_URI_RW, NULL);
     if (!uri) {
@@ -49,7 +69,7 @@ NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses)
     lses->render = strdup(uri);
     
     /* process cache */
-    HDF *node = hdf_get_obj(g_cfg, PRE_CFG_FILECACHE".0");
+    node = hdf_get_obj(g_cfg, PRE_CFG_FILECACHE".0");
     while (node != NULL) {
         if (reg_search(hdf_get_value(node, "uri", "NULL"), uri)) {
             lses->tm_cache_browser = hdf_get_int_value(node, "tm_cache", 0);
@@ -71,7 +91,7 @@ void session_destroy(session_t **ses)
 
     if (lses == NULL) return;
 
-    SAFE_FREE(lses->uname);
+    SAFE_FREE(lses->mname);
     SAFE_FREE(lses->dataer);
     SAFE_FREE(lses->render);
 

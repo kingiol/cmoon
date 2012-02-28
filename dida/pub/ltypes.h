@@ -14,6 +14,7 @@ typedef struct _session {
     void *data;
 } session_t;
 
+session_t* session_default();
 NEOERR* session_init(CGI *cgi, HASH *dbh, session_t **ses);
 void session_destroy(session_t **ses);
 
