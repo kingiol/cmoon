@@ -135,6 +135,8 @@ int main(int argc, char **argv, char **envp)
             
             cgi_destroy(&cgi);
             session_destroy(&session);
+            cgi = NULL;
+            session = NULL;
         }
 #ifdef USE_FASTCGI
     }
