@@ -26,7 +26,7 @@ b/base.js: pub/jquery-1.7.1.js pub/jquery.cookie.js pub/jquery.md5.js \
            pub/jquery.hotkeys.js pub/jquery.mninpval.js \
            pub/jquerytools/src/toolbox/toolbox.expose.js \
            pub/jquerytools/src/overlay/overlay.js \
-           pub/bmoon.js \
+           pub/jquery.bmoon.js pub/bmoon.js \
            bmoon.dida.js
 
 b/loadgmap.js: loadgmap.js
