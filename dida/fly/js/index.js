@@ -56,7 +56,6 @@ bmoon.index = {
         o.e_mc_no_nick = $('#mc-no-nick');
         o.e_mc_no_attach = $('#mc-no-attach');
         o.e_mc_no_subscribes = $('input[name=subscribe]');
-        o.e_mc_no_subscribed = $('input[name=subscribe]:checked');
         o.e_mc_no_submit = $('#mc-no-submit');
 
         o.plan = {};
@@ -129,6 +128,7 @@ bmoon.index = {
         });
 
         o.bindClick();
+        o.setDefault();
     },
 
     bindClick: function() {
@@ -146,6 +146,18 @@ bmoon.index = {
         o.e_mc_continue.click(function() {o.e_mc_noresult.toggle();});
         o.e_mc_no_subscribes.click(function() {
             if ($(this).attr('checked') == 'checked') {
+                if ($(this).val() == 1) {
+                    if (!o.e_mc_no_phone.val().length) {
+                        $.getJSON('/json/member/info', null, function(data) {
+                            if (data.success == 1)
+                                o.e_mc_no_phone.val(data.member.phone);
+                        });
+                    }
+                }
+                if (!$('.' + $(this).attr('inpcheck')).inputval()) {
+                    $(this).removeAttr('checked');
+                    return;
+                }
                 if (!bmoon.dida.loginCheck()) {
                     bmoon.dida.loginhint.html('订阅线路需要登录');
                     bmoon.dida.reloadAfterLogin = false;
@@ -153,6 +165,13 @@ bmoon.index = {
                 }
             }
         });
+    },
+
+    setDefault: function() {
+        var o = bmoon.index.init();
+
+        o.e_mc_no_contact.val(bmoon.dida.loginmname.val());
+        o.e_mc_no_nick.val(bmoon.dida.mnick.text());
     },
 
     wdayChanged: function() {
@@ -246,7 +265,7 @@ bmoon.index = {
         plan.nick = o.e_mc_no_nick.val().length ? o.e_mc_no_nick.val(): '嘀嗒网友';
         plan.attach = o.e_mc_no_attach.val();
         plan.subscribe = 0;
-        $.each(o.e_mc_no_subscribed, function(i, o) {
+        $.each($('input[name=subscribe]:checked'), function(i, o) {
             plan.subscribe += parseInt($(this).val());
         });
 
@@ -261,7 +280,7 @@ bmoon.index = {
         $.post('/json/plan/leave', pdata, function(data) {
             p.removeClass('loading');
             if (data.success == 1) {
-                o.e_mc_no_submit.attr('disabled', 'disabled');
+                //o.e_mc_no_submit.attr('disabled', 'disabled');
                 p.addClass('success');
                 $('<span class="vres">提交成功，期待有人联系你:D</span>').appendTo(p);
             } else {

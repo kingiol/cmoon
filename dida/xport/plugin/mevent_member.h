@@ -11,7 +11,6 @@
 #define _COL_MEMBER "mid, mname, mnick, msn, mmsn, "    \
     " ori, male, verify, credit, cityid, "              \
     " to_char(intime, 'YYYY-MM-DD') as intime"
-#define _COL_MEMBER_PRIV "mid, mname, mnick, msn, mmsn, phone, contact"
 #define _COL_MEMBER_ADMIN "mid, mname, mnick, msn, mmsn, male, phone, contact, " \
     " verify, credit, cityid, "                                         \
     " to_char(intime, 'YYYY-MM-DD') as intime"

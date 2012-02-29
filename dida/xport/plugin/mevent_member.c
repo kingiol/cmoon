@@ -106,8 +106,8 @@ static NEOERR* member_cmd_mem_priv_get(struct member_entry *e, QueueEntry *q)
     if (cache_getf(cd, &val, &vsize, PREFIX_MEMBER_PRIV"%d", mid)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
     } else {
-        MDB_QUERY_RAW(db, "member", _COL_MEMBER_PRIV, "mid=%d", NULL, mid);
-        err = mdb_set_row(q->hdfsnd, db, _COL_MEMBER_PRIV, NULL);
+        MDB_QUERY_RAW(db, "member", _COL_MEMBER_ADMIN, "mid=%d", NULL, mid);
+        err = mdb_set_row(q->hdfsnd, db, _COL_MEMBER_ADMIN, NULL);
         if (err != STATUS_OK) return nerr_pass(err);
 
         CACHE_HDF(q->hdfsnd, MEMBER_CC_SEC, PREFIX_MEMBER_PRIV"%d", mid);

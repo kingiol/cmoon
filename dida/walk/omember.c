@@ -35,14 +35,23 @@ static void member_after_login(CGI *cgi, HASH *evth, char *mname, char *mnick)
 NEOERR* member_info_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
     mevent_t *evt = hash_lookup(evth, "member");
+    char *mname;
+    NEOERR *err;
     
     MCS_NOT_NULLB(cgi->hdf, evt);
 
-    hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
+    mname = hdf_get_value(cgi->hdf, PRE_QUERY".mname", NULL);
+    if (!mname) {
+        MEMBER_CHECK_LOGIN();
+        hdf_set_value(evt->hdfsnd, "mname", mname);
+        /* TODO msn outputed, safe? */
+        MEVENT_TRIGGER(evt, NULL, REQ_CMD_MEMBER_PRIV_GET, FLAGS_SYNC);
+    } else {
+        hdf_set_value(evt->hdfsnd, "mname", mname);
+        MEVENT_TRIGGER(evt, NULL, REQ_CMD_MEMBER_GET, FLAGS_SYNC);
+    }
 
-    MEVENT_TRIGGER(evt, NULL, REQ_CMD_MEMBER_GET, FLAGS_SYNC);
-
-    hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
+    hdf_copy(cgi->hdf, PRE_OUTPUT".member", evt->hdfrcv);
 
     return STATUS_OK;
 }
