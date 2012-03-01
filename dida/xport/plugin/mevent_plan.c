@@ -1,4 +1,6 @@
 #include "mevent_plugin.h"
+#include "mevent_member.h"
+#include "mevent_public.h"
 #include "mevent_plan.h"
 
 #define PLUGIN_NAME    "plan"
@@ -20,84 +22,6 @@ struct plan_entry {
     Cache *cd;
     struct plan_stats st;
 };
-
-static time_t m_thatsec = 0;
-
-static int plan_compare(const void *a, const void *b)
-{
-    HDF *ha = *(HDF**)a, *hb = *(HDF**)b;
-    unsigned int seca = mcs_get_uint_value(ha, "epochsec", 0);
-    unsigned int secb = mcs_get_uint_value(hb, "epochsec", 0);
-
-    return abs(seca - m_thatsec) - abs(secb - m_thatsec);
-}
-
-static void plan_prepare_time(HDF *node, char *date, struct tm *todaystm, float km)
-{
-    if (!node || !date || !todaystm) return;
-
-    char datetime[LEN_TM] = {0}, *stime, *sdate;
-    time_t tm;
-
-    /*
-     * epochsec seted, so, return
-     */
-    if (hdf_get_value(node, "epochsec", NULL)) return;
-    
-    stime = hdf_get_value(node, "stime", "08:00:00");
-    sdate = hdf_get_value(node, "sdate", "2011-11-11");
-    
-    int repeat = hdf_get_int_value(node, "repeat", PLAN_RPT_NONE);
-    if (repeat == PLAN_RPT_DAY) {
-        /*
-         * use date as datepart
-         */
-        snprintf(datetime, LEN_TM, "%s %s", date, stime);
-    } else if (repeat == PLAN_RPT_WEEK) {
-        /*
-         * use the nearest date as datepart
-         */
-        int minday = 7, thatday;
-        /* 1,2,3,4,5 */
-        if (sdate) {
-            int today = todaystm->tm_wday + 1;
-            ULIST *list;
-            
-            string_array_split(&list, sdate, ",", 100);
-            ITERATE_MLIST(list) {
-                thatday = atoi(list->items[t_rsv_i]);
-                if (abs(minday) > abs(thatday - today))
-                    minday = thatday - today;
-            }
-            uListDestroy(&list, ULIST_FREE);
-        }
-        tm = m_thatsec + (minday*60*60*24);
-        struct tm *stm = localtime(&tm);
-        char s[LEN_DT];
-        strftime(s, LEN_DT, "%Y-%m-%d", stm);
-        snprintf(datetime, LEN_TM, "%s %s", s, stime);
-    } else {
-        /*
-         * use sdate as datepart
-         */
-        snprintf(datetime, LEN_TM, "%s %s", sdate, stime);
-    }
-
-    struct tm thatdaystm;
-    strptime(datetime, "%Y-%m-%d %H:%M:%S", &thatdaystm);
-    tm = mktime(&thatdaystm);
-
-    if (km != 0.0) {
-        float mkm, delta;
-        mkm = mcs_get_float_value(node, "km", 0.0);
-        delta = abs(km - mkm);
-
-        tm = m_thatsec + (tm - m_thatsec) * ((delta / km) + 0.01);
-    }
-
-    hdf_set_value(node, "datetime", datetime);
-    mcs_set_uint_value(node, "epochsec", tm);
-}
 
 static bool plan_spd_exist(struct plan_entry *e, QueueEntry *q,
                            char *ori, char *id)
@@ -168,6 +92,7 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
     
     int dad, scityid = 0, ecityid = 0, ttnum, nmax = 0, maxday = 0;
     char *rect = NULL, *pdate, *ptime;
+    time_t thatsec;
     float km;
 
     REQ_GET_PARAM_INT(q->hdfrcv, "dad", dad);
@@ -241,46 +166,26 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
             if (err != STATUS_OK) return nerr_pass(err);
         }
 
+        if (!pdate) goto done;
+            
         /*
          * fuck the time
          * this could be done by robot side,
          * process here for more efficient transport, and more user likely
          */
-        char datetime[LEN_TM] = {0}, name[LEN_HDF_KEY];
-        struct tm thatdaystm, *todaystm;
-        time_t todaysec;
-            
-        if (!pdate) goto done;
-            
-        snprintf(datetime, LEN_TM, "%s %s", pdate, ptime);
-        strptime(datetime, "%Y-%m-%d %H:%M:%S", &thatdaystm);
-        m_thatsec = mktime(&thatdaystm);
-
-        todaysec = time(NULL);
-        todaystm = localtime(&todaysec);
-            
+        thatsec = pub_plan_get_abssec(pdate, ptime);
         HDF *node = hdf_get_child(q->hdfsnd, "plans");
-        while (node) {
-            plan_prepare_time(node, pdate, todaystm, km);
-
-            node = hdf_obj_next(node);
-        }
-
-        /*
-         * sort plan
-         */
-        node = hdf_get_obj(q->hdfsnd, "plans");
-        if (node) hdf_sort_obj(node, plan_compare);
+        err = pub_plan_sort_by_time(node, km, thatsec, pdate);
+        if (err != STATUS_OK) return nerr_pass(err);
         
+        char name[LEN_HDF_KEY];
         if (maxday > 0) {
             /*
              * remove plan according datetime
              */
             node = hdf_get_child(q->hdfsnd, "plans");
             while (node) {
-                todaysec = mcs_get_uint_value(node, "epochsec", 0);
-
-                if (abs(todaysec - m_thatsec) < (maxday * 24 * 60 * 60)) {
+                if (pub_plan_get_relsec(node, thatsec) < (maxday * 24 * 60 * 60)) {
                     node = hdf_obj_next(node);
                     continue;
                 }
@@ -326,7 +231,7 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
 static NEOERR* plan_cmd_plan_add(struct plan_entry *e, QueueEntry *q)
 {
 	STRING str; string_init(&str);
-    char *mname, *ori = NULL, *oid = NULL, *tmps;
+    char *ori = NULL, *oid = NULL, *tmps;
 	NEOERR *err;
 
     mdb_conn *db = e->db;
@@ -334,10 +239,7 @@ static NEOERR* plan_cmd_plan_add(struct plan_entry *e, QueueEntry *q)
     REQ_FETCH_PARAM_STR(q->hdfrcv, "ori", ori);
     REQ_FETCH_PARAM_STR(q->hdfrcv, "oid", oid);
     
-    if (!hdf_get_value(q->hdfrcv, "mid", NULL)) {
-        REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
-        hdf_set_int_value(q->hdfrcv, "mid", hash_string_rev(mname));
-    }
+    MEMBER_SET_PARAM_MID(q->hdfrcv);
     
     if (ori) {
         if (plan_spd_exist(e, q, ori, oid))
@@ -353,7 +255,10 @@ static NEOERR* plan_cmd_plan_add(struct plan_entry *e, QueueEntry *q)
                           &str);
 	if (err != STATUS_OK) return nerr_pass(err);
 
-    MDB_EXEC(db, NULL, "INSERT INTO plan %s", NULL, str.buf);
+    MDB_EXEC(db, NULL, "INSERT INTO plan %s RETURNING id", NULL, str.buf);
+
+    err = mdb_set_row(q->hdfsnd, db, "id", NULL);
+	if (err != STATUS_OK) return nerr_pass(err);
 
     string_clear(&str);
 

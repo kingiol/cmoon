@@ -23,18 +23,14 @@ struct member_entry {
 
 static NEOERR* member_cmd_car_get(struct member_entry *e, QueueEntry *q)
 {
-	unsigned char *val = NULL; size_t vsize = 0;
-    char *mname;
+    unsigned char *val = NULL; size_t vsize = 0;
     int mid;
-	NEOERR *err;
+    NEOERR *err;
 
     mdb_conn *db = e->db;
     struct cache *cd = e->cd;
 
-    if (!hdf_get_value(q->hdfrcv, "mid", NULL)) {
-        REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
-        mid = hash_string_rev(mname);
-    } else mid = hdf_get_int_value(q->hdfrcv, "mid", 0);
+    MEMBER_GET_PARAM_MID(q->hdfrcv, mid);
 
     if (cache_getf(cd, &val, &vsize, PREFIX_CAR"%d", mid)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
@@ -52,19 +48,13 @@ static NEOERR* member_cmd_car_get(struct member_entry *e, QueueEntry *q)
 static NEOERR* member_cmd_mem_get(struct member_entry *e, QueueEntry *q)
 {
 	unsigned char *val = NULL; size_t vsize = 0;
-    char *mname;
     int mid;
 	NEOERR *err;
 
     mdb_conn *db = e->db;
     struct cache *cd = e->cd;
 
-    if (hdf_get_value(q->hdfrcv, "mid", NULL)) {
-        mid = hdf_get_int_value(q->hdfrcv, "mid", 0);
-    } else {
-        REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
-        mid = hash_string_rev(mname);
-    }
+    MEMBER_GET_PARAM_MID(q->hdfrcv, mid);
     
     if (cache_getf(cd, &val, &vsize, PREFIX_MEMBER"%d", mid)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
@@ -89,19 +79,13 @@ static NEOERR* member_cmd_mem_get(struct member_entry *e, QueueEntry *q)
 static NEOERR* member_cmd_mem_priv_get(struct member_entry *e, QueueEntry *q)
 {
 	unsigned char *val = NULL; size_t vsize = 0;
-    char *mname;
     int mid;
 	NEOERR *err;
 
     mdb_conn *db = e->db;
     struct cache *cd = e->cd;
 
-    if (hdf_get_value(q->hdfrcv, "mid", NULL)) {
-        mid = hdf_get_int_value(q->hdfrcv, "mid", 0);
-    } else {
-        REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
-        mid = hash_string_rev(mname);
-    }
+    MEMBER_GET_PARAM_MID(q->hdfrcv, mid);
     
     if (cache_getf(cd, &val, &vsize, PREFIX_MEMBER_PRIV"%d", mid)) {
         unpack_hdf(val, vsize, &q->hdfsnd);
@@ -119,17 +103,12 @@ static NEOERR* member_cmd_mem_priv_get(struct member_entry *e, QueueEntry *q)
 static NEOERR* member_cmd_car_add(struct member_entry *e, QueueEntry *q)
 {
 	STRING str; string_init(&str);
-    char *mname;
     int mid;
 	NEOERR *err;
 
     mdb_conn *db = e->db;
 
-    if (!hdf_get_value(q->hdfrcv, "mid", NULL)) {
-        REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
-        hdf_set_int_value(q->hdfrcv, "mid", hash_string_rev(mname));
-    }
-    mid = hdf_get_int_value(q->hdfrcv, "mid", 0);
+    MEMBER_GET_PARAM_MID(q->hdfrcv, mid);
 
     err = member_cmd_car_get(e, q);
     nerr_handle(&err, NERR_NOT_FOUND);
@@ -192,18 +171,13 @@ static NEOERR* member_cmd_mem_add(struct member_entry *e, QueueEntry *q)
 static NEOERR* member_cmd_mem_up(struct member_entry *e, QueueEntry *q)
 {
 	STRING str; string_init(&str);
-    char *mname;
     int mid;
 	NEOERR *err;
 
     mdb_conn *db = e->db;
     struct cache *cd = e->cd;
 
-    if (!hdf_get_value(q->hdfrcv, "mid", NULL)) {
-        REQ_GET_PARAM_STR(q->hdfrcv, "mname", mname);
-        mid = hash_string_rev(mname);
-        hdf_set_int_value(q->hdfrcv, "mid", mid);
-    } else mid = hdf_get_int_value(q->hdfrcv, "mid", 0);
+    MEMBER_GET_PARAM_MID(q->hdfrcv, mid);
 
     err = member_cmd_mem_get(e, q);
 	if (err != STATUS_OK) return nerr_pass(err);

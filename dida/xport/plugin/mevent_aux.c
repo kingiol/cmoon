@@ -191,7 +191,7 @@ static NEOERR* aux_cmd_memoryadd(struct aux_entry *e, QueueEntry *q)
                           hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.memory"), &str);
 	if (err != STATUS_OK) return nerr_pass(err);
     
-    MDB_EXEC(db, NULL, "INSERT into memory %s", NULL, str.buf);
+    MDB_EXEC(db, NULL, "INSERT INTO memory %s", NULL, str.buf);
 
     string_clear(&str);
 
@@ -224,18 +224,22 @@ static NEOERR* aux_cmd_memorymod(struct aux_entry *e, QueueEntry *q)
     return STATUS_OK;
 }
 
-static NEOERR* aux_cmd_mailadd(struct aux_entry *e, QueueEntry *q)
+static NEOERR* aux_cmd_emailadd(struct aux_entry *e, QueueEntry *q)
 {
     STRING str; string_init(&str);
     char sum[LEN_MD5], *content;
     NEOERR *err;
+    mdb_conn *db = e->db;
 
     REQ_GET_PARAM_STR(q->hdfrcv, "content", content);
     mstr_md5_str(content, sum);
     hdf_set_value(q->hdfrcv, "checksum", sum);
-    
-    mdb_conn *db = e->db;
 
+    HDF *node = hdf_get_child(q->hdfrcv, "mto");
+
+insert:
+    if (node) hdf_set_value(q->hdfrcv, "to", hdf_obj_name(node));
+    
     err = mdb_build_incol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.email"),
                           &str);
@@ -243,6 +247,38 @@ static NEOERR* aux_cmd_mailadd(struct aux_entry *e, QueueEntry *q)
     
     MDB_EXEC(db, NULL, "INSERT INTO email %s", NULL, str.buf);
     string_clear(&str);
+
+    if (node) {
+        node = hdf_obj_next(node);
+        if (node) goto insert;
+    }
+
+    return STATUS_OK;
+}
+
+static NEOERR* aux_cmd_inboxadd(struct aux_entry *e, QueueEntry *q)
+{
+    STRING str; string_init(&str);
+    NEOERR *err;
+    mdb_conn *db = e->db;
+
+    HDF *node = hdf_get_child(q->hdfrcv, "mmid");
+
+insert:
+    if (node) hdf_set_value(q->hdfrcv, "mid", hdf_obj_name(node));
+    
+    err = mdb_build_incol(q->hdfrcv,
+                          hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.inbox"),
+                          &str);
+    if (err != STATUS_OK) return nerr_pass(err);
+    
+    MDB_EXEC(db, NULL, "INSERT INTO inbox %s", NULL, str.buf);
+    string_clear(&str);
+
+    if (node) {
+        node = hdf_obj_next(node);
+        if (node) goto insert;
+    }
 
     return STATUS_OK;
 }
@@ -278,8 +314,11 @@ static void aux_process_driver(EventEntry *entry, QueueEntry *q)
     case REQ_CMD_MEMORY_MOD:
         err = aux_cmd_memorymod(e, q);
         break;
-    case REQ_CMD_MAIL_ADD:
-        err = aux_cmd_mailadd(e, q);
+    case REQ_CMD_AUX_EMAIL_ADD:
+        err = aux_cmd_emailadd(e, q);
+        break;
+    case REQ_CMD_AUX_INBOX_ADD:
+        err = aux_cmd_inboxadd(e, q);
         break;
     case REQ_CMD_STATS:
         st->msg_stats++;

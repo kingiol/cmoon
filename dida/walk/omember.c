@@ -259,8 +259,9 @@ NEOERR* member_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *
 NEOERR* member_reset_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
     mevent_t *evt;
-    char *mnick, *mname, *sub, *content;
+    char *mnick, *mname, *mname_esc = NULL;
     char rlink[LEN_CK];
+    NEOERR *err;
     
     HDF_GET_STR(cgi->hdf, PRE_QUERY".mname", mname);
     mstr_rand_string(rlink, sizeof(rlink));
@@ -274,37 +275,16 @@ NEOERR* member_reset_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     MEVENT_TRIGGER(evt, mname, REQ_CMD_MEMBER_SETRLINK, FLAGS_SYNC);
 
     mnick = hdf_get_value(evt->hdfrcv, "mnick", NULL);
+    neos_url_escape(mname, &mname_esc, NULL);
 
-    /*
-     * input check
-     */
-    evt = (mevent_t*)hash_lookup(evth, "aux");
-    MCS_NOT_NULLA(evt);
+    hdf_set_value(cgi->hdf, PRE_DATASET".content.mnick", mnick);
+    hdf_set_value(cgi->hdf, PRE_DATASET".content.mname_esc", mname_esc);
+    hdf_set_value(cgi->hdf, PRE_DATASET".content.rlink", mnick);
 
-    sub = hdf_get_value(g_cfg, "Email.MemberReset.subject", NULL);
-    content = hdf_get_value(g_cfg, "Email.MemberReset.content", NULL);
-    MCS_NOT_NULLB(sub, content);
+    err = email_add(cgi->hdf, evth, "MemberReset", mnick);
+	if (err != STATUS_OK) return nerr_pass(err);
 
-    /*
-     * prepare data 
-     */
-    hdf_set_value(evt->hdfsnd, "go", "1");
-    hdf_set_value(evt->hdfsnd, "opt",
-                  hdf_get_value(g_cfg, "Email.MemberReset.opt", NULL));
-    hdf_set_value(evt->hdfsnd, "sub", sub);
-    hdf_set_value(evt->hdfsnd, "to", mname);
-
-    char *p = NULL;
-    neos_url_escape(mname, &p, NULL);
-    content = mstr_repstr(3, content, "$mnick$", mnick, "$mname_esc$", p, "$rlink$", rlink);
-    hdf_set_value(evt->hdfsnd, "content", content);
-    SAFE_FREE(content);
-    SAFE_FREE(p);
-    
-    /*
-     * trigger
-     */
-    MEVENT_TRIGGER(evt, mname, REQ_CMD_MAIL_ADD, FLAGS_NONE);
+    SAFE_FREE(mname_esc);
 
     return STATUS_OK;
 }

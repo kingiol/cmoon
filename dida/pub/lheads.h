@@ -20,6 +20,7 @@
 #include "mevent_plan.h"
 #include "mevent_city.h"
 #include "mevent_aux.h"
+#include "mevent_fft.h"
 
 /*
  * walker
@@ -30,5 +31,7 @@
 #include "omember.h"
 #include "obore.h"
 #include "ocomment.h"
+#include "oinbox.h"
+#include "oemail.h"
 
 #endif    /* __LHEADS_H__ */

@@ -56,9 +56,10 @@ Memcached {
 Mevent {
     0 = skeleton
     1 = member
-    3 = plan
-    4 = city
-    5 = aux
+    2 = plan
+    3 = city
+    4 = aux
+    5 = fft
 }
 
 ClientReqLimit {
@@ -74,13 +75,38 @@ FileCache {
 
 Email {
     MemberReset {
-        subject = 重置dida密码
+        subject = 重置嘀嗒密码
         opt = -c /var/www/dida/mtls/conf/noreply.conf
+        go = 1
+#        to = $mname$
         content << EOM
 $mnick$ 你好，
 
     有人通过这个邮箱申请重置嘀嗒网的密码，请在浏览器中打开以下连接以重置密码：
     http://www.dididada.org/member/pass?mname=$mname_esc$&rlink=$rlink$
+EOM
+    }
+    PlanMatched {
+        subject = 嘀嗒路线提醒
+        opt = -c /var/www/dida/mtls/conf/noreply.conf
+        go = 1
+#        to = $mname$
+        content << EOM
+你好，
+
+    以下路线可能与您的出行路线重合，建议你看看。
+    $plans$
+EOM
+    }
+}
+
+Inbox {
+	PlanMatched {
+    	fmid = 0
+        fnick = 嘀嗒
+        message << EOM
+以下路线可能与您的出行路线重合，建议你看看。
+$plans$
 EOM
     }
 }

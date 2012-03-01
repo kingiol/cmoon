@@ -17,6 +17,24 @@
 #define _COL_CAR "mid, size, model, mdate"
 #define _COL_RESET " mname, rlink, to_char(intime, 'YYYY-MM-DD') as intime "
 
+#define MEMBER_GET_PARAM_MID(hdf, mid)                  \
+    do {                                                \
+        if (!hdf_get_value(hdf, "mid", NULL)) {         \
+            char *_mname = NULL;                        \
+            REQ_GET_PARAM_STR(hdf, "mname", _mname);    \
+            mid = hash_string_rev(_mname);              \
+            hdf_set_int_value(hdf, "mid", mid);         \
+        } else mid = hdf_get_int_value(hdf, "mid", 0);  \
+    } while (0)
+#define MEMBER_SET_PARAM_MID(hdf)                                   \
+    do {                                                            \
+        if (!hdf_get_value(hdf, "mid", NULL)) {                     \
+            char *_mname = NULL;                                    \
+            REQ_GET_PARAM_STR(hdf, "mname", _mname);                \
+            hdf_set_int_value(hdf, "mid", hash_string_rev(_mname)); \
+        }                                                           \
+    } while (0)
+
 enum {
     REQ_CMD_MEMBER_GET = 1001,
     REQ_CMD_MEMBER_PRIV_GET,

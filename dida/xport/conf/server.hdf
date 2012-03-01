@@ -10,6 +10,8 @@ Mevent {
         2 = plan
         3 = city
         4 = aux
+        5 = fft
+        99 = public
     }
     smsalarm {
         db {
@@ -154,14 +156,14 @@ Plugin {
                 dad [type=int, require=true] = dad =
                 statu [type=int, require=true] = statu <
                 rect [type=box] = ((rect - @@rect) * point(1.2,0) + @@rect) @>
-                sgeo[type=point] = ((rect[0] <-> rect[1]) / 5) > sgeo <-> 
+                sgeo [type=point] = ((rect[0] <-> rect[1]) / 5) > sgeo <-> 
                 km [type=float] = (km / 1.5) <
             }
             geox {
                 dad [type=int, require=true] = dad =
                 statu [type=int, require=true] = statu <
                 rect [type=box] = ((rect - @@rect) * point(1.6,0) + @@rect) @>
-                sgeo[type=point] = ((rect[0] <-> rect[1]) / 5) > sgeo <-> 
+                sgeo [type=point] = ((rect[0] <-> rect[1]) / 5) > sgeo <-> 
                 km [type=float] = (km / 1.8) <
             }
         }
@@ -194,6 +196,13 @@ Plugin {
                 content [require=true] = content
                 checksum [require=true, maxlen=64] = checksum
             }
+            inbox {
+            	mid [type=int, require=true] = mid
+                fresh [type=int] = fresh
+                fmid [type=int, require=true] = fmid
+                fnick [maxlen=256, require=true] = fnick
+                message [maxlen=1024, require=true] = message
+            }
             memory {
                 title [maxlen=256, require=true] = title
                 hint [maxlen=256] = hint
@@ -206,6 +215,35 @@ Plugin {
                 hint [maxlen=256] = hint
                 content = content
                 statu [type=int] = statu
+            }
+        }
+    }
+    fft {
+        dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
+        meetMaxDay = 3
+        InsertCol {
+            expect {
+            	mid [type=int, require=true] = mid
+                pid [type=int, require=true] = pid
+                addrtype [type=int, require=true] = addrtype
+                gotime [type=int] = gotime
+
+                dad [type=int] = dad
+                sgeo [type=point] = sgeo
+                rect [type=box] = rect
+                km [type=float] = km
+                repeat [type=int] = repeat
+                sdate [maxlen=16] = sdate
+                stime = stime
+            }
+        }
+        QueryCond {
+            expect {
+                dad [type=int, require=true] = dad !=
+                statu [type=int, require=true] = statu =
+                rect [type=box] = ((rect - @@rect) * point(1.6,0) + @@rect) @>
+                sgeo [type=point] = ((rect[0] <-> rect[1]) / 5) > sgeo <-> 
+                km [type=float] = (km / 1.8) <
             }
         }
     }
