@@ -56,6 +56,14 @@ CREATE TABLE email (
 CREATE INDEX email_index ON email (state, gotime);
 CREATE TRIGGER tg_uptime_email BEFORE UPDATE ON email FOR EACH ROW EXECUTE PROCEDURE update_time();
 
+-- OWN Aggregate Functions
+CREATE AGGREGATE str_concat(
+  basetype    = text,
+  sfunc       = textcat,
+  stype       = text,
+  initcond    = ''
+);
+
 CREATE TABLE inbox (
 	id SERIAL,
     mid int NOT NULL DEFAULT 0,

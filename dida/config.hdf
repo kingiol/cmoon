@@ -76,7 +76,7 @@ FileCache {
 Email {
     MemberReset {
         subject = 重置嘀嗒密码
-        opt = -c /var/www/dida/mtls/conf/noreply.conf
+        opt = -c /var/www/dida/mtl/conf/noreply.conf
         go = 1
 #        to = XmnameX
         content << EOM
@@ -88,7 +88,7 @@ EOM
     }
     PlanMatched {
         subject = 嘀嗒路线提醒
-        opt = -c /var/www/dida/mtls/conf/noreply.conf
+        opt = -c /var/www/dida/mtl/conf/noreply.conf
         go = 1
 #        to = XmnameX
         content << EOM

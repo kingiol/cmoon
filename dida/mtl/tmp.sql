@@ -1,3 +1,5 @@
+ALTER TABLE email RENAME COLUMN state to statu;
+
 CREATE TABLE inbox (
 	id SERIAL,
     mid int NOT NULL DEFAULT 0,
@@ -37,4 +39,12 @@ CREATE TABLE meet (
     eid int NOT NULL DEFAULT 0, --expect id
     pid int NOT NULL DEFAULT 0, --told plan id
     intime timestamp DEFAULT now()
+);
+
+-- OWN Aggregate Functions
+CREATE AGGREGATE str_concat(
+  basetype    = text,
+  sfunc       = textcat,
+  stype       = text,
+  initcond    = ''
 );
