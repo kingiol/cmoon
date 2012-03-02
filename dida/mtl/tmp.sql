@@ -1,92 +1,40 @@
-ALTER TABLE member ADD COLUMN mnick varchar(256) NOT NULL DEFAULT '';
-ALTER TABLE member ADD COLUMN msn varchar(256) NOT NULL DEFAULT '';
-ALTER TABLE member ADD COLUMN mmsn varchar(256) NOT NULL DEFAULT '';
+CREATE TABLE inbox (
+	id SERIAL,
+    mid int NOT NULL DEFAULT 0,
+    fresh smallint NOT NULL DEFAULT 1,
+    fmid int NOT NULL DEFAULT 0,
+    fnick varchar(256) NOT NULL DEFAULT '',
+    message varchar(1024) NOT NULL DEFAULT '',
+    intime timestamp DEFAULT now()
+);
 
-CREATE TABLE memory (
-    id SERIAL,
-    statu int NOT NULL DEFAULT 0,
+-- 处理用户的“对结果不满意”，
+-- 所有这种期盼立即被放到 expect 里，
+-- 所有 plan 入库后遍历该表，满足的话插入 meet 表
+CREATE TABLE expect (
+	id SERIAL,
+    mid int NOT NULL DEFAULT 0, --member id
+    mname varchar(256) NOT NULL DEFAULT '',
+    pid int NOT NULL DEFAULT 0, --plan id
+    statu smallint NOT NULL DEFAULT 0,    --0 ok, 1 pause, 2 delete
+    addrtype smallint NOT NULL DEFAULT 1, --1 phone, 2 email, 3 all
+    --toaddr varchar(128) NOT NULL DEFAULT '',
+    gotime smallint NOT NULL DEFAULT 0,  --0 immediatly, 1 day, 2 week
 
-    title varchar(256) NOT NULL DEFAULT '',
-    hint varchar(256) NOT NULL DEFAULT '',
-    content text NOT NULL DEFAULT '',
-
-    previd int NOT NULL DEFAULT 0,
-    nextid int NOT NULL DEFAULT 0,
+    dad smallint NOT NULL DEFAULT 0,   --0 person, 1 car
+    sgeo point NOT NULL DEFAULT '(0,0)',
+    rect box NOT NULL DEFAULT '((0,0), (1,1))',
+    km numeric NOT NULL DEFAULT 0.1,
+    repeat smallint NOT NULL DEFAULT 0, --0 no, 1 day, 2 week
+    sdate varchar(16) NOT NULL DEFAULT '2011-11-11', --or 1,3,5
+    stime time NOT NULL DEFAULT '08:00:00',
     
-    intime timestamp DEFAULT now(),
-    uptime timestamp DEFAULT now(),
-    PRIMARY KEY (id)
+    intime timestamp DEFAULT now()
 );
-CREATE TRIGGER tg_uptime_memory BEFORE UPDATE ON memory FOR EACH ROW EXECUTE PROCEDURE update_time();
 
-CREATE TABLE comment (
+CREATE TABLE meet (
     id SERIAL,
-
-    type int NOT NULL DEFAULT 0, --0 memory
-    statu int NOT NULL DEFAULT 0,
-
-    oid int NOT NULL DEFAULT 0,
-    pid int NOT NULL DEFAULT 0,
-
-    ip varchar(64) NOT NULL DEFAULT '',
-    addr varchar(256) NOT NULL DEFAULT '',
-
-    author varchar(64) NOT NULL DEFAULT '',
-    contact varchar(256) NOT NULL DEFAULT '',
-    content text NOT NULL DEFAULT '',
-
-    intime timestamp DEFAULT now(),
-    uptime timestamp DEFAULT now(),    
-    PRIMARY KEY (id)
+    eid int NOT NULL DEFAULT 0, --expect id
+    pid int NOT NULL DEFAULT 0, --told plan id
+    intime timestamp DEFAULT now()
 );
-CREATE TRIGGER tg_uptime_comment BEFORE UPDATE ON comment FOR EACH ROW EXECUTE PROCEDURE update_time();
-
-
-CREATE TABLE memberreset (
-       mname varchar(256) NOT NULL DEFAULT '',
-       rlink varchar(256) NOT NULL DEFAULT '',
-       intime timestamp DEFAULT now(),
-       PRIMARY KEY (mname)
-);
-
-CREATE FUNCTION merge_memberreset(e TEXT, r TEXT) RETURNS VOID AS
-$$
-BEGIN
-    LOOP
-        -- first try to update the key
-        UPDATE memberreset SET rlink = r WHERE mname = e;
-        IF found THEN
-            RETURN;
-        END IF;
-        -- not there, so try to insert the key
-        -- if someone else inserts the same key concurrently,
-        -- we could get a unique-key failure
-        BEGIN
-            INSERT INTO memberreset(mname, rlink) VALUES (e, r);
-            RETURN;
-        EXCEPTION WHEN unique_violation THEN
-            -- do nothing, and loop to try the UPDATE again
-        END;
-    END LOOP;
-END
-$$
-LANGUAGE plpgsql;
-
-CREATE TABLE email (
-       id SERIAL,
-       state int NOT NULL DEFAULT 0, -- 0 fresh 1 sended
-       gotime int NOT NULL DEFAULT 0, -- 0 immediatly 1 minute 2 O clock 3 midnight
-       opts varchar(512) NOT NULL DEFAULT '', -- -c /usr/local/etc/email/liuchunsheng.conf -html -s....
-       subject varchar(256) NOT NULL DEFAULT '',
-       sendto text NOT NULL DEFAULT '',
-       cc text NOT NULL DEFAULT '',
-       bcc text NOT NULL DEFAULT '',
-       content text NOT NULL DEFAULT '',
-       checksum varchar(64) NOT NULL DEFAULT '',
-       intime timestamp DEFAULT now(),
-       uptime timestamp DEFAULT now(),    
-       PRIMARY KEY (id)
-);
-
-CREATE INDEX email_index ON email (state, gotime);
-CREATE TRIGGER tg_uptime_email BEFORE UPDATE ON email FOR EACH ROW EXECUTE PROCEDURE update_time();

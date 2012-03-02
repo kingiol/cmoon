@@ -6,12 +6,12 @@ Mevent {
     logfile = /var/log/moon/dida/mevent
     plugins {
         0 = skeleton
-        1 = member
-        2 = plan
-        3 = city
-        4 = aux
-        5 = fft
-        99 = public
+        1 = public
+        2 = member
+        3 = plan
+        4 = city
+        5 = aux
+        6 = fft
     }
     smsalarm {
         db {
@@ -33,6 +33,11 @@ Odomain {
 Plugin {
     skeleton {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
+        InsertCol {
+            member {
+                midFromHdf [type=int, require=true] = midToDbCol
+            }
+        }
     }
     member {
         dbsn = pgsql:dbname=merry host=localhost user=dida password=loveu
@@ -191,7 +196,7 @@ Plugin {
             email {
                 go [type=int] = gotime
                 opt [maxlen=512, require=true] = opts
-                sub [maxlen=256, require=true] = subject
+                subject [maxlen=256, require=true] = subject
                 to [require=true] = sendto
                 content [require=true] = content
                 checksum [require=true, maxlen=64] = checksum
@@ -224,6 +229,7 @@ Plugin {
         InsertCol {
             expect {
             	mid [type=int, require=true] = mid
+                mname [maxlen=256, require=true] = mname
                 pid [type=int, require=true] = pid
                 addrtype [type=int, require=true] = addrtype
                 gotime [type=int] = gotime

@@ -4,6 +4,7 @@
 CREATE TABLE expect (
 	id SERIAL,
     mid int NOT NULL DEFAULT 0, --member id
+    mname varchar(256) NOT NULL DEFAULT '',
     pid int NOT NULL DEFAULT 0, --plan id
     statu smallint NOT NULL DEFAULT 0,    --0 ok, 1 pause, 2 delete
     addrtype smallint NOT NULL DEFAULT 1, --1 phone, 2 email, 3 all

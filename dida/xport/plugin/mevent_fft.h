@@ -3,7 +3,7 @@
 
 #define PREFIX_FFT     "Fft"
 
-#define _COL_EXPECT "id, mid, pid, statu, addrtype, gotime, "   \
+#define _COL_EXPECT "id, mid, mname, pid, statu, addrtype, gotime, "   \
     " dad, sgeo, rect, km, repeat, sdate, stime, "              \
     " to_char(intime, 'YYYY-MM-DD') as intime "
 

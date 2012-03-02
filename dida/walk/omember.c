@@ -10,18 +10,18 @@ static void member_after_login(CGI *cgi, HASH *evth, char *mname, char *mnick)
 
     memset(mmsn, 0x0, sizeof(mmsn));
     mstr_rand_string(mmsn, sizeof(mmsn));
+    mutil_getdatetime_gmt(tm, sizeof(tm), "%A, %d-%b-%Y %T GMT", ONE_WEEK);
 
     /*
      * set cookie 
      */
-    cgi_cookie_set(cgi, "mname", mname, NULL, SITE_DOMAIN, NULL, 1, 0);
-    cgi_cookie_set(cgi, "mnick", mnick, NULL, SITE_DOMAIN, NULL, 1, 0);
+    cgi_cookie_set(cgi, "mname", mname, NULL, SITE_DOMAIN, tm, 1, 0);
+    cgi_cookie_set(cgi, "mnick", mnick, NULL, SITE_DOMAIN, tm, 1, 0);
     neos_url_escape(mnick, &p, NULL);
-    cgi_cookie_set(cgi, "mnick_esc", p, NULL, SITE_DOMAIN, NULL, 1, 0);
+    cgi_cookie_set(cgi, "mnick_esc", p, NULL, SITE_DOMAIN, tm, 1, 0);
     free(p);
 
     //cgi_url_escape(mmsn, &p);
-    mutil_getdatetime_gmt(tm, sizeof(tm), "%A, %d-%b-%Y %T GMT", 60*60*3);
     cgi_cookie_set(cgi, "mmsn", mmsn, NULL, SITE_DOMAIN, tm, 1, 0);
 
     hdf_set_value(evt->hdfsnd, "mname", mname);
@@ -277,9 +277,9 @@ NEOERR* member_reset_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     mnick = hdf_get_value(evt->hdfrcv, "mnick", NULL);
     neos_url_escape(mname, &mname_esc, NULL);
 
-    hdf_set_value(cgi->hdf, PRE_DATASET".content.mnick", mnick);
-    hdf_set_value(cgi->hdf, PRE_DATASET".content.mname_esc", mname_esc);
-    hdf_set_value(cgi->hdf, PRE_DATASET".content.rlink", mnick);
+    hdf_set_value(cgi->hdf, PRE_DATASET".content.XmnickX", mnick);
+    hdf_set_value(cgi->hdf, PRE_DATASET".content.Xmname_escX", mname_esc);
+    hdf_set_value(cgi->hdf, PRE_DATASET".content.XrlinkX", mnick);
 
     err = email_add(cgi->hdf, evth, "MemberReset", mnick);
 	if (err != STATUS_OK) return nerr_pass(err);

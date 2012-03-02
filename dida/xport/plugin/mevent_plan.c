@@ -174,7 +174,7 @@ static NEOERR* plan_cmd_plan_match(struct plan_entry *e, QueueEntry *q)
          * process here for more efficient transport, and more user likely
          */
         thatsec = pub_plan_get_abssec(pdate, ptime);
-        HDF *node = hdf_get_child(q->hdfsnd, "plans");
+        HDF *node = hdf_get_obj(q->hdfsnd, "plans");
         err = pub_plan_sort_by_time(node, km, thatsec, pdate);
         if (err != STATUS_OK) return nerr_pass(err);
         

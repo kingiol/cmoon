@@ -80,6 +80,7 @@ NEOERR* plan_leave_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     MCS_NOT_NULLA(evt);
 
     hdf_copy(evt->hdfsnd, NULL, plan);
+    hdf_set_int_value(evt->hdfsnd, "id", id);
 
     MEVENT_TRIGGER(evt, NULL, REQ_CMD_FFT_EXPECT_MATCH, FLAGS_SYNC);
 
@@ -88,17 +89,54 @@ NEOERR* plan_leave_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
      */
     HDF *obj = hdf_get_obj(evt->hdfrcv, "expects");
     if (obj) {
-        hdf_set_valuef(obj, PRE_DATASET".message.plans=<a target=\"_blank\" "   \
-                       "href=\"/plan/%d\">%d</a>", id, id);
+        /*
+         * inbox notify
+         */
+        hdf_set_valuef(obj, PRE_DATASET".message.XplansX=<a target=\"_blank\" "   \
+                       "href=\"/plan/info?id=%d\">%d</a>", id, id);
         err = inbox_multi_add(obj, evth, "PlanMatched");
         if (err != STATUS_OK) return nerr_pass(err);
 
-        hdf_remove_tree(obj, PRE_DATASET);
-        hdf_set_valuef(obj, PRE_DATASET".content.plans=<a target=\"_blank\" "   \
-                       "href=\"http://%s/plan/%d\">%d</a>", SITE_DOMAIN, id, id);
-        err = email_multi_add(obj, evth, "PlanMatched");
+        /*
+         * email notify
+         */
+        HDF *child, *tnode;
+        hdf_init(&tnode);
+        child = hdf_obj_child(obj);
+        while (child) {
+            if (hdf_get_int_value(child, "addrtype", FFT_EXPECT_NONE) ==
+                FFT_EXPECT_EMAIL) {
+                hdf_copy(tnode, hdf_obj_name(child), child);
+            }
+            
+            child = hdf_obj_next(child);
+        }
+        hdf_set_valuef(tnode, PRE_DATASET".content.XplansX=<a target=\"_blank\" " \
+                       "href=\"http://%s/plan/info?id=%d\">%d</a>",
+                       SITE_DOMAIN, id, id);
+        err = email_multi_add(tnode, evth, "PlanMatched");
         if (err != STATUS_OK) return nerr_pass(err);
+        hdf_destroy(&tnode);
+
+        /*
+         * TODO sms notify
+         */
     }
+    
+    return STATUS_OK;
+}
+
+NEOERR* plan_info_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+    mevent_t *evt = hash_lookup(evth, "plan");
+
+    MCS_NOT_NULLB(cgi, evt);
+
+    hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
+
+    MEVENT_TRIGGER(evt, NULL, REQ_CMD_PLAN_GET, FLAGS_SYNC);
+
+    hdf_copy(cgi->hdf, PRE_OUTPUT".plan", evt->hdfrcv);
     
     return STATUS_OK;
 }

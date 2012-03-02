@@ -7,6 +7,7 @@ NEOERR* email_multi_add(HDF *datanode, HASH *evth, char *emailtype)
     mevent_t *evt;
     char *mname;
     HDF *child;
+    int cnt = 0;
     NEOERR *err;
     
     MCS_NOT_NULLB(datanode, evth);
@@ -18,7 +19,10 @@ NEOERR* email_multi_add(HDF *datanode, HASH *evth, char *emailtype)
     while (child) {
         mname = hdf_get_value(child, "mname", NULL);
         if (mname) {
-            hdf_set_valuef(evt->hdfsnd, "mto.%s=%s", mname, mname);
+            /*
+             * use cnt instead of mname as hdf key because mname contain '.'
+             */
+            hdf_set_valuef(evt->hdfsnd, "mto.%d=%s", cnt++, mname);
         }
 
         child = hdf_obj_next(child);
@@ -31,7 +35,7 @@ NEOERR* email_multi_add(HDF *datanode, HASH *evth, char *emailtype)
                            mcs_hdf_getf(g_cfg, "Email.%s", emailtype),
                            hdf_get_obj(datanode, PRE_DATASET));
 	if (err != STATUS_OK) return nerr_pass(err);
-    
+
     MEVENT_TRIGGER(evt, NULL, REQ_CMD_AUX_EMAIL_ADD, FLAGS_NONE);
 
     return STATUS_OK;

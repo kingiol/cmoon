@@ -41,6 +41,7 @@ bmoon.index = {
         o.e_mc_nick = $('#mc-nick');
         o.e_mc_saddr = $('#mc-saddr');
         o.e_mc_eaddr = $('#mc-eaddr');
+        o.e_mc_planurl = $('#mc-planurl');
         o.e_mc_from = $('#mc-from');
         o.e_mc_sdate = $('#mc-sdate');
         o.e_mc_stime = $('#mc-stime');
@@ -257,7 +258,7 @@ bmoon.index = {
             });
             plan.sdate = days.join(',');
         } else plan.sdate = plan.date;
-        if (plan.dad == 0) plan.dad = 1; // if i lookup man, i'm a car
+        if (o.e_dad.val() == 0) plan.dad = 1; // if i lookup man, i'm a car
         else plan.dad = 0;
         plan.stime = plan.time;
         plan.phone = o.e_mc_no_phone.val();
@@ -334,6 +335,7 @@ bmoon.index = {
             o.e_mc_sdate.html('每周 ' + plan.sdate);
         } else o.e_mc_sdate.html(plan.sdate);
         o.e_mc_stime.html(plan.stime);
+        o.e_mc_planurl.attr('href', '/plan/info?id='+plan.id);
 
         o.e_mc_nav.fadeIn();
         o.e_mc_result.fadeIn('slow');

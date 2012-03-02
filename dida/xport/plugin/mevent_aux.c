@@ -232,13 +232,14 @@ static NEOERR* aux_cmd_emailadd(struct aux_entry *e, QueueEntry *q)
     mdb_conn *db = e->db;
 
     REQ_GET_PARAM_STR(q->hdfrcv, "content", content);
+    
     mstr_md5_str(content, sum);
     hdf_set_value(q->hdfrcv, "checksum", sum);
 
     HDF *node = hdf_get_child(q->hdfrcv, "mto");
 
 insert:
-    if (node) hdf_set_value(q->hdfrcv, "to", hdf_obj_name(node));
+    if (node) hdf_set_value(q->hdfrcv, "to", hdf_obj_value(node));
     
     err = mdb_build_incol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.email"),
@@ -265,7 +266,7 @@ static NEOERR* aux_cmd_inboxadd(struct aux_entry *e, QueueEntry *q)
     HDF *node = hdf_get_child(q->hdfrcv, "mmid");
 
 insert:
-    if (node) hdf_set_value(q->hdfrcv, "mid", hdf_obj_name(node));
+    if (node) hdf_set_value(q->hdfrcv, "mid", hdf_obj_value(node));
     
     err = mdb_build_incol(q->hdfrcv,
                           hdf_get_obj(g_cfg, CONFIG_PATH".InsertCol.inbox"),

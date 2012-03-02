@@ -1,0 +1,13 @@
+plan_info {
+    Layout = layout.html
+    Dataset {
+        Layout {
+            css = <link rel="stylesheet" type="text/css" href="/css/b/plan/info.css" />
+            js = <script type="text/javascript" src="/js/b/plan/info.js"></script>
+            title = 线路详情
+        }
+        Include {
+            content = plan/info.html
+        }
+    }
+}

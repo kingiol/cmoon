@@ -78,24 +78,24 @@ Email {
         subject = 重置嘀嗒密码
         opt = -c /var/www/dida/mtls/conf/noreply.conf
         go = 1
-#        to = $mname$
+#        to = XmnameX
         content << EOM
-$mnick$ 你好，
+XmnickX 你好，
 
     有人通过这个邮箱申请重置嘀嗒网的密码，请在浏览器中打开以下连接以重置密码：
-    http://www.dididada.org/member/pass?mname=$mname_esc$&rlink=$rlink$
+    http://www.dididada.org/member/pass?mname=Xmname_escX&rlink=XrlinkX
 EOM
     }
     PlanMatched {
         subject = 嘀嗒路线提醒
         opt = -c /var/www/dida/mtls/conf/noreply.conf
         go = 1
-#        to = $mname$
+#        to = XmnameX
         content << EOM
 你好，
 
     以下路线可能与您的出行路线重合，建议你看看。
-    $plans$
+    XplansX
 EOM
     }
 }
@@ -106,7 +106,7 @@ Inbox {
         fnick = 嘀嗒
         message << EOM
 以下路线可能与您的出行路线重合，建议你看看。
-$plans$
+XplansX
 EOM
     }
 }

@@ -82,14 +82,15 @@ static NEOERR* fft_cmd_expect_match(struct fft_entry *e, QueueEntry *q)
      */
     MDB_QUERY_RAW(db, "expect", _COL_EXPECT, "%s", NULL, str.buf);
     err = mdb_set_rows(node, db, _COL_EXPECT, "expects", "0");
-    nerr_handle(&err, NERR_NOT_FOUND);
+    if (nerr_handle(&err, NERR_NOT_FOUND)) return STATUS_OK;
 	if (err != STATUS_OK) return nerr_pass(err);
 
+    child = hdf_get_obj(node, "expects");
+    
     /*
      * sort expect by time
      */
     thatsec = pub_plan_get_abssec(pdate, ptime);
-    child = hdf_get_obj(node, "expects");
     err = pub_plan_sort_by_time(child, km, thatsec, pdate);
 	if (err != STATUS_OK) return nerr_pass(err);
 
@@ -102,7 +103,7 @@ static NEOERR* fft_cmd_expect_match(struct fft_entry *e, QueueEntry *q)
         if (pub_plan_get_relsec(child, thatsec) < (maxday * ONE_DAY)) {
             ttnum++;
             eid = hdf_get_int_value(child, "id", 0);
-            MDB_EXEC(db, NULL, "INSERT INTO meet (eid, pid) VALUES (%d %d);",
+            MDB_EXEC(db, NULL, "INSERT INTO meet (eid, pid) VALUES (%d, %d);",
                      NULL, eid, pid);
             if (hdf_get_int_value(child, "gotime", FFT_GOTIME_WEEK) ==
                 FFT_GOTIME_IMMEDIATE) {
