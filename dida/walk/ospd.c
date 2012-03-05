@@ -20,18 +20,17 @@ NEOERR* spd_pre_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 NEOERR* spd_do_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
     mevent_t *evt;
-    HDF *member, *plan;
+    HDF *plan;
     int cityid = 0;
     
     if (!cgi || !cgi->hdf) return nerr_raise(NERR_ASSERT, "paramter null");
 
-    /*
-     * member
-     */
-    HDF_GET_OBJ(cgi->hdf, PRE_QUERY".member", member);
     HDF_GET_OBJ(cgi->hdf, PRE_QUERY".plan", plan);
     
-    char *s = hdf_get_value(member, "city", NULL);
+    /*
+     * city
+     */
+    char *s = hdf_get_value(plan, "city", NULL);
     if (s) {
         evt = hash_lookup(evth, "city");
         if (!evt) return nerr_raise(NERR_ASSERT, "city null");
@@ -40,18 +39,6 @@ NEOERR* spd_do_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
         MEVENT_TRIGGER_NRET(evt, NULL, REQ_CMD_CITY_BY_S, FLAGS_SYNC);
         cityid = hdf_get_int_value(evt->hdfrcv, "city.id", 0);
     }
-
-    evt = hash_lookup(evth, "member");
-    if (!evt) return nerr_raise(NERR_ASSERT, "member null");
-
-    hdf_copy(evt->hdfsnd, NULL, member);
-
-    hdf_set_int_value(evt->hdfsnd, "cityid", cityid);
-    hdf_set_int_value(evt->hdfsnd, "statu", MEMBER_ST_SPD_FRESH);
-    if (hdf_get_int_value(plan, "dad", PLAN_DAD_MAN) == PLAN_DAD_CAR)
-        hdf_set_value(evt->hdfsnd, "_addcar", "1");
-    
-    MEVENT_TRIGGER_NRET(evt, NULL, REQ_CMD_MEMBER_ADD, FLAGS_NONE);
 
     /*
      * plan
@@ -97,20 +84,11 @@ NEOERR* spd_post_do_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
     int id = hdf_get_int_value(cgi->hdf, PRE_QUERY".exceptid", 0);
 
-    MDB_QUERY_RAW(db, "plan", _COL_PLAN, "statu=%d AND id !=%d LIMIT 1",
+    MDB_QUERY_RAW(db, "plan", _COL_PLAN_ADMIN, "statu=%d AND id !=%d LIMIT 1",
                   NULL, PLAN_ST_SPD_RBTED, id);
-    err = mdb_set_row(cgi->hdf, db, _COL_PLAN, PRE_OUTPUT".plan");
+    err = mdb_set_row(cgi->hdf, db, _COL_PLAN_ADMIN, PRE_OUTPUT".plan");
 	if (err != STATUS_OK) return nerr_pass(err);
     
-    db = hash_lookup(dbh, "member");
-    if (!db) return nerr_raise(NERR_ASSERT, "member null");
-
-    int mid = hdf_get_int_value(cgi->hdf, PRE_OUTPUT".plan.mid", 0);
-
-    MDB_QUERY_RAW(db, "member", _COL_MEMBER_ADMIN, "mid=%d", NULL, mid);
-    err = mdb_set_row(cgi->hdf, db, _COL_MEMBER_ADMIN, PRE_OUTPUT".member");
-    if (err != STATUS_OK) return nerr_pass(err);
-
     int cityid = hdf_get_int_value(cgi->hdf, PRE_OUTPUT".plan.cityid", 0);
 
     MDB_QUERY_RAW(db, "city", _COL_CITY, "id=%d", NULL, cityid);
@@ -136,14 +114,6 @@ NEOERR* spd_post_do_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     hdf_set_int_value(evt->hdfsnd, "statu", PLAN_ST_SPD_OK);
 
     MEVENT_TRIGGER(evt, NULL, REQ_CMD_PLAN_UP, FLAGS_NONE);
-
-    if (hdf_get_obj(cgi->hdf, PRE_QUERY".member")) {
-        evt = hash_lookup(evth, "member");
-        if (!evt) return nerr_raise(NERR_ASSERT, "member null");
-
-        hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY".member"));
-        MEVENT_TRIGGER(evt, NULL, REQ_CMD_MEMBER_UP, FLAGS_NONE);
-    }
 
     return STATUS_OK;
 }

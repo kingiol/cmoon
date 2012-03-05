@@ -89,29 +89,16 @@ bmoon.spd58 = {
         $.getJSON('http://user.58.com/userdata/?callback=?',
                   {userid: uid},
                   function(data) {
-                      var ori = '58',
-                      mname = data.name + '@58.com';
+                      var ori = '58';
                       
                       $.getJSON(g_site_admin + 'json/spd/do?JsonCallback=?',
                             {
                                 _op: 'add',
 
-                                member: JSON.stringify({
-                                    mname: mname,
-                                    ori: ori,
-                                    verify: data.license,
-                                    credit: data.credit,
-                                    city: city, // need convert to cityid
+                                plan: JSON.stringify({
+                                    mid: 0,
                                     phone: bmoon.utl.clotheHTML(phone),
                                     contact: bmoon.utl.clotheHTML(contact),
-
-                                    size: size
-                                }),
-
-                                _type_member: 'object',
-
-                                plan: JSON.stringify({
-                                    mname: mname,
                                     ori: ori,
                                     oid: id,
                                     ourl: location.href,
@@ -120,6 +107,7 @@ bmoon.spd58 = {
                                     saddr: saddr,
                                     eaddr: eaddr,
                                     marks: marks, // convert
+                                    city: city, // need convert to cityid
                                     repeat: repeat,
                                     sdate: sdate,
                                     stime: stime,

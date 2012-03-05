@@ -348,10 +348,10 @@ bmoon.index = {
             $('<img/>').attr('src', domains[plan.ori].img).appendTo(o.e_mc_from);
         }
         
-        o.e_mc_phone.attr('src', '/image/member/pic?defs=segv&type=phone&mid=' +
-                          plan.mid);
-        o.e_mc_contact.attr('src', '/image/member/pic?defs=segv&type=contact&mid=' +
-                            plan.mid);
+        o.e_mc_phone.attr('src', '/image/plan/pic?defs=segv&type=phone&id=' +
+                          plan.id);
+        o.e_mc_contact.attr('src', '/image/plan/pic?defs=segv&type=contact&id=' +
+                            plan.id);
     },
 
     // {address_components: [], formatted_address: "", geometry: {}...} gdata.js

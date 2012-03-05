@@ -30,6 +30,7 @@ readme.html
         GET /json/plan/match    通过路线信息匹配相关路线
         ADD /json/plan/leave    用户站内留下带联系方式的路线
         GET /plan/info          查看单条线路详细信息
+        GET /image/plan/pic     通过id查看路线的phone, contact等图片数据
 
     omember.h
         GET /json/member/info   通过mname获取用户信息

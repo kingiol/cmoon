@@ -2,9 +2,10 @@
 #define __MEVENT_PLAN_H__
 
 #define PREFIX_PLAN     "Plan"
+#define PREFIX_PLAN_PRIV "PlanPriv"
 #define PREFIX_SPD      "Spd"
 
-#define PLAN_CC_SEC     60
+#define PLAN_CC_SEC     600
 #define SPD_CC_SEC      60000
 
 #define _COL_PLAN "id, mid, ori, ourl, dad, nick, statu, repeat, seat, " \
@@ -13,7 +14,16 @@
     " to_char(intime, 'YYYY-MM-DD') as intime, "                        \
     " to_char(uptime, 'YYYY-MM-DD') as uptime "
 
-#define _COL_PLAN_C "p.id AS id, p.mid AS mid, p.ori AS ori, p.ourl AS ourl, " \
+#define _COL_PLAN_ADMIN "id, mid, phone, contact, ori, ourl, "          \
+    " dad, nick, statu, repeat, seat, "                                 \
+    " fee, attach, cityid, scityid, ecityid, saddr, eaddr, marks, rect, route, " \
+    " km, sdate, edate, stime, etime, estmin, "                         \
+    " to_char(intime, 'YYYY-MM-DD') as intime, "                        \
+    " to_char(uptime, 'YYYY-MM-DD') as uptime "
+
+#define _COL_PLAN_C "p.id AS id, p.mid AS mid, "                        \
+    " p.phone AS phone, p.contact AS contact, "                         \
+    " p.ori AS ori, p.ourl AS ourl, "                                   \
     " p.dad AS dad, p.nick AS nick, p.statu AS statu, p.repeat AS repeat, " \
     " p.seat AS seat, p.fee AS fee, p.attach AS attach, "               \
     " p.cityid AS cityid, p.scityid AS scityid, p.ecityid AS ecityid, " \
@@ -27,6 +37,7 @@
 
 enum {
     REQ_CMD_PLAN_GET = 1001,
+    REQ_CMD_PLAN_PRIV_GET,
     REQ_CMD_PLAN_MATCH,
     REQ_CMD_PLAN_ADD,
     REQ_CMD_PLAN_UP,

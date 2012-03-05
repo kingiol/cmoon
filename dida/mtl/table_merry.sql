@@ -14,7 +14,6 @@ CREATE TABLE member (
     mnick varchar(256) NOT NULL DEFAULT '',
     msn varchar(256) NOT NULL DEFAULT '',
     mmsn varchar(256) NOT NULL DEFAULT '',
-    ori smallint NOT NULL DEFAULT 0, -- plan's origin domain, see server.hdf
     male smallint NOT NULL DEFAULT 0,
     pass varchar(64) NOT NULL DEFAULT '',
     mpass varchar(64) NOT NULL DEFAULT '',
@@ -71,6 +70,8 @@ CREATE INDEX car_index ON car (size);
 CREATE TABLE plan (
     id SERIAL,
     mid int NOT NULL DEFAULT 0,
+    phone varchar(128) NOT NULL DEFAULT '',
+    contact varchar(128) NOT NULL DEFAULT '',
 
     ori smallint NOT NULL DEFAULT 0, -- plan's origin domain, see server.hdf
     oid varchar(64) NOT NULL DEFAULT '',   -- plan's origin id

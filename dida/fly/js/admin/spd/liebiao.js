@@ -33,7 +33,7 @@ bmoon.spdliebiao = {
 
         var ori = 'liebiao', city = '', phone = '', contact = '', size = 0, model = '',
         dad = 0, repeat = 0, saddr = '', eaddr = '', sdate = '', stime = '',
-        attach = '', nick = id, seat = 4, fee = 0, marks = '', mname = '';
+        attach = '', nick = id, seat = 4, fee = 0, marks = '';
 
         var s = $('tr', '.lb_pp'), x;
 
@@ -79,15 +79,6 @@ bmoon.spdliebiao = {
         nick = '列表网友';
         
 
-        // mname
-        if (contact && !contace.match('http')) {
-            mname = contact;
-        } else if (phone && !phone.match('http')) {
-            mname = phone;
-        } else
-            mname = id + '@liebiao.com';
-
-
         console.log('city ' + city);
         console.log('phone ' + phone);
         console.log('contact ' + contact);
@@ -107,25 +98,13 @@ bmoon.spdliebiao = {
         console.log('fee ' + fee);
         console.log('marks ' + marks);
 
-        console.log('mname ' + mname);
-
         $.getJSON(g_site_admin + 'json/spd/do?JsonCallback=?', {
             _op: 'add',
-            
-            member: JSON.stringify({
-                mname: mname,
-                ori: ori,
-                city: city, // need convert to cityid
-                phone: bmoon.utl.clotheHTML(phone),
-                contact: bmoon.utl.clotheHTML(contact),
-
-                size: size
-            }),
-
-            _type_member: 'object',
 
             plan: JSON.stringify({
-                mname: mname,
+                mid: 0,
+                phone: bmoon.utl.clotheHTML(phone),
+                contact: bmoon.utl.clotheHTML(contact),
                 ori: ori,
                 oid: id,
                 ourl: location.href,
@@ -135,6 +114,7 @@ bmoon.spdliebiao = {
                 saddr: saddr,
                 eaddr: eaddr,
                 marks: marks, // convert
+                city: city, // need convert to cityid
                 repeat: repeat,
                 sdate: sdate,
                 stime: stime,

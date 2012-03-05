@@ -89,26 +89,15 @@ bmoon.spdganji = {
         console.log('contact' + contact);
         console.log('city' + city);
 
-        var ori = 'ganji',
-        mname = id + '@ganji.com';
+        var ori = 'ganji';
         
         $.getJSON(g_site_admin + 'json/spd/do?JsonCallback=?', {
             _op: 'add',
             
-            member: JSON.stringify({
-                mname: mname,
-                ori: ori,
-                city: city, // need convert to cityid
+            plan: JSON.stringify({
+                mid: 0,
                 phone: bmoon.utl.clotheHTML(phone),
                 contact: bmoon.utl.clotheHTML(contact),
-
-                size: size
-            }),
-
-            _type_member: 'object',
-
-            plan: JSON.stringify({
-                mname: mname,
                 ori: ori,
                 oid: id,
                 ourl: location.href,
@@ -118,6 +107,7 @@ bmoon.spdganji = {
                 saddr: saddr,
                 eaddr: eaddr,
                 marks: marks, // convert
+                city: city, // need convert to cityid
                 repeat: repeat,
                 sdate: sdate,
                 stime: stime,

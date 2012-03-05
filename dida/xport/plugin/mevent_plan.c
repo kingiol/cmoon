@@ -71,6 +71,30 @@ static NEOERR* plan_cmd_plan_get(struct plan_entry *e, QueueEntry *q)
     return STATUS_OK;
 }
 
+static NEOERR* plan_cmd_plan_priv_get(struct plan_entry *e, QueueEntry *q)
+{
+	unsigned char *val = NULL; size_t vsize = 0;
+    int id;
+	NEOERR *err;
+
+    mdb_conn *db = e->db;
+    struct cache *cd = e->cd;
+    
+    REQ_GET_PARAM_INT(q->hdfrcv, "id", id);
+
+    if (cache_getf(cd, &val, &vsize, PREFIX_PLAN_PRIV"%d", id)) {
+        unpack_hdf(val, vsize, &q->hdfsnd);
+    } else {
+        MDB_QUERY_RAW(db, "plan", _COL_PLAN_ADMIN, "id=%d", NULL, id);
+        err = mdb_set_row(q->hdfsnd, db, _COL_PLAN_ADMIN, NULL);
+        if (err != STATUS_OK) return nerr_pass(err);
+
+        CACHE_HDF(q->hdfsnd, PLAN_CC_SEC, PREFIX_PLAN_PRIV"%d", id);
+    }
+    
+    return STATUS_OK;
+}
+
 /*
  * get plans by geographically, and filter by time
  * keep plan clean (no history useless plan) please
@@ -330,6 +354,9 @@ static void plan_process_driver(EventEntry *entry, QueueEntry *q)
         CASE_SYS_CMD(q->operation, q, e->cd, err);
     case REQ_CMD_PLAN_GET:
         err = plan_cmd_plan_get(e, q);
+        break;
+    case REQ_CMD_PLAN_PRIV_GET:
+        err = plan_cmd_plan_priv_get(e, q);
         break;
     case REQ_CMD_PLAN_MATCH:
         err = plan_cmd_plan_match(e, q);

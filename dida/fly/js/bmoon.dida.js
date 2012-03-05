@@ -37,7 +37,7 @@ bmoon.dida = {
 
         // bmoon.dida.js will used on other site
         // so, we return on other site to avoid js error
-        if (!jQuery('a[rel="#bd-login"]').length) return;
+        if (!jQuery('a[rel="#bd-login"]').length) return o;
         
         o.e_content = $('#bd-content');
 

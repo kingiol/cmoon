@@ -28,24 +28,13 @@ NEOERR* plan_leave_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     
     if (!cgi || !cgi->hdf) return nerr_raise(NERR_ASSERT, "paramter null");
 
-    evt = hash_lookup(evth, "member");
-    if (!evt) return nerr_raise(NERR_ASSERT, "member null");
-
     HDF_GET_OBJ(cgi->hdf, PRE_QUERY".plan", plan);
-    HDF_GET_STR(plan, "phone", mname);
-    HDF_GET_INT(plan, "scityid", id);
     
-    hdf_set_valuef(evt->hdfsnd, "mname=%s@%s", mname, SITE_DOMAIN);
-    hdf_set_value(evt->hdfsnd, "phone", mname);
-    hdf_set_int_value(evt->hdfsnd, "cityid", id);
-
-    MEVENT_TRIGGER_NRET(evt, NULL, REQ_CMD_MEMBER_ADD, FLAGS_NONE);
-
     evt = hash_lookup(evth, "plan");
     if (!evt) return nerr_raise(NERR_ASSERT, "plan null");
 
     hdf_copy(evt->hdfsnd, NULL, plan);
-    hdf_set_valuef(evt->hdfsnd, "mname=%s@%s", mname, SITE_DOMAIN);
+    hdf_set_value(evt->hdfsnd, "mid", "0");
 
     /*
      * add plan
@@ -137,6 +126,63 @@ NEOERR* plan_info_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     MEVENT_TRIGGER(evt, NULL, REQ_CMD_PLAN_GET, FLAGS_SYNC);
 
     hdf_copy(cgi->hdf, PRE_OUTPUT".plan", evt->hdfrcv);
+    
+    return STATUS_OK;
+}
+
+NEOERR* plan_pic_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+    mevent_t *evt = hash_lookup(evth, "plan");
+    HDF *node;
+    char *s = NULL, *defs = NULL;
+    NEOERR *err;
+    
+    MCS_NOT_NULLB(cgi->hdf, evt);
+
+    HDF_FETCH_STR(cgi->hdf, PRE_QUERY".defs", defs);
+
+    node = hdf_get_child(cgi->hdf, PRE_QUERY".type");
+    if (!node) HDF_GET_STR(cgi->hdf, PRE_QUERY".type", s);
+    
+    hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
+
+    MEVENT_TRIGGER(evt, NULL, REQ_CMD_PLAN_PRIV_GET, FLAGS_SYNC);
+
+    if (s) goto getval;
+    while (node) {
+        s = hdf_obj_value(node);
+    getval:
+        /*
+         * turn &amp; into & in url format
+         */
+        mstr_html_unescape(evt->hdfrcv, s);
+        s = hdf_get_value(evt->hdfrcv, s, NULL);
+        if (s && *s) {
+            if (!strncmp(s, "http:", 5)) {
+                hdf_set_value(cgi->hdf, PRE_OUTPUT".302", s);
+                return STATUS_OK;
+            }
+            break;
+        }
+        
+        node = hdf_obj_next(node);
+    }
+
+    if (!s || !*s) {
+        if (!defs) s = SITE_DOMAIN;
+        else if (!strcmp(defs, "segv")) return STATUS_OK;
+        else s = defs;
+    }
+    
+    err = mimg_create_from_string(s,
+                                  hdf_get_value(g_cfg,
+                                                "Config.font.plan.path",
+                                                "/usr/share/ttf/Times.ttf"),
+                                  atof(hdf_get_value(g_cfg,
+                                                     "Config.font.plan.size",
+                                                     "14.")),
+                                  &ses->data);
+    if (err != STATUS_OK) return nerr_pass(err);
     
     return STATUS_OK;
 }

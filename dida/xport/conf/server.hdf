@@ -48,7 +48,6 @@ Plugin {
                 mnick [maxlen=256] = mnick
                 msn [maxlen=256] = msn
                 mmsn [maxlen=256] = mmsn
-                ori [type=int] = ori
                 male [type=int] = male
                 pass [maxlen=64] = pass
                 statu [type=int] = statu
@@ -67,8 +66,6 @@ Plugin {
         }
         UpdateCol {
             member {
-                mid [type=int, require=true] = mid
-                mname [maxlen=256, require=true] = mname
                 mnick [maxlen=256] = mnick
                 msn [maxlen=256] = msn
                 mmsn [maxlen=256] = mmsn
@@ -91,6 +88,8 @@ Plugin {
         InsertCol {
             plan {
                 mid [type=int, require=true] = mid
+                phone [maxlen=128] = phone
+                contact [maxlen=128] = contact
 
                 ori [type=int] = ori
                 oid [maxlen=64] = oid
@@ -126,7 +125,8 @@ Plugin {
         }
         UpdateCol {
             plan {
-                id [type=int, require=true] = id
+                phone [maxlen=128] = phone
+                contact [maxlen=128] = contact
 
                 ori [type=int] = ori
                 oid [maxlen=64] = oid

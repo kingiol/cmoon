@@ -16,7 +16,9 @@ __BEGIN_DECLS
         err = member_check_login_data_get(cgi, dbh, evth, ses);         \
         if (err != STATUS_OK) return nerr_pass(err);                    \
         HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".mname", mname);         \
-        if (hdf_get_int_value(evt->hdfrcv, "verify", -1) < MEMBER_VF_ADMIN) \
+        mevent_t *_evt = hash_lookup(evth, "member");                   \
+        MCS_NOT_NULLA(_evt);                                            \
+        if (hdf_get_int_value(_evt->hdfrcv, "verify", -1) < MEMBER_VF_ADMIN) \
             return nerr_raise(LERR_LIMIT, "%s not admin", mname);       \
     } while (0)
 
@@ -25,7 +27,9 @@ __BEGIN_DECLS
         err = member_check_login_data_get(cgi, dbh, evth, ses);         \
         if (err != STATUS_OK) return nerr_pass(err);                    \
         HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".mname", mname);         \
-        if (hdf_get_int_value(evt->hdfrcv, "verify", -1) < MEMBER_VF_ROOT) \
+        mevent_t *_evt = hash_lookup(evth, "member");                   \
+        MCS_NOT_NULLA(_evt);                                            \
+        if (hdf_get_int_value(_evt->hdfrcv, "verify", -1) < MEMBER_VF_ROOT) \
             return nerr_raise(LERR_LIMIT, "%s not admin", mname);       \
     } while (0)
 

@@ -107,9 +107,8 @@ bmoon.spdpost = {
                 o.attach.html(p.attach);
                 o.ourl.attr('href', p.ourl);
                 o.plan = data.plan;
-                o.member = data.member;
-                o.phoneimg.attr('src', bmoon.utl.clotheHTML(data.member.phone));
-                o.contactimg.attr('src', bmoon.utl.clotheHTML(data.member.contact));
+                o.phoneimg.attr('src', bmoon.utl.clotheHTML(data.plan.phone));
+                o.contactimg.attr('src', bmoon.utl.clotheHTML(data.plan.contact));
 
                 o.count.text(--mgd._ntt);
             } else {
@@ -186,18 +185,16 @@ bmoon.spdpost = {
             o.plan.ell.join(',') + '))';
         o.plan.sgeo = '(' + o.plan.sll.join(',') +')';
         o.plan.egeo = '(' + o.plan.ell.join(',') +')';
+        if (phone.length || contact.length) {
+            if (phone) o.plan.phone = phone;
+            if (contact) o.plan.contact = contact;
+        }
 
         var pdata = {
             _op: 'mod',
             plan: JSON.stringify(o.plan),
             _type_plan: 'object'
         };
-        if (phone.length || contact.length) {
-            if (phone) o.member.phone = phone;
-            if (contact) o.member.contact = contact;
-            pdata.member = JSON.stringify(o.member);
-            pdata._type_member = 'object';
-        }
         
         $('.vres', p).remove();
         p.removeClass('success').removeClass('error').addClass('loading');

@@ -31,7 +31,6 @@ NEOERR* bore_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
 NEOERR* bore_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-    mevent_t *evt = hash_lookup(evth, "member");
     char *mname;
 	NEOERR *err;
     
@@ -44,8 +43,7 @@ NEOERR* bore_new_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
 NEOERR* bore_op_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-    mevent_t *evt = hash_lookup(evth, "member");
-    mevent_t *evt_aux = hash_lookup(evth, "aux");
+    mevent_t *evt = hash_lookup(evth, "aux");
     char *mname;
 	NEOERR *err;
     
@@ -53,43 +51,41 @@ NEOERR* bore_op_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
     SET_ADMIN_ACTION(cgi->hdf);
 
-    hdf_copy(evt_aux->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
+    hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 
-    MEVENT_TRIGGER(evt_aux, NULL, REQ_CMD_MEMORY_GET, FLAGS_SYNC);
+    MEVENT_TRIGGER(evt, NULL, REQ_CMD_MEMORY_GET, FLAGS_SYNC);
 
-    hdf_copy(cgi->hdf, PRE_OUTPUT".memory", evt_aux->hdfrcv);
+    hdf_copy(cgi->hdf, PRE_OUTPUT".memory", evt->hdfrcv);
 
     return STATUS_OK;
 }
 
 NEOERR* bore_op_data_mod(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-    mevent_t *evt = hash_lookup(evth, "member");
-    mevent_t *evt_aux = hash_lookup(evth, "aux");
+    mevent_t *evt = hash_lookup(evth, "aux");
     char *mname;
 	NEOERR *err;
 
     MEMBER_CHECK_ADMIN();
 
-    hdf_copy(evt_aux->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
+    hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 
-    MEVENT_TRIGGER(evt_aux, NULL, REQ_CMD_MEMORY_MOD, FLAGS_NONE);
+    MEVENT_TRIGGER(evt, NULL, REQ_CMD_MEMORY_MOD, FLAGS_NONE);
 
     return STATUS_OK;
 }
 
 NEOERR* bore_op_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
-    mevent_t *evt = hash_lookup(evth, "member");
-    mevent_t *evt_aux = hash_lookup(evth, "aux");
+    mevent_t *evt = hash_lookup(evth, "aux");
     char *mname;
 	NEOERR *err;
 
     MEMBER_CHECK_ADMIN();
 
-    hdf_copy(evt_aux->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
+    hdf_copy(evt->hdfsnd, NULL, hdf_get_obj(cgi->hdf, PRE_QUERY));
 
-    MEVENT_TRIGGER(evt_aux, NULL, REQ_CMD_MEMORY_ADD, FLAGS_NONE);
+    MEVENT_TRIGGER(evt, NULL, REQ_CMD_MEMORY_ADD, FLAGS_NONE);
 
     return STATUS_OK;
 }
