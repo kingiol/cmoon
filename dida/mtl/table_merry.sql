@@ -10,7 +10,7 @@ CREATE TABLE city (
 
 CREATE TABLE member (
     mid int PRIMARY KEY,
-    mname varchar(256) NOT NULL DEFAULT '', --email
+    mname varchar(256) NOT NULL DEFAULT '', --equal to userid, in email format
     mnick varchar(256) NOT NULL DEFAULT '',
     msn varchar(256) NOT NULL DEFAULT '',
     mmsn varchar(256) NOT NULL DEFAULT '',

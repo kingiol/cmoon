@@ -48,7 +48,7 @@ static NEOERR* fft_cmd_expect_add(struct fft_entry *e, QueueEntry *q)
  * 输入参数:
  *  必传 id, dad, rect, sgeo, sdate, stime, km
  *  可选 
- * 输出: 1 + 2
+ * 返回: 1 + 2
  *  1, 匹配到的 expect， insert into meet table
  *  2, 匹配到的 expect 且其 gotime == FFT_GOTIME_IMMEDIATE 以数组形式返回，以便后续处理
  */

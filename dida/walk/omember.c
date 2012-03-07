@@ -30,6 +30,7 @@ static void member_after_login(CGI *cgi, HASH *evth, char *mname, char *mnick)
 
     hdf_set_copy(cgi->hdf, PRE_OUTPUT".mnick", PRE_QUERY".mnick");
     hdf_set_copy(cgi->hdf, PRE_OUTPUT".mname", PRE_QUERY".mname");
+    hdf_set_value(cgi->hdf, PRE_OUTPUT".mmsn", mmsn);
 }
 
 NEOERR* member_info_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
@@ -221,8 +222,6 @@ NEOERR* member_logout_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
     MEMBER_CHECK_LOGIN();
 
-    HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".mname", mname);
-    
     hdf_set_value(evt->hdfsnd, "mname", mname);
     hdf_set_value(evt->hdfsnd, "mmsn", "0");
 
@@ -238,8 +237,13 @@ NEOERR* member_check_login_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *
     
     MCS_NOT_NULLB(cgi->hdf, evt);
 
-    HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".mname", mname);
-    HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".mmsn", mmsn);
+    HDF_FETCH_STR(cgi->hdf, PRE_QUERY".mname", mname);
+    HDF_FETCH_STR(cgi->hdf, PRE_QUERY".mmsn", mmsn);
+    if (!mname || !mmsn) {
+        HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".mname", mname);
+        HDF_GET_STR_IDENT(cgi->hdf, PRE_COOKIE".mmsn", mmsn);
+        hdf_set_value(cgi->hdf, PRE_RESERVE".mname", mname);
+    }
 
     hdf_set_value(evt->hdfsnd, "mname", mname);
 

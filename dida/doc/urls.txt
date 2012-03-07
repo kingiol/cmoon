@@ -47,8 +47,8 @@ readme.html
         GET /member/info        查看用户信息页面
 
     obore.h
-        GET bore                随便看看页面
-        GET bore/op             修改随便看看页面
+        GET /bore               随便看看页面
+        GET /bore/op            修改随便看看页面
         ADD /json/bore/op       添加随便看看接口
         MOD /json/bore/op       修改随便看看接口
         GET /bore/preview       随便看看预览页面

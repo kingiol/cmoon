@@ -45,11 +45,10 @@ Plugin {
             member {
                 mid [type=int, require=true] = mid
                 mname [maxlen=256, require=true] = mname
-                mnick [maxlen=256] = mnick
-                msn [maxlen=256] = msn
+                mnick [maxlen=256, require=true] = mnick
+                msn [maxlen=256, require=true] = msn
                 mmsn [maxlen=256] = mmsn
                 male [type=int] = male
-                pass [maxlen=64] = pass
                 statu [type=int] = statu
                 verify [type=int] = verify
                 credit [type=int] = credit
@@ -70,7 +69,6 @@ Plugin {
                 msn [maxlen=256] = msn
                 mmsn [maxlen=256] = mmsn
                 male [type=int] = male
-                pass [maxlen=64] = pass
                 statu [type=int] = statu
                 verify [type=int] = verify
                 credit [type=int] = credit
