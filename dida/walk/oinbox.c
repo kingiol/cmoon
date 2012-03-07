@@ -27,9 +27,7 @@ NEOERR* inbox_multi_add(HDF *datanode, HASH *evth, char *inboxtype)
     if (!hdf_get_obj(evt->hdfsnd, "mmid"))
         return nerr_raise(NERR_ASSERT, "请设置收信用户号码");
 
-    err = mcs_hdf_copy_rep(evt->hdfsnd, NULL,
-                           mcs_hdf_getf(g_cfg, "Inbox.%s", inboxtype),
-                           hdf_get_obj(datanode, PRE_DATASET));
+    err = mtpl_InConfigRend_get(evt->hdfsnd, datanode, "inbox", inboxtype, g_datah);
 	if (err != STATUS_OK) return nerr_pass(err);
     
     MEVENT_TRIGGER(evt, NULL, REQ_CMD_AUX_INBOX_ADD, FLAGS_NONE);

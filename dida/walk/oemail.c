@@ -31,9 +31,7 @@ NEOERR* email_multi_add(HDF *datanode, HASH *evth, char *emailtype)
     if (!hdf_get_obj(evt->hdfsnd, "mto"))
         return nerr_raise(NERR_ASSERT, "请设置收信用户名");
 
-    err = mcs_hdf_copy_rep(evt->hdfsnd, NULL,
-                           mcs_hdf_getf(g_cfg, "Email.%s", emailtype),
-                           hdf_get_obj(datanode, PRE_DATASET));
+    err = mtpl_InConfigRend_get(evt->hdfsnd, datanode, "email", emailtype, g_datah);
 	if (err != STATUS_OK) return nerr_pass(err);
 
     MEVENT_TRIGGER(evt, NULL, REQ_CMD_AUX_EMAIL_ADD, FLAGS_NONE);
@@ -51,9 +49,7 @@ NEOERR* email_add(HDF *datanode, HASH *evth, char *emailtype, char *mname)
     evt = hash_lookup(evth, "aux");
     MCS_NOT_NULLA(evt);
 
-    err = mcs_hdf_copy_rep(evt->hdfsnd, NULL,
-                           mcs_hdf_getf(g_cfg, "Email.%s", emailtype),
-                           hdf_get_obj(datanode, PRE_DATASET));
+    err = mtpl_InConfigRend_get(evt->hdfsnd, datanode, "email", emailtype, g_datah);
 	if (err != STATUS_OK) return nerr_pass(err);
 
     hdf_set_value(evt->hdfsnd, "to", mname);

@@ -42,6 +42,7 @@ NEOERR* plan_leave_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     MEVENT_TRIGGER(evt, NULL, REQ_CMD_PLAN_ADD, FLAGS_SYNC);
     id = hdf_get_int_value(evt->hdfrcv, "id", 0);
     if (id <= 0) return nerr_raise(NERR_ASSERT, "添加路线失败");
+    hdf_set_int_value(plan, "id", id);
 
     /*
      * add subscribe
@@ -81,8 +82,8 @@ NEOERR* plan_leave_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
         /*
          * inbox notify
          */
-        hdf_set_valuef(obj, PRE_DATASET".message.XplansX=<a target=\"_blank\" "   \
-                       "href=\"/plan/info?id=%d\">%d</a>", id, id);
+        hdf_copy(obj, PRE_DATASET".Output.plans.0", plan);
+
         err = inbox_multi_add(obj, evth, "PlanMatched");
         if (err != STATUS_OK) return nerr_pass(err);
 
@@ -100,11 +101,11 @@ NEOERR* plan_leave_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
             
             child = hdf_obj_next(child);
         }
-        hdf_set_valuef(tnode, PRE_DATASET".content.XplansX=<a target=\"_blank\" " \
-                       "href=\"http://%s/plan/info?id=%d\">%d</a>",
-                       SITE_DOMAIN, id, id);
+        hdf_copy(tnode, PRE_DATASET".Output.plans.0", plan);
+
         err = email_multi_add(tnode, evth, "PlanMatched");
         if (err != STATUS_OK) return nerr_pass(err);
+
         hdf_destroy(&tnode);
 
         /*

@@ -277,11 +277,11 @@ NEOERR* member_reset_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     mnick = hdf_get_value(evt->hdfrcv, "mnick", NULL);
     neos_url_escape(mname, &mname_esc, NULL);
 
-    hdf_set_value(cgi->hdf, PRE_DATASET".content.XmnickX", mnick);
-    hdf_set_value(cgi->hdf, PRE_DATASET".content.Xmname_escX", mname_esc);
-    hdf_set_value(cgi->hdf, PRE_DATASET".content.XrlinkX", mnick);
+    hdf_set_value(cgi->hdf, PRE_DATASET".Layout.mnick", mnick);
+    hdf_set_value(cgi->hdf, PRE_DATASET".Layout.mname_esc", mname_esc);
+    hdf_set_value(cgi->hdf, PRE_DATASET".Layout.rlink", rlink);
 
-    err = email_add(cgi->hdf, evth, "MemberReset", mnick);
+    err = email_add(cgi->hdf, evth, "MemberReset", mname);
 	if (err != STATUS_OK) return nerr_pass(err);
 
     SAFE_FREE(mname_esc);

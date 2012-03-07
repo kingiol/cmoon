@@ -6,6 +6,7 @@
 #include "lheads.h"
 
 HDF *g_cfg = NULL;
+HASH *g_datah = NULL;
 
 int main(int argc, char **argv, char **envp)
 {
@@ -28,6 +29,15 @@ int main(int argc, char **argv, char **envp)
     DIE_NOK_CGI(err);
     
     err = mcfg_parse_file(SITE_CONFIG, &g_cfg);
+    DIE_NOK_CGI(err);
+
+    err = mtpl_set_tplpath(PATH_TPL);
+    DIE_NOK_CGI(err);
+
+    err = mtpl_InConfigRend_init(PATH_TPL"/config/email", "email", &g_datah);
+    DIE_NOK_CGI(err);
+
+    err = mtpl_InConfigRend_init(PATH_TPL"/config/inbox", "inbox", &g_datah);
     DIE_NOK_CGI(err);
 
     err = ltpl_init(&tplh, NULL);
@@ -145,6 +155,7 @@ int main(int argc, char **argv, char **envp)
     levt_destroy(evth);
     ldb_destroy(dbh);
     ltpl_destroy(tplh);
+    mtpl_InConfigRend_destroy(g_datah);
     mcfg_cleanup(&g_cfg);
 
     return 0;

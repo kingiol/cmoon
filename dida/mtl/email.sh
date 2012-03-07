@@ -46,9 +46,9 @@ do
 # 当前不支持 cc, bcc。 因为-cc , , , -bcc , , ,会让email报 Smtp error: 503 5.5.1 RCPT first 错误
 # 而， sub(/,+/, ",", $4) 又不起作用。
 #        cmd=`echo ${oneline} | awk -F${FS} '{print "/usr/local/bin/email " $1 " -s " $2 " -cc " $4 " -bcc " $5 $3}'`
-        cmd=`echo ${oneline} | awk -F${FS} '{print "/usr/local/bin/email " $1 " -s " $2 $3}'`
+        cmd=`echo ${oneline} | awk -F${FS} '{print "/usr/local/bin/email " $1 " -html -s " $2 $3}'`
         echo "send mail for ${ids}..."
-#        echo ${cmd}
+        echo ${cmd}
         ${cmd} < ${TMPFILEMAIL}.${checksum} 2>&1 | grep 'FATAL'
         if [ $? = 0 ]; then
             echo "failure ${ret}."
