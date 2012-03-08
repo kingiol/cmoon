@@ -86,37 +86,36 @@ Plugin {
         InsertCol {
             plan {
                 mid [type=int, require=true] = mid
-                phone [maxlen=128] = phone
+                phone [maxlen=128, require=true] = phone
                 contact [maxlen=128] = contact
 
                 ori [type=int] = ori
                 oid [maxlen=64] = oid
                 ourl [maxlen=256] = ourl
 
-                dad [type=int] = dad
+                dad [type=int, require=true] = dad
                 nick [maxlen=32] = nick
                 statu [type=int] = statu
-                repeat [type=int] = repeat
+                repeat [type=int, require=true] = repeat
                 seat [type=int] = seat
                 fee [type=int] = fee
                 attach [maxlen=256] = attach
 
-                cityid [type=int] = cityid
                 scityid [type=int] = scityid
                 ecityid [type=int] = ecityid
                 saddr [maxlen=256] = saddr
                 eaddr [maxlen=256] = eaddr
-                sgeo [type=point] = sgeo
-                egeo [type=point] = egeo
+                sgeo [type=point, require=true] = sgeo
+                egeo [type=point, require=true] = egeo
                 marks [maxlen=256] = marks
                 
-                rect [type=box] = rect
+                rect [type=box, require=true] = rect
                 route [type=path] = route
-                km [type=float] = km
+                km [type=float, require=true] = km
 
-                sdate [maxlen=16] = sdate
+                sdate [maxlen=16, require=true] = sdate
                 edate [maxlen=16] = edate
-                stime = stime
+                stime [require=true] = stime
                 etime = etime
                 estmin [type=int] = estmin
             }

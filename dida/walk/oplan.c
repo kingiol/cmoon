@@ -21,7 +21,7 @@ NEOERR* plan_match_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 NEOERR* plan_leave_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 {
     mevent_t *evt;
-    char *mname;
+    char *mname = NULL;
     HDF *plan;
     int id, expect;
     NEOERR *err;
@@ -34,7 +34,16 @@ NEOERR* plan_leave_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
     if (!evt) return nerr_raise(NERR_ASSERT, "plan null");
 
     hdf_copy(evt->hdfsnd, NULL, plan);
-    hdf_set_value(evt->hdfsnd, "mid", "0");
+
+    err = member_check_login_data_get(cgi, dbh, evth, ses);
+	if (err == STATUS_OK) {
+        mname = hdf_get_value(cgi->hdf, PRE_RESERVE".mname", NULL);
+        hdf_set_value(evt->hdfsnd, "mname", mname);
+    } else {
+        hdf_set_value(evt->hdfsnd, "mid", "0");
+        nerr_ignore(&err);
+        mname = NULL;
+    }
 
     /*
      * add plan
@@ -49,7 +58,7 @@ NEOERR* plan_leave_data_add(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
      */
     expect = hdf_get_int_value(plan, "subscribe", FFT_EXPECT_NONE);
     if (expect != FFT_EXPECT_NONE) {
-        MEMBER_CHECK_LOGIN();
+        if (!mname) return nerr_raise(LERR_NOTLOGIN, "not login");
 
         evt = hash_lookup(evth, "fft");
         MCS_NOT_NULLA(evt);
