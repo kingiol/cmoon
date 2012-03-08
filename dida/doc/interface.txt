@@ -27,7 +27,7 @@ dida 目前只提供 http 接口供手机客户端、其他APP调用。 若需�
   操作失败时， errcode, errmsg, errtrace 是必返回的成员
 
 urls.txt 中，每个接口都会对应一个 .h 头文件， 该接口的参数及返回请查看对应的头文件中(cmoon/dida/walk/o*.h)的说明，
-接口安以下规则对应相应的函数：
+接口按以下规则对应相应的函数：
         GET /json/member/login  对应 omember.h 的 member_login_data_get()
         ADD /json/member/new    对应 omember.h 的 member_new_data_add()
         DEL /json/spd/post/do   对应 ospd.h    的 spd_post_do_data_del()

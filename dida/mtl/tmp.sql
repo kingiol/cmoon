@@ -1,4 +1,1 @@
-ALTER TABLE member DROP COLUMN ori;
-ALTER TABLE plan ADD COLUMN phone varchar(128) NOT NULL DEFAULT '';
-ALTER TABLE plan ADD COLUMN contact varchar(128) NOT NULL DEFAULT '';
-
+ALTER TABLE plan DROP COLUMN cityid;

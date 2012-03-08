@@ -85,7 +85,6 @@ CREATE TABLE plan (
     fee int NOT NULL DEFAULT 0,
     attach varchar(256) NOT NULL DEFAULT '',
 
-    cityid int NOT NULL DEFAULT 0,
     scityid int NOT NULL DEFAULT 0,
     ecityid int NOT NULL DEFAULT 0,
     saddr varchar(256) NOT NULL DEFAULT '',
