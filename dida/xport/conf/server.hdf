@@ -101,21 +101,22 @@ Plugin {
                 fee [type=int] = fee
                 attach [maxlen=256] = attach
 
+                cityid [type=int] = cityid
                 scityid [type=int] = scityid
                 ecityid [type=int] = ecityid
                 saddr [maxlen=256] = saddr
                 eaddr [maxlen=256] = eaddr
-                sgeo [type=point, require=true] = sgeo
-                egeo [type=point, require=true] = egeo
+                sgeo [type=point] = sgeo
+                egeo [type=point] = egeo
                 marks [maxlen=256] = marks
                 
-                rect [type=box, require=true] = rect
+                rect [type=box] = rect
                 route [type=path] = route
-                km [type=float, require=true] = km
+                km [type=float] = km
 
                 sdate [maxlen=16, require=true] = sdate
                 edate [maxlen=16] = edate
-                stime [require=true] = stime
+                stime = stime
                 etime = etime
                 estmin [type=int] = estmin
             }
