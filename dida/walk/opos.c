@@ -69,3 +69,21 @@ NEOERR* city_s_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
 
     return STATUS_OK;
 }
+
+NEOERR* city_id_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses)
+{
+    mevent_t *evt = hash_lookup(evth, "city");
+    char *id;
+
+    MCS_NOT_NULLB(cgi->hdf, evt);
+
+    HDF_GET_STR(cgi->hdf, PRE_QUERY".id", id);
+
+    hdf_set_value(evt->hdfsnd, "id", id);
+
+    MEVENT_TRIGGER(evt, NULL, REQ_CMD_CITY_BY_ID, FLAGS_SYNC);
+
+    hdf_copy(cgi->hdf, PRE_OUTPUT, evt->hdfrcv);
+
+    return STATUS_OK;
+}

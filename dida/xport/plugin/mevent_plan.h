@@ -33,7 +33,7 @@
     " p.stime AS stime, p.etime AS etime, p.estmin AS estmin, "         \
     " to_char(p.intime, 'YYYY-MM-DD') as intime, "                      \
     " to_char(p.uptime, 'YYYY-MM-DD') as uptime, "                      \
-    " c.geopos AS geopos "
+    " c.geopos AS geopos, c.s AS city "
 
 enum {
     REQ_CMD_PLAN_GET = 1001,

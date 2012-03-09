@@ -1,6 +1,4 @@
-urls.txt 参数明确 (plan/leave 时无 scityid 不应报错)
 爬虫后台/批量化
-加速地图载入（mapabc?）
 inbox 的展现
 统计
 
@@ -24,3 +22,5 @@ DONE cgi_register_parse_cb 限制上传大小
 DONE “邮件订阅该线路”
 DONE (member有效化) plan 自带联系方式，这样不必每个plan注册一个垃圾member
 DONE email 支持 html
+DONE urls.txt 参数明确 (plan/leave 时无 scityid 不应报错)
+DONE 加速地图载入（baidu）

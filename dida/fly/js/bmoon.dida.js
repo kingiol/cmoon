@@ -188,6 +188,29 @@ bmoon.dida = {
         }
 
         get(0);
+    },
+
+    // {"province":"","city":"长沙市","district":"开福区","street":"","streetNumber":"","business":"开福寺"}
+    getCityByPoi: function(data, callback) {
+        var o = bmoon.dida.init();
+
+        var arrs = [data.district, data.city, data.province];
+        
+        var get = function (pos) {
+            if (arrs.length == 0 || pos == arrs.length) return callback(null);
+            
+            var city = arrs[pos];
+
+            $.getJSON('/json/city/s', {c: city}, function(data) {
+                if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
+                    return callback(data.city);
+                } else {
+                    return get(pos+1);
+                }
+            });
+        }
+
+        get(0);
     }
 };
 

@@ -54,8 +54,8 @@ NEOERR* plan_match_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
  *                  nick - 称呼（张先生:D）
  *                  repeat* - 路线需求重复 0 一次 1 每天 2 每周 详见 table_merry.sql
  *                  attach - 用户留言
- *                  scityid - 起点城市id，详见 city_s_data_get()
- *                  ecityid - 终点城市id，详见 city_s_data_get()
+ *                  scityid* - 起点城市id，详见 getCityByPoi() of bmoon.dida.js
+ *                  ecityid* - 终点城市id，详见 getCityByPoi() of bmoon.dids.js
  *                  saddr - 起点文字
  *                  eaddr - 终点文字
  *                  sgeo* - 起点地理经纬度坐标

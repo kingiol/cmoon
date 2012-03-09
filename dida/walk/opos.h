@@ -37,5 +37,12 @@ NEOERR* city_ip_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
  */
 NEOERR* city_s_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
 
+/*
+ * Description: 通过id获取城市信息
+ * Request: id* - 待查city id
+ * Returns: None
+ */
+NEOERR* city_id_data_get(CGI *cgi, HASH *dbh, HASH *evth, session_t *ses);
+
 __END_DECLS
 #endif /* __OPOS_H__ */

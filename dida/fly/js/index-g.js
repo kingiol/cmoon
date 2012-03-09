@@ -2,31 +2,20 @@
 bmoon.index = {
     version: '1.0',
 
-    // {"province":"","city":"长沙市","district":"开福区","street":"","streetNumber":"","business":"开福寺"}
-    _strFromPoi: function(d) {
-        if (bmoon.utl.type(d) == 'Object')
-            return d.province + d.city + d.district + d.street + d.streetNumber + d.business;
-    },
-    
-    _formInfoTitle: function(x) {
-        if (x != 'e') return '<b>线路起点</b>';
-        else return '<b>线路终点</b>';
+    _formAddr: function(name, addrs, loc) {
+        if (addrs) {
+            return '<div><strong>' + name + '</strong><br />' +
+                [(addrs[0] &&
+                  addrs[0].short_name || ''),
+                 (addrs[1] &&
+                  addrs[1].short_name || ''),
+                 (addrs[2] &&
+                  addrs[2].short_name || '')
+                ].join(' ') +
+                '（' + loc.lat().toFixed(4) + ', ' + loc.lng().toFixed(4) + '）';
+        } else return ' ';
     },
 
-    _formInfoContent: function(result) {
-        var s = result.address,
-        pois = result.surroundingPois;
-
-        if (pois && pois.length > 0) {
-            s += '<br /><b>周边信息</b>'
-            for (var i = 0; i < pois.length; i++) {
-                s += '<br />' + pois[i].title;
-            }
-        }
-
-        return s;
-    },
-    
     init: function() {
         var o = bmoon.index;
         if (o.inited) return o;
@@ -80,29 +69,35 @@ bmoon.index = {
         var o = bmoon.index.init();
 
         geo = geo || [28.188,113.033];
-        o.g_lat = new BMap.Point(geo[1], geo[0]);
-        o.g_map = new BMap.Map("map");
-        o.g_map.enableScrollWheelZoom();
-        o.g_map.centerAndZoom(o.g_lat, 13);
-
-        o.g_sauto = new BMap.Autocomplete({
-            location: o.g_map,
-            input: 'saddr'});
-        o.g_eauto = new BMap.Autocomplete({
-            location: o.g_map,
-            input: 'eaddr'});
-        o.g_geocode = new BMap.Geocoder();
-
-        o.g_smarker = new BMap.Marker();
-        o.g_emarker = new BMap.Marker();
-        o.g_smarker.enableDragging();
-        o.g_emarker.enableDragging();
-        o.g_direct = new BMap.Polyline();
-        o.g_prect = new BMap.Polygon();
-        o.g_infow = new BMap.InfoWindow('起点', {
-            width: 250,
-            height: 100
+        o.g_lat = new google.maps.LatLng(geo[0], geo[1]);
+        o.g_map = new google.maps.Map($('#map')[0], {
+            zoom: 10,
+            center: o.g_lat,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            region: 'zh-CN'
         });
+
+        o.g_sauto = new google.maps.places.Autocomplete($('#saddr')[0]);
+        o.g_eauto = new google.maps.places.Autocomplete($('#eaddr')[0]);
+        o.g_geocode = new google.maps.Geocoder();
+        o.g_dirservice = new google.maps.DirectionsService();
+        o.g_dirrender = new google.maps.DirectionsRenderer();
+        o.g_prect = new google.maps.Rectangle(); // matched plan's rect
+        o.g_infow = new google.maps.InfoWindow();
+        o.g_smarker = new google.maps.Marker({
+            map: o.g_map,
+            draggable: true,
+            title: '设置起始位置'
+        });
+        o.g_emarker = new google.maps.Marker({
+            map: o.g_map,
+            draggable: true,
+            title: '设置终点位置'
+        });
+
+        o.g_sauto.bindTo('bounds', o.g_map);
+        o.g_eauto.bindTo('bounds', o.g_map);
+        o.g_dirrender.setMap(o.g_map);
         o.bindMapChange();
     },
 
@@ -126,21 +121,15 @@ bmoon.index = {
             }
         });
         
-        o.bindClick();
-        o.setDefault();
-        bmoon.utl.loadJS('http://api.map.baidu.com/api?v=1.3&callback=bmoon.index.onMapReady');
-    },
-
-    onMapReady: function() {
-        var o = bmoon.index.init();
-
         //$.getJSON('/json/city/ip', {ip: '118.145.22.78'}, function(data) {
         $.getJSON('/json/city/ip', null, function(data) {
             if (data.success == 1 && bmoon.utl.type(data.city) == 'Object') {
                 o.initMap(bmoon.dida.dbpoint2ll(data.city.geopos));
-                o.city = data.city.s;
             } else o.initMap();
         });
+
+        o.bindClick();
+        o.setDefault();
     },
 
     bindClick: function() {
@@ -166,14 +155,14 @@ bmoon.index = {
                         });
                     }
                 }
+                if (!$('.' + $(this).attr('inpcheck')).inputval()) {
+                    $(this).removeAttr('checked');
+                    return;
+                }
                 if (!bmoon.dida.loginCheck()) {
                     bmoon.dida.loginhint.html('订阅线路需要登录');
                     bmoon.dida.reloadAfterLogin = false;
                     bmoon.dida.loginoverlay.load();
-                }
-                if (!$('.' + $(this).attr('inpcheck')).inputval()) {
-                    $(this).removeAttr('checked');
-                    return;
                 }
             }
         });
@@ -205,7 +194,7 @@ bmoon.index = {
         o.e_mc_noresult.fadeOut();
         o.e_mc_result.fadeOut();
         o.e_mc_nav.fadeOut();
-        //o.g_prect.setMap(null);
+        o.g_prect.setMap(null);
         o.mplans = {};
         
         if (!plan.sll) {
@@ -304,16 +293,24 @@ bmoon.index = {
 
     rendPlan: function(ncur) {
         var o = bmoon.index.init();
-
+        
         var plan = o.mplans[ncur],
-        geo = bmoon.dida.dbbox2ll(plan.rect);
-        
-        o.g_prect.setPath([
-            new BMap.Point(geo[0][1], geo[0][0]),
-            new BMap.Point(geo[1][1], geo[1][0])
-        ]);
-        
-        //o.g_map.addOverlay(o.g_prect);
+        geo = bmoon.dida.dbbox2ll(plan.rect),
+        bounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(geo[0][0], geo[0][1]),
+          new google.maps.LatLng(geo[1][0], geo[1][1])
+        );
+
+        o.g_prect.setOptions({
+            strokeColor: "#008888",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#aaaaaa",
+            fillOpacity: 0.35,
+            bounds: bounds,
+            map: o.g_map
+        });
+
         o.rendMatch(plan, ncur);
     },
 
@@ -357,34 +354,21 @@ bmoon.index = {
                             plan.id);
     },
 
-    // {"province":"","city":"长沙市","district":"开福区","street":"","streetNumber":"","business":"开福寺"}
+    // {address_components: [], formatted_address: "", geometry: {}...} gdata.js
     upPlan: function(x, data) {
         var o = bmoon.index.init();
 
-        var p = o.plan,
-        s = o._strFromPoi(data);
+        var p = o.plan;
 
-        if (x != 'e') p.saddr = s;
-        else p.eaddr = s;
-
-        if (data.point) {
-            if (x != 'e') p.sll = [data.point.lat, data.point.lng];
-            else {
-                p.ell = [data.point.lat, data.point.lng];
-                o.rendDirect();
-            }
+        if (x != 'e') {
+            p.sll = [data.geometry.location.lat(), data.geometry.location.lng()];
+            p.saddr = data.formatted_address;
         } else {
-            o.g_geocode.getPoint(s, function(point) {
-                if (!point) return;
-                if (x != 'e') p.sll = [point.lat, point.lng];
-                else {
-                    p.ell = [point.lat, point.lng];
-                    o.rendDirect();
-                }
-            }, o.city);
+            p.ell = [data.geometry.location.lat(), data.geometry.location.lng()];
+            p.eaddr = data.formatted_address;
         }
 
-        bmoon.dida.getCityByPoi(data, function(city) {
+        bmoon.dida.getCityByGeoresult(data, function(city) {
             if (bmoon.utl.type(city) == 'Object') {
                 if (x != 'e') p.scityid = city.id;
                 else p.ecityid = city.id;
@@ -397,37 +381,36 @@ bmoon.index = {
 
         if (!o.plan.sll || !o.plan.ell) return;
 
-        var km = bmoon.utl.earthDis(o.plan.sll, o.plan.ell);
-
-        o.e_km.html('约 '+ km +' 千米');
-
-        if (km > 10 && km < 100) o.g_map.setZoom(12);
-        else if (km > 100 && km < 300) o.g_map.setZoom(9);
-        else if (km > 300 && km < 600) o.g_map.setZoom(7);
-        else if (km > 600) o.g_map.setZoom(6);
-
-        o.g_direct.setPath([
-            new BMap.Point(o.plan.sll[1], o.plan.sll[0]),
-            new BMap.Point(o.plan.ell[1], o.plan.ell[0])
-        ]);
-        o.g_map.addOverlay(o.g_direct);
+        o.e_km.html('约 '+ bmoon.utl.earthDis(o.plan.sll, o.plan.ell) +' 千米');
+        
+        var opts = {
+            origin: new google.maps.LatLng(o.plan.sll[0], o.plan.sll[1]),
+            destination: new google.maps.LatLng(o.plan.ell[0], o.plan.ell[1]),
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        
+        o.g_dirservice.route(opts, function(result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                o.g_dirrender.setDirections(result);
+            }
+        });
     },
 
     bindMapChange: function() {
         var o = bmoon.index.init();
 
-        o.g_sauto.addEventListener('onconfirm', function(res) {
-            o.autoChanged('s', res);
-        });
-        o.g_eauto.addEventListener('onconfirm', function(res) {
-            o.autoChanged('e', res);
-        });
-        
-        o.g_smarker.addEventListener('dragend', function(e) {
+        google.maps.event.addListener(o.g_smarker, 'dragend', function() {
             o.markDraged('s');
         });
-        o.g_emarker.addEventListener('dragend', function(e) {
+        google.maps.event.addListener(o.g_emarker, 'dragend', function() {
             o.markDraged('e');
+        });
+
+        google.maps.event.addListener(o.g_sauto, 'place_changed', function() {
+            o.autoChanged('s');
+        });
+        google.maps.event.addListener(o.g_eauto, 'place_changed', function() {
+            o.autoChanged('e');
         });
     },
 
@@ -442,52 +425,52 @@ bmoon.index = {
         }
 
         var pos = marker.getPosition();
-        
-        o.g_geocode.getLocation(pos, function(result) {
-            if (result.surroundingPois && result.surroundingPois.length > 0) {
-                var poi = result.surroundingPois[0];
-                addr.val(poi.address + poi.title);
-                result.addressComponents.point = poi.point;
-            } else {
-                addr.val(result.address);
-                result.addressComponents.point = result.point;
+        o.g_geocode.geocode({latLng: pos}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                addr.val(results[0].formatted_address);
+                o.g_infow.setContent(o._formAddr(
+                    results[0].address_components[0].short_name,
+                    results[0].address_components,
+                    results[0].geometry.location));
+                o.g_infow.open(o.g_map, marker);
+                setTimeout(function() {o.g_infow.close();}, 2000);
+
+                o.upPlan(x, results[0]);
+                o.rendDirect();
             }
-            o.upPlan(x, result.addressComponents);
-
-            o.g_infow.setTitle(o._formInfoTitle(x));
-            o.g_infow.setContent(o._formInfoContent(result));
-
-            marker.openInfoWindow(o.g_infow);
-            setTimeout(function() {marker.closeInfoWindow();}, 3000);
         });
     },
-    
-    // res.item = {"index":2,"value":{"province":"","city":"长沙市","district":"开福区","street":"","streetNumber":"","business":"开福寺"}}}
-    autoChanged: function(x, res) {
+
+    autoChanged: function(x) {
         var o = bmoon.index.init();
-
+        
         var marker = o.g_smarker,
-        p = o.plan,
-        s = o._strFromPoi(res.item.value);
-
+        auto = o.g_sauto;
+        
         if (x == 'e') {
             marker = o.g_emarker;
+            auto = o.g_eauto;
         }
 
-        o.g_geocode.getPoint(s, function(point) {
-            if (!point) return;
-            marker.setPosition(point);
-            o.g_map.centerAndZoom(point, 13);
-            o.g_map.addOverlay(marker);
+        o.g_infow.close();
+        var place = auto.getPlace();
+        if (place.geometry.viewport) {
+            o.g_map.fitBounds(place.geometry.viewport);
+        } else {
+            o.g_map.setCenter(place.geometry.location);
+        }
+        
+        marker.setPosition(place.geometry.location);
+        
+        o.g_infow.setContent(o._formAddr(
+            place.name,
+            place.address_components,
+            place.geometry.location));
+        o.g_infow.open(o.g_map, marker);
+        setTimeout(function() {o.g_infow.close();}, 2000);
 
-            o.g_infow.setTitle(o._formInfoTitle(x));
-            o.g_infow.setContent(o._strFromPoi(res.item.value));
-
-            marker.openInfoWindow(o.g_infow);
-            setTimeout(function() {marker.closeInfoWindow();}, 2000);
-        }, o.city);
-
-        o.upPlan(x, res.item.value);
+        o.upPlan(x, place);
+        o.rendDirect();
     }
 };
 
