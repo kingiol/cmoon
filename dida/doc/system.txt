@@ -122,6 +122,14 @@ server
 postgresql
 ==========
 
+0
+-
+Debian                                          RedHat
+apt-get install postgresql-8.4                  yum install postgresql84-server.i386
+                                                service postgresql initdb
+                                                /etc/init.d/postgresql start
+
+
 1
 -
 #su postgres
