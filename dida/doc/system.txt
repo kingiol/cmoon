@@ -2,16 +2,11 @@ lighttpd
 ========
 1
 -
-(dev)#cd /var/www && ln -s /home/bigml/web/moon/dida dida
-(run)#cd /var/www && ln -s /usr/local/moon/dida dida
+...lighttpd.conf
++mod_rewrite
++mod_expire
 
 2
--
-...lighttpd.conf
-mod_rewrite
-mod_expire
-
-3
 -
 (dev)
     ...10-simple-vhost.conf
@@ -85,7 +80,7 @@ spawn-fcgi -d /var/www/dida/fly/run/ -f /var/www/dida/fly/run/viki -a 127.0.0.1 
 server
 {
     listen 80;
-    server_name *.dida.com;
+    server_name *.dididada.org;
     
     index index.html index.htm;
     root  /var/www/dida/fly;
@@ -94,7 +89,7 @@ server
     rewrite ^/([^\.]+)\?(.*[^\/])$  /run/viki?ScriptName=$1&$2 last;
     
     location ~ ^/run/.*$ {
-        include fcgi.conf;
+        include fastcgi.conf;
         fastcgi_pass 127.0.0.1:9001;
         fastcgi_index viki;
         fastcgi_param SCRIPT_FILENAME  /var/www/dida/fly/run/$fastcgi_script_name;
@@ -125,7 +120,7 @@ postgresql
 0
 -
 Debian                                          RedHat
-apt-get install postgresql-8.4                  yum install postgresql84-server.i386
+                                                yum install postgresql84-server.i386
                                                 service postgresql initdb
                                                 /etc/init.d/postgresql start
 
@@ -162,6 +157,9 @@ $psql -U postgres
 -
 $psql -U dida merry
 =>\i /var/www/dida/mtl/table_merry.sql
+=>\i /var/www/dida/mtl/table_aux.sql
+=>\i /var/www/dida/mtl/table_fireflight.sql
+=>\i /var/www/dida/mtl/data_city.sql
 
 
 备注:
@@ -169,4 +167,18 @@ $psql -U dida merry
     pg_ident.conf 文件只是在 认证方式为 ident 的时候配合修改(ident也可以存在于TCP/IP方式)
     关于 pg_hba.conf 的说明可以参考 http://www.chinaunix.net/jh/18/8176.html
 
-    useradd -d /opt -g code -N forge
+    RedHat系统, /var/lib/pgsql/data/pg_hba.conf 需要注释掉原有的 local all all ident
+    并将
+        host    all         all         127.0.0.1/32          ident
+    改为
+        host    all         all         127.0.0.1/32          md5
+
+
+启动开发环境
+=========
+# cd /var/www && ln -s /your/path/to/moon/dida dida
+# cd /var/www/dida/xport; make install
+$ cd /var/www/dida/pager; ./static
+$ mkdir /var/log/moon/dida
+$ killall mevent; sleep 1; /var/www/dida/xport/daemon/mevent -c /var/www/dida/xport/conf/server.hdf
+# /etc/init.d/lighttpd start
