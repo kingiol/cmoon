@@ -53,7 +53,7 @@ CREATE TABLE email (
     PRIMARY KEY (id)
 );
 
-CREATE INDEX email_index ON email (state, gotime);
+CREATE INDEX email_index ON email (statu, gotime);
 CREATE TRIGGER tg_uptime_email BEFORE UPDATE ON email FOR EACH ROW EXECUTE PROCEDURE update_time();
 
 -- OWN Aggregate Functions

@@ -25,7 +25,7 @@ CREATE TABLE member (
     contact varchar(128) NOT NULL DEFAULT '',
     intime timestamp DEFAULT now()
 );
-CREATE INDEX member_index ON member (ori, male, verify);
+CREATE INDEX member_index ON member (male, verify);
 
 CREATE TABLE memberreset (
        mname varchar(256) NOT NULL DEFAULT '',
@@ -85,6 +85,7 @@ CREATE TABLE plan (
     fee int NOT NULL DEFAULT 0,
     attach varchar(256) NOT NULL DEFAULT '',
 
+    cityid int NOT NULL DEFAULT 0,
     scityid int NOT NULL DEFAULT 0,
     ecityid int NOT NULL DEFAULT 0,
     saddr varchar(256) NOT NULL DEFAULT '',
