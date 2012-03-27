@@ -1,5 +1,4 @@
-tmp/
-.svn/
-.depend
-cscope.files
-cscope.out
+bin
+*.class
+gen
+
