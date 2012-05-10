@@ -6,4 +6,4 @@ cscope.out
 bin
 *.class
 gen
-
+.DS_Store
