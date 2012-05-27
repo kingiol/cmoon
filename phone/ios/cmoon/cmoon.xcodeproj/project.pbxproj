@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1422D02D1571CDFC00478932 /* Province.m in Sources */ = {isa = PBXBuildFile; fileRef = 1422D02C1571CDFC00478932 /* Province.m */; };
+		1422D0301571D05D00478932 /* IpInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1422D02F1571D05D00478932 /* IpInfo.m */; };
+		1422D0331571D32500478932 /* HttpSendAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1422D0321571D32500478932 /* HttpSendAction.m */; };
+		1422D0351571DB8400478932 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1422D0341571DB8400478932 /* SystemConfiguration.framework */; };
 		14AA475D155B665A009324FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AA475C155B665A009324FD /* UIKit.framework */; };
 		14AA475F155B665A009324FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AA475E155B665A009324FD /* Foundation.framework */; };
 		14AA4761155B665A009324FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AA4760155B665A009324FD /* CoreGraphics.framework */; };
@@ -19,6 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1422D02B1571CDFC00478932 /* Province.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Province.h; sourceTree = "<group>"; };
+		1422D02C1571CDFC00478932 /* Province.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Province.m; sourceTree = "<group>"; };
+		1422D02E1571D05D00478932 /* IpInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpInfo.h; sourceTree = "<group>"; };
+		1422D02F1571D05D00478932 /* IpInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpInfo.m; sourceTree = "<group>"; };
+		1422D0311571D32500478932 /* HttpSendAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpSendAction.h; sourceTree = "<group>"; };
+		1422D0321571D32500478932 /* HttpSendAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpSendAction.m; sourceTree = "<group>"; };
+		1422D0341571DB8400478932 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		14AA4758155B665A009324FD /* cmoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cmoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14AA475C155B665A009324FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		14AA475E155B665A009324FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -41,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1422D0351571DB8400478932 /* SystemConfiguration.framework in Frameworks */,
 				14AA475D155B665A009324FD /* UIKit.framework in Frameworks */,
 				14AA475F155B665A009324FD /* Foundation.framework in Frameworks */,
 				14AA4761155B665A009324FD /* CoreGraphics.framework in Frameworks */,
@@ -50,9 +62,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1422D0291571CDC600478932 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				1422D02B1571CDFC00478932 /* Province.h */,
+				1422D02C1571CDFC00478932 /* Province.m */,
+				1422D02E1571D05D00478932 /* IpInfo.h */,
+				1422D02F1571D05D00478932 /* IpInfo.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		14AA474D155B665A009324FD = {
 			isa = PBXGroup;
 			children = (
+				1422D0291571CDC600478932 /* model */,
 				14AA47A1155B6A81009324FD /* thirdpart */,
 				14AA477F155B67D3009324FD /* core */,
 				14AA477A155B6750009324FD /* ui */,
@@ -74,6 +98,7 @@
 		14AA475B155B665A009324FD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1422D0341571DB8400478932 /* SystemConfiguration.framework */,
 				14AA475C155B665A009324FD /* UIKit.framework */,
 				14AA475E155B665A009324FD /* Foundation.framework */,
 				14AA4760155B665A009324FD /* CoreGraphics.framework */,
@@ -122,6 +147,8 @@
 		14AA477F155B67D3009324FD /* core */ = {
 			isa = PBXGroup;
 			children = (
+				1422D0311571D32500478932 /* HttpSendAction.h */,
+				1422D0321571D32500478932 /* HttpSendAction.m */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -202,6 +229,9 @@
 				14AA476D155B665A009324FD /* DidaAppDelegate.m in Sources */,
 				14AA4773155B665A009324FD /* DidaViewController.m in Sources */,
 				14AA47A4155B6A9D009324FD /* JSONKit.m in Sources */,
+				1422D02D1571CDFC00478932 /* Province.m in Sources */,
+				1422D0301571D05D00478932 /* IpInfo.m in Sources */,
+				1422D0331571D32500478932 /* HttpSendAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +277,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -265,7 +295,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

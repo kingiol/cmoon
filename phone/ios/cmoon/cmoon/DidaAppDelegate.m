@@ -7,6 +7,8 @@
 //
 
 #import "DidaAppDelegate.h"
+#import "HttpSendAction.h"
+
 
 @implementation DidaAppDelegate
 
@@ -15,6 +17,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [HttpSendAction sendHttp:@"http://www.imdida.org/" withParam:@"json/city/ip"];
     return YES;
 }
 							
