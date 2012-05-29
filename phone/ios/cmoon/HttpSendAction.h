@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HttpSendAction : NSObject
+@interface HttpSendAction : NSObject<NSURLConnectionDelegate> {
+    NSMutableData * responseData;
+}
 
 +(void) sendHttp:(NSString *) url withParam:(NSString *)param;
 
