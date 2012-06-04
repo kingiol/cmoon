@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPClient.h"
-#import "AFJSONRequestOperation.h"
 #import "AFNetworking.h"
 
 
