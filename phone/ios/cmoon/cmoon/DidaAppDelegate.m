@@ -17,7 +17,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [HttpJsonAction sendRequest:@"http://www.imdida.org/json/city/ip"];
+   
     return YES;
 }
 							
