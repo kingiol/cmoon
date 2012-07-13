@@ -7,7 +7,6 @@
 //
 
 #import "DidaAppDelegate.h"
-#import "HttpJsonAction.h"
 
 
 @implementation DidaAppDelegate
