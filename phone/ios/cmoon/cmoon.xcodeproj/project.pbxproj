@@ -31,6 +31,7 @@
 		14AA4770155B665A009324FD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14AA476E155B665A009324FD /* MainStoryboard.storyboard */; };
 		14AA4773155B665A009324FD /* DidaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AA4772155B665A009324FD /* DidaViewController.m */; };
 		14AA47A4155B6A9D009324FD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AA47A3155B6A9D009324FD /* JSONKit.m */; };
+		14F6390515B40895002D5198 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F6390415B40895002D5198 /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,8 @@
 		14AA4772155B665A009324FD /* DidaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DidaViewController.m; sourceTree = "<group>"; };
 		14AA47A2155B6A9D009324FD /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		14AA47A3155B6A9D009324FD /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		14F6390315B40895002D5198 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		14F6390415B40895002D5198 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +240,8 @@
 		14AA47A1155B6A81009324FD /* thirdpart */ = {
 			isa = PBXGroup;
 			children = (
+				14F6390315B40895002D5198 /* MBProgressHUD.h */,
+				14F6390415B40895002D5198 /* MBProgressHUD.m */,
 				14AA47A2155B6A9D009324FD /* JSONKit.h */,
 				14AA47A3155B6A9D009324FD /* JSONKit.m */,
 			);
@@ -322,6 +327,7 @@
 				147A6CCA15AFCF6500B2F4D5 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				147A6CCB15AFCF6500B2F4D5 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				147A6CD315AFE1D100B2F4D5 /* DeviceMsg.m in Sources */,
+				14F6390515B40895002D5198 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
