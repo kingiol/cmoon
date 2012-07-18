@@ -9,28 +9,25 @@
 #import "DidaNetWorkEngine.h"
 
 @implementation DidaNetWorkEngine
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        
-    }
-    [self useCache];//使用缓存
-    return self;
-}
 
+/**
+ *Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*\*;q=0.8
+* Accept-Charset:UTF-8,*;q=0.5
+Accept-Encoding:gzip,deflate,sdch
+Accept-Language:en-US,en;q=0.8
+Cache-Control:max-age=0
+Connection:keep-alive
+ */
+-(void) sendServerRequest:(NSString*) path withParam:(NSMutableDictionary*) params userMethod:(NSString*) method {
+    MKNetworkOperation * op = [self operationWithPath:path params:nil httpMethod:method];
 
--(void) sendServerRequest:(NSMutableDictionary*) params userMethod:(NSString*) method {
-    MKNetworkOperation * op = [self operationWithPath:API_SERVER params:params httpMethod:method];
-    NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
-    [headerFields setValue:@"iOS" forKey:@"x-client-identifier"];
-    [op addHeaders:headerFields];
-   // op addHeaders:<#(NSDictionary *)#>
+    
     [op onCompletion:^(MKNetworkOperation *completedOperation) {
         [self parseJsonData:completedOperation];  
     } onError:^(NSError *error) {
         [self alertError:error];
     }];
+    [self enqueueOperation:op];
 }
 /**
  * @param 解析json数据

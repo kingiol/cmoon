@@ -7,6 +7,7 @@
 //
 
 #import "DidaAppDelegate.h"
+#import "DidaNetWorkEngine.h"
 
 
 @implementation DidaAppDelegate
@@ -16,7 +17,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-   
+    NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
+    [headerFields setValue:@"UTF-8,*;q=0.5" forKey:@"Accept-Charset"];
+    [headerFields setValue:@"text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*'\'*;q=0.8" forKey:@"Accept"];
+    [headerFields setValue:@"Mozilla/5.0" forKey:@"User-Agent"];
+    [headerFields setValue:@"gzip,deflate,sdch" forKey:@"Accept-Encoding"];
+
+    DidaNetWorkEngine * engine = [[DidaNetWorkEngine alloc] initWithHostName:@"imdida.org" customHeaderFields:headerFields];
+    [headerFields release];
+    // not that these header fields are mandated by yahoo. This line is to show the feature of MKNetworkKit
+    [engine useCache]; 
+    
+    [engine sendServerRequest:@"/json/city/ip" withParam:nil userMethod:@"GET"];
     return YES;
 }
 							

@@ -17,7 +17,7 @@
  *发送信息到服务端
  * @param params 相关参数
  */
--(void) sendServerRequest:(NSMutableDictionary*) params userMethod:(NSString*) method;
+-(void) sendServerRequest:(NSString*) path withParam:(NSMutableDictionary*) params userMethod:(NSString*) method;
 
 
 //typedef void (^completeJsonParse)(MKNetworkOperation*);
