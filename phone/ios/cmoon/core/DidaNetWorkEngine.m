@@ -29,6 +29,8 @@ Connection:keep-alive
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
     MBProgressHUD *hub = [[MBProgressHUD alloc] initWithWindow:window];
     [hub setMode:MBProgressHUDModeIndeterminate];
+    hub.frame = CGRectMake(0, 0, 40.0, 40.0);
+    hub.center = window.center;
     hub.taskInProgress = YES;
     [window addSubview:hub];
     [hub show:YES];
