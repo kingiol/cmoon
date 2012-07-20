@@ -8,30 +8,67 @@
 
 #import "DidaAppDelegate.h"
 #import "DidaNetWorkEngine.h"
-
+#import "DidaViewController.h"
 
 @implementation DidaAppDelegate
 
 @synthesize window = _window;
+@synthesize engine = _engine;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [self initNetworkEngine];
+    [engine setReachabilityChangedHandler:networkChangedListener];
     // Override point for customization after application launch.
-    NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
-    [headerFields setValue:@"UTF-8,*;q=0.5" forKey:@"Accept-Charset"];
-    [headerFields setValue:@"text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*'\'*;q=0.8" forKey:@"Accept"];
-    [headerFields setValue:@"Mozilla/5.0" forKey:@"User-Agent"];
-    [headerFields setValue:@"gzip,deflate,sdch" forKey:@"Accept-Encoding"];
-
-    DidaNetWorkEngine * engine = [[DidaNetWorkEngine alloc] initWithHostName:@"imdida.org" customHeaderFields:headerFields];
-    [headerFields release];
-    // not that these header fields are mandated by yahoo. This line is to show the feature of MKNetworkKit
-    [engine useCache]; 
-    
-    [engine sendServerRequest:@"/json/city/ip" withParam:nil userMethod:@"GET"];
+    DidaViewController *controller = [[DidaViewController alloc ]init];
+    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [controller release];
+    [_window addSubview:navigationController.view];
+    [navigationController release];
+    [_window makeKeyAndVisible];
     return YES;
 }
-							
+/**
+ * 网络变化的代码块
+ * 会有问题
+ */
+void (^networkChangedListener)(NetworkStatus netstatus) = ^(NetworkStatus nstatus) {
+        switch(nstatus) {
+            case NotReachable://网络不可用
+        {
+            //显示一个不可用的视图
+        }
+            break;
+            case ReachableViaWiFi:
+                break;
+            case ReachableViaWWAN://手机网络
+                break;
+                default:
+                break;
+    }
+};
+
+/**
+ * 初始化网络引擎
+ */
+-(void) initNetworkEngine {
+    @try {
+        NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
+        [headerFields setValue:@"UTF-8,*;q=0.5" forKey:@"Accept-Charset"];
+        [headerFields setValue:@"text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*'\'*;q=0.8" forKey:@"Accept"];
+        [headerFields setValue:@"IOS" forKey:@"User-Agent"];
+        [headerFields setValue:@"gzip,deflate,sdch" forKey:@"Accept-Encoding"];
+        engine = [[DidaNetWorkEngine alloc] initWithHostName:SERVER_HOST customHeaderFields:headerFields];
+        [engine useCache];
+        [headerFields release];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"The Network initial exception %@",exception.description);
+    }
+    
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -57,6 +94,9 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [engine emptyCache];
+    [engine release];
 }
+
 
 @end

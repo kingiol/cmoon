@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "MKNetworkEngine.h"
 #import "CommomDefine.h"
-
+#import "JSONKit.h"
+#import "MBProgressHUD.h"
 
 @interface DidaNetWorkEngine : MKNetworkEngine
+
+{
+   
+}
 
 /**
  *发送信息到服务端

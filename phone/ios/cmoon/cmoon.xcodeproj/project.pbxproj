@@ -28,7 +28,6 @@
 		14AA4767155B665A009324FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14AA4765155B665A009324FD /* InfoPlist.strings */; };
 		14AA4769155B665A009324FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AA4768155B665A009324FD /* main.m */; };
 		14AA476D155B665A009324FD /* DidaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AA476C155B665A009324FD /* DidaAppDelegate.m */; };
-		14AA4770155B665A009324FD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14AA476E155B665A009324FD /* MainStoryboard.storyboard */; };
 		14AA4773155B665A009324FD /* DidaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AA4772155B665A009324FD /* DidaViewController.m */; };
 		14AA47A4155B6A9D009324FD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AA47A3155B6A9D009324FD /* JSONKit.m */; };
 		14F6390515B40895002D5198 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F6390415B40895002D5198 /* MBProgressHUD.m */; };
@@ -74,7 +73,6 @@
 		14AA476A155B665A009324FD /* cmoon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cmoon-Prefix.pch"; sourceTree = "<group>"; };
 		14AA476B155B665A009324FD /* DidaAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DidaAppDelegate.h; sourceTree = "<group>"; };
 		14AA476C155B665A009324FD /* DidaAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DidaAppDelegate.m; sourceTree = "<group>"; };
-		14AA476F155B665A009324FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		14AA4771155B665A009324FD /* DidaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DidaViewController.h; sourceTree = "<group>"; };
 		14AA4772155B665A009324FD /* DidaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DidaViewController.m; sourceTree = "<group>"; };
 		14AA47A2155B6A9D009324FD /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 			children = (
 				14AA476B155B665A009324FD /* DidaAppDelegate.h */,
 				14AA476C155B665A009324FD /* DidaAppDelegate.m */,
-				14AA476E155B665A009324FD /* MainStoryboard.storyboard */,
 				14AA4771155B665A009324FD /* DidaViewController.h */,
 				14AA4772155B665A009324FD /* DidaViewController.m */,
 				14AA4763155B665A009324FD /* Supporting Files */,
@@ -301,7 +298,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				14AA4767155B665A009324FD /* InfoPlist.strings in Resources */,
-				14AA4770155B665A009324FD /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,14 +337,6 @@
 				14AA4766155B665A009324FD /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		14AA476E155B665A009324FD /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				14AA476F155B665A009324FD /* en */,
-			);
-			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -415,6 +403,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cmoon/cmoon-Prefix.pch";
 				INFOPLIST_FILE = "cmoon/cmoon-Info.plist";
@@ -433,6 +425,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cmoon/cmoon-Prefix.pch";
 				INFOPLIST_FILE = "cmoon/cmoon-Info.plist";

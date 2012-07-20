@@ -12,3 +12,5 @@
 #define API_SERVER @"http://www.imdida.org/json"
 
 #define DIDA_URL(P2) [NSString stringWithFormat:@"%@/%@",API_SERVER,P2]
+
+#define SERVER_HOST @"imdida.org"

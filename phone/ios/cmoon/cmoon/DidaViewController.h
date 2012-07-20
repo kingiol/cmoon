@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DidaAppDelegate.h"
+
 
 @interface DidaViewController : UIViewController
 

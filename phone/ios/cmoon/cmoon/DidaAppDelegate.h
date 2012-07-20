@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DidaNetWorkEngine.h"
+#import "CommomDefine.h"
 
 @interface DidaAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+{
+    DidaNetWorkEngine * engine;
+}
 
+@property (retain, nonatomic) UIWindow *window;
+
+@property (assign,nonatomic) DidaNetWorkEngine * engine;
 @end
