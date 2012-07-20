@@ -10,15 +10,6 @@
 
 @implementation DidaNetWorkEngine
 
--(id)initWithHostName:(NSString *)hostName customHeaderFields:(NSDictionary *)headers {
-    
-//    [self setReachabilityChangedHandler:^(NetworkStatus status) {
-//        NSLog(@"The status %d",status);
-//    }];
-    return [super initWithHostName:hostName customHeaderFields:headers];
-    
-}
-
 /**
  *Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*\*;q=0.8
 * Accept-Charset:UTF-8,*;q=0.5
@@ -34,18 +25,20 @@ Connection:keep-alive
 //        [alertView release];
 //        return;
 //    }
-    
-    
-    MBProgressHUD *hub = [[MBProgressHUD alloc]initWithView:[UIApplication sharedApplication].inputView];
-    MKNetworkOperation * op = [self operationWithPath:path params:nil httpMethod:method ];
+    MKNetworkOperation * op = [self operationWithPath:path params:nil httpMethod:method ]; 
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    MBProgressHUD *hub = [[MBProgressHUD alloc] initWithWindow:window];
+    [hub setMode:MBProgressHUDModeIndeterminate];
+    hub.taskInProgress = YES;
+    [window addSubview:hub];
+    [hub show:YES];
     [op onCompletion:^(MKNetworkOperation *completedOperation) {
-        [hub show:NO];
+        [hub hide:YES];
         [self parseJsonData:completedOperation]; 
     } onError:^(NSError *error) {
-        [hub show:NO];
+         [hub hide:YES];
         [self alertError:error];
     }];
-    [hub show:YES];
     [hub release];
     [self enqueueOperation:op];
 }

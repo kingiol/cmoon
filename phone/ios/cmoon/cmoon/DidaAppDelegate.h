@@ -12,11 +12,7 @@
 
 @interface DidaAppDelegate : UIResponder <UIApplicationDelegate>
 
-{
-    DidaNetWorkEngine * engine;
-}
-
 @property (retain, nonatomic) UIWindow *window;
 
-@property (assign,nonatomic) DidaNetWorkEngine * engine;
+@property (retain,nonatomic) DidaNetWorkEngine * engine;
 @end

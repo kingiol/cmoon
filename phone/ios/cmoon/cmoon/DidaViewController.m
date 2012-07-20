@@ -24,7 +24,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect ];
     button.frame = CGRectMake(20, 80, 120, 30);
     [button setTitle:@"Click" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(testA) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -35,9 +35,10 @@
     
 }
 
--(void) test{
+-(void) testA{
+    
     DidaAppDelegate * app = (DidaAppDelegate *)[UIApplication sharedApplication].delegate;
-    [app.engine sendServerRequest:@"/json/city/ip" withParam:nil userMethod:@"GET"];
+    [app.engine sendServerRequest:@"/json/bore" withParam:nil userMethod:@"GET"];
 }
 
 - (void)viewDidUnload

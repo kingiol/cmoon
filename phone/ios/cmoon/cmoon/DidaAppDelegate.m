@@ -19,14 +19,14 @@
 {
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initNetworkEngine];
-    [engine setReachabilityChangedHandler:networkChangedListener];
+    [_engine setReachabilityChangedHandler:networkChangedListener];
     // Override point for customization after application launch.
     DidaViewController *controller = [[DidaViewController alloc ]init];
     UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
-    [controller release];
+    //[controller release];
     [_window addSubview:navigationController.view];
     [navigationController release];
-    [_window makeKeyAndVisible];
+    //[_window makeKeyAndVisible];
     return YES;
 }
 /**
@@ -59,9 +59,11 @@ void (^networkChangedListener)(NetworkStatus netstatus) = ^(NetworkStatus nstatu
         [headerFields setValue:@"text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*'\'*;q=0.8" forKey:@"Accept"];
         [headerFields setValue:@"IOS" forKey:@"User-Agent"];
         [headerFields setValue:@"gzip,deflate,sdch" forKey:@"Accept-Encoding"];
-        engine = [[DidaNetWorkEngine alloc] initWithHostName:SERVER_HOST customHeaderFields:headerFields];
-        [engine useCache];
-        [headerFields release];
+        DidaNetWorkEngine * engine = [[DidaNetWorkEngine alloc] initWithHostName:SERVER_HOST customHeaderFields:headerFields];
+        self.engine = engine;
+        [engine release];
+        NSLog(@"%d",[self.engine retainCount]);
+        [_engine useCache];
     }
     @catch (NSException *exception) {
         NSLog(@"The Network initial exception %@",exception.description);
@@ -94,8 +96,8 @@ void (^networkChangedListener)(NetworkStatus netstatus) = ^(NetworkStatus nstatu
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [engine emptyCache];
-    [engine release];
+    [_engine emptyCache];
+    [_engine release];
 }
 
 
