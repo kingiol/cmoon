@@ -44,8 +44,7 @@
     [childControllers addObject:controller];
     [controller release];
     tabeViewController.viewControllers = childControllers;
-    [_window addSubview:tabeViewController.view];
-//    _window.rootViewController = tabeViewController;
+    _window.rootViewController = tabeViewController;
     [_window makeKeyAndVisible];
     [childControllers release];
     return YES;
