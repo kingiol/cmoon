@@ -38,22 +38,16 @@
     tabeViewController = [[UITabBarController alloc] init];
     tabeViewController.delegate = self;
     NSMutableArray * childControllers = [[NSMutableArray alloc]initWithCapacity:3];
+    UITabBarItem *secondTab = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured tag:2];
+    controller.tabBarItem = secondTab;
+    [secondTab release];
     [childControllers addObject:controller];
     [controller release];
-    UITabBarItem *secondTab = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured tag:2];
     tabeViewController.viewControllers = childControllers;
-    [childControllers release];
-    NSArray * tableitems = [[NSArray alloc]initWithObjects:secondTab,secondTab,secondTab, nil];
-    tabeViewController.toolbarItems = tableitems;
     [_window addSubview:tabeViewController.view];
-    [tabeViewController release];
-    NSLog(@"The tabview %d",[tabeViewController retainCount]);
-    [tableitems release];
-//    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
-//    //[controller release];
-//    [_window addSubview:navigationController.view];
-//    [navigationController release];
-    //[_window makeKeyAndVisible];
+//    _window.rootViewController = tabeViewController;
+    [_window makeKeyAndVisible];
+    [childControllers release];
     return YES;
 }
 /**
@@ -141,6 +135,7 @@ void (^networkChangedListener)(NetworkStatus netstatus) = ^(NetworkStatus nstatu
 #pragma tabviewbar click delegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     //click the item bar
+    NSLog(@"onClicked...");
 }
 
 @end
