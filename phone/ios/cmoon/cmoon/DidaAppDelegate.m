@@ -9,40 +9,46 @@
 #import "DidaAppDelegate.h"
 #import "DidaNetWorkEngine.h"
 #import "DidaViewController.h"
+#import "HomeMapController.h"
 
 @implementation DidaAppDelegate
 
 @synthesize window = _window;
 @synthesize engine = _engine;
-@synthesize mLocationMgr;
-@synthesize curLoc;
+
+
 @synthesize tabeViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [_window setBackgroundColor:[UIColor whiteColor]];
     //initial the networkengine
     [self initNetworkEngine];
     [_engine setReachabilityChangedHandler:networkChangedListener];
     //initial the location manager
-    if ([CLLocationManager locationServicesEnabled]) {
-        mLocationMgr = [[CLLocationManager alloc] init];
-        [mLocationMgr setDelegate:self];
-        mLocationMgr.desiredAccuracy = kCLLocationAccuracyBest;
-        [mLocationMgr startUpdatingLocation];
-    }
-    
+        
     // Override point for customization after application launch.
     DidaViewController *controller = [[DidaViewController alloc ]init];
     
     tabeViewController = [[UITabBarController alloc] init];
     tabeViewController.delegate = self;
-    NSMutableArray * childControllers = [[NSMutableArray alloc]initWithCapacity:3];
+    NSMutableArray * childControllers = [[NSMutableArray alloc]initWithCapacity:2];
+    HomeMapController * mapController = [[HomeMapController alloc] init];
+    
+    UITabBarItem * firstItem = [[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:1];
+    mapController.tabBarItem = firstItem;
+    [firstItem release];
+    
+    [childControllers addObject:mapController];
+    [mapController release];
+    
     UITabBarItem *secondTab = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured tag:2];
     controller.tabBarItem = secondTab;
     [secondTab release];
     [childControllers addObject:controller];
     [controller release];
+    
     tabeViewController.viewControllers = childControllers;
     _window.rootViewController = tabeViewController;
     [_window makeKeyAndVisible];
@@ -119,18 +125,10 @@ void (^networkChangedListener)(NetworkStatus netstatus) = ^(NetworkStatus nstatu
     [_engine emptyCache];
     [_engine release];
     [tabeViewController release];
-    if (mLocationMgr != nil) {
-        [mLocationMgr release];
-        mLocationMgr = nil;
-    }
+    
     
 }
-#pragma 位置代理delegate
-- (void)locationManager:(CLLocationManager *)manager
-	didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation {
-    curLoc = manager.location.coordinate;
-}
+
 #pragma tabviewbar click delegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     //click the item bar

@@ -13,6 +13,9 @@
 		1425155515BD000400607974 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1425155115BCFA9300607974 /* CoreLocation.framework */; };
 		1425155C15BD1C3F00607974 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1425155A15BD1C3F00607974 /* icon.png */; };
 		1425155D15BD1C3F00607974 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1425155B15BD1C3F00607974 /* icon@2x.png */; };
+		1425156015BD3CD400607974 /* HomeMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1425155F15BD3CD400607974 /* HomeMapController.m */; };
+		1425156315BD40A100607974 /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1425156215BD40A100607974 /* BaseController.m */; };
+		1425156515BD41FC00607974 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1425156415BD41FC00607974 /* MapKit.framework */; };
 		1464733515AC7D2300037F09 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1464733415AC7D2300037F09 /* CFNetwork.framework */; };
 		1464733715AC7D3F00037F09 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1464733615AC7D3F00037F09 /* Security.framework */; };
 		147A6CA415AFCCD200B2F4D5 /* DidaNetWorkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A6CA315AFCCD200B2F4D5 /* DidaNetWorkEngine.m */; };
@@ -46,6 +49,11 @@
 		1425155415BCFF0700607974 /* ArcHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArcHelper.h; sourceTree = "<group>"; };
 		1425155A15BD1C3F00607974 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		1425155B15BD1C3F00607974 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		1425155E15BD3CD400607974 /* HomeMapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMapController.h; sourceTree = "<group>"; };
+		1425155F15BD3CD400607974 /* HomeMapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMapController.m; sourceTree = "<group>"; };
+		1425156115BD40A100607974 /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
+		1425156215BD40A100607974 /* BaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseController.m; sourceTree = "<group>"; };
+		1425156415BD41FC00607974 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		143394ED15B65FBC00C3626A /* cmoon-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "cmoon-Info.plist"; sourceTree = "<group>"; };
 		1464733415AC7D2300037F09 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		1464733615AC7D3F00037F09 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -93,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1425156515BD41FC00607974 /* MapKit.framework in Frameworks */,
 				1425155515BD000400607974 /* CoreLocation.framework in Frameworks */,
 				1464733715AC7D3F00037F09 /* Security.framework in Frameworks */,
 				1464733515AC7D2300037F09 /* CFNetwork.framework in Frameworks */,
@@ -183,6 +192,7 @@
 		14AA475B155B665A009324FD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1425156415BD41FC00607974 /* MapKit.framework */,
 				1425155115BCFA9300607974 /* CoreLocation.framework */,
 				1464733615AC7D3F00037F09 /* Security.framework */,
 				1464733415AC7D2300037F09 /* CFNetwork.framework */,
@@ -229,6 +239,10 @@
 			children = (
 				14AA4771155B665A009324FD /* DidaViewController.h */,
 				14AA4772155B665A009324FD /* DidaViewController.m */,
+				1425155E15BD3CD400607974 /* HomeMapController.h */,
+				1425155F15BD3CD400607974 /* HomeMapController.m */,
+				1425156115BD40A100607974 /* BaseController.h */,
+				1425156215BD40A100607974 /* BaseController.m */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -339,6 +353,8 @@
 				147A6CCB15AFCF6500B2F4D5 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				147A6CD315AFE1D100B2F4D5 /* DeviceMsg.m in Sources */,
 				14F6390515B40895002D5198 /* MBProgressHUD.m in Sources */,
+				1425156015BD3CD400607974 /* HomeMapController.m in Sources */,
+				1425156315BD40A100607974 /* BaseController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
