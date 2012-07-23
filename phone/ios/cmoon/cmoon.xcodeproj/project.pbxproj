@@ -10,6 +10,9 @@
 		1422D02D1571CDFC00478932 /* Province.m in Sources */ = {isa = PBXBuildFile; fileRef = 1422D02C1571CDFC00478932 /* Province.m */; };
 		1422D0301571D05D00478932 /* IpInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1422D02F1571D05D00478932 /* IpInfo.m */; };
 		1422D0351571DB8400478932 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1422D0341571DB8400478932 /* SystemConfiguration.framework */; };
+		1425155515BD000400607974 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1425155115BCFA9300607974 /* CoreLocation.framework */; };
+		1425155C15BD1C3F00607974 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1425155A15BD1C3F00607974 /* icon.png */; };
+		1425155D15BD1C3F00607974 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1425155B15BD1C3F00607974 /* icon@2x.png */; };
 		1464733515AC7D2300037F09 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1464733415AC7D2300037F09 /* CFNetwork.framework */; };
 		1464733715AC7D3F00037F09 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1464733615AC7D3F00037F09 /* Security.framework */; };
 		147A6CA415AFCCD200B2F4D5 /* DidaNetWorkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A6CA315AFCCD200B2F4D5 /* DidaNetWorkEngine.m */; };
@@ -39,6 +42,10 @@
 		1422D02E1571D05D00478932 /* IpInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpInfo.h; sourceTree = "<group>"; };
 		1422D02F1571D05D00478932 /* IpInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpInfo.m; sourceTree = "<group>"; };
 		1422D0341571DB8400478932 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1425155115BCFA9300607974 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1425155415BCFF0700607974 /* ArcHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArcHelper.h; sourceTree = "<group>"; };
+		1425155A15BD1C3F00607974 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		1425155B15BD1C3F00607974 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		143394ED15B65FBC00C3626A /* cmoon-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "cmoon-Info.plist"; sourceTree = "<group>"; };
 		1464733415AC7D2300037F09 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		1464733615AC7D3F00037F09 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -73,8 +80,8 @@
 		14AA476A155B665A009324FD /* cmoon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cmoon-Prefix.pch"; sourceTree = "<group>"; };
 		14AA476B155B665A009324FD /* DidaAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DidaAppDelegate.h; sourceTree = "<group>"; };
 		14AA476C155B665A009324FD /* DidaAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DidaAppDelegate.m; sourceTree = "<group>"; };
-		14AA4771155B665A009324FD /* DidaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DidaViewController.h; sourceTree = "<group>"; };
-		14AA4772155B665A009324FD /* DidaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DidaViewController.m; sourceTree = "<group>"; };
+		14AA4771155B665A009324FD /* DidaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DidaViewController.h; path = cmoon/DidaViewController.h; sourceTree = "<group>"; };
+		14AA4772155B665A009324FD /* DidaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DidaViewController.m; path = cmoon/DidaViewController.m; sourceTree = "<group>"; };
 		14AA47A2155B6A9D009324FD /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		14AA47A3155B6A9D009324FD /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		14F6390315B40895002D5198 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -86,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1425155515BD000400607974 /* CoreLocation.framework in Frameworks */,
 				1464733715AC7D3F00037F09 /* Security.framework in Frameworks */,
 				1464733515AC7D2300037F09 /* CFNetwork.framework in Frameworks */,
 				1422D0351571DB8400478932 /* SystemConfiguration.framework in Frameworks */,
@@ -175,6 +183,7 @@
 		14AA475B155B665A009324FD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1425155115BCFA9300607974 /* CoreLocation.framework */,
 				1464733615AC7D3F00037F09 /* Security.framework */,
 				1464733415AC7D2300037F09 /* CFNetwork.framework */,
 				1422D0341571DB8400478932 /* SystemConfiguration.framework */,
@@ -190,8 +199,6 @@
 			children = (
 				14AA476B155B665A009324FD /* DidaAppDelegate.h */,
 				14AA476C155B665A009324FD /* DidaAppDelegate.m */,
-				14AA4771155B665A009324FD /* DidaViewController.h */,
-				14AA4772155B665A009324FD /* DidaViewController.m */,
 				14AA4763155B665A009324FD /* Supporting Files */,
 			);
 			path = cmoon;
@@ -211,6 +218,8 @@
 		14AA4779155B673D009324FD /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				1425155A15BD1C3F00607974 /* icon.png */,
+				1425155B15BD1C3F00607974 /* icon@2x.png */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -218,6 +227,8 @@
 		14AA477A155B6750009324FD /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				14AA4771155B665A009324FD /* DidaViewController.h */,
+				14AA4772155B665A009324FD /* DidaViewController.m */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -230,6 +241,7 @@
 				147A6CCE15AFE0EB00B2F4D5 /* CommomDefine.h */,
 				147A6CD115AFE1D100B2F4D5 /* DeviceMsg.h */,
 				147A6CD215AFE1D100B2F4D5 /* DeviceMsg.m */,
+				1425155415BCFF0700607974 /* ArcHelper.h */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -298,6 +310,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				14AA4767155B665A009324FD /* InfoPlist.strings in Resources */,
+				1425155C15BD1C3F00607974 /* icon.png in Resources */,
+				1425155D15BD1C3F00607974 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

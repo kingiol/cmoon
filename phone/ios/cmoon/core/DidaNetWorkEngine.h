@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Archelper.h"
 #import "MKNetworkEngine.h"
 #import "CommomDefine.h"
 #import "JSONKit.h"

@@ -14,18 +14,45 @@
 
 @synthesize window = _window;
 @synthesize engine = _engine;
+@synthesize mLocationMgr;
+@synthesize curLoc;
+@synthesize tabeViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    //initial the networkengine
     [self initNetworkEngine];
     [_engine setReachabilityChangedHandler:networkChangedListener];
+    //initial the location manager
+    if ([CLLocationManager locationServicesEnabled]) {
+        mLocationMgr = [[CLLocationManager alloc] init];
+        [mLocationMgr setDelegate:self];
+        mLocationMgr.desiredAccuracy = kCLLocationAccuracyBest;
+        [mLocationMgr startUpdatingLocation];
+    }
+    
     // Override point for customization after application launch.
     DidaViewController *controller = [[DidaViewController alloc ]init];
-    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
-    //[controller release];
-    [_window addSubview:navigationController.view];
-    [navigationController release];
+    
+    tabeViewController = [[UITabBarController alloc] init];
+    tabeViewController.delegate = self;
+    NSMutableArray * childControllers = [[NSMutableArray alloc]initWithCapacity:3];
+    [childControllers addObject:controller];
+    [controller release];
+    UITabBarItem *secondTab = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured tag:2];
+    tabeViewController.viewControllers = childControllers;
+    [childControllers release];
+    NSArray * tableitems = [[NSArray alloc]initWithObjects:secondTab,secondTab,secondTab, nil];
+    tabeViewController.toolbarItems = tableitems;
+    [_window addSubview:tabeViewController.view];
+    [tabeViewController release];
+    NSLog(@"The tabview %d",[tabeViewController retainCount]);
+    [tableitems release];
+//    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+//    //[controller release];
+//    [_window addSubview:navigationController.view];
+//    [navigationController release];
     //[_window makeKeyAndVisible];
     return YES;
 }
@@ -62,7 +89,7 @@ void (^networkChangedListener)(NetworkStatus netstatus) = ^(NetworkStatus nstatu
         DidaNetWorkEngine * engine = [[DidaNetWorkEngine alloc] initWithHostName:SERVER_HOST customHeaderFields:headerFields];
         self.engine = engine;
         [engine release];
-        NSLog(@"%d",[self.engine retainCount]);
+        //NSLog(@"%d",[self.engine retainCount]);
         [_engine useCache];
     }
     @catch (NSException *exception) {
@@ -98,7 +125,22 @@ void (^networkChangedListener)(NetworkStatus netstatus) = ^(NetworkStatus nstatu
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [_engine emptyCache];
     [_engine release];
+    [tabeViewController release];
+    if (mLocationMgr != nil) {
+        [mLocationMgr release];
+        mLocationMgr = nil;
+    }
+    
 }
-
+#pragma 位置代理delegate
+- (void)locationManager:(CLLocationManager *)manager
+	didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation {
+    curLoc = manager.location.coordinate;
+}
+#pragma tabviewbar click delegate
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    //click the item bar
+}
 
 @end

@@ -19,12 +19,6 @@ Cache-Control:max-age=0
 Connection:keep-alive
  */
 -(void) sendServerRequest:(NSString*) path withParam:(NSMutableDictionary*) params userMethod:(NSString*) method {
-//    if (![self isReachable]) {
-//        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"警告" message:@"当前网络不可用" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-//        [alertView show];
-//        [alertView release];
-//        return;
-//    }
     MKNetworkOperation * op = [self operationWithPath:path params:nil httpMethod:method ]; 
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
     MBProgressHUD *hub = [[MBProgressHUD alloc] initWithWindow:window];
