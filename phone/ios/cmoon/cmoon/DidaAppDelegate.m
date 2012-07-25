@@ -44,8 +44,7 @@
     
     HomeMapController * mapController = [[HomeMapController alloc] init];
     
-    UITabBarItem * firstItem = [[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:2];
-    firstItem.title = @"拼车";
+    UITabBarItem * firstItem = [[UITabBarItem alloc]initWithTitle:@"拼车" image:[UIImage imageNamed:@"earth.png"] tag:2];
     mapController.tabBarItem = firstItem;
     [firstItem release];
     
@@ -67,8 +66,8 @@
     [fourth release];
     [childControllers addObject:about];
     [about release];
-    tabeViewController.selectedIndex = 2;
     tabeViewController.viewControllers = childControllers;
+    [tabeViewController setSelectedViewController:mapController];
     _window.rootViewController = tabeViewController;
     [_window makeKeyAndVisible];
     [childControllers release];

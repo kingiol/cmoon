@@ -19,6 +19,7 @@
 		1453A55215BFC97800209D47 /* BoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1453A55115BFC97800209D47 /* BoreController.m */; };
 		1453A55515BFD0A900209D47 /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1453A55415BFD0A900209D47 /* AboutController.m */; };
 		1453A55E15BFDCB300209D47 /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 1453A55D15BFDCB300209D47 /* about.png */; };
+		1453A56215BFE1FE00209D47 /* earth.png in Resources */ = {isa = PBXBuildFile; fileRef = 1453A56115BFE1FE00209D47 /* earth.png */; };
 		1464733515AC7D2300037F09 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1464733415AC7D2300037F09 /* CFNetwork.framework */; };
 		1464733715AC7D3F00037F09 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1464733615AC7D3F00037F09 /* Security.framework */; };
 		147A6CA415AFCCD200B2F4D5 /* DidaNetWorkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A6CA315AFCCD200B2F4D5 /* DidaNetWorkEngine.m */; };
@@ -63,6 +64,7 @@
 		1453A55315BFD0A900209D47 /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutController.h; sourceTree = "<group>"; };
 		1453A55415BFD0A900209D47 /* AboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutController.m; sourceTree = "<group>"; };
 		1453A55D15BFDCB300209D47 /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about.png; sourceTree = "<group>"; };
+		1453A56115BFE1FE00209D47 /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth.png; sourceTree = "<group>"; };
 		1464733415AC7D2300037F09 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		1464733615AC7D3F00037F09 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		147A6CA215AFCCD200B2F4D5 /* DidaNetWorkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DidaNetWorkEngine.h; path = core/DidaNetWorkEngine.h; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 		14AA4779155B673D009324FD /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				1453A56115BFE1FE00209D47 /* earth.png */,
 				1453A55D15BFDCB300209D47 /* about.png */,
 				1425155A15BD1C3F00607974 /* icon.png */,
 				1425155B15BD1C3F00607974 /* icon@2x.png */,
@@ -340,6 +343,7 @@
 				1425155C15BD1C3F00607974 /* icon.png in Resources */,
 				1425155D15BD1C3F00607974 /* icon@2x.png in Resources */,
 				1453A55E15BFDCB300209D47 /* about.png in Resources */,
+				1453A56215BFE1FE00209D47 /* earth.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
