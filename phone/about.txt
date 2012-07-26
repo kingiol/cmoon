@@ -1,4 +1,4 @@
-imdida.org/bore?id=1,3,6,9
+imdida.org/bore?id=0,3,6,9
 will get the an list picture
 
 
